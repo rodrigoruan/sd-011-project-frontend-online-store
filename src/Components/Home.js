@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Categories from './Categories';
 
 class Home extends Component {
   constructor() {
@@ -28,6 +29,7 @@ class Home extends Component {
         >
           Ir para o carrinho
         </Link>
+        <Categories />
       </div>
     );
   }
