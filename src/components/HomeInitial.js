@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import cart from '../Images/cart.png';
 import SearchArea from './SearchArea';
+import Filter from './Filter';
 
 class HomeInitial extends Component {
   constructor(props) {
@@ -57,9 +58,6 @@ class HomeInitial extends Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
-<<<<<<< HEAD
-        <Filter />
-=======
         <div>
           <Link to="/carrinho-compras">
             <img
@@ -71,7 +69,7 @@ class HomeInitial extends Component {
           </Link>
         </div>
         <SearchArea products={ products } />
->>>>>>> 0458f9d29f55640de47d4cb376166ff676252738
+        <Filter />
       </div>
     );
   }

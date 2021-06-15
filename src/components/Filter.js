@@ -1,35 +1,40 @@
 import React from 'react';
+import { getCategories } from '../services/api';
 
 class Filter extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      id: '',
-      name:'',
+      request: [],
     };
     this.filterProducts = this.filterProducts.bind(this);
   }
+
   componentDidMount() {
     this.filterProducts();
   }
 
   async filterProducts() {
-    const request = await api.categories();
-    this.setState({ 
-      id: { request },
-      name: '',
+    const request = await getCategories();
+    this.setState({
+      request,
     });
+    console.log(request);
   }
 
   render() {
-    const { id, name } = this.state;
+    const { request } = this.state;
     return (
-      <div data-testid="category">
-        {name.map((name) => (
-          <App key={ name.title } name={ name } />
+      <div>
+        {request.map((req, index) => (
+          <div key={ index } data-testid="category">
+            <p>{req.name}</p>
+          </div>
         ))}
       </div>
     );
   }
 }
+
+export default Filter;
