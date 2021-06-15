@@ -2,12 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Main from './pages/Main';
+import Cart from './pages/Cart';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={ Main } />
+        <Route exact path="/" component={ Main } />
+        <Route path="/Cart" component={ Cart } />
       </Switch>
     </Router>
   );

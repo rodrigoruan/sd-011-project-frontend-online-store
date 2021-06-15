@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar';
+import CartButton from '../components/CartButton';
 import ProductListing from '../components/ProductListing';
 import Category from '../components/Category';
 import CardCreator from '../components/CardCreator';
@@ -45,6 +46,7 @@ class Main extends Component {
           change={ this.handleChange }
           value={ query }
         />
+        <CartButton />
         <ProductListing texto="Nenhum produto foi encontrado" />
         { loading
           ? null
