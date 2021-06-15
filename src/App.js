@@ -22,9 +22,9 @@ export class App extends Component {
     return (
       <section>
         { categories.map((produto) => (
-          <Link to={ `produto/${produto.id}` } key={ produto.id }>
+          <div key={ produto.id }>
             <h2>{produto.name}</h2>
-          </Link>
+          </div>
         ))}
       </section>
     );
