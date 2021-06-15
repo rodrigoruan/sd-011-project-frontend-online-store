@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ProductCard } from '.'; 
 
 export default class SearchResults extends React.Component {
   render() {
-    const { productList } = this.props;
+    const { searchResults } = this.props;
 
     return (
       <section id="home-search" className="home-two-fourths search-section">
@@ -23,7 +24,7 @@ export default class SearchResults extends React.Component {
         </header>
 
         <ol className="search-section__results">
-          {productList.map((product => 'opa'))}
+          {searchResults.results.map((product => <ProductCard key={ product.id } product={ product } />))}
         </ol>
       </section>
     );

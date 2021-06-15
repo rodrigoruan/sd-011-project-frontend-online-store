@@ -8,24 +8,32 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      productList: [],
+      searchResults: {},
     };
+
+    this.updateSearchResults = this.updateSearchResults.bind(this);
   }
 
   componentDidMount() {
     api.getCategories();
   }
 
+  updateSearchResults(searchResults) {
+    this.setState({ searchResults });
+  }
+
   render() {
-    const { productList } = this.state;
+    const { searchResults } = this.state;
 
     return (
       <>
         <header>Frontend Online Store</header>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" render={() => <Home productList={ productList } />} />
-            <Route path="/cart" component={Cart} />
+            <Route exact path="/" render={ () => 
+              <Home searchResults={ searchResults } updateSearchResults={ this.updateSearchResults } /> } 
+            />
+            <Route path="/cart" component={ Cart } />
           </Switch>
         </BrowserRouter>
         <footer>Feito pelo Grupo 14, o grupo brabo</footer>
