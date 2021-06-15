@@ -10,6 +10,7 @@ function App() {
       <Switch>
         <Route exact path="/" render={ () => <Home /> } />
         <Route path="/cart" component={ cartPage } />
+        <Route path="/" render={ () => <Home /> } />
       </Switch>
     </BrowserRouter>
   );
