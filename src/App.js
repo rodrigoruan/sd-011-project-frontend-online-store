@@ -5,7 +5,6 @@ import * as api from './services/api';
 import Home from './Home';
 
 class App extends Component {
-
   componentDidMount() {
     api.getCategories();
     api.getProductsFromCategoryAndQuery();
