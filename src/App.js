@@ -1,11 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import * as api from './services/api';
 
-function App() {
-  return (
-    <div>Hello World</div>
-  );
+class App extends Component {
+
+  componentDidMount() {
+    api.getCategories();
+    api.getProductsFromCategoryAndQuery();
+  }
+
+  render() {
+    return (
+      <div>
+        Test
+      </div>
+    );
+  }
 }
 
 export default App;
