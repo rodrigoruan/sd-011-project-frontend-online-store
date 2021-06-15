@@ -4,6 +4,7 @@ import './App.css';
 
 function App() {
   // Iniciando o projeto;
+  // Júlio chegou aqui.
   return (
     <div className="App">
       <header className="App-header">
