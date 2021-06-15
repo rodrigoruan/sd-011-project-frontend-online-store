@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
-import Search from './Search';
+import ShoppingCart from './Pages/ShoppingCart';
+import Search from './Pages/Search';
 
 function App() {
   return (
     <div className="App">
       <Search />
+      <ShoppingCart />
     </div>
   );
 }
