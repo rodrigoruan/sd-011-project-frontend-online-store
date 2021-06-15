@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class CardProduct extends Component {
   render() {
@@ -13,3 +14,11 @@ export default class CardProduct extends Component {
     );
   }
 }
+
+CardProduct.propTypes = {
+  listProduct: PropTypes.arrayOf(PropTypes.shape({
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.string,
+  })).isRequired,
+};
