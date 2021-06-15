@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CategoryList from '../components/CategoryList';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   render() {
@@ -8,6 +9,7 @@ class Home extends Component {
         <label htmlFor="search">
           <input type="text" name="search" />
         </label>
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
