@@ -17,3 +17,4 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
       .then((products) => products.json());
   }
 }
+

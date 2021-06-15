@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './services/api'
 // import * as api from './services/api'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Learn React
+        
         </a>
       </header>
     </div>
