@@ -1,0 +1,26 @@
+﻿Atribuição é feita para o programador liderar aquela área mas as decisões finais são todas tomadas por todo o grupo.
+
+
+01 – Project Archtect (PA - 01): 
+    • Responsável por entender a documentação da API e fazer um resumo de como consumir ela para os demais. 
+    • Responsável por entender as exigências do projeto para organizar, dividir e estruturar o mesmo, que é debatico com o resto da equipe e depois o PA estrutura o backlog.
+    • Criar os padroes para nomes e intercomunicação entre os componentes (props e states). 
+    • Corrigir todos os problemas de interação entre componentes, incluindo os merges.
+
+
+02 – Project Designer (PD – 01):
+    • Responsável por criar uma mockup do projeto a partir da estrutura desenvolvida pelo PA.
+    • Responsável pela criação da parte visual do proejto como imagens e logos.
+    • Responsável por deixar o layout do projeto organizado e estruturado (stylesheet) ao longo do desenvolvimento.
+      
+
+03 – Scrum Master (SM – 01):
+    • Responsável por atribuindo as responsabilidades de cada um.
+    • Manter o engajamento do time, sempre facilitando os possíveis problemas de comunicação.
+    • Responsável por cobrar e manter a organização das metodologias ágeis (timelines e software de gerenciamento do scrum ou kaban).
+
+
+04 – Helpers (SOS – 02):
+    • Ficar ligado para ajudar os coleguinhas e se ajudar também.
+    • Participar dos plantões.
+    • Revisar os códigos, erros e bugs e tentar buscar soluções.
