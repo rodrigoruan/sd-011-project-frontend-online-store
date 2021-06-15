@@ -33,6 +33,15 @@ export default class Home extends Component {
       });
   }
 
+  changeCategory = () => {
+    const { category } = this.state;
+    getProductsFromCategoryAndQuery(category, false)
+      .then(({ results }) => {
+        if (results.lenght === 0) this.setState({ noFindProducts: true });
+        else this.setState({ products: results });
+      });
+  }
+
   render() {
     const { api, products, noFindProducts } = this.state;
     if (!api) return <p>carregando...</p>;
@@ -40,6 +49,7 @@ export default class Home extends Component {
       <div>
         <select
           onChange={ this.handle }
+          onClick={ this.changeCategory }
           name="category"
         >
           <option data-testid="category"> Selecione uma Categoria</option>
