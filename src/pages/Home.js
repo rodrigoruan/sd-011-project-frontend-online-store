@@ -13,10 +13,10 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.requiredCategories();
+    this.fetchCategories();
   }
 
-  async requiredCategories() {
+  async fetchCategories() {
     const request = await Api.getCategories();
     this.setState({
       categories: request,
@@ -28,7 +28,8 @@ class Home extends Component {
     const { categories, loading } = this.state;
     return (
       <div>
-        { !loading && categories.map((category, index) => <CategoryList key={ index } category={ category } />)}
+        { !loading && categories
+          .map((category, index) => <CategoryList key={ index } category={ category } />)}
         <span data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
