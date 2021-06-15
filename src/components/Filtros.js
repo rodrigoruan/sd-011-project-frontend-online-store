@@ -24,12 +24,12 @@ class Filtros extends Component {
   render() {
     const { categories } = this.state;
     if (categories === undefined) {
-      return <div> Loading...</div>;
+      return <div>Loading...</div>;
     }
     return (
-      <div data-testId="category">
+      <div>
         {categories.map((category) => (
-          <label key={ category.name } htmlFor={ category.id }>
+          <label key={ category.name } htmlFor={ category.id } data-testId="category">
             <input
               type="radio"
               id={ category.id }
