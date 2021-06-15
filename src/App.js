@@ -1,14 +1,14 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
-import * as api from './services/api';
+import Home from './Pages/Home';
 
-function App() {
-  return (
-    <div className="App">
-      {api.getCategories()}
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Home />
+      </div>);
+  }
 }
 
 export default App;
