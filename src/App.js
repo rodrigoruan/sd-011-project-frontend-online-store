@@ -1,12 +1,16 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CarrinhoCompras from './components/CarrinhoCompras';
 import HomeInitial from './components/HomeInitial';
 
 function App() {
   return (
-    <div className="App">
-      <HomeInitial />
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/carrinho-compras" component={ CarrinhoCompras } />
+        <Route path="/" component={ HomeInitial } />
+      </Switch>
+    </Router>
   );
 }
 
