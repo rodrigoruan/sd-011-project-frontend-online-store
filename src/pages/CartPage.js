@@ -7,7 +7,7 @@ class cartPage extends Component {
       <div>
         <span data-testid="shopping-cart-empty-message">
           <img src={ emptyBoxImage } alt="Cart" />
-          Seu carrinho está vazio
+          Seu Carrinho Está Vazio
         </span>
       </div>
     );
