@@ -1,32 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import * as api from '../services/api';
+import { SearchResults } from '../components';
 
 class Home extends React.Component {
   render() {
-    api.getCategories()
-      .then((categories) => console.log(categories))
-      .catch((err) => console.error(err));
+    const { productList } = this.props;
+
     return (
+      <main className="home-container">
+        <section id="categories" className="home-one-fourth">
 
-      <div>
+        </section>
 
-        <main className="home-container">
-          <p
-            className="home-initial-message"
-            data-testid="home-initial-message"
-          >
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <Link
-            to="/cart"
-            data-testid="shopping-cart-button"
-          >
-            <button type="button">carrinho</button>
-          </Link>
-
-        </main>
-      </div>
+        <SearchResults productList={productList} />
+      </main>
     );
   }
 }
