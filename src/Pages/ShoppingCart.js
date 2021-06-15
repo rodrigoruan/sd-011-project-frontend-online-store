@@ -5,6 +5,7 @@ class ShoppingCart extends React.Component {
     return (
       <div>
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        <button type="button" data-testid="shopping-cart-button">Comprar</button>
       </div>
     );
   }
