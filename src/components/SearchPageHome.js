@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class SearchPageHome extends Component {
   render() {
@@ -10,6 +11,7 @@ export default class SearchPageHome extends Component {
             id="initialMessage"
           />
         </label>
+        <Link data-testid="shopping-cart-button" to="/shoppingCart">Oi!</Link>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
