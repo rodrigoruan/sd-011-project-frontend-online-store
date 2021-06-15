@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from './services/api';
-import data from './services/apiDataResult';
+import ProductCard from './ProductCard';
 
 class BuscaProduto extends Component {
   constructor() {
@@ -8,7 +8,8 @@ class BuscaProduto extends Component {
 
     this.state = {
       inputData: '',
-    }
+      productsData: [],
+    };
 
     this.getInputData = this.getInputData.bind(this);
     this.getApiData = this.getApiData.bind(this);
@@ -20,19 +21,32 @@ class BuscaProduto extends Component {
   }
 
   async getApiData() {
-    const dataText = this.state.inputData;
-    const apiData = await api.getProductsFromCategoryAndQuery('$CATEGORY_ID', dataText);
-    
-    apiData.results.forEach((dataProduct) => {
-      data.push(dataProduct);
-    });
+    const { inputData } = this.state;
+    const dataText = inputData;
+    const apiData = await api.getProductsFromCategoryAndQuery(
+      '$CATEGORY_ID',
+      dataText,
+    );
+
+    this.setState({ productsData: apiData.results });
   }
 
   render() {
+    const { productsData } = this.state;
     return (
       <div>
-        <input data-testid="query-input" onChange={this.getInputData}></input>
-        <button data-testid="query-button" onClick={this.getApiData}>Buscar</button>
+        <input data-testid="query-input" onChange={ this.getInputData } />
+        <button type="button" data-testid="query-button" onClick={ this.getApiData }>
+          Buscar
+        </button>
+        {productsData.map(({ id, title, thumbnail, price }) => (
+          <ProductCard
+            key={ id }
+            title={ title }
+            imgPath={ thumbnail }
+            price={ price }
+          />
+        ))}
       </div>
     );
   }

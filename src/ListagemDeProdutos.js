@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Loading from './Loading';
 import * as api from './services/api';
+import BuscaProduto from './BuscaProduto';
 
 class ListagemDeProdutos extends Component {
   constructor() {
@@ -18,7 +19,6 @@ class ListagemDeProdutos extends Component {
 
   async fetchCategories() {
     const apiResponse = await api.getCategories();
-    console.log(apiResponse);
     this.setState({
       loading: false,
       categories: apiResponse,
@@ -27,6 +27,7 @@ class ListagemDeProdutos extends Component {
 
   render() {
     const { loading, categories } = this.state;
+
     const loadingComponent = <Loading />;
     const categoryList = (
       <div>
@@ -39,6 +40,7 @@ class ListagemDeProdutos extends Component {
     );
     return (
       <div>
+        <BuscaProduto />
         {loading ? loadingComponent : categoryList}
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
