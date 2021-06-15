@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Filtros from './Filtros';
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component {
   render() {
@@ -9,6 +10,11 @@ export default class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <Filtros />
+        <Link to="/ShoppingCart">
+          <button data-testid="shopping-cart-button" type="button">
+            Carrinho de Compras
+          </button>
+        </Link>
       </div>
     );
   }
