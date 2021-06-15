@@ -29,8 +29,8 @@ export default class Home extends Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
-        {categories.map((eachCategory, index) => (
-          <RadialButton category={ eachCategory } key={ index } />
+        {categories.map((eachCategory) => (
+          <RadialButton category={ eachCategory } key={ eachCategory.id } />
         ))}
       </div>
     );

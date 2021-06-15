@@ -7,7 +7,7 @@ class RadialButton extends Component {
     return (
       <label htmlFor="category">
         { name }
-        <input data-testid="category" type="radio" />
+        <input data-testid="category" name="category" type="radio" />
       </label>
     );
   }
