@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import shoppingCartImage from '../images/shoppingCart.jpg';
 import * as Api from '../services/api';
 import CategoryList from '../components/categoryList';
 
@@ -33,6 +35,9 @@ class Home extends Component {
         <span data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <img src={ shoppingCartImage } alt="Cart" />
+        </Link>
       </div>
     );
   }
