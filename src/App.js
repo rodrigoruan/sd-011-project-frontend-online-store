@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={ () => <LandingPage /> } />
+          <Route exact path="/" render={ (props) => <LandingPage { ...props } /> } />
         </Switch>
       </Router>
     );
