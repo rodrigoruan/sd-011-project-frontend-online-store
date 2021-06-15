@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ListagemDeProdutos from './ListagemDeProdutos';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={ ListagemDeProdutos } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
