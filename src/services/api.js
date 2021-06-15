@@ -4,12 +4,12 @@ async function fetchURL(searchCat) {
   return json;
 }
 
-export async function getCategories(searchCat) {
+export async function getCategories() {
   // Implemente aqui
   return fetchURL('categories');
 }
 
-export async function getProductsFromCategoryAndQuery( categoryId, query ) {
+export async function getProductsFromCategoryAndQuery(categoryId, query) {
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
   let url = 'search?';
   // Se tiver termo
@@ -22,5 +22,4 @@ export async function getProductsFromCategoryAndQuery( categoryId, query ) {
   if (categoryId) url += `category=${categoryId}`;
 
   return fetchURL(url);
-
 }
