@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import cart from '../Images/cart.png';
 import SearchArea from './SearchArea';
+import Filter from './Filter';
 
 class HomeInitial extends Component {
   constructor(props) {
@@ -68,6 +69,7 @@ class HomeInitial extends Component {
           </Link>
         </div>
         <SearchArea products={ products } />
+        <Filter />
       </div>
     );
   }
