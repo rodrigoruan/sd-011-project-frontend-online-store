@@ -37,7 +37,6 @@ class Home extends React.Component {
   }
 
   render() {
-    // const { categories } = this.state;
     return (
       <main>
         <SearchBar />
