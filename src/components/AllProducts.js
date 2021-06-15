@@ -5,6 +5,10 @@ import CardProduct from './CardProduct';
 class AllProducts extends Component {
   render() {
     const { productsList } = this.props;
+    console.log(productsList[0]);
+    if (!productsList[0]) {
+      return <span>Nenhum produto foi encontrado</span>;
+    }
     return (
       <div>
         {productsList.map((product) => (

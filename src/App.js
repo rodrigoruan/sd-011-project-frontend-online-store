@@ -27,7 +27,6 @@ class App extends Component {
   async fetchProducts(query) {
     const result = await getProductsFromCategoryAndQuery('', query);
     const products = result.results;
-    console.log(products);
     this.setState({
       products,
     });
