@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CategoryFilter from './CategoryFilter';
 
 export default class ProductsList extends React.Component {
   render() {
