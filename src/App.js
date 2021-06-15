@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './Pages/Home';
 // import * as api from './services/api';
 
 class App extends Component {
@@ -7,7 +9,11 @@ class App extends Component {
     // api.getProductsFromCategoryAndQuery('MLB1055', 'Motorola').then(categories => { console.log(categories) });
 
     return (
-      <div> textInComponent </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" render={ () => <Home /> } />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
