@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as api from './services/api';
 import SearchBar from './components/SearchBar';
+import ShoppingCart from './components/ShoppingCart/index';
 
 function App() {
   api.getCategories().then((categorie) => console.log(categorie));
@@ -12,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ SearchBar } />
+          <Route path="/cart" component={ ShoppingCart } />
         </Switch>
       </BrowserRouter>
     </div>
