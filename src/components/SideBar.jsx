@@ -1,36 +1,31 @@
 import React, { Component } from 'react';
-import * as api from '../services/api';
+import PropTypes from 'prop-types';
 
 export default class SideBar extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      categories: [],
-    };
-
-    this.requestCategories = this.requestCategories.bind(this);
-  }
-
-  componentDidMount() {
-    this.requestCategories();
-  }
-
-  async requestCategories() {
-    const categories = await api.getCategories();
-    this.setState({ categories });
-  }
-
   render() {
-    const { categories } = this.state;
+    const { categories, onChangeHandler } = this.props;
     return (
       <aside>
         <ul>
           { categories.map((category) => (
-            <li data-testid="category" key={ category.id }>{category.name}</li>
+            <label htmlFor="category" key={ category.id }>
+              { category.name }
+              <input
+                type="radio"
+                name="category"
+                data-testid="category"
+                value={ category.id }
+                onChange={ onChangeHandler }
+              />
+            </label>
           ))}
         </ul>
       </aside>
     );
   }
 }
+
+SideBar.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onChangeHandler: PropTypes.func.isRequired,
+};
