@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import * as api from '../services/api';
+import * as api from '../services/api';
 
 class Home extends React.Component {
   render() {
+    api.getCategories()
+      .then((categories) => console.log(categories))
+      .catch((err) => console.error(err));
     return (
+
       <div>
 
         <main className="home-container">
