@@ -9,11 +9,13 @@ class App extends React.Component {
   // api.getProductsFromCategoryAndQuery('MLB5672').then((categories) => { console.log(categories); });
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ Home } />
-        </Switch>
-      </BrowserRouter>
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ Home } />
+          </Switch>
+        </BrowserRouter>
+      </div>
     );
   }
 }
