@@ -1,0 +1,16 @@
+.Home-css {
+  padding: 10px;
+}
+
+.inputs-style {
+  margin-top: 10px;
+  width: 350px;
+  border-radius: 10px;
+}
+
+.img {
+  width: 20px;
+  margin-left: -20px;
+  margin-top: 10px;
+  position: absolute;
+}
