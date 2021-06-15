@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Filtros from './Filtros';
 import { Link } from 'react-router-dom';
+import Filtros from './Filtros';
 
 export default class Home extends Component {
   render() {
