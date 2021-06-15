@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as api from './services/api';
-
-import { BrowserRouter, Switch, Route } from  'react-router-dom';
 import SearchBar from './components/SearchBar';
 
 function App() {
