@@ -4,10 +4,10 @@ import emptyBoxImage from '../images/emptyBox.png';
 class cartPage extends Component {
   render() {
     return (
-      <div>
-        <span data-testid="shopping-cart-empty-message">
+      <div data-testid="shopping-cart-empty-message">
+        <span>
           <img src={ emptyBoxImage } alt="Cart" />
-          Seu Carrinho Está Vazio
+          Seu carrinho está vazio
         </span>
       </div>
     );
