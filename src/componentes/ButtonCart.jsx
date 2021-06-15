@@ -5,7 +5,7 @@ class ButtonCart extends Component {
   render() {
     return (
       <Link to="/carPages" data-testid="shopping-cart-button">
-        <button type="button">cart</button>
+        <img src="src/images/shopCartIcon.png" alt="botão carrinho de compras" />
       </Link>
     );
   }
