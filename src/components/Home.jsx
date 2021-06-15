@@ -22,25 +22,26 @@ export default class Home extends Component {
 
   }
 
+  handleChange({ target }) {
+    const { value, name } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  async fetchProducts() {
+    const { search, categoryId } = this.state;
+    const fetchedProduts = await
+    fetchAPI.getProductsFromCategoryAndQuery(search, categoryId);
+    console.log(fetchedProduts);
+  }
+
   async fetchProductCategory() {
     const fetchedCategories = await fetchAPI.getCategories();
     this.setState({
       categories: fetchedCategories,
     });
   }
-
-handleChange({ target })  {
-  const { value, name }= target;
-  this.setState({
-    [name]: value
-  })
-}
-
-async fetchProducts() {
-  const { search, categoryId } = this.state;
-  const fetchedProduts = await fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
-  console.log(fetchedProduts);
-}
 
   render() {
     const { categories } = this.state;
@@ -49,10 +50,20 @@ async fetchProducts() {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <input type="text" data-testid="query-input" name="search" onChange={ this.handleChange } />
-        <button type="button" data-testid="query-button" onClick={ this.fetchProducts } />
+        <input
+          type="text"
+          data-testid="query-input"
+          name="search"
+          onChange={ this.handleChange }
+        />
+        <button
+          type="button"
+          aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
+          data-testid="query-button"
+          onClick={ this.fetchProducts }
+        />
         <h2>Categorias:</h2>
-        <select onChange= { this.handleChange } name="categoryId">
+        <select onChange={ this.handleChange } name="categoryId">
           {categories.map((category) => (
             <option
               data-testid="category"
