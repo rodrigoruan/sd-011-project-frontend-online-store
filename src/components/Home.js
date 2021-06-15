@@ -7,8 +7,8 @@ export default class Home extends Component {
       <div>
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
-          <Filtros />
         </h2>
+        <Filtros />
       </div>
     );
   }

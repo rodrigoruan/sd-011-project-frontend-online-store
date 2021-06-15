@@ -23,9 +23,22 @@ class Filtros extends Component {
 
   render() {
     const { categories } = this.state;
+    if (categories === undefined) {
+      return <div> Loading...</div>;
+    }
     return (
-      <div>
-        {console.log(categories)}
+      <div data-testId="category">
+        {categories.map((category) => (
+          <label key={ category.name } htmlFor={ category.id }>
+            <input
+              type="radio"
+              id={ category.id }
+              name="category"
+              value={ category.name }
+            />
+            { category.name }
+          </label>
+        ))}
       </div>
     );
   }
