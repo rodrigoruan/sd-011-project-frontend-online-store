@@ -1,6 +1,7 @@
 import './App.css';
-import * as api from './services/api';
 import React, { Component } from 'react';
+import * as api from './services/api';
+import Home from './components/StartingPage';
 
 export default class App extends Component {
   componentDidMount() {
@@ -9,6 +10,10 @@ export default class App extends Component {
   }
 
   render() {
-    return <div>Ok</div>;
+    return (
+      <div className="App">
+        <Home />
+      </div>
+    );
   }
 }
