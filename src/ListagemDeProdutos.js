@@ -27,16 +27,22 @@ class ListagemDeProdutos extends Component {
 
   render() {
     const { loading, categories } = this.state;
-    if (loading === true) return <Loading />;
+    const loadingComponent = <Loading />;
+    const categoryList = (
+      <div>
+        {categories.map(({ id, name }) => (
+          <p data-testid="category" key={ id }>
+            {name}
+          </p>
+        ))}
+      </div>
+    );
     return (
       <div>
+        {loading ? loadingComponent : categoryList}
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <div>
-          {categories.map(({ id, name }) => (
-            <p data-testid="category" key={ id }>{ name }</p>))}
-        </div>
       </div>
     );
   }
