@@ -29,7 +29,7 @@ class Filtros extends Component {
     return (
       <div>
         {categories.map((category) => (
-          <label key={ category.name } htmlFor={ category.id } data-testId="category">
+          <label key={ category.name } htmlFor={ category.id } data-testid="category">
             <input
               type="radio"
               id={ category.id }
