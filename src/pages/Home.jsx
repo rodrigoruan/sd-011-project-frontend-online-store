@@ -60,8 +60,8 @@ export default class Home extends Component {
 
   render() {
     const { categories, isNotFound, product, isLoading, products } = this.state;
-    console.log(products.results);
-    if (isLoading) {
+    const { results } = products;
+    if (!isLoading) {
       return <Loading />;
     }
     if (isNotFound) {
@@ -79,18 +79,14 @@ export default class Home extends Component {
           requestProducts={ this.requestProducts }
         />
         <SideBar categories={ categories } onChangeHandler={ this.onChangeHandler } />
-        {
-          isLoading
-            ? <Loading />
-            : products.map((element) => (
-              <Product
-                key={ element.results.id }
-                title={ element.results.title }
-                thumbnail={ element.results.thumbnail }
-                price={ element.results.price }
-              />
-            ))
-        }
+        { results.map((element) => (
+          <Product
+            key={ element.id }
+            title={ element.title }
+            thumbnail={ element.thumbnail }
+            price={ element.price }
+          />
+        ))}
       </div>
     );
   }
