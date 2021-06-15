@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 export default class App extends Component {
   componentDidMount() {
     api.getCategories();
+    api.getProductsFromCategoryAndQuery();
   }
 
   render() {
