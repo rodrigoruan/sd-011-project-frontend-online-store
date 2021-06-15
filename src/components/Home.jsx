@@ -10,19 +10,38 @@ export default class Home extends Component {
       categories: [],
     };
     this.fetchProductCategory = this.fetchProductCategory.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   componentDidMount() {
     this.fetchProductCategory();
   }
 
+  componentDidUpdate() {
+
+  }
+
   async fetchProductCategory() {
     const fetchedCategories = await fetchAPI.getCategories();
-    console.log(fetchedCategories);
     this.setState({
       categories: fetchedCategories,
     });
   }
+
+handleChange({ target })  {
+  const { value, name }= target;
+  this.setState({
+    [name]: value
+  })
+}
+
+async fetchProducts() {
+  const { search, categoryId } = this.state;
+  const fetchedProduts = await fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
+  console.log(fetchedProduts);
+  console.log(this.state);
+}
 
   render() {
     const { categories } = this.state;
@@ -31,25 +50,28 @@ export default class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        
+        <input type="text" data-testid="query-input" name="search" onChange={ this.handleChange } />
+        <button type="button" data-testid="query-button" onClick={ this.fetchProducts } />
         <h2>Categorias:</h2>
-        <ul>
+        <select onChange= { this.handleChange }>
           {categories.map((category) => (
-            <li
+            <option
               data-testid="category"
               key={ category.id }
+              value={ category.id }
+              name="categoryId"
             >
               {category.name}
-            </li>))}
-        </ul>
+            </option>))}
+        </select>
         <Router>
-            <Link to="/cart" data-testid="shopping-cart-button">
-                <img src="./images/cart.svg" alt="Cart" />
-            </Link>
-             <Switch>
-                 <Route path="/cart" component={ ShopCart } />
-             </Switch>
-         </Router>
+          <Link to="/cart" data-testid="shopping-cart-button">
+            <img src="./images/cart.svg" alt="Cart" />
+          </Link>
+          <Switch>
+            <Route path="/cart" component={ ShopCart } />
+          </Switch>
+        </Router>
       </div>
     );
   }
