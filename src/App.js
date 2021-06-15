@@ -1,15 +1,23 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './components/Home';
 import './App.css';
 // import * as api from './services/api';
 
-function App() {
+class App extends React.Component {
   // api.getCategories().then((categories) => { console.log(categories); });
   // api.getProductsFromCategoryAndQuery('MLB5672').then((categories) => { console.log(categories); });
-  return (
-    <div className="App">
-      <h1>OK</h1>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ Home } />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default App;
