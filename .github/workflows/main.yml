@@ -29,5 +29,5 @@ jobs:
         uses: betrybe/store-evaluation-action@v2
         with:
           evaluation-data: ${{ steps.evaluator.outputs.result }}
-          environment: production
+          environment: staging
           pr-number: ${{ steps.evaluator.outputs.pr-number }}
