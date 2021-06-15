@@ -40,7 +40,6 @@ async fetchProducts() {
   const { search, categoryId } = this.state;
   const fetchedProduts = await fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
   console.log(fetchedProduts);
-  console.log(this.state);
 }
 
   render() {
@@ -53,13 +52,12 @@ async fetchProducts() {
         <input type="text" data-testid="query-input" name="search" onChange={ this.handleChange } />
         <button type="button" data-testid="query-button" onClick={ this.fetchProducts } />
         <h2>Categorias:</h2>
-        <select onChange= { this.handleChange }>
+        <select onChange= { this.handleChange } name="categoryId">
           {categories.map((category) => (
             <option
               data-testid="category"
               key={ category.id }
               value={ category.id }
-              name="categoryId"
             >
               {category.name}
             </option>))}
