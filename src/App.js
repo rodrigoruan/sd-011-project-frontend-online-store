@@ -1,7 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Home from './home';
 import './App.css';
 import './services/api'
+import listproductterms from './components/listproductterms'
 // import * as api from './services/api'
 
 function App() {
