@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import * as api from './services/api';
+import Home from './Home';
 
 class App extends Component {
 
@@ -12,7 +14,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        Test
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ Home } />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
