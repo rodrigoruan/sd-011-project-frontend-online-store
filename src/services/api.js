@@ -1,11 +1,11 @@
 async function fetchURL(searchCat) {
-const init = { headers: { 'Content-Type': 'application/json'}}
+  const init = { headers: { 'Content-Type': 'application/json' } };
   try {
-    const response = await fetch(`https://api.mercadolibre.com/sites/MLB/${searchCat}`, init );
+    const response = await fetch(`https://api.mercadolibre.com/sites/MLB/${searchCat}`, init);
     const json = await response.json();
     return json;
-  } catch(err) {
-    throw new Error(err)
+  } catch (err) {
+    throw new Error(err);
   }
 }
 
