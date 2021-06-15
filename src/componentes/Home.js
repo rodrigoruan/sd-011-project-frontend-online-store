@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
+import ButtonCart from './ButtonCart';
 
 class Home extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class Home extends Component {
           { categories.map((item, index) => (
             <li data-testid="category" key={ index }>{ item.name }</li>)) }
         </ol>
+        <ButtonCart />
       </div>
     );
   }
