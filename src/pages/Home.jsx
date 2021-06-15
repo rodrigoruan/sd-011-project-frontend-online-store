@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import * as api from '../services/api';
+import SearchBar from '../components/SearchBar';
 
 export default class Home extends Component {
   constructor() {
@@ -12,7 +13,7 @@ export default class Home extends Component {
       isNotFound: false,
       product: '',
       products: [],
-      loading: true,
+      isLoading: true,
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.requestCategories = this.requestCategories.bind(this);
@@ -61,23 +62,11 @@ export default class Home extends Component {
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        <label htmlFor="product">
-          Digite o nome do produto:
-          <input
-            type="text"
-            name="product"
-            data-testid="query-input"
-            value={ product }
-            onChange={ this.onChangeHandler }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.requestProducts }
-        >
-          Pesquisar
-        </button>
+        <SearchBar
+          onChangeHandler={ this.onChangeHandler }
+          product={ product }
+          requestProducts={ this.requestProducts }
+        />
         <SideBar categories={ categories } onChangeHandler={ this.onChangeHandler } />
       </div>
     );
