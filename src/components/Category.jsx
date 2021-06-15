@@ -26,11 +26,11 @@ class Category extends React.Component {
     return (
       <div>
         <form>
-          {categories.map((category, index) => (
-            <label htmlFor="categories" key={ index }>
-              { category.name}
+          {categories.map((category) => (
+            <label htmlFor="categories" key={ category.id }>
+              { category.name }
               <input
-                key={ index }
+                key={ category.id }
                 data-testid="category"
                 type="radio"
                 name="categories"
