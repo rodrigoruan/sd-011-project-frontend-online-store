@@ -10,10 +10,10 @@ class CardCreator extends Component {
   }
 
   createCard(item) {
-    const { title, thumbnail, price, id } = item;
+    const { title, thumbnail, price } = item;
 
     return (
-      <div className="product-card" data-testid="product" key={ id }>
+      <div className="product-card" data-testid="product">
         <h2 className="product-title">{title}</h2>
         <img
           className="product-image"
