@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   constructor() {
@@ -21,6 +22,12 @@ class Home extends Component {
             name="searchBar"
           />
         </label>
+        <Link
+          to="/shoppingcart"
+          data-testid="shopping-cart-button"
+        >
+          Ir para o carrinho
+        </Link>
       </div>
     );
   }
