@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
-import * as api from './services/api';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './components/Home';
 
 function App() {
-  api.getProductsFromCategoryAndQuery().then((categories) => { console.log(categories); });
   return (
-    <div className="App">
-      olá
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={ Home } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
