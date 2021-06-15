@@ -1,6 +1,10 @@
 import React from 'react'
+
 import FiltersBar from '../components/filtersbar/FiltersBar.jsx';
 import * as api from '../services/api';
+
+import { Link, Route } from 'react-router-dom';
+
 
 class Home extends React.Component {
   constructor() {
@@ -32,6 +36,7 @@ class Home extends React.Component {
           <h1 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h1>
+          <Link data-testid="shopping-cart-button" to="/shopping-cart">Procurar</Link>
         </label>
       </div>
     );
