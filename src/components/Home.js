@@ -9,7 +9,9 @@ export default class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <Link to="/ShoppingCart">
-          <button data-testid="shopping-cart-button" type="button">Carrinho de Compras</button>
+          <button data-testid="shopping-cart-button" type="button">
+            Carrinho de Compras
+          </button>
         </Link>
       </div>
     );
