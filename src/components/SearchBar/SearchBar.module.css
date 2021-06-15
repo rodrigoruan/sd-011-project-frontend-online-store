@@ -1,0 +1,14 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.container input {
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px black;
+  height: 20px;
+  margin: 10px;
+  outline: none;
+  width: 70vw;
+}
