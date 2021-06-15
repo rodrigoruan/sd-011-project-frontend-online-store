@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SideBar from '../components/SideBar';
 
 export default class Home extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class Home extends Component {
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
+        <SideBar />
       </div>
     );
   }
