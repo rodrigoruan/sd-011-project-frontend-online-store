@@ -1,6 +1,6 @@
-import React from 'react';
+import { Component } from 'react';
 
-class ListagemDeProdutos extends React.Component {
+class ListagemDeProdutos extends Component {
   render() {
     return (
       <div>
