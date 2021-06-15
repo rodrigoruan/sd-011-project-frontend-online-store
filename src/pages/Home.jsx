@@ -1,29 +1,27 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import FiltersBar from '../components/filtersbar/FiltersBar.jsx';
+import FiltersBar from '../components/filtersbar/FiltersBar';
 import * as api from '../services/api';
-
-import { Link, Route } from 'react-router-dom';
-
 
 class Home extends React.Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       categories: [],
-    }
+    };
   }
 
   componentDidMount() {
-    this.FetchAPI()
+    this.FetchAPI();
   }
 
   async FetchAPI() {
     const getCategories = await api.getCategories();
     this.setState({
       categories: getCategories,
-    })
+    });
   }
 
   render() {
@@ -42,5 +40,5 @@ class Home extends React.Component {
     );
   }
 }
- 
+
 export default Home;

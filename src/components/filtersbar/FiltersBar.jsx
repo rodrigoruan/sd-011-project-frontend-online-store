@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class FiltersBar extends Component {
   render() {
@@ -14,6 +15,13 @@ export default class FiltersBar extends Component {
           )) }
         </form>
       </div>
-    )
+    );
   }
 }
+
+FiltersBar.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  })).isRequired,
+};
