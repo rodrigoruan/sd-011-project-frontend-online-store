@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+// import * as api from './services/api'
 
 function App() {
+  // api.getCategories().then(categories => { console.log(categories) })
+  // api.getProductsFromCategoryAndQuery('MLB5672', 'Farol').then(categories => { console.log(categories) })
   return (
     <div className="App">
       <header className="App-header">
