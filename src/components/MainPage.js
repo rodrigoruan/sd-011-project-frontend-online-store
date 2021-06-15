@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CategoriesList from './CategoriesList';
 
 class MainPage extends React.Component {
   render() {
@@ -18,6 +19,9 @@ class MainPage extends React.Component {
           Cart
         </Link>
         <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
+        <div>
+          <CategoriesList />
+        </div>
       </div>
     );
   }
