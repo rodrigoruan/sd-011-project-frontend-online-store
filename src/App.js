@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ProductsList from './pages/ProductsList';
-import './App.css';
 import ShoppingCart from './pages/ShoppingCart';
+import './App.css';
+
 
 function App() {
   return (
