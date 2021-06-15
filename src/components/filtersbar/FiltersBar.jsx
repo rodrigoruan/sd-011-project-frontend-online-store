@@ -7,7 +7,7 @@ export default class FiltersBar extends Component {
       <div>
         <form action="">
           { categories.map(({ id, name }) => (
-            <label key={ id } htmlFor={ id }>
+            <label data-testid="category" key={ id } htmlFor={ id }>
               <input type="checkbox" name={ name } id={ id } />
               { name }
             </label>
