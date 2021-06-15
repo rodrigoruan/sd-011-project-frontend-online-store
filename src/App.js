@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
-import * as Data from './services/api';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './Pages/Home';
 
 function App() {
   return (
     <div className="App">
-      {console.log(Data.getCategories())}
-      {console.log(Data.getProductsFromCategoryAndQuery())}
+      <Router>
+        <Switch>
+          <Route path="/" component={ Home } />
+        </Switch>
+      </Router>
     </div>
   );
 }
