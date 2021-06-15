@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './SearchBar.module.css';
+import CartButton from '../CartButton/index';
 
 export default class SearchBar extends React.Component {
   render() {
@@ -9,6 +10,7 @@ export default class SearchBar extends React.Component {
           <i className="fa fa-search">
             <input type="text" name="search-input" id="search-input" />
           </i>
+          <CartButton />
         </label>
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
