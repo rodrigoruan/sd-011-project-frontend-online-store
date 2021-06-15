@@ -5,7 +5,6 @@ class CategoryList extends Component {
   constructor() {
     super();
     this.state = {
-      isLoaded: false,
       categories: [],
     };
   }
@@ -14,30 +13,27 @@ class CategoryList extends Component {
     api.getCategories()
       .then((categories) => {
         this.setState({
-          isLoaded: true,
           categories,
         });
       });
   }
 
   render() {
-    const { isLoaded, categories } = this.state;
-    if (isLoaded) {
-      return (
-        <div>
-          <label htmlFor="list">
-            Categorias
-            <ul name="list">
-              {categories.map((category) => (
-                <li data-testid="category" key={ category.id }>
-                  {category.name}
-                </li>
-              ))}
-            </ul>
-          </label>
-        </div>
-      );
-    }
+    const { categories } = this.state;
+    return (
+      <div>
+        <label htmlFor="list">
+          Categorias
+          <ul name="list">
+            {categories.map((category) => (
+              <li data-testid="category" key={ category.id }>
+                {category.name}
+              </li>
+            ))}
+          </ul>
+        </label>
+      </div>
+    );
   }
 }
 
