@@ -23,12 +23,12 @@ class Filtros extends Component {
 
   render() {
     const { categories } = this.state;
+    const { onClick } = this.props;
     if (categories === undefined) {
       return <div>Loading...</div>;
     }
     return (
       <div>
-        {console.log(categories)}
         {categories.map((category) => (
           <label key={ category.name } htmlFor={ category.id } data-testid="category">
             <input
@@ -36,6 +36,7 @@ class Filtros extends Component {
               id={ category.id }
               name="category"
               value={ category.name }
+              onClick={ onClick }
             />
             { category.name }
           </label>
@@ -44,5 +45,9 @@ class Filtros extends Component {
     );
   }
 }
+
+Filtros.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Filtros;
