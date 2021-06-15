@@ -1,10 +1,12 @@
 import React from 'react';
-import CategoriesBar from './CategoriesBar';
+import { Link } from 'react-router-dom';
+import CategoriesBar from '../CategoriesBar';
 
 class Home extends React.Component {
   render() {
     return (
       <div>
+        <Link to="/cart" data-testid="shopping-cart-button">Cart</Link>
         <p
           data-testid="home-initial-message"
         >
