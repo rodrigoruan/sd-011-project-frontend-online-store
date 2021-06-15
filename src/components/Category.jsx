@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 export default class Category extends Component {
@@ -23,6 +24,7 @@ export default class Category extends Component {
 
   render() {
     const { categories, loading } = this.state;
+    const { change } = this.props;
     return (
       <div>
         <p>Categorias:</p>
@@ -35,6 +37,7 @@ export default class Category extends Component {
                 value={ name }
                 name="categories"
                 data-testid="category"
+                onChange={ change }
               />
               {name}
             </div>
@@ -43,3 +46,7 @@ export default class Category extends Component {
     );
   }
 }
+
+Category.propTypes = {
+  change: PropTypes.func.isRequired,
+};
