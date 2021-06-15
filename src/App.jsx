@@ -14,10 +14,6 @@ class App extends React.Component {
     this.updateSearchResults = this.updateSearchResults.bind(this);
   }
 
-  componentDidMount() {
-    api.getCategories();
-  }
-
   updateSearchResults(searchResults) {
     this.setState({ searchResults });
   }
