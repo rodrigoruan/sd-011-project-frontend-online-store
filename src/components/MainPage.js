@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class MainPage extends React.Component {
   render() {
@@ -10,6 +11,12 @@ class MainPage extends React.Component {
             type="text"
           />
         </label>
+        <Link
+          data-testid="shopping-cart-button"
+          to="/components/Cart"
+        >
+          Cart
+        </Link>
         <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>
       </div>
     );
