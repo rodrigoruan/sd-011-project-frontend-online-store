@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import * as Api from '../services/api';
 import ProductList from '../components/productlist';
+import CategoryList from '../components/CategoryList';
+import { Link } from 'react-router-dom';
+
 class Home extends Component {
   constructor() {
     super();
@@ -38,6 +41,9 @@ class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <ProductList />
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <CategoryList />
+
       </div>
     );
   }
