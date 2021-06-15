@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from '../components/SearchBar';
+import CartButton from '../components/CartButton';
 import ProductListing from '../components/ProductListing';
 
 class Main extends Component {
@@ -7,6 +8,7 @@ class Main extends Component {
     return (
       <div>
         <SearchBar />
+        <CartButton />
         <ProductListing />
       </div>
     );
