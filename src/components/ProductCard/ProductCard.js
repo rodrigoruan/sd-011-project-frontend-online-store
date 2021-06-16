@@ -29,6 +29,7 @@ export default class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
+  handleAddToShopCart: PropTypes.func,
   title: PropTypes.string,
   thumbnail: PropTypes.string,
   price: PropTypes.number,
