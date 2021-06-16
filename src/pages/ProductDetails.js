@@ -26,16 +26,16 @@ class ProductDetail extends Component {
         <div>
           <p>
             Especificações:
-            <ul>
-              {attributes.map((attribute, index) => (
-                <li key={ index }>
-                  {attribute.name}
-                  :
-                  {attribute.value_name}
-                </li>
-              ))}
-            </ul>
           </p>
+          <ul>
+            {attributes.map((attribute, index) => (
+              <li key={ index }>
+                {attribute.name}
+                :
+                {attribute.value_name}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     );
