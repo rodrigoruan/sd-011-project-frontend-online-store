@@ -73,7 +73,10 @@ class Home extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategoriesBar functionHome={ getCategories } filterCategory={ this.handleButton } />
+        <CategoriesBar
+          functionHome={ getCategories }
+          filterCategory={ this.handleButton }
+        />
         <div>
           {searched ? this.renderCards() : <span>Não houve pesquisa</span>}
         </div>
