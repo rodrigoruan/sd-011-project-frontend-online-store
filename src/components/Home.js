@@ -8,7 +8,6 @@ export default class Home extends Component {
     super();
     this.state = {
       query: '',
-      category: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -26,8 +25,8 @@ export default class Home extends Component {
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        <Filtros />
         <Input value={ query } onChange={ this.handleOnChange } />
+        <Filtros onClick={ this.handleOnChange } />
         <Link to="/ShoppingCart">
           <button data-testid="shopping-cart-button" type="button">
             Carrinho de Compras
