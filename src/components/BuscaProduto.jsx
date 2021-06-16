@@ -9,7 +9,6 @@ class BuscaProduto extends Component {
     this.state = {
       inputData: '',
       productsData: [],
-      load: false,
     };
 
     this.getInputData = this.getInputData.bind(this);
