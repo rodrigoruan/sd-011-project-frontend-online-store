@@ -24,8 +24,8 @@ class Category extends React.Component {
   render() {
     const { categories } = this.state;
     return (
-      <div>
-        <form>
+      <div className="categories">
+        <form className="category-form">
           {categories.map((category) => (
             <label htmlFor="categories" key={ category.id }>
               { category.name }

@@ -40,3 +40,26 @@
     transform: rotate(360deg);
   }
 }
+
+.main-page {
+  display: flex;
+}
+
+.main-page .search-bar {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: baseline;
+}
+
+.categories .category-form {
+  display: flex;
+  flex-direction: column;
+  border: #282c34 2px solid;
+  border-radius: 5px;
+}
+
+#queryInput {
+  border: black 1px solid;
+  border-radius: 5px;
+}
