@@ -73,6 +73,12 @@ class MainPage extends React.Component {
     });
   }
 
+  // async filterProduct() {
+  //   const { products: { id } } = this.state;
+  //   const result = await fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${id}`);
+  //   products.filter((item) => item.id === id);
+  // }
+
   render() {
     const { searchText, products, loading, categories } = this.state;
     return (
