@@ -38,8 +38,8 @@ class ShoppingCart extends Component {
             alt="imagem de voltar"
           />
         </Link>
-        {shopCart === null
-          ? <p>Seu carrinho está vazio</p>
+        {shopCart.length === 0
+          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           : this.renderShopCart(shopCart)}
       </>
     );
