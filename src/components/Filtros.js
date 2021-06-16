@@ -36,7 +36,7 @@ class Filtros extends Component {
               type="radio"
               id={ category.id }
               name="category"
-              value={ category.name }
+              value={ category.id }
               onClick={ onClick }
             />
             { category.name }
