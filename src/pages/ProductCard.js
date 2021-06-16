@@ -5,13 +5,10 @@ class ProductCard extends React.Component {
   render() {
     const { title, price, thumbnail } = this.props;
     return (
-      <div data-testid="product">
+      <div className="product-card" data-testid="product">
         <p>{ title }</p>
         <img src={ thumbnail } alt={ title } />
-        <p>
-          R$
-          { price }
-        </p>
+        <p>{ price }</p>
       </div>
     );
   }

@@ -11,8 +11,8 @@ export default class Main extends React.Component {
     this.state = {
       query: '',
       id: '',
-      product: false,
-      noItems: [],
+      product: [],
+      noItems: true,
     };
     this.handleState = this.handleState.bind(this);
     this.SearchText = this.SearchText.bind(this);
@@ -27,23 +27,21 @@ export default class Main extends React.Component {
 
   SearchText() {
     const { query, id, product, noItems } = this.state;
-    getProductsFromCategoryAndQuery(query, id).then(({ results }) => {
-      if (results === null) {
-        this.setState({
-          product: true,
-        });
-      }
-      this.setState({
-        noItems: results,
-      });
-    });
+    getProductsFromCategoryAndQuery(query, id)
+      .then(({ results }) => {
+        if (results === null) {
+          this.setState({
+            product: product.results,
+            noItems: noItems.false,
+          });
+        }
+      }).catch((error) => console.error(error));
   }
 
   render() {
     const { noItems, product } = this.state;
     return (
       <div>
-        <CategoryFilter onClick={ this.handleState } value="categories" />
         <label htmlFor="busca">
           <input
             name="inputText"
@@ -73,6 +71,7 @@ export default class Main extends React.Component {
                 .map(({ ...props }, index) => <ProductCard key={ index } { ...props } />)}
           </p>
         </nav>
+        <CategoryFilter onClick={ this.handleState } value="categories" />
       </div>
     );
   }
