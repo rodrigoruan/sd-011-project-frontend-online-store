@@ -1,8 +1,7 @@
 import React from 'react';
-import Category from './Category';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
-
+import Category from './Category';
 
 class Home extends React.Component {
   render() {
