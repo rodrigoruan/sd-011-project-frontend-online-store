@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
-export default class CategoryBar extends Component {
+class CategoryBar extends Component {
   constructor() {
     super();
     this.state = {
@@ -24,12 +25,22 @@ export default class CategoryBar extends Component {
 
   render() {
     const { categoriesList } = this.state;
+    const { onClickCategory } = this.props;
     return (
       <div className="categories-container">
         <ul>
           {categoriesList.map((category) => (
-            <li key={ category.id } data-testid="category">
-              {category.name}
+            <li key={ category.id }>
+              <label htmlFor={ category.id } data-testid="category">
+                {category.name}
+                <input
+                  type="radio"
+                  id={ category.id }
+                  value={ category.name }
+                  name="selectedCategory"
+                  onClick={ () => onClickCategory(category.id) }
+                />
+              </label>
             </li>
           ))}
         </ul>
@@ -37,3 +48,9 @@ export default class CategoryBar extends Component {
     );
   }
 }
+
+export default CategoryBar;
+
+CategoryBar.propTypes = {
+  onClickCategory: PropTypes.func.isRequired,
+};

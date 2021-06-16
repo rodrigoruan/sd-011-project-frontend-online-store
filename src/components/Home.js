@@ -18,10 +18,12 @@ class Home extends Component {
     this.handleSearchProduct = this.handleSearchProduct.bind(this);
     this.getProductsCategoryAndQuery = this.getProductsCategoryAndQuery.bind(this);
     this.renderProductLibrary = this.renderProductLibrary.bind(this);
+    this.handleSearchFromCategoryList = this.handleSearchFromCategoryList.bind(this);
   }
 
   handleSearchProduct() {
     const { categorySelect, searchText } = this.state;
+    console.log(categorySelect, searchText);
     this.getProductsCategoryAndQuery(categorySelect, searchText);
   }
 
@@ -32,12 +34,18 @@ class Home extends Component {
     });
   }
 
+  async handleSearchFromCategoryList(categoryId) {
+    this.setState({
+      categorySelect: categoryId,
+    });
+    await this.getProductsCategoryAndQuery(categoryId);
+  }
+
   async getProductsCategoryAndQuery(categoryId, query) {
     const products = await api.getProductsFromCategoryAndQuery(categoryId, query);
-    const state = this.setState({
+    this.setState({
       productsList: products,
     });
-    return state;
   }
 
   renderProductLibrary() {
@@ -73,7 +81,7 @@ class Home extends Component {
           buscar
         </button>
         {this.renderProductLibrary()}
-        <CategoryBar />
+        <CategoryBar onClickCategory={ this.handleSearchFromCategoryList } />
         <Link to="/Cart" data-testid="shopping-cart-button">Carrinho!</Link>
       </div>
     );
