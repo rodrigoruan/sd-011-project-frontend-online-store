@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   render() {
-    const { shopCart } = this.state;
     return (
       <BrowserRouter>
         <Switch>
