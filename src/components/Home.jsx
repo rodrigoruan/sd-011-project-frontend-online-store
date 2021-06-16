@@ -9,7 +9,7 @@ export default class Home extends Component {
     super();
     this.state = {
       categories: [],
-      productCards: undefined,
+      productCards: [],
       categoryId: '',
       search: '',
     };
@@ -49,18 +49,20 @@ export default class Home extends Component {
     });
   }
 
-  async fetchCategories() {
-    const { categoryId } = this.state;
+  async fetchCategories(id) {
+    // this.handleChange();
     const fetchedProductsFromCategories = await
-    fetchAPI.getProductsFromCategory(categoryId);
+    fetchAPI.getProductsFromCategory(id);
+    console.log(fetchedProductsFromCategories.results);
     this.setState({
-      categories: fetchedProductsFromCategories,
+      productCards: fetchedProductsFromCategories.results,
+      categoryId: id,
     });
   }
 
   render() {
     const { categories, productCards } = this.state;
-
+    if (categories === []) return <div>Loading...</div>;
     return (
       <div>
         <p data-testid="home-initial-message">
@@ -84,18 +86,20 @@ export default class Home extends Component {
           Enviar
         </button>
         <h2>Categorias:</h2>
-        <select onChange={ this.fetchCategories } name="categoryId">
-          {categories.map((category) => (
-            <option
-              data-testid="category"
-              key={ category.id }
-              value={ category.id }
-            >
-              {category.name}
-            </option>))}
-        </select>
+        {categories.map((category) => (
+          <button
+            type="button"
+            data-testid="category"
+            key={ category.id }
+            value={ category.id }
+            name="categoryId"
+            onClick={ () => this.fetchCategories(category.id) }
+          >
+            {category.name}
+          </button>
+        ))}
         <div>
-          {productCards === undefined
+          {!productCards
             ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar
             : productCards.map((product) => (
               <ProductCard
