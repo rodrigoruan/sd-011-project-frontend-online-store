@@ -22,15 +22,17 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    const { product, searchQuery } = this.props;
-    if (product) {
+    const { searchQuery } = this.props;
+    if (searchQuery) {
       this.getQuery(searchQuery);
     }
   }
 
   componentDidUpdate() {
-    const { product, searchQuery } = this.props;
-    this.getQuery(searchQuery);
+    const { searchQuery } = this.props;
+    if (searchQuery) {
+      this.getQuery(searchQuery);
+    }
   }
 
   handleInput = ({ target }) => {

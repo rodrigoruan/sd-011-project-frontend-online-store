@@ -13,9 +13,7 @@ export default class SearchList extends Component {
     this.showList = this.showList.bind(this);
   }
 
-  componentDidUpdate() {
-    // this.setState({ products: this.props.products, loading: false });
-  }
+  componentDidUpdate() {}
 
   showList = () => {
     if (this.props.products) {
