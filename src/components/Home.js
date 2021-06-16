@@ -8,6 +8,7 @@ export default class Home extends Component {
     super();
     this.state = {
       query: '',
+      category: '',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
@@ -19,7 +20,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { query } = this.state;
+    const { query, category } = this.state;
     return (
       <div>
         <h2 data-testid="home-initial-message">
@@ -32,6 +33,7 @@ export default class Home extends Component {
             Carrinho de Compras
           </button>
         </Link>
+        <ListCards query={ query } category={ category } />
       </div>
     );
   }
