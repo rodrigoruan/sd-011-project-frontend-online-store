@@ -8,8 +8,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      searchResults: { results: [] },
       categories: [],
     };
+
+    this.updateSearchResults = this.updateSearchResults.bind(this);
   }
 
   componentDidMount() {
@@ -25,17 +28,32 @@ class App extends Component {
     }
   }
 
+  updateSearchResults(searchResults) {
+    this.setState({ searchResults });
+  }
+
   render() {
-    const { categories } = this.state;
+    const { categories, searchResults } = this.state;
+
     return (
-      <div className="App">
+      <>
+        <header>Frontend Online Store</header>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" render={ (() => <Home categories={ categories } />) } />
+            <Route
+              exact
+              path="/"
+              render={ () => (<Home
+                searchResults={ searchResults }
+                updateSearchResults={ this.updateSearchResults }
+                categories={ categories }
+              />) }
+            />
             <Route path="/cart" component={ Cart } />
           </Switch>
         </BrowserRouter>
-      </div>
+        <footer>Feito pelo Grupo 14, o grupo brabo</footer>
+      </>
     );
   }
 }

@@ -1,36 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Categories from '../components/Categories';
+import { Categories, SearchResults } from '../components';
 
 class Home extends React.Component {
   render() {
-    const { categories } = this.props;
-    return (
-      <div>
-        <main className="home-container">
-          <Categories categories={ categories } />
-          <p
-            className="home-initial-message"
-            data-testid="home-initial-message"
-          >
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <Link
-            to="/cart"
-            data-testid="shopping-cart-button"
-          >
-            <button type="button">carrinho</button>
-          </Link>
+    const { categories, updateSearchResults, searchResults } = this.props;
 
-        </main>
-      </div>
+    return (
+      <main className="home-container">
+        <Categories categories={ categories } />
+        <SearchResults
+          searchResults={ searchResults }
+          updateSearchResults={ updateSearchResults }
+        />
+      </main>
     );
   }
 }
 
 Home.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.strings),
-}.isRequired;
+  searchResults: PropTypes.shape({
+    results: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })),
+  }).isRequired,
+  updateSearchResults: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  })).isRequired,
+};
 
 export default Home;
