@@ -12,6 +12,7 @@ export default class SearchBar extends Component {
       categories: [],
       textSearch: '',
       products: [],
+      categoria: '',
     };
     this.getCategory = this.getCategory.bind(this);
     this.getProducts = this.getProducts.bind(this);
@@ -24,7 +25,8 @@ export default class SearchBar extends Component {
   }
 
   getValuTextInput({ target }) {
-    const { name, value } = target;
+    const { name } = target;
+    const value = target.type === 'radio' ? target.checked : target.value;
     this.setState({
       [name]: value,
     });
@@ -38,8 +40,9 @@ export default class SearchBar extends Component {
   }
 
   async getProducts() {
-    const { id, textSearch } = this.state;
-    const returnGetProducts = await Api.getProductsFromCategoryAndQuery(id, textSearch);
+    const { categoria, textSearch } = this.state;
+    const returnGetProducts = await
+    Api.getProductsFromCategoryAndQuery(categoria, textSearch);
     const arrayReturnProducts = returnGetProducts.results;
     this.setState({
       products: arrayReturnProducts,
@@ -68,11 +71,16 @@ export default class SearchBar extends Component {
           type="button"
           onClick={ this.getProducts }
         >
-          Buscar Produto:
+          Buscar Produto
         </button>
         <div>
-          {categories.map((category) => (
-            <Category key={ category.id } name={ category.name } />
+          {categories.map((category, index) => (
+            <Category
+              onChange={ this.getValuTextInput }
+              key={ category.id }
+              value={ category.id }
+              name={ category.name }
+            />
           ))}
         </div>
         <div>
