@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default class SearchList extends Component {
   constructor(props) {
@@ -8,8 +8,10 @@ export default class SearchList extends Component {
 
     this.state = {
       products: '',
+      productDetail: '',
     };
     this.showList = this.showList.bind(this);
+    this.handleCart = this.handleCart.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +28,8 @@ export default class SearchList extends Component {
     return this.setState({ products: getList.results });
   };
 
+  handleCart = () => {};
+
   showList = () => {
     return this.state.products.map((el) => {
       const { thumbnail, title, id, price } = el;
@@ -34,7 +38,12 @@ export default class SearchList extends Component {
           <img src={thumbnail} />
           <h3>{title}</h3>
           <h6>R${parseFloat(price, 10).toFixed(2)}</h6>
-          <button className="btn btn-success">Add to Cart!</button>
+          <Link className="btn btn-success" to={{ pathname: `/product/${id}`, state: el }}>
+            See more details!
+          </Link>
+          <button onClick={this.handleCart} className="btn btn-success">
+            Add to cart!
+          </button>
         </div>
       );
     });
