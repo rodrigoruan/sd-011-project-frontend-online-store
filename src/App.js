@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Header from './components/Header';
+import Header from './page/Header';
 import ShoppingCart from './page/ShoppingCart';
 
 function App() {
