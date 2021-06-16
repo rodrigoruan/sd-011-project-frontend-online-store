@@ -15,7 +15,7 @@ class App extends Component {
 
   handleAddToShopCart(title, thumbnail, price) {
     this.setState((state) => ({
-      shopCart: [...state.shopCart, { title, thumbnail, price, amount: 0 }],
+      shopCart: [...state.shopCart, { title, thumbnail, price, amount: 1 }],
     }));
   }
 
@@ -36,6 +36,7 @@ class App extends Component {
               <Home
                 { ...props }
                 handleAddToShopCart={ this.handleAddToShopCart }
+                shopCart={ shopCart }
               />) }
           />
         </Switch>

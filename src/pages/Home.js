@@ -5,6 +5,7 @@ import imageTwo from '../imgs/Carrinho.png';
 import ProductSearch from '../components/ProductSearch/ProductSearch';
 import ProductsList from '../components/ProductsList/ProductsList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+// check
 
 class Home extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Home extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.handleSelectCategory = this.handleSelectCategory.bind(this);
+    this.renderShopCart = this.renderShopCart.bind(this);
   }
 
   componentDidMount() {
@@ -70,12 +72,34 @@ class Home extends Component {
               { name }
             </button>
           </li>))}
-      </ul>);
+      </ul>
+    );
+  }
+
+  renderShopCart() {
+    const { shopCart } = this.props;
+    return (
+      shopCart.map(({ title, amount }, index) => (
+        <div key={ index }>
+          <span
+            data-testid="shopping-cart-product-name"
+          >
+            { title }
+          </span>
+          <p
+            data-testid="shopping-cart-product-quantity"
+          >
+            Quantidade
+            { amount }
+          </p>
+        </div>
+      ))
+    );
   }
 
   render() {
     const { loading, categories, products, searchInput } = this.state;
-    const { handleAddToShopCart } = this.props;
+    const { handleAddToShopCart, shopCart } = this.props;
     return (
       <>
         <ProductSearch
@@ -91,7 +115,9 @@ class Home extends Component {
           />
         </Link>
         <main data-testid="shopping-cart-button" />
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        {shopCart.length === 0
+          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          : this.renderShopCart()}
         {loading ? 'Loading...' : this.renderCategories(categories)}
         <ProductsList products={ products } handleAddToShopCart={ handleAddToShopCart } />
       </>
@@ -101,5 +127,11 @@ class Home extends Component {
 export default Home;
 
 Home.propTypes = {
-  handleAddToShopCart: PropTypes.func.isRequired,
-};
+  handleAddToShopCart: PropTypes.func,
+  shopCart: PropTypes.arrayOf(PropTypes.shape({
+    amount: PropTypes.number,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+  })),
+}.isRequired;
