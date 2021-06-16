@@ -83,7 +83,7 @@ export default class SearchBar extends Component {
           ))}
         </div>
         <div>
-          { products.map((product) => (
+          {products.map((product) => (
             <Products
               key={ product.id }
               title={ product.title }
