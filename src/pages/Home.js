@@ -21,6 +21,7 @@ class Home extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.getProducts = this.getProducts.bind(this);
+    this.handleSelectCategory = this.handleSelectCategory.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,10 @@ class Home extends Component {
 
   async handleSearch() {
     this.getProducts();
+  }
+
+  handleSelectCategory(id) {
+    this.setState({ selectedCategory: id }, this.getProducts);
   }
 
   async getProducts() {
@@ -52,12 +57,17 @@ class Home extends Component {
   renderCategories(data) {
     return (
       <ul>
-        {data.map(({ name }, index) => (
+        {data.map(({ id, name }) => (
           <li
-            data-testid="category"
-            key={ index }
+            key={ id }
           >
-            { name }
+            <button
+              data-testid="category"
+              type="button"
+              onClick={ () => this.handleSelectCategory(id) }
+            >
+              { name }
+            </button>
           </li>))}
       </ul>);
   }
