@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import CartButton from '../components/CartButton';
 import ProductListing from '../components/ProductListing';
@@ -79,6 +80,13 @@ class Main extends Component {
               >
                 Adicione ao carrinho
               </button>
+              <Link
+                data-testid="product-detail-link"
+                to={ { pathname: `/product-detail/${product.id}`,
+                  state: { produto: product } } }
+              >
+                Saiba Mais
+              </Link>
             </div>
           ))}
       </div>
