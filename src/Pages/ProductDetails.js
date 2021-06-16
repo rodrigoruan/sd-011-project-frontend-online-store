@@ -6,6 +6,7 @@ class ProductDetails extends Component {
     super(props);
     this.state = {
       redirect: false,
+      product: {},
     };
 
     this.setProduct = this.setProduct.bind(this);
@@ -14,13 +15,14 @@ class ProductDetails extends Component {
 
   componentDidMount() {
     const product = JSON.parse(sessionStorage.getItem('product'));
-    if(!product) this.setRedirect();
+    if (!product) this.setRedirect();
+    console.log(product);
     this.setProduct(product);
   }
 
   setProduct(product) {
     this.setState(() => ({
-      product
+      product,
     }));
   }
 
@@ -32,9 +34,12 @@ class ProductDetails extends Component {
 
   render() {
     const { redirect, product } = this.state;
+    const { title, thumbnail, price } = product;
     return !redirect ? (
       <div>
-        <p data-testid="product-detail-name">{ product }</p>
+        <p data-testid="product-detail-name">{ title }</p>
+        <img src={ thumbnail } alt={ title } />
+        { price }
       </div>
     ) : (<Redirect to="/" />);
   }
