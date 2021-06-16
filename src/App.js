@@ -4,7 +4,7 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import { About, Home, SearchList, Header, Footer, NotFound } from './pages/index';
+import { About, Home, SearchList, Header, Footer, NotFound, ShoppingCart } from './pages/index';
 
 export default class App extends Component {
   constructor(props) {
@@ -29,13 +29,12 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <Header />
         <BrowserRouter className="App">
+          <Header />
           <Switch>
             <Route
-              path="/"
+              exact path="/"
               render={(props) => <Home {...props} sendSubmit={this.getSearchQuery} />}
-              exact
             />
             <Route
               path="/search/:id"
@@ -47,6 +46,14 @@ export default class App extends Component {
                 />
               )}
               exact
+            />
+            <Route
+              exact path="/cart"
+              render={(props) => (
+                <ShoppingCart
+                  {...props}
+                />
+              )}
             />
             <Route path="/about" component={About} exact />
             <Route component={NotFound} />
