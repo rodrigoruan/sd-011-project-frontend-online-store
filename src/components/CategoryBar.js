@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as api from './services/api';
+import * as api from '../services/api';
 
 export default class CategoryBar extends Component {
   constructor() {
