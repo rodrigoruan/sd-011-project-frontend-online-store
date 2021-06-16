@@ -11,12 +11,15 @@ export default class Home extends React.Component {
 
     this.state = {
       categories: [],
+      crrCategory: '',
       products: [],
       loading: false,
+      searchText: '',
     };
 
     this.renderProducts = this.renderProducts.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.setCategory = this.setCategory.bind(this);
   }
 
   componentDidMount() {
@@ -30,27 +33,43 @@ export default class Home extends React.Component {
     });
   }
 
-  async FetchProducts() {
+  async FetchProducts(id, searchText) {
     this.setState(
       { loading: true },
       async () => {
-        const getProducts = await api.getProductsFromCategoryAndQuery();
+        const getProducts = await api.getProductsFromCategoryAndQuery(id, searchText);
         this.setState({
           products: getProducts,
           loading: false,
-        })
+        });
       }
     )
   }
 
   handleSearchClick() {
-    console.log("estou funcionando")
+    const inputText = document.querySelector('#search-input').value;
+    
+    this.setState({
+      searchText: inputText,
+    });
+
+    const id = this.state.crrCategory ? this.state.crrCategory : false;
+    const searchText = this.state.searchText ? this.state.searchText : false;
+
+    this.FetchProducts(id, searchText)
+  }
+
+  setCategory = ({ target }) => {
+    const { id } = target;
+    this.setState({
+      crrCategory: id,
+    });
   }
 
   renderProducts() {
     const { loading } = this.state;
     if (loading) return <Loading />
-    return <ProductsList products={this.state.products} />
+    return <ProductsList products={ this.state.products } />
   }
 
   render() {
@@ -60,7 +79,7 @@ export default class Home extends React.Component {
         <label htmlFor="search-input">
           <input type="text" name="search" id="search-input" data-testid="query-input" />
 
-          <button type="button" name="button" data-testid="query-button" onClick={ this.handleSearchClick() } >Pesquisar</button>
+          <button type="button" name="button" data-testid="query-button" onClick={ () => this.handleSearchClick() } >Pesquisar</button>
 
           <h1 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -69,7 +88,7 @@ export default class Home extends React.Component {
 
         <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho de Compras</Link>
 
-        <FiltersBar categories={ categories } />
+        <FiltersBar categories={ categories } setCategory={ this.setCategory } />
 
         { this.renderProducts() }
       </div>
