@@ -20,9 +20,10 @@ class LandingPage extends React.Component {
 
   onClickCategory(event) {
     const { target: { id } } = event;
-    console.log(id);
     this.setState({ selectedCategory: id });
-    console.log(this.state.selectedCategory);
+    this.setState((previousState) => {
+      cardList: previousState.cardList.results.filter((card)=> card.product_id === previousState.selectedCategory)
+    } )
   }
 
   onClick() {
