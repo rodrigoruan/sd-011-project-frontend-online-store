@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD:src/Home.js
 import ProductLibrary from './ProductLibrary';
 import * as api from './services/api';
+=======
+import { Link } from 'react-router-dom';
+import CategoryBar from './CategoryBar';
+>>>>>>> 762834a413c7911c1434b69a6dc9030adec1002d:src/components/Home.js
 
 class Home extends Component {
   constructor() {
@@ -67,6 +72,7 @@ class Home extends Component {
     const { searchText } = this.state;
     return (
       <div>
+<<<<<<< HEAD:src/Home.js
         <input
           type="text"
           value={ searchText }
@@ -80,6 +86,14 @@ class Home extends Component {
           buscar
         </button>
         {this.renderProductLibrary()}
+=======
+        <CategoryBar />
+        <input />
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+        <Link to="/Cart" data-testid="shopping-cart-button">Carrinho!</Link>
+>>>>>>> 762834a413c7911c1434b69a6dc9030adec1002d:src/components/Home.js
       </div>
     );
   }
