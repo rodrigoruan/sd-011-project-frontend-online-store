@@ -4,8 +4,8 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import { About, SearchList, NotFound, ShoppingCart, Home } from './pages/zPageMenu';
-import { Footer, SearchBar, Header, Categories } from './components/zComponentsMenu';
+import { About, NotFound, ShoppingCart, Home } from './pages/zPageMenu';
+import { Footer, Header } from './components/zComponentsMenu';
 
 export default class App extends Component {
   constructor(props) {
@@ -33,10 +33,7 @@ export default class App extends Component {
         <Header />
         <Switch>
           {/* prettier-ignore */}
-          <Route exact path="/" render={(props) => <Home {...props}  searchQuery = {this.state.searchQuery} sendSubmit={this.getSearchQuery}/>}  />
-          {/* prettier-ignore */}
-          <Route exact path="/search/:id" render={(props) => 
-          (<SearchList {...props} sendSubmit={this.getSearchQuery} product={this.state.searchQuery}/>)} />
+          <Route exact path="/" render={(props) => <Home {...props} product={this.state.searchQuery} searchQuery = {this.state.searchQuery} sendSubmit={this.getSearchQuery}/>}  />
           <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
           <Route exact path="/about" component={About} />
           <Route component={NotFound} />
