@@ -10,11 +10,12 @@ export default class Home extends Component {
     this.state = {
       query: '',
       categoryId: '',
-      productsFiltered: [],
+      dataApi: [],
+      request: false,
     };
 
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
-    this.searchProducts = this.searchProducts.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   onSearchTextChange(event) {
@@ -24,21 +25,26 @@ export default class Home extends Component {
     });
   }
 
-  async searchProducts() {
+  fetchProducts = async (id) => {
     const { query, categoryId } = this.state;
-    const allProducts = await api.getProductsFromCategoryAndQuery(categoryId, query);
-    this.setState({
-      productsFiltered: allProducts.results,
-    });
+    this.setState({ request: true, categoryId: id },
+      async () => {
+        const dataProducts = await api.getProductsFromCategoryAndQuery(categoryId, query);
+        this.setState({
+          dataApi: dataProducts.results,
+          request: false,
+          query: '',
+        });
+      });
   }
 
   render() {
-    const { productsFiltered } = this.state;
+    const { dataApi, request, query } = this.state;
 
     return (
       <div>
         <div>
-          <CategoryList />
+          <CategoryList fetchProducts={ this.fetchProducts } />
         </div>
         <div>
           <input
@@ -49,7 +55,8 @@ export default class Home extends Component {
           <button
             data-testid="query-button"
             type="button"
-            onClick={ () => this.searchProducts() }
+            onClick={ () => this.fetchProducts() }
+            query={ query }
           >
             Pesquisar
           </button>
@@ -57,7 +64,7 @@ export default class Home extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
-        <ProductSearch products={ productsFiltered } />
+        <ProductSearch products={ dataApi } request={ request } />
 
         <Link to="/cart">
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
