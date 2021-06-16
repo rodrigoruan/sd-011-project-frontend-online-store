@@ -4,7 +4,7 @@
   flex-direction: column;
 }
 
-.container input[type="text"] {
+.headerInput {
   border-radius: 4px;
   box-shadow: 1px 1px 10px black;
   height: 40px;
@@ -14,12 +14,12 @@
 }
 
 .headerContainer {
-  width: 100%;
+  align-items: center;
   background-color: #131920;
   display: flex;
-  padding: 0 30px;
   justify-content: space-between;
-  align-items: center;
+  padding: 0 30px;
+  width: 100%;
 
 }
 
@@ -32,41 +32,35 @@ p {
   position: relative;
 }
 
-#lupaIcon {
-  position: absolute;
-  /* background-color: yellow; */
-  height: 40px;
+.lupaIcon {
   color: black;
-  top: 23px;
+  height: 40px;
+  position: absolute;
   right: 20px;
+  top: 23px;
 }
 
 .heroContent {
-  /* border: 1px solid blue; */
   display: flex;
+  height: 89.5vh;
   justify-content: space-between;
   width: 100%;
-  height: 89.5vh;
 }
 
 aside {
-  padding: 10px;
-  /* border: 1px solid black; */
   background-color: rgba(240, 236, 236, 0.555);
-  -webkit-box-shadow: 11px 3px 16px -4px rgba(210,210,210,0.56); 
-  box-shadow: 11px 3px 16px -4px rgba(210,210,210,0.56);
-  width: 15vw;
+  box-shadow: 11px 3px 16px -4px rgba(210, 210, 210, 0.56);
   overflow: auto;
+  padding: 10px;
+  width: 15vw;
 }
 
 .mainContent {
   text-align: center;
-  /* border: 1px solid green; */
   width: 85vw;
 }
 
 .categoryItem {
-  /* border: 1px solid green; */
   padding: 7px;
 }
 
@@ -74,6 +68,6 @@ aside {
   cursor: pointer;
 }
 
-.categoryItem input {
+.categoryItem i {
   cursor: pointer;
 }

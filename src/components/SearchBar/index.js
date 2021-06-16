@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SearchBar.module.css';
+import './SearchBar.css';
 import CartButton from '../CartButton/index';
 import * as api from '../../services/api';
 
@@ -28,21 +28,26 @@ export default class SearchBar extends React.Component {
     // console.log(categories);
     // api.getProductsFromCategoryAndQuery('MLB5672', 'Biela').then((r) => console.log(r));
     return (
-      <div className={ styles.container }>
-        <div className={ styles.headerContainer }>
+      <div className="container">
+        <div className="headerContainer">
           <p>TrybeStore</p>
-          <label htmlFor="search-input" className={ styles.headerLabel }>
-            <input type="text" name="search-input" id="search-input" />
-            <i className="fa fa-search" id={ styles.lupaIcon }>
+          <label htmlFor="search-input" className="headerLabel">
+            <input
+              type="text"
+              name="search-input"
+              className="headerInput"
+              id="search-input"
+            />
+            <i className="fa fa-search lupaIcon">
               <span />
             </i>
           </label>
           <CartButton />
         </div>
-        <div className={ styles.heroContent }>
+        <div className="heroContent">
           <aside>
             {categories.map((categorie) => (
-              <div key={ categorie.id } className={ styles.categoryItem }>
+              <div key={ categorie.id } className="categoryItem">
                 <label htmlFor={ categorie.id }>
                   <input
                     type="radio"
@@ -56,7 +61,7 @@ export default class SearchBar extends React.Component {
               </div>
             ))}
           </aside>
-          <div className={ styles.mainContent }>
+          <div className="mainContent">
             <h1 data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
             </h1>
