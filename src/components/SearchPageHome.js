@@ -69,16 +69,23 @@ export default class SearchPageHome extends Component {
             name="query"
           />
         </label>
-        <button data-testid="query-button" type="button" onClick={ this.getProducts }>Pesquisar</button>
+        <button
+          data-testid="query-button"
+          type="button"
+          onClick={ this.getProducts }
+        >
+          Pesquisar
+        </button>
         <Link data-testid="shopping-cart-button" to="/shoppingCart">Oi!</Link>
         <Categories
           listCategories={ categoriesData }
           changeCategory={ this.changeCategory }
         />
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        { product.map((item) => <ProductList products={ item } key={ item.id } />) }
+        {loading ? (
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        ) : (product.map((item) => <ProductList products={ item } key={ item.id } />))}
       </div>
     );
   }
