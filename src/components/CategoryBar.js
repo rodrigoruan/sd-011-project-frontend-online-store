@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
-export default class CategoryBar extends Component {
+class CategoryBar extends Component {
   constructor() {
     super();
     this.state = {
       categoriesList: [],
-      selectedCategory: '',
     };
     this.getCategoryList = this.getCategoryList.bind(this);
     this.handleSelectedCategory = this.handleSelectedCategory.bind(this);
@@ -18,7 +18,6 @@ export default class CategoryBar extends Component {
 
   handleSelectedCategory({ target }) {
     const { name, value } = target;
-    console.log(target);
     this.setState({
       [name]: value,
     });
@@ -34,19 +33,20 @@ export default class CategoryBar extends Component {
 
   render() {
     const { categoriesList } = this.state;
+    const { onClickCategory } = this.props;
     return (
       <div className="categories-container">
         <ul>
           {categoriesList.map((category) => (
             <li key={ category.id }>
-              <label htmlFor={ category.id }>
+              <label htmlFor={ category.id } data-testid="category">
                 {category.name}
                 <input
                   type="radio"
                   id={ category.id }
                   value={ category.name }
                   name="selectedCategory"
-                  onClick={ this.handleSelectedCategory }
+                  onClick={ () => onClickCategory(category.id) }
                 />
               </label>
             </li>
@@ -56,3 +56,9 @@ export default class CategoryBar extends Component {
     );
   }
 }
+
+export default CategoryBar;
+
+CategoryBar.propTypes = {
+  onClickCategory: PropTypes.func.isRequired,
+};
