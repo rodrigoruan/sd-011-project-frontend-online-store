@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../services/api';
 import PropTypes from 'prop-types';
 import CategoriesBar from '../components/CategoriesBar';
@@ -12,11 +12,13 @@ class Home extends React.Component {
       value: '',
       products: [],
       searched: false,
+      category: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderCards = this.renderCards.bind(this);
+    this.handleButton = this.handleButton.bind(this);
   }
 
   handleChange(event) {
@@ -25,11 +27,22 @@ class Home extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    const { value } = this.state;
+    const { value, category } = this.state;
     const { getProductsFromCategoryAndQuery } = this.props;
-    const search = await getProductsFromCategoryAndQuery('$CATEGORY_ID', value);
+    const search = await getProductsFromCategoryAndQuery(category, value);
     console.log(search.results);
     this.setState({ products: search.results, searched: true });
+  }
+
+  async handleButton({ target }) {
+    this.setState({
+      category: target.id,
+    }, async () => {
+      const { value, category } = this.state;
+      const { getProductsFromCategoryAndQuery } = this.props;
+      const search = await getProductsFromCategoryAndQuery(category, value);
+      this.setState({ products: search.results, searched: true });
+    });
   }
 
   renderCards() {
@@ -42,6 +55,7 @@ class Home extends React.Component {
     const { getCategories } = this.props;
     return (
       <div>
+        <Link to="/cart" data-testid="shopping-cart-button">CART</Link>
         <form>
           <input
             type="text"
@@ -59,10 +73,13 @@ class Home extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <CategoriesBar
+          functionHome={ getCategories }
+          filterCategory={ this.handleButton }
+        />
         <div>
           {searched ? this.renderCards() : <span>Não houve pesquisa</span>}
         </div>
-        <CategoriesBar functionHome={ getCategories } />
       </div>
     );
   }

@@ -33,13 +33,20 @@ class CategoriesBar extends React.Component {
 
   renderCategorie() {
     const { categories } = this.state;
+    const { filterCategory } = this.props;
     return (
       <ul>
         {
           categories.map((category) => (
-            <li data-testid="category" key={ category.id }>
+            <button
+              onClick={ filterCategory }
+              type="submit"
+              data-testid="category"
+              key={ category.id }
+              id={ category.id }
+            >
               {category.name}
-            </li>
+            </button>
           ))
         }
       </ul>
