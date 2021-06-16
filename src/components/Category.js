@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 
 export default class Category extends Component {
   render() {
-    const { value, name, onChange } = this.props;
+    const { value, name, onClick } = this.props;
     return (
       <div>
-        <label htmlFor="categoria">
+        <label htmlFor={ value }>
           <input
             name="categoria"
             data-testid="category"
             type="radio"
             id={ value }
             value={ value }
-            onChange={ onChange }
+            onClick={ onClick }
           />
           { name }
         </label>
@@ -23,11 +23,12 @@ export default class Category extends Component {
 }
 
 Category.propTypes = {
-  key: PropTypes.string,
+  value: PropTypes.string,
   name: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
 Category.defaultProps = {
-  key: '',
+  value: '',
   name: '',
 };

@@ -21,12 +21,11 @@ export default class SearchBar extends Component {
 
   componentDidMount() {
     this.getCategory();
-    this.getProducts();
+    // this.getProducts();
   }
 
   getValuTextInput({ target }) {
-    const { name } = target;
-    const value = target.type === 'radio' ? target.checked : target.value;
+    const { name, value } = target;
     this.setState({
       [name]: value,
     });
@@ -73,10 +72,10 @@ export default class SearchBar extends Component {
         >
           Buscar Produto
         </button>
-        <div>
-          {categories.map((category, index) => (
+        <div onChange={ this.getValuTextInput }>
+          {categories.map((category) => (
             <Category
-              onChange={ this.getValuTextInput }
+              onClick={ this.getProducts }
               key={ category.id }
               value={ category.id }
               name={ category.name }
