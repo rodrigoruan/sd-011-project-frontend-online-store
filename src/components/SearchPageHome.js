@@ -34,7 +34,7 @@ export default class SearchPageHome extends Component {
   async getCategories() {
     const categories = await api.getCategories();
     this.setState({ 
-      categoriesData: categories.categories,
+      categoriesData: categories,
     })
   }
 

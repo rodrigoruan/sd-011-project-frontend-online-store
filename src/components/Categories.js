@@ -9,10 +9,11 @@ export default class Categories extends Component {
       <div>
         <select onChange={ changeCategory }>
           {listCategories.map((category, index) => (
-            <option 
-              data-testid="category" 
+            <option
+              data-testid="category"
               key={ index }
-              value={ category.id }>
+              value={ category.id }
+            >
               { category.name }
             </option>
           ))}
@@ -24,4 +25,5 @@ export default class Categories extends Component {
 
 Categories.propTypes = {
   listCategories: PropTypes.arrayOf().isRequired,
+  changeCategory: PropTypes.func.isRequired,
 };
