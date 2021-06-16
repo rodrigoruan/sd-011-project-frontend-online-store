@@ -8,7 +8,7 @@ class SearchBarProducts extends Component {
       <input
         data-testid="query-input"
         value={ value }
-        placeholder="Digite algo"
+        placeholder="Buscar produto"
         name="searchValue"
         onChange={ onChange }
       />
