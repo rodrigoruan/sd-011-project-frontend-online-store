@@ -1,11 +1,11 @@
 .product-card {
-  margin: 5px;
-  max-width: 200px;
+  align-items: center;
+  border: 1px solid magenta;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
-  border: 1px solid magenta;
+  margin: 5px;
+  max-width: 200px;
   padding: 0 7px;
 }
 

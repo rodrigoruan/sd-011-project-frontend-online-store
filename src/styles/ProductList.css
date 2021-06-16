@@ -1,8 +1,8 @@
 .productList {
+  border: 1px solid black;
   display: flex;
   flex-flow: row wrap;
-  width: 75%;
   margin: 0;
   padding: 5px;
-  border: 1px solid black;
+  width: 75%;
 }

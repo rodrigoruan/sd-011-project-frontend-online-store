@@ -1,10 +1,10 @@
 .searchSection {
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  width: 90%;
   margin: 1em auto 2em;
+  width: 90%;
 }
 
 .searchSection label {
@@ -12,41 +12,41 @@
 }
 
 .searchSection input {
-  width: 100%;
-  border-radius: 5px;
-  padding: 2px 5px;
-  font-size: 1.2rem;
   border: 1px solid #272727;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  padding: 2px 5px;
+  width: 100%;
 }
 
 .btn {
-  padding: 5px 10px;
   margin: 0 10px 0 30px;
+  padding: 5px 10px;
 }
 
 .cart-btn {
   border: 1px solid #272727;
   color: #272727;
-  text-decoration: none;
-  padding: 5px 10px;
   margin: 0 10px;
+  padding: 5px 10px;
+  text-decoration: none;
 }
 
 .home-message {
-  text-align: center;
   font-size: 1.8rem;
+  text-align: center;
 }
 
 .category-products-wrapper {
+  align-items: flex-start;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
-  width: 90%;
   margin: 0 auto;
+  width: 90%;
 }
 
 .categories {
-  width: 20%;
   border: 1px solid black;
+  width: 20%;
 }
