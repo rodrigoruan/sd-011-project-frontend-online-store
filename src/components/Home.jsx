@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import ShopCart from './ShopCart';
+import ProductCard from './ProductCard';
 import * as fetchAPI from '../services/api';
 
 export default class Home extends Component {
@@ -8,10 +9,14 @@ export default class Home extends Component {
     super();
     this.state = {
       categories: [],
+      productCards: undefined,
+      categoryId: '',
+      search: '',
     };
     this.fetchProductCategory = this.fetchProductCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.fetchCategories = this.fetchCategories.bind(this);
   }
 
   componentDidMount() {
@@ -30,10 +35,11 @@ export default class Home extends Component {
   }
 
   async fetchProducts() {
-    const { search, categoryId } = this.state;
-    const fetchedProduts = await
-    fetchAPI.getProductsFromCategoryAndQuery(search, categoryId);
-    console.log(fetchedProduts);
+    const { categoryId, search } = this.state;
+    const fetchedProducts = await
+    fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
+    console.log(fetchedProducts);
+    this.setState({ productCards: fetchedProducts.results });
   }
 
   async fetchProductCategory() {
@@ -43,27 +49,42 @@ export default class Home extends Component {
     });
   }
 
+  async fetchCategories() {
+    const { categoryId } = this.state;
+    const fetchedProductsFromCategories = await
+    fetchAPI.getProductsFromCategory(categoryId);
+    this.setState({
+      categories: fetchedProductsFromCategories,
+    });
+  }
+
   render() {
-    const { categories } = this.state;
+    const { categories, productCards } = this.state;
+
     return (
       <div>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <input
-          type="text"
-          data-testid="query-input"
-          name="search"
-          onChange={ this.handleChange }
-        />
+        <label htmlFor="search">
+          <input
+            type="text"
+            data-testid="query-input"
+            name="search"
+            onChange={ this.handleChange }
+          />
+        </label>
+
         <button
           type="button"
           aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
           data-testid="query-button"
           onClick={ this.fetchProducts }
-        />
+        >
+          Enviar
+        </button>
         <h2>Categorias:</h2>
-        <select onChange={ this.handleChange } name="categoryId">
+        <select onChange={ this.fetchCategories } name="categoryId">
           {categories.map((category) => (
             <option
               data-testid="category"
@@ -73,6 +94,15 @@ export default class Home extends Component {
               {category.name}
             </option>))}
         </select>
+        <div>
+          {productCards === undefined
+            ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar
+            : productCards.map((product) => (
+              <ProductCard
+                key={ product.id }
+                product={ product }
+              />))}
+        </div>
         <Router>
           <Link to="/cart" data-testid="shopping-cart-button">
             <img src="./images/cart.svg" alt="Cart" />
