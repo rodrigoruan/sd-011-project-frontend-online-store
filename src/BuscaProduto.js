@@ -29,7 +29,7 @@ class BuscaProduto extends Component {
     );
 
     this.setState({
-      inputData: '',
+      // inputData: '',
       productsData: apiData.results });
   }
 
@@ -48,7 +48,7 @@ class BuscaProduto extends Component {
         {productsData.map(({ id, title, thumbnail, price, category_id }) => (
 
           <ProductCard
-            apiResp={ productsData }
+            search={ inputData }
             product={ { id, title, thumbnail, price, category_id } }
             id={ id }
             key={ id }
