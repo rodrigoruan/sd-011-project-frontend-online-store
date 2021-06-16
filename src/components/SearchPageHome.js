@@ -62,13 +62,14 @@ export default class SearchPageHome extends Component {
       <div>
         <label htmlFor="initialMessage">
           <input
+            data-testid="query-input"
             type="text"
             id="initialMessage"
             onChange={ this.filterProducts }
             name="query"
           />
         </label>
-        <button type="button" onClick={ this.getProducts }>Pesquisar</button>
+        <button data-testid="query-button" type="button" onClick={ this.getProducts }>Pesquisar</button>
         <Link data-testid="shopping-cart-button" to="/shoppingCart">Oi!</Link>
         <Categories
           listCategories={ categoriesData }

@@ -4,7 +4,7 @@ export default class ProductList extends Component {
   render() {
     const { products: { title, price, thumbnail } } = this.props;
     return (
-      <div>
+      <div data-testid="product">
         <p>{ title }</p>
         <img src={ thumbnail } alt={ title } />
         <p>R$ {price}</p>
