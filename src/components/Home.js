@@ -50,13 +50,13 @@ class Home extends Component {
 
   renderProductLibrary() {
     const { productsList } = this.state;
-    const para = (
+    const parag = (
       <p data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
     );
     if (!productsList) {
-      return para;
+      return parag;
     }
     const { results } = productsList;
     return <ProductLibrary productsList={ results } />;
