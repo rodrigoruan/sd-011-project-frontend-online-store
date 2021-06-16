@@ -1,5 +1,6 @@
 import React from 'react';
 import ShoppingCart from './ShoppingCart';
+import Categories from './Categories';
 import style from './Home.module.css';
 
 class Home extends React.Component {
@@ -17,6 +18,7 @@ class Home extends React.Component {
         <span data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
+        <Categories />
       </div>
     );
   }
