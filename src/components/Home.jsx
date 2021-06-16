@@ -27,7 +27,7 @@ class Home extends React.Component {
   async requestButton() {
     this.clearState();
     const { inputProduct } = this.state;
-    const request = await api.getProductsFromCategoryAndQuery(undefined, inputProduct);
+    const request = await api.getProductsFromQuery(inputProduct);
     this.setState({
       response: request.results,
     });
