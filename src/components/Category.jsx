@@ -17,27 +17,27 @@ export default class Category extends Component {
   }
 
   fetchCategories() {
-    api
-      .getCategories()
+    api.getCategories()
       .then((categorie) => this.setState({ categories: categorie, loading: false }));
   }
 
   render() {
     const { categories, loading } = this.state;
-    const { change } = this.props;
+    const { change, click } = this.props;
     return (
       <div>
         <p>Categorias:</p>
         {loading
           ? null
-          : categories.map(({ name }, index) => (
+          : categories.map(({ name, id }, index) => (
             <div key={ index }>
               <input
                 type="radio"
-                value={ name }
+                value={ id }
                 name="categories"
                 data-testid="category"
                 onChange={ change }
+                onClick={ click }
               />
               {name}
             </div>
@@ -49,4 +49,5 @@ export default class Category extends Component {
 
 Category.propTypes = {
   change: PropTypes.func.isRequired,
+  click: PropTypes.func.isRequired,
 };

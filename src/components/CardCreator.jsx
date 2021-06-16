@@ -32,7 +32,11 @@ class CardCreator extends Component {
 }
 
 CardCreator.propTypes = {
-  item: PropTypes.objectOf.isRequired,
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
 };
 
 export default CardCreator;
