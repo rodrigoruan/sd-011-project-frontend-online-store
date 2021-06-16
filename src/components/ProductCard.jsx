@@ -5,6 +5,11 @@ import PropTypes from 'prop-types';
 import '../styles/ProductCard.css';
 
 class ProductCard extends Component {
+  addToCart({ target: { value } }) {
+    const key = JSON.parse(value).title;
+    localStorage.setItem(key, value);
+  }
+
   render() {
     const { title, price, thumbnail, id } = this.props;
     return (
@@ -25,6 +30,14 @@ class ProductCard extends Component {
           <img alt="foto do produto" src={ thumbnail } />
           <p>{ `R$ ${price}` }</p>
         </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ this.addToCart }
+          value={ JSON.stringify({ title, price, thumbnail }) }
+        >
+          Adicionar
+        </button>
       </li>
     );
   }
