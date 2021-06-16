@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ProductList extends Component {
   render() {
@@ -7,8 +8,19 @@ export default class ProductList extends Component {
       <div data-testid="product">
         <p>{ title }</p>
         <img src={ thumbnail } alt={ title } />
-        <p>R$ {price}</p>
+        <p>
+          R$
+          {price}
+        </p>
       </div>
     );
   }
 }
+
+ProductList.propTypes = {
+  products: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+  }).isRequired,
+};
