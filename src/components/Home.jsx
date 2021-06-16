@@ -14,6 +14,7 @@ class Home extends React.Component {
 
     this.catchText = this.catchText.bind(this);
     this.requestButton = this.requestButton.bind(this);
+    this.clearState = this.clearState.bind(this);
   }
 
   catchText({ target }) {
@@ -24,10 +25,17 @@ class Home extends React.Component {
   }
 
   async requestButton() {
+    this.clearState();
     const { inputProduct } = this.state;
     const request = await api.getProductsFromCategoryAndQuery(undefined, inputProduct);
     this.setState({
       response: request.results,
+    });
+  }
+
+  clearState() {
+    this.setState({
+      response: [],
     });
   }
 
@@ -42,10 +50,20 @@ class Home extends React.Component {
             <form className="search-bar">
               <label htmlFor="queryInput" data-testid="home-initial-message">
                 Digite algum termo de pesquisa ou escolha uma categoria.
-                <input data-testid="query-input" id="queryInput" onChange={this.catchText} />
+                <input
+                  data-testid="query-input"
+                  id="queryInput"
+                  onChange={ this.catchText }
+                />
               </label>
             </form>
-            <button type="button" onClick={ this.requestButton } data-testid="query-button"> Pesquisa </button>
+            <button
+              type="button"
+              onClick={ this.requestButton }
+              data-testid="query-button"
+            >
+              Pesquisa
+            </button>
             <Link to="/carrinho" data-testid="shopping-cart-button">
               Carrinho de compras 🛒
             </Link>
