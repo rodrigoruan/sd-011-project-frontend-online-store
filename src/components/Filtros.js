@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class Filtros extends Component {
@@ -23,6 +24,7 @@ class Filtros extends Component {
 
   render() {
     const { categories } = this.state;
+    const { onClick } = this.props;
     if (categories === undefined) {
       return <div>Loading...</div>;
     }
@@ -34,7 +36,8 @@ class Filtros extends Component {
               type="radio"
               id={ category.id }
               name="category"
-              value={ category.name }
+              value={ category.id }
+              onClick={ onClick }
             />
             { category.name }
           </label>
@@ -43,5 +46,9 @@ class Filtros extends Component {
     );
   }
 }
+
+Filtros.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Filtros;
