@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import * as api from '../services/api';
+import PropTypes from 'prop-types';
+import { getCategories } from '../services/api';
 
 export default class CategoryList extends Component {
   constructor() {
     super();
-
-    this.apiCategories = this.apiCategories.bind(this);
 
     this.state = {
       categories: [],
@@ -13,26 +12,42 @@ export default class CategoryList extends Component {
   }
 
   componentDidMount() {
-    this.apiCategories();
+    this.fetchApi();
   }
 
-  async apiCategories() {
-    const allCategories = await api.getCategories();
-
-    this.setState({
-      categories: allCategories,
-    });
+  async fetchApi() {
+    const data = await getCategories();
+    this.setState({ categories: data });
   }
 
   render() {
     const { categories } = this.state;
+    const { fetchProducts } = this.props;
+
     return (
-      <ul>
+      <aside className="category-id">
+        <h1>Categorias:</h1>
         {
-          categories.map((categorie) => (
-            <li data-testid="category" key={ categorie.id }>{categorie.name}</li>))
+          categories.map((category) => (
+            <div key={ category.id }>
+              <label htmlFor="category">
+                <input
+                  data-testid="category"
+                  type="radio"
+                  name="category"
+                  value={ category.id }
+                  onClick={ ({ target: { value } }) => fetchProducts(value) }
+                />
+                { category.name }
+              </label>
+            </div>
+          ))
         }
-      </ul>
+      </aside>
     );
   }
 }
+
+CategoryList.propTypes = {
+  fetchProducts: PropTypes.func.isRequired,
+};
