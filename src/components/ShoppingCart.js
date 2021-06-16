@@ -3,10 +3,26 @@ import { Link } from 'react-router-dom';
 
 export default class ShoppingCart extends Component {
   render() {
+    const arrayObject = JSON.parse(localStorage.getItem('item'));
     return (
       <div>
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        <Link data-testid="shopping-cart-button" to="/">Voltar</Link>
+        {!localStorage.item ? (
+          <div data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </div>
+        ) : (
+          arrayObject.map(({ title, thumbnail, price }, index) => (
+            <div key={ index } data-testid="shopping-cart-product-name">
+              <h2>{`${title}-${price}`}</h2>
+              <img src={ thumbnail } alt={ title } />
+            </div>
+          ))
+        )}
+        {localStorage.item
+          && <div data-testid="shopping-cart-product-quantity">{arrayObject.length}</div>}
+        <Link data-testid="shopping-cart-button" to="/">
+          Voltar
+        </Link>
       </div>
     );
   }

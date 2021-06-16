@@ -3,6 +3,29 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default class ProductsCard extends Component {
+  constructor() {
+    super();
+    this.handleSetStorage = this.handleSetStorage.bind(this);
+  }
+
+  handleSetStorage(param) {
+    console.log(param);
+    param.countProduct = 1; // Adicionando um chave para contar
+    if (!localStorage.item) {
+      localStorage.setItem('item', JSON.stringify([param])); // transformando o objeto em JSON
+    } else {
+      const arrayObject = JSON.parse(localStorage.getItem('item')); // Retorna o JSON para objeto
+      const idProducts = arrayObject.map((value) => value.id);
+      const num = idProducts.indexOf(param.id); // Se não existe retorna -1, se existe o index do array é retornado.
+      if (num < 0) {
+        localStorage.setItem('item', JSON.stringify([...arrayObject, param])); // Adicionando objeto não existente no localStorage
+      } else {
+        arrayObject[num].countProduct += 1;
+        localStorage.setItem('item', JSON.stringify([...arrayObject])); // Se o id identificado já existir, mantem o localStorage
+      }
+    }
+  }
+
   render() {
     const {
       products: { results },
@@ -22,6 +45,14 @@ export default class ProductsCard extends Component {
               >
                 Mais Detalhes
               </Link>
+              <button
+                data-testid="product-add-to-cart"
+                type="button"
+                value={ result }
+                onClick={ () => this.handleSetStorage(result) }
+              >
+                Adicionar Carrinho
+              </button>
             </div>
           );
         })}

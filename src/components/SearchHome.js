@@ -91,11 +91,9 @@ export default class SearchHome extends Component {
             Buscar
           </button>
         </label>
-        <div>
-          <Link to="/ShoppingCart">
-            <button data-testid="shopping-cart-button" type="button">Carrinho</button>
-          </Link>
-        </div>
+        <Link to={ { pathname: '/ShoppingCart' } }>
+          <button data-testid="shopping-cart-button" type="button">Carrinho</button>
+        </Link>
         { products.length < 1
           ? <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>
           : <ProductsCard products={ products } />}
