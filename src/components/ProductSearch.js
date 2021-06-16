@@ -11,7 +11,7 @@ class ProductSearch extends Component {
           ? 'Nenhum produto foi encontrado'
           : products.map((product) => (
             <ProductCard
-              key={ product.title }
+              key={ product.id }
               products={ product }
             />
           ))}
