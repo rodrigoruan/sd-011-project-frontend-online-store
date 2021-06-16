@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class Card extends Component {
   render() {
@@ -18,3 +19,10 @@ export default class Card extends Component {
     );
   }
 }
+
+Card.propTypes = ({
+  title: PropTypes.string,
+  price: PropTypes.number,
+  thumbnail: PropTypes.string,
+  id: PropTypes.string,
+}).isRequired;
