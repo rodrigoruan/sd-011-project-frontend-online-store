@@ -17,6 +17,10 @@ export default class SearchList extends Component {
     this.getQuery(product);
   }
 
+  componentDidUpdate() {
+    const { product } = this.props;
+    this.getQuery(product);
+  }
   getQuery = async (product) => {
     const getList = await api.getProductsFromCategoryAndQuery('MLB1071', product);
     return this.setState({ products: getList.results });
@@ -29,26 +33,8 @@ export default class SearchList extends Component {
         <div className="content" data-testid="product" key={id}>
           <img src={thumbnail} />
           <h3>{title}</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
           <h6>R${parseFloat(price, 10).toFixed(2)}</h6>
-          <ul>
-            <li>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </li>
-            <li>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </li>
-            <li>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </li>
-            <li>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </li>
-            <li>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </li>
-          </ul>
-          <button className="buy-1">Adicionar ao Carrinho</button>
+          <button className="btn btn-success">Add to Cart!</button>
         </div>
       );
     });

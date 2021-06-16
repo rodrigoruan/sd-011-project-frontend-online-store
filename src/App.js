@@ -1,10 +1,10 @@
-import './App.css';
-import './Componentscss/searchlist.css';
 import React, { Component } from 'react';
-import * as api from './services/api';
-import Home from './components/StartingPage';
-import SearchList from './components/SearchList';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import './App.css';
+import './css/searchlist.css';
+import './css/home.css';
+import * as api from './services/api';
+import { About, Home, SearchList, Header, Footer, NotFound } from './pages/index';
 
 export default class App extends Component {
   constructor(props) {
@@ -28,27 +28,32 @@ export default class App extends Component {
 
   render() {
     return (
-      <BrowserRouter className="App">
-        {/* <Home sendSubmit={this.getSearchQuery} /> */}
-        <Switch>
-          <Route
-            path="/"
-            render={(props) => <Home {...props} sendSubmit={this.getSearchQuery} />}
-            exact
-          />
-          <Route
-            path="/search:id"
-            render={(props) => (
-              <SearchList
-                {...props}
-                sendSubmit={this.getSearchQuery}
-                product={this.state.searchQuery}
-              />
-            )}
-            exact
-          />
-        </Switch>
-      </BrowserRouter>
+      <>
+        <Header />
+        <BrowserRouter className="App">
+          <Switch>
+            <Route
+              path="/"
+              render={(props) => <Home {...props} sendSubmit={this.getSearchQuery} />}
+              exact
+            />
+            <Route
+              path="/search/:id"
+              render={(props) => (
+                <SearchList
+                  {...props}
+                  sendSubmit={this.getSearchQuery}
+                  product={this.state.searchQuery}
+                />
+              )}
+              exact
+            />
+            <Route path="/about" component={About} exact />
+            <Route component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+        <Footer />
+      </>
     );
   }
 }
