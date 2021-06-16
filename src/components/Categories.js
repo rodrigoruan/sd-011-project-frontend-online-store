@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 
 export default class Categories extends Component {
   render() {
-    const { listCategories } = this.props;
+    const { listCategories, changeCategory } = this.props;
 
     return (
       <div>
-        <select>
+        <select onChange={ changeCategory }>
           {listCategories.map((category, index) => (
-            <option data-testid="category" key={ index }>
+            <option
+              data-testid="category"
+              key={ index }
+              value={ category.id }
+            >
               { category.name }
             </option>
           ))}
@@ -21,4 +25,5 @@ export default class Categories extends Component {
 
 Categories.propTypes = {
   listCategories: PropTypes.arrayOf().isRequired,
+  changeCategory: PropTypes.func.isRequired,
 };
