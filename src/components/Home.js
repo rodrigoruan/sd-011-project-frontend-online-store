@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ListCards from './ListCards';
 import Filtros from './Filtros';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Card from './Card';
 import Input from './Input';
 
 export default class Home extends Component {
@@ -13,7 +13,13 @@ export default class Home extends Component {
       category: 'MLB1384',
       products: [],
     };
+
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.searchApi = this.searchApi.bind(this);
+  }
+
+  componentDidMount() {
+    this.searchApi();
   }
 
   handleOnChange({ target }) {
@@ -25,17 +31,18 @@ export default class Home extends Component {
 
   async searchApi() {
     const { query, category } = this.state;
-    console.log(query);
+    console.log(query, category);
     let products = await getProductsFromCategoryAndQuery(query, category);
-    console.log(products);
-    products = products.results.map(({ title, id, price }) => (
-      { name: title, key: id, price }
+    console.log(products.results);
+    products = products.results.map(({ title, thumbnail, id, price }) => (
+      { name: title, img: thumbnail, key: id, price }
     ));
     this.setState(products);
   }
 
   render() {
-    const { query, category } = this.state;
+    const { query, products } = this.state;
+    console.log(products);
     return (
       <div>
         <h2 data-testid="home-initial-message">
@@ -48,7 +55,12 @@ export default class Home extends Component {
             Carrinho de Compras
           </button>
         </Link>
-        <ListCards query={ query } category={ category } />
+        {
+          products.map((product) => {
+            const { key } = product;
+            return <Card { ...product } key={ key } />;
+          })
+        }
       </div>
     );
   }
