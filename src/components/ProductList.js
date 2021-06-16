@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
   render() {
     const { products: { title, price, thumbnail, id }, addItemCart } = this.props;
+    const { products } = this.props;
+
     return (
       <div data-testid="product">
         <p>{ title }</p>
@@ -20,6 +23,15 @@ export default class ProductList extends Component {
         >
           Adicionar ao Carrinho
         </button>
+        <Link
+          to={ {
+            pathname: `/details/${id}`,
+            state: { detail: products },
+          } }
+          data-testid="product-detail-link"
+        >
+          detalhes
+        </Link>
       </div>
     );
   }
