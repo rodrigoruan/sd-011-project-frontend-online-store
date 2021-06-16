@@ -5,11 +5,8 @@ import Home from './components/Home';
 import ShoppingCart from './components/ShoppingCart';
 
 import './App.css';
-// import * as api from './services/api';
 
 class App extends React.Component {
-  // api.getCategories().then((categories) => { console.log(categories); });
-  // api.getProductsFromCategoryAndQuery('MLB5672').then((categories) => { console.log(categories); });
   render() {
     return (
       <div>
