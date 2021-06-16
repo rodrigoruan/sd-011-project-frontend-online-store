@@ -19,10 +19,11 @@ class Categories extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { onClick } = this.props;
     return (
       <div>
         { categories.map(({ id, name }) => (
-          <p data-testid="category" key={ id }>{ name }</p>
+          <p data-testid="category" key={ id } onClick={onClick} id={id} >{ name }</p>
         )) }
       </div>
     );

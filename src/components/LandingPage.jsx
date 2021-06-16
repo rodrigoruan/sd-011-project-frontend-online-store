@@ -11,9 +11,18 @@ class LandingPage extends React.Component {
     this.state = {
       cardList: [],
       query: '',
+      selectedCategory: '',
     };
     this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onClickCategory = this.onClickCategory.bind(this);
+  }
+
+  onClickCategory(event) {
+    const { target: { id } } = event;
+    console.log(id);
+    this.setState({ selectedCategory: id });
+    console.log(this.state.selectedCategory);
   }
 
   onClick() {
@@ -50,7 +59,7 @@ class LandingPage extends React.Component {
           <img src={ carrinho } alt="carrinho" />
         </Link>
         <CardList list={ cardList.results } />
-        <Categories />
+        <Categories onClick={ this.onClickCategory } />
       </div>
     );
   }
