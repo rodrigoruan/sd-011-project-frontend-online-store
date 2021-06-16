@@ -5,6 +5,7 @@ import imageTwo from '../imgs/Carrinho.png';
 import ProductSearch from '../components/ProductSearch/ProductSearch';
 import ProductsList from '../components/ProductsList/ProductsList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+// check
 
 class Home extends Component {
   constructor(props) {
