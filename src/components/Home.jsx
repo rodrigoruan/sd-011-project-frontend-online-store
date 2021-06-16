@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ShopCart from './ShopCart';
 import ProductCard from './ProductCard';
 import * as fetchAPI from '../services/api';
@@ -105,14 +105,9 @@ export default class Home extends Component {
                 product={ product }
               />))}
         </div>
-        <Router>
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <img src="./images/cart.svg" alt="Cart" />
-          </Link>
-          <Switch>
-            <Route path="/cart" component={ ShopCart } />
-          </Switch>
-        </Router>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <img src="./images/cart.svg" alt="Cart" />
+        </Link>
       </div>
     );
   }
