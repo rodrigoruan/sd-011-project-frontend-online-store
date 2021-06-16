@@ -2,8 +2,6 @@
   text-align: center;
 }
 
-
-
 .main {
   align-items: flex-start;
   background-color: #f7f7f7;
@@ -14,13 +12,14 @@
   justify-content: center;
   min-height: 100vh;
 }
+
 .nav {
+  align-items: flex-start;
   border: black solid 2px;
   border-radius: 5px;
-  margin: 5px 5px 10px 5px ;
-  font-size: medium;
-  padding: 10px ;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  font-size: medium;
+  margin: 5px 5px 10px;
+  padding: 10px;
 }
