@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import './App.css';
-import Listproductterms from './components/listProductTerms';
+
 import * as api from './services/api';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <div />
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={ () => <Home /> } />
+          <Route exact path="/" render={ () => <Home { ...api } /> } />
           <Route path="/cart" render={ (props) => <Cart { ...props } /> } />
         </Switch>
       </BrowserRouter>

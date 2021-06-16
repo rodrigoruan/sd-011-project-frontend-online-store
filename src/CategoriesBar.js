@@ -1,5 +1,4 @@
 import React from 'react';
-import * as api from './services/api';
 import Loading from './Loading';
 
 class CategoriesBar extends React.Component {
@@ -22,7 +21,7 @@ class CategoriesBar extends React.Component {
       loading: true,
 
     }, async () => {
-      const reponse = await api.getCategories();
+      const reponse = await this.props.functionHome();
       this.setState({
         loading: false,
         categories: reponse,
