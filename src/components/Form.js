@@ -1,6 +1,34 @@
 import React, { Component } from 'react';
 
 export default class Form extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      comments: [],
+    };
+
+    this.addComment = this.addComment.bind(this);
+  }
+
+  addComment() {
+    const email = document.querySelector('*[name="email"]');
+    const review = document.querySelector('*[name="review"]');
+    const comments = document.querySelector('*[name="comments"]');
+
+    const newComment = {
+      email: email.value,
+      review: review.value,
+      text: comments.value,
+    };
+
+    this.setState((state) => {
+      this.setState({
+        comments: [...state.comments, newComment],
+      });
+    });
+  }
+
   render() {
     return (
       <div>
@@ -21,9 +49,9 @@ export default class Form extends Component {
             <input type="radio" name="review" value="5" required />
           </div>
           <div>
-            <textarea name="comment" cols="30" rows="10" />
+            <textarea name="comments" cols="30" rows="10" />
           </div>
-          <button type="submit">Avaliar</button>
+          <button type="button" onClick={ this.addComment }>Avaliar</button>
         </form>
       </div>
     );
