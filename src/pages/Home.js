@@ -16,19 +16,27 @@ class Home extends Component {
       loading: true,
       products: [],
       searchValue: '',
+      category: '',
     };
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   componentDidMount() {
     this.fetchCategories();
   }
 
-  handleSearch({ target }) {
+  handleChange({ target }) {
     const { value, name } = target;
-    this.setState({
-      [name]: value,
-    });
+    if (name === 'category') {
+      this.setState({
+        [name]: value,
+      }, () => this.fetchProducts());
+    } else {
+      this.setState({
+        [name]: value,
+      });
+    }
   }
 
   async fetchCategories() {
@@ -39,8 +47,10 @@ class Home extends Component {
     });
   }
 
-  async fetchProducts(query) {
-    const result = await Api.getProductsFromCategoryAndQuery('', query);
+  async fetchProducts() {
+    const { category, searchValue } = this.state;
+    console.log(category);
+    const result = await Api.getProductsFromCategoryAndQuery(category, searchValue);
     const products = result.results;
     this.setState({
       products,
@@ -51,17 +61,22 @@ class Home extends Component {
     const { searchValue, products, categories, loading } = this.state;
     return (
       <div>
-        <SearchBarProducts value={ searchValue } onChange={ this.handleSearch } />
-        <Button onClick={ () => this.fetchProducts(searchValue) } innerText="Buscar" />
-        <AllProducts productsList={ products } />
+        <SearchBarProducts value={ searchValue } onChange={ this.handleChange } />
+        <Button onClick={ this.fetchProducts } innerText="Buscar" />
         { !loading && categories
-          .map((category, index) => <CategoryList key={ index } category={ category } />)}
+          .map((category, index) => (
+            <CategoryList
+              key={ index }
+              category={ category }
+              changeFunction={ this.handleChange }
+            />))}
         <span data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
         <Link to="/cart" data-testid="shopping-cart-button">
           <img src={ shoppingCartImage } alt="Cart" />
         </Link>
+        <AllProducts productsList={ products } />
       </div>
     );
   }
