@@ -14,12 +14,14 @@ export default class SearchPageHome extends Component {
       loading: true,
       query: '',
       categories: '',
+      itemsCart: [],
     };
 
     this.getProducts = this.getProducts.bind(this);
     this.filterProducts = this.filterProducts.bind(this);
     this.getCategories = this.getCategories.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
+    this.addItemCart = this.addItemCart.bind(this);
   }
 
   componentDidMount() {
@@ -28,9 +30,7 @@ export default class SearchPageHome extends Component {
 
   async getProducts() {
     const { query, categories } = this.state;
-    console.log(categories);
     const products = await api.getProductsFromCategoryAndQuery(categories, query);
-    console.log(products);
     this.setState({
       product: products.results,
       loading: false,
@@ -56,8 +56,18 @@ export default class SearchPageHome extends Component {
     });
   }
 
+  addItemCart({ target }) {
+    const { product, itemsCart } = this.state;
+    const { value } = target;
+    const productForCart = product.find((item) => item.id === value);
+
+    this.setState({
+      itemsCart: [...itemsCart, productForCart],
+    });
+  }
+
   render() {
-    const { categoriesData, product, loading } = this.state;
+    const { categoriesData, product, loading, itemsCart } = this.state;
     return (
       <div>
         <label htmlFor="initialMessage">
@@ -72,7 +82,7 @@ export default class SearchPageHome extends Component {
         { categoriesData.map((item) => (<Categories
           listCategories={ item }
           changeCategory={ this.getProducts }
-          key={ item }
+          key={ item.name }
         />
         ))}
         <button
@@ -82,12 +92,26 @@ export default class SearchPageHome extends Component {
         >
           Pesquisar
         </button>
-        <Link data-testid="shopping-cart-button" to="/shoppingCart">Oi!</Link>
+        <Link
+          data-testid="shopping-cart-button"
+          to={ {
+            pathname: '/shoppingCart',
+            state: itemsCart,
+          } }
+        >
+          Carrinho(
+          {itemsCart.length}
+          )
+        </Link>
         {loading ? (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-        ) : (product.map((item) => <ProductList products={ item } key={ item.id } />))}
+        ) : (product.map((item) => (<ProductList
+          products={ item }
+          key={ item.id }
+          addItemCart={ this.addItemCart }
+        />)))}
       </div>
     );
   }
