@@ -11,11 +11,11 @@ class CardProduct extends Component {
       redirect: false,
     };
 
-    this.onClick = this.onClick.bind(this);
+    this.setStorage = this.setStorage.bind(this);
     this.setRedirect = this.setRedirect.bind(this);
   }
 
-  onClick() {
+  setStorage() {
     const { listProduct } = this.props;
     sessionStorage.setItem('product', JSON.stringify(listProduct));
     this.setRedirect();
@@ -29,7 +29,7 @@ class CardProduct extends Component {
 
   render() {
     const { redirect } = this.state;
-    const { listProduct } = this.props;
+    const { listProduct, onClick } = this.props;
     const { thumbnail, title, price } = listProduct;
     return !redirect ? (
       <div data-testid="product">
@@ -38,10 +38,17 @@ class CardProduct extends Component {
         { price }
         <button
           type="button"
-          onClick={ this.onClick }
+          onClick={ this.setStorage }
           data-testid="product-detail-link"
         >
           Detalhes
+        </button>
+        <button
+          onClick={ () => onClick(listProduct) }
+          type="button"
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao carrinho
         </button>
       </div>
     ) : (<Redirect to="/product" />);
@@ -54,6 +61,7 @@ CardProduct.propTypes = {
     title: PropTypes.string,
     price: PropTypes.string,
   })).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default CardProduct;
