@@ -9,10 +9,13 @@ class ProductList extends Component {
     const { productsList } = this.props;
     return (
       <ul className="productList">
-        {productsList.map((product) => (
+        {productsList.map(({ title, thumbnail, price, id }) => (
           <ProductCard
-            key={ product.title }
-            product={ product }
+            key={ title }
+            title={ title }
+            thumbnail={ thumbnail }
+            price={ price }
+            id={ id }
           />
         ))}
       </ul>
