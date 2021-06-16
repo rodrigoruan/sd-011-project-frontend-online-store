@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import SideBar from '../components/SideBar';
 import * as api from '../services/api';
 import SearchBar from '../components/SearchBar';
-import Loading from '../components/Loading';
 import Product from '../components/Product';
 
 export default class Home extends Component {
@@ -14,8 +13,7 @@ export default class Home extends Component {
       category: '',
       isNotFound: false,
       product: '',
-      products: [],
-      isLoading: true,
+      productsArray: [],
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.requestCategories = this.requestCategories.bind(this);
@@ -24,6 +22,12 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.requestCategories();
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState !== this.state) {
+      this.requestProducts();
+    }
   }
 
   onChangeHandler({ target }) {
@@ -37,33 +41,28 @@ export default class Home extends Component {
     const categories = await api.getCategories();
     this.setState({
       categories,
-      isLoading: false,
     });
   }
 
   async requestProducts() {
     const { category, product } = this.state;
     const products = await api.getProductsFromCategoryAndQuery(category, product);
+    const productsArray = products.results;
     if (!products) {
       this.setState({
         isNotFound: true,
-        isLoading: false,
+        productsArray: [],
       });
       return;
     }
     this.setState({
-      products,
+      productsArray,
       isNotFound: false,
-      isLoading: false,
     });
   }
 
   render() {
-    const { categories, isNotFound, product, isLoading, products } = this.state;
-    const { results } = products;
-    if (!isLoading) {
-      return <Loading />;
-    }
+    const { categories, isNotFound, product, productsArray } = this.state;
     if (isNotFound) {
       return <div>Nenhum produto foi encontrado</div>;
     }
@@ -79,7 +78,7 @@ export default class Home extends Component {
           requestProducts={ this.requestProducts }
         />
         <SideBar categories={ categories } onChangeHandler={ this.onChangeHandler } />
-        { results.map((element) => (
+        { productsArray.map((element) => (
           <Product
             key={ element.id }
             title={ element.title }
