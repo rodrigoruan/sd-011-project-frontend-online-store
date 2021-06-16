@@ -6,15 +6,14 @@ import '../styles/ProductList.css';
 
 class ProductList extends Component {
   render() {
-    const { productsList } = this.props;
+    const { productsList, addToCart } = this.props;
     return (
       <ul className="productList">
-        {productsList.map(({ title, thumbnail, price }) => (
+        {productsList.map((product) => (
           <ProductCard
-            key={ title }
-            title={ title }
-            thumbnail={ thumbnail }
-            price={ price }
+            key={ product.title }
+            product={ product }
+            addToCart={ addToCart }
           />
         ))}
       </ul>
@@ -23,7 +22,8 @@ class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-  productsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+  productsList: PropTypes.arrayOf(PropTypes.object),
+  addToCart: PropTypes.func,
+}.isRequired;
 
 export default ProductList;
