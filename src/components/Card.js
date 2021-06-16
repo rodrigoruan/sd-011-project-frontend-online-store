@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 class Card extends Component {
   render() {
-    const { name, img, price } = this.props;
+    const { name, thumbnail, price } = this.props;
     return (
       <div data-testid="product">
         <h2>{name}</h2>
-        <img src={ img } alt={ name } />
+        <img src={ thumbnail } alt={ name } />
         <p>{price}</p>
       </div>
     );
@@ -16,8 +16,8 @@ class Card extends Component {
 
 Card.propTypes = {
   name: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
 };
 
 export default Card;

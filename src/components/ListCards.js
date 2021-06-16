@@ -7,12 +7,15 @@ export default class ListCards extends Component {
     const { products } = this.props;
     return (
       <div>
-        { products.map((product) => <Card { ...product } key={ product.id } />)}
+        { products.map((product, index) => (<Card
+          { ...product }
+          key={ index }
+        />))}
       </div>
     );
   }
 }
 
 ListCards.propTypes = {
-  products: PropTypes.isRequired,
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
