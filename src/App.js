@@ -8,12 +8,14 @@ import ShoppingCart from './components/ShoppingCart';
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ Home } api={ api } />
-          <Route exact path="/carrinho" component={ ShoppingCart } />
-        </Switch>
-      </BrowserRouter>
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={ Home } api={ api } />
+            <Route exact path="/carrinho" component={ ShoppingCart } />
+          </Switch>
+        </BrowserRouter>
+      </div>
     );
   }
 }
