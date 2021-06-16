@@ -21,14 +21,14 @@ export default class Home extends Component {
     this.searchApi();
   }
 
-  handleOnChange({ target }) {
-    const { name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState(({ [name]: value }));
+  async handleOnChange({ target }) {
+    const { name, value } = target;
+    await this.setState(({ [name]: value }));
     this.searchApi();
   }
 
   async searchApi() {
+    this.setState({ products: undefined });
     const { query, category } = this.state;
     let products = await getProductsFromCategoryAndQuery(category, query);
     products = products.results.map(({ title, id, price }) => (
@@ -38,13 +38,13 @@ export default class Home extends Component {
   }
 
   render() {
-    const { query, products } = this.state;
+    const { products } = this.state;
     return (
       <div>
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        <Input value={ query } onChange={ this.handleOnChange } />
+        <Input onClick={ this.handleOnChange } />
         <Filtros onClick={ this.handleOnChange } />
         <Link to="/ShoppingCart">
           <button data-testid="shopping-cart-button" type="button">
