@@ -17,7 +17,8 @@ export default class Category extends Component {
   }
 
   fetchCategories() {
-    api.getCategories()
+    api
+      .getCategories()
       .then((categorie) => this.setState({ categories: categorie, loading: false }));
   }
 

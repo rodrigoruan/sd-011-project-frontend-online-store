@@ -27,7 +27,7 @@ ProductDetail.propTypes = {
     state: PropTypes.shape({
       produto: PropTypes.shape({
         condition: PropTypes.string,
-        price: PropTypes.string,
+        price: PropTypes.number,
         thumbnail: PropTypes.string,
         title: PropTypes.string,
       }),
