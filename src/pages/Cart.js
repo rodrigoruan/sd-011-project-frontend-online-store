@@ -5,6 +5,14 @@ export default class Cart extends Component {
   render() {
     const { location: { state: { cart } } } = this.props;
 
+    if (!cart.length) {
+      return (
+        <div data-testid="shopping-cart-empty-message">
+          Seu carrinho está vazio
+        </div>
+      );
+    }
+
     if (cart) {
       return (
         <div>
@@ -21,12 +29,6 @@ export default class Cart extends Component {
         </div>
       );
     }
-
-    return (
-      <div data-testid="shopping-cart-empty-message">
-        Seu carrinho está vazio
-      </div>
-    );
   }
 }
 
