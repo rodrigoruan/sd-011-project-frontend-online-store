@@ -8,4 +8,12 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
     .then((response) => response.json());
 }
 
-// comentario
+export async function getProductsFromQuery(query) {
+  return fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${query}`)
+    .then((response) => response.json());
+}
+
+export async function getProductsFromCategoryId(id) {
+  return fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${id}`)
+    .then((response) => response.json());
+}
