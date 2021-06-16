@@ -15,6 +15,7 @@ class Main extends Component {
       loading: true,
       query: '',
       categories: '',
+      addingCart: [],
     };
 
     this.fetchProductCategory = this.fetchProductCategory.bind(this);
@@ -48,7 +49,7 @@ class Main extends Component {
   }
 
   render() {
-    const { productList, loading, query } = this.state;
+    const { productList, loading, query, addingCart } = this.state;
     return (
       <div>
         <Category change={ this.handleChange } click={ this.handleClick } />
@@ -57,13 +58,27 @@ class Main extends Component {
           change={ this.handleChange }
           value={ query }
         />
-        <CartButton />
+        <CartButton
+          link={ {
+            pathname: '/cart',
+            state: { cart: addingCart },
+          } }
+        />
         <ProductListing texto="Nenhum produto foi encontrado" />
         {loading
           ? null
           : productList.map((product, index) => (
             <div key={ index }>
               <CardCreator item={ product } />
+              <button
+                type="button"
+                onClick={ () => this.setState((previousState) => ({
+                  addingCart: [...previousState.addingCart, product] }
+                )) }
+                data-testid="product-add-to-cart"
+              >
+                Adicione ao carrinho
+              </button>
             </div>
           ))}
       </div>
