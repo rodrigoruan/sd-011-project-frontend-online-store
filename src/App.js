@@ -16,7 +16,7 @@ class App extends Component {
 
   handleAddToShopCart(title, thumbnail, price) {
     this.setState((state) => ({
-      shopCart: [...state.shopCart, { title, thumbnail, price, amount: 0 }],
+      shopCart: [...state.shopCart, { title, thumbnail, price, amount: 1 }],
     }));
   }
 
@@ -24,12 +24,24 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ Home } />
-          <Route path="/ShoppingCart" component={ ShoppingCart } />
           <Route path="/details" component={ ProductDetails } />
+          <Route
+            exact
+            path="/ShoppingCart"
+            render={ (props) => <ShoppingCart { ...props } shopCart={ shopCart } /> }
+          />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (
+              <Home
+                { ...props }
+                handleAddToShopCart={ this.handleAddToShopCart }
+                shopCart={ shopCart }
+              />) }
+          />
         </Switch>
       </BrowserRouter>
-
     );
   }
 }
