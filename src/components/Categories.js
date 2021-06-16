@@ -7,17 +7,16 @@ export default class Categories extends Component {
 
     return (
       <div>
-        <select onChange={ changeCategory }>
-          {listCategories.map((category, index) => (
-            <option
-              data-testid="category"
-              key={ index }
-              value={ category.id }
-            >
-              { category.name }
-            </option>
-          ))}
-        </select>
+        <label htmlFor={ listCategories.id }>
+          {listCategories.name}
+          <input
+            type="radio"
+            onClick={ changeCategory }
+            data-testid="category"
+            name="categoria"
+            value={ listCategories.id }
+          />
+        </label>
       </div>
     );
   }

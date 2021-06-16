@@ -69,6 +69,12 @@ export default class SearchPageHome extends Component {
             name="query"
           />
         </label>
+        { categoriesData.map((item) => (<Categories
+          listCategories={ item }
+          changeCategory={ this.getProducts }
+          key={ item }
+        />
+        ))}
         <button
           data-testid="query-button"
           type="button"
@@ -77,10 +83,6 @@ export default class SearchPageHome extends Component {
           Pesquisar
         </button>
         <Link data-testid="shopping-cart-button" to="/shoppingCart">Oi!</Link>
-        <Categories
-          listCategories={ categoriesData }
-          changeCategory={ this.changeCategory }
-        />
         {loading ? (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
