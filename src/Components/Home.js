@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Categories from './Categories';
-import SearchProduct from './SearchProduct';
+// import Categories from './Categories';
+// import SearchProduct from './SearchProduct';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
   constructor(props) {
@@ -10,7 +11,21 @@ class Home extends Component {
     this.state = {
       searchBar: '',
       mostrarProdutos: false,
+      categoriesList: [],
+      products: [],
+      categoryId: '',
     };
+  }
+
+  componentDidMount() {
+    this.fetchCategories();
+  }
+
+  showProducts = () => {
+    this.setState({
+      mostrarProdutos: true,
+    });
+    this.searchProduct();
   }
 
   handleChange = ({ target }) => {
@@ -21,14 +36,49 @@ class Home extends Component {
     });
   }
 
-  showProducts = () => {
+  renderProducts = () => {
+    const { products } = this.state;
+    if (products.length < 1) return <p>Nenhum produto foi encontrado</p>;
+    return (
+      <div>
+        { products.map(({ title, price, thumbnail, id }) => (
+          <div data-testid="product" key={ id }>
+            <img src={ thumbnail } alt={ title } />
+            <h3>{ title }</h3>
+            <p>{ price }</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  saveCategorieId = (id) => {
     this.setState({
-      mostrarProdutos: true,
+      categoryId: id,
+    });
+    this.showProducts();
+  }
+
+  async searchProduct() {
+    const { searchBar, categoryId } = this.state;
+    const response = await getProductsFromCategoryAndQuery(categoryId, searchBar);
+    const { results } = response;
+
+    this.setState({
+      products: results,
+    });
+  }
+
+  async fetchCategories() {
+    const categories = await getCategories();
+
+    this.setState({
+      categoriesList: categories,
     });
   }
 
   render() {
-    const { searchBar, mostrarProdutos } = this.state;
+    const { searchBar, mostrarProdutos, categoriesList } = this.state;
     return (
       <div>
         <label htmlFor="searchBar">
@@ -53,10 +103,26 @@ class Home extends Component {
         >
           Ir para o carrinho
         </Link>
-        <Categories />
+
+        <div>
+          <ul>
+            {categoriesList.map((categorie) => (
+              <button
+                type="button"
+                onClick={ (event) => this.saveCategorieId(event.target.id) }
+                id={ categorie.id }
+                data-testid="category"
+                key={ categorie.id }
+              >
+                { categorie.name }
+              </button>
+            ))}
+          </ul>
+        </div>
+
         <span data-testid="home-initial-message">
           {mostrarProdutos
-            ? <SearchProduct searchBar={ searchBar } />
+            ? this.renderProducts(searchBar)
             : <p>Digite algum termo de pesquisa ou escolha uma categoria.</p>}
         </span>
       </div>
