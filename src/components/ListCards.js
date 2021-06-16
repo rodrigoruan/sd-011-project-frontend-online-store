@@ -14,14 +14,16 @@ export default class ListCards extends Component {
   }
 
   componentDidMount() {
-    this.searchApi();
+    this.searchApi(this.props);
   }
 
   async searchApi(props) {
     const { query, category } = props;
     console.log(props);
-    const products = await getProductsFromCategoryAndQuery(query, category);
-    console.log(products);
+    let products = await getProductsFromCategoryAndQuery(query, category);
+    products = products.results.map(({ title, id, price }) => (
+      { name: title, key: id, price }
+    ));
     this.setState(products);
   }
 
@@ -29,9 +31,11 @@ export default class ListCards extends Component {
     const { products } = this.state;
     return (
       <div>
-        { products.map((product, key) => (
-          <Card { ...product } key={ key } />
-        )) }
+        {
+          products.map((name, key, price) => (
+            <Card name={ name } key={ key } price={ price } />
+          ))
+        }
       </div>
     );
   }

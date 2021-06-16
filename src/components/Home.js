@@ -9,7 +9,7 @@ export default class Home extends Component {
     super();
     this.state = {
       query: '',
-      category: '',
+      category: 'MLB1384',
     };
     this.handleOnChange = this.handleOnChange.bind(this);
   }
