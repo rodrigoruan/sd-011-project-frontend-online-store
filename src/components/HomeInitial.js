@@ -13,7 +13,8 @@ class HomeInitial extends Component {
       products: [],
     };
     this.onChange = this.onChange.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.filterProductsBySearch = this.filterProductsBySearch.bind(this);
+    this.filterProductsByCategory = this.filterProductsByCategory.bind(this);
   }
 
   onChange({ target }) {
@@ -23,13 +24,32 @@ class HomeInitial extends Component {
     });
   }
 
-  async onClick() {
+  async filterProductsBySearch() {
     const { search } = this.state;
     const products = await getProductsFromCategoryAndQuery('$CATEGORY_ID', `$${search}`);
     this.setState({
       products: products.results,
       search: '',
     });
+  }
+
+  async filterProductsByCategory({ target }) {
+    if (target.className === 'Category') {
+      const { id } = target;
+      // console.log(id);
+      const { search } = this.state;
+      if (search) {
+        const products = await getProductsFromCategoryAndQuery(`$${id}`, `$${search}`);
+        this.setState({
+          products: products.results,
+        });
+      } else {
+        const products = await getProductsFromCategoryAndQuery(`$${id}`, '$QUERY');
+        this.setState({
+          products: products.results,
+        });
+      }
+    }
   }
 
   render() {
@@ -49,7 +69,7 @@ class HomeInitial extends Component {
           </label>
           <button
             data-testid="query-button"
-            onClick={ this.onClick }
+            onClick={ this.filterProductsBySearch }
             type="button"
           >
             Buscar
@@ -69,7 +89,7 @@ class HomeInitial extends Component {
           </Link>
         </div>
         <SearchArea products={ products } />
-        <Filter />
+        <Filter onClick={ this.filterProductsByCategory } />
       </div>
     );
   }

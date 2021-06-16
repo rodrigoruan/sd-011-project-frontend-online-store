@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 class Filter extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       request: [],
@@ -25,16 +26,23 @@ class Filter extends React.Component {
 
   render() {
     const { request } = this.state;
+    const { onClick } = this.props;
+
     return (
       <div>
-        {request.map((req, index) => (
-          <div key={ index } data-testid="category">
-            <p>{req.name}</p>
-          </div>
-        ))}
+        <ul aria-hidden="true" onClick={ onClick }>
+          {request.map((req, index) => (
+            <li data-testid="category" id={ req.id } key={ index } className="Category">
+              {req.name}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
 }
+Filter.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default Filter;
