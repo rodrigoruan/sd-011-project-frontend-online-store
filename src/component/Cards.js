@@ -13,7 +13,6 @@ export default class Cards extends Component {
             <Link
               to={ `/product/${id}` }
               data-testid="product-detail-link"
-              staticContext={ resultSearch }
             >
               Ver detalhes
             </Link>

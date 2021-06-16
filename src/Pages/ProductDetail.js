@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FormComment from '../component/FormComment';
+import Comments from '../component/Comments';
 
 export default class ProductDetail extends Component {
   constructor() {
     super();
     this.state = {
       product: {},
+      commnets: [],
     };
     this.getProduct = this.getProduct.bind(this);
   }
@@ -27,7 +30,13 @@ export default class ProductDetail extends Component {
     const { product } = this.state;
 
     return (
-      <div data-testid="product-detail-name">{ product.title }</div>
+      <>
+        <div data-testid="product-detail-name">{ product.title }</div>
+        <div data-testid="product-detail-evaluation">
+          <FormComment idPrd={ product.id } />
+          <Comments />
+        </div>
+      </>
     );
   }
 }
