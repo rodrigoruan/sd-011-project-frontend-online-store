@@ -50,10 +50,8 @@ export default class Home extends Component {
   }
 
   async fetchCategories(id) {
-    // this.handleChange();
     const fetchedProductsFromCategories = await
-    fetchAPI.getProductsFromCategory(id);
-    console.log(fetchedProductsFromCategories.results);
+    fetchAPI.getProductsFromCategoryAndQuery(id);
     this.setState({
       productCards: fetchedProductsFromCategories.results,
       categoryId: id,
