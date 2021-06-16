@@ -68,7 +68,7 @@ export default class SearchBar extends Component {
           type="button"
           onClick={ this.getProducts }
         >
-          Buscar Produto
+          Buscar Produto:
         </button>
         <div>
           {categories.map((category) => (
