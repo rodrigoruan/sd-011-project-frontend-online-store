@@ -30,11 +30,15 @@ export default class Home extends Component {
   async searchApi() {
     this.setState({ products: undefined });
     const { query, category } = this.state;
-    let products = await getProductsFromCategoryAndQuery(category, query);
-    products = products.results.map(({ title, id, price }) => (
-      { name: title, key: id, price }
-    ));
-    this.setState({ products });
+    try {
+      let products = await getProductsFromCategoryAndQuery(category, query);
+      products = products.results.map(({ title, id, price }) => (
+        { name: title, key: id, price }
+      ));
+      this.setState({ products });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {
