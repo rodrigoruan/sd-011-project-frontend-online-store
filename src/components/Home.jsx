@@ -34,11 +34,14 @@ class Home extends Component {
     const { search } = this.state;
     api.getProductsFromCategoryAndQuery('', search)
       .then(({ results }) => {
-        const bool = results.lenght === 0;
-        console.log(bool);
         this.setState({
           searchResult: results,
-          voidSearch: bool,
+        }, () => {
+          const { searchResult } = this.state;
+          const bool = searchResult.length === 0;
+          this.setState({
+            voidSearch: bool,
+          });
         });
       });
   }
