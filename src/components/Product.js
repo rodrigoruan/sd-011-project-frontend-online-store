@@ -6,26 +6,11 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 export default class Product extends Component {
   constructor() {
     super();
-    this.state = {
-      api: [],
-    };
-  }
-
-  componentDidMount() {
-    this.getProduct();
-  }
-
-  async getProduct() {
-    const { match } = this.props;
-    const { id } = match.params;
-
-    getProductsFromCategoryAndQuery(false, false, id)
-      .then((response) => this.setState({ api: response }));
   }
 
   render() {
-    const { api } = this.state;
-    const { title, price, thumbnail, attributes } = api;
+    console.log(this.props)
+    const { location: { state: {title, price, thumbnail, attributes}} } = this.props;
     return (
       <>
         <h1 data-testid="product-detail-name">{title}</h1>
