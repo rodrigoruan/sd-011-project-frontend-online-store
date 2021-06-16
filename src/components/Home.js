@@ -16,17 +16,13 @@ class Home extends Component {
 
     this.handleSearchText = this.handleSearchText.bind(this);
     this.handleSearchProduct = this.handleSearchProduct.bind(this);
-    this.getProductsQuery = this.getProductsQuery.bind(this);
     this.getProductsCategoryAndQuery = this.getProductsCategoryAndQuery.bind(this);
     this.renderProductLibrary = this.renderProductLibrary.bind(this);
   }
 
   handleSearchProduct() {
     const { categorySelect, searchText } = this.state;
-    // if (!categorySelect) {
-    //   return this.getProductsQuery(searchText);
-    // }
-    return this.getProductsCategoryAndQuery(categorySelect, searchText);
+    this.getProductsCategoryAndQuery(categorySelect, searchText);
   }
 
   handleSearchText({ target }) {
@@ -34,14 +30,6 @@ class Home extends Component {
     this.setState({
       [name]: value,
     });
-  }
-
-  async getProductsQuery(query) {
-    const products = await api.getProductsFromQuery(query);
-    const state = this.setState({
-      productsList: products,
-    });
-    return state;
   }
 
   async getProductsCategoryAndQuery(categoryId, query) {
