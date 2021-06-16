@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as api from '../services/api';
+import PropTypes from 'prop-types';
+import Categories from '../components/Categories';
 
 class Home extends React.Component {
   render() {
-    api.getCategories()
-      .then((categories) => console.log(categories))
-      .catch((err) => console.error(err));
+    const { categories } = this.props;
     return (
-
       <div>
-
         <main className="home-container">
+          <Categories categories={ categories } />
           <p
             className="home-initial-message"
             data-testid="home-initial-message"
@@ -30,4 +28,9 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.strings),
+}.isRequired;
+
 export default Home;
