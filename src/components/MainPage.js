@@ -22,6 +22,7 @@ class MainPage extends React.Component {
     this.getCategoryAndQuery = this.getCategoryAndQuery.bind(this);
   }
 
+  /* \_(ツ)_/ */
   /* Função para chamar a requisição da função getCategories no carregamento da página */
   componentDidMount() {
     this.requestCart();
