@@ -20,7 +20,7 @@ class RadialButton extends Component {
 }
 
 RadialButton.propTypes = {
-  category: PropTypes.arrayOf(PropTypes.shape({
+  category: PropTypes.shape(PropTypes.arrayOf({
     name: PropTypes.string,
   })).isRequired,
   value: PropTypes.string.isRequired,
