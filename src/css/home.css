@@ -1,3 +1,7 @@
+body {
+  background-color: red;
+}
+
 .home-div {
   display: flex;
   flex-flow: column nowrap;
@@ -70,4 +74,5 @@ footer {
   justify-content: left;
   justify-items: left;
   margin-left: 0px;
+  /* oi */
 }
