@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './filter-bar.css';
 
 export default class FiltersBar extends Component {
   render() {
     const { categories } = this.props;
     return (
-      <div>
+      <div className="filter-container">
         <form action="">
           { categories.map(({ id, name }) => (
             <label data-testid="category" key={ id } htmlFor={ id }>
