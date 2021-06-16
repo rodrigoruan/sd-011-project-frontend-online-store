@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import { About, Home, SearchList, Header, Footer, NotFound, ShoppingCart } from './pages/index';
+import { About, SearchList, NotFound, ShoppingCart, Home } from './pages/zPageMenu';
+import { Footer, SearchBar, Header, Categories } from './components/zComponentsMenu';
 
 export default class App extends Component {
   constructor(props) {
@@ -29,36 +30,17 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <BrowserRouter className="App">
-          <Header />
-          <Switch>
-            <Route
-              exact path="/"
-              render={(props) => <Home {...props} sendSubmit={this.getSearchQuery} />}
-            />
-            <Route
-              path="/search/:id"
-              render={(props) => (
-                <SearchList
-                  {...props}
-                  sendSubmit={this.getSearchQuery}
-                  product={ this.state.searchQuery }
-                />
-              )}
-              exact
-            />
-            <Route
-              exact path="/cart"
-              render={(props) => (
-                <ShoppingCart
-                  { ...props }
-                />
-              )}
-            />
-            <Route path="/about" component={About} exact />
-            <Route component={NotFound} />
-          </Switch>
-        </BrowserRouter>
+        <Header />
+        <Switch>
+          {/* prettier-ignore */}
+          <Route exact path="/" render={(props) => <Home {...props}  searchQuery = {this.state.searchQuery} sendSubmit={this.getSearchQuery}/>}  />
+          {/* prettier-ignore */}
+          <Route exact path="/search/:id" render={(props) => 
+          (<SearchList {...props} sendSubmit={this.getSearchQuery} product={this.state.searchQuery}/>)} />
+          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
+          <Route exact path="/about" component={About} />
+          <Route component={NotFound} />
+        </Switch>
         <Footer />
       </>
     );

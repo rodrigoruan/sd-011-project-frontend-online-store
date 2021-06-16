@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
   render() {
@@ -28,9 +28,13 @@ export default class Header extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <Link to='/cart' data-testid='shopping-cart-button
-                ' className="nav-link">
-                    Carrinho
+                <Link
+                  to="/cart"
+                  data-testid="shopping-cart-button
+                "
+                  className="nav-link"
+                >
+                  Carrinho
                 </Link>
               </li>{' '}
               <li className="nav-item">
