@@ -1,5 +1,5 @@
 import React from 'react';
-import * as api from './services/api';
+import PropTypes from 'prop-types';
 import Loading from './Loading';
 
 class CategoriesBar extends React.Component {
@@ -22,7 +22,8 @@ class CategoriesBar extends React.Component {
       loading: true,
 
     }, async () => {
-      const reponse = await api.getCategories();
+      const { functionHome } = this.props;
+      const reponse = await functionHome();
       this.setState({
         loading: false,
         categories: reponse,
@@ -56,5 +57,9 @@ class CategoriesBar extends React.Component {
     );
   }
 }
+
+CategoriesBar.propTypes = {
+  functionHome: PropTypes.string,
+}.isRequired;
 
 export default CategoriesBar;
