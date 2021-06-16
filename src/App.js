@@ -6,6 +6,7 @@ import SearchBarProducts from './components/SearchBarProducts';
 import AllProducts from './components/AllProducts';
 import { getProductsFromCategoryAndQuery } from './services/api';
 import Button from './components/Button';
+import cartPage from './pages/CartPage';
 
 class App extends Component {
   constructor() {
@@ -40,7 +41,8 @@ class App extends Component {
         <Button onClick={ () => this.fetchProducts(searchValue) } innerText="Buscar" />
         <AllProducts productsList={ products } />
         <Switch>
-          <Route path="/" render={ () => <Home /> } />
+          <Route exact path="/" render={ () => <Home /> } />
+          <Route path="/cart" component={ cartPage } />
         </Switch>
       </BrowserRouter>
     );
