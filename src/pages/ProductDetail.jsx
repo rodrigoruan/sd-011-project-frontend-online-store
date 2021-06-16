@@ -8,14 +8,28 @@ export default class ProductDetail extends Component {
     this.state = location.state;
   }
 
+  addToCart({ target: { value } }) {
+    const key = JSON.parse(value).title;
+    localStorage.setItem(key, value);
+  }
+
   render() {
     const { title, thumbnail, price } = this.state;
     return (
       <div>
         <Link to="/">Voltar</Link>
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         <h3 data-testid="product-detail-name">{title}</h3>
         <h3>{ price }</h3>
         <img src={ thumbnail } alt={ title } />
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addToCart }
+          value={ JSON.stringify({ title, price, thumbnail }) }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }

@@ -8,7 +8,6 @@ export default class Cart extends Component {
       if (typeof value !== 'number') {
         const item = JSON.parse(value);
         cartItems[item.title] = item;
-        items += 1;
       }
     });
 
@@ -22,7 +21,7 @@ export default class Cart extends Component {
               Object.entries(cartItems).map(([title, { price, thumbnail }]) => (
                 <div key={ title }>
                   <p data-testid="shopping-cart-product-name">{ title }</p>
-                  <img src={ thumbnail } alt="" />
+                  <img src={ thumbnail } alt={ title } />
                   <p>{ price }</p>
                   <p data-testid="shopping-cart-product-quantity">Quantidade: 1</p>
                 </div>
