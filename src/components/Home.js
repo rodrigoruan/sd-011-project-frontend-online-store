@@ -1,7 +1,8 @@
 import React from 'react';
+import Category from './Category';
 import { Link } from 'react-router-dom';
-
 import { FaShoppingCart } from 'react-icons/fa';
+
 
 class Home extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class Home extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </header>
+        <Category />
       </div>
     );
   }
