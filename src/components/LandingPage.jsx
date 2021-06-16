@@ -1,6 +1,6 @@
 import React from 'react';
-import Categories from './Categories';
 import { Link } from 'react-router-dom';
+import Categories from './Categories';
 import carrinho from '../carrinho.png';
 
 class LandingPage extends React.Component {
