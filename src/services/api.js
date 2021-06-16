@@ -4,8 +4,11 @@ export async function getCategories() {
   return response.json();
 }
 
-export async function getProductsFromCategoryAndQuery(categoryId, query) {
+export async function getProductsFromCategoryAndQuery(categoryId, query, id) {
   let endpoint;
+  if (id) {
+    endpoint = `https://api.mercadolibre.com/items/${id}`;
+  }
   if (query) {
     endpoint = `https://api.mercadolibre.com/sites/MLB/search?q=${query}`;
   }

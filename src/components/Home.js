@@ -26,7 +26,7 @@ export default class Home extends Component {
 
   handleSearch = () => {
     const { inputText, category } = this.state;
-    getProductsFromCategoryAndQuery(category, inputText)
+    getProductsFromCategoryAndQuery(category, inputText, false)
       .then(({ results }) => {
         if (results.lenght === 0) this.setState({ noFindProducts: true });
         else this.setState({ products: results });
@@ -35,7 +35,7 @@ export default class Home extends Component {
 
   changeCategory = () => {
     const { category } = this.state;
-    getProductsFromCategoryAndQuery(category, false)
+    getProductsFromCategoryAndQuery(category, false, false)
       .then(({ results }) => {
         if (results.lenght === 0) this.setState({ noFindProducts: true });
         else this.setState({ products: results });
