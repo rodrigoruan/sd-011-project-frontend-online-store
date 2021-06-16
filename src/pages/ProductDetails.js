@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class ProductDetails extends React.Component {
+  constructor({ location }) {
+    super({ location });
+    this.state = location.state;
+  }
+
   render() {
-    const { location } = this.props;
-    const { state } = location;
-    const { title, id, price, thumbnail } = state;
+    const { title, thumbnail, price, id } = this.state;
     return (
       <div key={ id }>
         <span data-testid="product-detail-name">{ title }</span>
@@ -18,13 +21,6 @@ export default class ProductDetails extends React.Component {
   }
 }
 
-ProductsDetails.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.shape({
-    location:PropTypes.objectOf,
-    state: PropTypes.objectOf,
-    id: PropTypes.string,
-    thumbnail: PropTypes.string,
-    title: PropTypes.string,
-    price: PropTypes.number,
-  })).isRequired,
-};
+ProductDetails.propTypes = {
+  location: PropTypes.object,
+}.isRequired;

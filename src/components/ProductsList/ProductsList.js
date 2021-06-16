@@ -13,7 +13,7 @@ export default class ProductsList extends React.Component {
             ? (
               products.map(({ id, thumbnail, title, price }) => (
                 <ProductCard
-                  id={ id }
+                  key={ id }
                   thumbnail={ thumbnail }
                   title={ title }
                   price={ price }
@@ -32,7 +32,7 @@ export default class ProductsList extends React.Component {
 
 ProductsList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    key: PropTypes.string,
     thumbnail: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
