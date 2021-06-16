@@ -89,6 +89,7 @@ export default class Home extends Component {
         { productsArray.map((element) => (
           <Product
             key={ element.id }
+            id={ element.id }
             title={ element.title }
             thumbnail={ element.thumbnail }
             price={ element.price }
