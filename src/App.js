@@ -17,9 +17,12 @@ class App extends Component {
   }
 
   async defineStateCategories() {
-    const categories = await api.getCategories();
-    const array = categories.map(({ name }) => name);
-    this.setState({ categories: array });
+    try {
+      const categories = await api.getCategories();
+      this.setState({ categories });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   render() {

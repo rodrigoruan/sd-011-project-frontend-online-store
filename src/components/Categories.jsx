@@ -8,13 +8,13 @@ export default class Categories extends Component {
       <section className="categories-container">
         <p>Categorias:</p>
         <ul className="categories-list">
-          { categories.map((categorie, index) => (
+          { categories.map(({ name, id }) => (
             <li
               data-testid="category"
-              className="categorie"
-              key={ index }
+              className="category"
+              key={ id }
             >
-              { categorie }
+              { name }
             </li>
           )) }
         </ul>
