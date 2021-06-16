@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Search extends Component {
@@ -8,14 +9,15 @@ export default class Search extends Component {
       searchText: '',
     };
     this.handle = this.handle.bind(this);
-    console.log(props);
   }
 
   async handle({ target }) {
+    const { evSrch, ctgId } = this.props;
     const { type, value } = target;
     const { searchText } = this.state;
     if (type === 'button') {
-      await getProductsFromCategoryAndQuery('Imóveis', searchText);
+      const result = await getProductsFromCategoryAndQuery(ctgId, searchText);
+      evSrch(result.results);
     }
     if (type === 'text') {
       this.setState({
@@ -34,8 +36,19 @@ export default class Search extends Component {
           type="text"
           onChange={ this.handle }
         />
-        <button type="button" onClick={ this.handle }>Search</button>
+        <button
+          type="button"
+          data-testid="query-button"
+          onClick={ this.handle }
+        >
+          Search
+        </button>
       </div>
     );
   }
 }
+
+Search.propTypes = {
+  evSrch: PropTypes.func.isRequired,
+  ctgId: PropTypes.string.isRequired,
+};
