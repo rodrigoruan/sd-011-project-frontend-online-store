@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import * as api from './services/api';
 import Home from './components/Home';
 import Cart from './pages/Cart';
 
 class App extends Component {
-  componentDidMount() {
-    api.getCategories();
-    api.getProductsFromCategoryAndQuery();
-  }
-
   render() {
     return (
       <div>
