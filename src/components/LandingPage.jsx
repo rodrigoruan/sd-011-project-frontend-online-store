@@ -11,7 +11,7 @@ class LandingPage extends React.Component {
     this.state = {
       cardList: [],
       query: '',
-      selectedCategory: '',
+      // selectedCategory: '',
     };
     this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -20,14 +20,13 @@ class LandingPage extends React.Component {
 
   onClickCategory(event) {
     const { target: { id } } = event;
-    console.log(id);
-    this.setState({ selectedCategory: id });
-    console.log(this.state.selectedCategory);
+    // this.setState(() => ({ selectedCategory: id }));
+    this.onClick(id);
   }
 
-  onClick() {
+  onClick(id = '') {
     const { query } = this.state;
-    fetchApi.getProductsFromCategoryAndQuery('', query).then((produtos) => this.setState({
+    fetchApi.getProductsFromCategoryAndQuery(id, query).then((produtos) => this.setState({
       cardList: produtos,
     }));
   }
