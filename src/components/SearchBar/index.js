@@ -4,6 +4,7 @@ import CartButton from '../CartButton/index';
 import * as api from '../../services/api';
 import EmptyHome from './EmptyHome';
 import ProductCard from '../ProductCard';
+import NotFound from './NotFound';
 
 export default class SearchBar extends React.Component {
   constructor() {
@@ -12,6 +13,7 @@ export default class SearchBar extends React.Component {
       categories: [],
       products: [],
       searchInput: '',
+      searched: false,
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
@@ -40,11 +42,20 @@ export default class SearchBar extends React.Component {
     const { searchInput } = this.state;
     api.getProductsFromCategoryAndQuery('', searchInput).then((r) => this.setState({
       products: r.results,
+      searched: true,
     }));
   }
 
   render() {
-    const { categories, products } = this.state;
+    const { categories, products, searched } = this.state;
+    let renderedComponent;
+    if (!searched) {
+      renderedComponent = <EmptyHome />;
+    } else if (products.length === 0 && searched) {
+      renderedComponent = <NotFound />;
+    } else {
+      renderedComponent = <ProductCard products={ products } />;
+    }
     return (
       <div className="container">
         <div className="headerContainer">
@@ -88,9 +99,7 @@ export default class SearchBar extends React.Component {
             ))}
           </aside>
           <div className="mainContent">
-            { products.length === 0
-              ? <EmptyHome />
-              : <ProductCard products={ products } /> }
+            {renderedComponent}
           </div>
         </div>
       </div>
