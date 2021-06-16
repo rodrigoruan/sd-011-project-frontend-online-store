@@ -35,6 +35,7 @@ class Filtros extends Component {
             <input
               type="radio"
               id={ category.id }
+              checked
               name="category"
               value={ category.id }
               onClick={ onClick }

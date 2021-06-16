@@ -12,6 +12,7 @@ class Input extends React.Component {
           id="inpQuery"
           value={ value }
           onChange={ onChange }
+          data-testid="query-input"
         />
       </div>
     );
