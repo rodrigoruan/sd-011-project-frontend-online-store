@@ -48,6 +48,7 @@ class ListaCategoria extends Component {
           <label key={id}>
             {name}
             <input
+              name="categoria"
               type="radio"
               data-testid="category"
               key={id}
