@@ -7,12 +7,10 @@
   pointer-events: none;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
+@media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-
 }
 
 .App-header {
@@ -31,7 +29,6 @@
 }
 
 @keyframes App-logo-spin {
-
   from {
     transform: rotate(0deg);
   }
@@ -39,4 +36,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.product-card {
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 200px;
+}
+
+.details {
+  text-decoration: none;
+  color: rgb(7, 6, 6);
 }
