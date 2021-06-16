@@ -3,20 +3,29 @@ import PropTypes from 'prop-types';
 
 export default class Categories extends Component {
   render() {
-    const { categories } = this.props;
+    const { categories, filterCategory, currentCategoryFilter } = this.props;
     return (
       <section className="categories-container home-one-fourth">
         <p>Categorias:</p>
         <ul className="categories-list">
-          { categories.map(({ name, id }) => (
-            <li
-              data-testid="category"
-              className="category"
-              key={ id }
-            >
-              { name }
-            </li>
-          )) }
+          { categories.map(({ name, id }) => {
+            const isSelected = (id === currentCategoryFilter);
+            return (
+              <li
+                className={ `category${isSelected ? ' category--selected' : ''}` }
+                key={ id }
+              >
+                <button
+                  data-testid="category"
+                  type="button"
+                  data-id={ id }
+                  onClick={ filterCategory }
+                >
+                  { name }
+                </button>
+              </li>
+            );
+          }) }
         </ul>
       </section>
     );
