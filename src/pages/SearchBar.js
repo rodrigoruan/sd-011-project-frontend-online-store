@@ -2,8 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class SearchBar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      userInput: '',
+    };
+    this.handleState = this.handleState.bind(this);
+  }
+
+  handleState({ target }) {
+    const { value } = target;
+    this.setState({
+      userInput: value,
+    });
+  }
+
   render() {
-    const { handleState } = this.props;
+    const { onClick } = this.props;
+    const { userInput } = this.state;
     return (
       <label htmlFor="busca">
         <input
@@ -11,17 +27,16 @@ class SearchBar extends React.Component {
           data-testid="query-input"
           type="text"
           placeholder="Faça sua pesquisa"
-          onChange={ handleState }
+          value={ userInput }
+          onChange={ this.handleState }
         />
         <button
           type="button"
           data-testid="query-button"
+          onClick={ () => onClick(userInput) }
         >
           Buscar
         </button>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
       </label>
     );
   }

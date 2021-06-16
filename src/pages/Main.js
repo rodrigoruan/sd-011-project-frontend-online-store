@@ -8,32 +8,32 @@ export default class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      // query: '',
-      // id: '',
-      // product: [],
-      // noItems: true,
+      query: '',
+      categoryId: '',
     };
-    this.handleState = this.handleState.bind(this);
-    // this.SearchText = this.SearchText.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
-  handleState({ target }) {
-    const { name, value } = target;
+  onClick(query) {
     this.setState({
-      [name]: value,
+      query,
     });
   }
 
   render() {
+    const { categoryId, query } = this.state;
+    const paragraph = 'Digite algum termo de pesquisa ou escolha uma categoria.';
     return (
       <div>
-        <SearchBar />
+        <SearchBar onClick={ this.onClick } />
         <nav>
           <Link data-testid="shopping-cart-button" to="/shoppingcart">
             Carrinho
           </Link>
         </nav>
-        <ProductList categoryId="MLB5672" query="Apple" />
+        { !query
+          ? <p data-testid="home-initial-message">{ paragraph }</p>
+          : <ProductList categoryId={ categoryId } query={ query } />}
         <CategoryFilter />
       </div>
     );
