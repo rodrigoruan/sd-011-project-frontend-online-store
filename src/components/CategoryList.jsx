@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 class CategoryList extends Component {
@@ -20,21 +21,31 @@ class CategoryList extends Component {
 
   render() {
     const { categories } = this.state;
+    const { handleUserInput } = this.props;
     return (
       <div className="categories">
-        <label htmlFor="list">
-          Categorias
-          <ul name="list">
-            {categories.map((category) => (
-              <li data-testid="category" key={ category.id }>
-                {category.name}
-              </li>
-            ))}
-          </ul>
-        </label>
+        {categories.map((category) => (
+          <div key={ category.id }>
+            <label htmlFor={ category.name }>
+              <input
+                type="radio"
+                name="category"
+                id={ category.name }
+                value={ category.id }
+                data-testid="category"
+                onChange={ handleUserInput }
+              />
+              {category.name}
+            </label>
+          </div>
+        ))}
       </div>
     );
   }
 }
+
+CategoryList.propTypes = {
+  handleUserInput: PropTypes.func,
+}.isRequired;
 
 export default CategoryList;
