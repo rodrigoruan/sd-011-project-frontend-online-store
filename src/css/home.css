@@ -7,10 +7,8 @@
 }
 
 .home-form-div {
-  align-items: center;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
 }
 
 .home-form-div button {
@@ -72,5 +70,4 @@ footer {
   justify-content: left;
   justify-items: left;
   margin-left: 0px;
-  
 }

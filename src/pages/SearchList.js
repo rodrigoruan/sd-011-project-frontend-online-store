@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
-import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 export default class SearchList extends Component {
   constructor(props) {
@@ -43,8 +43,11 @@ export default class SearchList extends Component {
   render() {
     if (!this.state.products) {
       return <div>Loading...</div>;
-    } else {
-      return <div className="search-list">{this.showList()}</div>;
+    } else if (this.state.products.length < 1) {
+      return <div>Nenhum produto foi encontrado</div>;
+    } else if (!this.props.product) {
+      return <Redirect to="/" />;
     }
+    return <div className="search-list">{this.showList()}</div>;
   }
 }
