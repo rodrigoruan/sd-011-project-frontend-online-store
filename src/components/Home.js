@@ -52,7 +52,7 @@ export default class Home extends Component {
           onClick={ this.changeCategory }
           name="category"
         >
-          <option data-testid="category"> Selecione uma Categoria</option>
+          <option> Selecione uma Categoria</option>
           {api.map(({ id, name }) => (
             <option
               data-testid="category"

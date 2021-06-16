@@ -17,7 +17,6 @@ export default class Product extends Component {
 
   async getProduct() {
     const { match } = this.props;
-    console.log(match);
     const { id } = match.params;
 
     getProductsFromCategoryAndQuery(false, false, id)
