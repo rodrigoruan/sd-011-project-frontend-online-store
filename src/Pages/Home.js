@@ -1,5 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
+import ProductList from '../ProductList';
 
 class Home extends React.Component {
   constructor() {
@@ -30,6 +31,7 @@ class Home extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h3>
+        <ProductList />
         <div>
           { productCategories.map((category) => (
             <div
