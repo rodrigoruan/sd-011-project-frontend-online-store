@@ -71,3 +71,13 @@ footer {
   list-style: none;
   padding: 3px 10px;
 }
+
+.category button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, .4);
+}
+
+.category--selected button {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, .4) inset;
+}
