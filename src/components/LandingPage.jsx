@@ -4,7 +4,6 @@ import CardList from './cardList';
 import * as fetchApi from '../services/api';
 import carrinho from '../carrinho.png';
 
-
 class LandingPage extends React.Component {
   constructor() {
     super();
