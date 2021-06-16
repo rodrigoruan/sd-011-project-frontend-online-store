@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardCreator from './cardCreator';
 
 export default class CardList extends React.Component {
@@ -9,11 +10,17 @@ export default class CardList extends React.Component {
         {
           list === undefined
             ? <span>Nenhum produto foi encontrado</span>
-            : list.length === 0
-              ? <span>Nenhum produto foi encontrado</span>
-              : list.map((produto, index) => <CardCreator key={ index } product={ produto } />)
+            : list.map((produto, index) => (
+              <CardCreator
+                key={ index }
+                product={ produto }
+              />))
         }
       </div>
     );
   }
 }
+
+CardList.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.any).isRequired,
+};
