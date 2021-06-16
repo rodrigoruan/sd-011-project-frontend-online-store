@@ -13,6 +13,7 @@ class Home extends Component {
     this.state = {
       data: [],
       search: '',
+      category: '',
     };
 
     this.HandlerState = this.HandlerState.bind(this);
@@ -20,16 +21,22 @@ class Home extends Component {
   }
 
   HandlerState(event) {
-    const { target: { value } } = event;
-    this.setState({ search: value });
+    const { target: { name, value } } = event;
+    if (name === 'category') {
+      this.setState({ [name]: value }, () => this.RequestApi());
+    } else {
+      this.setState({ [name]: value });
+    }
   }
 
   RequestApi() {
-    const { search } = this.state;
-    Api.getProductsFromCategoryAndQuery('', search)
-      .then(({ results }) => {
-        this.setState({ data: results });
-      });
+    const { search, category } = this.state;
+    this.setState({ data: [] }, () => {
+      Api.getProductsFromCategoryAndQuery(category, search)
+        .then(({ results }) => {
+          this.setState({ data: results });
+        });
+    });
   }
 
   render() {
@@ -65,7 +72,9 @@ class Home extends Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <div className="category-products-wrapper">
-          <CategoryList />
+          <CategoryList
+            handleUserInput={ this.HandlerState }
+          />
           <ProductList productsList={ data } />
         </div>
 
