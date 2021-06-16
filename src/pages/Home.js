@@ -9,8 +9,8 @@ export default class Home extends Component {
 
     this.state = {
       loading: true,
-      inputText: '',
-      products: '',
+      inputText: [],
+      products: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);

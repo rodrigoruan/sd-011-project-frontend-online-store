@@ -38,7 +38,7 @@ export default class App extends Component {
           <Route exact path="/about" component={About} />
           <Route component={NotFound} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </>
     );
   }
