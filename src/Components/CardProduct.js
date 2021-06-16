@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // teste
 
-export default class CardProduct extends Component {
+class CardProduct extends Component {
   render() {
     const { listProduct } = this.props;
     const { thumbnail, title, price } = listProduct;
@@ -17,9 +17,11 @@ export default class CardProduct extends Component {
 }
 
 CardProduct.propTypes = {
-  listProduct: PropTypes.arrayOf(PropTypes.shape({
+  listProduct: PropTypes.shape(PropTypes.arrayOf({
     thumbnail: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.string,
   })).isRequired,
 };
+
+export default CardProduct;

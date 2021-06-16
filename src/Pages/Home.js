@@ -12,11 +12,14 @@ export default class Home extends Component {
       id: '',
       value: '',
       searchProducts: [],
+      searchCategory: [],
+      loading: true,
     };
     this.getProducts = this.getProducts.bind(this);
     this.getProductById = this.getProductById.bind(this);
     this.getValue = this.getValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.getProductsFromCategory = this.getProductsFromCategory.bind(this);
   }
 
   componentDidMount() {
@@ -30,9 +33,10 @@ export default class Home extends Component {
     });
   }
 
-  getValue({ target: { value } }) {
+  async getValue({ target: { value } }) {
     this.setState({
       id: value,
+      searchProducts: await this.getProductsFromCategory(value),
     });
   }
 
@@ -51,8 +55,13 @@ export default class Home extends Component {
     });
   }
 
+  async getProductsFromCategory(id) {
+    const products = await Data.getProductsFromCategoryAndQuery(id);
+    return products.results;
+  }
+
   render() {
-    const { categories, searchProducts } = this.state;
+    const { categories, searchProducts, searchCategory, loading } = this.state;
 
     return (
       <div>
@@ -75,11 +84,11 @@ export default class Home extends Component {
           </button>
         </label>
         <Link data-testid="shopping-cart-button" to="/shopcart">Carrinho</Link>
-        {categories.map((eachCategory, index) => (
+        {categories.map((eachCategory) => (
           <RadialButton
             category={ eachCategory }
             onClick={ this.getValue }
-            key={ index }
+            key={ eachCategory.id }
             value={ eachCategory.id }
           />
         ))}
@@ -90,6 +99,15 @@ export default class Home extends Component {
             listProduct={ eachItem }
           />
         ))}
+        {!loading ? searchCategory.map((eachCategoryItem) => (
+          <CardProduct
+            data-testid=""
+            key={ eachCategoryItem.id }
+            listProduct={ eachCategoryItem }
+          />
+        )) : (
+          <h1>Loading</h1>
+        )}
       </div>
     );
   }
