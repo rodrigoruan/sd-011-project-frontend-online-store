@@ -16,7 +16,8 @@ class Categories extends Component {
   }
 
   async renderCategories() {
-    const data = await api.getCategories()
+    const data = await api
+      .getCategories()
       .then((response) => this.setState({ categories: response }));
     return data;
   }
@@ -27,14 +28,11 @@ class Categories extends Component {
       <div>
         <h5>Categorias:</h5>
         <ul className="categories">
-          { categories.map((category) => (
-            <li
-              data-testid="category"
-              key={ category.id }
-            >
-              { category.name }
+          {categories.map((category) => (
+            <li data-testid="category" key={category.id}>
+              {category.name}
             </li>
-          )) }
+          ))}
         </ul>
       </div>
     );

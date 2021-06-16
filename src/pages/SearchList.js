@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
-import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import ItemProduct from '../components/ItemProduct';
 
 export default class SearchList extends Component {
   constructor(props) {
@@ -29,22 +30,18 @@ export default class SearchList extends Component {
   showList = () => {
     return this.state.products.map((el) => {
       const { thumbnail, title, id, price } = el;
-      return (
-        <div className="content" data-testid="product" key={id}>
-          <img src={thumbnail} />
-          <h3>{title}</h3>
-          <h6>R${parseFloat(price, 10).toFixed(2)}</h6>
-          <button className="btn btn-success">Add to Cart!</button>
-        </div>
-      );
+      return <ItemProduct thumbnail={thumbnail} title={title} id={id} price={price} />;
     });
   };
 
   render() {
     if (!this.state.products) {
       return <div>Loading...</div>;
-    } else {
-      return <div className="search-list">{this.showList()}</div>;
+    } else if (this.state.products.length < 1) {
+      return <div>Nenhum produto foi encontrado</div>;
+    } else if (!this.props.product) {
+      return <Redirect to="/" />;
     }
+    return <div className="search-list">{this.showList()}</div>;
   }
 }
