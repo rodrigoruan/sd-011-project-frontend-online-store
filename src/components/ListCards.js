@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+
 import Card from './Card';
 
 export default class ListCards extends Component {
@@ -14,17 +14,12 @@ export default class ListCards extends Component {
   }
 
   componentDidMount() {
-    this.searchApi(this.props);
+    const { func } = this.props;
+    this.searchApi(func);
   }
 
-  async searchApi(props) {
-    const { query, category } = props;
-    console.log(props);
-    let products = await getProductsFromCategoryAndQuery(query, category);
-    products = products.results.map(({ title, id, price }) => (
-      { name: title, key: id, price }
-    ));
-    this.setState(products);
+  searchApi(products) {
+    this.setState({ products });
   }
 
   render() {

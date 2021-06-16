@@ -20,8 +20,17 @@ export default class Home extends Component {
     this.setState(({ [name]: value }));
   }
 
-  render() {
+  async searchApi() {
     const { query, category } = this.state;
+    let products = await getProductsFromCategoryAndQuery(query, category);
+    products = products.results.map(({ title, id, price }) => (
+      { name: title, key: id, price }
+    ));
+    return products;
+  }
+
+  render() {
+    const { query } = this.state;
     return (
       <div>
         <h2 data-testid="home-initial-message">
@@ -34,7 +43,7 @@ export default class Home extends Component {
             Carrinho de Compras
           </button>
         </Link>
-        <ListCards query={ query } category={ category } />
+        <ListCards func={ this.searchApi } />
       </div>
     );
   }
