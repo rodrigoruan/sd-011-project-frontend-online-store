@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { Link } from 'react-router-dom';
-import CategorieList from '../components/CategorieList';
+import CategorieNav from './CategorieNav';
+import SearchBar from './SearchBar';
 
-export default class SearchBar extends Component {
+export default class MainPage extends Component {
   render() {
     return (
-      <div>
-        <input type="text" />
+      <div className="main">
+        <CategorieNav />
+        <SearchBar />
         <Link to="/shopping-cart" data-testid="shopping-cart-button">
           <img
             src="images/Carrinho-de-Compras.png"
@@ -14,7 +17,6 @@ export default class SearchBar extends Component {
             width="50px"
           />
         </Link>
-        <CategorieList />
       </div>
     );
   }
