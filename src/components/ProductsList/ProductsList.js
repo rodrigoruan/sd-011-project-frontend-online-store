@@ -35,7 +35,7 @@ export default class ProductsList extends React.Component {
 ProductsList.propTypes = {
   handleAddToShopCart: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    key: PropTypes.string,
     thumbnail: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
