@@ -48,8 +48,10 @@ export default class SearchResults extends React.Component {
 SearchResults.propTypes = {
   searchResults: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string,
     })),
-  }).isRequired,
-  updateSearchResults: PropTypes.func.isRequired,
-};
+  }),
+  handleSearch: PropTypes.func,
+  handleChangeField: PropTypes.func,
+  searchTerm: PropTypes.string,
+}.isRequired;

@@ -38,7 +38,7 @@ class Home extends React.Component {
       return {
         currentCategoryFilter: (currentCategoryFilter !== id) ? id : '',
       };
-    },() => this.handleSearch(e));
+    }, () => this.handleSearch(e));
   }
 
   render() {
