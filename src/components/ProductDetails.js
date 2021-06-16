@@ -2,6 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class ProductDetails extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      product: [],
+      itemsCart: [],
+    };
+    this.addItemCart = this.addItemCart.bind(this);
+  }
+
+  addItemCart({ target }) {
+    const { product, itemsCart } = this.state;
+    const { value } = target;
+    const productForCart = product.find((item) => item.id === value);
+
+    this.setState({
+      itemsCart: [...itemsCart, productForCart],
+    });
+  }
+
   render() {
     const { location: { state: { detail } } } = this.props;
     const { title, thumbnail, price, attributes, installments } = detail;
