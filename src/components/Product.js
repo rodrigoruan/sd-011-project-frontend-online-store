@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Product extends Component {
-  constructor() {
-    super();
-  }
-
   render() {
-    console.log(this.props)
-    const { location: { state: {title, price, thumbnail, attributes}} } = this.props;
+    const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
     return (
       <>
         <h1 data-testid="product-detail-name">{title}</h1>
@@ -35,6 +29,12 @@ export default class Product extends Component {
 }
 
 Product.propTypes = {
-  match: PropTypes.objectOf(PropTypes.array).isRequired,
-  id: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    state: {
+      title: PropTypes.string,
+      price: PropTypes.number,
+      thumbnail: PropTypes.string,
+      attributes: PropTypes.arrayOf(PropTypes.object),
+    },
+  }).isRequired,
 };
