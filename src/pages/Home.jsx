@@ -19,10 +19,6 @@ class Home extends Component {
     this.RequestApi = this.RequestApi.bind(this);
   }
 
-  componentDidMount() {
-    this.RequestApi();
-  }
-
   HandlerState(event) {
     const { target: { value } } = event;
     this.setState({ search: value });
@@ -30,7 +26,7 @@ class Home extends Component {
 
   RequestApi() {
     const { search } = this.state;
-    Api.getProductsFromCategoryAndQuery('', 'roda')
+    Api.getProductsFromCategoryAndQuery('', search)
       .then(({ results }) => {
         this.setState({ data: results });
       });
