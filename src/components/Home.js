@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ListCards from './ListCards';
 import Filtros from './Filtros';
 import Input from './Input';
 
