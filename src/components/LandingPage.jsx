@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CardList from './cardList';
 import * as fetchApi from '../services/api';
+import carrinho from '../carrinho.png';
+
 
 class LandingPage extends React.Component {
   constructor() {
@@ -43,6 +46,9 @@ class LandingPage extends React.Component {
         >
           Pesquisar
         </button>
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">
+          <img src={ carrinho } alt="carrinho" />
+        </Link>
         <CardList list={ cardList.results } />
       </div>
     );
