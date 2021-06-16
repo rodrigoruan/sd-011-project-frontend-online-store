@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Loading from './Loading';
 import * as api from './services/api';
+import CartButton from './components/cartButton';
 
 class ListagemDeProdutos extends Component {
   constructor() {
@@ -39,6 +40,7 @@ class ListagemDeProdutos extends Component {
     );
     return (
       <div>
+        <CartButton />
         {loading ? loadingComponent : categoryList}
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
