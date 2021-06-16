@@ -14,7 +14,8 @@ export default class SearchHome extends Component {
       search: '',
       products: [],
     };
-    this.handleOnChange = this.handleOnChange.bind(this);
+    this.handleOnChangeCategory = this.handleOnChangeCategory.bind(this);
+    this.handleOnChangeQuery = this.handleOnChangeQuery.bind(this);
     this.handleSearchProducts = this.handleSearchProducts.bind(this);
   }
 
@@ -30,7 +31,20 @@ export default class SearchHome extends Component {
     });
   }
 
-  handleOnChange({ target }) {
+  async handleOnChangeCategory({ target }) {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+    const { search } = this.state;
+    const response = await AppServices.getProductsFromCategoryAndQuery(value, search);
+    this.setState({
+      products: response,
+    });
+  }
+
+  handleOnChangeQuery({ target }) {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({
@@ -57,7 +71,7 @@ export default class SearchHome extends Component {
                 value={ category.name }
                 id={ category.id }
                 key={ index }
-                onChange={ this.handleOnChange }
+                onChange={ this.handleOnChangeCategory }
               />),
             ) }
         </aside>
@@ -67,7 +81,7 @@ export default class SearchHome extends Component {
             id="search"
             type="text"
             name="search"
-            onChange={ this.handleOnChange }
+            onChange={ this.handleOnChangeQuery }
           />
           <button
             data-testid="query-button"

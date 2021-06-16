@@ -5,13 +5,14 @@ export default class Categories extends Component {
   render() {
     const { value, onChange, id } = this.props;
     return (
-      <div data-testid="category">
+      <div>
         <label htmlFor={ value }>
           <input
+            data-testid="category"
             type="radio"
             value={ id }
             name="category"
-            onChange={ onChange }
+            onClick={ onChange }
             id={ value }
           />
           { value }
