@@ -6,14 +6,13 @@ import '../styles/ProductList.css';
 
 class ProductList extends Component {
   render() {
-    const { productsList, addToCart } = this.props;
+    const { productsList } = this.props;
     return (
       <ul className="productList">
         {productsList.map((product) => (
           <ProductCard
             key={ product.title }
             product={ product }
-            addToCart={ addToCart }
           />
         ))}
       </ul>

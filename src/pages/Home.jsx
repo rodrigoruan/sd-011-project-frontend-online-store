@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as Api from '../services/api';
 
@@ -42,7 +41,6 @@ class Home extends Component {
 
   render() {
     const { data } = this.state;
-    const { addToCart, getCart } = this.props;
     return (
       <div>
         <div className="searchSection">
@@ -69,9 +67,6 @@ class Home extends Component {
           >
             Carrinho
           </Link>
-          <p>
-            {`${getCart().length} itens no carrinho`}
-          </p>
         </div>
         <h2 className="home-message" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
@@ -80,17 +75,12 @@ class Home extends Component {
           <CategoryList
             handleUserInput={ this.HandlerState }
           />
-          <ProductList productsList={ data } addToCart={ addToCart } />
+          <ProductList productsList={ data } />
         </div>
 
       </div>
     );
   }
 }
-
-Home.propTypes = {
-  addToCart: PropTypes.func,
-  getCart: PropTypes.func,
-}.isRequired;
 
 export default Home;
