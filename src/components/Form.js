@@ -72,7 +72,13 @@ export default class Form extends Component {
             />
           </div>
           <div>
-            <textarea name="comment" cols="30" rows="10" value={ comment } />
+            <textarea
+              name="comment"
+              cols="30"
+              rows="10"
+              value={ comment }
+              onChange={ this.onChange }
+            />
           </div>
           <button type="button" onClick={ handleOnChange }>
             Avaliar
