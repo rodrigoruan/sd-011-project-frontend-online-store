@@ -4,7 +4,7 @@ import queryMock from '../__mocks__/query';
 
 class Home extends React.Component {
   render() {
-    // const { searchResults } = this.props;
+    const { updateSearchResults, searchResults } = this.props;
 
     return (
       <main className="home-container">
@@ -12,7 +12,7 @@ class Home extends React.Component {
 
         </section>
 
-        <SearchResults searchResults={ queryMock } />
+        <SearchResults searchResults={ searchResults } updateSearchResults={ updateSearchResults } />
       </main>
     );
   }

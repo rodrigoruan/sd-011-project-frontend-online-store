@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      searchResults: {},
+      searchResults: { results: [] },
     };
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
