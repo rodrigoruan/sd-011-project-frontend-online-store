@@ -19,20 +19,31 @@ class Main extends Component {
 
     this.fetchProductCategory = this.fetchProductCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange({ target }) {
     const { name, value } = target;
-    console.log(name, value);
     this.setState({
       [name]: value,
     });
   }
 
+  handleClick({ target }) {
+    const { value } = target;
+    const { productList, query } = this.state;
+    if (productList !== []) {
+      this.setState({ loading: true });
+      api
+        .getProductsFromCategoryAndQuery(value, query)
+        .then((data) => this.setState({ productList: data.results, loading: false }));
+    }
+  }
+
   async fetchProductCategory() {
     const { query, categories } = this.state;
     api
-      .getProductsFromCategoryAndQuery(query, categories)
+      .getProductsFromCategoryAndQuery(categories, query)
       .then((data) => this.setState({ productList: data.results, loading: false }));
   }
 
@@ -40,7 +51,7 @@ class Main extends Component {
     const { productList, loading, query } = this.state;
     return (
       <div>
-        <Category change={ this.handleChange } />
+        <Category change={ this.handleChange } click={ this.handleClick } />
         <SearchBar
           click={ this.fetchProductCategory }
           change={ this.handleChange }
@@ -48,12 +59,13 @@ class Main extends Component {
         />
         <CartButton />
         <ProductListing texto="Nenhum produto foi encontrado" />
-        { loading
+        {loading
           ? null
-          : productList
-            .map((product, index) => (
-              <div key={ index }><CardCreator item={ product } /></div>
-            )) }
+          : productList.map((product, index) => (
+            <div key={ index }>
+              <CardCreator item={ product } />
+            </div>
+          ))}
       </div>
     );
   }
