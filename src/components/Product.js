@@ -3,6 +3,25 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class Product extends Component {
+  constructor() {
+    super();
+    this.state = {
+      counter: 1,
+    };
+  }
+
+  handleClick = () => {
+    this.setState((previous) => ({
+      counter: previous.counter + 1,
+    }));
+    const { counter } = this.state;
+    const { location: { state } } = this.props;
+    const { title, id, price, thumbnail, attributes } = state;
+    const object = { counter, price, thumbnail, id, attributes, title };
+    const json = JSON.stringify(object);
+    localStorage.setItem(title, json);
+  }
+
   render() {
     const { location: { state: { title, price, thumbnail, attributes } } } = this.props;
     return (
@@ -22,7 +41,14 @@ export default class Product extends Component {
             ))}
           </ul>
         </div>
-        <Link to="/cart">Carrinho</Link>
+        <button
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.handleClick }
+          type="button"
+        >
+          Adicionar ao Carrinho
+        </button>
+        <Link data-testid="shopping-cart-button" to="/cart">Carrinho</Link>
       </>
     );
   }
