@@ -19,12 +19,10 @@ export default class CategorieNav extends Component {
   render() {
     const { categories, loading } = this.state;
 
-    if (loading) {
-      return <Loading />;
-    }
     return (
-      <div>
-        { categories
+      <div className="nav">
+        <h3>Categorias:</h3>
+        {loading ? <Loading /> : categories
           .map((categorie) => (<CategorieList
             key={ categorie.id }
             categorie={ categorie }

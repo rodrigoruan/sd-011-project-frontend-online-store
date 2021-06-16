@@ -6,7 +6,7 @@ import CategorieNav from './page/CategorieNav';
 
 function App() {
   return (
-    <div>
+    <div className="App">
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Header } />
