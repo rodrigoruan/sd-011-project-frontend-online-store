@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NotFound from './NotFound';
-
+// ininciando requisito 7
 class Products extends Component {
   render() {
     const { prodList } = this.props;
