@@ -1,21 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CategoryFilter from './CategoryFilter';
-import ProductCard from './ProductCard';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import Loading from './Loading';
+import ProductList from './ProductList';
+import SearchBar from './SearchBar';
 
 export default class Main extends React.Component {
   constructor() {
     super();
     this.state = {
-      query: '',
-      id: '',
-      product: [],
-      noItems: true,
+      // query: '',
+      // id: '',
+      // product: [],
+      // noItems: true,
     };
     this.handleState = this.handleState.bind(this);
-    this.SearchText = this.SearchText.bind(this);
+    // this.SearchText = this.SearchText.bind(this);
   }
 
   handleState({ target }) {
@@ -25,53 +24,17 @@ export default class Main extends React.Component {
     });
   }
 
-  SearchText() {
-    const { query, id, product, noItems } = this.state;
-    getProductsFromCategoryAndQuery(query, id)
-      .then(({ results }) => {
-        if (results === null) {
-          this.setState({
-            product: product.results,
-            noItems: noItems.false,
-          });
-        }
-      }).catch((error) => console.error(error));
-  }
-
   render() {
-    const { noItems, product } = this.state;
     return (
       <div>
-        <label htmlFor="busca">
-          <input
-            name="inputText"
-            data-testid="query-input"
-            type="text"
-            placeholder="Faça sua pesquisa"
-            onChange={ this.handleState }
-          />
-          <button
-            type="button"
-            data-testid="query-button"
-            onClick={ this.SearchText }
-          >
-            Buscar
-          </button>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        </label>
+        <SearchBar />
         <nav>
           <Link data-testid="shopping-cart-button" to="/shoppingcart">
             Carrinho
           </Link>
-          <p>
-            { noItems ? <Loading />
-              : product
-                .map(({ ...props }, index) => <ProductCard key={ index } { ...props } />)}
-          </p>
         </nav>
-        <CategoryFilter onClick={ this.handleState } value="categories" />
+        <ProductList categoryId="MLB5672" query="Apple" />
+        <CategoryFilter />
       </div>
     );
   }
