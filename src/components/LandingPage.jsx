@@ -33,10 +33,10 @@ class LandingPage extends React.Component {
     const { cardList } = this.state;
     return (
       <div data-testid="home-initial-message">
+        <span>Digite algum termo de pesquisa ou escolha uma categoria.</span>
         <input
           onChange={ this.onChange }
           type="text"
-          placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
           data-testid="query-input"
         />
         <button
