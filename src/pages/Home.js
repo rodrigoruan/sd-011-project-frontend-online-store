@@ -1,6 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import '../services/api';
+import PropTypes from 'prop-types';
 import CategoriesBar from '../CategoriesBar';
 import Productcard from '../components/productcard';
 
@@ -22,56 +23,51 @@ class Home extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
+    const { value } = this.state;
+    const {getProductsFromCategoryAndQuery} = this.props;
     const search = await
-    this.props.getProductsFromCategoryAndQuery('$CATEGORY_ID', this.state.value);
+    getProductsFromCategoryAndQuery('$CATEGORY_ID', value);
     this.setState({ products: search });
     console.log(search);
   }
 
-  async eventset() {
-    const { products } = this.state;
-    products.map(({ id, title, thumbnail, price }) => (
-      <Productcard
-        key={ id }
-        title={ title }
-        thumbnail={ thumbnail }
-        price={ price }
-      />));
-  }
-
   render() {
     const { products } = this.state;
+    const { value } = this.state;
+    const { getCategories } = this.props;
     return (
       <div>
         <form>
-          <label>
-            <input type="text" 
-            data-testid="query-input" 
-            value={ this.state.value } 
-            onChange={ this.handleChange } />
-          </label>
-          <input type="submit" 
-          data-testid="query-button" 
-          value="Enviar" 
-          onClick={ this.handleSubmit } />
+          <input
+            type="text"
+            data-testid="query-input"
+            value={ value }
+            onChange={ this.handleChange }
+          />
+          <input
+            type="submit"
+            data-testid="query-button"
+            value="Enviar"
+            onClick={ this.handleSubmit }
+          />
         </form>
         <div>
-          {products.map(({ id, title, thumbnail, price }) => (
-            <Productcard
-              key={ id }
-              title={ title }
-              thumbnail={ thumbnail }
-              price={ price }
-            />))}
+          {products
+            .map(({ ...props }, index) => <Productcard key={ index } { ...props } />)}
         </div>
         <div />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategoriesBar functionHome={ this.props.getCategories } />
+        <CategoriesBar functionHome={ getCategories } />
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  getProductsFromCategoryAndQuery: PropTypes.string,
+  getCategories: PropTypes.string,
+}.isRequired;
 
 export default Home;

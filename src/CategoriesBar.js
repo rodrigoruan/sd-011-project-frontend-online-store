@@ -1,5 +1,6 @@
 import React from 'react';
 import Loading from './Loading';
+import PropTypes from 'prop-types';
 
 class CategoriesBar extends React.Component {
   constructor() {
@@ -55,5 +56,10 @@ class CategoriesBar extends React.Component {
     );
   }
 }
+
+CategoriesBar.propTypes = {
+  functionHome: PropTypes.string,
+}.isRequired;
+
 
 export default CategoriesBar;
