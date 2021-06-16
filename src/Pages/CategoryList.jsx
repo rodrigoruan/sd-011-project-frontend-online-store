@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
-import * as api from './services/api';
+import * as api from '../services/api';
 
 class CategoryList extends Component {
   constructor() {
     super();
     this.state = {
-      CategoryList: [],
+      auxList: [],
     };
-    this.catchCategory = this.catchCategory.bind(this);
+  }
+
+  componentDidMount() {
+    this.catchCategory();
   }
 
   async catchCategory() {
-    await api.get;
+    const categories = await api.getCategories();
+    this.setState({
+      auxList: categories,
+    });
   }
 
   render() {
+    const { auxList } = this.state;
     return (
-      <div>
-        textInComponent
-      </div>
+      <label htmlFor="selectCategorie">
+        Escolha sua categoria:
+        <br />
+        <select id="selectCategorie">
+          {auxList.map((categorie) => (
+            <option key={ categorie.id } data-testid="category">
+              {categorie.name}
+            </option>
+          ))}
+        </select>
+      </label>
     );
   }
 }
