@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CategorieList from '../components/CategorieList';
+import CategorieNav from './CategorieNav';
 
 export default class SearchBar extends Component {
   render() {
@@ -14,7 +15,12 @@ export default class SearchBar extends Component {
             width="50px"
           />
         </Link>
-        <CategorieList />
+        <div>
+          <h1 data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h1>
+        </div>
+        <CategorieNav />
       </div>
     );
   }
