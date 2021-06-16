@@ -14,6 +14,7 @@ export default class SearchBar extends React.Component {
       products: [],
       searchInput: '',
       searched: false,
+      category: '',
     };
 
     this.fetchCategories = this.fetchCategories.bind(this);
@@ -27,9 +28,11 @@ export default class SearchBar extends React.Component {
 
   handleInputChange({ target }) {
     const { name, value } = target;
+    console.log(value)
     this.setState({
       [name]: value,
     });
+    this.fetchProductsByTerm();
   }
 
   fetchCategories() {
@@ -39,8 +42,8 @@ export default class SearchBar extends React.Component {
   }
 
   fetchProductsByTerm() {
-    const { searchInput } = this.state;
-    api.getProductsFromCategoryAndQuery('', searchInput).then((r) => this.setState({
+    const { searchInput, category } = this.state;
+    api.getProductsFromCategoryAndQuery(category, searchInput).then((r) => this.setState({
       products: r.results,
       searched: true,
     }));
@@ -56,6 +59,7 @@ export default class SearchBar extends React.Component {
     } else {
       renderedComponent = <ProductCard products={ products } />;
     }
+
     return (
       <div className="container">
         <div className="headerContainer">
@@ -88,10 +92,11 @@ export default class SearchBar extends React.Component {
                 <label htmlFor={ categorie.id }>
                   <input
                     type="radio"
-                    value={ categorie.name }
+                    value={ categorie.id }
                     data-testid="category"
                     name="category"
                     id={ categorie.id }
+                    onChange={ this.handleInputChange }
                   />
                   { categorie.name }
                 </label>
