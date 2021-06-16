@@ -7,7 +7,6 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
-    this.defineStateCategories = this.defineStateCategories.bind(this);
     this.state = {
       categories: [],
     };

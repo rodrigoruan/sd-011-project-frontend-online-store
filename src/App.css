@@ -1,11 +1,17 @@
+.home-container {
+  display: flex;
+  justify-content: space-around;
+}
+
 .categories-container {
-  color: black;
+  border: 1px solid black;
 }
 
 .categories-list {
-  color: black; 
+  color: black;
 }
 
 .categorie {
   list-style: none;
+  padding: 3px 10px;
 }
