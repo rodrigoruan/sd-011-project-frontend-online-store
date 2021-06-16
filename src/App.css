@@ -46,8 +46,8 @@
 }
 
 .main-page .search-bar {
-  align-items: baseline;
   display: flex;
+  align-items: baseline;
   justify-content: space-evenly;
   width: 100%;
 }
