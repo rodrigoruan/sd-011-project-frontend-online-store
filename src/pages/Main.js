@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import CartButton from '../components/CartButton';
 import ProductListing from '../components/ProductListing';
@@ -64,6 +65,13 @@ class Main extends Component {
           : productList.map((product, index) => (
             <div key={ index }>
               <CardCreator item={ product } />
+              <Link
+                data-testid="product-detail-link"
+                to={ { pathname: `/product-detail/${product.id}`,
+                  state: { produto: product } } }
+              >
+                Saiba Mais
+              </Link>
             </div>
           ))}
       </div>
