@@ -1,6 +1,7 @@
 import React from 'react';
 import ProductCard from './ProductCards';
 import * as api from './services/api';
+// Agora vai
 
 class ProductList extends React.Component {
   constructor() {
