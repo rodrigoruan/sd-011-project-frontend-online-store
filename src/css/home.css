@@ -2,37 +2,36 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
-  width: 100%;
   margin: 10px;
+  width: 100%;
 }
 
 .home-form-div {
+  align-items: center;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-
-  align-items: center;
 }
 
 .home-form-div button {
+  font-size: 1.4em;
+  height: 50px;
   margin: 20px;
   margin-top: 2.5em;
-  height: 50px;
-  font-size: 1.4em;
 }
 
 input {
-  margin-top: 5rem;
-  font-size: 1.5em;
   background-color: blue;
+  font-size: 1.5em;
   margin-right: 10px;
+  margin-top: 5rem;
 }
 
 footer {
-  position: absolute;
   bottom: 0;
-  width: 100%;
   height: 60px;
+  position: absolute;
+  width: 100%;
 }
 
 .navbar {
@@ -54,14 +53,14 @@ footer {
 }
 
 .list-group {
+  font-size: 1.4em;
   margin-top: 20px;
   width: 20%;
-  font-size: 1.4em;
 }
 
 .about-div {
+  align-items: center;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
-  align-items: center;
 }
