@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SearchResults } from '../components';
+import { Categories, SearchResults } from '../components';
 
 class Home extends React.Component {
   render() {
-    const { updateSearchResults, searchResults } = this.props;
+    const { categories, updateSearchResults, searchResults } = this.props;
 
     return (
       <main className="home-container">
-        <section id="categories" className="home-one-fourth" />
-
+        <Categories categories={ categories } />
         <SearchResults
           searchResults={ searchResults }
           updateSearchResults={ updateSearchResults }
@@ -18,7 +17,6 @@ class Home extends React.Component {
     );
   }
 }
-export default Home;
 
 Home.propTypes = {
   searchResults: PropTypes.shape({
@@ -27,4 +25,10 @@ Home.propTypes = {
     })),
   }).isRequired,
   updateSearchResults: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  })).isRequired,
 };
+
+export default Home;

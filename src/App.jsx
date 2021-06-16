@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Home, Cart } from './pages';
+import * as api from './services/api';
 import './App.css';
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
       searchResults: { results: [] },
+      categories: [],
     };
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
+  }
+
+  componentDidMount() {
+    this.defineStateCategories();
+  }
+
+  async defineStateCategories() {
+    try {
+      const categories = await api.getCategories();
+      this.setState({ categories });
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   updateSearchResults(searchResults) {
@@ -18,7 +33,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { searchResults } = this.state;
+    const { categories, searchResults } = this.state;
 
     return (
       <>
@@ -31,6 +46,7 @@ class App extends React.Component {
               render={ () => (<Home
                 searchResults={ searchResults }
                 updateSearchResults={ this.updateSearchResults }
+                categories={ categories }
               />) }
             />
             <Route path="/cart" component={ Cart } />

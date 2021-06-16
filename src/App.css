@@ -57,3 +57,17 @@ footer {
   justify-content: center;
   padding: 40px;
 }
+
+.categories-container {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.categories-list {
+  color: black;
+}
+
+.category {
+  list-style: none;
+  padding: 3px 10px;
+}
