@@ -9,12 +9,12 @@ class Categories extends Component {
     this.state = {
       categories: null,
     };
-    // this.getCategories = this.getCategories.bind(this);
   }
 
   componentDidMount() {
     getCategories()
       .then((json) => this.setState({ categories: json }));
+    console.log('categories: ', this.state.categories);
   }
 
   render() {
@@ -25,7 +25,7 @@ class Categories extends Component {
         { categories.map((produto) => (
           <Link to="/categories/:id" key={ produto.id } className={ style.link }>
             <ul className={ style.list }>
-              <li data-testid="category">{produto.name}</li>
+              <li data-testid="category" id={ produto.id }>{produto.name}</li>
             </ul>
           </Link>
         ))}

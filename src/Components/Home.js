@@ -19,6 +19,7 @@ class Home extends React.Component {
     const { value } = document.querySelector('input');
     const id = getCategories()
       .then((json) => json.id);
+    console.log(id);
     getProductsFromCategoryAndQuery(id, value)
       .then((json) => this.setState({
         products: json.results,
