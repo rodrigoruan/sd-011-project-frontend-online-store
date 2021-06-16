@@ -12,12 +12,15 @@ class ShoppingCart extends Component {
   render() {
     const { products } = this.state;
     return (
-
       <div>
         <p>ShoppingCart</p>
-        {!products
-          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-          : <p>carrinho com alguma coisa</p> }
+        {!products ? (
+          <p data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </p>
+        ) : (
+          <p>carrinho com alguma coisa</p>
+        )}
         <Link to="/">Voltar</Link>
       </div>
     );
