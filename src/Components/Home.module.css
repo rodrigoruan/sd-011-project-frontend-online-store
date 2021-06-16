@@ -1,0 +1,10 @@
+.inputContent {
+  display: flex;
+}
+
+.inputContent label input {
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  width: 300px;
+}
