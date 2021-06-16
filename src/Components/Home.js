@@ -10,7 +10,7 @@ class Home extends React.Component {
 
     this.state = {
       products: null,
-      // search: false,
+      search: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
@@ -20,15 +20,14 @@ class Home extends React.Component {
     const id = getCategories()
       .then((json) => json.id);
     getProductsFromCategoryAndQuery(id, value)
-      .then((json) => this.setState({ products: json.results }));
-    
-    this.setState({  });
-    // console.log(this.state.products);
-
+      .then((json) => this.setState({
+        products: json.results,
+        search: true,
+      }));
   }
 
   render() {
-    const { products } = this.state;
+    const { products, search } = this.state;
     return (
       <div className={ style.inputContent }>
         <label htmlFor="site-search">
@@ -59,6 +58,7 @@ class Home extends React.Component {
             <h2>{product.title}</h2>
             <p>{product.price}</p>
           </div>))}
+        {search && products.length === 0 && <p>Nenhum produto encontrado</p>}
       </div>
     );
   }
