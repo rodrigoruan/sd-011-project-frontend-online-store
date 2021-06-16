@@ -21,7 +21,7 @@ class CategoryList extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <div>
+      <div className="categories">
         <label htmlFor="list">
           Categorias
           <ul name="list">
