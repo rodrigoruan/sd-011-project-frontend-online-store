@@ -13,7 +13,7 @@ export default class ProductsList extends React.Component {
             ? (
               products.map(({ id, thumbnail, title, price }) => (
                 <ProductCard
-                  key={ id }
+                  id={ id }
                   thumbnail={ thumbnail }
                   title={ title }
                   price={ price }
