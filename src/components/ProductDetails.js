@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class ProductDetails extends Component {
@@ -6,25 +7,15 @@ export default class ProductDetails extends Component {
     super();
 
     this.state = {
-      product: [],
       itemsCart: [],
     };
-    this.addItemCart = this.addItemCart.bind(this);
-  }
-
-  addItemCart({ target }) {
-    const { product, itemsCart } = this.state;
-    const { value } = target;
-    const productForCart = product.find((item) => item.id === value);
-
-    this.setState({
-      itemsCart: [...itemsCart, productForCart],
-    });
   }
 
   render() {
+    const { itemsCart } = this.state;
     const { location: { state: { detail } } } = this.props;
-    const { title, thumbnail, price, attributes, installments } = detail;
+    const { id, title, thumbnail, price, attributes, installments } = detail;
+    console.log(this.props);
 
     return (
       <div>
@@ -57,6 +48,27 @@ export default class ProductDetails extends Component {
             ))}
           </p>
         </div>
+        <Link
+          data-testid="shopping-cart-button"
+          to={ {
+            pathname: '/shoppingCart',
+            state: itemsCart,
+          } }
+        >
+          Carrinho(
+          {itemsCart.length}
+          )
+        </Link>
+        <button
+          data-testid="product-detail-add-to-cart"
+          value={ id }
+          onClick={ () => this.setState(() => ({
+            itemsCart: [...itemsCart, detail],
+          })) }
+          type="button"
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
