@@ -5,6 +5,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Searchfield from './Searchfield';
 import Category from './Category';
+import * as api from '../services/api';
 
 class Home extends Component {
   constructor(props) {
@@ -12,9 +13,11 @@ class Home extends Component {
     this.state = {
       search: '',
       products: [],
+      categoryId: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.getProductsByCategory = this.getProductsByCategory.bind(this);
   }
 
   onChange({ target: { value } }) {
@@ -24,13 +27,19 @@ class Home extends Component {
   }
 
   async onClick() {
-    const { search } = this.state;
-    const products = await getProductsFromCategoryAndQuery('$categoryId', `$${search}`);
+    const { search, categoryId } = this.state;
+    const products = await getProductsFromCategoryAndQuery(categoryId, search);
     const { results } = products;
     this.setState({
       products: results,
       search: '',
     });
+  }
+
+  async getProductsByCategory(categoryId) {
+    const data = await api.getProductsFromCategoryAndQuery(categoryId, '');
+    console.log(data);
+    this.setState({ products: data.results, categoryId });
   }
 
   render() {
@@ -64,8 +73,8 @@ class Home extends Component {
             <FaShoppingCart size={ 30 } />
           </Link>
         </div>
+        <Category byCategory={ this.getProductsByCategory } />
         <Searchfield products={ products } />
-        <Category />
       </div>
     );
   }
