@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import * as api from './services/api';
-import ProductCard from './ProductCard';
+import * as api from '../services/api';
+import { ProductCard } from './index';
 
 class BuscaProduto extends Component {
   constructor() {
@@ -9,6 +9,7 @@ class BuscaProduto extends Component {
     this.state = {
       inputData: '',
       productsData: [],
+      load: false,
     };
 
     this.getInputData = this.getInputData.bind(this);
