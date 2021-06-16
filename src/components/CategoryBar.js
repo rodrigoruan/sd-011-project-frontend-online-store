@@ -6,12 +6,22 @@ export default class CategoryBar extends Component {
     super();
     this.state = {
       categoriesList: [],
+      selectedCategory: '',
     };
     this.getCategoryList = this.getCategoryList.bind(this);
+    this.handleSelectedCategory = this.handleSelectedCategory.bind(this);
   }
 
   componentDidMount() {
     this.getCategoryList();
+  }
+
+  handleSelectedCategory({ target }) {
+    const { name, value } = target;
+    console.log(target);
+    this.setState({
+      [name]: value,
+    });
   }
 
   async getCategoryList() {
@@ -28,8 +38,17 @@ export default class CategoryBar extends Component {
       <div className="categories-container">
         <ul>
           {categoriesList.map((category) => (
-            <li key={ category.id } data-testid="category">
-              {category.name}
+            <li key={ category.id }>
+              <label htmlFor={ category.id }>
+                {category.name}
+                <input
+                  type="radio"
+                  id={ category.id }
+                  value={ category.name }
+                  name="selectedCategory"
+                  onClick={ this.handleSelectedCategory }
+                />
+              </label>
             </li>
           ))}
         </ul>
