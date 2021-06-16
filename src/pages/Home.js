@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, Link, Redirect } from 'react-router-dom';
+import Categories from './Categories';
 
 class StartingPage extends Component {
   constructor(props) {
@@ -35,6 +36,9 @@ class StartingPage extends Component {
 
     return (
       <main className="home-div">
+                <aside>
+          <Categories />
+        </aside>
         <form className="home-form-div" onSubmit={this.handleSubmit}>
           <fieldset>
             <input

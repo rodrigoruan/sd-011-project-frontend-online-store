@@ -42,7 +42,7 @@ export default class App extends Component {
                 <SearchList
                   {...props}
                   sendSubmit={this.getSearchQuery}
-                  product={this.state.searchQuery}
+                  product={ this.state.searchQuery }
                 />
               )}
               exact
@@ -51,7 +51,7 @@ export default class App extends Component {
               exact path="/cart"
               render={(props) => (
                 <ShoppingCart
-                  {...props}
+                  { ...props }
                 />
               )}
             />

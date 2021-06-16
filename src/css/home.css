@@ -64,3 +64,13 @@ footer {
   flex-flow: column nowrap;
   justify-content: center;
 }
+
+.categories {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  justify-content: left;
+  justify-items: left;
+  margin-left: 0px;
+  
+}
