@@ -11,14 +11,22 @@ class LandingPage extends React.Component {
     this.state = {
       cardList: [],
       query: '',
+      // selectedCategory: '',
     };
     this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onClickCategory = this.onClickCategory.bind(this);
   }
 
-  onClick() {
+  onClickCategory(event) {
+    const { target: { id } } = event;
+    // this.setState(() => ({ selectedCategory: id }));
+    this.onClick(id);
+  }
+
+  onClick(id = '') {
     const { query } = this.state;
-    fetchApi.getProductsFromCategoryAndQuery('', query).then((produtos) => this.setState({
+    fetchApi.getProductsFromCategoryAndQuery(id, query).then((produtos) => this.setState({
       cardList: produtos,
     }));
   }
@@ -50,7 +58,7 @@ class LandingPage extends React.Component {
           <img src={ carrinho } alt="carrinho" />
         </Link>
         <CardList list={ cardList.results } />
-        <Categories />
+        <Categories onClick={ this.onClickCategory } />
       </div>
     );
   }
