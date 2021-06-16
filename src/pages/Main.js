@@ -28,7 +28,7 @@ export default class Main extends React.Component {
   SearchText() {
     const { query, id, product, noItems } = this.state;
     getProductsFromCategoryAndQuery(query, id).then(({ results }) => {
-      if (results.lenght === 0) {
+      if (results === null) {
         this.setState({
           product: true,
         });
@@ -69,7 +69,8 @@ export default class Main extends React.Component {
           </Link>
           <p>
             { noItems ? <Loading />
-              : product.map(({ ...props }, index) => <ProductCard key={ index } { ...props } />)}
+              : product
+                .map(({ ...props }, index) => <ProductCard key={ index } { ...props } />)}
           </p>
         </nav>
       </div>
