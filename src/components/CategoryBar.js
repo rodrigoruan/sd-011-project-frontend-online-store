@@ -9,18 +9,10 @@ class CategoryBar extends Component {
       categoriesList: [],
     };
     this.getCategoryList = this.getCategoryList.bind(this);
-    this.handleSelectedCategory = this.handleSelectedCategory.bind(this);
   }
 
   componentDidMount() {
     this.getCategoryList();
-  }
-
-  handleSelectedCategory({ target }) {
-    const { name, value } = target;
-    this.setState({
-      [name]: value,
-    });
   }
 
   async getCategoryList() {
