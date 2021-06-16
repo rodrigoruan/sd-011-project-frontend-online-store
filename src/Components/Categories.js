@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
 
+
 class Categories extends Component {
   constructor() {
     super();

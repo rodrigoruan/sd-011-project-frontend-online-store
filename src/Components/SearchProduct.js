@@ -6,10 +6,11 @@ class SearchProduct extends Component {
   constructor(props) {
     super(props);
 
-    const { searchBar } = this.props;
+    const { searchBar, categoryId } = this.props;
 
     this.state = {
       searchBar,
+      categoryId,
       products: [],
     };
   }
@@ -19,8 +20,8 @@ class SearchProduct extends Component {
   }
 
   async searchProduct() {
-    const { searchBar } = this.state;
-    const response = await getProductsFromCategoryAndQuery('', searchBar);
+    const { searchBar, categoryId } = this.state;
+    const response = await getProductsFromCategoryAndQuery(categoryId, searchBar);
     const { results } = response;
 
     this.setState({
