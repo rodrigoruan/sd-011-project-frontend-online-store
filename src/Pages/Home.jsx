@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CategoryList from './CategoryList';
 import * as api from '../services/api';
 import Products from './Products';
-
+// comentario
 class Home extends Component {
   constructor() {
     super();
