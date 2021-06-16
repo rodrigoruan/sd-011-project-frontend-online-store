@@ -33,12 +33,12 @@ export default class App extends Component {
         <Header />
         <Switch>
           {/* prettier-ignore */}
-          <Route exact path="/" render={(props) => <Home {...props} product={this.state.searchQuery} searchQuery = {this.state.searchQuery} sendSubmit={this.getSearchQuery}/>}  />
+          <Route exact path="/" render={(props) => <Home {...props}  searchQuery = {this.state.searchQuery} sendSubmit={this.getSearchQuery}/>}  />
           <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
           <Route exact path="/about" component={About} />
           <Route component={NotFound} />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </>
     );
   }

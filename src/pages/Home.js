@@ -9,8 +9,8 @@ export default class Home extends Component {
 
     this.state = {
       loading: true,
-      inputText: '',
-      products: '',
+      inputText: [],
+      products: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -22,15 +22,17 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    const { product, searchQuery } = this.props;
-    if (product) {
+    const { searchQuery } = this.props;
+    if (searchQuery) {
       this.getQuery(searchQuery);
     }
   }
 
   componentDidUpdate() {
-    const { product, searchQuery } = this.props;
-    this.getQuery(searchQuery);
+    const { searchQuery } = this.props;
+    if (searchQuery) {
+      this.getQuery(searchQuery);
+    }
   }
 
   handleInput = ({ target }) => {
