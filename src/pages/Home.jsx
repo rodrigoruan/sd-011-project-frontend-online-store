@@ -12,6 +12,7 @@ export default class Home extends Component {
       categories: [],
       category: '',
       isNotFound: false,
+      isUpdated: false,
       product: '',
       productsArray: [],
     };
@@ -24,10 +25,18 @@ export default class Home extends Component {
     this.requestCategories();
   }
 
+  componentDidUpdate() {
+    const { isUpdated } = this.state;
+    if (isUpdated) {
+      this.requestProducts();
+    }
+  }
+
   onChangeHandler({ target }) {
     const { name, value } = target;
     this.setState({
       [name]: value,
+      isUpdated: true,
     });
   }
 
@@ -46,12 +55,14 @@ export default class Home extends Component {
       this.setState({
         isNotFound: true,
         productsArray: [],
+        isUpdated: false,
       });
       return;
     }
     this.setState({
       productsArray,
       isNotFound: false,
+      isUpdated: false,
     });
   }
 
@@ -71,7 +82,10 @@ export default class Home extends Component {
           product={ product }
           requestProducts={ this.requestProducts }
         />
-        <SideBar categories={ categories } onChangeHandler={ this.onChangeHandler } />
+        <SideBar
+          categories={ categories }
+          onChangeHandler={ this.onChangeHandler }
+        />
         { productsArray.map((element) => (
           <Product
             key={ element.id }
