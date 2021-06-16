@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Searchfield from './Searchfield';
-
-import { FaShoppingCart } from 'react-icons/fa';
 import Category from './Category';
 
 class Home extends Component {
