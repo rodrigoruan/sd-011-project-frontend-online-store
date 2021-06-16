@@ -5,12 +5,39 @@ import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shopCart: [],
+    };
+    this.handleAddToShopCart = this.handleAddToShopCart.bind(this);
+  }
+
+  handleAddToShopCart(title, thumbnail, price) {
+    this.setState((state) => ({
+      shopCart: [...state.shopCart, { title, thumbnail, price, amount: 0 }],
+    }));
+  }
+
   render() {
+    const { shopCart } = this.state;
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ Home } />
-          <Route path="/ShoppingCart" component={ ShoppingCart } />
+          <Route
+            exact
+            path="/ShoppingCart"
+            render={ (props) => <ShoppingCart { ...props } shopCart={ shopCart } /> }
+          />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (
+              <Home
+                { ...props }
+                handleAddToShopCart={ this.handleAddToShopCart }
+              />) }
+          />
         </Switch>
       </BrowserRouter>
 
