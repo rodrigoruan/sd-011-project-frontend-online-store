@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import ListCards from './ListCards';
 import Filtros from './Filtros';
 import Input from './Input';
-import ListCards from './';
 
 export default class Home extends Component {
   constructor() {
