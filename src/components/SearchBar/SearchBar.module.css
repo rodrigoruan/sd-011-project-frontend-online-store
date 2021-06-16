@@ -4,11 +4,76 @@
   flex-direction: column;
 }
 
-.container input {
-  border-radius: 10px;
+.container input[type="text"] {
+  border-radius: 4px;
   box-shadow: 1px 1px 10px black;
-  height: 20px;
+  height: 40px;
   margin: 10px;
   outline: none;
-  width: 70vw;
+  width: 30vw;
+}
+
+.headerContainer {
+  width: 100%;
+  background-color: #131920;
+  display: flex;
+  padding: 0 30px;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+p {
+  color: white;
+  font-size: 25px;
+}
+
+.headerLabel {
+  position: relative;
+}
+
+#lupaIcon {
+  position: absolute;
+  /* background-color: yellow; */
+  height: 40px;
+  color: black;
+  top: 23px;
+  right: 20px;
+}
+
+.heroContent {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 89.5vh;
+}
+
+aside {
+  padding: 10px;
+  /* border: 1px solid black; */
+  background-color: rgba(240, 236, 236, 0.555);
+  -webkit-box-shadow: 11px 3px 16px -4px rgba(210,210,210,0.56); 
+  box-shadow: 11px 3px 16px -4px rgba(210,210,210,0.56);
+  width: 15vw;
+  overflow: auto;
+}
+
+.mainContent {
+  text-align: center;
+  /* border: 1px solid green; */
+  width: 85vw;
+}
+
+.categoryItem {
+  /* border: 1px solid green; */
+  padding: 7px;
+}
+
+.categoryItem label {
+  cursor: pointer;
+}
+
+.categoryItem input {
+  cursor: pointer;
 }
