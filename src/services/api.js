@@ -7,13 +7,22 @@ export async function getCategories() {
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
   if (categoryId && !query) {
-    return fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`)
-      .then((products) => products.json());
+    return fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`, {
+      method: 'GET',
+    })
+      .then((products) => products.json())
+      .catch((error) => console.log(`Erro: ${error}`));
   } if (!categoryId && query) {
-    return fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${query}`)
-      .then((products) => products.json());
+    return fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${query}`, {
+      method: 'GET',
+    })
+      .then((products) => products.json())
+      .catch((error) => console.log(`Erro: ${error}`));
   } if (categoryId && query) {
-    return fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}_ID&q=${query}`)
-      .then((products) => products.json());
+    return fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}_ID&q=${query}`, {
+      method: 'GET',
+    })
+      .then((products) => products.json())
+      .catch((error) => console.log(`Erro: ${error}`));
   }
 }
