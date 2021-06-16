@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import imageTwo from '../imgs/Carrinho.png';
 import ProductSearch from '../components/ProductSearch';
 import { getCategories } from '../services/api';
 
@@ -44,6 +46,15 @@ class Home extends Component {
     return (
       <>
         <ProductSearch />
+        <Link to="/ShoppingCart">
+          <img
+            width="30px"
+            src={ imageTwo }
+            alt="imagem do carrinho"
+          />
+        </Link>
+        <main data-testid="shopping-cart-button" />
+        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
         {loading ? 'Loading...' : this.renderCategories(categories)}
       </>
     );
