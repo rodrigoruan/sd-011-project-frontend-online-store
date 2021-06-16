@@ -13,6 +13,7 @@ class Home extends Component {
     this.state = {
       search: '',
       products: [],
+      categoryId: '',
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -26,8 +27,8 @@ class Home extends Component {
   }
 
   async onClick() {
-    const { search } = this.state;
-    const products = await getProductsFromCategoryAndQuery('$categoryId', `$${search}`);
+    const { search, categoryId } = this.state;
+    const products = await getProductsFromCategoryAndQuery(categoryId, search);
     const { results } = products;
     this.setState({
       products: results,
@@ -36,9 +37,9 @@ class Home extends Component {
   }
 
   async getProductsByCategory(categoryId) {
-    const data = await api.getProductsFromCategory(categoryId);
+    const data = await api.getProductsFromCategoryAndQuery(categoryId, '');
     console.log(data);
-    this.setState({ products: data.results });
+    this.setState({ products: data.results, categoryId });
   }
 
   render() {
