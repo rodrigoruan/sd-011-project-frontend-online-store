@@ -7,10 +7,13 @@ export default class ListCards extends Component {
     const { products } = this.props;
     return (
       <div>
-        { products.map((product, index) => (<Card
-          { ...product }
-          key={ index }
-        />))}
+        { products.map((product, index) => (
+          <div key={ index }>
+            <Card
+              { ...product }
+              key={ index }
+            />
+          </div>))}
       </div>
     );
   }
