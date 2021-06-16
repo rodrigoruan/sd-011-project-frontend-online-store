@@ -48,7 +48,7 @@ class ShoppingCart extends Component {
 export default ShoppingCart;
 
 ShoppingCart.propTypes = {
-  shopCart: PropTypes.arrayOf(PropTypes.objectWithShape({
+  shopCart: PropTypes.arrayOf(PropTypes.shape({
     amount: PropTypes.number,
     price: PropTypes.number,
     thumbnail: PropTypes.string,
