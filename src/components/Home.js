@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import cart from '../images/cart.png';
 import Searchfield from './Searchfield';
-import Filteringbycategory from './Filteringbycategory';
+
+import { FaShoppingCart } from 'react-icons/fa';
+import Category from './Category';
 
 class Home extends Component {
   constructor(props) {
@@ -59,17 +60,12 @@ class Home extends Component {
         </form>
         <br />
         <div>
-          <Link to="/shopping-cart">
-            <img
-              src={ cart }
-              alt="shopping-cart"
-              data-testid="shopping-cart-button"
-              height="40px"
-            />
+          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+            <FaShoppingCart size={ 30 } />
           </Link>
         </div>
         <Searchfield products={ products } />
-        <Filteringbycategory />
+        <Category />
       </div>
     );
   }
