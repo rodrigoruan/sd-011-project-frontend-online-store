@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import imageTwo from '../imgs/Carrinho.png';
-import ProductSearch from '../components/ProductSearch';
+import ProductSearch from '../components/ProductSearch/ProductSearch';
 import ProductsList from '../components/ProductsList/ProductsList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -74,6 +75,7 @@ class Home extends Component {
 
   render() {
     const { loading, categories, products, searchInput } = this.state;
+    const { handleAddToShopCart } = this.props;
     return (
       <>
         <ProductSearch
@@ -90,12 +92,14 @@ class Home extends Component {
         </Link>
         <main data-testid="shopping-cart-button" />
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-
         {loading ? 'Loading...' : this.renderCategories(categories)}
-
-        <ProductsList products={ products } />
+        <ProductsList products={ products } handleAddToShopCart={ handleAddToShopCart } />
       </>
     );
   }
 }
 export default Home;
+
+Home.propTypes = {
+  handleAddToShopCart: PropTypes.func.isRequired,
+};
