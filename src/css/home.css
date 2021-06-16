@@ -1,0 +1,66 @@
+.home-div {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  margin: 10px;
+  width: 100%;
+}
+
+.home-form-div {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+.home-form-div button {
+  font-size: 1.4em;
+  height: 50px;
+  margin: 20px;
+  margin-top: 2.5em;
+}
+
+input {
+  background-color: blue;
+  font-size: 1.5em;
+  margin-right: 10px;
+  margin-top: 5rem;
+}
+
+footer {
+  bottom: 0;
+  height: 60px;
+  position: absolute;
+  width: 100%;
+}
+
+.navbar {
+  font-size: 1.3em;
+}
+
+.navbar-brand {
+  margin-left: 2%;
+}
+
+.search-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.about-page {
+  margin-top: 100px;
+}
+
+.list-group {
+  font-size: 1.4em;
+  margin-top: 20px;
+  width: 20%;
+}
+
+.about-div {
+  align-items: center;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
