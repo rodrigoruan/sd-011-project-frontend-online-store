@@ -37,6 +37,9 @@ class Home extends Component {
     return (
       <div>
         <form>
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
           <label htmlFor="search-bar">
             <input
               type="text"
@@ -54,16 +57,14 @@ class Home extends Component {
             Buscar
           </button>
         </form>
-        <h1 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h1>
+        <br />
         <div>
           <Link to="/shopping-cart">
             <img
               src={ cart }
               alt="shopping-cart"
               data-testid="shopping-cart-button"
-              height="80px"
+              height="40px"
             />
           </Link>
         </div>
