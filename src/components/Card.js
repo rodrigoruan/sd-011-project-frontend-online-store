@@ -3,25 +3,50 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class Card extends Component {
+  constructor() {
+    super();
+    this.state = {
+      counter: 1,
+    };
+  }
+
+  handleClick = () => {
+    this.setState((previous) => ({
+      counter: previous.counter + 1,
+    }));
+    const { counter } = this.state;
+    const { title, price, thumbnail, id, attributes } = this.props;
+    const object = { counter, price, thumbnail, id, attributes, title };
+    const json = JSON.stringify(object);
+    localStorage.setItem(title, json);
+  }
+
   render() {
     const { title, price, thumbnail, id, attributes } = this.props;
     return (
-      <Link
-        data-testid="product-detail-link"
-        to={ {
-          pathname: `/produtos/${id}`,
-          state: { title, price, thumbnail, id, attributes },
-        } }
-      >
-        <div data-testid="product">
+      <div data-testid="product">
+        <Link
+          data-testid="product-detail-link"
+          to={ {
+            pathname: `/produtos/${id}`,
+            state: { title, price, thumbnail, id, attributes },
+          } }
+        >
           <p>{title}</p>
           <img src={ thumbnail } alt={ title } />
           <p>
             R$
             {price}
           </p>
-        </div>
-      </Link>
+        </Link>
+        <button
+          data-testid="product-add-to-cart"
+          onClick={ this.handleClick }
+          type="button"
+        >
+          Adicionar ao Carrinho
+        </button>
+      </div>
     );
   }
 }
