@@ -1,0 +1,73 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerInput {
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px black;
+  height: 40px;
+  margin: 10px;
+  outline: none;
+  width: 30vw;
+}
+
+.headerContainer {
+  align-items: center;
+  background-color: #131920;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  width: 100%;
+
+}
+
+p {
+  color: white;
+  font-size: 25px;
+}
+
+.headerLabel {
+  position: relative;
+}
+
+.lupaIcon {
+  color: black;
+  height: 40px;
+  position: absolute;
+  right: 20px;
+  top: 23px;
+}
+
+.heroContent {
+  display: flex;
+  height: 89.5vh;
+  justify-content: space-between;
+  width: 100%;
+}
+
+aside {
+  background-color: rgba(240, 236, 236, 0.555);
+  box-shadow: 11px 3px 16px -4px rgba(210, 210, 210, 0.56);
+  overflow: auto;
+  padding: 10px;
+  width: 15vw;
+}
+
+.mainContent {
+  text-align: center;
+  width: 85vw;
+}
+
+.categoryItem {
+  padding: 7px;
+}
+
+.categoryItem label {
+  cursor: pointer;
+}
+
+.categoryItem i {
+  cursor: pointer;
+}
