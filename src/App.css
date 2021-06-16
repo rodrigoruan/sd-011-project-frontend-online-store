@@ -1,23 +1,23 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-html , body , #root {
+html, body, body > div {
   min-height: 100vh;
 }
 
-#root {
+body > div {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
 header {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
   padding: 40px;
 }
 
@@ -52,8 +52,8 @@ main {
 }
 
 footer {
-  padding: 40px;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding: 40px;
 }
