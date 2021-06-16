@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { ProductCard } from '.';
+import ProductCard from './ProductCard';
 import * as api from '../services/api';
 
 export default class SearchResults extends React.Component {
@@ -65,9 +66,22 @@ export default class SearchResults extends React.Component {
         </header>
 
         <ol className="search-section__results">
-          {searchResults.results.map((product => <ProductCard key={ product.id } product={ product } />))}
+          {searchResults.results.map(((product) => (<ProductCard
+            key={ product.id }
+            product={ product }
+          />)
+          ))}
         </ol>
       </section>
     );
   }
 }
+
+SearchResults.propTypes = {
+  searchResults: PropTypes.shape({
+    results: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })),
+  }).isRequired,
+  updateSearchResults: PropTypes.func.isRequired,
+};

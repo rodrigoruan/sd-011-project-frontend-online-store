@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 export default class ProductCard extends React.Component {
@@ -7,7 +8,7 @@ export default class ProductCard extends React.Component {
 
     return (
       <li data-testid="product">
-        <h1>{ title} </h1>
+        <h1>{ title }</h1>
         <picture>
           <img src={ thumbnail } alt={ title } />
         </picture>
@@ -16,3 +17,12 @@ export default class ProductCard extends React.Component {
     );
   }
 }
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }).isRequired,
+};

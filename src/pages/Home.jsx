@@ -1,6 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { SearchResults } from '../components';
-import queryMock from '../__mocks__/query';
 
 class Home extends React.Component {
   render() {
@@ -8,13 +8,23 @@ class Home extends React.Component {
 
     return (
       <main className="home-container">
-        <section id="categories" className="home-one-fourth">
+        <section id="categories" className="home-one-fourth" />
 
-        </section>
-
-        <SearchResults searchResults={ searchResults } updateSearchResults={ updateSearchResults } />
+        <SearchResults
+          searchResults={ searchResults }
+          updateSearchResults={ updateSearchResults }
+        />
       </main>
     );
   }
 }
 export default Home;
+
+Home.propTypes = {
+  searchResults: PropTypes.shape({
+    results: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })),
+  }).isRequired,
+  updateSearchResults: PropTypes.func.isRequired,
+};
