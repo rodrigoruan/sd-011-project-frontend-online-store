@@ -18,6 +18,7 @@ class StartingPage extends Component {
   handleKeyPress = (event) => {};
 
   handleInput = ({ target }) => {
+    console.log('teste');
     this.setState({ inputText: target.value });
   };
 
@@ -36,7 +37,7 @@ class StartingPage extends Component {
 
     return (
       <main className="home-div">
-                <aside>
+        <aside>
           <Categories />
         </aside>
         <form className="home-form-div" onSubmit={this.handleSubmit}>
