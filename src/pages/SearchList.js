@@ -8,14 +8,12 @@ export default class SearchList extends Component {
     super(props);
 
     this.state = {
-      products: '',
+      products: [],
     };
     this.showList = this.showList.bind(this);
   }
 
-  componentDidUpdate() {
-    // this.setState({ products: this.props.products, loading: false });
-  }
+  componentDidUpdate() {}
 
   showList = () => {
     if (this.props.products) {
@@ -27,10 +25,11 @@ export default class SearchList extends Component {
   };
 
   render() {
-    if (!this.state.products) {
-      return <div className="search-list">{this.showList()}</div>;
-    } else {
+    const { products } = this.state;
+    if (!products) {
       return <div>Loading</div>;
+    } else {
+      return <div className="search-list">{this.showList()}</div>;
     }
   }
 }
