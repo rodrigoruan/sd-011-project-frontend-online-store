@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export default class ShoppingCart extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
-    )
+      <ol>
+        <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
+      </ol>
+    );
   }
 }
