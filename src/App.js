@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { getCategories } from './services/api';
+// import { Link } from 'react-router-dom';
+import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
 
 export class App extends Component {
   constructor() {
@@ -14,6 +14,8 @@ export class App extends Component {
   componentDidMount() {
     getCategories()
       .then((json) => this.setState({ categories: json }));
+    getProductsFromCategoryAndQuery()
+      .then((json) => console.log(json));
   }
 
   render() {
