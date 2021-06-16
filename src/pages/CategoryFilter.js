@@ -21,6 +21,7 @@ export default class CategoryFilter extends Component {
 
   render() {
     const { categories } = this.state;
+    if (!categories) return <p>loading...</p>;
     return (
       <ul>
         {
