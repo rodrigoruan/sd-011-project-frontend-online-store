@@ -14,12 +14,14 @@ export default class Home extends Component {
       searchProducts: [],
       searchCategory: [],
       loading: true,
+      cartProducts: [],
     };
     this.getProducts = this.getProducts.bind(this);
     this.getProductById = this.getProductById.bind(this);
     this.getValue = this.getValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getProductsFromCategory = this.getProductsFromCategory.bind(this);
+    this.addCart = this.addCart.bind(this);
   }
 
   componentDidMount() {
@@ -60,8 +62,20 @@ export default class Home extends Component {
     return products.results;
   }
 
+  addCart(product) {
+    this.setState((old) => ({
+      cartProducts: [...old.cartProducts, product],
+    }));
+  }
+
   render() {
-    const { categories, searchProducts, searchCategory, loading } = this.state;
+    const {
+      categories,
+      searchProducts,
+      searchCategory,
+      loading,
+      cartProducts,
+    } = this.state;
 
     return (
       <div>
@@ -83,7 +97,12 @@ export default class Home extends Component {
             Search
           </button>
         </label>
-        <Link data-testid="shopping-cart-button" to="/shopcart">Carrinho</Link>
+        <Link
+          data-testid="shopping-cart-button"
+          to={ { pathname: '/shopcart', state: cartProducts } }
+        >
+          Carrinho
+        </Link>
         {categories.map((eachCategory) => (
           <RadialButton
             category={ eachCategory }
@@ -97,6 +116,7 @@ export default class Home extends Component {
             data-testid="product"
             key={ eachItem.id }
             listProduct={ eachItem }
+            onClick={ this.addCart }
           />
         ))}
         {!loading ? searchCategory.map((eachCategoryItem) => (
@@ -104,6 +124,7 @@ export default class Home extends Component {
             data-testid=""
             key={ eachCategoryItem.id }
             listProduct={ eachCategoryItem }
+            onClick={ this.addCart }
           />
         )) : (
           <h1>Loading</h1>

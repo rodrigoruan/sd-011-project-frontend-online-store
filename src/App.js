@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/shopcart" component={ Shopcart } />
+          <Route path="/shopcart" render={ (params) => <Shopcart { ...params } /> } />
           <Route
             path="/product"
             render={ (props) => (
