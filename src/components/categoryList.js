@@ -14,16 +14,10 @@ class CategoryList extends Component {
   }
 }
 
-CategoryList.defaultProps = {
-  category: [],
-  name: '',
-  id: '',
-};
-
 CategoryList.propTypes = {
   category: propTypes.objectOf(propTypes.string),
   name: propTypes.string,
   id: propTypes.string,
-};
+}.isRequired;
 
 export default CategoryList;
