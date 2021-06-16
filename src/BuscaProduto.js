@@ -28,14 +28,20 @@ class BuscaProduto extends Component {
       dataText,
     );
 
-    this.setState({ productsData: apiData.results });
+    this.setState({
+      inputData: '',
+      productsData: apiData.results });
   }
 
   render() {
-    const { productsData } = this.state;
+    const { productsData, inputData } = this.state;
     return (
       <div>
-        <input data-testid="query-input" onChange={ this.getInputData } />
+        <input
+          data-testid="query-input"
+          value={ inputData }
+          onChange={ this.getInputData }
+        />
         <button type="button" data-testid="query-button" onClick={ this.getApiData }>
           Buscar
         </button>
