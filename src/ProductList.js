@@ -1,7 +1,6 @@
 import React from 'react';
 import ProductCard from './ProductCards';
 import * as api from './services/api';
-// Agora vai
 
 class ProductList extends React.Component {
   constructor() {
@@ -23,7 +22,8 @@ class ProductList extends React.Component {
 
   async filterElements() {
     const { filtrar } = this.state;
-    const elementsList = await api.getProductsFromCategoryAndQuery('', filtrar);
+    const { selectedCategory } = this.props;
+    const elementsList = await api.getProductsFromCategoryAndQuery(selectedCategory, filtrar);
     this.setState({
       produtosFiltrados: elementsList.results,
     });
