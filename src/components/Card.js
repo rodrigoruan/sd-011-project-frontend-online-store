@@ -1,38 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Cart from './Cart';
 
 class Card extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       product: props.product,
-      loading: true,
-      cartList: [],
     };
     this.handlerSubmit = this.handlerSubmit.bind(this);
   }
 
   handlerSubmit() {
-    const { product, cartList } = this.state;
-    const { title, price, thumbnail } = product;
-    const cartProduct = (
-      <li>
-        <p>{ title }</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
-      </li>
-    );
-    this.setState({
-      loading: false,
-      cartList: [...cartList, cartProduct],
-    });
+    const { product } = this.state;
+    const { title, thumbnail, price, id } = product;
+    window.localStorage.setItem(id, [title, thumbnail, price]);
   }
 
   render() {
-    const { product, loading } = this.state;
-    // console.log(product);
+    const { product } = this.state;
     const { title, thumbnail, price } = product;
     return (
       <div data-testid="product">
@@ -54,7 +40,6 @@ class Card extends React.Component {
         >
           Adicionar ao Carrinho
         </button>
-        {loading ? (<span>oi</span>) : (<Cart addCart={ product } />)}
       </div>
     );
   }
