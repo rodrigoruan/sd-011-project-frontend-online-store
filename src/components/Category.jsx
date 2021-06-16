@@ -7,8 +7,10 @@ class Category extends Component {
 
     this.state = {
       categories: [],
+      // productsByCategory: [],
     };
     this.getCategories = this.getCategories.bind(this);
+    // this.getProductsByCategory = this.getProductsByCategory.bind(this);
   }
 
   componentDidMount() {
@@ -21,24 +23,31 @@ class Category extends Component {
     return data;
   }
 
+  // async getProductsByCategory(categoryId) {
+  //   const data = await api.getProductsFromCategory(categoryId);
+  //   console.log(data);
+  //   this.setState({ productsByCategory: data.results });
+  // }
+
   render() {
     const { categories } = this.state;
+    const { byCategory } = this.props;
     return (
       <div>
         <h4>
           Categorias:
         </h4>
-        <ul>
-          { categories
-            .map((category) => (
-              <li
-                key={ category.id }
-                data-testid="category"
-              >
-                { category.name }
-              </li>
-            )) }
-        </ul>
+        { categories
+          .map((category) => (
+            <button
+              type="button"
+              key={ category.id }
+              data-testid="category"
+              onClick={ () => byCategory(category.id) }
+            >
+              { category.name }
+            </button>
+          )) }
       </div>
     );
   }
