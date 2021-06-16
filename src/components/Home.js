@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ProductLibrary from './ProductLibrary';
-import * as api from './services/api';
 import { Link } from 'react-router-dom';
+import ProductLibrary from './ProductLibrary';
+import * as api from '../services/api';
 import CategoryBar from './CategoryBar';
 
 class Home extends Component {
@@ -9,7 +9,7 @@ class Home extends Component {
     super();
 
     this.state = {
-      productsList: [],
+      productsList: '',
       searchText: '',
       categorySelect: '',
     };
@@ -23,9 +23,9 @@ class Home extends Component {
 
   handleSearchProduct() {
     const { categorySelect, searchText } = this.state;
-    if (categorySelect === '') {
-      return this.getProductsQuery(searchText);
-    }
+    // if (!categorySelect) {
+    //   return this.getProductsQuery(searchText);
+    // }
     return this.getProductsCategoryAndQuery(categorySelect, searchText);
   }
 
@@ -39,7 +39,7 @@ class Home extends Component {
   async getProductsQuery(query) {
     const products = await api.getProductsFromQuery(query);
     const state = this.setState({
-      categorySelect: products,
+      productsList: products,
     });
     return state;
   }
@@ -59,10 +59,11 @@ class Home extends Component {
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
     );
-    if (productsList.length === 0) {
+    if (!productsList) {
       return para;
     }
-    return <ProductLibrary productsList={ productsList } />;
+    const { results } = productsList;
+    return <ProductLibrary productsList={ results } />;
   }
 
   render() {
@@ -74,10 +75,12 @@ class Home extends Component {
           value={ searchText }
           name="searchText"
           onChange={ this.handleSearchText }
+          data-testid="query-input"
         />
         <button
           type="button"
-          onClick={ this.handleSearchProduct() }
+          onClick={ this.handleSearchProduct }
+          data-testid="query-button"
         >
           buscar
         </button>

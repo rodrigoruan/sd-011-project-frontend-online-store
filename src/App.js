@@ -6,11 +6,6 @@ import Home from './components/Home';
 import Cart from './pages/Cart';
 
 class App extends Component {
-  componentDidMount() {
-    api.getCategories();
-    api.getProductsFromCategoryAndQuery();
-  }
-
   render() {
     return (
       <div>

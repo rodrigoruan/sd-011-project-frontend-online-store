@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-// import ProductCard from './ProductCard';
+import PropTypes from 'prop-types';
+import ProductCard from './ProductCard';
 
 class ProductLibrary extends Component {
   render() {
     const { productsList } = this.props;
-    // console.log(productsList);
     return (
       <div>
-        {productsList.map((product) => console.log(product))}
-        {/* {productsList.map((product) => (<ProductCard
+        {productsList.map((product) => (<ProductCard
           key={ product.id }
           product={ product }
-        />))} */}
+        />))}
       </div>
     );
   }
 }
 
 export default ProductLibrary;
+
+ProductLibrary.propTypes = ({
+  productsList: PropTypes.arrayOf({}),
+  map: PropTypes.func,
+}).isRequired;
