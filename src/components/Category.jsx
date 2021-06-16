@@ -31,6 +31,7 @@ class Category extends React.Component {
               <label htmlFor="categories" key={ category.id }>
                 { category.name}
                 <input
+                  id={ `${category.id}` }
                   key={ category.id }
                   data-testid="category"
                   type="radio"

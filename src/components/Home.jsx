@@ -46,28 +46,26 @@ class Home extends React.Component {
       <div className="main-page">
         <Category />
         <div>
-          <div>
-            <form className="search-bar">
-              <label htmlFor="queryInput" data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-                <input
-                  data-testid="query-input"
-                  id="queryInput"
-                  onChange={ this.catchText }
-                />
-              </label>
-            </form>
-            <button
-              type="button"
-              onClick={ this.requestButton }
-              data-testid="query-button"
-            >
-              Pesquisa
-            </button>
-            <Link to="/carrinho" data-testid="shopping-cart-button">
-              Carrinho de compras 🛒
-            </Link>
-          </div>
+          <form className="search-bar">
+            <label htmlFor="queryInput" data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+              <input
+                data-testid="query-input"
+                id="queryInput"
+                onChange={ this.catchText }
+              />
+            </label>
+          </form>
+          <button
+            type="button"
+            onClick={ this.requestButton }
+            data-testid="query-button"
+          >
+            Pesquisa
+          </button>
+          <Link to="/carrinho" data-testid="shopping-cart-button">
+            Carrinho de compras 🛒
+          </Link>
           <CardItem products={ response } />
         </div>
       </div>
