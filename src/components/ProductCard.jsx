@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import '../styles/ProductCard.css';
 
@@ -14,5 +15,11 @@ class ProductCard extends Component {
     );
   }
 }
+
+ProductCard.propTypes = {
+  title: PropTypes.string,
+  price: PropTypes.number,
+  thumbnail: PropTypes.string,
+}.isRequired;
 
 export default ProductCard;
