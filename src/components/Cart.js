@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Cart extends Component {
   constructor() {
@@ -91,6 +92,14 @@ export default class Cart extends Component {
             </button>
           </div>
         ))}
+        <Link to={ { pathname: '/checkout' } }>
+          <button
+            data-testid="checkout-products"
+            type="button"
+          >
+            Comprar
+          </button>
+        </Link>
       </div>
     );
   }
