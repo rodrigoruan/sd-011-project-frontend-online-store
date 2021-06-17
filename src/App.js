@@ -36,9 +36,9 @@ export default class App extends Component {
         <Switch>
           {/* prettier-ignore */}
           <Route exact path="/" render={ (props) => <Home { ...props } /> } />
-          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
-          <Route exact path="/about" component={About} />
-          <Route component={NotFound} />
+          <Route exact path="/cart" render={ (props) => <ShoppingCart { ...props } /> } />
+          <Route exact path="/about" component={ About } />
+          <Route component={ NotFound } />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>

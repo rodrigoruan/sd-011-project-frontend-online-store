@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -5,7 +6,8 @@ export default class Header extends Component {
   render() {
     return (
       <header>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg ">
+        <nav
+          className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg">
           <a className="navbar-brand" href="/">
             MercadoDibre
           </a>

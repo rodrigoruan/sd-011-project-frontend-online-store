@@ -18,11 +18,6 @@ export default class Home extends Component {
     this.handleRadioClick = this.handleRadioClick.bind(this);
   }
 
-  getQuery = async (category, product) => {
-    const getList = await api.getProductsFromCategoryAndQuery(category, product);
-    return this.setState({ products: getList.results });
-  };
-
   componentDidMount() {
     const { inputText } = this.state;
     if (inputText) {
@@ -36,6 +31,11 @@ export default class Home extends Component {
       this.getQuery(radioFilter.id, inputText);
     }
   }
+
+  getQuery = async (category, product) => {
+    const getList = await api.getProductsFromCategoryAndQuery(category, product);
+    return this.setState({ products: getList.results });
+  };
 
   handleInput = ({ target }) => {
     this.setState({ inputText: target.value });
@@ -53,15 +53,16 @@ export default class Home extends Component {
   };
 
   showResults = () => {
-    if (!this.state.loading) return <SearchList products={this.state.products} />;
+    const { loading, products } = this.state;
+    if (!loading) return <SearchList products={ products } />;
   };
 
   render() {
     return (
       <div className="home-div">
-        <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
+        <SearchInput handleSubmit={this.handleSubmit } handleInput={ this.handleInput } />
         <div className="search-results">
-          <Categories handleRadioClick={this.handleRadioClick} />
+          <Categories handleRadioClick={ this.handleRadioClick } />
           {this.showResults()}
         </div>
       </div>

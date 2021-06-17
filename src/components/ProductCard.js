@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ItemProduct extends Component {
   render() {
-    const { thumbnail, title, price, id } = this.props.item;
+    const num = 10;
+    const { item: { thumbnail, title, price, id } } = this.props;
     return (
-      <div data-testid="product" className="content" key={id}>
-        <img src={thumbnail} alt="product thumbnail" />
+      <div data-testid="product" className="content" key={ id }>
+        <img src={ thumbnail } alt="product thumbnail" />
         <h3>{title}</h3>
         <h6>
           R$
-          {parseFloat(price, 10).toFixed(2)}
+          {parseFloat(price, num).toFixed(2)}
         </h6>
-        <button className="btn btn-success">Add to Cart!</button>
+        <button className="btn btn-success" type="button">Add to Cart!</button>
       </div>
     );
   }
 }
+
+ItemProduct.propTypes = {
+  item: PropTypes.shape({
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+    id: PropTypes.string,
+  }),
+};
+
+ItemProduct.defaultProps = {
+  item: {},
+};
