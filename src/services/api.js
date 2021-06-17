@@ -17,3 +17,5 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   return fetch(url)
     .then((result) => result.json());
 }
+
+// Teste: category=MLB1055&q=Motorola
