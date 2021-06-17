@@ -29,8 +29,9 @@ class Home extends React.Component {
     const { name } = target;
     const { searchText } = this.state;
     const arrayProdutcs = await Api.getProductsFromCategoryAndQuery(name, searchText);
+    console.log(arrayProdutcs);
     this.setState({
-      products: arrayProdutcs,
+      products: arrayProdutcs.results,
     });
   }
 
