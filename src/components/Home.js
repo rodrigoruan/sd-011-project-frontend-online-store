@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 
 import Searchfield from './Searchfield';
-import Category from './Category';
+import Category from './Categories';
 import * as api from '../services/api';
 
 class Home extends Component {
