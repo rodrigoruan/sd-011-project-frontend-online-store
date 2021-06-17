@@ -25,4 +25,5 @@ FiltersBar.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
   })).isRequired,
+  setCategory: PropTypes.func.isRequired,
 };

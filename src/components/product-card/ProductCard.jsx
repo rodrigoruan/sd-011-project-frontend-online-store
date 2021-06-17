@@ -12,7 +12,11 @@ export default class ProductCard extends Component {
         <img src={ thumbnail } alt={ title } />
         <div className="wrapper">
           <h3>{ title }</h3>
-          <p>Preço: { price }</p>
+          <p>
+            Preço:
+            {' '}
+            { price }
+          </p>
         </div>
       </div>
     );
