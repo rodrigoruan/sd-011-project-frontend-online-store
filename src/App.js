@@ -11,9 +11,10 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-
-    this.getSearchQuery = this.getSearchQuery.bind(this);
+    this.state = {
+      ShoppingCart: '',
+    };
+    this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   componentDidMount() {
@@ -21,12 +22,9 @@ export default class App extends Component {
     api.getProductsFromCategoryAndQuery();
   }
 
-  getSearchQuery = (inputText) => {
-    this.setState({ searchQuery: inputText });
-  };
-
-  getRadio = (value) => {
-    this.setState({ radioFilter: value });
+  handleAddToCart = (id, thumbnail, title, price) => {
+    const newItem = { id, thumbnail, title, price };
+    this.setState((prev) => ({ ShoppingCart: [...prev.ShoppingCart, newItem] }));
   };
 
   render() {
@@ -35,10 +33,10 @@ export default class App extends Component {
         <Header />
         <Switch>
           {/* prettier-ignore */}
-          <Route exact path="/" render={ (props) => <Home { ...props } /> } />
-          <Route exact path="/cart" render={ (props) => <ShoppingCart { ...props } /> } />
-          <Route exact path="/about" component={ About } />
-          <Route component={ NotFound } />
+          <Route exact path="/" render={ (props) => <Home { ...props }  handleAddToCart = {this.handleAddToCart}    /> } />
+          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
+          <Route exact path="/about" component={About} />
+          <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
