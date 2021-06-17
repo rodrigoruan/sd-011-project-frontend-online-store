@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ProductCard } from '../components/zComponentsMenu';
 
 export default class SearchList extends Component {
@@ -11,24 +12,23 @@ export default class SearchList extends Component {
     this.showList = this.showList.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.products !== this.props.products) {
-      this.setState({ empty: false });
-    }
+  componentDidMount() {
   }
 
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
     const { products } = this.props;
-    this.setState({ products });
+    if (prevProps.products !== products) {
+      this.setState({ empty: false });
+    }
   }
 
   showList = () => {
     const { products, handleAddToCart } = this.props;
     const { empty } = this.state;
     if (!empty && products.length > 1) {
-      return products.map((el, index) => (
-        <ProductCard item={el} key={index} handleAddToCart={handleAddToCart} />
-      ));
+
+      return products.map((el, index) => <ProductCard item={ el } key={ index } handleAddToCart={ handleAddToCart } />);
+
     }
     if (products.length < 1) {
       return <>Nenhum produto foi encontrado</>;
@@ -45,3 +45,11 @@ export default class SearchList extends Component {
     }
   }
 }
+
+SearchList.propTypes = {
+  products: PropTypes.string,
+};
+
+SearchList.defaultProps = {
+  products: '',
+};

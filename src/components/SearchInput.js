@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class SearchInput extends Component {
   render() {
@@ -24,3 +25,13 @@ export default class SearchInput extends Component {
     );
   }
 }
+
+SearchInput.propTypes = {
+  handleSubmit: PropTypes.func,
+  handleInput: PropTypes.func,
+};
+
+SearchInput.defaultProps = {
+  handleSubmit: {},
+  handleInput: {},
+};

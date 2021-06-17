@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 class Categories extends Component {
@@ -29,16 +30,16 @@ class Categories extends Component {
       <div className="categories">
         <h5>Categorias:</h5>
         {categories.map((el) => (
-          <label key={el.id} htmlFor={el.id}>
+          <label key={ el.id } htmlFor={ el.id }>
             {el.name}
             <input
-              key={el.id}
+              key={ el.id }
               type="radio"
-              id={el.id}
-              name={el.name}
+              id={ el.id }
+              name={ el.name }
               data-testid="category"
-              value={el.id}
-              onClick={handleRadioClick}
+              value={ el.id }
+              onClick={ handleRadioClick }
             />
           </label>
         ))}
@@ -46,5 +47,13 @@ class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  handleRadioClick: PropTypes.func,
+};
+
+Categories.defaultProps = {
+  handleRadioClick: {},
+};
 
 export default Categories;

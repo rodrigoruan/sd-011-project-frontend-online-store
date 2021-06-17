@@ -36,6 +36,11 @@ export default class Home extends Component {
     }
   }
 
+  getQuery = async (category, product) => {
+    const getList = await api.getProductsFromCategoryAndQuery(category, product);
+    return this.setState({ products: getList.results });
+  };
+
   handleInput = ({ target }) => {
     this.setState({ inputText: target.value });
   };
@@ -61,17 +66,19 @@ export default class Home extends Component {
   }
 
   showResults = () => {
+
     const { handleAddToCart } = this.props;
     if (!this.state.loading)
       return <SearchList products={this.state.products} handleAddToCart={handleAddToCart} />;
+
   };
 
   render() {
     return (
       <div className="home-div">
-        <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
+        <SearchInput handleSubmit={this.handleSubmit } handleInput={ this.handleInput } />
         <div className="search-results">
-          <Categories handleRadioClick={this.handleRadioClick} />
+          <Categories handleRadioClick={ this.handleRadioClick } />
           {this.showResults()}
         </div>
       </div>
