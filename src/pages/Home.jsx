@@ -33,7 +33,7 @@ class Home extends React.Component {
     const arrayProdutcs = await this.fetchProducts(category, searchText);
     console.log(arrayProdutcs);
     this.setState({
-      products: arrayProdutcs,
+      products: arrayProdutcs.results,
     });
   }
 
@@ -59,10 +59,14 @@ class Home extends React.Component {
   listCategories() {
     const { categories } = this.state;
     return categories.map((category) => (
-      <li key={ category.id } data-testid="category">
+      <button
+        type="button"
+        key={ category.id }
+        data-testid="category"
+      >
         <BiCircle />
         { category.name }
-      </li>));
+      </button>));
   }
 
   render() {
