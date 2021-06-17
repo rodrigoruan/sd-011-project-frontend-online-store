@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ShopCart from './ShopCart';
 import ProductCard from './ProductCard';
 import * as fetchAPI from '../services/api';
 
@@ -12,19 +11,17 @@ export default class Home extends Component {
       productCards: [],
       categoryId: '',
       search: '',
+      cartItems: [],
     };
     this.fetchProductCategory = this.fetchProductCategory.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
     this.fetchCategories = this.fetchCategories.bind(this);
+    this.addCart = this.addCart.bind(this);
   }
 
   componentDidMount() {
     this.fetchProductCategory();
-  }
-
-  componentDidUpdate() {
-
   }
 
   handleChange({ target }) {
@@ -58,11 +55,28 @@ export default class Home extends Component {
     });
   }
 
+  addCart({ target: { value } }) {
+    const { productCards, cartItems } = this.state;
+    const itemToCart = productCards.find((item) => item.id === value);
+    this.setState({
+      cartItems: [...cartItems, itemToCart],
+    });
+  }
+
   render() {
-    const { categories, productCards } = this.state;
+    const { categories, productCards, cartItems } = this.state;
     if (categories === []) return <div>Loading...</div>;
     return (
       <div>
+        <Link
+          data-testid="shopping-cart-button"
+          to={ {
+            pathname: '/cart',
+            state: cartItems,
+          } }
+        >
+          <img src="./images/cart.svg" alt="Cart" />
+        </Link>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
@@ -103,11 +117,9 @@ export default class Home extends Component {
               <ProductCard
                 key={ product.id }
                 product={ product }
+                addCart={ this.addCart }
               />))}
         </div>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src="./images/cart.svg" alt="Cart" />
-        </Link>
       </div>
     );
   }
