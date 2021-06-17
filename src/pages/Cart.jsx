@@ -20,7 +20,7 @@ class Cart extends Component {
 
   decrement() {
     const { count } = this.state;
-    if (count >= 0) {
+    if (count > 1) {
       return this.setState({
         count: count - 1,
       });
