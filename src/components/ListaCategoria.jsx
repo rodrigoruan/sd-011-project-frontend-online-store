@@ -18,10 +18,11 @@ class ListaCategoria extends Component {
     this.fetchCategories();
   }
 
-  handleClick({ target: { key } }) {
-    this.fetchCategory(key);
+  handleClick({ target: { id } }) {
+    this.fetchCategory(id);
   }
 
+  // oi
   async fetchCategory(id) {
     const response = await api.getProductsFromCategoryAndQuery(id, '$QUERY');
     this.setState({
@@ -55,10 +56,10 @@ class ListaCategoria extends Component {
     const categoryList = (
       <div>
         {categories.map(({ id, name }) => (
-          <label key={ id } htmlFor="category-input">
+          <label key={ id } htmlFor={ id }>
             {name}
             <input
-              id="category-input"
+              id={ id }
               type="radio"
               data-testid="category"
               key={ id }
