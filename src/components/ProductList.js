@@ -17,7 +17,8 @@ class ProductList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.query !== this.props.query || prevProps.categoryId !== this.props.categoryId) {
+    const { categoryId, query } = this.props;
+    if (prevProps.query !== query || prevProps.categoryId !== categoryId) {
       this.fetchProducts();
     }
   }
@@ -33,7 +34,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    console.log('productlist')
+    console.log('productlist');
     const { products } = this.state;
     return (
       <section>
