@@ -1,0 +1,26 @@
+.priceP {
+  color: black;
+}
+
+.atributoP {
+  color: black;
+}
+
+.productDetailHeader {
+  align-items: center;
+  background-color: #131920;
+  display: flex;
+  height: 10vh;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.LinkBack {
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.LinkBack:hover {
+  color: #f08804;
+}

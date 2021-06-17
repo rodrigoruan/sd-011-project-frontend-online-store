@@ -67,7 +67,10 @@ export default class SearchBar extends React.Component {
     return (
       <div className="container">
         <div className="headerContainer">
-          <p>TrybeStore</p>
+          <p>
+            Trybe
+            <span className="yellowSpan">Store</span>
+          </p>
           <label htmlFor="search-input" className="headerLabel">
             <input
               data-testid="query-input"
