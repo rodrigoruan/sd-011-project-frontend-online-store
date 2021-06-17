@@ -68,48 +68,50 @@ export default class Home extends Component {
     if (categories === []) return <div>Loading...</div>;
     return (
       <div>
-        <Link
-          data-testid="shopping-cart-button"
-          to={ {
-            pathname: '/cart',
-            state: cartItems,
-          } }
-        >
-          <img src="./images/cart.svg" alt="Cart" />
-        </Link>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <label htmlFor="search">
-          <input
-            type="text"
-            data-testid="query-input"
-            name="search"
-            onChange={ this.handleChange }
-          />
-        </label>
+        <div>
+          <Link
+            data-testid="shopping-cart-button"
+            to={ {
+              pathname: '/cart',
+              state: cartItems,
+            } }
+          >
+            <img src="./images/cart.svg" alt="Cart" />
+          </Link>
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+          <label htmlFor="search">
+            <input
+              type="text"
+              data-testid="query-input"
+              name="search"
+              onChange={ this.handleChange }
+            />
+          </label>
 
-        <button
-          type="button"
-          aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
-          data-testid="query-button"
-          onClick={ this.fetchProducts }
-        >
-          Enviar
-        </button>
-        <h2>Categorias:</h2>
-        {categories.map((category) => (
           <button
             type="button"
-            data-testid="category"
-            key={ category.id }
-            value={ category.id }
-            name="categoryId"
-            onClick={ () => this.fetchCategories(category.id) }
+            aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
+            data-testid="query-button"
+            onClick={ this.fetchProducts }
           >
-            {category.name}
+            Enviar
           </button>
-        ))}
+          <h2>Categorias:</h2>
+          {categories.map((category) => (
+            <button
+              type="button"
+              data-testid="category"
+              key={ category.id }
+              value={ category.id }
+              name="categoryId"
+              onClick={ () => this.fetchCategories(category.id) }
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
         <div>
           {!productCards
             ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar
@@ -119,6 +121,7 @@ export default class Home extends Component {
                 product={ product }
                 addCart={ this.addCart }
               />))}
+        </div>
       </div>
     );
   }
