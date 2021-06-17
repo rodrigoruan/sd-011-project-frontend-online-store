@@ -62,6 +62,7 @@ export default class SearchHome extends Component {
 
   render() {
     const { categories, loading, products } = this.state;
+    const arrayObject = JSON.parse(localStorage.getItem('item'));
     return (
       <div data-testid="home-initial-message">
         <aside>
@@ -94,6 +95,8 @@ export default class SearchHome extends Component {
         <Link to={ { pathname: '/ShoppingCart' } }>
           <button data-testid="shopping-cart-button" type="button">Carrinho</button>
         </Link>
+        {localStorage.item
+          && <div data-testid="shopping-cart-size">{arrayObject.length}</div>}
         { products.length < 1
           ? <div>Digite algum termo de pesquisa ou escolha uma categoria.</div>
           : <ProductsCard products={ products } />}

@@ -9,7 +9,7 @@ export default class ProductsCard extends Component {
   }
 
   handleSetStorage(param) {
-    console.log(param);
+    // console.log(param);
     param.countProduct = 1; // Adicionando um chave para contar
     if (!localStorage.item) {
       localStorage.setItem('item', JSON.stringify([param])); // transformando o objeto em JSON
@@ -24,6 +24,10 @@ export default class ProductsCard extends Component {
         localStorage.setItem('item', JSON.stringify([...arrayObject])); // Se o id identificado já existir, mantem o localStorage
       }
     }
+
+    // this.setState({
+    //   tamanho: arrayObject.length
+    // });
   }
 
   render() {
@@ -45,14 +49,16 @@ export default class ProductsCard extends Component {
               >
                 Mais Detalhes
               </Link>
-              <button
-                data-testid="product-add-to-cart"
-                type="button"
-                value={ result }
-                onClick={ () => this.handleSetStorage(result) }
-              >
-                Adicionar Carrinho
-              </button>
+              <Link to="/">
+                <button
+                  data-testid="product-add-to-cart"
+                  type="button"
+                  value={ result }
+                  onClick={ () => this.handleSetStorage(result) }
+                >
+                  Adicionar Carrinho
+                </button>
+              </Link>
             </div>
           );
         })}
