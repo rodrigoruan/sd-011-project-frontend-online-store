@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import image from '../imgs/Seta.png';
+import Back from '../imgs/Seta.png';
 
 class ShoppingCart extends Component {
   render() {
@@ -9,7 +9,7 @@ class ShoppingCart extends Component {
         <Link to="/">
           <img
             width="30px"
-            src={ image }
+            src={ Back }
             alt="imagem de voltar"
           />
         </Link>

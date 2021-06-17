@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import imageTwo from '../imgs/Carrinho.png';
+import Cart from '../imgs/Carrinho.png';
 import ProductSearch from '../components/ProductSearch';
 import ProductsList from '../components/ProductsList/ProductsList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import ProductDetails from './ProductDetails';
 
 class Home extends Component {
   constructor(props) {
@@ -84,7 +85,7 @@ class Home extends Component {
         <Link to="/ShoppingCart">
           <img
             width="30px"
-            src={ imageTwo }
+            src={ Cart }
             alt="imagem do carrinho"
           />
         </Link>
@@ -94,6 +95,7 @@ class Home extends Component {
         {loading ? 'Loading...' : this.renderCategories(categories)}
 
         <ProductsList products={ products } />
+        <ProductDetails />
       </>
     );
   }
