@@ -14,6 +14,7 @@ class Home extends Component {
       products: [],
       categoryId: '',
     };
+
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.getProductsByCategory = this.getProductsByCategory.bind(this);
