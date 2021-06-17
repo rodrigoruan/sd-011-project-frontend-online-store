@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
@@ -13,6 +13,7 @@ export default class App extends Component {
 
     this.state = {
       searchQuery: '',
+      shoppingItems: '',
     };
 
     this.getSearchQuery = this.getSearchQuery.bind(this);
@@ -29,7 +30,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <>
+      <BrowserRouter>
         <Header />
         <Switch>
           {/* prettier-ignore */}
@@ -39,7 +40,7 @@ export default class App extends Component {
           <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}
-      </>
+      </BrowserRouter>
     );
   }
 }

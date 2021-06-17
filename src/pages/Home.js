@@ -40,8 +40,8 @@ export default class Home extends Component {
   };
 
   handleSubmit = (event) => {
-    const { inputText } = this.state;
     event.preventDefault();
+    const { inputText } = this.state;
     this.props.sendSubmit(inputText);
     this.setState({ loading: false });
   };
