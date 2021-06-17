@@ -14,12 +14,12 @@ export default class SearchBar extends Component {
       textSearch: '',
       products: [],
       categoria: '',
-      storage: localStorage.length,
+      cart: 0,
     };
     this.getCategory = this.getCategory.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.getValuTextInput = this.getValuTextInput.bind(this);
-    this.getLocalStorage = this.getLocalStorage.bind(this);
+    // this.updateCartItem = this.updateCartItem.bind(this);
   }
 
   componentDidMount() {
@@ -28,7 +28,7 @@ export default class SearchBar extends Component {
   }
 
   // componentDidUpdate() {
-  // this.getLocalStorage();
+  //   this.getLocalStorage();
   // }
 
   getValuTextInput({ target }) {
@@ -55,82 +55,81 @@ export default class SearchBar extends Component {
     });
   }
 
-  getLocalStorage() {
-    const { storage } = this.state;
-    if (storage !== localStorage.length) {
-      this.setState({
-        storage: localStorage.length,
-      });
-    }
-  }
-
+  // updateCartItem() {
+  //   this.setState((oldValue) => ({ cart: oldValue.cart + 1 }));
+  // }
   // addToCart() {
   //   const { title, price, thumbnail } = this.props;
   //   localStorage.setItem(`item ${title}`, [`${title} - R$${price}`, `${thumbnail}`]);
   // }
 
   render() {
-    const { categories, products, textSearch, storage } = this.state;
+    const { categories, products, textSearch, cart } = this.state;
     return (
-      <div>
-        <label htmlFor="textSearch" data-testid="home-initial-message">
-          <input
-            data-testid="query-input"
-            type="text"
-            name="textSearch"
-            value={ textSearch }
-            onChange={ this.getValuTextInput }
-          />
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </label>
+      <div className="main-container">
         <div>
-          <Link data-testid="shopping-cart-button" to="/cartitems">
-            Carrinho de compras
-          </Link>
-          <span>
-            { storage }
-          </span>
-        </div>
-        <button
-          data-testid="query-button"
-          type="button"
-        >
-          Buscar Produto
-        </button>
-        <div onChange={ this.getValuTextInput }>
-          {categories.map((category) => (
-            <Category
-              onClick={ this.getProducts }
-              key={ category.id }
-              value={ category.id }
-              name={ category.name }
+          <label htmlFor="textSearch" data-testid="home-initial-message">
+            <input
+              data-testid="query-input"
+              type="text"
+              name="textSearch"
+              value={ textSearch }
+              onChange={ this.getValuTextInput }
             />
-          ))}
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </label>
+          <div>
+            <Link data-testid="shopping-cart-button" to="/cartitems">
+              Carrinho de compras
+            </Link>
+            <span data-testeid="shopping-cart-product-quantity">
+              { cart }
+            </span>
+          </div>
+          <button
+            data-testid="query-button"
+            type="button"
+          >
+            Buscar Produto
+          </button>
         </div>
-        <div>
-          {products.map((product) => (
-            <div key={ product.id }>
-              <Link
-                key={ product.id }
-                to={ { pathname: `/details/${product.id}`, state: { product } } }
-                data-testid="product-detail-link"
-              >
-                <Products
+        <section>
+          <div onChange={ this.getValuTextInput }>
+            {categories.map((category) => (
+              <Category
+                onClick={ this.getProducts }
+                key={ category.id }
+                value={ category.id }
+                name={ category.name }
+              />
+            ))}
+          </div>
+        </section>
+        <section>
+          <div>
+            {products.map((product) => (
+              <div key={ product.id }>
+                <Link
+                  key={ product.id }
+                  to={ { pathname: `/details/${product.id}`, state: { product } } }
+                  data-testid="product-detail-link"
+                >
+                  <Products
+                    title={ product.title }
+                    thumbnail={ product.thumbnail }
+                    price={ product.price }
+                  />
+                </Link>
+                <Button
                   title={ product.title }
                   thumbnail={ product.thumbnail }
                   price={ product.price }
+                  // updateCartItem={ this.updateCartItem }
                 />
-              </Link>
-              <Button
-                title={ product.title }
-                thumbnail={ product.thumbnail }
-                price={ product.price }
-                // onClick={ this.getLocalStorage }
-
-              />
-            </div>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </div>
     );
   }

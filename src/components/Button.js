@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 
 export default class Button extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: '',
-      price: '',
-      thumbnail: '',
-    };
-    this.addToCart = this.addToCart.bind(this);
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     title: '',
+  //     price: '',
+  //     thumbnail: '',
+  //   };
+  // this.addToCart = this.addToCart.bind(this);
+  // }
 
-  addToCart() {
-    const { title, price, thumbnail } = this.props;
-    localStorage.setItem(`item ${title}`, [`${title} - R$${price}`, `${thumbnail}`]);
-  }
+  // addToCart() {
+  //   const { title, price, thumbnail, updateCartItem } = this.props;
+  //   localStorage.setItem(`posição ${title}`, [`${title} - R$${price}`, `${thumbnail}`]);
+  //   updateCartItem();
+  // }
 
   render() {
-
     return (
 
       <button
@@ -30,3 +31,15 @@ export default class Button extends Component {
     );
   }
 }
+
+// Button.propTypes = {
+//   title: PropTypes.string,
+//   thumbnail: PropTypes.string,
+//   price: PropTypes.number,
+// };
+
+// Button.defaultProps = {
+//   title: '',
+//   thumbnail: '',
+//   price: 0,
+// };
