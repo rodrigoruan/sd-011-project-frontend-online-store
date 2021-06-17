@@ -4,19 +4,21 @@ import ProductCard from '../ProductCard/ProductCard';
 
 export default class ProductsList extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, handleAddToShopCart } = this.props;
 
     return (
       <div>
         {
           products.length
             ? (
-              products.map(({ id, thumbnail, title, price }) => (
+              products.map(({ id, thumbnail, title, price }, index) => (
                 <ProductCard
-                  key={ id }
+                  key={ index }
+                  id={ id }
                   thumbnail={ thumbnail }
                   title={ title }
                   price={ price }
+                  handleAddToShopCart={ handleAddToShopCart }
                 />
               ))
             ) : (
@@ -31,8 +33,9 @@ export default class ProductsList extends React.Component {
 }
 
 ProductsList.propTypes = {
+  handleAddToShopCart: PropTypes.func.isRequired,
   products: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
+    key: PropTypes.string,
     thumbnail: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
