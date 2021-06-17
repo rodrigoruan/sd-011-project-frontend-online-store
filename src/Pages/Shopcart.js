@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import NewItem from '../Components/NewItem';
 
 class Shopcart extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class Shopcart extends Component {
       products: state,
       loading: true,
     };
-
     this.setLoading = this.setLoading.bind(this);
   }
 
@@ -39,10 +39,7 @@ class Shopcart extends Component {
         </div>
       ) : (
         products.map((product, index) => (
-          <div key={ index }>
-            <h4 data-testid="shopping-cart-product-name">{product.title}</h4>
-            <h5 data-testid="shopping-cart-product-quantity">11</h5>
-          </div>
+          <NewItem newProduct={ product } key={ index } />
         ))
       ));
   }
