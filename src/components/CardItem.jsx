@@ -23,8 +23,8 @@ class CardItem extends React.Component {
     // }
 
     return products.length === 0 ? notFound : (
-      products.map(({ title, thumbnail, price }) => (
-        <Link to="/details" data-testid="product-detail-link"> DETALHES
+      products.map(({ title, thumbnail, price, id }) => (
+        <Link to={`details/${ id }`} data-testid="product-detail-link">
           <div data-testid="product"
             key={ title } >
             <p>{ title }</p>
