@@ -45,6 +45,7 @@ export default class Home extends Component {
   }
 
   addCartFunc(data) {
+    data.quantity = 1;
     this.setState((previous) => ({
       cartItems: [...previous.cartItems, data],
     }));

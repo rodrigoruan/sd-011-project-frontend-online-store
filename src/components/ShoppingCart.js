@@ -11,9 +11,10 @@ export default class ShoppingCart extends Component {
           (cartItems.length === 0)
             ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
             : cartItems.map((product, index) => (
-              <p key={ index } data-testid="shopping-cart-product-name">
-                { product.title }
-              </p>
+              <div key={ index }>
+                <p data-testid="shopping-cart-product-name">{ product.title }</p>
+                <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
+              </div>
             ))
         }
         <Link to="/">Voltar</Link>
