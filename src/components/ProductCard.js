@@ -4,6 +4,33 @@ import PropTypes from 'prop-types';
 import './css/Products.css';
 
 class ProductCard extends Component {
+  constructor(props) {
+    super(props);
+
+    this.setItemStorage = this.setItemStorage.bind(this);
+  }
+
+  componentDidMount() {
+    const productInfo = JSON.parse(localStorage.getItem('productInfos'));
+    if (!productInfo) {
+      localStorage.setItem('productInfos', JSON.stringify([]));
+    }
+  } 
+
+  setItemStorage() {
+    const productInfo = JSON.parse(localStorage.getItem('productInfos'));
+    const { products } = this.props;
+    const { id, title, thumbnail, price } = products;
+    productInfo.push({
+      id,
+      title,
+      thumbnail,
+      price,
+    });
+    console.log(productInfo);
+    localStorage.setItem('productInfos', JSON.stringify(productInfo));
+  }
+
   render() {
     const { products } = this.props;
     const { id, title, thumbnail, price } = products;
@@ -20,9 +47,15 @@ class ProductCard extends Component {
             <p>{ `${price} R$` }</p>
           </div>
         </Link>
-        <button className="button" type="button">Adicionar ao carrinho</button>
+        <button
+          className="button"
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ this.setItemStorage }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
-
     );
   }
 }
