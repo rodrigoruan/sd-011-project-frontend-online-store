@@ -13,28 +13,28 @@
 }
 
 .product {
+  align-content: center;
   border: 1px solid black;
   border-radius: 10px;
-  margin: 10px;
-  padding: 10px;
-  width: 20vw;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-content: center;
+  margin: 10px;
+  padding: 10px;
+  width: 20vw;
 
 }
 
-.product-img {
-width: 60%;
-margin: 20px;
+/* .product-img {
+  width: 60%;
+  margin: 20px;
 }
 
 .price {
   background-color:cadetblue;
-  text-align: center;
   font-weight: bold;
-}
+  text-align: center;
+} */
 
 /* @media ( prefers-reduced-motion : no-preference ) {
 
