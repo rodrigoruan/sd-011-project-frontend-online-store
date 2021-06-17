@@ -12,7 +12,6 @@ export default class ProductCard extends Component {
           data-testid="product-detail-link"
         >
           <h5>{title}</h5>
-          <p>{id}</p>
           <p>{`R$ ${price}`}</p>
           <div>
             <img src={ thumbnail } alt={ title } width="70px" />

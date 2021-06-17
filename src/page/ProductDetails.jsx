@@ -1,27 +1,40 @@
 import React, { Component } from 'react';
-import * as api from '../services/api';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default class ProductDetails extends Component {
-  constructor() {
-    super();
-    this.state = {
-      product: '',
-    };
-  }
-
-  componentDidMount() {
-    const { match: { params: { id } } } = this.props;
-    this.searchI(id);
-    // api.getProductsFromCategoryAndQuery('', id).then((product) => console.log(product));
-  }
-
   render() {
-    const { product } = this.state;
     const { location: { state } } = this.props;
-    console.log(state);
+    const { title, thumbnail, price, attributes } = state;
     return (
       <div>
+        <Link to="/shopping-cart" data-testid="shopping-cart-button">
+          <img
+            src="images/Carrinho-de-Compras.png"
+            alt="Carrinho de Compras"
+            width="50px"
+          />
+        </Link>
+        <h2 data-testid="product-detail-name">{title}</h2>
+        <img src={ thumbnail } alt={ title } />
+        <h4>{ price }</h4>
+        <ul>
+          {attributes.map((atributo, index) => (
+            <li
+              key={ index }
+            >
+              {`${atributo.name}: `}
+              {atributo.value_name}
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
 }
+
+ProductDetails.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.objectOf,
+  }),
+}.isRequired;
