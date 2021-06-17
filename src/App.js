@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// Páginas
 import Main from './pages/Main';
+// Componentes
 import ShoppingCart from './pages/ShoppingCart';
+import CategoryFilter from './components/CategoryFilter';
 import './App.css';
-import CategoryFilter from './pages/CategoryFilter';
 
 function App() {
   return (
