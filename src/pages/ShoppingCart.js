@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ShoppingItem from '../components/ShoppingItem';
-import query from '../__mocks__/query';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
-    const { results } = query;
     this.state = {
       products: '',
     };
