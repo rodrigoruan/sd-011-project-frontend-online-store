@@ -48,6 +48,8 @@ export default class ProductDetails extends Component {
           <button type="button">Carrinho</button>
         </Link>
         <Link to="/">Voltar</Link>
+        <input type="text" />
+        <textarea type="text" data-testid="product-detail-evaluation" />
       </div>
     );
   }
