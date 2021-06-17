@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import CategoryList from './CategoryList';
 import ProductSearch from './ProductSearch';
+import './css/Section.css';
 
 export default class Home extends Component {
   constructor() {
@@ -46,7 +47,7 @@ export default class Home extends Component {
         <div>
           <CategoryList fetchProducts={ this.fetchProducts } />
         </div>
-        <div>
+        <div className="searchbar">
           <input
             data-testid="query-input"
             type="text"
@@ -55,6 +56,7 @@ export default class Home extends Component {
           <button
             data-testid="query-button"
             type="button"
+            placeholder="Pesquisar Items"
             onClick={ () => this.fetchProducts() }
             query={ query }
           >

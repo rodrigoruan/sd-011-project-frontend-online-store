@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
+import Loading from './Loading';
+import './css/Section.css';
 
 export default class CategoryList extends Component {
   constructor() {
@@ -8,6 +10,7 @@ export default class CategoryList extends Component {
 
     this.state = {
       categories: [],
+      loading: true,
     };
   }
 
@@ -17,33 +20,32 @@ export default class CategoryList extends Component {
 
   async fetchApi() {
     const data = await getCategories();
-    this.setState({ categories: data });
+    this.setState({ categories: data, loading: false });
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories, loading } = this.state;
     const { fetchProducts } = this.props;
 
     return (
-      <aside className="category-id">
+      <section className="category-section">
         <h1>Categorias:</h1>
-        {
-          categories.map((category) => (
-            <div key={ category.id }>
-              <label htmlFor="category">
-                <input
-                  data-testid="category"
-                  type="radio"
-                  name="category"
-                  value={ category.id }
-                  onClick={ ({ target: { value } }) => fetchProducts(value) }
-                />
-                { category.name }
-              </label>
-            </div>
-          ))
-        }
-      </aside>
+        { loading ? <Loading />
+          : categories.map((category) => (
+            <label htmlFor={ category.id } key={ category.id } className="label-radio">
+              <input
+                data-testid="category"
+                type="radio"
+                id={ category.id }
+                name="category"
+                value={ category.id }
+                onClick={ ({ target: { value } }) => fetchProducts(value) }
+              />
+              { category.name }
+            </label>
+
+          ))}
+      </section>
     );
   }
 }
