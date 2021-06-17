@@ -5,7 +5,7 @@ export default class CategorieList extends Component {
   render() {
     const { category: { name, id }, onClick } = this.props;
     return (
-      <label htmlFor="category">
+      <label htmlFor="category" className="category">
         <input
           type="radio"
           value={ id }

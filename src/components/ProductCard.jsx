@@ -7,7 +7,7 @@ export default class ProductCard extends Component {
     return (
       <div data-testid="product">
         <h5>{title}</h5>
-        <p>{price}</p>
+        <p>{`R$ ${price}`}</p>
         <div>
           <img src={ thumbnail } alt={ title } width="70px" />
         </div>
