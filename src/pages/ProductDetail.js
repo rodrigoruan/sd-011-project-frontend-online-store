@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 // import CustomerRatingForm from '../components/CustomerRatingForm';
+=======
+import CartButton from '../components/CartButton';
+>>>>>>> c23f619ca5f457f7ed9769459bcad4d15e8326f8
 
 class ProductDetail extends Component {
   constructor() {
@@ -35,12 +39,15 @@ class ProductDetail extends Component {
   render() {
     const {
       location:
-      { state:
-        { produto:
-          { condition, price, thumbnail, title } } } } = this.props;
+      // { state:
+      //   { produto:
+      //     { condition, price, thumbnail, title } } } } = this.props;
     // const { email, comment, rating, counter } = this.state;
-    const storedRatings = JSON.parse(localStorage.getItem(counter));
-    console.log(storedRatings);
+    // const storedRatings = JSON.parse(localStorage.getItem(counter));
+    // console.log(storedRatings);
+        { state:
+          { produto, addToCart } } } = this.props;
+    const { condition, price, thumbnail, title } = produto;
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
@@ -78,8 +85,6 @@ class ProductDetail extends Component {
             Add comentário
           </button>
         </form> */}
-        <input type="text" />
-        <textarea type="text" data-testid="product-detail-evaluation" />
         {/* { storedRatings.map(({ email: emailField, comment: commentField, rating: ratingField, counter: counterField }) => (
           <div key={ counterField }>
             <h3>{ emailField }</h3>
@@ -87,6 +92,24 @@ class ProductDetail extends Component {
             <p>{ ratingField }</p>
           </div>
         )) } */}
+        <button
+          type="button"
+          onClick={ () => {
+            const addedCart = [...addToCart, produto];
+            localStorage.setItem('addingCart', JSON.stringify(addedCart));
+          } }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicione ao carrinho
+        </button>
+        <CartButton
+          link={ {
+            pathname: '/cart',
+            state: { cart: addToCart },
+          } }
+        />
+          <input type="text" />
+          <textarea type="text" data-testid="product-detail-evaluation" />
       </div>
     );
   }
@@ -97,6 +120,7 @@ export default ProductDetail;
 ProductDetail.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
+      addToCart: PropTypes.arrayOf(PropTypes.object),
       produto: PropTypes.shape({
         condition: PropTypes.string,
         price: PropTypes.number,
