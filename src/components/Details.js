@@ -20,9 +20,10 @@ export default class Details extends Component {
   }
 
   async idFetch() {
-    const id = await Api.getIdFetch(this.props.match.params.id);
-    const positionBody = id[0].body;
-    // console.log(id[0].body.title)
+    const { match } = this.props;
+    const { id } = match.params;
+    const getProduct = await Api.getIdFetch(id);
+    const positionBody = getProduct[0].body;
     this.setState({
       title: positionBody.title,
       price: positionBody.price,
@@ -33,7 +34,6 @@ export default class Details extends Component {
 
   render() {
     const { title, thumbnail, price, attributes } = this.state;
-    // console.log(this.props.match.params.id);
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cartitems">
@@ -41,25 +41,17 @@ export default class Details extends Component {
         </Link>
         <div>
           <h2>
-            { title }
-            -
-            R$
-            { price }
+            {`${title} - R$${price}`}
           </h2>
           <img src={ thumbnail } alt={ title } />
         </div>
         <div>
           <h3>Especificações Técnicas</h3>
           <ul>
-            { attributes.map((product) => (<li key={ product.id }>
-              {' '}
-              { product.name }
-              {' '}
-              -
-              {' '}
-              { product.value_name }
-              {' '}
-                                           </li>))}
+            { attributes.map((product) => (
+              <li key={ product.id }>
+                {`${product.name} - ${product.value_name}`}
+              </li>))}
           </ul>
         </div>
       </div>
@@ -68,13 +60,9 @@ export default class Details extends Component {
 }
 
 Details.propTypes = {
-  title: PropTypes.string,
-  thumbnail: PropTypes.string,
-  price: PropTypes.number,
-};
-
-Details.defaultProps = {
-  title: '',
-  thumbnail: '',
-  price: 0,
+  match: PropTypes.objectOf({
+    params: PropTypes.objectOf({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
 };
