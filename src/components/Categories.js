@@ -34,10 +34,10 @@ class Categories extends Component {
               {el.name}
               <input
                 key={el.id}
-                data-testid="category"
                 type="radio"
                 id={el.id}
                 name="categories"
+                data-testid="category"
                 value={el.id}
                 onClick={handleRadioClick}
               />

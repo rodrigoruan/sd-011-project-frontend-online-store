@@ -52,18 +52,13 @@ export default class Home extends Component {
   };
 
   showCategory = () => {
-    if (!this.state.loading)
-      return (
-        <>
-          <Categories handleRadioClick={this.handleRadioClick} />
-          <SearchList products={this.state.products} />
-        </>
-      );
+    if (!this.state.loading) return <SearchList products={this.state.products} />;
   };
 
   render() {
     return (
       <div className="home-div">
+        <Categories handleRadioClick={this.handleRadioClick} />
         <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
         <div className="search-results">{this.showCategory()}</div>
       </div>
