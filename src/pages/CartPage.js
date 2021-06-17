@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import emptyBoxImage from '../images/emptyBox.png';
+import CardCart from '../components/CardCart';
+import EmptyCart from '../components/EmptyCart';
 
 class cartPage extends Component {
   render() {
+    const newArray = JSON.parse(localStorage.getItem('products') || '[]');
+    console.log(newArray);
     return (
       <div data-testid="shopping-cart-empty-message">
-        <span>
-          <img src={ emptyBoxImage } alt="Cart" />
-          Seu carrinho está vazio
-        </span>
+        {newArray.length > 0 ? <CardCart /> : <EmptyCart />}
       </div>
     );
   }
