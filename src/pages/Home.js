@@ -4,6 +4,7 @@ import '../services/api';
 import PropTypes from 'prop-types';
 import CategoriesBar from '../components/CategoriesBar';
 import ProductCard from '../components/productcard';
+import Loading from '../components/Loading';
 
 class Home extends React.Component {
   constructor(props) {
@@ -13,12 +14,14 @@ class Home extends React.Component {
       products: [],
       searched: false,
       category: '',
+      loading: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderCards = this.renderCards.bind(this);
     this.handleButton = this.handleButton.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
   }
 
   handleChange(event) {
@@ -27,26 +30,39 @@ class Home extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault();
-    const { value, category } = this.state;
-    const { getProductsFromCategoryAndQuery } = this.props;
-    const search = await getProductsFromCategoryAndQuery(category, value);
-    console.log(search.results);
-    this.setState({ products: search.results, searched: true });
-  }
-
-  async handleButton({ target }) {
     this.setState({
-      category: target.id,
+      searched: true,
+      loading: true,
     }, async () => {
-      const { value, category } = this.state;
-      const { getProductsFromCategoryAndQuery } = this.props;
-      const search = await getProductsFromCategoryAndQuery(category, value);
-      this.setState({ products: search.results, searched: true });
+      this.fetchProducts();
     });
   }
 
+  async handleButton(event) {
+    event.preventDefault();
+    const { target } = event;
+    this.setState({
+      category: target.id,
+      searched: true,
+      loading: true,
+    }, async () => {
+      this.fetchProducts();
+    });
+  }
+
+  async fetchProducts() {
+    const { value, category } = this.state;
+    const { getProductsFromCategoryAndQuery } = this.props;
+    const search = await getProductsFromCategoryAndQuery(category, value);
+    console.log(search);
+    this.setState({ products: search.results, loading: false });
+  }
+
   renderCards() {
-    const { products } = this.state;
+    const { products, loading } = this.state;
+    if (loading) {
+      return <Loading />;
+    }
     return products.map((product) => <ProductCard key={ product.id } { ...product } />);
   }
 
@@ -83,7 +99,7 @@ class Home extends React.Component {
           filterCategory={ this.handleButton }
         />
         <div>
-          {searched ? this.renderCards() : <span>Não houve pesquisa</span>}
+          {searched ? this.renderCards() : <span>Nada foi pesquisado.</span>}
         </div>
       </div>
     );
