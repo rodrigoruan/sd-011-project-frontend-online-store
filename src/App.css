@@ -1,9 +1,11 @@
 * {
   text-align: center;
 }
+
 .body {
   height: 100%;
 }
+
 .main {
   align-items: flex-start;
   background-color: #f7f7f7;
@@ -29,9 +31,9 @@
 .product {
   display: flex;
   flex-direction: column;
-  width: 90%;
   height: 1400px;
   overflow: scroll;
+  width: 90%;
 }
 
 .category {
