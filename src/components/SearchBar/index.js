@@ -28,11 +28,15 @@ export default class SearchBar extends React.Component {
 
   handleInputChange({ target }) {
     const { name, value } = target;
-    console.log(value)
-    this.setState({
-      [name]: value,
-    });
-    this.fetchProductsByTerm();
+    if (name === 'category') {
+      this.setState({
+        [name]: value,
+      }, () => this.fetchProductsByTerm()); // Ajuda do Tales Coelho!
+    } else {
+      this.setState({
+        [name]: value,
+      });
+    }
   }
 
   fetchCategories() {
@@ -89,17 +93,15 @@ export default class SearchBar extends React.Component {
           <aside>
             {categories.map((categorie) => (
               <div key={ categorie.id } className="categoryItem">
-                <label htmlFor={ categorie.id }>
-                  <input
-                    type="radio"
-                    value={ categorie.id }
-                    data-testid="category"
-                    name="category"
-                    id={ categorie.id }
-                    onChange={ this.handleInputChange }
-                  />
+                <button
+                  type="button"
+                  value={ categorie.id }
+                  data-testid="category"
+                  name="category"
+                  onClick={ this.handleInputChange }
+                >
                   { categorie.name }
-                </label>
+                </button>
               </div>
             ))}
           </aside>
