@@ -23,12 +23,12 @@ export default class Details extends Component {
     const { match } = this.props;
     const { id } = match.params;
     const getProduct = await Api.getIdFetch(id);
-    const positionBody = getProduct[0].body;
+    const positionAndBody = getProduct[0].body;
     this.setState({
-      title: positionBody.title,
-      price: positionBody.price,
-      thumbnail: positionBody.thumbnail,
-      attributes: positionBody.attributes,
+      title: positionAndBody.title,
+      price: positionAndBody.price,
+      thumbnail: positionAndBody.thumbnail,
+      attributes: positionAndBody.attributes,
     });
   }
 
