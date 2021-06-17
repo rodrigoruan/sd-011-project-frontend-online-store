@@ -14,6 +14,7 @@ class Home extends Component {
       categoriesList: [],
       products: [],
       categoryId: '',
+      quantity: 1,
     };
   }
 
@@ -43,16 +44,34 @@ class Home extends Component {
       <div>
         { products.map(({ title, price, thumbnail, id }) => (
           <div data-testid="product" key={ id }>
-            <img src={ thumbnail } alt={ title } />
-            <h3>{ title }</h3>
-            <p>{ price }</p>
+            <div className="cartProducts">
+              <img src={ thumbnail } alt={ title } />
+              <h3>{ title }</h3>
+              <p>{ price }</p>
+            </div>
             <Link data-testid="product-detail-link" to={ `/pageProduct/${id}` }>
               Ver detalhes
             </Link>
+            <button
+              type="button"
+              data-testid="product-add-to-cart"
+              value={ title }
+              onClick={ () => this.addToCart(title, price, thumbnail, id) }
+            >
+              Adicionar ao Carrinho
+            </button>
           </div>
         ))}
       </div>
     );
+  }
+
+  addToCart = (title, price, thumbnail, id) => {
+    const { quantity } = this.state;
+    // const product = { title, price, thumbnail, id };
+    // const listJson = JSON.stringify(product);
+
+    localStorage.setItem(id, [title, '/n', thumbnail, '/n', price, '/n', quantity]);
   }
 
   saveCategorieId = (id) => {
