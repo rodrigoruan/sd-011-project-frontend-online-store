@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { ConteudoCarrinho } from '../components/index';
 
 class ShoppingCart extends Component {
   render() {
-    return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
+    return (
+      <div>
+        <ConteudoCarrinho />
+      </div>
+    );
   }
 }
 

@@ -46,6 +46,7 @@ class ListaCategoria extends Component {
       <div>
         {filteredCategories.map(({ id, title, thumbnail, price }) => (
           <ProductCard
+            id={ id }
             key={ id }
             title={ title }
             imgPath={ thumbnail }
