@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdShoppingCart } from 'react-icons/md';
-import { BiCircle } from 'react-icons/bi';
 import SearchBar from '../components/SearchBar';
 import * as Api from '../services/api';
 import ProductCard from '../components/ProductCard';
@@ -13,13 +12,11 @@ class Home extends React.Component {
       categories: [],
       products: [],
       searchText: '',
-      category: '',
 
     };
     this.fetchCategories = this.fetchCategories.bind(this);
     this.listCategories = this.listCategories.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
-    this.handleQuerySearch = this.handleQuerySearch.bind(this);
+    this.handleSearchs = this.handleSearchs.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
   }
 
@@ -28,9 +25,10 @@ class Home extends React.Component {
     this.listCategories();
   }
 
-  async handleQuerySearch() {
-    const { searchText, category } = this.state;
-    const arrayProdutcs = await this.fetchProducts(category, searchText);
+  async handleSearchs({ target }) {
+    const { name } = target;
+    const { searchText } = this.state;
+    const arrayProdutcs = await Api.getProductsFromCategoryAndQuery(name, searchText);
     console.log(arrayProdutcs);
     this.setState({
       products: arrayProdutcs.results,
@@ -44,11 +42,6 @@ class Home extends React.Component {
     });
   }
 
-  async fetchProducts(categoryId, query) {
-    const response = await Api.getProductsFromCategoryAndQuery(categoryId, query);
-    return response;
-  }
-
   async fetchCategories() {
     const requestCategories = await Api.getCategories();
     this.setState({
@@ -60,13 +53,15 @@ class Home extends React.Component {
     const { categories } = this.state;
     return categories.map((category) => (
       <button
+        name={ category.id }
         type="button"
         key={ category.id }
         data-testid="category"
+        onClick={ this.handleSearchs }
       >
-        <BiCircle />
         { category.name }
-      </button>));
+      </button>
+    ));
   }
 
   render() {
@@ -78,22 +73,25 @@ class Home extends React.Component {
         <button
           type="button"
           data-testid="query-button"
-          onClick={ this.handleQuerySearch }
+          onClick={ this.handleSearchs }
         >
           PESQUISAR
         </button>
         <section className="products-column">
-          <div className="list-categories">{this.listCategories()}</div>
+          <ul className="list-categories">
+            {this.listCategories()}
+          </ul>
+
           <Link to="/shopping-cart" data-testid="shopping-cart-button">
             <MdShoppingCart />
           </Link>
-          {products.length < 1
-            ? <p>Nenhum produto encontrado</p>
-            : products.map((item) => (<ProductCard key={ item.id } item={ item } />)) }
+          {products.length > 0
+            ? products.map((item) => (<ProductCard key={ item.id } item={ item } />))
+            : <p>Nenhum produto encontrado</p> }
         </section>
       </main>
     );
   }
 }
-//
+
 export default Home;
