@@ -42,13 +42,11 @@ export default class Card extends Component {
             shipping.free_shipping
               ? <p data-testid="free-shipping">Frete Grátis!</p> : null
           }
-          <p>
           <p className="price">
             R$
             {price}
           </p>
         </Link>
-
         <button
           className="add-cart-button"
           data-testid="product-add-to-cart"

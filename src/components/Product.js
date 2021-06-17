@@ -52,7 +52,8 @@ export default class Product extends Component {
 
   render() {
     const { props, state } = this;
-    const { location: { state: { title, price, thumbnail, attributes, id, shipping } } } = props;
+    const { location:
+      { state: { title, price, thumbnail, attributes, id, shipping } } } = props;
     const { allComments } = state;
     return (
       <>
