@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddCarrinho extends Component {
   constructor() {
@@ -14,10 +15,12 @@ class AddCarrinho extends Component {
   sendToCart() {
     let arrProducts = [];
     const storageData = JSON.parse(localStorage.getItem('products'));
-    const { title, price } = this.props;
+    const { title, price, id } = this.props;
+    console.log(this.props);
     const { quantity } = this.state;
-    const product = { 
+    const product = {
       title,
+      id,
       price,
       quantity,
     };
@@ -30,14 +33,14 @@ class AddCarrinho extends Component {
       const productAux = storageData.find((produto) => produto.title === product.title);
       const productIndex = storageData.indexOf(productAux);
 
-      if(productAux !== undefined) {
+      if (productAux !== undefined) {
         storageData[productIndex].quantity = product.quantity;
         arrProducts = arrProducts.concat(storageData);
       } else {
         arrProducts.push(product);
         arrProducts = arrProducts.concat(storageData);
       }
-      
+
       localStorage.setItem('products', JSON.stringify(arrProducts));
     } else {
       localStorage.setItem('products', JSON.stringify([product]));
@@ -49,7 +52,7 @@ class AddCarrinho extends Component {
       <button
         data-testid="product-add-to-cart"
         type="button"
-        onClick={this.sendToCart}
+        onClick={ this.sendToCart }
       >
         Adicionar ao Carrinho
       </button>
@@ -58,3 +61,9 @@ class AddCarrinho extends Component {
 }
 
 export default AddCarrinho;
+
+AddCarrinho.propTypes = {
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+};
