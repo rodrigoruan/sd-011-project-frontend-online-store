@@ -4,11 +4,13 @@ import Card from './Card';
 
 export default class ListCards extends Component {
   render() {
-    const { products } = this.props;
+    const { products, query, category } = this.props;
     return (
       <div>
         { products.map((product, index) => (<Card
           { ...product }
+          query={ query }
+          category={ category }
           key={ index }
         />))}
       </div>
@@ -18,4 +20,6 @@ export default class ListCards extends Component {
 
 ListCards.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  query: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
 };

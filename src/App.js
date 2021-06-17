@@ -13,7 +13,7 @@ class App extends Component {
             <Route exact path="/" component={ Home } />
             <Route path="/ShoppingCart" component={ ShoppingCart } />
             <Route
-              path="/product/:id"
+              path="/product/:id/:query/:category"
               render={ (props) => <ProductDetails { ...props } /> }
             />
           </Switch>

@@ -9,8 +9,8 @@ export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      query: '',
-      category: 'MLB1953',
+      query: ' ',
+      category: 'MLB1648',
       products: undefined,
     };
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -42,7 +42,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, query, category } = this.state;
     return (
       <div>
         <h2 data-testid="home-initial-message">
@@ -57,7 +57,7 @@ export default class Home extends Component {
         </Link>
         {(products === undefined)
           ? <p>Loading...</p>
-          : <ListCards products={ products } />}
+          : <ListCards products={ products } category={ category } query={ query } />}
       </div>
     );
   }

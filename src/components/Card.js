@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 class Card extends Component {
   render() {
-    const { name, thumbnail, price, id } = this.props;
-    const redirectId = `/product/${id}`;
+    const { name, thumbnail, price, id, query, category } = this.props;
+    const redirectId = `/product/${id}/${query}/${category}`;
     return (
       <div data-testid="product">
         <h2>{name}</h2>
@@ -22,6 +22,8 @@ Card.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  query: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
 };
 
 export default Card;
