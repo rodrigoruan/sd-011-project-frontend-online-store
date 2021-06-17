@@ -1,0 +1,7 @@
+* {
+  margin-left: 20px,
+}
+
+.shopping-cart-item-section {
+  display: flex;
+}
