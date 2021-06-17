@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
-import { Loading } from '../components/index';
+import { Loading, ProductCard } from './index';
 
 class ListaCategoria extends Component {
   constructor() {
@@ -18,17 +18,17 @@ class ListaCategoria extends Component {
     this.fetchCategories();
   }
 
-  handleClick({ target: { key } }) {
-    const categoryArray = this.fetchCategory(key);
-    this.setState({
-      filteredCategories: categoryArray,
-      loading: false,
-    });
+  handleClick({ target: { id } }) {
+    this.fetchCategory(id);
   }
 
+  // oi
   async fetchCategory(id) {
-    const response = await api.getProductsFromCategoryAndQuery(id, "$QUERY");
-    return response;
+    const response = await api.getProductsFromCategoryAndQuery(id, '$QUERY');
+    this.setState({
+      filteredCategories: response.results,
+      loading: false,
+    });
   }
 
   async fetchCategories() {
@@ -40,19 +40,32 @@ class ListaCategoria extends Component {
   }
 
   render() {
-    const { loading, categories } = this.state;
+    const { loading, categories, filteredCategories } = this.state;
     const loadingComponent = <Loading />;
+    const categoryFiltered = (
+      <div>
+        {filteredCategories.map(({ id, title, thumbnail, price }) => (
+          <ProductCard
+            key={ id }
+            title={ title }
+            imgPath={ thumbnail }
+            price={ price }
+          />
+        ))}
+      </div>);
     const categoryList = (
       <div>
         {categories.map(({ id, name }) => (
-          <label key={id}>
+          <label key={ id } htmlFor={ id }>
             {name}
             <input
+              id={ id }
               type="radio"
               data-testid="category"
-              key={id}
-              onClick={this.handleClick}
-              value={name}
+              key={ id }
+              onClick={ this.handleClick }
+              value={ name }
+              name="category-name"
             />
           </label>
         ))}
@@ -61,6 +74,7 @@ class ListaCategoria extends Component {
     return (
       <div>
         {loading ? loadingComponent : categoryList}
+        { categoryFiltered }
       </div>
     );
   }
