@@ -2,19 +2,20 @@ body {
   display: inline-block;
 }
 
+.product-card {
+  border: 1px solid black;
+  height: auto;
+  width: 100px;
+}
+
+.product-card img {
+  height: auto;
+  width: 100px;
+}
+
 .products-column {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 }
 
-.product-card {
-   width: 100px;
-   height: auto;
-   border: 1px solid black;
-}
-
-.product-card img {
-  width: 100px;
-  height: auto;  
-}
