@@ -11,10 +11,11 @@ export default class ShoppingCart extends Component {
             Seu carrinho está vazio
           </div>
         ) : (
-          arrayObject.map(({ title, thumbnail, price }, index) => (
+          arrayObject.map(({ title, thumbnail, price, countProduct }, index) => (
             <div key={ index } data-testid="shopping-cart-product-name">
               <h2>{`${title}-${price}`}</h2>
               <img src={ thumbnail } alt={ title } />
+              <div data-testid="shopping-cart-product-quantity">{countProduct}</div>
             </div>
           ))
         )}
