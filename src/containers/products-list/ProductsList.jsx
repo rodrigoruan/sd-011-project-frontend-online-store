@@ -9,7 +9,7 @@ export default class ProductsList extends Component {
 
     return (
       <div>
-        <p>Lista de Produtos</p>
+        { products.map((product) => <ProductCard product={ product } />) }
       </div>
     );
   }
