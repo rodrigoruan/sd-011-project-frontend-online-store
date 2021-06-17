@@ -2,13 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ProductDetails extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      product: undefined,
-    };
-  }
-
   render() {
     const { match: { params: { id } } } = this.props;
     const product = JSON.parse(sessionStorage.getItem(id));
