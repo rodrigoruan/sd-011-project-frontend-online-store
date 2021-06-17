@@ -7,11 +7,9 @@ export default class ProductsList extends Component {
   render() {
     const { products } = this.props;
 
-    if (!products.length) return <p>Qual produto deseja pesquisar?</p>
-
     return (
       <div>
-        <p>Lista de Produtos</p>
+        { products.map((product) => <ProductCard product={ product } />) }
       </div>
     );
   }

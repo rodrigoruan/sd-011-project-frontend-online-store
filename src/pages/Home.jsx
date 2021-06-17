@@ -20,13 +20,14 @@ export default class Home extends React.Component {
     this.renderProducts = this.renderProducts.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
     this.setCategory = this.setCategory.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
-    this.FetchAPI();
+    this.FetchCategories();
   }
 
-  async FetchAPI() {
+  async FetchCategories() {
     const getCategories = await api.getCategories();
     this.setState({
       categories: getCategories,
@@ -37,30 +38,52 @@ export default class Home extends React.Component {
     this.setState(
       { loading: true },
       async () => {
-        const getProducts = await api.getProductsFromCategoryAndQuery(id, searchText);
-        this.setState({
-          products: getProducts,
-          loading: false,
-        });
+        const SetProducts = (getProducts) => {
+          this.setState({
+            products: getProducts.results,
+            loading: false,
+            });
+        };
+
+        if (id && searchText) {
+          const getProducts = await api.getProductsFromCategoryAndQuery(id, searchText);
+          SetProducts(getProducts);
+        } 
+        else if (id && !searchText) {
+          const getProducts = await api.getProductsFromCategory(id);
+          SetProducts(getProducts);
+        }
+        else if (searchText && !id) {
+          const getProducts = await api.getProductsFromQuery(searchText);
+          SetProducts(getProducts);
+        }
+        else {
+          alert('Por favor escolha alguma categoria ou digite algo para pesquisar');
+          this.setState({
+            loading: false,
+          })
+        }
       }
     )
   }
 
-  handleSearchClick() {
-    const inputText = document.querySelector('#search-input').value;
-    
-    this.setState({
-      searchText: inputText,
-    });
+  handleInputChange(e) {
+    const text = e.target.value;
 
-    const id = this.state.crrCategory ? this.state.crrCategory : false;
-    const searchText = this.state.searchText ? this.state.searchText : false;
+    this.setState({
+      searchText: text,
+    });
+  }
+
+  handleSearchClick() {
+    const id = this.state.crrCategory ? this.state.crrCategory : "";
+    const searchText = this.state.searchText ? this.state.searchText : "";
 
     this.FetchProducts(id, searchText)
   }
 
-  setCategory = ({ target }) => {
-    const { id } = target;
+  setCategory = (e) => {
+    const { id } = e.target;
     this.setState({
       crrCategory: id,
     });
@@ -77,9 +100,9 @@ export default class Home extends React.Component {
     return (
       <div className="Home">
         <label htmlFor="search-input">
-          <input type="text" name="search" id="search-input" data-testid="query-input" />
+          <input type="text" name="search" id="search-input" data-testid="query-input" onChange={ this.handleInputChange } />
 
-          <button type="button" name="button" data-testid="query-button" onClick={ () => this.handleSearchClick() } >Pesquisar</button>
+          <button type="button" name="button" data-testid="query-button" onClick={ this.handleSearchClick } >Pesquisar</button>
 
           <h1 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
