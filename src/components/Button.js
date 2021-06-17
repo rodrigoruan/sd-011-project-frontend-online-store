@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class Button extends Component {
   render() {
-    const { subClick, addClick } = this.props;
+    const { subClick, addClick, quantity } = this.props;
     return (
       <div>
         <button
@@ -14,7 +14,11 @@ export default class Button extends Component {
           -
         </button>
 
-        <p data-testid="shopping-cart-product-quantity"> 1 </p>
+        <p data-testid="shopping-cart-product-quantity">
+          {' '}
+          { quantity }
+          {' '}
+        </p>
         <button
           data-testid="product-increase-quantity"
           type="button"
@@ -30,4 +34,5 @@ export default class Button extends Component {
 Button.propTypes = {
   subClick: PropTypes.func.isRequired,
   addClick: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };

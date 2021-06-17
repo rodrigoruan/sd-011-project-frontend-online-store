@@ -9,7 +9,6 @@ export default class ProductList extends Component {
   }
 
   handlerLocalStore(param) {
-    console.log(param);
     param.countP = 1;
     if (!localStorage.item) {
       localStorage.setItem('item', JSON.stringify([param]));
