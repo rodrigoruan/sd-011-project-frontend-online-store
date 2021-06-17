@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from '../ProductCard/ProductCard';
+import './ProductsList.css';
 
 export default class ProductsList extends React.Component {
   render() {
     const { products, handleAddToShopCart } = this.props;
 
     return (
-      <div>
+      <div className="products-list-container">
         {
           products.length
             ? (
