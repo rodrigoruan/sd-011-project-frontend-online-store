@@ -32,24 +32,34 @@ class CardProduct extends Component {
     const { listProduct, onClick } = this.props;
     const { thumbnail, title, price } = listProduct;
     return !redirect ? (
-      <div data-testid="product">
-        { title }
-        <img src={ thumbnail } alt={ title } />
-        { price }
-        <button
-          type="button"
-          onClick={ this.setStorage }
-          data-testid="product-detail-link"
-        >
-          Detalhes
-        </button>
-        <button
-          onClick={ () => onClick(listProduct) }
-          type="button"
-          data-testid="product-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </button>
+      <div className="card" data-testid="product">
+        <div className="title">
+          { title }
+        </div>
+        <img className="img" src={ thumbnail } alt={ title } />
+        <div className="buttons-container">
+          <div className="price">
+            R$
+            {' '}
+            { price }
+          </div>
+          <button
+            type="button"
+            onClick={ this.setStorage }
+            data-testid="product-detail-link"
+            id="details-button"
+          >
+            Ver mais
+          </button>
+          <button
+            onClick={ () => onClick(listProduct) }
+            type="button"
+            data-testid="product-add-to-cart"
+            id="add-to-cart-button"
+          >
+            Adicionar ao carrinho
+          </button>
+        </div>
       </div>
     ) : (<Redirect to="/product" />);
   }

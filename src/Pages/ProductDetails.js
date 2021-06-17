@@ -43,28 +43,48 @@ class ProductDetails extends Component {
     const { redirect, product, cartProducts } = this.state;
     const { title, thumbnail, price } = product;
     return !redirect ? (
-      <div>
-        <p data-testid="product-detail-name">{ title }</p>
-        <img src={ thumbnail } alt={ title } />
-        { price }
-        <button
-          onClick={ () => this.addCart(product) }
-          type="button"
-          data-testid="product-detail-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </button>
-        <Link
-          to={ { pathname: '/shopcart', state: cartProducts } }
-        >
-          <button type="button" data-testid="shopping-cart-button">
-            Carrinho de Compras
+      <div id="details-container">
+        <header className="header">
+          <Link
+            to={ { pathname: '/' } }
+          >
+            <h1 className="logo" data-testid="home-initial-message">
+              G16 Store
+            </h1>
+          </Link>
+        </header>
+        <div className="card">
+          <div className="title">
+            <p data-testid="product-detail-name">{ title }</p>
+          </div>
+
+          <img className="img" src={ thumbnail } alt={ title } />
+
+          <div className="price">
+            R$
+            {' '}
+            { price }
+          </div>
+          <button
+            onClick={ () => this.addCart(product) }
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            id="add-to-cart-button-details"
+          >
+            Adicionar ao carrinho
           </button>
-        </Link>
-        <form method="GET">
-          <input data-testid="product-detail-evaluation" type="textarea" />
-          <input type="submit" />
-        </form>
+          <Link
+            to={ { pathname: '/shopcart', state: cartProducts } }
+          >
+            <button type="button" data-testid="shopping-cart-button">
+              Carrinho de Compras
+            </button>
+          </Link>
+          <form method="GET">
+            <input id="textarea" data-testid="product-detail-evaluation" type="textarea" />
+            <input type="submit" />
+          </form>
+        </div>
       </div>
     ) : (<Redirect to="/" />);
   }

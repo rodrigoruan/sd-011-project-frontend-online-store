@@ -34,21 +34,44 @@ class Shopcart extends Component {
   render() {
     const { products, loading } = this.state;
     return (
+
       loading ? (
-        <div data-testid="shopping-cart-empty-message">
-          Seu carrinho está vazio
-        </div>
-      ) : (
-        <div>
-          {products.map((product, index) => (
-            <NewItem newProduct={ product } key={ index } />
-          ))}
-          <Link to={ { pathname: '/PurchasePage', state: products } }>
-            <button data-testid="checkout-products" type="button">
-              Finalizar Compra
-            </button>
+        <header className="header">
+          <Link
+            to={ { pathname: '/' } }
+          >
+            <h1 id="text-search-h1" data-testid="home-initial-message">
+              G16 Store
+            </h1>
           </Link>
+          <div data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </div>
+        </header>
+
+      ) : (
+        <div className="ajuda-deus">
+          <header className="header">
+            <Link
+              to={ { pathname: '/' } }
+            >
+              <h1 className="logo" data-testid="home-initial-message">
+                G16 Store
+              </h1>
+            </Link>
+          </header>
+          <div className="card-container">
+            {products.map((product, index) => (
+              <NewItem newProduct={ product } key={ index } />
+            ))}
+            <Link to={ { pathname: '/PurchasePage', state: products } }>
+              <button data-testid="checkout-products" type="button">
+                Finalizar Compra
+              </button>
+            </Link>
+          </div>
         </div>
+
       ));
   }
 }
