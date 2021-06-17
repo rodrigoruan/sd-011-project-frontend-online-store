@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import closeButton from '../images/close-button.png';
+import closeButton from '../images/close-button.png';
 
 export default class ShoppingCart extends Component {
   constructor() {
@@ -7,10 +7,11 @@ export default class ShoppingCart extends Component {
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.removeAllItems = this.removeAllItems.bind(this);
-
     const items = JSON.parse(localStorage.getItem('items'));
+    const quantity = JSON.parse(localStorage.getItem('quantity'));
     this.state = {
       items,
+      quantity,
     };
   }
 
@@ -51,17 +52,17 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { items } = this.state;
+    const { items, quantity } = this.state;
     return (
       <div>
-        { items.map(({ title, thumbnail, price, id, quantity }, index) => (
+        { items.map(({ product: { title, thumbnail, price, id } }, index) => (
           <div key={ index }>
-            {/* <img
+            <img
               src={ closeButton }
               alt="close button"
               id={ id }
               onClick={ this.removeAllItems }
-            /> */}
+            />
             <img src={ thumbnail } alt="Foto do Produto" />
             <p>{title}</p>
             <button
@@ -73,8 +74,7 @@ export default class ShoppingCart extends Component {
               -
             </button>
             <p>
-              Quantidade:
-              { quantity }
+              { `Quantidade: ${quantity.find((productId) => productId === id)}` }
             </p>
             <button
               id={ id }
