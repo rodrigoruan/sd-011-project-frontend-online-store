@@ -13,8 +13,8 @@ class Card extends Component {
   setItem = () => {
     const { title, thumbnail, price, id } = this.props;
     const { counter } = this.state;
-    this.setState((previus) => ({
-      counter: previus.counter + 1,
+    this.setState((previous) => ({
+      counter: previous.counter + 1,
     }));
     const obj = { title, thumbnail, price, id, counter };
     const objJSON = JSON.stringify(obj);

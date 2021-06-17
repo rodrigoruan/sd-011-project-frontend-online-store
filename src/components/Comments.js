@@ -28,7 +28,6 @@ export default class Comments extends Component {
         <form>
           <div>
             <input
-              data-testid="product-detail-evaluation"
               type="email"
               pattern="^[\w_.]{6,}@[a-z]{5,}.com(.br)?$"
               name="email"
@@ -74,6 +73,7 @@ export default class Comments extends Component {
           </div>
           <div>
             <textarea
+              data-testid="product-detail-evaluation"
               name="comment"
               cols="30"
               rows="10"
@@ -81,7 +81,7 @@ export default class Comments extends Component {
               onChange={ this.onChange }
             />
           </div>
-          <button type="button" onClick={ addComment }>
+          <button type="button" onClick={ () => addComment(this.state) }>
             Avaliar
           </button>
         </form>
@@ -93,9 +93,5 @@ export default class Comments extends Component {
 
 Comments.propTypes = {
   addComment: PropTypes.func.isRequired,
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    email: PropTypes.string,
-    review: PropTypes.number,
-    comment: PropTypes.string,
-  })).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
