@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CardList from './cardList';
 import * as fetchApi from '../services/api';
 import Categories from './Categories';
@@ -11,20 +12,12 @@ class LandingPage extends React.Component {
     this.state = {
       cardList: [],
       query: '',
-      // selectedCategory: '',
     };
     this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.onClickCategory = this.onClickCategory.bind(this);
   }
 
-  onClickCategory(event) {
-    const { target: { id } } = event;
-    // this.setState(() => ({ selectedCategory: id }));
-    this.onClick(id);
-  }
-
-  onClick(id = '') {
+  onClick({ target: { id = '' } }) {
     const { query } = this.state;
     fetchApi.getProductsFromCategoryAndQuery(id, query).then((produtos) => this.setState({
       cardList: produtos,
@@ -38,7 +31,8 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    const { cardList } = this.state;
+    const { cardList, query } = this.state;
+    const { getProductDetails } = this.props;
     return (
       <div data-testid="home-initial-message">
         <span>Digite algum termo de pesquisa ou escolha uma categoria.</span>
@@ -57,11 +51,19 @@ class LandingPage extends React.Component {
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ carrinho } alt="carrinho" />
         </Link>
-        <CardList list={ cardList.results } />
-        <Categories onClick={ this.onClickCategory } />
+        <CardList
+          list={ cardList.results }
+          query={ query }
+          getProductDetails={ getProductDetails }
+        />
+        <Categories onClick={ this.onClick } />
       </div>
     );
   }
 }
+
+LandingPage.propTypes = {
+  getProductDetails: PropTypes.func.isRequired,
+};
 
 export default LandingPage;

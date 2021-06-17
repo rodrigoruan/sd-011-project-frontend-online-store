@@ -4,7 +4,7 @@ import CardCreator from './cardCreator';
 
 export default class CardList extends React.Component {
   render() {
-    const { list } = this.props;
+    const { list, query, getProductDetails } = this.props;
     return (
       <div>
         {
@@ -14,6 +14,8 @@ export default class CardList extends React.Component {
               <CardCreator
                 key={ index }
                 product={ produto }
+                query={ query }
+                getProductDetails={ getProductDetails }
               />))
         }
       </div>
@@ -23,4 +25,6 @@ export default class CardList extends React.Component {
 
 CardList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any).isRequired,
+  query: PropTypes.string.isRequired,
+  getProductDetails: PropTypes.func.isRequired,
 };
