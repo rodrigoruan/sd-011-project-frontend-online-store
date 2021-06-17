@@ -16,24 +16,32 @@ class Categories extends Component {
   }
 
   async renderCategories() {
-    const data = await api
-      .getCategories()
-      .then((response) => this.setState({ categories: response }));
-    return data;
+    const data = await api.getCategories();
+    this.setState({
+      categories: data,
+    });
   }
 
   render() {
+    const { handleRadioClick } = this.props;
     const { categories } = this.state;
     return (
       <div className="categories">
         <h5>Categorias:</h5>
-        <ul>
-          {categories.map((category) => (
-            <li data-testid="category" key={category.id}>
-              {category.name}
-            </li>
-          ))}
-        </ul>
+        {categories.map((el) => (
+          <label key={ el.id } htmlFor={ el.id }>
+            {el.name}
+            <input
+              key={ el.id }
+              type="radio"
+              id={ el.id }
+              name="categories"
+              data-testid="category"
+              value={ el.id }
+              onClick={ handleRadioClick }
+            />
+          </label>
+        ))}
       </div>
     );
   }

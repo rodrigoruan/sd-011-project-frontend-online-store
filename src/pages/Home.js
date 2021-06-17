@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Categories from '../components/Categories';
-import SearchInput from '../components/SearchInput';
-import SearchList from '../pages/SearchList';
+import { Categories, SearchInput } from '../components/zComponentsMenu';
+import SearchList from './SearchList';
 import * as api from '../services/api';
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -10,14 +10,16 @@ export default class Home extends Component {
     this.state = {
       loading: true,
       inputText: [],
-      products: [],
+      products: '',
+      radio: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleRadioClick = this.handleRadioClick.bind(this);
   }
 
-  getQuery = async (product) => {
-    const getList = await api.getProductsFromCategoryAndQuery('MLB1071', product);
+  getQuery = async (category, product) => {
+    const getList = await api.getProductsFromCategoryAndQuery(category, product);
     return this.setState({ products: getList.results });
   };
 
@@ -28,10 +30,10 @@ export default class Home extends Component {
     }
   }
 
-  componentDidUpdate() {
-    const { searchQuery } = this.props;
-    if (searchQuery) {
-      this.getQuery(searchQuery);
+  componentDidUpdate(prevProps) {
+    const { searchQuery, radioFilter } = this.props;
+    if (prevProps.searchQuery !== this.props.searchQuery) {
+      this.getQuery(radioFilter, searchQuery);
     }
   }
 
@@ -40,20 +42,26 @@ export default class Home extends Component {
   };
 
   handleSubmit = (event) => {
-    const { inputText } = this.state;
     event.preventDefault();
+    const { inputText } = this.state;
     this.props.sendSubmit(inputText);
     this.setState({ loading: false });
+  };
+
+  handleRadioClick = ({ target }) => {
+    this.props.sendRadio(target.value);
+  };
+
+  showCategory = () => {
+    if (!this.state.loading) return <SearchList products={this.state.products} />;
   };
 
   render() {
     return (
       <div className="home-div">
+        <Categories handleRadioClick={this.handleRadioClick} />
         <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
-        <div class="search-results">
-          <Categories />  
-          <SearchList products={this.state.products} />
-        </div>
+        <div className="search-results">{this.showCategory()}</div>
       </div>
     );
   }

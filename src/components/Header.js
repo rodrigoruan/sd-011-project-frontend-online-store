@@ -18,7 +18,7 @@ export default class Header extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon" />
           </button>
           <section className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
@@ -36,7 +36,8 @@ export default class Header extends Component {
                 >
                   Carrinho
                 </Link>
-              </li>{' '}
+              </li>
+              {' '}
               <li className="nav-item">
                 <a className="nav-link" href="/about">
                   About

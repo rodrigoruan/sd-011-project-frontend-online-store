@@ -1,34 +1,44 @@
 import React, { Component } from 'react';
-import * as api from '../services/api';
-import { Redirect } from 'react-router-dom';
-import ItemProduct from '../components/ItemProduct';
+import { ProductCard } from '../components/zComponentsMenu';
 
 export default class SearchList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [],
+      empty: true,
     };
     this.showList = this.showList.bind(this);
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps) {
+    if (prevProps.products !== this.props.products) {
+      this.setState({ empty: false });
+    }
+  }
+
+  componentDidMount() {
+    const { products } = this.props;
+    this.setState({ products });
+  }
 
   showList = () => {
-    if (this.props.products) {
-      return this.props.products.map((el) => {
-        const { thumbnail, title, id, price } = el;
-        return <ItemProduct thumbnail={thumbnail} title={title} id={id} price={price} />;
-      });
+    const { products } = this.props;
+    const { empty } = this.state;
+    if (!empty && products.length > 1) {
+      return products.map((el, index) => <ProductCard item={el} key={index} />);
+    }
+    if (products.length < 1) {
+      return <>Nenhum produto foi encontrado</>;
     }
   };
 
   render() {
-    const { products } = this.state;
+    const { products } = this.props;
     if (!products) {
-      return <div>Loading</div>;
-    } else {
+      return <>Loading</>;
+    }
+    if (products) {
       return <div className="search-list">{this.showList()}</div>;
     }
   }

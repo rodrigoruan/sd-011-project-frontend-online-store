@@ -70,11 +70,12 @@ h6 {
 
 ul {
   list-style-type: none;
+
   /* align-items: center;
   display: flex;
   justify-content: center;
   padding: 0; */
-} 
+}
 
 li {
   padding: 5px;
