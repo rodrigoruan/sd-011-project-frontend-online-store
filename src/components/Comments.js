@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ListComments from './ListComments';
 
-export default class Form extends Component {
+export default class Comments extends Component {
   constructor() {
     super();
 
@@ -19,7 +20,7 @@ export default class Form extends Component {
   }
 
   render() {
-    const { handleOnChange } = this.props;
+    const { addComment, comments } = this.props;
     const { email, comment } = this.state;
     return (
       <div>
@@ -80,15 +81,21 @@ export default class Form extends Component {
               onChange={ this.onChange }
             />
           </div>
-          <button type="button" onClick={ handleOnChange }>
+          <button type="button" onClick={ addComment }>
             Avaliar
           </button>
         </form>
+        <ListComments comments={ comments } />
       </div>
     );
   }
 }
 
-Form.propTypes = {
-  handleOnChange: PropTypes.func.isRequired,
+Comments.propTypes = {
+  addComment: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape({
+    email: PropTypes.string,
+    review: PropTypes.number,
+    comment: PropTypes.string,
+  })).isRequired,
 };
