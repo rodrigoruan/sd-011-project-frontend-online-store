@@ -43,7 +43,7 @@ class ProductDetails extends Component {
     const { redirect, product, cartProducts } = this.state;
     const { title, thumbnail, price } = product;
     return !redirect ? (
-      <div id="details-container">
+      <div className="details-container">
         <header className="header">
           <Link
             to={ { pathname: '/' } }
@@ -57,9 +57,7 @@ class ProductDetails extends Component {
           <div className="title">
             <p data-testid="product-detail-name">{ title }</p>
           </div>
-
           <img className="img" src={ thumbnail } alt={ title } />
-
           <div className="price">
             R$
             {' '}
@@ -81,7 +79,11 @@ class ProductDetails extends Component {
             </button>
           </Link>
           <form method="GET">
-            <input id="textarea" data-testid="product-detail-evaluation" type="textarea" />
+            <input
+              className="textarea"
+              data-testid="product-detail-evaluation"
+              type="textarea"
+            />
             <input type="submit" />
           </form>
         </div>

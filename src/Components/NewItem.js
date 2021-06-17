@@ -42,7 +42,7 @@ export default class NewItem extends Component {
           Preço total:
           {quantity * newProduct.price}
         </p>
-        <div id="increase-decrease-buttons">
+        <div className="increase-decrease-buttons">
           <button
             type="button"
             data-testid="product-increase-quantity"

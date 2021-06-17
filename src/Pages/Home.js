@@ -94,7 +94,7 @@ export default class Home extends Component {
             <input
               data-testid="query-input"
               onChange={ this.handleChange }
-              id="search"
+              className="search"
               type="text"
             />
             <button
