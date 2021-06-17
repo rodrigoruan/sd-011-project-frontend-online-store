@@ -48,7 +48,7 @@ class ProductList extends React.Component {
           {produtosFiltrados.map((product) => (
             <ProductCard
               produto={ product }
-              key={ product.title }
+              key={ product.id }
             />))}
         </div>
         <h4
