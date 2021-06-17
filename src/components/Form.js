@@ -12,7 +12,7 @@ export default class Form extends Component {
     this.sortComment = this.sortComment.bind(this);
   }
 
-  async addComment({ target }) {
+  addComment({ target }) {
     const { idProduct } = this.props;
     console.log(idProduct);
     const teste = target.parentElement.children;
@@ -22,7 +22,7 @@ export default class Form extends Component {
       comment: teste[2].firstChild.value,
     };
 
-    await this.setState((prevValue) => ({
+    this.setState((prevValue) => ({
       comment: [...prevValue.comment, commentForState],
     }));
 
@@ -76,6 +76,7 @@ export default class Form extends Component {
             <textarea
               id="comment"
               placeholder="Insira seu comentário"
+              data-testid="product-detail-evaluation"
             />
           </label>
           <button
