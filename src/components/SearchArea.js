@@ -13,6 +13,7 @@ class SearchArea extends Component {
             title={ product.title }
             price={ product.price }
             img={ product.thumbnail }
+            id={ product.id }
           />
         ))}
       </div>
