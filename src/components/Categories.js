@@ -8,10 +8,9 @@ class Category extends Component {
 
     this.state = {
       categories: [],
-      // productsByCategory: [],
     };
+
     this.getCategories = this.getCategories.bind(this);
-    // this.getProductsByCategory = this.getProductsByCategory.bind(this);
   }
 
   componentDidMount() {
@@ -23,12 +22,6 @@ class Category extends Component {
       .then((response) => this.setState({ categories: response }));
     return data;
   }
-
-  // async getProductsByCategory(categoryId) {
-  //   const data = await api.getProductsFromCategory(categoryId);
-  //   console.log(data);
-  //   this.setState({ productsByCategory: data.results });
-  // }
 
   render() {
     const { categories } = this.state;

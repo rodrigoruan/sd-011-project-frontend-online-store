@@ -22,9 +22,9 @@ class ProductDetails extends React.Component {
   async getProduct() {
     const { match: { params: { categoryId, id } } } = this.props;
     const productObj = await api.getProductsFromCategoryAndQuery(categoryId, '');
-    const details = productObj.results
-      .find((product) => product.id === id);
-    this.setState({ product: details });
+    const product = productObj.results
+      .find((prod) => prod.id === id);
+    this.setState({ product });
   }
 
   render() {

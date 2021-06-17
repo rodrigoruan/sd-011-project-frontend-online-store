@@ -4,7 +4,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Searchfield from './Searchfield';
-import Category from './Category';
+import Category from './Categories';
 import * as api from '../services/api';
 
 class Home extends Component {
