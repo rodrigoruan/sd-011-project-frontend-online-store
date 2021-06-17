@@ -38,14 +38,11 @@ class DetalhesProduto extends Component {
     const { match } = this.props;
     const { item } = match.params;
     const { itemsArr, loading } = this.state;
-    // if (loading) return <Loading />;
+    if (loading) return <Loading />;
     const produto = itemsArr.find((produc) => produc.id === item);
     return (
-      <div>
-        { loading ? <Loading />
-          : <p data-testid="product-detail-name">
-            {produto.title}
-            </p>}
+      <div data-testid="product-detail-name">
+        {produto.title}
       </div>
     );
   }

@@ -57,10 +57,10 @@ class ListaCategoria extends Component {
     const categoryList = (
       <div>
         {categories.map(({ id, name }) => (
-          <label key={ id } htmlFor="category-input">
+          <label key={ id } htmlFor={ id }>
             {name}
             <input
-              id="category-input"
+              id={ id }
               type="radio"
               data-testid="category"
               key={ id }
