@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Categories, SearchResults } from '../components';
 import * as api from '../services/api';
@@ -42,7 +43,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { categories, updateSearchResults, searchResults } = this.props;
+    const { addItemToCart, categories, updateSearchResults, searchResults } = this.props;
     const { currentCategoryFilter, searchTerm } = this.state;
     return (
       <main className="home-container">
@@ -59,7 +60,9 @@ class Home extends React.Component {
           searchResults={ searchResults }
           updateSearchResults={ updateSearchResults }
           currentCategoryFilter={ currentCategoryFilter }
+          addItemToCart={ addItemToCart }
         />
+        <Link to="/cart">Ver Carrinho</Link>
       </main>
     );
   }
@@ -68,14 +71,15 @@ class Home extends React.Component {
 Home.propTypes = {
   searchResults: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string,
     })),
-  }).isRequired,
-  updateSearchResults: PropTypes.func.isRequired,
+  }),
+  updateSearchResults: PropTypes.func,
   categories: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
-  })).isRequired,
-};
+  })),
+  addItemToCart: PropTypes.func,
+}.isRequired;
 
 export default Home;
