@@ -3,9 +3,22 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Card extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      product: props.product,
+    };
+    this.handlerSubmit = this.handlerSubmit.bind(this);
+  }
+
+  handlerSubmit() {
+    const { product } = this.state;
+    const { title, thumbnail, price, id } = product;
+    window.localStorage.setItem(id, [title, thumbnail, price]);
+  }
+
   render() {
-    const { product } = this.props;
-    // console.log(product);
+    const { product } = this.state;
     const { title, thumbnail, price } = product;
     return (
       <div data-testid="product">
@@ -19,6 +32,14 @@ class Card extends React.Component {
         >
           Detalhes
         </Link>
+        <br />
+        <button
+          type="submit"
+          data-testid="product-add-to-cart"
+          onClick={ this.handlerSubmit }
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }

@@ -14,11 +14,15 @@ class ProductDetails extends React.Component {
         <p data-testid="product-detail-name">{title}</p>
         <p>{`Preço: ${price} R$`}</p>
         <img src={ thumbnail } alt={ title } />
-        {attributes.map(({ value_name }, index) => <p key={ index }>{ value_name }</p>)}
+        {attributes.map(({ name }, index) => <p key={ index }>{ name }</p>)}
         <br />
         <Link to="/">Voltar</Link>
         <br />
-        <Link to="/components/Cart">Carrinho de compras</Link>
+        <Link
+          to="/components/Cart"
+        >
+          Carrinho de compras
+        </Link>
       </div>
     );
   }
