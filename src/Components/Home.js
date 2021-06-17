@@ -1,6 +1,5 @@
 import React from 'react';
-import ShoppingCart from './ShoppingCart';
-import Categories from './Categories';
+import { Link } from 'react-router-dom';
 import style from './Home.module.css';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -10,9 +9,16 @@ class Home extends React.Component {
 
     this.state = {
       products: null,
+      categories: null,
       search: false,
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleClickLi = this.handleClickLi.bind(this);
+  }
+
+  componentDidMount() {
+    getCategories()
+      .then((json) => this.setState({ categories: json }));
   }
 
   handleClick() {
@@ -26,40 +32,75 @@ class Home extends React.Component {
       }));
   }
 
+  async handleClickLi({ target: { id } }) {
+    const { value } = document.querySelector('input');
+    const query = await getProductsFromCategoryAndQuery(id, value);
+    this.setState({ products: query.results });
+  }
+
   render() {
     const { products, search } = this.state;
+    const { categories } = this.state;
     return (
-      <div className={ style.inputContent }>
-        <label htmlFor="site-search">
-          <input
-            data-testid="query-input"
-            type="search"
-            id="site-search"
-          />
-        </label>
+      <>
+        {/* Renderiza o card de produtos após clicar no botão */}
 
-        <button
-          id="search-button"
-          type="button"
-          data-testid="query-button"
-          onClick={ this.handleClick }
-        >
-          Busca
-        </button>
-        <br />
-        <ShoppingCart />
-        <span data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </span>
-        <Categories />
-        {products && products.map((product) => (
-          <div key={ product.id } data-testid="product">
-            <img src={ product.thumbnail } alt="foto-produto" />
-            <h2>{product.title}</h2>
-            <p>{product.price}</p>
-          </div>))}
-        {search && products.length === 0 && <p>Nenhum produto encontrado</p>}
-      </div>
+        <section className={ style.inputContent }>
+          <label htmlFor="site-search">
+            <input
+              data-testid="query-input"
+              type="search"
+              id="site-search"
+            />
+          </label>
+
+          <button
+            id="search-button"
+            type="button"
+            data-testid="query-button"
+            onClick={ this.handleClick }
+          >
+            Busca
+          </button>
+          <br />
+          <span data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </span>
+          {products && products.map((product) => (
+            <Link
+              to="/product/:id"
+              key={ product.id }
+              data-testid="product"
+            >
+              <img src={ product.thumbnail } alt="foto-produto" />
+              <h2>{product.title}</h2>
+              <p>{product.price}</p>
+            </Link>))}
+          {search && products.length === 0 && <p>Nenhum produto encontrado</p>}
+        </section>
+
+        {/* Renderiza o card de produtos após clicar na categoria */}
+
+        <section>
+          {categories && categories.map((produto) => (
+            <Link
+              to="/"
+              key={ produto.id }
+              className={ style.link }
+              onClick={ this.handleClickLi }
+            >
+              <ul className={ style.list }>
+                <li
+                  data-testid="category"
+                  id={ produto.id }
+                >
+                  {produto.name}
+                </li>
+              </ul>
+            </Link>
+          ))}
+        </section>
+      </>
     );
   }
 }

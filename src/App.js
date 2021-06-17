@@ -2,17 +2,21 @@ import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Cart from './Components/Cart';
-import Categories from './Components/Categories';
+import { Product } from './Components/Product';
 import Home from './Components/Home';
+import ShoppingCart from './Components/ShoppingCart';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ Home } />
+          <Route exact path="/">
+            <Home />
+            <ShoppingCart />
+          </Route>
           <Route path="/cart" component={ Cart } />
-          <Route path="/categories/:id" component={ Categories } />
+          <Route path="/product/:id" component={ Product } />
         </Switch>
       </BrowserRouter>
     </div>
