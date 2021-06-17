@@ -81,7 +81,7 @@ export default class Home extends Component {
       <div className="body">
         <header className="header">
           <h1 className="text-search-h1" data-testid="home-initial-message">
-            G16 Store
+            Digite algum termo de pesquisa ou escolha uma categoria.
           </h1>
           <Link
             to={ { pathname: '/shopcart', state: cartProducts } }
