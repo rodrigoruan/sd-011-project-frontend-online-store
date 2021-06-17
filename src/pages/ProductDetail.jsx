@@ -46,7 +46,7 @@ export default class ProductDetail extends Component {
 
   addToCart({ target: { value } }) {
     const key = JSON.parse(value).title;
-    localStorage.setItem(key, value);
+    sessionStorage.setItem(key, value);
   }
 
   resetCanCreatePE() {
@@ -72,7 +72,7 @@ export default class ProductDetail extends Component {
           type="button"
           data-testid="product-detail-add-to-cart"
           onClick={ this.addToCart }
-          value={ JSON.stringify({ title, price, thumbnail }) }
+          value={ JSON.stringify({ title, price, thumbnail, quantity: 1 }) }
         >
           Adicionar ao carrinho
         </button>
