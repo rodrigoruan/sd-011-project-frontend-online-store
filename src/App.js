@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/details" component={ ProductDetails } />
+          <Route path="/details/:id" component={ ProductDetails } />
           <Route
             exact
             path="/ShoppingCart"

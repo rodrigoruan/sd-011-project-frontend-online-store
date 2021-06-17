@@ -7,11 +7,11 @@ class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
+    this.renderShopCart = this.renderShopCart.bind(this);
     this.state = {
       shopCart: props.shopCart,
     };
 
-    this.renderShopCart = this.renderShopCart.bind(this);
   }
 
   renderShopCart(shopCart) {
