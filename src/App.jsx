@@ -10,13 +10,23 @@ class App extends Component {
     this.state = {
       searchResults: { results: [] },
       categories: [],
+      shoppingCart: [],
     };
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
     this.defineStateCategories();
+  }
+
+  addItemToCart(product) {
+    this.setState(({ shoppingCart }) => {
+      product.quantity = 1;
+      const newShoppingCart = [...shoppingCart, product];
+      return { shoppingCart: newShoppingCart };
+    });
   }
 
   async defineStateCategories() {
@@ -33,7 +43,7 @@ class App extends Component {
   }
 
   render() {
-    const { categories, searchResults } = this.state;
+    const { categories, searchResults, shoppingCart } = this.state;
 
     return (
       <>
@@ -47,9 +57,14 @@ class App extends Component {
                 searchResults={ searchResults }
                 updateSearchResults={ this.updateSearchResults }
                 categories={ categories }
+                addItemToCart={ this.addItemToCart }
               />) }
             />
-            <Route path="/cart" component={ Cart } />
+
+            <Route
+              path="/cart"
+              render={ () => <Cart productList={ shoppingCart } /> }
+            />
             <Route
               path="/product/:id"
               component={ Product }
