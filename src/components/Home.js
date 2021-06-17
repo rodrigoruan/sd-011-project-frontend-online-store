@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart } from 'react-icons/fa';
 
-import { getProductsFromCategoryAndQuery } from '../services/api';
 import Searchfield from './Searchfield';
 import Category from './Categories';
 import * as api from '../services/api';
@@ -15,6 +14,7 @@ class Home extends Component {
       products: [],
       categoryId: '',
     };
+
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.getProductsByCategory = this.getProductsByCategory.bind(this);
@@ -28,7 +28,7 @@ class Home extends Component {
 
   async onClick() {
     const { search, categoryId } = this.state;
-    const products = await getProductsFromCategoryAndQuery(categoryId, search);
+    const products = await api.getProductsFromCategoryAndQuery(categoryId, search);
     const { results } = products;
     this.setState({
       products: results,
@@ -38,7 +38,6 @@ class Home extends Component {
 
   async getProductsByCategory(categoryId) {
     const data = await api.getProductsFromCategoryAndQuery(categoryId, '');
-    console.log(data);
     this.setState({ products: data.results, categoryId });
   }
 

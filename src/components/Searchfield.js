@@ -16,7 +16,7 @@ class Searchfield extends Component {
             id={ product.id }
             categoryId={ product.category_id }
           />
-        ))}
+        )) }
       </div>
     );
   }
