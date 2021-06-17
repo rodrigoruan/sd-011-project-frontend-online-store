@@ -2,35 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './CardItem.css';
 import { Link } from 'react-router-dom';
+import AddToCartBttn from '../ShoppingCart/AddToCartBttn';
 
 export default class CardItem extends Component {
-  constructor() {
-    super();
-    this.state = {
-      counter: 1,
-    };
-    this.handleCartButtonClick = this.handleCartButtonClick.bind(this);
-  }
-
-  handleCartButtonClick() {
-    const { product:
-      { id, title, price, thumbnail, currency_id: currencyId,
-      } } = this.props;
-    this.setState((pState) => ({
-      counter: pState.counter + 1,
-    }));
-    const { counter } = this.state;
-    const obj = {
-      id,
-      title,
-      price,
-      thumbnail,
-      currencyId,
-      counter,
-    };
-    localStorage.setItem(id, JSON.stringify(obj));
-  }
-
   render() {
     const { product:
       { id, title, price, thumbnail, currency_id: currencyId, attributes,
@@ -59,14 +33,16 @@ export default class CardItem extends Component {
         >
           Mais detalhes
         </Link>
-        <button
-          type="button"
-          onClick={ this.handleCartButtonClick }
-          data-testid="product-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </button>
-
+        <AddToCartBttn
+          product={ {
+            id,
+            title,
+            price,
+            thumbnail,
+            currency_id: currencyId,
+          } }
+          dataTest="product-add-to-cart"
+        />
       </div>
     );
   }

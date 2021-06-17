@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartButton from '../CartButton/index';
 import './ProductDetail.css';
+import AddToCartBttn from '../ShoppingCart/AddToCartBttn';
 
 export default class ProductDetail extends Component {
   render() {
-    const { location: { state: { name, image, price, spec } } } = this.props;
+    const { location: { state: { name, image, price, spec } },
+      match: { params: { id } } } = this.props;
     return (
       <div>
         <header className="productDetailHeader">
@@ -29,6 +31,16 @@ export default class ProductDetail extends Component {
               <span>{atributo.value_name}</span>
             </div>
           ))}
+          <AddToCartBttn
+            product={ {
+              id,
+              title: name,
+              price: price.total,
+              thumbnail: image,
+              currency_id: price.currency,
+            } }
+            dataTest="product-detail-add-to-cart"
+          />
         </div>
       </div>
     );
@@ -45,6 +57,11 @@ ProductDetail.propTypes = {
         currency: PropTypes.string.isRequired,
       }).isRequired,
       spec: PropTypes.arrayOf(Object).isRequired,
+    }).isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };
