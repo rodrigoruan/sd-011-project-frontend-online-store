@@ -78,6 +78,7 @@ class Home extends Component {
   render() {
     const { loading, categories, products, searchInput } = this.state;
     const { handleAddToShopCart } = this.props;
+    console.log({ products });
     return (
       <>
         <header className="home-header">

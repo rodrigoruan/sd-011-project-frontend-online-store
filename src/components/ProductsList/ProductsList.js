@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from '../ProductCard/ProductCard';
@@ -12,13 +13,14 @@ export default class ProductsList extends React.Component {
         {
           products.length
             ? (
-              products.map(({ id, thumbnail, title, price }, index) => (
+              products.map(({ id, thumbnail, title, price, shipping }, index) => (
                 <ProductCard
                   key={ index }
                   id={ id }
                   thumbnail={ thumbnail }
                   title={ title }
                   price={ price }
+                  shipping={ shipping?.free_shipping }
                   handleAddToShopCart={ handleAddToShopCart }
                 />
               ))
