@@ -37,7 +37,7 @@ Cart.propTypes = {
     title: PropTypes.string,
     id: PropTypes.string,
     quantity: PropTypes.number,
-  })).isRequired,
-};
+  })),
+}.isRequired;
 
 export default Cart;

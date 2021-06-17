@@ -71,15 +71,15 @@ class Home extends React.Component {
 Home.propTypes = {
   searchResults: PropTypes.shape({
     results: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string,
     })),
-  }).isRequired,
-  updateSearchResults: PropTypes.func.isRequired,
+  }),
+  updateSearchResults: PropTypes.func,
   categories: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
-  })).isRequired,
-  addItemToCart: PropTypes.func.isRequired,
-};
+  })),
+  addItemToCart: PropTypes.func,
+}.isRequired;
 
 export default Home;

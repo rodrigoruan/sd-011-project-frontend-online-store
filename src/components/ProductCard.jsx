@@ -31,6 +31,6 @@ ProductCard.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  }).isRequired,
-  addItemToCart: PropTypes.func.isRequired,
-};
+  }),
+  addItemToCart: PropTypes.func,
+}.isRequired;
