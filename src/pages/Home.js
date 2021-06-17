@@ -5,6 +5,7 @@ import Cart from '../imgs/Carrinho.png';
 import ProductSearch from '../components/ProductSearch/ProductSearch';
 import ProductsList from '../components/ProductsList/ProductsList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import './Home.css';
 
 class Home extends Component {
   constructor(props) {
@@ -79,20 +80,29 @@ class Home extends Component {
     const { handleAddToShopCart } = this.props;
     return (
       <>
-        <ProductSearch
-          handleSubmit={ this.handleSearch }
-          onChange={ this.handleInputChange }
-          value={ searchInput }
-        />
-        <Link to="/ShoppingCart" data-testid="shopping-cart-button">
-          <img
-            width="30px"
-            src={ Cart }
-            alt="imagem do carrinho"
+        <header className="home-header">
+          <ProductSearch
+            handleSubmit={ this.handleSearch }
+            onChange={ this.handleInputChange }
+            value={ searchInput }
           />
-        </Link>
-        <main>
-          {loading ? 'Loading...' : this.renderCategories(categories)}
+          <Link
+            to="/ShoppingCart"
+            className="shopping-cart-button"
+            data-testid="shopping-cart-button"
+          >
+            <img
+              width="30px"
+              src={ Cart }
+              alt="imagem do carrinho"
+            />
+          </Link>
+        </header>
+
+        <main className="home-main-container">
+          <div className="categories-container">
+            {loading ? 'Loading...' : this.renderCategories(categories)}
+          </div>
           <ProductsList
             products={ products }
             handleAddToShopCart={ handleAddToShopCart }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './ProductSearch.css';
 
 export default class ProductSearch extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class ProductSearch extends Component {
       <div>
         <input
           data-testid="query-input"
+          className="query-input"
           name="searchProduct"
           type="text"
           value={ value }
