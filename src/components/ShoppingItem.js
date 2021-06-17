@@ -7,16 +7,10 @@ class ShoppingItem extends Component {
     const { item: { price } } = this.props;
     this.state = {
       counter: 1,
-      totalPrice: price
+      totalPrice: price,
     };
     this.sumCounter = this.sumCounter.bind(this);
     this.minusCounter = this.minusCounter.bind(this);
-    // this.getTotalPrice = this.getTotalPrice.bind(this);
-  }
-
-  getTotalPrice() {
-    const sumCounter = sumCounter()
-    return sumCounter
   }
 
   sumCounter() {
@@ -27,21 +21,18 @@ class ShoppingItem extends Component {
       counter: counter + 1,
       totalPrice,
     });
-    return totalPrice;
   }
 
   minusCounter() {
-    const { counter, totalPrice } = this.state;
+    const { counter } = this.state;
     if (counter > 1) {
       const { item: { price } } = this.props;
-      const { counter } = this.state;
       const totalPrice = Math.round((counter - 1) * price * 100) / 100;
       this.setState({
         counter: counter - 1,
         totalPrice,
       });
     }
-    return totalPrice;
   }
 
   render() {
