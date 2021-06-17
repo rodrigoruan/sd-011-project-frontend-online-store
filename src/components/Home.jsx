@@ -12,6 +12,7 @@ class Home extends Component {
       categories: [],
       searchResult: [],
       voidSearch: false,
+      category: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.queryResult = this.queryResult.bind(this);
@@ -24,15 +25,15 @@ class Home extends Component {
   }
 
   handleChange({ target }) {
-    const { value } = target;
+    const { value, name } = target;
     this.setState({
-      search: value,
+      [name]: value,
     });
   }
 
   queryResult() {
-    const { search } = this.state;
-    api.getProductsFromCategoryAndQuery('', search)
+    const { search, category } = this.state;
+    api.getProductsFromCategoryAndQuery(category, search)
       .then(({ results }) => {
         this.setState({
           searchResult: results,
@@ -54,6 +55,7 @@ class Home extends Component {
         <label htmlFor="search-product" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
           <input
+            name="search"
             onChange={ this.handleChange }
             type="text"
             className="search-product"
@@ -88,7 +90,12 @@ class Home extends Component {
         </div>
         <div>
           {categories.map(({ id, name }) => (
-            <Category key={ id } value={ id } name={ name } />
+            <Category
+              key={ id }
+              id={ id }
+              name={ name }
+              handleChange={ this.handleChange }
+            />
           ))}
         </div>
       </div>
