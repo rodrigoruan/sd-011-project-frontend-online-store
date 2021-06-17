@@ -9,8 +9,11 @@ export default class ProductCard extends React.Component {
 
     return (
       <Link
-        to={ `/product/${id}` }
-        product={ product }
+        to={ {
+          pathname: `/product/${id}`,
+          state: { product },
+        } }
+        data-testid="product-detail-link"
       >
         <li
           data-testid="product"

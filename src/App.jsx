@@ -52,7 +52,7 @@ class App extends Component {
             <Route path="/cart" component={ Cart } />
             <Route
               path="/product/:id"
-              render={ () => <Product { ...this.props } /> }
+              component={ Product }
             />
           </Switch>
         </BrowserRouter>
