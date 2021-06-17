@@ -3,23 +3,26 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AddCarrinho } from './index';
 
-class ProductCard extends Component {
+class ProductDetailCard extends Component {
   render() {
-    const { title, imgPath, price, id, category_id: catId } = this.props;
+    const { title, imgPath, price, id } = this.props;
     return (
       <div>
         <Link
-          to={ `/detalhesproduto/${catId}/${id}/${title}` }
-          data-testid="product-detail-link"
+          to="/shoppingCart"
+          alt="shopping-cart"
+          data-testid="shopping-cart-button"
         >
-          <div data-testid="product">
-            <h3>{title}</h3>
-            <img src={ imgPath } alt={ title } />
-            <p>{price}</p>
-          </div>
+          carrinho
+
         </Link>
+        <div data-testid="product">
+          <h3 data-testid="product-detail-name">{title}</h3>
+          <img src={ imgPath } alt={ title } />
+          <p>{price}</p>
+        </div>
         <AddCarrinho
-          testId="product-add-to-cart"
+          testId="product-detail-add-to-cart"
           title={ title }
           price={ price }
           id={ id }
@@ -29,12 +32,11 @@ class ProductCard extends Component {
   }
 }
 
-export default ProductCard;
+export default ProductDetailCard;
 
-ProductCard.propTypes = {
+ProductDetailCard.propTypes = {
   title: PropTypes.string.isRequired,
   imgPath: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
-  category_id: PropTypes.string.isRequired,
 };

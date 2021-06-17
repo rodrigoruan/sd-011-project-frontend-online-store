@@ -5,3 +5,4 @@ export { default as BuscaProduto } from './BuscaProduto';
 export { default as ListaCategoria } from './ListaCategoria';
 export { default as AddCarrinho } from './AddCarrinho';
 export { default as ConteudoCarrinho } from './ConteudoCarrinho';
+export { default as ProductDetailCard } from './ProductDetailCard';

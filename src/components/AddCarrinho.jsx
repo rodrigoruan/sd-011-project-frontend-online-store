@@ -48,9 +48,10 @@ class AddCarrinho extends Component {
   }
 
   render() {
+    const { testId } = this.props;
     return (
       <button
-        data-testid="product-add-to-cart"
+        data-testid={ testId }
         type="button"
         onClick={ this.sendToCart }
       >
@@ -66,4 +67,5 @@ AddCarrinho.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  testId: PropTypes.string.isRequired,
 };
