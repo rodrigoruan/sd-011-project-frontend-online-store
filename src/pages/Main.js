@@ -73,9 +73,13 @@ class Main extends Component {
               <CardCreator item={ product } />
               <button
                 type="button"
-                onClick={ () => this.setState((previousState) => ({
-                  addingCart: [...previousState.addingCart, product] }
-                )) }
+                onClick={ () => {
+                  const addedCart = [...addingCart, product];
+                  localStorage.setItem('addingCart', JSON.stringify(addedCart));
+                  this.setState(() => ({
+                    addingCart: JSON.parse(localStorage.getItem('addingCart')) || [] }
+                  ));
+                } }
                 data-testid="product-add-to-cart"
               >
                 Adicione ao carrinho
@@ -83,7 +87,8 @@ class Main extends Component {
               <Link
                 data-testid="product-detail-link"
                 to={ { pathname: `/product-detail/${product.id}`,
-                  state: { produto: product } } }
+                  state: { produto: product,
+                    addToCart: JSON.parse(localStorage.getItem('addingCart')) || [] } } }
               >
                 Saiba Mais
               </Link>
