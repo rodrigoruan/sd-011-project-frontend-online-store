@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import closeButton from '../images/close-button.png';
+// import closeButton from '../images/close-button.png';
 
 export default class ShoppingCart extends Component {
   constructor() {
@@ -56,12 +56,12 @@ export default class ShoppingCart extends Component {
       <div>
         { items.map(({ title, thumbnail, price, id, quantity }, index) => (
           <div key={ index }>
-            <img
+            {/* <img
               src={ closeButton }
               alt="close button"
               id={ id }
               onClick={ this.removeAllItems }
-            />
+            /> */}
             <img src={ thumbnail } alt="Foto do Produto" />
             <p>{title}</p>
             <button
