@@ -25,9 +25,9 @@ class Categories extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <div>
+      <div className="categories">
         <h5>Categorias:</h5>
-        <ul className="categories">
+        <ul>
           {categories.map((category) => (
             <li data-testid="category" key={category.id}>
               {category.name}

@@ -6,9 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <BrowserRouter className="App">
+  <React.StrictMode className="App">
     <App />
-  </BrowserRouter>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
