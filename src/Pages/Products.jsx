@@ -6,22 +6,26 @@ import NotFound from './NotFound';
 export default class Products extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      saveProduct: [],
+    };
 
     this.handleClick = this.handleClick.bind(this);
     this.loadList = this.loadList.bind(this);
   }
 
-  handleClick() {
-    const { prodList } = this.props;
-    const cardList = this.loadList();
+  handleClick(item) {
+    this.setState((previousValue) => ({
+      saveProduct: [...previousValue.saveProduct, item],
+    }));
 
-    localStorage.setItem('cart', JSON.stringify(cardList));
+    // localStorage.setItem('cart', JSON.stringify( item ));
   }
 
-  loadList() {
-    const cart = localStorage.getItem('cart');
-    return JSON.parse(cart);
-  }
+  // loadList() {
+  //   const cart = localStorage.getItem('cart');
+  //   return JSON.parse(cart);
+  // }
 
   render() {
     const { prodList } = this.props;
@@ -31,28 +35,28 @@ export default class Products extends Component {
     return (
       <div>
         {prodList.map((item) => (
-          <Link
-            data-testid="product-detail-link"
-            key={ item.id }
-            to={ {
-              pathname: `/product-detail/${item.id}`,
-              state: { item: [item] },
-            } }
-          >
-            <div key={ item.id } data-testid="product">
+          <div key={ item.id } data-testid="product">
+            <Link
+              data-testid="product-detail-link"
+              key={ item.id }
+              to={ {
+                pathname: `/product-detail/${item.id}`,
+                state: { item: [item] },
+              } }
+            >
               <h1 data-testid="shopping-cart-product-name">{item.title}</h1>
               <img src={ item.thumbnail } alt={ item.title } />
               <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
               <p>{`R$: ${item.price}`}</p>
-              <button
-                type="button"
-                data-testid="product-add-to-cart"
-                onClick={ this.handleClick }
-              >
-                Adicionar ao Carrinho
-              </button>
-            </div>
-          </Link>
+            </Link>
+            <button
+              type="button"
+              data-testid="product-add-to-cart"
+              onClick={ () => this.handleClick(item) }
+            >
+              Adicionar ao Carrinho
+            </button>
+          </div>
         ))}
       </div>
     );

@@ -62,7 +62,8 @@ class Home extends Component {
         >
           Enviar
         </button>
-        {(!wasSearched) ? null : <Products prodList={ prodList } />}
+        {(!wasSearched)
+          ? null : (props) => <Products { ...props } prodList={ prodList } />}
         <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
         {/* <Checkout /> */}
       </div>
