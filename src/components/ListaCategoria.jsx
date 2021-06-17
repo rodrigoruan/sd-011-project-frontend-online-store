@@ -22,6 +22,7 @@ class ListaCategoria extends Component {
     this.fetchCategory(id);
   }
 
+  // oi
   async fetchCategory(id) {
     const response = await api.getProductsFromCategoryAndQuery(id, '$QUERY');
     this.setState({
