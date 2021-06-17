@@ -42,7 +42,7 @@ class ListProducts extends Component {
     const result = await api.getProductsFromCategoryAndQuery(categoryId, search);
     this.setState({
       data: result.results,
-    })
+    });
   }
 
   getProductsByQuery() {
