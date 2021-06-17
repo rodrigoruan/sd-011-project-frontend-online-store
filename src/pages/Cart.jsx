@@ -6,7 +6,7 @@ export default class Cart extends Component {
     super();
     const cartItems = {};
     Object.values(sessionStorage).forEach((value) => {
-      if (typeof value !== 'number') {
+      if (!value.includes('rendererID')) {
         const item = JSON.parse(value);
         cartItems[item.title] = item;
       }

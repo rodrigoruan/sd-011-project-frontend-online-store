@@ -10,14 +10,29 @@ import '../styles/Home.css';
 class Home extends Component {
   constructor() {
     super();
+    let cartSize = 0;
+    Object.values(sessionStorage).forEach((value) => {
+      if (!value.includes('rendererID')) {
+        const data = JSON.parse(value);
+        cartSize += data.quantity;
+      }
+    });
     this.state = {
       data: [],
       search: '',
       category: '',
+      cartSize,
     };
 
     this.HandlerState = this.HandlerState.bind(this);
     this.RequestApi = this.RequestApi.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+  }
+
+  addToCart({ target: { value } }) {
+    const key = JSON.parse(value).title;
+    sessionStorage.setItem(key, value);
+    this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
   }
 
   HandlerState(event) {
@@ -40,7 +55,7 @@ class Home extends Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, cartSize } = this.state;
     return (
       <div>
         <div className="searchSection">
@@ -67,6 +82,9 @@ class Home extends Component {
           >
             Carrinho
           </Link>
+          <p data-testid="shopping-cart-size">
+            {cartSize}
+          </p>
         </div>
         <h2 className="home-message" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
@@ -75,7 +93,7 @@ class Home extends Component {
           <CategoryList
             handleUserInput={ this.HandlerState }
           />
-          <ProductList productsList={ data } />
+          <ProductList addToCart={ this.addToCart } productsList={ data } />
         </div>
 
       </div>

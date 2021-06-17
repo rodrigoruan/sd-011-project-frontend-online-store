@@ -6,7 +6,7 @@ import '../styles/ProductList.css';
 
 class ProductList extends Component {
   render() {
-    const { productsList } = this.props;
+    const { productsList, addToCart } = this.props;
     return (
       <ul className="productList">
         {productsList.map(({ title, thumbnail, price, id }) => (
@@ -16,6 +16,7 @@ class ProductList extends Component {
             thumbnail={ thumbnail }
             price={ price }
             id={ id }
+            addToCart={ addToCart }
           />
         ))}
       </ul>
