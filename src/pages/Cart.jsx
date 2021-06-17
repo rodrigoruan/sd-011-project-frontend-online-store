@@ -4,57 +4,140 @@ import { Link } from 'react-router-dom';
 export default class Cart extends Component {
   constructor() {
     super();
-    this.state = ({
-      cartList: {},
+    const cartItems = {};
+    Object.values(localStorage).forEach((value) => {
+      if (typeof value !== 'number') {
+        const item = JSON.parse(value);
+        cartItems[item.title] = item;
+      }
+    });
+    this.state = {
+      cartList: cartItems,
+    };
+
+    this.addItem = this.addItem.bind(this);
+    this.decreasesItem = this.decreasesItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+    this.totalPrice = this.totalPrice.bind(this);
+  }
+
+  componentDidUpdate() {
+    const { cartList } = this.state;
+    Object.values(cartList).forEach((listItem) => {
+      const value = JSON.stringify(listItem);
+      localStorage.setItem(listItem.title, value);
     });
   }
 
-  addItem() {
-    
+  // Limpar storage quando o componente for desmontado no compoenntWillUnmonte
+  addItem({ target: { name } }) {
+    const { cartList } = this.state;
+    const cart = { ...cartList };
+    const item = { ...cart[name] };
+    item.quantity += 1;
+    cart[name] = item;
+    this.setState(() => ({
+      cartList: cart,
+    }));
   }
 
-  removeItem() {
-    
+  decreasesItem(event) {
+    const {
+      target: { name },
+    } = event;
+    const { cartList } = this.state;
+    const cart = { ...cartList };
+    const item = { ...cart[name] };
+
+    if (item.quantity === 1) {
+      this.removeItem(event);
+    } else {
+      item.quantity -= 1;
+      cart[name] = item;
+      this.setState(() => ({
+        cartList: cart,
+      }));
+    }
   }
 
-  decreasesItem() {
-    
+  removeItem({ target: { name } }) {
+    const { cartList } = this.state;
+    const cart = { ...cartList };
+    delete cart[name];
+    localStorage.removeItem(name);
+    this.setState(() => ({
+      cartList: cart,
+    }));
   }
 
-  totalItemPrice() {
-   
-  }
-
-  totalListPrice() {
-   
+  totalPrice() {
+    const { cartList } = this.state;
+    let totalPrice = 0;
+    Object.values(cartList).forEach(({ price, quantity }) => {
+      totalPrice += price * quantity;
+    });
+    return totalPrice;
   }
 
   // Função que monta li que é item do produto
-  // Do evento (item clicado) extrai foto, preco 
-  elementList(thumbnail, price, title, id) {
-    Return (
-    <li>
-      <span onClick={ this.removeItem } >Remover</span>
-      <img alt="Foto produto" src={ thumbnail } />
-      <p>{ title} </p>
-      <span onClick={ this.decreasesItem }>decrementar</span>
-      {/* <p>{ Função que diz quantidade de itens dessa li }</p> */}
-      <span onClick={ this.addItem }>Incrementar</span>
-      <p>{ this.totalItemPrice() }</p>
-    </li> 
+  // Do evento (item clicado) extrai foto, preco
+  elementList(thumbnail, price, title, quantity) {
+    return (
+      <li key={ title }>
+        <button
+          data-testid=""
+          type="button"
+          name={ title }
+          onClick={ this.removeItem }
+        >
+          Remover
+        </button>
+        <img alt="Foto produto" src={ thumbnail } />
+        <p data-testid="shopping-cart-product-name">{title}</p>
+        <button
+          data-testid="product-decrease-quantity"
+          type="button"
+          name={ title }
+          onClick={ this.decreasesItem }
+        >
+          decrementar
+        </button>
+        <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+        <button
+          data-testid="product-increase-quantity"
+          type="button"
+          name={ title }
+          onClick={ this.addItem }
+        >
+          Incrementar
+        </button>
+        <p>{price * quantity}</p>
+      </li>
+    );
   }
-  
 
   render() {
+    const { cartList } = this.state;
+    if (Object.entries(cartList).length === 0) {
+      // localStorage.clear();
+      return (
+        <div>
+          <Link to="/">Voltar</Link>
+          <h3 data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </h3>
+        </div>
+      );
+    }
     return (
       <div>
         <Link to="/">Voltar</Link>
-        <h2>Carrinho de compras</h2>
-        <ul>
-          { /*  Colocar condicional de se o carrinho tiver o tamanho = 0 retornar mensagem(data-testid="shopping-cart-empty-message">Seu carrinho está vazio). Se não retornar elementList  */}
-        </ul>
-        <p> Valor total da compra: R$ { totalPrice }</p>
-        <button type="submit">Finalizar compra</button>
+        {Object.entries(cartList).map(
+          ([title, { price, thumbnail, quantity }]) => (
+            this.elementList(thumbnail, price, title, quantity)
+          ),
+        )}
+        {`Valor total da compra: R$${this.totalPrice()}`}
       </div>
     );
   }

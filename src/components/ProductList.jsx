@@ -9,12 +9,13 @@ class ProductList extends Component {
     const { productsList } = this.props;
     return (
       <ul className="productList">
-        {productsList.map(({ title, thumbnail, price }) => (
+        {productsList.map(({ title, thumbnail, price, id }) => (
           <ProductCard
             key={ title }
             title={ title }
             thumbnail={ thumbnail }
             price={ price }
+            id={ id }
           />
         ))}
       </ul>
@@ -23,7 +24,7 @@ class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-  productsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+  productsList: PropTypes.arrayOf(PropTypes.object),
+}.isRequired;
 
 export default ProductList;
