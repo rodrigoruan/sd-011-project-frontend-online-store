@@ -1,10 +1,6 @@
-body {
-  background-color: red;
-}
-
 .home-div {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
   justify-content: space-evenly;
   margin: 10px;
   width: 100%;
@@ -67,6 +63,20 @@ footer {
   justify-content: center;
 }
 
+/* -- SEARCH RESULT -- */
+.search-results {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-results:nth-child(1) {
+  flex: 1;
+}
+
+.search-results:nth-child(2) {
+  flex: 2;
+}
+
 .categories {
   display: flex;
   justify-content: left;
@@ -74,5 +84,4 @@ footer {
   justify-content: left;
   justify-items: left;
   margin-left: 0px;
-  /* oi */
 }
