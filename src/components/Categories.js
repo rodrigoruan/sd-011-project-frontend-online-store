@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 
 export default class Categories extends Component {
   render() {
-    const { listCategories, changeCategory } = this.props;
+    const { listCategories: { id, name }, changeCategory } = this.props;
 
     return (
       <div>
-        <label htmlFor={ listCategories.id }>
-          {listCategories.name}
+        <label htmlFor={ id }>
+          {name}
           <input
             type="radio"
             onClick={ changeCategory }
             data-testid="category"
             name="categoria"
-            value={ listCategories.id }
+            value={ id }
           />
         </label>
       </div>
@@ -23,6 +23,9 @@ export default class Categories extends Component {
 }
 
 Categories.propTypes = {
-  listCategories: PropTypes.arrayOf().isRequired,
+  listCategories: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+  }).isRequired,
   changeCategory: PropTypes.func.isRequired,
 };
