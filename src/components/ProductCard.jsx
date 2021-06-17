@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { AddCarrinho } from './index'
 
 class ProductCard extends Component {
   render() {
@@ -8,7 +9,8 @@ class ProductCard extends Component {
       <div data-testid="product">
         <h3>{ title }</h3>
         <img src={ imgPath } alt={ title } />
-        <p>{ price }</p>
+        <p>{ `R$ ${ price }` }</p>
+        <AddCarrinho title={ title } price={ price } />
       </div>
     );
   }
