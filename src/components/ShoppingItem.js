@@ -2,40 +2,50 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ShoppingItem extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { item: { price } } = this.props;
     this.state = {
       counter: 1,
+      totalPrice: price
     };
     this.sumCounter = this.sumCounter.bind(this);
     this.minusCounter = this.minusCounter.bind(this);
+    // this.getTotalPrice = this.getTotalPrice.bind(this);
   }
 
   getTotalPrice() {
-    const { item: { price } } = this.props;
-    const { counter } = this.state;
-    const totalPrice = Math.round(counter * price * 100) / 100;
-    return totalPrice;
+    const sumCounter = sumCounter()
+    return sumCounter
   }
 
   sumCounter() {
+    const { item: { price } } = this.props;
     const { counter } = this.state;
+    const totalPrice = Math.round((counter + 1) * price * 100) / 100;
     this.setState({
       counter: counter + 1,
+      totalPrice,
     });
+    return totalPrice;
   }
 
   minusCounter() {
-    const { counter } = this.state;
+    const { counter, totalPrice } = this.state;
     if (counter > 1) {
+      const { item: { price } } = this.props;
+      const { counter } = this.state;
+      const totalPrice = Math.round((counter - 1) * price * 100) / 100;
       this.setState({
         counter: counter - 1,
+        totalPrice,
       });
     }
+    return totalPrice;
   }
 
   render() {
-    const { counter } = this.state;
+    const { counter, totalPrice } = this.state;
     const { onClick, item: { id, title, thumbnail } } = this.props;
     return (
       <div>
@@ -59,7 +69,7 @@ class ShoppingItem extends Component {
         </button>
         <span>
           R$
-          { this.getTotalPrice() }
+          { totalPrice }
         </span>
       </div>
     );
