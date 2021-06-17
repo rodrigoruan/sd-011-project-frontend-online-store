@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CustomerRatingForm from '../components/CustomerRatingForm';
+// import CustomerRatingForm from '../components/CustomerRatingForm';
 
 class ProductDetail extends Component {
   constructor() {
@@ -10,12 +10,11 @@ class ProductDetail extends Component {
       email: '',
       comment: '',
       rating: 1,
-      commentList: [email, comment, rating],
+      counter: 0,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.submitRating = this.submitRating.bind(this);
-    this.setCustomerComment = this.setCustomerComment.bind(this);
   }
 
   handleChange({ target: { value, name } }) {
@@ -24,9 +23,13 @@ class ProductDetail extends Component {
     });
   }
 
-  submitRating() {
-    this.setState((state) => ({
-      commentList: [state.commentList, [email, comment, rating]] }));
+  async submitRating() {
+    await this.setState((state) => ({
+      counter: state.counter + 1,
+    }));
+    const { counter } = this.state;
+    // const commentList = [{ email, comment, rating, counter }];
+    localStorage.setItem(counter, JSON.stringify(this.state));
   }
 
   render() {
@@ -35,13 +38,55 @@ class ProductDetail extends Component {
       { state:
         { produto:
           { condition, price, thumbnail, title } } } } = this.props;
+    // const { email, comment, rating, counter } = this.state;
+    const storedRatings = JSON.parse(localStorage.getItem(counter));
+    console.log(storedRatings);
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
         <h2>{ price }</h2>
         <img src={ thumbnail } alt={ `imagem de ${title}` } />
         <p>{ condition }</p>
-        <CustomerRatingForm info={ this.state } />
+        {/* <form>
+          <h2>Avaliações</h2>
+          <input
+            name="email"
+            type="text"
+            placeholder="Email"
+            onChange={ this.handleChange }
+            value={ email }
+          />
+          <input
+            name="rating"
+            type="range"
+            min="1"
+            max="5"
+            onChange={ this.handleChange }
+            value={ rating }
+          />
+          <textarea
+            name="comment"
+            placeholder="Mensagem (Opcional)"
+            data-testid="product-detail-evaluation"
+            onChange={ this.handleChange }
+            value={ comment }
+          />
+          <button
+            type="submit"
+            onClick={ this.submitRating }
+          >
+            Add comentário
+          </button>
+        </form> */}
+        <input type="text" />
+        <textarea type="text" data-testid="product-detail-evaluation" />
+        {/* { storedRatings.map(({ email: emailField, comment: commentField, rating: ratingField, counter: counterField }) => (
+          <div key={ counterField }>
+            <h3>{ emailField }</h3>
+            <h4>{ commentField }</h4>
+            <p>{ ratingField }</p>
+          </div>
+        )) } */}
       </div>
     );
   }
