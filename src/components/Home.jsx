@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import ShopCart from './ShopCart';
+import { BrowserRouter as Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import * as fetchAPI from '../services/api';
 
@@ -36,11 +34,9 @@ export default class Home extends Component {
   }
 
   async fetchProducts() {
-    const { match } = this.props;
-    const { id } = match.params;
-    const string = '';
+    const { categoryId, search } = this.state;
     const fetchedProducts = await
-    fetchAPI.getProductsFromCategoryAndQuery(string, id);
+    fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
     // console.log(fetchedProducts.results);
     this.setState({ productCards: fetchedProducts.results });
   }
@@ -52,7 +48,7 @@ export default class Home extends Component {
     });
   }
 
-  async fetchCategories(id) { // apagado id param
+  async fetchCategories(id) {
     const fetchedProductsFromCategories = await
     fetchAPI.getProductsFromCategoryAndQuery(id);
     this.setState({
@@ -103,41 +99,18 @@ export default class Home extends Component {
           {!productCards
             ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar
             : productCards.map((product) => (
-              <>
-                <Link
-                  to={ `/cart:${product.id}` }
-                  data-testid="product-detail-link"
-                  key={ product.id }
-                >
-                  Ver detalhes
-                </Link>
-
-                <ProductCard
-                  key={ product.id }
-                  product={ product }
-                  productId={ this.fetchProducts() }
-                />
-              </>))}
+              <ProductCard
+                key={ product.id }
+                product={ product }
+                productId={ this.fetchProducts() }
+              />
+            ))}
         </div>
-        <Router>
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <img src="./images/cart.svg" alt="Cart" />
-          </Link>
-          <Switch>
-            <Route path="/cart" component={ ShopCart } />
-            <Route path="/cart:id" render={ (props) => <ProductCard { ...props } /> } />
-          </Switch>
 
-        </Router>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <img src="./images/cart.svg" alt="Cart" />
+        </Link>
       </div>
     );
   }
 }
-
-Home.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    }),
-  }).isRequired,
-};
