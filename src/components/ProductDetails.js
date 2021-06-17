@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import cart from '../Images/cart.png';
 import Rating from './Rating';
 
 class ProductDetails extends Component {
@@ -30,6 +32,8 @@ class ProductDetails extends Component {
   }
 
   render() {
+    const { match } = this.props;
+    const { id } = match.params;
     const { product } = this.state;
     return (
       <div>
@@ -43,14 +47,25 @@ class ProductDetails extends Component {
             { att.value_name }
           </p>
         ))}
-        <Rating />
+        <Rating id={ id } />
+        <Link to="/carrinho-compras">
+          <img
+            src={ cart }
+            alt="carrinho-compras"
+            data-testid="shopping-cart-button"
+            height="200px"
+          />
+        </Link>
+        <Link to="/">
+          HOME
+        </Link>
       </div>
     );
   }
 }
 
 ProductDetails.propTypes = {
-  match: PropTypes.objectOf().isRequired,
+  match: PropTypes.objectOf(String).isRequired,
 };
 
 export default ProductDetails;
