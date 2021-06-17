@@ -68,13 +68,15 @@ class Home extends React.Component {
           </span>
           {products && products.map((product) => (
             <Link
-              to="/product/:id"
+              to={ `/product/${product.id}` }
               key={ product.id }
-              data-testid="product"
+              data-testid="product-detail-link"
             >
-              <img src={ product.thumbnail } alt="foto-produto" />
-              <h2>{product.title}</h2>
-              <p>{product.price}</p>
+              <div data-testid="product">
+                <img src={ product.thumbnail } alt="foto-produto" />
+                <h2>{product.title}</h2>
+                <p>{product.price}</p>
+              </div>
             </Link>))}
           {search && products.length === 0 && <p>Nenhum produto encontrado</p>}
         </section>
