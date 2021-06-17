@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './filter-bar.css';
 
 export default class FiltersBar extends Component {
   render() {
-    const { categories } = this.props;
+    const { categories, setCategory } = this.props;
     return (
-      <div>
+      <div className="filter-container">
         <form action="">
           { categories.map(({ id, name }) => (
             <label data-testid="category" key={ id } htmlFor={ id }>
-              <input type="checkbox" name={ name } id={ id } />
+              <input type="radio" name="categoria" id={ id } onClick={ setCategory } />
               { name }
             </label>
           )) }
