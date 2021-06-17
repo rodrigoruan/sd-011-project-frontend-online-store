@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export default class ProductCard extends Component {
   render() {
     const { product: { title, price, thumbnail, id }, addCart } = this.props;
+    const { product } = this.props;
     return (
       <div data-testid="product">
         <h4 data-testid="product-detail-name">{title}</h4>
@@ -19,7 +20,10 @@ export default class ProductCard extends Component {
           Adicionar ao Carrinho
         </button>
         <Link
-          to={ `/details/${id}` }
+          to={ {
+            pathname: `/details/${id}`,
+            state: { product, addCart },
+          } }
           data-testid="product-detail-link"
         >
           Ver Detalhes
