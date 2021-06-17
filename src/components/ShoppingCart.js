@@ -48,9 +48,14 @@ class ShoppingCart extends React.Component {
           : details
             .map((product, index) => <Cart key={ index } product={ product } />) }
         <h4>
+          Você possui
+          { ` ${details.length} ` }
+          itens no carrinho
+        </h4>
+        <h3>
           Valor total:
           { `R$ ${parseFloat(total).toFixed(2)}` }
-        </h4>
+        </h3>
       </div>
     );
   }
