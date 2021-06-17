@@ -81,3 +81,13 @@ footer {
 .category--selected button {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4) inset;
 }
+
+.cart-item-container {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-switch {
+  display: flex;
+  align-items: center;
+}

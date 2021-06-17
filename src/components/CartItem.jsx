@@ -7,10 +7,11 @@ export default class CartItem extends Component {
       stock: 99,
       quantity: 1,
     };
+    this.handleFluctuation = this.handleFluctuation.bind(this);
   }
 
-  handleFluctuation(e) {
-    if(e.target.innertext === '+') {
+  handleFluctuation({ target }) {
+    if(target.innerText === '+') {
       this.setState((currentState) => ({
         quantity: currentState.quantity + 1,
       }));
@@ -26,8 +27,8 @@ export default class CartItem extends Component {
     const { thumbnail, title, price,  } = product;
     const { quantity } = this.state;
     return (
-      <div>
-        <li>
+        <li className="cart-item-container">
+          <button type="button">X</button>
         <picture>
           <img src={ thumbnail } alt={ title } />
         </picture>
@@ -39,7 +40,6 @@ export default class CartItem extends Component {
         </div>
         <h2>{`R$ ${(price * quantity).toFixed(2)}`}</h2>
       </li>
-      </div>
     )
   }
 }

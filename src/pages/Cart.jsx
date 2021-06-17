@@ -1,5 +1,6 @@
 import React from 'react';
 import { CartItem } from '../components';
+import data from '../__mocks__/query';
 
 
 class Cart extends React.Component {
@@ -16,7 +17,7 @@ class Cart extends React.Component {
           ) 
           : (
             <ul>
-              {cartList.map(((product) => (<CartItem
+              {data.results.map(((product) => (<CartItem
                 key={ product.id }
                 product={ product }
                 />)
