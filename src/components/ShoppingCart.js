@@ -64,6 +64,8 @@ export default class ShoppingCart extends Component {
                 />
               </div>
             ))) }
+          {/* <Purchase /> */}
+          <Link to="checkout" data-testid="checkout-products">Checkout</Link>
           <Link to="/">Voltar</Link>
         </div>
         {/* <div className="cart_item">
