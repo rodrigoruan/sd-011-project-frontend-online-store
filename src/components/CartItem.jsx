@@ -5,11 +5,21 @@ export default class CartItem extends Component {
     super();
     this.state = {
       stock: 99,
-      quantity: 0,
+      quantity: 1,
     };
   }
 
-  
+  handleFluctuation(e) {
+    if(e.target.innertext === '+') {
+      this.setState((currentState) => ({
+        quantity: currentState.quantity + 1,
+      }));
+    } else {
+      this.setState((currentState) => ({
+        quantity: currentState.quantity - 1,
+      }));
+    }
+  }
 
   render() {
     const { product } = this.props;
