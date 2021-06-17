@@ -17,10 +17,9 @@ class CategoryBar extends Component {
 
   async getCategoryList() {
     const categories = await api.getCategories();
-    const state = this.setState({
+    this.setState({
       categoriesList: categories,
     });
-    return state;
   }
 
   render() {
