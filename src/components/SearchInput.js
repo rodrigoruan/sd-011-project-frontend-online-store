@@ -8,7 +8,6 @@ export default class SearchInput extends Component {
         <fieldset>
           <input
             data-testid="query-input"
-            type="search"
             className="form-control form-control-lg"
             type="text"
             onChange={handleInput}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Categories from '../components/Categories';
-import SearchInput from '../components/SearchInput';
+import { Categories, SearchInput } from '../components/zComponentsMenu';
 import SearchList from '../pages/SearchList';
 import * as api from '../services/api';
 export default class Home extends Component {
@@ -10,14 +9,16 @@ export default class Home extends Component {
     this.state = {
       loading: true,
       inputText: [],
-      products: [],
+      products: '',
+      radio: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleRadioClick = this.handleRadioClick.bind(this);
   }
 
-  getQuery = async (product) => {
-    const getList = await api.getProductsFromCategoryAndQuery('MLB1071', product);
+  getQuery = async (category, product) => {
+    const getList = await api.getProductsFromCategoryAndQuery(category, product);
     return this.setState({ products: getList.results });
   };
 
@@ -29,9 +30,9 @@ export default class Home extends Component {
   }
 
   componentDidUpdate() {
-    const { searchQuery } = this.props;
-    if (searchQuery) {
-      this.getQuery(searchQuery);
+    const { searchQuery, radioFilter } = this.props;
+    if (searchQuery || radioFilter) {
+      this.getQuery(radioFilter, searchQuery);
     }
   }
 
@@ -46,14 +47,25 @@ export default class Home extends Component {
     this.setState({ loading: false });
   };
 
+  handleRadioClick = ({ target }) => {
+    this.props.sendRadio(target.value);
+  };
+
+  showCategory = () => {
+    if (!this.state.loading)
+      return (
+        <>
+          <Categories handleRadioClick={this.handleRadioClick} />
+          <SearchList products={this.state.products} />
+        </>
+      );
+  };
+
   render() {
     return (
       <div className="home-div">
         <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
-        <div class="search-results">
-          <Categories />  
-          <SearchList products={this.state.products} />
-        </div>
+        <div className="search-results">{this.showCategory()}</div>
       </div>
     );
   }
