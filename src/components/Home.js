@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as Api from '../services/api';
 import Category from './Category';
 import Products from './Products';
+import Button from './Button';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -13,16 +14,22 @@ export default class SearchBar extends Component {
       textSearch: '',
       products: [],
       categoria: '',
+      storage: localStorage.length,
     };
     this.getCategory = this.getCategory.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.getValuTextInput = this.getValuTextInput.bind(this);
+    this.getLocalStorage = this.getLocalStorage.bind(this);
   }
 
   componentDidMount() {
     this.getCategory();
     // this.getProducts();
   }
+
+  // componentDidUpdate() {
+  // this.getLocalStorage();
+  // }
 
   getValuTextInput({ target }) {
     const { name, value } = target;
@@ -48,8 +55,22 @@ export default class SearchBar extends Component {
     });
   }
 
+  getLocalStorage() {
+    const { storage } = this.state;
+    if (storage !== localStorage.length) {
+      this.setState({
+        storage: localStorage.length,
+      });
+    }
+  }
+
+  // addToCart() {
+  //   const { title, price, thumbnail } = this.props;
+  //   localStorage.setItem(`item ${title}`, [`${title} - R$${price}`, `${thumbnail}`]);
+  // }
+
   render() {
-    const { categories, products, textSearch } = this.state;
+    const { categories, products, textSearch, storage } = this.state;
     return (
       <div>
         <label htmlFor="textSearch" data-testid="home-initial-message">
@@ -62,13 +83,17 @@ export default class SearchBar extends Component {
           />
           Digite algum termo de pesquisa ou escolha uma categoria.
         </label>
-        <Link data-testid="shopping-cart-button" to="/cartitems">
-          Carrinho de compras
-        </Link>
+        <div>
+          <Link data-testid="shopping-cart-button" to="/cartitems">
+            Carrinho de compras
+          </Link>
+          <span>
+            { storage }
+          </span>
+        </div>
         <button
           data-testid="query-button"
           type="button"
-          onClick={ this.getProducts }
         >
           Buscar Produto
         </button>
@@ -84,18 +109,26 @@ export default class SearchBar extends Component {
         </div>
         <div>
           {products.map((product) => (
-            <Link
-              key={ product.id }
-              to={ { pathname: `/details/${product.id}`, state: { product } } }
-              data-testid="product-detail-link"
-            >
-              <Products
+            <div key={ product.id }>
+              <Link
                 key={ product.id }
+                to={ { pathname: `/details/${product.id}`, state: { product } } }
+                data-testid="product-detail-link"
+              >
+                <Products
+                  title={ product.title }
+                  thumbnail={ product.thumbnail }
+                  price={ product.price }
+                />
+              </Link>
+              <Button
                 title={ product.title }
                 thumbnail={ product.thumbnail }
                 price={ product.price }
+                // onClick={ this.getLocalStorage }
+
               />
-            </Link>
+            </div>
           ))}
         </div>
       </div>
