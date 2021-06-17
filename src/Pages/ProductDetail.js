@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FormComment from '../component/FormComment';
 import Comments from '../component/Comments';
+import ShoppingCart from './ShoppingCart';
 
 export default class ProductDetail extends Component {
   constructor() {
@@ -12,10 +13,20 @@ export default class ProductDetail extends Component {
     };
     this.getProduct = this.getProduct.bind(this);
     this.setCommentarray = this.setCommentarray.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   componentDidMount() {
     this.getProduct();
+  }
+
+  handleAdd(product) {
+    const obj = {
+      id: product.id,
+      title: product.title,
+    };
+    const { addItens } = this.props;
+    addItens(obj);
   }
 
   async getProduct() {
@@ -34,15 +45,23 @@ export default class ProductDetail extends Component {
     });
   }
 
+
   render() {
-    const { product, comments } = this.state;
+    const { product,comments } = this.state;
+    const { itensAdded } = this.props;
     return (
       <>
         <div data-testid="product-detail-name">{ product.title }</div>
-        <div>
-          <FormComment idPrd={ product.id } evBtn={ this.setCommentarray } />
-          <Comments idPrd={ product.id } arrayComment={ comments } />
-        </div>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => this.handleAdd(product) }
+        >
+          Adicionar
+        </button>
+        <ShoppingCart itensArray={ itensAdded } />
+        <FormComment idPrd={ product.id } evBtn={ this.setCommentarray } />
+        <Comments idPrd={ product.id } arrayComment={ comments } />
       </>
     );
   }
@@ -54,4 +73,6 @@ ProductDetail.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
+  itensAdded: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addItens: PropTypes.func.isRequired,
 };

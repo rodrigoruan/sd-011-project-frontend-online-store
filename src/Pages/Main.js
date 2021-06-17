@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ShoppingCart from './ShoppingCart';
 import Search from '../component/Search';
 import Categorys from '../component/Categorys';
@@ -40,13 +41,19 @@ export default class Main extends Component {
 
   render() {
     const { arraySearch, ctgId } = this.state;
+    const { itensAdded, addItens } = this.props;
     return (
       <>
         <Search evSrch={ this.eventSearch } ctgId={ ctgId } />
-        <ShoppingCart />
         <Categorys evCtg={ this.eventCtg } />
-        <Cards resultSearch={ arraySearch } />
+        <Cards resultSearch={ arraySearch } addItems={ addItens } />
+        <ShoppingCart itensArray={ itensAdded } />
       </>
     );
   }
 }
+
+Main.propTypes = {
+  itensAdded: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addItens: PropTypes.func.isRequired,
+};
