@@ -1,42 +1,85 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap') ;
+
+* {
+  box-sizing: border-box;
+  font-family: Roboto , sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-size: 12px;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-
+.flex-dashboard {
+  color: #f8eee7;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
 }
 
-.App-header {
+.sidebar-catories {
   align-items: center;
-  background-color: #282c34;
-  color: white;
+  background-color: #49274a;
+  border-right: 2px solid black;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 15px 0;
+  position: fixed;
+  width: 320px;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar-catories ul {
+  list-style: none;
 }
 
-@keyframes App-logo-spin {
+.sidebar-catories li {
+  color: #f4decb;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 10px 0;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.sidebar-catories li:hover {
+  color: #f9cf00;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.main-content {
+  background-color: #94618e;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-left: 320px;
+  padding: 25px;
+  width: 100%;
+}
+
+.inputShoppingCart {
+  border: none;
+  border-radius: 15px;
+  font-size: 1.2rem;
+  outline: none;
+  padding: 10px;
+  width: 80%;
+}
+
+.row {
+  align-items: center;
+  display: flex;
+}
+
+.buttonCart {
+  border: 1px solid #f9cf00;
+  color: #f4decb;
+  font-size: 1.5rem;
+  margin-left: 35px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.buttonCart:hover {
+  background-color: #49274a;
 }
