@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import NotFound from './NotFound';
 
-class Products extends Component {
+export default class Products extends Component {
   constructor(props) {
     super(props);
 
@@ -13,9 +13,7 @@ class Products extends Component {
   handleClick() {
     const { prodList } = this.props;
     const cardList = this.loadList();
-    const productList = [];
 
-    productList.push({ prodList });
     localStorage.setItem('cart', JSON.stringify(cardList));
   }
 
@@ -56,5 +54,3 @@ Products.propTypes = {
     PropTypes.object,
   ).isRequired,
 };
-
-export default Products;
