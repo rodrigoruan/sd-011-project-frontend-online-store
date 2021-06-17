@@ -28,22 +28,20 @@ class Categories extends Component {
     return (
       <div className="categories">
         <h5>Categorias:</h5>
-        {categories.map((el) => {
-          return (
-            <label key={el.id} htmlFor={el.id}>
-              {el.name}
-              <input
-                key={el.id}
-                type="radio"
-                id={el.id}
-                name="categories"
-                data-testid="category"
-                value={el.id}
-                onClick={handleRadioClick}
-              />
-            </label>
-          );
-        })}
+        {categories.map((el) => (
+          <label key={ el.id } htmlFor={ el.id }>
+            {el.name}
+            <input
+              key={ el.id }
+              type="radio"
+              id={ el.id }
+              name="categories"
+              data-testid="category"
+              value={ el.id }
+              onClick={ handleRadioClick }
+            />
+          </label>
+        ))}
       </div>
     );
   }

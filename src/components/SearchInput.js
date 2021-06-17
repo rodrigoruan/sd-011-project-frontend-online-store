@@ -4,13 +4,13 @@ export default class SearchInput extends Component {
   render() {
     const { handleSubmit, handleInput } = this.props;
     return (
-      <form className="home-form-div" onSubmit={handleSubmit}>
+      <form className="home-form-div" onSubmit={ handleSubmit }>
         <fieldset>
           <input
             data-testid="query-input"
             className="form-control form-control-lg"
             type="text"
-            onChange={handleInput}
+            onChange={ handleInput }
             placeholder="ex: gato"
           />
           <h2 data-testid="home-initial-message">

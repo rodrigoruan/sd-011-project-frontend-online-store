@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ItemProduct from '../components/ItemProduct';
+import { ProductCard } from '../components/zComponentsMenu';
 
 export default class SearchList extends Component {
   constructor(props) {
@@ -19,15 +19,16 @@ export default class SearchList extends Component {
 
   componentDidMount() {
     const { products } = this.props;
-    this.setState({ products: products });
+    this.setState({ products });
   }
 
   showList = () => {
     const { products } = this.props;
     const { empty } = this.state;
     if (!empty && products.length > 1) {
-      return products.map((el, index) => <ItemProduct item={el} key={index} />);
-    } else if (products.length < 1) {
+      return products.map((el, index) => <ProductCard item={el} key={index} />);
+    }
+    if (products.length < 1) {
       return <>Nenhum produto foi encontrado</>;
     }
   };
@@ -36,7 +37,8 @@ export default class SearchList extends Component {
     const { products } = this.props;
     if (!products) {
       return <>Loading</>;
-    } else if (products) {
+    }
+    if (products) {
       return <div className="search-list">{this.showList()}</div>;
     }
   }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Categories, SearchInput } from '../components/zComponentsMenu';
-import SearchList from '../pages/SearchList';
+import SearchList from './SearchList';
 import * as api from '../services/api';
+
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -29,9 +30,9 @@ export default class Home extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const { searchQuery, radioFilter } = this.props;
-    if (searchQuery || radioFilter) {
+    if (prevProps.searchQuery !== this.props.searchQuery) {
       this.getQuery(radioFilter, searchQuery);
     }
   }
