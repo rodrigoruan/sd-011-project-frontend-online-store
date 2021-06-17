@@ -9,6 +9,10 @@ export default class ShoppingCart extends Component {
     };
   }
 
+  componentDidMount(){
+    
+  }
+
   render() {
     const emptyCartMessage = (
       <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>

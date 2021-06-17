@@ -16,14 +16,13 @@ export default class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
+    this.showResults = this.showResults.bind(this);
+    this.getQuery = this.getQuery.bind(this);
+    this.getCategories = this.getCategories.bind(this);
   }
 
-  getQuery = async (category, product) => {
-    const getList = await api.getProductsFromCategoryAndQuery(category, product);
-    return this.setState({ products: getList.results });
-  };
-
   componentDidMount() {
+    this.getCategories();
     const { inputText } = this.state;
     if (inputText) {
       this.getQuery(inputText);
@@ -43,7 +42,6 @@ export default class Home extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    // this.props.sendSubmit(inputText);
     this.setState({ loading: false });
   };
 
@@ -52,8 +50,20 @@ export default class Home extends Component {
     this.setState({ radioFilter: categoryObj });
   };
 
+  async getCategories() {
+    const categories = await api.getCategories();
+    this.setState({ categories: categories });
+  }
+
+  async getQuery(category, product) {
+    const getList = await api.getProductsFromCategoryAndQuery(category, product);
+    return this.setState({ products: getList.results });
+  }
+
   showResults = () => {
-    if (!this.state.loading) return <SearchList products={this.state.products} />;
+    const { handleAddToCart } = this.props;
+    if (!this.state.loading)
+      return <SearchList products={this.state.products} handleAddToCart={handleAddToCart} />;
   };
 
   render() {

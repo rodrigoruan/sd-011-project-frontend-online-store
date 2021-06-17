@@ -10,7 +10,7 @@ export default class Header extends Component {
             MercadoDibre
           </a>
           <section className=" " id="navbarNav">
-            <ul className="navbar-nav" style={{display:'inline-block'}}>
+            <ul className="navbar-nav">
               <li className="nav-item active">
                 <a className="nav-link" href="/">
                   Home

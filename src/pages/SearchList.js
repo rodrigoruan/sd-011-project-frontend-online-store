@@ -23,10 +23,12 @@ export default class SearchList extends Component {
   }
 
   showList = () => {
-    const { products } = this.props;
+    const { products, handleAddToCart } = this.props;
     const { empty } = this.state;
     if (!empty && products.length > 1) {
-      return products.map((el, index) => <ProductCard item={el} key={index} />);
+      return products.map((el, index) => (
+        <ProductCard item={el} key={index} handleAddToCart={handleAddToCart} />
+      ));
     }
     if (products.length < 1) {
       return <>Nenhum produto foi encontrado</>;
