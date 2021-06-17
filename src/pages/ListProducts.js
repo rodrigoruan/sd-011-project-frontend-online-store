@@ -40,7 +40,7 @@ class ListProducts extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div data-testid="home-initial-message" className="flex-dashboard">
+      <div className="flex-dashboard">
         <CategoryList
           handleUserInput={ this.HandlerState }
         />
