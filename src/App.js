@@ -11,11 +11,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      searchQuery: '',
-      radioFilter: '',
-      shoppingItems: '',
-    };
+    this.state = {};
 
     this.getSearchQuery = this.getSearchQuery.bind(this);
   }
@@ -39,10 +35,10 @@ export default class App extends Component {
         <Header />
         <Switch>
           {/* prettier-ignore */}
-          <Route exact path="/" render={ (props) => <Home { ...props } searchQuery={ this.state.searchQuery } radioFilter={ this.state.radioFilter } sendSubmit={ this.getSearchQuery } sendRadio={ this.getRadio } /> } />
-          <Route exact path="/cart" render={ (props) => <ShoppingCart { ...props } /> } />
-          <Route exact path="/about" component={ About } />
-          <Route component={ NotFound } />
+          <Route exact path="/" render={ (props) => <Home { ...props } /> } />
+          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
+          <Route exact path="/about" component={About} />
+          <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>

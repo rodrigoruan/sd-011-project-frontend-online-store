@@ -9,9 +9,9 @@ export default class Home extends Component {
 
     this.state = {
       loading: true,
-      inputText: [],
+      inputText: '',
       products: '',
-      radio: '',
+      radioFilter: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -24,16 +24,16 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    const { searchQuery } = this.props;
-    if (searchQuery) {
-      this.getQuery(searchQuery);
+    const { inputText } = this.state;
+    if (inputText) {
+      this.getQuery(inputText);
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { searchQuery, radioFilter } = this.props;
-    if (prevProps.searchQuery !== searchQuery || prevProps.radioFilter !== radioFilter) {
-      this.getQuery(radioFilter.id, searchQuery);
+  componentDidUpdate(prevProps, prevState) {
+    const { inputText, radioFilter, loading } = this.state;
+    if (prevState.loading !== loading || prevState.radioFilter !== radioFilter) {
+      this.getQuery(radioFilter.id, inputText);
     }
   }
 
@@ -43,28 +43,27 @@ export default class Home extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { inputText } = this.state;
-    this.props.sendSubmit(inputText);
+    // this.props.sendSubmit(inputText);
     this.setState({ loading: false });
   };
 
   handleRadioClick = ({ target }) => {
     const categoryObj = { id: target.id, name: target.name };
-    this.props.sendRadio(categoryObj);
+    this.setState({ radioFilter: categoryObj });
   };
 
-  showCategory = () => {
+  showResults = () => {
     if (!this.state.loading) return <SearchList products={this.state.products} />;
   };
 
   render() {
     return (
       <div className="home-div">
-        <Categories handleRadioClick={this.handleRadioClick} />
         <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
-        {/* <div className="search-results"> */}
-        {this.showCategory()}
-        {/* </div> */}
+        <div className="search-results">
+          <Categories handleRadioClick={this.handleRadioClick} />
+          {this.showResults()}
+        </div>
       </div>
     );
   }
