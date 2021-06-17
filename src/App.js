@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 
 class App extends Component {
   constructor(props) {
@@ -54,7 +55,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/details" component={ ProductDetails } />
+          <Route
+            path="/details/:id"
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                handleAddToShopCart={ this.handleAddToShopCart }
+              />
+            ) }
+          />
           <Route
             exact
             path="/ShoppingCart"
@@ -76,7 +85,16 @@ class App extends Component {
                 { ...props }
                 handleAddToShopCart={ this.handleAddToShopCart }
                 shopCart={ shopCart }
-              />) }
+              />
+            ) }
+          />
+          <Route
+            path="/checkout"
+            render={ () => (
+              <Checkout
+                shopCart={ shopCart }
+              />
+            ) }
           />
         </Switch>
       </BrowserRouter>
