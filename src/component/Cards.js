@@ -11,17 +11,18 @@ export default class Cards extends Component {
   handleAdd(id, title) {
     const obj = { id, title };
     const { addItems } = this.props;
-    console.log(obj);
     addItems(obj);
   }
 
   render() {
     const { resultSearch } = this.props;
     return (
-      <div className="cards">
-        { resultSearch.map(({ id, title }) => (
-          <div data-testid="product" key={ id }>
+      <div className="list-cards">
+        { resultSearch.map(({ id, title, shipping }) => (
+          <div className="cards" data-testid="product" key={ id }>
             <p>{ title }</p>
+            { shipping.free_shipping
+              ? <spam data-testid="free-shipping">Frete Grátis</spam> : '' }
             <Link
               to={ `/product/${id}` }
               data-testid="product-detail-link"
