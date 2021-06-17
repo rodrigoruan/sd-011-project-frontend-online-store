@@ -3,10 +3,10 @@
 }
 
 .list-cards {
-  text-align: center;
   display: flex;
   flex-flow: row wrap;
   padding: 48px 30px;
+  text-align: center;
 }
 
 .cards {
