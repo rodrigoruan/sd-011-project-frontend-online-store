@@ -1,36 +1,75 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CardItem from './CardItem';
-import Category from './Category';
 import * as api from '../services/api';
 
-class Home extends React.Component {
+class Home2 extends React.Component {
   constructor() {
     super();
     this.state = {
-      inputProduct: '',
+      allCategories: [],
+      inputQuery: '',
+      category: '',
       response: [],
     };
 
-    this.catchText = this.catchText.bind(this);
+    this.getTextAndCategory = this.getTextAndCategory.bind(this);
     this.requestButton = this.requestButton.bind(this);
     this.clearState = this.clearState.bind(this);
   }
 
-  catchText({ target }) {
-    const { value } = target;
+  componentDidMount() {
+    this.getCategories();
+  }
+
+  async getItemsFromCategoryAndQuery(category, inputQuery) {
+    const request = await api.getProductsFromCategoryAndQuery(category, inputQuery);
+    console.log(request);
     this.setState({
-      inputProduct: value,
+      response: request.results,
+    });
+  }
+
+  // Joga a lista de categorias para o state "allCategories"
+  async getCategories() {
+    const response = await api.getCategories();
+    this.setState({
+      allCategories: response,
+    });
+  }
+
+  // Função responsável por pegar dados do input e catagory e
+  // jogar para o state
+  getTextAndCategory({ target }) {
+    const { value, name } = target;
+    this.setState({
+      [name]: value,
+    }, () => {
+      if (name === 'category') {
+        this.requestButton();
+      }
     });
   }
 
   async requestButton() {
     this.clearState();
-    const { inputProduct } = this.state;
-    const request = await api.getProductsFromQuery(inputProduct);
-    this.setState({
-      response: request.results,
-    });
+    const { inputQuery, category } = this.state;
+    // const request = await this.getItemsFromInput(inputQuery);
+    // this.setState({
+    //   response: request.results,
+    // });
+
+    // if (category && inputQuery) {
+    // Caso verdadeiro, faça a requisição através de uma
+    // função assíncrona e adicione o resultado à propriedade
+    // results, no state.
+    this.getItemsFromCategoryAndQuery(category, inputQuery);
+    // }
+    // else if (inputQuery) {
+    //   this.getItemsFromInput(inputQuery);
+    // } else if (category) {
+    //   this.getItemsFromCategory(category);
+    // }
   }
 
   clearState() {
@@ -40,19 +79,38 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log('Render Home');
-    const { response } = this.state;
+    const { allCategories, inputQuery, category, response } = this.state;
     return (
       <div className="main-page">
-        <Category />
+        <div className="categories">
+          <aside>
+            <div className="category-form">
+              {allCategories.map((anyCategory) => (
+                <button
+                  type="button"
+                  key={ anyCategory.id }
+                  data-testid="category"
+                  name="category"
+                  value={ anyCategory.id }
+                  onClick={ this.getTextAndCategory }
+                >
+                  { anyCategory.name }
+                </button>
+              ))}
+            </div>
+          </aside>
+        </div>
+        {/* <Category */}
         <div>
           <form className="search-bar">
             <label htmlFor="queryInput" data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
               <input
+                type="text"
+                name="inputQuery"
                 data-testid="query-input"
                 id="queryInput"
-                onChange={ this.catchText }
+                onChange={ this.getTextAndCategory }
               />
             </label>
           </form>
@@ -73,4 +131,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default Home2;

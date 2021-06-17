@@ -6,8 +6,11 @@ class Category extends React.Component {
     super();
     this.state = {
       categories: [],
+      products: [],
     };
     this.handlerState = this.handlerState.bind(this);
+    this.renderCategory = this.renderCategory.bind(this);
+    this.clearProducts = this.clearProducts.bind(this);
   }
 
   componentDidMount() {
@@ -21,25 +24,40 @@ class Category extends React.Component {
     });
   }
 
+  clearProducts() {
+    this.setState({
+      products: [],
+    });
+  }
+
+  async renderCategory({ target }) {
+    this.clearProducts();
+    const response = await api.getProductsFromCategoryId(target.id);
+    this.setState({
+      products: response.results,
+    });
+  }
+
   render() {
     const { categories } = this.state;
     return (
       <div className="categories">
         <aside>
-          <form className="category-form">
+          <div className="category-form">
             {categories.map((category) => (
-              <label htmlFor="categories" key={ category.id }>
-                { category.name}
-                <input
-                  id={ `${category.id}` }
-                  key={ category.id }
-                  data-testid="category"
-                  type="radio"
-                  name="categories"
-                />
-              </label>
+              <button
+                type="button"
+                id={ category.id }
+                key={ category.id }
+                data-testid="category"
+                name="category"
+                onClick={ this.renderCategory }
+                value={ category.id }
+              >
+                { category.name }
+              </button>
             ))}
-          </form>
+          </div>
         </aside>
       </div>
     );
