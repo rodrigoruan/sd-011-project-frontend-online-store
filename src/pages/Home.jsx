@@ -38,29 +38,39 @@ export default class Home extends Component {
     const { products } = this.state;
     const { addToCart, cart } = this.props;
     return (
-      <div>
-        <label htmlFor="searchInput">
-          <input
-            type="text"
-            id="searchInput"
-            name="query"
-            onChange={ this.handleChange }
-            data-testid="query-input"
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.searchProducts }
-        >
-          Pesquisar
-        </button>
-        <Link data-testid="shopping-cart-button" to="/shoppingcart">
-          <button type="button">
-            Carrinho
-          </button>
-        </Link>
-        <h4 data-testid="shopping-cart-size">{cart.length}</h4>
+      <div className="">
+        <div className="search-icons">
+          <div className="search-icons">
+            <label htmlFor="searchInput">
+              <input
+                type="text"
+                id="searchInput"
+                name="query"
+                onChange={ this.handleChange }
+                data-testid="query-input"
+                className="grow"
+              />
+            </label>
+
+            <button
+              type="button"
+              data-testid="query-button"
+              className="search-button"
+              onClick={ this.searchProducts }
+              className="material-icons"
+            >
+              search
+            </button>
+          </div>
+          <div>
+            <Link data-testid="shopping-cart-button" to="/shoppingcart">
+              <span type="button" className="material-icons">
+                shopping_cart
+              </span>
+            </Link>
+            <span data-testid="shopping-cart-size">{cart.length}</span>
+          </div>
+        </div>
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>

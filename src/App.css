@@ -40,3 +40,17 @@
     transform: rotate(360deg);
   }
 }
+
+.search-icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grow {
+  flex-grow: 2;
+}
+
+.search-button {
+  border-radius: 100px;
+}
