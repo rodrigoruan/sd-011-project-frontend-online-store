@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import ShoppingCart from './Pages/ShoppingCart';
+import ProductDetail from './Pages/ProductDetail/ProductDetail';
 // import * as api from './services/api';
 // test
 
@@ -13,6 +14,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          <Route
+            path="/product-detail/:id"
+            render={ (props) => <ProductDetail { ...props } /> }
+          />
           <Route exact path="/shoppingcart" render={ () => <ShoppingCart /> } />
           <Route exact path="/" render={ () => <Home /> } />
         </Switch>
