@@ -36,6 +36,7 @@ Cart.propTypes = {
   productList: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     id: PropTypes.string,
+    quantity: PropTypes.number,
   })).isRequired,
 };
 
