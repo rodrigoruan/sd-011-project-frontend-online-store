@@ -48,6 +48,7 @@ export default class Home extends React.Component {
     this.setState({
       crrCategory: id,
     });
+    this.FetchProducts(id);
   }
 
   async FetchCategories() {
@@ -110,7 +111,6 @@ export default class Home extends React.Component {
 
           { loading ? <Loading />
             : <ProductsList products={ products } /> }
-          ;
         </div>
       </div>
     );
