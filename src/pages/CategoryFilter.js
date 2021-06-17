@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
 
 export default class CategoryFilter extends Component {
@@ -48,3 +49,7 @@ export default class CategoryFilter extends Component {
     );
   }
 }
+
+CategoryFilter.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};

@@ -19,7 +19,7 @@ class ProductList extends React.Component {
   async fetchProducts() {
     const { categoryId, query } = this.props;
     const API = await getProductsFromCategoryAndQuery(categoryId, query);
-    console.log(API);
+
     const { results } = API;
     this.setState({
       products: results,
