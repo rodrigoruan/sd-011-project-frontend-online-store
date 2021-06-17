@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { Loading } from '../components/index';
+import ProductDetailCard from '../components/ProductDetailCard';
 
 class DetalhesProduto extends Component {
   constructor() {
@@ -37,10 +38,17 @@ class DetalhesProduto extends Component {
 
     if (loading) return <Loading />;
     const produto = itemsArr.find((produc) => produc.id === productId);
+    const { title, thumbnail, price, id } = produto;
 
     return (
-      <div data-testid="product-detail-name">
-        {produto.title}
+      <div>
+        <ProductDetailCard
+          id={ id }
+          key={ id }
+          title={ title }
+          imgPath={ thumbnail }
+          price={ price }
+        />
       </div>
     );
   }
