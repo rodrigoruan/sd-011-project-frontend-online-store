@@ -69,11 +69,11 @@ footer {
   flex-direction: row;
 }
 
-.search-results:nth-child( 1 ) {
+.search-results:nth-child(1) {
   flex: 1;
 }
 
-.search-results:nth-child( 2 ) {
+.search-results:nth-child(2) {
   flex: 2;
 }
 
