@@ -47,6 +47,7 @@ class BuscaProduto extends Component {
         </button>
         {productsData.map(({ id, title, thumbnail, price }) => (
           <ProductCard
+            id={ id }
             key={ id }
             title={ title }
             imgPath={ thumbnail }
