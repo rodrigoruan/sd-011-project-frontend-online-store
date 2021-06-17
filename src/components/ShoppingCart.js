@@ -1,48 +1,46 @@
 import React, { Component } from 'react';
 import { results } from '../__mocks__/query';
 import closeButton from '../images/close-button.png';
-const some = {
-  'MLB918281211': 1,
-  'MLB923744806': 1,
-};
 
 export default class ShoppingCart extends Component {
   constructor() {
     super();
-    localStorage.setItem('shoppingCart', JSON.stringify(results));
-    localStorage.setItem('quantity', JSON.stringify(some));
-    const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-    const quantity = JSON.parse(localStorage.getItem('quantity'));
+    localStorage.setItem('items', JSON.stringify(results));
+    const items = JSON.parse(localStorage.getItem('items'));
     this.state = {
-      shoppingCart,
-      quantity,
+      items,
     };
   }
 
-  // componentDidMount() {
-  //   const objeto = Object.assign({}, this.state.shoppingCart[0]);
-  //   const shoppingCart = localStorage.getItem('shoppingCart');
-  //   localStorage.setItem('shoppingCart', JSON.stringify([...shoppingCart, objeto]))
-  //   console.log(objeto)
-  //   this.setState({
-  //     shoppingCart: JSON.parse(localStorage.getItem('shoppingCart')),
-  //   });
-  // }
-
   render() {
-    const { shoppingCart } = this.state;
+    const { items } = this.state;
     return (
       <div>
-        { shoppingCart.map(({ title, thumbnail, price }, index) => (
+        { items.map(({ title, thumbnail, price, id }, index) => (
           <div key={ index }>
             <img src={ closeButton } alt="close button" />
             <img src={ thumbnail } alt="Foto do Produto" />
             <p>{title}</p>
-            <button type="button" data-testid="product-decrease-quantity">
+            <button
+              id={ id }
+              type="button"
+              data-testid="product-decrease-quantity"
+              // onClick={ decreaseQuantity }
+            >
               -
             </button>
-            <p>{ `Quantidade: ${1}` }</p>
-            <button type="button" data-testid="product-increase-quantity">
+            <p>
+              Quantidade:
+              {
+                items.reduce((acc, item) => (item.id === id ? acc + 1 : acc), 0)
+              }
+            </p>
+            <button
+              id={ id }
+              type="button"
+              data-testid="product-increase-quantity"
+              // onClick={ increaseQuantity }
+            >
               +
             </button>
             <p>{`Preço: R$${price}`}</p>
