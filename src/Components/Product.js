@@ -10,7 +10,11 @@ export class Product extends Component {
       price: 0,
       imagePath: '',
       attributes: [],
+      eMail: '',
+      mensage: '',
+      rating: '',
     };
+    this.submitButton = this.submitButton.bind(this);
   }
 
   componentDidMount() {
@@ -30,8 +34,19 @@ export class Product extends Component {
     });
   }
 
+  submitButton() {
+    const eMail = document.getElementById('email-id').value;
+    const mensage = document.getElementById('mensage-id').value;
+    const rating = document.getElementById('rating-id').value;
+    this.setState({
+      eMail,
+      mensage,
+      rating,
+    });
+  }
+
   render() {
-    const { title, price, imagePath, attributes } = this.state;
+    const { title, price, imagePath, attributes, eMail, mensage, rating } = this.state;
     return (
       <div className={ style.product }>
         <h3 data-testid="product-detail-name">{ title }</h3>
@@ -76,10 +91,12 @@ export class Product extends Component {
             <textarea
               type="text"
               data-testid="product-detail-evaluation"
+              id="mensage-id"
             />
           </label>
           <br />
           <button
+            onClick={ this.submitButton }
             id="avaiation-button"
             type="button"
           >
@@ -88,6 +105,15 @@ export class Product extends Component {
         </form>
         <section>
           <h4>Avaliações recentes</h4>
+          <h4>
+            { eMail }
+          </h4>
+          <h3>
+            { mensage }
+          </h3>
+          <h3>
+            { rating }
+          </h3>
         </section>
       </div>
     );
