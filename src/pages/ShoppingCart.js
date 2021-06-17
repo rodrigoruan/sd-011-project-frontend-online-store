@@ -8,7 +8,7 @@ class ShoppingCart extends Component {
     super();
     const { results } = query;
     this.state = {
-      products: results,
+      products: '',
     };
     this.removeItem = this.removeItem.bind(this);
   }
