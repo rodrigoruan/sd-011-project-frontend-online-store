@@ -19,6 +19,7 @@ ProductCard.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.string,
-  }).isRequired };
+  }).isRequired,
+};
 
 export default ProductCard;
