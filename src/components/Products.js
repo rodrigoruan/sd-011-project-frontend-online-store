@@ -8,9 +8,12 @@ export default class Products extends Component {
     return (
       <div>
         <div id="conteiner-product" data-testid="product">
-          <h2 data-testid="shopping-cart-product-name">{title}</h2>
-          <img src={ thumbnail } alt={ title } />
-          <p>{price}</p>
+          <div>
+            <h2>{title}</h2>
+            <img src={ thumbnail } alt={ title } />
+            <p>{price}</p>
+
+          </div>
         </div>
         {/* <Button product={ product } id={ id } /> */}
       </div>

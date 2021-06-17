@@ -19,7 +19,7 @@ export default class SearchBar extends Component {
     this.getCategory = this.getCategory.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.getValuTextInput = this.getValuTextInput.bind(this);
-    // this.updateCartItem = this.updateCartItem.bind(this);
+    this.updateCartItem = this.updateCartItem.bind(this);
   }
 
   componentDidMount() {
@@ -55,9 +55,9 @@ export default class SearchBar extends Component {
     });
   }
 
-  // updateCartItem() {
-  //   this.setState((oldValue) => ({ cart: oldValue.cart + 1 }));
-  // }
+  updateCartItem() {
+    this.setState((oldValue) => ({ cart: oldValue.cart + 1 }));
+  }
   // addToCart() {
   //   const { title, price, thumbnail } = this.props;
   //   localStorage.setItem(`item ${title}`, [`${title} - R$${price}`, `${thumbnail}`]);
@@ -81,10 +81,10 @@ export default class SearchBar extends Component {
           <div>
             <Link data-testid="shopping-cart-button" to="/cartitems">
               Carrinho de compras
+              <span data-testeid="shopping-cart-product-quantity">
+                { cart }
+              </span>
             </Link>
-            <span data-testeid="shopping-cart-product-quantity">
-              { cart }
-            </span>
           </div>
           <button
             data-testid="query-button"
@@ -124,7 +124,8 @@ export default class SearchBar extends Component {
                   title={ product.title }
                   thumbnail={ product.thumbnail }
                   price={ product.price }
-                  // updateCartItem={ this.updateCartItem }
+                  updateCartItem={ this.updateCartItem }
+                  id={ product.id }
                 />
               </div>
             ))}
