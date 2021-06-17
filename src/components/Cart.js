@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Cart extends Component {
   constructor() {
@@ -16,6 +17,7 @@ export default class Cart extends Component {
   getItemLocalStorage = () => {
     const getProducts = { ...localStorage };
     const arrayOfproducts = Object.values(getProducts).map((e) => JSON.parse(e));
+
     this.setState({
       products: arrayOfproducts,
       count: arrayOfproducts.map(({ counter, title }) => ({ counter, title })),
@@ -24,12 +26,14 @@ export default class Cart extends Component {
 
   handleClick = ({ target: { id, name } }) => {
     const product = JSON.parse(localStorage.getItem(id));
+
     if (name === 'add') {
       product.counter += 1;
     }
     if (name === 'sub' && product.counter > 1) {
       product.counter -= 1;
     }
+
     localStorage.setItem(id, JSON.stringify(product));
     this.getItemLocalStorage();
   };
@@ -44,10 +48,9 @@ export default class Cart extends Component {
     const { products } = this.state;
 
     if (!products.length) {
-      return (
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-      );
+      return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
+
     return (
       <div>
         {products.map(({ title, price, thumbnail, id }) => (
@@ -89,6 +92,14 @@ export default class Cart extends Component {
             </button>
           </div>
         ))}
+        <Link to={ { pathname: '/checkout' } }>
+          <button
+            data-testid="checkout-products"
+            type="button"
+          >
+            Comprar
+          </button>
+        </Link>
       </div>
     );
   }
