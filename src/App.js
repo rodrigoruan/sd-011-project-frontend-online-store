@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" render={ () => <Home { ...api } /> } />
-          <Route path="/cart" render={ (props) => <Cart { ...props } /> } />
+          <Route path="/cart" render={ () => <Cart { ...api } /> } />
         </Switch>
       </BrowserRouter>
     </div>

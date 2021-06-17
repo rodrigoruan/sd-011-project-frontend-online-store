@@ -55,7 +55,12 @@ class Home extends React.Component {
     const { getCategories } = this.props;
     return (
       <div>
-        <Link to="/cart" data-testid="shopping-cart-button">CART</Link>
+        <Link
+          to="/Cart"
+          data-testid="shopping-cart-button"
+        >
+          CART
+        </Link>
         <form>
           <input
             type="text"
