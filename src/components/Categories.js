@@ -7,39 +7,39 @@ class Categories extends Component {
     super(props);
 
     this.state = {
-      categories: [],
+      // categories: [],
     };
-    this.renderCategories = this.renderCategories.bind(this);
+    // this.renderCategories = this.renderCategories.bind(this);
   }
 
-  componentDidMount() {
-    this.renderCategories();
-  }
+  // componentDidMount() {
+  //   this.renderCategories();
+  // }
 
-  async renderCategories() {
-    const data = await api.getCategories();
-    this.setState({
-      categories: data,
-    });
-  }
+  // async renderCategories() {
+  //   const data = await api.getCategories();
+  //   this.setState({
+  //     categories: data,
+  //   });
+  // }
 
   render() {
     const { handleRadioClick } = this.props;
-    const { categories } = this.state;
+    const { categories } = this.props;
     return (
       <div className="categories">
         <h5>Categorias:</h5>
         {categories.map((el) => (
-          <label key={ el.id } htmlFor={ el.id }>
+          <label key={el.id} htmlFor={el.id}>
             {el.name}
             <input
-              key={ el.id }
+              key={el.id}
               type="radio"
-              id={ el.id }
-              name={ el.name }
+              id={el.id}
+              name="categories"
               data-testid="category"
-              value={ el.id }
-              onClick={ handleRadioClick }
+              value={el.id}
+              onClick={handleRadioClick}
             />
           </label>
         ))}

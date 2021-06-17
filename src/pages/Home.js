@@ -12,6 +12,7 @@ export default class Home extends Component {
       inputText: '',
       products: '',
       radioFilter: '',
+      categories: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
@@ -22,24 +23,16 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    this.getQuery();
     this.getCategories();
-    const { inputText } = this.state;
-    if (inputText) {
-      this.getQuery(inputText);
-    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { inputText, radioFilter, loading } = this.state;
+    const { radioFilter, loading } = this.state;
     if (prevState.loading !== loading || prevState.radioFilter !== radioFilter) {
-      this.getQuery(radioFilter.id, inputText);
+      this.getQuery();
     }
   }
-
-  getQuery = async (category, product) => {
-    const getList = await api.getProductsFromCategoryAndQuery(category, product);
-    return this.setState({ products: getList.results });
-  };
 
   handleInput = ({ target }) => {
     this.setState({ inputText: target.value });
@@ -48,6 +41,7 @@ export default class Home extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({ loading: false });
+    this.getQuery();
   };
 
   handleRadioClick = ({ target }) => {
@@ -57,28 +51,31 @@ export default class Home extends Component {
 
   async getCategories() {
     const categories = await api.getCategories();
-    this.setState({ categories: categories });
+    this.setState({ categories });
   }
 
-  async getQuery(category, product) {
-    const getList = await api.getProductsFromCategoryAndQuery(category, product);
+  async getQuery() {
+    const { radioFilter, inputText } = this.state;
+    const getList = await api.getProductsFromCategoryAndQuery(radioFilter.id, inputText);
     return this.setState({ products: getList.results });
   }
 
   showResults = () => {
-
     const { handleAddToCart } = this.props;
-    if (!this.state.loading)
-      return <SearchList products={this.state.products} handleAddToCart={handleAddToCart} />;
-
+    const { loading, products } = this.state;
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+    if (!loading) return <SearchList products={products} handleAddToCart={handleAddToCart} />;
   };
 
   render() {
+    const { categories } = this.state;
     return (
       <div className="home-div">
-        <SearchInput handleSubmit={this.handleSubmit } handleInput={ this.handleInput } />
+        <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
         <div className="search-results">
-          <Categories handleRadioClick={ this.handleRadioClick } />
+          <Categories handleRadioClick={this.handleRadioClick} categories={categories} />
           {this.showResults()}
         </div>
       </div>
