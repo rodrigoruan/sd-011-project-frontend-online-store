@@ -8,6 +8,20 @@ export default class CartItem extends Component {
       quantity: 1,
     };
     this.handleFluctuation = this.handleFluctuation.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+  }
+
+  removeItem() {
+    const { removeItemFromCart, product } = this.props
+    const { id } = product;
+    removeItemFromCart(id);
+  }
+
+  componentDidMount() {
+    const { quantity } = this.props.product;
+    this.setState({
+      quantity,
+    });
   }
 
   handleFluctuation({ target }) {
@@ -17,18 +31,18 @@ export default class CartItem extends Component {
       }));
     } else {
       this.setState((currentState) => ({
-        quantity: currentState.quantity - 1,
+        quantity: currentState.quantity > 1 ? currentState.quantity - 1 : currentState.quantity,
       }));
     }
   }
 
   render() {
     const { product } = this.props;
-    const { thumbnail, title, price,  } = product;
+    const { thumbnail, title, price } = product;
     const { quantity } = this.state;
     return (
         <li className="cart-item-container">
-          <button type="button">X</button>
+          <button type="button" onClick={ this.removeItem }>X</button>
         <picture>
           <img src={ thumbnail } alt={ title } />
         </picture>

@@ -15,6 +15,7 @@ class App extends Component {
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.removeItemFromCart = this.removeItemFromCart.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +28,12 @@ class App extends Component {
       const newShoppingCart = [...shoppingCart, product];
       return { shoppingCart: newShoppingCart };
     });
+  }
+
+  removeItemFromCart(id){
+    this.setState(({ shoppingCart }) => ({
+      shoppingCart:shoppingCart.filter((product) => product.id !== id )
+    }));
   }
 
   async defineStateCategories() {
@@ -62,7 +69,7 @@ class App extends Component {
             />
             <Route
               path="/cart"
-              render={ () => <Cart productList={ shoppingCart } /> }
+              render={ () => <Cart removeItemFromCart={ this.removeItemFromCart } productList={ shoppingCart } /> }
             />
           </Switch>
         </BrowserRouter>
