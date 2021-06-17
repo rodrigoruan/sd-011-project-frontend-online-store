@@ -12,12 +12,34 @@ class Checkout extends Component {
         <section>
           Informações do Comprador
           <br />
-          <input type="text" data-testid="checkout-fullname" placeholder="Nome completo" />
-          <input type="text" maxLength="11" min="0" data-testid="checkout-cpf" placeholder="CPF" />
+          <input
+            type="text"
+            data-testid="checkout-fullname"
+            placeholder="Nome completo"
+          />
+          <input
+            type="text"
+            maxLength="11"
+            min="0"
+            data-testid="checkout-cpf"
+            placeholder="CPF"
+          />
           <input type="email" data-testid="checkout-email" placeholder="Email" />
-          <input type="text" maxLength="11" min="0" data-testid="checkout-phone" placeholder="Telefone" />
+          <input
+            type="text"
+            maxLength="11"
+            min="0"
+            data-testid="checkout-phone"
+            placeholder="Telefone"
+          />
           <br />
-          <input type="text" maxLength="8" min="0" data-testid="checkout-cep" placeholder="CEP" />
+          <input
+            type="text"
+            maxLength="8"
+            min="0"
+            data-testid="checkout-cep"
+            placeholder="CEP"
+          />
           <input type="text" data-testid="checkout-address" placeholder="Endereço" />
           <br />
           <input type="text" placeholder="Complemento" />
