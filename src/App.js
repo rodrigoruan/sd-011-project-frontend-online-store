@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // Páginas
 import Main from './pages/Main';
-// Componentes
 import ShoppingCart from './pages/ShoppingCart';
+// Componentes
 import CategoryFilter from './components/CategoryFilter';
 import './App.css';
 

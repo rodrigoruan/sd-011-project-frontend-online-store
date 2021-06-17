@@ -18,9 +18,9 @@ class ProductList extends React.Component {
 
   async fetchProducts() {
     const { categoryId, query } = this.props;
-    const API = await getProductsFromCategoryAndQuery(categoryId, query);
+    const data = await getProductsFromCategoryAndQuery(categoryId, query);
 
-    const { results } = API;
+    const { results } = data;
     this.setState({
       products: results,
     });
