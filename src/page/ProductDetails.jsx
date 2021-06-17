@@ -11,12 +11,14 @@ export default class ProductDetails extends Component {
 
   componentDidMount() {
     const { match: { params: { id } } } = this.props;
-    console.log(id)
-    api.getProductsFromCategoryAndQuery(false, id).then((product) => console.log(product));
+    this.searchI(id);
+    // api.getProductsFromCategoryAndQuery('', id).then((product) => console.log(product));
   }
 
   render() {
     const { product } = this.state;
+    const { location: { state } } = this.props;
+    console.log(state);
     return (
       <div>
       </div>
