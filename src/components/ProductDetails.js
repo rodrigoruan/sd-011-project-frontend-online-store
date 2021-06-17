@@ -46,7 +46,6 @@ class ProductDetails extends React.Component {
   }
 
   addComment(comment = {}) {
-    console.log(comment);
     this.setState((state) => (
       { comments: [...state.comments, comment] }
     ));
