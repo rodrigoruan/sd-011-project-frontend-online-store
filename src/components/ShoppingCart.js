@@ -20,7 +20,7 @@ export default class ShoppingCart extends Component {
           ))
         )}
         {localStorage.item
-          && <div data-testid="shopping-cart-product-quantity">{arrayObject.length}</div>}
+          && <div>{arrayObject.length}</div>}
         <Link data-testid="shopping-cart-button" to="/">
           Voltar
         </Link>
