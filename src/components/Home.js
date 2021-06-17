@@ -83,13 +83,19 @@ export default class SearchBar extends Component {
           ))}
         </div>
         <div>
-          { products.map((product) => (
-            <Products
+          {products.map((product) => (
+            <Link
               key={ product.id }
-              title={ product.title }
-              thumbnail={ product.thumbnail }
-              price={ product.price }
-            />
+              to={ { pathname: `/details/${product.id}`, state: { product } } }
+              data-testid="product-detail-link"
+            >
+              <Products
+                key={ product.id }
+                title={ product.title }
+                thumbnail={ product.thumbnail }
+                price={ product.price }
+              />
+            </Link>
           ))}
         </div>
       </div>

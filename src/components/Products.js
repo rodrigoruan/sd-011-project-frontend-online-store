@@ -6,9 +6,9 @@ export default class Products extends Component {
     const { title, thumbnail, price } = this.props;
     return (
       <div data-testid="product">
-        <h2>{ title }</h2>
+        <h2>{title}</h2>
         <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
+        <p>{price}</p>
       </div>
     );
   }
