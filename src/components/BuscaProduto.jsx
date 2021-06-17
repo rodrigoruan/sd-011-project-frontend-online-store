@@ -29,7 +29,7 @@ class BuscaProduto extends Component {
     );
 
     this.setState({
-      // inputData: '',
+      inputData: '',
       productsData: apiData.results });
   }
 
@@ -45,12 +45,8 @@ class BuscaProduto extends Component {
         <button type="button" data-testid="query-button" onClick={ this.getApiData }>
           Buscar
         </button>
-        {productsData.map(({ id, title, thumbnail, price, category_id }) => (
-
+        {productsData.map(({ id, title, thumbnail, price }) => (
           <ProductCard
-            search={ inputData }
-            product={ { id, title, thumbnail, price, category_id } }
-            id={ id }
             key={ id }
             title={ title }
             imgPath={ thumbnail }
