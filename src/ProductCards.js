@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
-    console.log(this.props);
     const { produto: { title, thumbnail, price } } = this.props;
     return (
       <div data-testid="product" className="product">
