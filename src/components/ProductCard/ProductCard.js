@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './ProductCard.css';
 
 export default class ProductCard extends Component {
   render() {
-    console.log(this.props);
     const { title, price, thumbnail, id, handleAddToShopCart } = this.props;
     return (
-      <div data-testid="product">
+      <div className="product-card" data-testid="product">
         <Link
           data-testid="product-detail-link"
           to={ { pathname: `/details/${id}`,
@@ -20,15 +20,15 @@ export default class ProductCard extends Component {
           } }
         >
           { title }
-          <img src={ thumbnail } alt={ title } />
-          { price }
         </Link>
+        <img src={ thumbnail } alt={ title } />
+        { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
         <button
           type="button"
           id={ title }
           className={ thumbnail }
           name={ price }
-          onClick={ () => handleAddToShopCart(title, thumbnail, price) }
+          onClick={ () => handleAddToShopCart(id, title, thumbnail, price) }
           data-testid="product-add-to-cart"
         >
           Comprar

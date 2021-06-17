@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import Rating from '../components/ProductRating/Rating';
 
 export default class ProductDetails extends React.Component {
-  constructor({ location }) {
-    super({ location });
-    this.state = location.state;
+  constructor(props) {
+    super(props);
+    this.state = props.location.state;
   }
 
   render() {
