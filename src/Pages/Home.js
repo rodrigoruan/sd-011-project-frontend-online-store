@@ -35,7 +35,7 @@ class Home extends React.Component {
     return (
       <fragment>
         <ProductList selectedCategory={ filterCategories } />
-        <div>
+        <div className="categoriesList">
           { productCategories.map((category) => (
             <div key={ category.id }>
               <input

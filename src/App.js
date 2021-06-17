@@ -3,9 +3,11 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
+  // Switch,
 } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home';
+import ProductDetails from './Pages/ProductDetails';
 import ShoppingCart from './Pages/ShoppingCart';
 import ShoppingCartButton from './Pages/ShoppingCartButton';
 
@@ -14,6 +16,7 @@ class App extends React.Component {
     return (
       <div>
         <Router>
+          {/* <Switch> */}
           <Route exact path="/">
             <Home />
             <Link data-testid="shopping-cart-button" to="/cart">
@@ -24,6 +27,11 @@ class App extends React.Component {
             <ShoppingCart />
             <Link to="/">Voltar à Home</Link>
           </Route>
+          <Route
+            path="/details/:id"
+            render={ (props) => <ProductDetails { ...props } /> }
+          />
+          {/* </Switch> */}
         </Router>
       </div>);
   }
