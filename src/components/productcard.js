@@ -19,6 +19,7 @@ export default class ProductCard extends Component {
       title,
       price,
       thumbnail,
+      quantity,
     };
     window.localStorage
       .setItem(id, JSON.stringify(obj));

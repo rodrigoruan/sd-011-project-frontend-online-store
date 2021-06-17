@@ -9,11 +9,11 @@ export default class Cart extends React.Component {
     const items = { ...localStorage };
     const text = 'shopping-cart-empty-message';
     const renderCart1 = Object.values(items).map((e) => (
-      <div key={JSON.parse(e).id}>
+      <div key={ JSON.parse(e).id }>
         <p data-testid="shopping-cart-product-name">{ JSON.parse(e).title }</p>
         <img src={ JSON.parse(e).thumbnail } alt={ e } />
         <p data-testid="shopping-cart-product-quantity">
-          Quantidade:
+          { JSON.parse(e).quantity }
         </p>
       </div>
     ));
