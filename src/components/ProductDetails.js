@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Form from './Form';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -9,7 +10,12 @@ export default class ProductDetails extends Component {
     this.state = {
       itemsCart: [],
     };
-    this.handlerLocalStore = this.handlerLocalStore.bind(this);
+
+    this.getValues = this.getValues.bind(this);
+  }
+
+  componentDidMount() {
+    this.getValues();
   }
 
   handlerLocalStore(param) {
@@ -26,6 +32,17 @@ export default class ProductDetails extends Component {
         getLocal[verify].countP += 1;
         localStorage.setItem('item', JSON.stringify([...getLocal]));
       }
+    }
+  }
+
+  getValues() {
+    const keys = Object.values(localStorage);
+    if (keys.length > 0) {
+      keys.forEach((value) => {
+        const obj = JSON.parse(value);
+        console.log(obj);
+      });
+      this.handlerLocalStore = this.handlerLocalStore.bind(this);
     }
   }
 
@@ -86,6 +103,7 @@ export default class ProductDetails extends Component {
         >
           Adicionar ao Carrinho
         </button>
+        <Form idProduct={ id } />
       </div>
     );
   }
