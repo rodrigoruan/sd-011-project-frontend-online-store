@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import NewItem from '../Components/NewItem';
 
 class Shopcart extends Component {
@@ -38,9 +39,16 @@ class Shopcart extends Component {
           Seu carrinho está vazio
         </div>
       ) : (
-        products.map((product, index) => (
-          <NewItem newProduct={ product } key={ index } />
-        ))
+        <div>
+          {products.map((product, index) => (
+            <NewItem newProduct={ product } key={ index } />
+          ))}
+          <Link to={ { pathname: '/PurchasePage', state: products } }>
+            <button data-testid="checkout-products" type="button">
+              Finalizar Compra
+            </button>
+          </Link>
+        </div>
       ));
   }
 }
