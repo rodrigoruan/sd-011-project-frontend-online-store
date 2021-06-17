@@ -48,6 +48,47 @@ export class Product extends Component {
             {/* {attributes.map((atribute) => <li key="">{attributes}</li>)} */}
           </ul>
         </div>
+        <form>
+          <h3>Avaliações</h3>
+          <label htmlFor="email-id">
+            <p>Email:</p>
+            <input
+              id="email-id"
+              type="e-mail"
+              placeholder="Digite seu e-mail"
+              isRequired
+            />
+          </label>
+          <label htmlFor="rating-id">
+            <p>Estrelas:</p>
+            <input
+              id="rating-id"
+              type="number"
+              step={ 0.1 }
+              min={ 0 }
+              max={ 5 }
+              placeholder="0 a 5"
+              isRequired
+            />
+          </label>
+          <label htmlFor="mensage-id">
+            <p>Mensagem:</p>
+            <textarea
+              type="text"
+              data-testid="product-detail-evaluation"
+            />
+          </label>
+          <br />
+          <button
+            id="avaiation-button"
+            type="button"
+          >
+            Avaliar
+          </button>
+        </form>
+        <section>
+          <h4>Avaliações recentes</h4>
+        </section>
       </div>
     );
   }
