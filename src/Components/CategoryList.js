@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 export default class CategoryList extends Component {
@@ -25,19 +25,29 @@ export default class CategoryList extends Component {
 
   render() {
     const { categories } = this.state;
+    const { getProductsFromCategory } = this.props;
     return (
       <div className="sidebar-catories">
         {console.log(categories)}
         <ul>
           {categories.map((category) => (
             <li
-              data-testid="category"
               key={ category.id }
             >
-              <Link to={ `/category/${category.id}` }>{ category.name }</Link>
+              <button
+                data-testid="category"
+                type="button"
+                onClick={ () => getProductsFromCategory(category.id) }
+              >
+                { category.name }
+              </button>
             </li>))}
         </ul>
       </div>
     );
   }
 }
+
+CategoryList.propTypes = {
+  getProductsFromCategory: PropTypes.func.isRequired,
+};
