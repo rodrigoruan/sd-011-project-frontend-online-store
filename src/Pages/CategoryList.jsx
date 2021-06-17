@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 class CategoryList extends Component {
@@ -22,13 +23,14 @@ class CategoryList extends Component {
 
   render() {
     const { auxList } = this.state;
+    const { selectListner } = this.props;
     return (
       <label htmlFor="selectCategorie">
         Escolha sua categoria:
         <br />
-        <select id="selectCategorie">
+        <select id="selectCategorie" onClick={ selectListner }>
           {auxList.map((categorie) => (
-            <option key={ categorie.id } data-testid="category">
+            <option key={ categorie.id } data-testid="category" value={ categorie.id }>
               {categorie.name}
             </option>
           ))}
@@ -37,5 +39,9 @@ class CategoryList extends Component {
     );
   }
 }
+
+CategoryList.propTypes = {
+  selectListner: PropTypes.func,
+}.isRequerid;
 
 export default CategoryList;

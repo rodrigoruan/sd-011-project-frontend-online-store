@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CategoryList from './CategoryList';
 import * as api from '../services/api';
 import Products from './Products';
-// comentario
+
 class Home extends Component {
   constructor() {
     super();
@@ -14,12 +14,20 @@ class Home extends Component {
     };
     this.inputListner = this.inputListner.bind(this);
     this.requestProducts = this.requestProducts.bind(this);
+    this.selectListner = this.selectListner.bind(this);
   }
 
   inputListner({ target }) {
     this.setState({
       search: target.value,
     });
+  }
+
+  selectListner({ target }) {
+    this.setState({
+      categoryId: target.value,
+    },
+    async () => this.requestProducts());
   }
 
   requestProducts() {
@@ -39,7 +47,7 @@ class Home extends Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategoryList />
+        <CategoryList selectListner={ this.selectListner } />
         <input
           type="text"
           data-testid="query-input"
@@ -55,6 +63,7 @@ class Home extends Component {
         </button>
         <Products prodList={ prodList } />
         <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
+        {/* <Checkout /> */}
       </div>
     );
   }
