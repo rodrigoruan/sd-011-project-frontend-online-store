@@ -13,7 +13,11 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ Home } />
-            <Route exact path="/ShoppingCart" component={ ShoppingCart } />
+            <Route
+              exact
+              path="/ShoppingCart"
+              render={ (props) => (<ShoppingCart { ...props } />) }
+            />
           </Switch>
         </BrowserRouter>
       </div>

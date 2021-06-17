@@ -14,7 +14,7 @@ class Searchfield extends Component {
             img={ product.thumbnail }
             price={ product.price }
           />
-        ))}
+        )) }
       </div>
     );
   }
