@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import ShopCart from './ShopCart';
+import { BrowserRouter as Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import * as fetchAPI from '../services/api';
 
@@ -38,7 +37,7 @@ export default class Home extends Component {
     const { categoryId, search } = this.state;
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
-    console.log(fetchedProducts);
+    // console.log(fetchedProducts.results);
     this.setState({ productCards: fetchedProducts.results });
   }
 
@@ -103,16 +102,14 @@ export default class Home extends Component {
               <ProductCard
                 key={ product.id }
                 product={ product }
-              />))}
+                productId={ this.fetchProducts }
+              />
+            ))}
         </div>
-        <Router>
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <img src="./images/cart.svg" alt="Cart" />
-          </Link>
-          <Switch>
-            <Route path="/cart" component={ ShopCart } />
-          </Switch>
-        </Router>
+
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <img src="./images/cart.svg" alt="Cart" />
+        </Link>
       </div>
     );
   }
