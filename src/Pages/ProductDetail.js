@@ -47,7 +47,7 @@ export default class ProductDetail extends Component {
 
 
   render() {
-    const { product,comments } = this.state;
+    const { product, comments } = this.state;
     const { itensAdded } = this.props;
     return (
       <>
