@@ -5,7 +5,11 @@ import ProductCard from './ProductCard';
 
 export default class SearchResults extends React.Component {
   render() {
-    const { searchResults, handleSearch, handleChangeField, searchTerm } = this.props;
+    const { searchResults,
+      handleSearch,
+      handleChangeField,
+      searchTerm,
+      addItemToCart } = this.props;
 
     return (
       <section id="home-search" className="home-two-fourths search-section">
@@ -37,6 +41,7 @@ export default class SearchResults extends React.Component {
           {searchResults.results.map(((product) => (<ProductCard
             key={ product.id }
             product={ product }
+            addItemToCart={ addItemToCart }
           />)
           ))}
         </ol>

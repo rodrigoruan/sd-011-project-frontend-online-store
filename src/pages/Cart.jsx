@@ -1,15 +1,15 @@
 import React from 'react';
 import { CartItem } from '../components';
 import data from '../__mocks__/query';
-
+import PropTypes from 'prop-types';
 
 class Cart extends React.Component {
   render() {
-    const { cartList } = this.props;
+    const { productList } = this.props;
     return (
-      <div>
+      <main>
         <h1>Carrinho de Compras</h1>
-          {!cartList
+          {!productList
           ? (
             <div data-testid="shopping-cart-empty-message">
             <p>Seu carrinho está vazio</p>
@@ -25,8 +25,17 @@ class Cart extends React.Component {
             </ul>
           )
           }
-      </div>
+      </main>
     );
   }
 }
+
+Cart.propTypes = {
+  productList: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string,
+    id: PropTypes.string,
+    quantity: PropTypes.number,
+  })),
+}.isRequired;
+
 export default Cart;

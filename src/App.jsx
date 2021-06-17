@@ -10,14 +10,23 @@ class App extends Component {
     this.state = {
       searchResults: { results: [] },
       categories: [],
-      cartList: [],
+      shoppingCart: [],
     };
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
   componentDidMount() {
     this.defineStateCategories();
+  }
+
+  addItemToCart(product) {
+    this.setState(({ shoppingCart }) => {
+      product.quantity = 1;
+      const newShoppingCart = [...shoppingCart, product];
+      return { shoppingCart: newShoppingCart };
+    });
   }
 
   async defineStateCategories() {
@@ -34,7 +43,7 @@ class App extends Component {
   }
 
   render() {
-    const { categories, searchResults, cartList } = this.state;
+    const { categories, searchResults, shoppingCart } = this.state;
 
     return (
       <>
@@ -48,9 +57,13 @@ class App extends Component {
                 searchResults={ searchResults }
                 updateSearchResults={ this.updateSearchResults }
                 categories={ categories }
+                addItemToCart={ this.addItemToCart }
               />) }
             />
-            <Route path="/cart" render={() => <Cart cartList={ cartList } /> } />
+            <Route
+              path="/cart"
+              render={ () => <Cart productList={ shoppingCart } /> }
+            />
           </Switch>
         </BrowserRouter>
         <footer>Feito pelo Grupo 14, o grupo brabo</footer>
