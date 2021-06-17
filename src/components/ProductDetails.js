@@ -21,19 +21,19 @@ class ProductDetails extends React.Component {
     this.getProduct();
   }
 
+  handleClick() {
+    const { product: { title, thumbnail, price } } = this.state;
+    const previousList = this.loadCartList();
+    previousList.push({ title, thumbnail, price });
+    localStorage.setItem('cartList', JSON.stringify(previousList));
+  }
+
   async getProduct() {
     const { match: { params: { categoryId, id } } } = this.props;
     const productObj = await api.getProductsFromCategoryAndQuery(categoryId, '');
     const product = productObj.results
       .find((prod) => prod.id === id);
     this.setState({ product });
-  }
-
-  handleClick() {
-    const { product: { title, thumbnail, price } } = this.state;
-    const previousList = this.loadCartList();
-    previousList.push({ title, thumbnail, price });
-    localStorage.setItem('cartList', JSON.stringify(previousList));
   }
 
   loadCartList() {
