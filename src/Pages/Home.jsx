@@ -36,12 +36,13 @@ class Home extends Component {
       .then(({ results }) => (
         this.setState({
           prodList: results,
+          wasSearched: true,
         })
       ));
   }
 
   render() {
-    const { prodList } = this.state;
+    const { prodList, wasSearched } = this.state;
     return (
       <div>
         <p data-testid="home-initial-message">
@@ -61,7 +62,7 @@ class Home extends Component {
         >
           Enviar
         </button>
-        <Products prodList={ prodList } />
+        {(!wasSearched) ? null : <Products prodList={ prodList } />}
         <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
         {/* <Checkout /> */}
       </div>
