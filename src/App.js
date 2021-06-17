@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ListagemDeProdutos, ShoppingCart } from './pages/index';
+import { ListagemDeProdutos, ShoppingCart, DetalhesProduto } from './pages/index';
 
 function App() {
   return (
@@ -8,6 +8,10 @@ function App() {
       <Switch>
         <Route exact path="/" component={ ListagemDeProdutos } />
         <Route exact path="/shoppingCart" component={ ShoppingCart } />
+        <Route
+          path="/detalhesproduto/:category_id/:product_id/:title"
+          render={ (props) => <DetalhesProduto { ...props } /> }
+        />
       </Switch>
     </BrowserRouter>
   );
