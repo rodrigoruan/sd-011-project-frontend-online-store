@@ -4,27 +4,10 @@ import PropTypes from 'prop-types';
 export default class CartItem extends Component {
   constructor(props) {
     super(props);
-    const { product } = this.props;
-    const { quantity } = product;
-    this.state = {
-      quantity,
-    };
-    this.handleFluctuation = this.handleFluctuation.bind(this);
+    const decrease = -1;
+    const increase = 1;
+    this.deltas = [decrease, increase];
     this.removeItem = this.removeItem.bind(this);
-  }
-
-  handleFluctuation({ target }) {
-    if (target.innerText === '+') {
-      this.setState((currentState) => ({
-        quantity: currentState.quantity + 1,
-      }));
-    } else {
-      this.setState((currentState) => ({
-        quantity: currentState.quantity > 1
-          ? currentState.quantity - 1
-          : currentState.quantity,
-      }));
-    }
   }
 
   removeItem() {
@@ -34,9 +17,8 @@ export default class CartItem extends Component {
   }
 
   render() {
-    const { product } = this.props;
-    const { thumbnail, title, price } = product;
-    const { quantity } = this.state;
+    const { product, updateQuantity } = this.props;
+    const { thumbnail, title, price, quantity } = product;
     return (
       <li className="cart-item-container">
         <button type="button" onClick={ this.removeItem }>X</button>
@@ -48,7 +30,7 @@ export default class CartItem extends Component {
           <button
             data-testid="product-increase-quantity"
             type="button"
-            onClick={ this.handleFluctuation }
+            onClick={ () => updateQuantity(product, this.deltas[1]) }
           >
             +
           </button>
@@ -56,7 +38,7 @@ export default class CartItem extends Component {
           <button
             data-testid="product-decrease-quantity"
             type="button"
-            onClick={ this.handleFluctuation }
+            onClick={ () => updateQuantity(product, this.deltas[0]) }
           >
             -
           </button>

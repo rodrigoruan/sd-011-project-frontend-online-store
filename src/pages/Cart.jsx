@@ -4,7 +4,7 @@ import { CartItem } from '../components';
 
 class Cart extends React.Component {
   render() {
-    const { productList, removeItemFromCart } = this.props;
+    const { productList, removeItemFromCart, updateQuantity } = this.props;
     return (
       <main>
         <h1>Carrinho de Compras</h1>
@@ -17,6 +17,7 @@ class Cart extends React.Component {
           : (
             <ul>
               {productList.map(((product) => (<CartItem
+                updateQuantity={ updateQuantity }
                 removeItemFromCart={ removeItemFromCart }
                 key={ product.id }
                 product={ product }
@@ -24,6 +25,7 @@ class Cart extends React.Component {
               ))}
             </ul>
           )}
+        <h2>{ }</h2>
       </main>
     );
   }
