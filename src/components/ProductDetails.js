@@ -67,9 +67,7 @@ ProductDetails.propTypes = {
         title: PropTypes.string,
         thumbnail: PropTypes.string,
         price: PropTypes.number,
-        attributes: PropTypes.shape({
-          map: PropTypes.func,
-        }),
+        attributes: PropTypes.arrayOf(PropTypes.objectOf),
       }),
     }),
   }).isRequired,
