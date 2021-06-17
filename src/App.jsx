@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       searchResults: { results: [] },
       categories: [],
+      cartList: [],
     };
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
@@ -33,7 +34,7 @@ class App extends Component {
   }
 
   render() {
-    const { categories, searchResults } = this.state;
+    const { categories, searchResults, cartList } = this.state;
 
     return (
       <>
@@ -49,7 +50,7 @@ class App extends Component {
                 categories={ categories }
               />) }
             />
-            <Route path="/cart" component={ Cart } />
+            <Route path="/cart" render={() => <Cart cartList={ cartList } /> } />
           </Switch>
         </BrowserRouter>
         <footer>Feito pelo Grupo 14, o grupo brabo</footer>
