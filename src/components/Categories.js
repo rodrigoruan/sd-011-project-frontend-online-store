@@ -11,7 +11,7 @@ export default class Categories extends Component {
           {name}
           <input
             type="radio"
-            onChange={ changeCategory }
+            onClick={ changeCategory }
             data-testid="category"
             name="categoria"
             value={ id }

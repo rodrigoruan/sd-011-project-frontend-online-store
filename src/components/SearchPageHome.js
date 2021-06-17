@@ -35,13 +35,12 @@ export default class SearchPageHome extends Component {
     this.setState({
       [name]: value,
     });
-    const { query, product } = this.state;
+    const { query } = this.state;
     const response = await api.getProductsFromCategoryAndQuery(value, query);
     this.setState({
       product: response.results,
       loading: false,
     });
-    console.log(product);
   }
 
   async getProducts() {
@@ -81,11 +80,6 @@ export default class SearchPageHome extends Component {
     this.setState({
       itemsCart: [...itemsCart, productForCart],
     });
-    if (itemsCart.length === 0) {
-      console.log('xablau3');
-    }
-    localStorage.setItem('key', JSON.stringify(itemsCart));
-    console.log('xablau');
   }
 
   render() {

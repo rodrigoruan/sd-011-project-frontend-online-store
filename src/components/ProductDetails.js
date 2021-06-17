@@ -9,13 +9,30 @@ export default class ProductDetails extends Component {
     this.state = {
       itemsCart: [],
     };
+    this.handlerLocalStore = this.handlerLocalStore.bind(this);
+  }
+
+  handlerLocalStore(param) {
+    param.countP = 1;
+    if (!localStorage.item) {
+      localStorage.setItem('item', JSON.stringify([param]));
+    } else {
+      const getLocal = JSON.parse(localStorage.getItem('item'));
+      const getId = getLocal.map((value) => value.id);
+      const verify = getId.indexOf(param.id);
+      if (verify < 0) {
+        localStorage.setItem('item', JSON.stringify([...getLocal, param]));
+      } else {
+        getLocal[verify].countP += 1;
+        localStorage.setItem('item', JSON.stringify([...getLocal]));
+      }
+    }
   }
 
   render() {
     const { itemsCart } = this.state;
     const { location: { state: { detail } } } = this.props;
     const { id, title, thumbnail, price, attributes, installments } = detail;
-    console.log(this.props);
 
     return (
       <div>
@@ -59,12 +76,12 @@ export default class ProductDetails extends Component {
           {itemsCart.length}
           )
         </Link>
+
+        <Link to="/">Voltar</Link>
         <button
           data-testid="product-detail-add-to-cart"
           value={ id }
-          onClick={ () => this.setState(() => ({
-            itemsCart: [...itemsCart, detail],
-          })) }
+          onClick={ () => this.handlerLocalStore(detail) }
           type="button"
         >
           Adicionar ao Carrinho

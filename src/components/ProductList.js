@@ -3,8 +3,31 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
+  constructor() {
+    super();
+    this.handlerLocalStore = this.handlerLocalStore.bind(this);
+  }
+
+  handlerLocalStore(param) {
+    console.log(param);
+    param.countP = 1;
+    if (!localStorage.item) {
+      localStorage.setItem('item', JSON.stringify([param]));
+    } else {
+      const getLocal = JSON.parse(localStorage.getItem('item'));
+      const getId = getLocal.map((value) => value.id);
+      const verify = getId.indexOf(param.id);
+      if (verify < 0) {
+        localStorage.setItem('item', JSON.stringify([...getLocal, param]));
+      } else {
+        getLocal[verify].countP += 1;
+        localStorage.setItem('item', JSON.stringify([...getLocal]));
+      }
+    }
+  }
+
   render() {
-    const { products: { title, price, thumbnail, id }, addItemCart } = this.props;
+    const { products: { title, price, thumbnail, id } } = this.props;
     const { products } = this.props;
 
     return (
@@ -18,7 +41,7 @@ export default class ProductList extends Component {
         <button
           data-testid="product-add-to-cart"
           value={ id }
-          onClick={ addItemCart }
+          onClick={ () => this.handlerLocalStore(products) }
           type="button"
         >
           Adicionar ao Carrinho
@@ -44,5 +67,4 @@ ProductList.propTypes = {
     thumbnail: PropTypes.string,
     id: PropTypes.string,
   }).isRequired,
-  addItemCart: PropTypes.func.isRequired,
 };

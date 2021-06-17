@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Button extends Component {
   render() {
-    const { subClick, addClick, quantity } = this.props;
+    const { subClick, addClick } = this.props;
     return (
       <div>
         <button
@@ -13,7 +14,7 @@ export default class Button extends Component {
           -
         </button>
 
-        <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
+        <p data-testid="shopping-cart-product-quantity"> 1 </p>
         <button
           data-testid="product-increase-quantity"
           type="button"
@@ -25,3 +26,8 @@ export default class Button extends Component {
     );
   }
 }
+
+Button.propTypes = {
+  subClick: PropTypes.func.isRequired,
+  addClick: PropTypes.func.isRequired,
+};

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ProductListCart from './ProductListCart';
 import Button from './Button';
 
 export default class ShoppingCart extends Component {
@@ -11,29 +10,39 @@ export default class ShoppingCart extends Component {
     };
   }
 
+  componentDidUpdate() {
+    this.setLocation();
+  }
+
+  setLocation = () => {
+    const { location } = this.props;
+    const { state } = location;
+    console.log(state);
+    if (state.length > 1) {
+      localStorage.setItem('item', JSON.stringify(state));
+      window.location.reload();
+    }
+  }
+
   sumtotal = () => {
     const { location } = this.props;
     const { state } = location;
 
     const total = [];
     state.map((item) => total.push(item.price));
-    console.log(total);
+
     // const { price } = state[0];
     // const prices = [...price];
     // return prices;
   }
 
-  subClick = () => {
-    const { quantity } = this.state;
+  subClick = (quantity) => {
     if (quantity > 0) {
-      this.setState((cartStatus) => ({
-        quantity: cartStatus.quantity - 1,
-      }));
+      quantity += 1;
     }
   }
 
-  addClick = () => {
-    const { quantity } = this.state;
+  addClick = (quantity) => {
     console.log(quantity);
     this.setState((cartStatus2) => ({
       quantity: cartStatus2.quantity + 1,
@@ -41,37 +50,40 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { quantity } = this.state;
-    const { location } = this.props;
-    const { state } = location;
-    const { title, price, thumbnail } = state;
-    console.log(this.props);
+    const getLocal = JSON.parse(localStorage.getItem('item'));
+
+    console.log(getLocal);
     return (
       <>
         <div>
-          { state.length === 0
+          { !localStorage.item
             ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
-            : (state.map((item) => (
-              <div key={ item.title }>
-                <ProductListCart
-                  products={ item }
-                />
+            : (getLocal.map(({ title, thumbnail, price, countP }, index) => (
+              <div key={ index }>
+                <div data-testid="shopping-cart-product-name">
+                  <img src={ thumbnail } alt={ title } />
+                  <p>{ title }</p>
+                  <p>
+                    R$
+                    {price}
+                  </p>
+                </div>
                 <Button
-                  quantity={ quantity }
+                  quantity={ countP }
                   subClick={ this.subClick }
                   addClick={ this.addClick }
                 />
               </div>
             ))) }
         </div>
-        <div className="cart_item">
+        {/* <div className="cart_item">
           <ol>
             <img src={ thumbnail } alt={ title } />
             <p>{ title }</p>
             <p>{ `R$${price}`}</p>
             <span>{this.sumtotal()}</span>
           </ol>
-        </div>
+        </div> */}
       </>
     );
   }
@@ -79,6 +91,6 @@ export default class ShoppingCart extends Component {
 
 ShoppingCart.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.arrayOf(),
+    state: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
