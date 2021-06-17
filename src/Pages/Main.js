@@ -11,10 +11,12 @@ export default class Main extends Component {
     this.state = {
       arraySearch: [],
       ctgId: '',
+      itensAdded: [],
     };
     this.eventSearch = this.eventSearch.bind(this);
     this.eventCtg = this.eventCtg.bind(this);
     this.defaultSearch = this.defaultSearch.bind(this);
+    this.addItens = this.addItens.bind(this);
   }
 
   componentDidMount() {
@@ -38,14 +40,21 @@ export default class Main extends Component {
     });
   }
 
+  addItens(obj) {
+    const { itensAdded } = this.state;
+    this.setState({
+      itensAdded: [...itensAdded, obj],
+    });
+  }
+
   render() {
-    const { arraySearch, ctgId } = this.state;
+    const { arraySearch, ctgId, itensAdded } = this.state;
     return (
       <>
         <Search evSrch={ this.eventSearch } ctgId={ ctgId } />
-        <ShoppingCart />
         <Categorys evCtg={ this.eventCtg } />
-        <Cards resultSearch={ arraySearch } />
+        <Cards resultSearch={ arraySearch } addItems={ this.addItens } />
+        <ShoppingCart itensArray={ itensAdded } />
       </>
     );
   }
