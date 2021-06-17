@@ -8,9 +8,10 @@ export default class ProductDetail extends Component {
     super();
     this.state = {
       product: {},
-      commnets: [],
+      comments: [],
     };
     this.getProduct = this.getProduct.bind(this);
+    this.setCommentarray = this.setCommentarray.bind(this);
   }
 
   componentDidMount() {
@@ -26,15 +27,21 @@ export default class ProductDetail extends Component {
     });
   }
 
-  render() {
-    const { product } = this.state;
+  setCommentarray(value) {
+    const { comments } = this.state;
+    this.setState({
+      comments: [value, ...comments],
+    });
+  }
 
+  render() {
+    const { product, comments } = this.state;
     return (
       <>
         <div data-testid="product-detail-name">{ product.title }</div>
-        <div data-testid="product-detail-evaluation">
-          <FormComment idPrd={ product.id } />
-          <Comments />
+        <div>
+          <FormComment idPrd={ product.id } evBtn={ this.setCommentarray } />
+          <Comments idPrd={ product.id } arrayComment={ comments } />
         </div>
       </>
     );

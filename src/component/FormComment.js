@@ -1,39 +1,55 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class FormComment extends Component {
-  constructor({ id }) {
-    super(id);
+  constructor() {
+    super();
     this.state = {
-      id,
+      idp: '',
       email: '',
       msg: '',
     };
-    this.handleclick = this.handleclick.bind(this);
     this.handlkeChange = this.handlkeChange.bind(this);
-  }
-
-  handleclick() {
-    const { email, msg } = this.state;
-    const newObj = { email, msg };
-    console.log(newObj);
   }
 
   handlkeChange({ target }) {
     const { name, value } = target;
+    const { idPrd } = this.props;
     this.setState({
+      idp: idPrd,
       [name]: value,
     });
   }
 
   render() {
     const { email, msg } = this.state;
-    console.log(this.props);
+    const { evBtn } = this.props;
     return (
       <form>
-        <input name="email" type="text" value={ email } onChange={ this.handlkeChange } />
-        <input name="msg" type="text" value={ msg } onChange={ this.handlkeChange } />
-        <button type="button" onClick={ this.handleclick }>Avaliar</button>
+        <input
+          name="email"
+          type="text"
+          value={ email }
+          onChange={ this.handlkeChange }
+        />
+        <input
+          data-testid="product-detail-evaluation"
+          name="msg"
+          type="text"
+          value={ msg }
+          onChange={ this.handlkeChange }
+        />
+        <button type="button" onClick={ () => evBtn(this.state) }>Avaliar</button>
       </form>
     );
   }
 }
+
+FormComment.defaultProps = {
+  idPrd: '',
+};
+
+FormComment.propTypes = {
+  idPrd: PropTypes.string,
+  evBtn: PropTypes.func.isRequired,
+};
