@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import ShoppingCart from './components/ShoppingCart';
-import ProductDetails from './components/ProductDetails';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Header from './components/Header';
+import Section from './components/Section';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={ Home } />
-        <Route path="/cart" component={ ShoppingCart } />
-        <Route
-          path="/product/:id"
-          render={ (props) => <ProductDetails { ...props } /> }
-        />
-      </Switch>
-    </BrowserRouter>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="app">
+        <Router>
+          <Header />
+          <Section />
+        </Router>
+      </div>
+    );
+  }
 }
 
 export default App;
