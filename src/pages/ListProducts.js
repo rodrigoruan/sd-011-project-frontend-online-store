@@ -14,25 +14,45 @@ class ListProducts extends Component {
       category: '',
     };
 
-    this.HandlerState = this.HandlerState.bind(this);
-    this.RequestApi = this.RequestApi.bind(this);
+    this.handlerChangeState = this.handlerChangeState.bind(this);
+    this.getProductsByCategory = this.getProductsByCategory.bind(this);
+    this.getProductsByQuery = this.getProductsByQuery.bind(this);
   }
 
-  HandlerState(event) {
+  handlerChangeState(event) {
     const { target: { name, value } } = event;
     if (name === 'category') {
-      this.setState({ [name]: value }, () => this.RequestApi());
+      this.setState({ [name]: value }, () => this.getProductsByCategory());
     } else {
       this.setState({ [name]: value });
     }
   }
 
-  RequestApi() {
+  async getProductsByCategory(categoryId) {
+    /**/
+    console.log(categoryId);
+    const { search } = this.state;
+    // this.setState({ data: [] }, () => {
+    //   api.getProductsFromCategoryAndQuery(categoryId, search)
+    //     .then(({ results }) => {
+    //       this.setState({ data: results });
+    //       console.log(results);
+    //     });
+    // });
+    const result = await api.getProductsFromCategoryAndQuery(categoryId, search);
+    this.setState({
+      data: result.results,
+    });
+  }
+
+  getProductsByQuery() {
+    /**/
     const { search, category } = this.state;
     this.setState({ data: [] }, () => {
       api.getProductsFromCategoryAndQuery(category, search)
         .then(({ results }) => {
           this.setState({ data: results });
+          console.log(results);
         });
     });
   }
@@ -42,7 +62,8 @@ class ListProducts extends Component {
     return (
       <div className="flex-dashboard">
         <CategoryList
-          handleUserInput={ this.HandlerState }
+          handleUserInput={ this.handlerChangeState }
+          getProductsFromCategory={ this.getProductsByCategory }
         />
         <div className="main-content">
           <div className="row">
@@ -51,13 +72,13 @@ class ListProducts extends Component {
                 data-testid="query-input"
                 type="text"
                 name="search"
-                onChange={ this.HandlerState }
+                onChange={ this.handlerChangeState }
               />
             </label>
             <button
               data-testid="query-button"
               type="submit"
-              onClick={ this.RequestApi }
+              onClick={ this.getProductsByQuery }
             >
               Pesquisar
             </button>
