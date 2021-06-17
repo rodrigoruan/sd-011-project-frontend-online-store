@@ -47,6 +47,7 @@ class MainPage extends React.Component {
     const { name, value } = target;
     this.setState({
       [name]: value,
+      loading: true,
     });
     const response = await fetchApi.getProductsFromCategoryAndQuery(value, searchText);
     this.setState({
@@ -58,6 +59,9 @@ class MainPage extends React.Component {
   /* Função para fazer requisição da função getProducsFromCategoryAndQuery */
   async getCategoryAndQuery() {
     const { searchText, category } = this.state;
+    this.setState({
+      loading: true,
+    });
     const getApi = await fetchApi.getProductsFromCategoryAndQuery(category, searchText);
     this.setState({
       products: getApi.results,
