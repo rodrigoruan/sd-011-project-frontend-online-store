@@ -41,30 +41,11 @@ class Home extends React.Component {
   render() {
     const { products, search } = this.state;
     const { categories } = this.state;
-    if (!categories) return <div>Loading...</div>;
     return (
       <>
-        <section>
-          { categories.map((produto) => (
-            <Link
-              to="/"
-              key={ produto.id }
-              className={ style.link }
-              onClick={ this.handleClickLi }
-            >
-              <ul className={ style.list }>
-                <li
-                  data-testid="category"
-                  id={ produto.id }
-                >
-                  {produto.name}
-                </li>
-              </ul>
-            </Link>
-          ))}
-        </section>
+        {/* Renderiza o card de produtos após clicar no botão */}
 
-        <div className={ style.inputContent }>
+        <section className={ style.inputContent }>
           <label htmlFor="site-search">
             <input
               data-testid="query-input"
@@ -96,7 +77,29 @@ class Home extends React.Component {
               <p>{product.price}</p>
             </Link>))}
           {search && products.length === 0 && <p>Nenhum produto encontrado</p>}
-        </div>
+        </section>
+
+        {/* Renderiza o card de produtos após clicar na categoria */}
+
+        <section>
+          {categories && categories.map((produto) => (
+            <Link
+              to="/"
+              key={ produto.id }
+              className={ style.link }
+              onClick={ this.handleClickLi }
+            >
+              <ul className={ style.list }>
+                <li
+                  data-testid="category"
+                  id={ produto.id }
+                >
+                  {produto.name}
+                </li>
+              </ul>
+            </Link>
+          ))}
+        </section>
       </>
     );
   }
