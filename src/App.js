@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import ShoppingCart from './components/ShoppingCart';
-// eslint-disable-next-line import/no-named-as-default
 import ProductDetails from './components/ProductDetails';
 
 class App extends Component {
@@ -11,11 +10,11 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/ShoppingCart" component={ShoppingCart} />
+            <Route exact path="/" component={ Home } />
+            <Route path="/ShoppingCart" component={ ShoppingCart } />
             <Route
               path="/product/:id"
-              render={(props) => <ProductDetails {...props} />}
+              render={ (props) => <ProductDetails { ...props } /> }
             />
           </Switch>
         </BrowserRouter>

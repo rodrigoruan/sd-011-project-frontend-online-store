@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getProductById } from '../services/api';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -8,27 +7,14 @@ class ProductDetails extends React.Component {
     this.state = {
       product: undefined,
     };
-    this.getProduct = this.getProduct.bind(this);
-  }
-
-  componentDidMount() {
-    this.getProduct();
-  }
-
-  async getProduct() {
-    const { match: { params: { id } } } = this.props;
-    const product = await getProductById(id);
-    console.log(product);
-    this.setState({ product });
   }
 
   render() {
-    const { product } = this.state;
+    const { match: { params: { id } } } = this.props;
+    const product = JSON.parse(sessionStorage.getItem(id));
     return (
       <div>
-        {(product === undefined)
-          ? <p>Loading...</p>
-          : <div> teste </div>}
+        {(product === undefined) ? <p>loading...</p> : <p data-testid="product-detail-name">{ product.name }</p>}
       </div>
     );
   }
