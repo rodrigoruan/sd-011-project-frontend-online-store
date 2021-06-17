@@ -57,13 +57,16 @@ class AddCarrinho extends Component {
         Adicionar ao Carrinho
       </button>
     );
+
   }
 }
 
 export default AddCarrinho;
+
 
 AddCarrinho.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
 };
+
