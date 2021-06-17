@@ -26,6 +26,8 @@ class Cart extends Component {
   render() {
     const { itensCarrinho } = this.state;
 
+    console.log(itensCarrinho);
+
     if (itensCarrinho.length === 0) {
       return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;
     }
@@ -33,7 +35,6 @@ class Cart extends Component {
       <div>
         {
           itensCarrinho.map((element) => (
-
             <ProductItem
               key={ element.id }
               cart={ element }

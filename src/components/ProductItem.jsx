@@ -33,7 +33,6 @@ export default class ProductItem extends Component {
       <div>
         <div className="cart-item" key={ cart.id }>
           <button type="button" id={ cart.id } onClick={ deleteItem }>delete</button>
-          <span>image</span>
           <h3 data-testid="shopping-cart-product-name">{ cart.title }</h3>
           <ProductQuantity
             increaseQuantity={ this.increaseQuantity }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AddToCartButton from './AddToCartButton';
 
 class Product extends Component {
   render() {
@@ -10,24 +11,21 @@ class Product extends Component {
         <img src={ thumbnail } alt={ title } />
         <h3>{title}</h3>
         <p>{`R$ ${price}`}</p>
-        <button
-          data-testid="product-add-to-cart"
-          type="button"
-          onClick={ addCart }
-          imagem={ thumbnail }
-          name={ title }
-          value={ price }
+        <AddToCartButton
+          addCart={ addCart }
+          title={ title }
+          price={ price }
           id={ id }
-        >
-          ADICIONAR AO CARRINHO
-        </button>
+        />
+
         <Link
           to={ {
             pathname: `/details/${id}`,
             aboutProps: {
-              name: title,
+              title,
               image: thumbnail,
-              preco: price,
+              price,
+              addCartFunction: addCart,
             },
           } }
           data-testid="product-detail-link"
