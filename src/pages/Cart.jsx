@@ -8,7 +8,6 @@ class Cart extends Component {
     const { location: { aboutProps: { itensCarrinho } } } = this.props;
     this.state = {
       itensCarrinho,
-
     };
     this.deleteItem = this.deleteItem.bind(this);
   }
