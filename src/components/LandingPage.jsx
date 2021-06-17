@@ -31,7 +31,7 @@ class LandingPage extends React.Component {
   }
 
   render() {
-    const { cardList, query } = this.state;
+    const { cardList } = this.state;
     const { getProductDetails } = this.props;
     return (
       <div data-testid="home-initial-message">
@@ -53,7 +53,6 @@ class LandingPage extends React.Component {
         </Link>
         <CardList
           list={ cardList.results }
-          query={ query }
           getProductDetails={ getProductDetails }
         />
         <Categories onClick={ this.onClick } />

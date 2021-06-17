@@ -9,18 +9,17 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      productId: '',
-      productTitle: '',
+      productDetails: {},
     };
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick(key, value) {
-    this.setState({ [key]: value });
+  onClick(value) {
+    this.setState({ productDetails: value });
   }
 
   render() {
-    const { productId, productTitle } = this.state;
+    const { productDetails } = this.state;
     return (
       <Router>
         <Switch>
@@ -35,12 +34,11 @@ class App extends React.Component {
           />
           <Route exact path="/shopping-cart" component={ ShoppingCart } />
           <Route
-            path="/productDetails/:categoryId?/:query?"
+            path="/productDetails/:id?"
             render={ (props) => (
               <ProductDetails
                 { ...props }
-                productId={ productId }
-                productTitle={ productTitle }
+                productDetails={ productDetails }
               />) }
           />
         </Switch>

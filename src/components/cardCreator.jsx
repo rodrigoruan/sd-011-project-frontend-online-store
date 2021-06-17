@@ -5,18 +5,17 @@ import { Link } from 'react-router-dom';
 class cardCreator extends React.Component {
   render() {
     const {
-      product: { title, thumbnail, price, category_id: categoryId, id },
-      query,
+      product: { title, thumbnail, price, id },
       getProductDetails,
     } = this.props;
+    const { product } = this.props;
     return (
       <Link
-        to={ `/productDetails/${categoryId}/${query}` }
+        to={ `/productDetails/${id}` }
         data-testid="product-detail-link"
         className="productDetails"
         onClick={ () => {
-          getProductDetails('productId', id);
-          getProductDetails('productTitle', title);
+          getProductDetails(product);
         } }
       >
         <div data-testid="product">
@@ -37,7 +36,6 @@ cardCreator.propTypes = {
     category_id: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
-  query: PropTypes.string.isRequired,
   getProductDetails: PropTypes.func.isRequired,
 };
 
