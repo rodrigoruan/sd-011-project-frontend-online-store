@@ -76,17 +76,6 @@ class PageProduct extends Component {
       </div>
     );
   }
-
-  render() {
-    const { loading } = this.state;
-    return (
-      <div>
-        <span>
-          { loading ? <p>Loading...</p> : this.renderProduct() }
-        </span>
-      </div>
-    );
-  }
 }
 
 PageProduct.propTypes = {
