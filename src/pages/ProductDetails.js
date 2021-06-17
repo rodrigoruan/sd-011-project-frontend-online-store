@@ -9,11 +9,9 @@ export default class ProductDetails extends React.Component {
     this.state = location.state;
   }
 
-
-
-
   render() {
     const { title, thumbnail, price, id } = this.state;
+    const { handleAddToShopCart } =this.props
     return (
       <div key={ id }>
         <span data-testid="product-detail-name">{ title }</span>
@@ -25,13 +23,15 @@ export default class ProductDetails extends React.Component {
           data-testid="product-detail-link"
           to={ { pathname: `/ShoppingCart`,
             state: {
-              shopCart:this.state
+              item:this.state
             },
           } }
         >
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
+          onClick={()=> handleAddToShopCart(title,thumbnail,price) }
+        
           value={ JSON.stringify({ title, price, thumbnail }) }
         >
           Adicionar ao carrinho

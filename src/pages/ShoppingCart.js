@@ -6,7 +6,6 @@ import Back from '../imgs/Seta.png';
 class ShoppingCart extends Component {
   constructor(props) {
     super(props);
-
     this.renderShopCart = this.renderShopCart.bind(this);
     this.state = {
       shopCart: props.shopCart,
@@ -28,7 +27,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const { shopCart } = this.state;
+    const { shopCart,outro } = this.state;
     return (
       <>
         <Link to="/">

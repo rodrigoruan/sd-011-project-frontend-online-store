@@ -106,14 +106,14 @@ class Home extends Component {
           onChange={ this.handleInputChange }
           value={ searchInput }
         />
-        <Link to="/ShoppingCart">
+        <Link data-testid="shopping-cart-button" to="/ShoppingCart">
           <img
             width="30px"
             src={ Cart }
             alt="imagem do carrinho"
           />
         </Link>
-        <main data-testid="shopping-cart-button" />
+        <main />
         {shopCart.length === 0
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           : this.renderShopCart()}
