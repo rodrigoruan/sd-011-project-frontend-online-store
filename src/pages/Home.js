@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import imageTwo from '../imgs/Carrinho.png';
+import Cart from '../imgs/Carrinho.png';
 import ProductSearch from '../components/ProductSearch/ProductSearch';
 import ProductsList from '../components/ProductsList/ProductsList';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-// check
 
 class Home extends Component {
   constructor(props) {
@@ -110,7 +109,7 @@ class Home extends Component {
         <Link to="/ShoppingCart">
           <img
             width="30px"
-            src={ imageTwo }
+            src={ Cart }
             alt="imagem do carrinho"
           />
         </Link>

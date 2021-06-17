@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import image from '../imgs/Seta.png';
+import Back from '../imgs/Seta.png';
 
 class ShoppingCart extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class ShoppingCart extends Component {
         <Link to="/">
           <img
             width="30px"
-            src={ image }
+            src={ Back }
             alt="imagem de voltar"
           />
         </Link>

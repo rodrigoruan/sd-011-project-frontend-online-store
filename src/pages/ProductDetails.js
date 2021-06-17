@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Rating from '../components/ProductRating/Rating';
 
 export default class ProductDetails extends React.Component {
   constructor({ location }) {
@@ -16,6 +17,7 @@ export default class ProductDetails extends React.Component {
           { price }
         </span>
         <img src={ thumbnail } alt="imagem do produto" />
+        <Rating />
       </div>
     );
   }
