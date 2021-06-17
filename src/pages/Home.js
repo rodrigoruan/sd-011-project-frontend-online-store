@@ -32,8 +32,8 @@ export default class Home extends Component {
 
   componentDidUpdate(prevProps) {
     const { searchQuery, radioFilter } = this.props;
-    if (prevProps.searchQuery !== this.props.searchQuery) {
-      this.getQuery(radioFilter, searchQuery);
+    if (prevProps.searchQuery !== searchQuery || prevProps.radioFilter !== radioFilter) {
+      this.getQuery(radioFilter.id, searchQuery);
     }
   }
 
@@ -49,7 +49,8 @@ export default class Home extends Component {
   };
 
   handleRadioClick = ({ target }) => {
-    this.props.sendRadio(target.value);
+    const categoryObj = { id: target.id, name: target.name };
+    this.props.sendRadio(categoryObj);
   };
 
   showCategory = () => {
@@ -61,7 +62,9 @@ export default class Home extends Component {
       <div className="home-div">
         <Categories handleRadioClick={this.handleRadioClick} />
         <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
-        <div className="search-results">{this.showCategory()}</div>
+        {/* <div className="search-results"> */}
+        {this.showCategory()}
+        {/* </div> */}
       </div>
     );
   }
