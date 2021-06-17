@@ -34,11 +34,13 @@ class Home extends React.Component {
         <ProductList />
         <div>
           { productCategories.map((category) => (
-            <div
-              data-testid="category"
-              key={ category.id }
-            >
-              { category.name }
+            <div key={ category.id }>
+              <input
+                data-testid="category"
+                type="radio"
+                name="categoria"
+              />
+              {category.name}
             </div>))}
         </div>
       </fragment>
