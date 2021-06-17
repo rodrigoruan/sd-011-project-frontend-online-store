@@ -7,7 +7,7 @@ class Products extends Component {
   render() {
     const { title, img, price } = this.props;
     return (
-      <Link to={ `/product-details/${title}` } >
+      <Link to={ `/product-details/${title}` } data-testid="product-detail-link">
         <div className="product" data-testid="product" aria-hidden="true">
           <p>{ title }</p>
           <img src={ img } alt="produto" />
