@@ -12,22 +12,22 @@ class Home extends Component {
       searchText: '',
       category: '',
     };
+
     this.fetchCategories = this.fetchCategories.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-    // this.handleCategoryProducts = this.handleCategoryProducts.bind(this);
   }
 
   componentDidMount() {
     this.fetchCategories();
+    this.fetchProducts();
   }
 
-  handleCategory(categoryId) {
+  async handleCategory(categoryId) {
     this.setState({
       category: categoryId,
     });
-    console.log(categoryId);
   }
 
   handleSearch({ target }) {
@@ -37,27 +37,19 @@ class Home extends Component {
     });
   }
 
+  async fetchProducts(categoryId, query) {
+    const resultProducts = await getProductsFromCategoryAndQuery(categoryId, query);
+    this.setState({
+      products: resultProducts.results,
+    });
+  }
+
   async fetchCategories() {
     const resultCategories = await getCategories();
     this.setState({
       categories: resultCategories,
     });
   }
-
-  async fetchProducts(categoryId, query) {
-    const resultProducts = await getProductsFromCategoryAndQuery(categoryId, query);
-    this.setState({
-      products: resultProducts.results,
-    });
-    console.log(resultProducts);
-  }
-
-  // async handleCategoryProducts(categoryId) {
-  //   const result = await getProductsFromCategoryAndQuery(categoryId);
-  //   this.setState({
-  //     products: result,
-  //   });
-  // }
 
   render() {
     const { categories, searchText, category, products } = this.state;
@@ -82,17 +74,20 @@ class Home extends Component {
           Pesquisar
         </button>
         { categories.map((item, index) => (
-          <div
-            role="button"
+          <button
+            type="button"
             onClick={ () => this.handleCategory(item.id) }
             name="category"
             data-testid="category"
             key={ index }
           >
             { item.name }
-          </div>)) }
+          </button>)) }
         <div>
-          { products.map((item) => <Products key={ item.id } products={ item } />) }
+          { products.map((item) => (<Products
+            key={ item.id }
+            products={ item }
+          />)) }
         </div>
         <ButtonCart />
       </div>
