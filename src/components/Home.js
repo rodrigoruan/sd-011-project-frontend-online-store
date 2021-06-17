@@ -86,7 +86,7 @@ export default class SearchBar extends Component {
           {products.map((product) => (
             <Link
               key={ product.id }
-              to={ `/details/${product.id}` }
+              to={ { pathname: `/details/${product.id}`, state: { product } } }
               data-testid="product-detail-link"
             >
               <Products
