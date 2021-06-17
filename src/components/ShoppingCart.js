@@ -29,39 +29,27 @@ export default class ShoppingCart extends Component {
 
   addClick = (index) => {
     const getLocal = JSON.parse(localStorage.getItem('item'));
-    getLocal[`${index}`].countP += 1;
-    // const teste = getLocal.filter((value) => value.id === target.value);
-    // const teste2 = teste[0].countP;
-    // const soma = teste2 + 1;
+    if (getLocal[`${index}`].countP < (getLocal[`${index}`].available_quantity)) {
+      getLocal[`${index}`].countP += 1;
+    }
     localStorage.setItem('item', JSON.stringify([...getLocal]));
   }
 
   render() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
-
-    console.log(getLocal);
     return (
-      <>
-        <div>
-          { !localStorage.item
-            ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
-            : (getLocal.map(({ title, thumbnail, price, countP, id }, index) => (
-              <div key={ index }>
-                <div data-testid="shopping-cart-product-name">
-                  <img src={ thumbnail } alt={ title } />
-                  <p>{ title }</p>
-                  <p>
-                    R$
-                    {price}
-                  </p>
-                </div>
-                <Button
-                  quantity={ countP }
-                  subClick={ this.subClick }
-                  addClick={ this.addClick }
-                  id={ id }
-                  index={ index }
-                />
+      <div>
+        { !localStorage.item
+          ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
+          : (getLocal.map(({ title, thumbnail, price, countP, id }, index) => (
+            <div key={ index }>
+              <div data-testid="shopping-cart-product-name">
+                <img src={ thumbnail } alt={ title } />
+                <p>{ title }</p>
+                <p>
+                  R$
+                  {price}
+                </p>
               </div>
             ))) }
           {/* <Purchase /> */}
@@ -77,6 +65,17 @@ export default class ShoppingCart extends Component {
           </ol>
         </div> */}
       </>
+              <Button
+                quantity={ countP }
+                subClick={ this.subClick }
+                addClick={ this.addClick }
+                id={ id }
+                index={ index }
+              />
+            </div>
+          ))) }
+        <Link to="/">Voltar</Link>
+      </div>
     );
   }
 }

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 export default class Button extends Component {
   render() {
     const { subClick, addClick, quantity, id, index } = this.props;
-    console.log(quantity);
     return (
       <div>
         <Link to="/ShoppingCart">
