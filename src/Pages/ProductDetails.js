@@ -61,6 +61,10 @@ class ProductDetails extends Component {
             Carrinho de Compras
           </button>
         </Link>
+        <form method="GET">
+          <input data-testid="product-detail-evaluation" type="textarea" />
+          <input type="submit" />
+        </form>
       </div>
     ) : (<Redirect to="/" />);
   }
