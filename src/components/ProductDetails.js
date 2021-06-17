@@ -13,6 +13,8 @@ class ProductDetails extends React.Component {
     };
 
     this.getProduct = this.getProduct.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.loadCartList = this.loadCartList.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +27,22 @@ class ProductDetails extends React.Component {
     const product = productObj.results
       .find((prod) => prod.id === id);
     this.setState({ product });
+  }
+
+  handleClick() {
+    const { product: { title, thumbnail, price } } = this.state;
+    const previousList = this.loadCartList();
+    previousList.push({ title, thumbnail, price });
+    localStorage.setItem('cartList', JSON.stringify(previousList));
+  }
+
+  loadCartList() {
+    let previousList = localStorage.getItem('cartList');
+    if (previousList === null) {
+      previousList = [];
+      return previousList;
+    }
+    return JSON.parse(previousList);
   }
 
   render() {
@@ -43,6 +61,13 @@ class ProductDetails extends React.Component {
             { price }
           </p>
         </div>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.handleClick }
+        >
+          Adicionar ao carrinho
+        </button>
         <Link to="/ShoppingCart" data-testid="shopping-cart-button">
           <FaShoppingCart size={ 30 } />
         </Link>

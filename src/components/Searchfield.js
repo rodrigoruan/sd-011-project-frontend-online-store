@@ -11,7 +11,7 @@ class Searchfield extends Component {
           <Cardproduct
             key={ product.id }
             title={ product.title }
-            img={ product.thumbnail }
+            thumbnail={ product.thumbnail }
             price={ product.price }
             id={ product.id }
             categoryId={ product.category_id }
