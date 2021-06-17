@@ -9,9 +9,11 @@ export default class ProductCard extends Component {
 
     return (
       <div data-testid="product" id={ id } key={ id }>
-        <h1>{ title }</h1>
         <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
+        <div className="wrapper">
+          <h3>{ title }</h3>
+          <p>Preço: { price }</p>
+        </div>
       </div>
     );
   }

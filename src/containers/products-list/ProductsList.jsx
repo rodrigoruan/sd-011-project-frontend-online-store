@@ -8,8 +8,8 @@ export default class ProductsList extends Component {
     const { products } = this.props;
 
     return (
-      <div>
-        { products.map((product) => <ProductCard product={ product } />) }
+      <div className="products-container">
+        { products.map((product, idx) => <ProductCard key={ idx } product={ product } />) }
       </div>
     );
   }
