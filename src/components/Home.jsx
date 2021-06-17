@@ -24,7 +24,6 @@ class Home2 extends React.Component {
 
   async getItemsFromCategoryAndQuery(category, inputQuery) {
     const request = await api.getProductsFromCategoryAndQuery(category, inputQuery);
-    console.log(request);
     this.setState({
       response: request.results,
     });
