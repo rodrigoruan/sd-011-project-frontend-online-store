@@ -78,58 +78,76 @@ export default class Home extends Component {
     } = this.state;
 
     return (
-      <div>
-        <h1 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h1>
-        <label htmlFor="search">
-          <input
-            data-testid="query-input"
-            onChange={ this.handleChange }
-            id="search"
-            type="text"
-          />
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ this.getProductById }
+      <div className="body">
+        <header className="header">
+          <h1 className="text-search-h1" data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </h1>
+          <Link
+            to={ { pathname: '/shopcart', state: cartProducts } }
           >
-            Search
-          </button>
-        </label>
-        <Link
-          to={ { pathname: '/shopcart', state: cartProducts } }
-        >
-          <button type="button" data-testid="shopping-cart-button">
-            Carrinho de Compras
-          </button>
-        </Link>
-        {categories.map((eachCategory) => (
-          <RadialButton
-            category={ eachCategory }
-            onClick={ this.getValue }
-            key={ eachCategory.id }
-            value={ eachCategory.id }
-          />
-        ))}
-        {searchProducts.map((eachItem) => (
-          <CardProduct
-            data-testid="product"
-            key={ eachItem.id }
-            listProduct={ eachItem }
-            onClick={ this.addCart }
-          />
-        ))}
-        {!loading ? searchCategory.map((eachCategoryItem) => (
-          <CardProduct
-            data-testid=""
-            key={ eachCategoryItem.id }
-            listProduct={ eachCategoryItem }
-            onClick={ this.addCart }
-          />
-        )) : (
-          <h1>Loading</h1>
-        )}
+            <button type="button" data-testid="shopping-cart-button">
+              Carrinho de Compras
+            </button>
+          </Link>
+          <label className="search-button" htmlFor="search">
+            <input
+              data-testid="query-input"
+              onChange={ this.handleChange }
+              className="search"
+              type="text"
+            />
+            <button
+              data-testid="query-button"
+              type="button"
+              onClick={ this.getProductById }
+            >
+              Search
+            </button>
+          </label>
+
+        </header>
+        <div className="body2">
+
+          <aside className="aside">
+            {categories.map((eachCategory) => (
+              <RadialButton
+                category={ eachCategory }
+                onClick={ this.getValue }
+                key={ eachCategory.id }
+                value={ eachCategory.id }
+
+              />
+            ))}
+          </aside>
+          {searchProducts.map((eachItem) => (
+
+            <CardProduct
+              data-testid="product"
+              key={ eachItem.id }
+              listProduct={ eachItem }
+              onClick={ this.addCart }
+            />
+
+          ))}
+
+          {!loading ? searchCategory.map((eachCategoryItem) => (
+
+            <CardProduct
+              data-testid=""
+              key={ eachCategoryItem.id }
+              listProduct={ eachCategoryItem }
+              onClick={ this.addCart }
+            />
+
+          )) : (
+            <div className="loading-parent">
+              <img className="loading" src="https://i.pinimg.com/originals/2b/02/15/2b02159fee58d573c079ad5212d56b63.gif" alt="loading" />
+            </div>
+          )}
+
+        </div>
+
       </div>
     );
   }

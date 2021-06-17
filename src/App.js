@@ -16,6 +16,7 @@ function App() {
             render={ (params) => <Shopcart { ...params } /> }
           />
           <Route
+            className="product"
             path="/product"
             render={ (props) => (
               <ProductDetails { ...props } />
