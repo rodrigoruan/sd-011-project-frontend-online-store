@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CategoryFilter from './CategoryFilter';
-import ProductList from './ProductList';
-import SearchBar from './SearchBar';
+import CategoryFilter from '../components/CategoryFilter';
+import ProductList from '../components/ProductList';
+import SearchBar from '../components/SearchBar';
 
 export default class Main extends React.Component {
   constructor(props) {
