@@ -28,7 +28,7 @@ CardProduct.propTypes = {
   title: PropTypes.string,
   thumbnail: PropTypes.string,
   price: PropTypes.number,
-  id: PropTypes.string,
+  id: PropTypes.number,
 }.isRequired;
 
 export default CardProduct;
