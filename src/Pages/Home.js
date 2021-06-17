@@ -98,10 +98,11 @@ export default class Home extends Component {
           </button>
         </label>
         <Link
-          data-testid="shopping-cart-button"
           to={ { pathname: '/shopcart', state: cartProducts } }
         >
-          Carrinho
+          <button type="button" data-testid="shopping-cart-button">
+            Carrinho de Compras
+          </button>
         </Link>
         {categories.map((eachCategory) => (
           <RadialButton
