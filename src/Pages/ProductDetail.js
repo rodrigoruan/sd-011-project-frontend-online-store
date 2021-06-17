@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FormComment from '../component/FormComment';
+import Comments from '../component/Comments';
 import ShoppingCart from './ShoppingCart';
 
 export default class ProductDetail extends Component {
@@ -8,8 +10,10 @@ export default class ProductDetail extends Component {
     this.state = {
       product: {},
       shipping: {},
+      comments: [],
     };
     this.getProduct = this.getProduct.bind(this);
+    this.setCommentarray = this.setCommentarray.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
   }
 
@@ -37,8 +41,15 @@ export default class ProductDetail extends Component {
     });
   }
 
+  setCommentarray(value) {
+    const { comments } = this.state;
+    this.setState({
+      comments: [value, ...comments],
+    });
+  }
+
   render() {
-    const { product, shipping } = this.state;
+    const { product, shipping, comments } = this.state;
     const { itensAdded } = this.props;
     return (
       <div>
@@ -54,6 +65,8 @@ export default class ProductDetail extends Component {
           Adicionar
         </button>
         <ShoppingCart itensArray={ itensAdded } />
+        <FormComment idPrd={ product.id } evBtn={ this.setCommentarray } />
+        <Comments idPrd={ product.id } arrayComment={ comments } />
       </div>
     );
   }
