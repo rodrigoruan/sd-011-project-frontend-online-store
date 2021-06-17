@@ -31,6 +31,7 @@ class Cardproduct extends Component {
       <div data-testid="product">
         <p data-testid="shopping-cart-product-name">{ title }</p>
         <img src={ img } width="100px" alt="produto" />
+
         <p data-testid="shopping-cart-product-quantity">1</p>
         <button
           type="button"
