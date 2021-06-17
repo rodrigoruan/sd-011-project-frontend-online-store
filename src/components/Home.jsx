@@ -102,7 +102,7 @@ export default class Home extends Component {
               <ProductCard
                 key={ product.id }
                 product={ product }
-                productId={ this.fetchProducts() }
+                productId={ this.fetchProducts }
               />
             ))}
         </div>

@@ -21,12 +21,12 @@ export default class ProductDetails extends Component {
     const { id } = match.params;
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(id);
-    // console.log(fetchedProducts.results);
-    this.setState({ productCards: fetchedProducts });
+    const product = fetchedProducts.results.find((item) => item.id === id);
+    this.setState({ productCards: product });
   }
 
   render() {
-    const { productCards: { title, price, thumbnail, attributes } } = this.state;
+    const { productCards: { title, price, thumbnail } } = this.state;
     return (
 
       <div data-testid="product">
@@ -34,7 +34,6 @@ export default class ProductDetails extends Component {
         <p>{`R$ ${price}`}</p>
         <img src={ thumbnail } alt={ title } />
         <p>Detalhes Técnicos</p>
-        <p>{attributes.name}</p>
       </div>
 
     );
