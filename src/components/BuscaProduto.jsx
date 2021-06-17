@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
-import { ProductCard } from './index';
+import ProductCard from './ProductCard';
 
 class BuscaProduto extends Component {
   constructor() {

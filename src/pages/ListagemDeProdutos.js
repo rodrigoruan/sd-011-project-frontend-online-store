@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { BuscaProduto, CartButton, ListaCategoria } from '../components/index';
+import { CartButton } from '../components/index';
+import ListaCategoria from '../components/ListaCategoria';
+import BuscaProduto from '../components/BuscaProduto';
 
 class ListagemDeProdutos extends Component {
   render() {

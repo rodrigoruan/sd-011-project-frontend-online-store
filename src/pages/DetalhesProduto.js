@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import { Loading, ProductDetailCard } from '../components/index';
+import { Loading } from '../components/index';
+import ProductDetailCard from '../components/ProductDetailCard';
 
 class DetalhesProduto extends Component {
   constructor() {

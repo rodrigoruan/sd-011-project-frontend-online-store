@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
-import { Loading, ProductCard } from './index';
+import { Loading } from './index';
+import ProductCard from './ProductCard';
 
 class ListaCategoria extends Component {
   constructor() {
