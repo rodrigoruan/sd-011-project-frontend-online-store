@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Categories, SearchResults } from '../components';
 import * as api from '../services/api';
@@ -61,6 +62,7 @@ class Home extends React.Component {
           currentCategoryFilter={ currentCategoryFilter }
           addItemToCart={ addItemToCart }
         />
+        <Link to="/cart">Ver Carrinho</Link>
       </main>
     );
   }

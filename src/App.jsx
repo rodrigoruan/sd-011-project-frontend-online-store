@@ -23,8 +23,9 @@ class App extends Component {
 
   addItemToCart(product) {
     this.setState(({ shoppingCart }) => {
+      product.quantity = 1;
       const newShoppingCart = [...shoppingCart, product];
-      return newShoppingCart;
+      return { shoppingCart: newShoppingCart };
     });
   }
 

@@ -16,6 +16,7 @@ export default class ProductCard extends React.Component {
         <button
           type="button"
           onClick={ () => addItemToCart(product) }
+          data-testid="product-add-to-cart"
         >
           Adicionar ao Carrinho
         </button>
