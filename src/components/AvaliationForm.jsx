@@ -29,7 +29,7 @@ export default class AvaliationForm extends Component {
     const state = { ...this.state };
     console.log([...state, ...{ id }]);
     // const info = [...state, id];
-    // getForm([...state, id]);
+    getForm(state, id);
   }
 
   render() {

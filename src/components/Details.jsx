@@ -7,16 +7,16 @@ export default class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      avaliations: [],
+      avaliation: [],
     };
     this.getForm = this.getForm.bind(this);
   }
   // componentDidMount() {
   // }
 
-  getForm(info) {
+  getForm(state, id) {
     this.setState({
-      avaliations: info,
+      avaliation: [...state, id],
     });
   }
 
