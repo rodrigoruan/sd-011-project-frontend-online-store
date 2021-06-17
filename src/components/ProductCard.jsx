@@ -7,7 +7,7 @@ import '../styles/ProductCard.css';
 class ProductCard extends Component {
   addToCart({ target: { value } }) {
     const key = JSON.parse(value).title;
-    localStorage.setItem(key, value);
+    sessionStorage.setItem(key, value);
   }
 
   render() {

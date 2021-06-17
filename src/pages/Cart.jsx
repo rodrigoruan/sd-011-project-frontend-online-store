@@ -5,7 +5,7 @@ export default class Cart extends Component {
   constructor() {
     super();
     const cartItems = {};
-    Object.values(localStorage).forEach((value) => {
+    Object.values(sessionStorage).forEach((value) => {
       if (typeof value !== 'number') {
         const item = JSON.parse(value);
         cartItems[item.title] = item;
@@ -25,7 +25,7 @@ export default class Cart extends Component {
     const { cartList } = this.state;
     Object.values(cartList).forEach((listItem) => {
       const value = JSON.stringify(listItem);
-      localStorage.setItem(listItem.title, value);
+      sessionStorage.setItem(listItem.title, value);
     });
   }
 
@@ -64,7 +64,7 @@ export default class Cart extends Component {
     const { cartList } = this.state;
     const cart = { ...cartList };
     delete cart[name];
-    localStorage.removeItem(name);
+    sessionStorage.removeItem(name);
     this.setState(() => ({
       cartList: cart,
     }));
@@ -119,7 +119,7 @@ export default class Cart extends Component {
   render() {
     const { cartList } = this.state;
     if (Object.entries(cartList).length === 0) {
-      // localStorage.clear();
+      // sessionStorage.clear();
       return (
         <div>
           <Link to="/">Voltar</Link>
