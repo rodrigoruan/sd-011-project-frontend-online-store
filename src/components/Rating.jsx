@@ -16,7 +16,7 @@ class Rating extends Component {
     const { email, message, rating } = this.state;
     return (
       <div>
-        <p>{ email }</p>
+        <strong>{ email }</strong>
         <p>{ message }</p>
         <p>{ rating }</p>
       </div>
