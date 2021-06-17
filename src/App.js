@@ -8,6 +8,7 @@ import './App.css';
 import Home from './Pages/Home';
 import ShoppingCart from './Pages/ShoppingCart';
 import ShoppingCartButton from './Pages/ShoppingCartButton';
+import Form from './Form';
 
 class App extends React.Component {
   render() {
@@ -25,6 +26,7 @@ class App extends React.Component {
             <Link to="/">Voltar à Home</Link>
           </Route>
         </Router>
+        <Form />
       </div>);
   }
 }
