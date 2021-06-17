@@ -16,6 +16,7 @@ export default class Cart extends Component {
   getItemLocalStorage = () => {
     const getProducts = { ...localStorage };
     const arrayOfproducts = Object.values(getProducts).map((e) => JSON.parse(e));
+
     this.setState({
       products: arrayOfproducts,
       count: arrayOfproducts.map(({ counter, title }) => ({ counter, title })),
@@ -24,12 +25,14 @@ export default class Cart extends Component {
 
   handleClick = ({ target: { id, name } }) => {
     const product = JSON.parse(localStorage.getItem(id));
+
     if (name === 'add') {
       product.counter += 1;
     }
     if (name === 'sub' && product.counter > 1) {
       product.counter -= 1;
     }
+
     localStorage.setItem(id, JSON.stringify(product));
     this.getItemLocalStorage();
   };
@@ -44,10 +47,9 @@ export default class Cart extends Component {
     const { products } = this.state;
 
     if (!products.length) {
-      return (
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-      );
+      return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
+
     return (
       <div>
         {products.map(({ title, price, thumbnail, id }) => (

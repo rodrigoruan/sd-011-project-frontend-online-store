@@ -17,9 +17,7 @@ export default class Product extends Component {
     this.saveCommentOnLocal();
   }
 
-  setComments = ({ target: { value, name } }) => {
-    this.setState({ [name]: value });
-  };
+  setComments = ({ target: { value, name } }) => this.setState({ [name]: value });
 
   saveCommentOnLocal = () => {
     const { location: { state: { id } } } = this.props;
@@ -28,6 +26,7 @@ export default class Product extends Component {
     if (stars) {
       const object = { comment, stars };
       const prevStorage = localStorage.getItem(id);
+
       if (prevStorage) {
         localStorage.setItem(id, `${prevStorage}*${JSON.stringify(object)}`);
       }
@@ -35,31 +34,27 @@ export default class Product extends Component {
         localStorage.setItem(id, JSON.stringify(object));
       }
     }
+
     this.setState({ allComments: localStorage.getItem(id) });
-  }
+  };
 
   handleClick = () => {
-    this.setState((previous) => ({
-      counter: previous.counter + 1,
-    }));
+    this.setState((previous) => ({ counter: previous.counter + 1 }));
+
     const { counter } = this.state;
-    const {
-      location: { state },
-    } = this.props;
+    const { location: { state } } = this.props;
     const { title, id, price, thumbnail, attributes } = state;
+
     const object = { counter, price, thumbnail, id, attributes, title };
     const json = JSON.stringify(object);
     localStorage.setItem(title, json);
   };
 
   render() {
-    const {
-      location: {
-        state: { title, price, thumbnail, attributes, id },
-      },
-    } = this.props;
+    const { props, state } = this;
+    const { location: { state: { title, price, thumbnail, attributes, id } } } = props;
+    const { allComments } = state;
 
-    const { allComments } = this.state;
     return (
       <>
         <h1 data-testid="product-detail-name">{title}</h1>
@@ -70,8 +65,10 @@ export default class Product extends Component {
         </p>
         <div>
           <ul>
-            {attributes
-              && attributes.map(({ name }, index) => <li key={ index }>{name}</li>)}
+            {attributes && attributes.map(({ name }, index) => (
+              <li key={ index }>
+                {name}
+              </li>))}
           </ul>
         </div>
         <button
@@ -109,9 +106,7 @@ export default class Product extends Component {
             const { comment, stars } = JSON.parse(item);
             return (
               <div key={ index }>
-                <p>
-                  {comment}
-                </p>
+                <p>{comment}</p>
                 <p>
                   STARS:
                   {stars}
