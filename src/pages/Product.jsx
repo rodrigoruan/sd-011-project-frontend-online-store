@@ -14,6 +14,7 @@ export default class Product extends Component {
     };
 
     this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleSubmitRating = this.handleSubmitRating.bind(this);
   }
 
   handleFormChange({ target }) {
@@ -27,29 +28,31 @@ export default class Product extends Component {
     });
   }
 
-  handleSubmitRating({ target }) {
+  handleSubmitRating(e) {
+    e.preventDefault();
 
+    this.setState(({ evaluations, evaluationForm }) => {
+      const userEvaluation = { ...evaluationForm, id: evaluationForm.id };
+      const newEvaluations = [...evaluations, userEvaluation];
+
+      return {
+        evaluations: newEvaluations,
+        evaluationForm: {
+          email: '',
+          message: '',
+          rating: '',
+        },
+      };
+    });
   }
 
   render() {
     const { location: { state: { product } } } = this.props;
     const { evaluationForm, evaluations } = this.state;
 
-    console.log(product);
     return (
       <main>
-        <section>
-          <h1>Especificações do produto</h1>
-          <h1>{ `${product.title} - R$${product.price}` }</h1>
-          <img src={ product.thumbnail } alt={ product.title } />
-        </section>
-        <section>
-          <h1>Formas de pagamento</h1>
-          { product.shipping.free_shipping ? <p>Free Shipping</p> : ''}
-          <p>{ `Disponível: ${product.available_quantity}` }</p>
-          <p>{ `${product.installments.amount}` }</p>
-        </section>
-
+        <p data-testid="product-detail-name">{ product.title }</p>
         <section>
           <h1>Avaliações</h1>
 
@@ -110,6 +113,7 @@ export default class Product extends Component {
               placeholder="Mensagem (opcional)"
               onChange={ this.handleFormChange }
               name="message"
+              data-testid="product-detail-evaluation"
             />
             <button type="submit">Avaliar</button>
           </form>
