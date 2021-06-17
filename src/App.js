@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
+import CartProductsAmount from './components/CartProductsAmount/CartProductsAmount';
 
 class App extends Component {
   constructor(props) {
@@ -52,43 +53,46 @@ class App extends Component {
   render() {
     const { shopCart } = this.state;
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route
-            path="/details/:id"
-            render={ (props) => (
-              <ProductDetails
-                { ...props }
-                handleAddToShopCart={ this.handleAddToShopCart }
-              />
-            ) }
-          />
-          <Route
-            exact
-            path="/ShoppingCart"
-            render={ (props) => (
-              <ShoppingCart
-                { ...props }
-                shopCart={ shopCart }
-                handleRemoveItemFromCart={ this.handleRemoveItemFromCart }
-                handleIncreaseItemAmount={ this.handleIncreaseItemAmount }
-                handleDecreaseItemAmount={ this.handleDecreaseItemAmount }
-              />
-            ) }
-          />
-          <Route
-            exact
-            path="/"
-            render={ (props) => (
-              <Home
-                { ...props }
-                handleAddToShopCart={ this.handleAddToShopCart }
-                shopCart={ shopCart }
-              />
-            ) }
-          />
-        </Switch>
-      </BrowserRouter>
+      <>
+        <CartProductsAmount shopCart={ shopCart } />
+        <BrowserRouter>
+          <Switch>
+            <Route
+              path="/details/:id"
+              render={ (props) => (
+                <ProductDetails
+                  { ...props }
+                  handleAddToShopCart={ this.handleAddToShopCart }
+                />
+              ) }
+            />
+            <Route
+              exact
+              path="/ShoppingCart"
+              render={ (props) => (
+                <ShoppingCart
+                  { ...props }
+                  shopCart={ shopCart }
+                  handleRemoveItemFromCart={ this.handleRemoveItemFromCart }
+                  handleIncreaseItemAmount={ this.handleIncreaseItemAmount }
+                  handleDecreaseItemAmount={ this.handleDecreaseItemAmount }
+                />
+              ) }
+            />
+            <Route
+              exact
+              path="/"
+              render={ (props) => (
+                <Home
+                  { ...props }
+                  handleAddToShopCart={ this.handleAddToShopCart }
+                  shopCart={ shopCart }
+                />
+              ) }
+            />
+          </Switch>
+        </BrowserRouter>
+      </>
     );
   }
 }
