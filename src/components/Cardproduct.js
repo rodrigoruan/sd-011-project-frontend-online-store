@@ -10,16 +10,19 @@ class Cardproduct extends Component {
   }
 
   handleClick() {
-    const { title, thumbnail, price } = this.props;
+    const { id, title, thumbnail, price } = this.props;
     const previousList = this.loadCartList();
-    previousList.push({ title, thumbnail, price });
+    previousList[id] = { title, thumbnail, price, quantity: 0 };
+
+    // const searchId = previousList[id].find((item) => item === id);
+    // console.log(searchId);
     localStorage.setItem('cartList', JSON.stringify(previousList));
   }
 
   loadCartList() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
-      previousList = [];
+      previousList = {};
       return previousList;
     }
     return JSON.parse(previousList);
