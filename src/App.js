@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart';
+import ProductDetails from './pages/ProductDetails';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class App extends Component {
 
   handleAddToShopCart(title, thumbnail, price) {
     this.setState((state) => ({
-      shopCart: [...state.shopCart, { title, thumbnail, price, amount: 0 }],
+      shopCart: [...state.shopCart, { title, thumbnail, price, amount: 1 }],
     }));
   }
 
@@ -24,6 +25,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          <Route path="/details" component={ ProductDetails } />
           <Route
             exact
             path="/ShoppingCart"
@@ -36,11 +38,11 @@ class App extends Component {
               <Home
                 { ...props }
                 handleAddToShopCart={ this.handleAddToShopCart }
+                shopCart={ shopCart }
               />) }
           />
         </Switch>
       </BrowserRouter>
-
     );
   }
 }
