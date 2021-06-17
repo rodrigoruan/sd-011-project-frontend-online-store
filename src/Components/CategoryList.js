@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 
 export default class CategoryList extends Component {
@@ -26,13 +27,14 @@ export default class CategoryList extends Component {
     const { categories } = this.state;
     return (
       <div className="sidebar-catories">
+        {console.log(categories)}
         <ul>
           {categories.map((category) => (
             <li
               data-testid="category"
               key={ category.id }
             >
-              { category.name }
+              <Link to={ `/category/${category.id}` }>{ category.name }</Link>
             </li>))}
         </ul>
       </div>
