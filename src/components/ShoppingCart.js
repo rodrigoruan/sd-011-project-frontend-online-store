@@ -1,29 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Button from './Button';
 
 export default class ShoppingCart extends Component {
-  constructor() {
-    super();
-    this.state = {
-      quantity: 1,
-    };
-  }
-
-  componentDidUpdate() {
-    this.setLocation();
-  }
-
-  setLocation = () => {
-    const { location } = this.props;
-    const { state } = location;
-    console.log(state);
-    if (state.length > 1) {
-      localStorage.setItem('item', JSON.stringify(state));
-      window.location.reload();
-    }
-  }
-
   sumtotal = () => {
     const { location } = this.props;
     const { state } = location;
@@ -36,17 +16,24 @@ export default class ShoppingCart extends Component {
     // return prices;
   }
 
-  subClick = (quantity) => {
-    if (quantity > 0) {
-      quantity += 1;
+  subClick = (index, id) => {
+    const getLocal = JSON.parse(localStorage.getItem('item'));
+    if (getLocal[`${index}`].countP > 1) {
+      getLocal[`${index}`].countP -= 1;
+      localStorage.setItem('item', JSON.stringify([...getLocal]));
+    } else {
+      const deleteItem = getLocal.filter((value) => value.id !== id);
+      localStorage.setItem('item', JSON.stringify([...deleteItem]));
     }
   }
 
-  addClick = (quantity) => {
-    console.log(quantity);
-    this.setState((cartStatus2) => ({
-      quantity: cartStatus2.quantity + 1,
-    }));
+  addClick = (index) => {
+    const getLocal = JSON.parse(localStorage.getItem('item'));
+    getLocal[`${index}`].countP += 1;
+    // const teste = getLocal.filter((value) => value.id === target.value);
+    // const teste2 = teste[0].countP;
+    // const soma = teste2 + 1;
+    localStorage.setItem('item', JSON.stringify([...getLocal]));
   }
 
   render() {
@@ -58,7 +45,7 @@ export default class ShoppingCart extends Component {
         <div>
           { !localStorage.item
             ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
-            : (getLocal.map(({ title, thumbnail, price, countP }, index) => (
+            : (getLocal.map(({ title, thumbnail, price, countP, id }, index) => (
               <div key={ index }>
                 <div data-testid="shopping-cart-product-name">
                   <img src={ thumbnail } alt={ title } />
@@ -72,9 +59,12 @@ export default class ShoppingCart extends Component {
                   quantity={ countP }
                   subClick={ this.subClick }
                   addClick={ this.addClick }
+                  id={ id }
+                  index={ index }
                 />
               </div>
             ))) }
+          <Link to="/">Voltar</Link>
         </div>
         {/* <div className="cart_item">
           <ol>
