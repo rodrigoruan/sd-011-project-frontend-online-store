@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class CardItem extends React.Component {
   // constructor() {
@@ -23,11 +24,14 @@ class CardItem extends React.Component {
 
     return products.length === 0 ? notFound : (
       products.map(({ title, thumbnail, price }) => (
-        <div data-testid="product" key={ title }>
-          <p>{title}</p>
-          <img src={ thumbnail } alt={ title } />
-          <p>{price}</p>
-        </div>
+        <Link to="/details" data-testid="product-detail-link"> DETALHES
+          <div data-testid="product"
+            key={ title } >
+            <p>{ title }</p>
+            <img src={ thumbnail } alt={ title } />
+            <p>{price}</p>
+          </div>
+        </Link>
       ))
     );
   }
