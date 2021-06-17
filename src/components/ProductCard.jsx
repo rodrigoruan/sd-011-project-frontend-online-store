@@ -8,31 +8,28 @@ export default class ProductCard extends React.Component {
     const { thumbnail, title, price, id } = product;
 
     return (
-      <Link
-        to={ {
-          pathname: `/product/${id}`,
-          state: { product },
-        } }
-        data-testid="product-detail-link"
-      >
-        <li
-          data-testid="product"
-          className="product-card"
+      <li data-testid="product" className="product-card">
+        <Link
+          to={ {
+            pathname: `/product/${id}`,
+            state: { product },
+          } }
+          data-testid="product-detail-link"
         >
-          <h1>{ title }</h1>
+          <h1>{title}</h1>
           <picture>
             <img src={ thumbnail } alt={ title } />
           </picture>
           <h2>{ price }</h2>
-          <button
-            type="button"
-            onClick={ () => addItemToCart(product) }
-            data-testid="product-add-to-cart"
-          >
-            Adicionar ao Carrinho
-          </button>
-        </li>
-      </Link>
+        </Link>
+        <button
+          type="button"
+          onClick={ () => addItemToCart(product) }
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </button>
+      </li>
     );
   }
 }
