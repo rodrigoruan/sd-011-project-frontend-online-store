@@ -45,13 +45,14 @@ class BuscaProduto extends Component {
         <button type="button" data-testid="query-button" onClick={ this.getApiData }>
           Buscar
         </button>
-        {productsData.map(({ id, title, thumbnail, price }) => (
+        {productsData.map(({ id, title, thumbnail, price, category_id: catId }) => (
           <ProductCard
             id={ id }
             key={ id }
             title={ title }
             imgPath={ thumbnail }
             price={ price }
+            category_id={ catId }
           />
         ))}
       </div>
