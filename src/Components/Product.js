@@ -10,7 +10,11 @@ export class Product extends Component {
       price: 0,
       imagePath: '',
       attributes: [],
+      eMail: '',
+      mensage: '',
+      rating: '',
     };
+    this.submitButton = this.submitButton.bind(this);
   }
 
   componentDidMount() {
@@ -30,8 +34,19 @@ export class Product extends Component {
     });
   }
 
+  submitButton() {
+    const eMail = document.getElementById('email-id').value;
+    const mensage = document.getElementById('mensage-id').value;
+    const rating = document.getElementById('rating-id').value;
+    this.setState({
+      eMail,
+      mensage,
+      rating,
+    });
+  }
+
   render() {
-    const { title, price, imagePath, attributes } = this.state;
+    const { title, price, imagePath, attributes, eMail, mensage, rating } = this.state;
     return (
       <div className={ style.product }>
         <h3 data-testid="product-detail-name">{ title }</h3>
@@ -48,6 +63,58 @@ export class Product extends Component {
             {/* {attributes.map((atribute) => <li key="">{attributes}</li>)} */}
           </ul>
         </div>
+        <form>
+          <h3>Avaliações</h3>
+          <label htmlFor="email-id">
+            <p>Email:</p>
+            <input
+              id="email-id"
+              type="e-mail"
+              placeholder="Digite seu e-mail"
+              isRequired
+            />
+          </label>
+          <label htmlFor="rating-id">
+            <p>Estrelas:</p>
+            <input
+              id="rating-id"
+              type="number"
+              step={ 0.1 }
+              min={ 0 }
+              max={ 5 }
+              placeholder="0 a 5"
+              isRequired
+            />
+          </label>
+          <label htmlFor="mensage-id">
+            <p>Mensagem:</p>
+            <textarea
+              type="text"
+              data-testid="product-detail-evaluation"
+              id="mensage-id"
+            />
+          </label>
+          <br />
+          <button
+            onClick={ this.submitButton }
+            id="avaiation-button"
+            type="button"
+          >
+            Avaliar
+          </button>
+        </form>
+        <section>
+          <h4>Avaliações recentes</h4>
+          <h4>
+            { eMail }
+          </h4>
+          <h3>
+            { mensage }
+          </h3>
+          <h3>
+            { rating }
+          </h3>
+        </section>
       </div>
     );
   }
