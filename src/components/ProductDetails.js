@@ -30,8 +30,8 @@ export default class ProductDetails extends Component {
   render() {
     const { location: { state: { result } } } = this.props;
     const { title, thumbnail, price } = result;
-    const arrayObject = JSON.parse(localStorage.getItem('item'));
-    const sum = arrayObject.reduce((acc, value) => acc + value.countProduct, 0);
+    const oj = JSON.parse(localStorage.getItem('item'));
+    // const { countProduct } = arrayObject[0];
     return (
       <div>
         <h2 data-testid="product-detail-name">{`${title} - ${price}`}</h2>
@@ -50,7 +50,7 @@ export default class ProductDetails extends Component {
           <button type="button">Carrinho</button>
         </Link>
         {localStorage.item
-          && <div data-testid="shopping-cart-size">{ sum }</div>}
+          && <div data-testid="shopping-cart-size">{oj.reduce((a, v) => a + v.countProduct, 0) }</div>}
         <Link to="/">Voltar</Link>
         <input type="text" />
         <textarea type="text" data-testid="product-detail-evaluation" />

@@ -34,7 +34,6 @@ export default class ShoppingCart extends Component {
 
   render() {
     const arrayObject = JSON.parse(localStorage.getItem('item'));
-    const sum = arrayObject.reduce((acc, value) => acc + value.countProduct, 0);
     return (
       <div>
         {!localStorage.item ? (
@@ -70,7 +69,7 @@ export default class ShoppingCart extends Component {
           ))
         )}
         {localStorage.item
-          && <div>{ sum }</div>}
+          && <div>{arrayObject.length}</div>}
         <Link to="/Buy">
           <button
             data-testid="checkout-products"
