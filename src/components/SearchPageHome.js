@@ -22,10 +22,26 @@ export default class SearchPageHome extends Component {
     this.getCategories = this.getCategories.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
     this.addItemCart = this.addItemCart.bind(this);
+    this.handleListCategories = this.handleListCategories.bind(this);
   }
 
   componentDidMount() {
     this.getCategories();
+  }
+
+  async handleListCategories({ target }) {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
+    });
+    const { query, product } = this.state;
+    const response = await api.getProductsFromCategoryAndQuery(value, query);
+    this.setState({
+      product: response.results,
+      loading: false,
+    });
+    console.log(product);
   }
 
   async getProducts() {
@@ -58,12 +74,18 @@ export default class SearchPageHome extends Component {
 
   addItemCart({ target }) {
     const { product, itemsCart } = this.state;
+    product.countP = 1;
     const { value } = target;
     const productForCart = product.find((item) => item.id === value);
 
     this.setState({
       itemsCart: [...itemsCart, productForCart],
     });
+    if (itemsCart.length === 0) {
+      console.log('xablau3');
+    }
+    localStorage.setItem('key', JSON.stringify(itemsCart));
+    console.log('xablau');
   }
 
   render() {
@@ -81,7 +103,7 @@ export default class SearchPageHome extends Component {
         </label>
         { categoriesData.map((item) => (<Categories
           listCategories={ item }
-          changeCategory={ this.getProducts }
+          changeCategory={ this.handleListCategories }
           key={ item.name }
         />
         ))}
