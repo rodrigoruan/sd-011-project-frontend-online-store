@@ -52,13 +52,15 @@ export default class Product extends Component {
 
   render() {
     const { props, state } = this;
-    const { location: { state: { title, price, thumbnail, attributes, id } } } = props;
+    const { location: { state: { title, price, thumbnail, attributes, id, shipping } } } = props;
     const { allComments } = state;
-
     return (
       <>
         <h1 data-testid="product-detail-name">{title}</h1>
         <img src={ thumbnail } alt={ title } />
+        {
+          shipping.free_shipping ? <p data-testid="free-shipping">Frete Grátis!</p> : null
+        }
         <p>
           R$
           {price}
@@ -127,6 +129,7 @@ Product.propTypes = {
       price: PropTypes.number,
       thumbnail: PropTypes.string,
       attributes: PropTypes.arrayOf(PropTypes.object),
+      free_shipping: PropTypes.bool,
     },
   }).isRequired,
 };
