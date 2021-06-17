@@ -89,6 +89,7 @@ class Rating extends Component {
             name="comment"
             onChange={ this.onChange }
             value={ comment }
+            data-testid="product-detail-evaluation"
           />
           <button type="button" onClick={ this.createComment }>Enviar</button>
         </form>
