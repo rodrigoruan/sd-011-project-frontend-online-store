@@ -40,6 +40,16 @@ footer {
   margin-left: 2%;
 }
 
+.navbar-nav {
+  display: flex!important;
+  flex-direction: row!important;
+  padding: 0 15px;
+}
+
+.navbar-nav li {
+  padding: 0 15px;
+}
+
 .search-list {
   display: flex;
   flex-flow: row wrap;

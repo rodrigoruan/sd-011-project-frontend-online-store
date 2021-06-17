@@ -11,7 +11,7 @@ export default class ItemProduct extends Component {
           R$
           {parseFloat(price, 10).toFixed(2)}
         </h6>
-        <button className="btn btn-success">Add to Cart!</button>
+        <button className="btn btn-success" data-testid="product-add-to-cart">Add to Cart!</button>
       </div>
     );
   }
