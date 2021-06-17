@@ -53,7 +53,7 @@ export default class ShoppingCart extends Component {
                   type="button"
                   onClick={ () => this.handleIncrease(index) }
                 >
-                  +
+                  ➕
                 </button>
               </Link>
               <Link to="/ShoppingCart">
@@ -62,7 +62,7 @@ export default class ShoppingCart extends Component {
                   type="button"
                   onClick={ () => this.handleDecrease(index, id) }
                 >
-                  -
+                  ➖
                 </button>
               </Link>
             </div>
@@ -70,9 +70,16 @@ export default class ShoppingCart extends Component {
         )}
         {localStorage.item
           && <div>{arrayObject.length}</div>}
-        <button type="button" onClick={ this.handlTotalPrice }>Finalizar Compra</button>
+        <Link to="/Buy">
+          <button
+            data-testid="checkout-products"
+            type="button"
+          >
+            ✅Finalizar Compra
+          </button>
+        </Link>
         <Link to="/ShoppingCart">
-          <button type="button" onClick={ this.handleRemove }>Remover</button>
+          <button type="button" onClick={ this.handleRemove }>❌Remover</button>
         </Link>
         <Link data-testid="shopping-cart-button" to="/">
           Voltar
