@@ -23,8 +23,9 @@ export default class App extends Component {
   }
 
   handleAddToCart = (id, thumbnail, title, price) => {
+    const oldItems = [...this.state.ShoppingCart];
     const newItem = { id, thumbnail, title, price };
-    this.setState((prev) => ({ ShoppingCart: [...prev.ShoppingCart, newItem] }));
+    this.setState({ ShoppingCart: [...oldItems, newItem] });
   };
 
   render() {
