@@ -6,9 +6,21 @@ export default class ProductQuantity extends Component {
     const { quantity, increaseQuantity, decreaseQuantity } = this.props;
     return (
       <div>
-        <button type="button" onClick={ decreaseQuantity }> - </button>
+        <button
+          type="button"
+          data-testid="product-decrease-quantity"
+          onClick={ decreaseQuantity }
+        >
+          -
+        </button>
         <strong data-testid="shopping-cart-product-quantity">{quantity}</strong>
-        <button type="button" onClick={ increaseQuantity }> + </button>
+        <button
+          type="button"
+          data-testid="product-increase-quantity"
+          onClick={ increaseQuantity }
+        >
+          +
+        </button>
       </div>
     );
   }

@@ -14,12 +14,9 @@ class Cart extends Component {
 
   deleteItem({ target: { id } }) {
     const { itensCarrinho } = this.state;
-    itensCarrinho.forEach((item) => {
-      if (item.id !== id) {
-        console.log(id);
-        delete item[id];
-        this.setState({ itensCarrinho });
-      }
+    const newItems = itensCarrinho.filter((item) => item.id !== id);
+    this.setState({
+      itensCarrinho: newItems,
     });
   }
 
@@ -40,9 +37,13 @@ class Cart extends Component {
               cart={ element }
               deleteItem={ this.deleteItem }
             />
-
           ))
         }
+        <strong>
+          Total: R$
+          {itensCarrinho.reduce((acc, curr) => acc + parseFloat(curr.price), 0)}
+        </strong>
+        <button type="button">Finalizar compra</button>
       </div>
     );
   }
