@@ -22,18 +22,22 @@ export default class Card extends Component {
   }
 
   render() {
-    const { title, price, thumbnail, id, attributes } = this.props;
+    const { title, price, thumbnail, id, attributes, shipping } = this.props;
     return (
       <div data-testid="product">
         <Link
           data-testid="product-detail-link"
           to={ {
             pathname: `/produtos/${id}`,
-            state: { title, price, thumbnail, id, attributes },
+            state: { title, price, thumbnail, id, attributes, shipping },
           } }
         >
           <p>{title}</p>
           <img src={ thumbnail } alt={ title } />
+          {
+            shipping.free_shipping
+              ? <p data-testid="free-shipping">Frete Grátis!</p> : null
+          }
           <p>
             R$
             {price}
@@ -56,4 +60,5 @@ Card.propTypes = {
   price: PropTypes.number,
   thumbnail: PropTypes.string,
   id: PropTypes.string,
+  free_shipping: PropTypes.bool,
 }.isRequired;
