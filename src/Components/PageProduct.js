@@ -42,6 +42,7 @@ class PageProduct extends Component {
 
   renderProduct = () => {
     const { title, price, thumbnail, id } = this.state;
+
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
@@ -69,6 +70,17 @@ class PageProduct extends Component {
         >
           Ir para o carrinho
         </Link>
+        <span>
+          { loading ? <p>Loading...</p> : this.renderProduct() }
+        </span>
+      </div>
+    );
+  }
+
+  render() {
+    const { loading } = this.state;
+    return (
+      <div>
         <span>
           { loading ? <p>Loading...</p> : this.renderProduct() }
         </span>
