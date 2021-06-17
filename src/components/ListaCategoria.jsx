@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import * as api from '../services/api';
 import { Loading, ProductCard } from './index';
 
+
+// oi
+
 class ListaCategoria extends Component {
   constructor() {
     super();
