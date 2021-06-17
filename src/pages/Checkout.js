@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import backImg from '../imgs/Seta.png';
 
 export default class Checkout extends React.Component {
@@ -125,3 +126,6 @@ export default class Checkout extends React.Component {
     );
   }
 }
+Checkout.propTypes = {
+  shopCart: PropTypes.object,
+}.isRequired;
