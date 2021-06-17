@@ -1,0 +1,18 @@
+.main-product-info {
+  display: flex;
+  justify-content: center;
+}
+
+.main-product-info h1 {
+  margin: 10px;
+}
+
+.product-details {
+  align-items: center;
+  justify-content: space-evenly;
+  display: flex;
+}
+
+.product-img {
+  height: min-content;
+}
