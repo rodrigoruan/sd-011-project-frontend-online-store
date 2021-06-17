@@ -6,7 +6,7 @@ class Cart extends Component {
     const { product } = this.props;
     return (
       <div>
-        <img alt={ `${product.title}` } src={ product.img } />
+        <img alt={ `${product.title}` } src={ product.thumbnail } />
         <h4 data-testid="shopping-cart-product-name">{ product.title }</h4>
         <p data-testid="shopping-cart-product-quantity">1</p>
         <p>{ `R$ ${parseFloat(product.price).toFixed(2)}` }</p>
@@ -18,7 +18,7 @@ class Cart extends Component {
 Cart.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
-    img: PropTypes.string,
+    thumbnail: PropTypes.string,
     price: PropTypes.number,
     id: PropTypes.string,
   }).isRequired,
