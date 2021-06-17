@@ -45,24 +45,8 @@ export default class Home extends React.Component {
             });
         };
 
-        if (id && searchText) {
-          const getProducts = await api.getProductsFromCategoryAndQuery(id, searchText);
-          SetProducts(getProducts);
-        } 
-        else if (id && !searchText) {
-          const getProducts = await api.getProductsFromCategory(id);
-          SetProducts(getProducts);
-        }
-        else if (searchText && !id) {
-          const getProducts = await api.getProductsFromQuery(searchText);
-          SetProducts(getProducts);
-        }
-        else {
-          alert('Por favor escolha alguma categoria ou digite algo para pesquisar');
-          this.setState({
-            loading: false,
-          })
-        }
+        const getProducts = await api.getProductsFromCategoryAndQuery(id, searchText);
+        SetProducts(getProducts);
       }
     )
   }
