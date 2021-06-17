@@ -10,22 +10,12 @@ export default class ProductDetails extends Component {
     this.state = {
       itemsCart: [],
     };
-    
+
     this.getValues = this.getValues.bind(this);
   }
 
   componentDidMount() {
     this.getValues();
-  }
-
-  getValues() {
-    const keys = Object.values(localStorage);
-    if (keys.length > 0) {
-      keys.forEach((value) => {
-        const obj = JSON.parse(value);
-        console.log(obj);
-      });
-    this.handlerLocalStore = this.handlerLocalStore.bind(this);
   }
 
   handlerLocalStore(param) {
@@ -42,6 +32,17 @@ export default class ProductDetails extends Component {
         getLocal[verify].countP += 1;
         localStorage.setItem('item', JSON.stringify([...getLocal]));
       }
+    }
+  }
+
+  getValues() {
+    const keys = Object.values(localStorage);
+    if (keys.length > 0) {
+      keys.forEach((value) => {
+        const obj = JSON.parse(value);
+        console.log(obj);
+      });
+      this.handlerLocalStore = this.handlerLocalStore.bind(this);
     }
   }
 
