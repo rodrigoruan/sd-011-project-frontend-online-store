@@ -54,7 +54,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/details" component={ ProductDetails } />
+          <Route
+            path="/details/:id"
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                handleAddToShopCart={ this.handleAddToShopCart }
+              />
+            ) }
+          />
           <Route
             exact
             path="/ShoppingCart"
@@ -76,7 +84,8 @@ class App extends Component {
                 { ...props }
                 handleAddToShopCart={ this.handleAddToShopCart }
                 shopCart={ shopCart }
-              />) }
+              />
+            ) }
           />
         </Switch>
       </BrowserRouter>
