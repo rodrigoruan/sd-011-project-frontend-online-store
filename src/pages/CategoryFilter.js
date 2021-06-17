@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { getCategories } from '../services/api';
 
 export default class CategoryFilter extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       categories: [],
@@ -21,17 +21,30 @@ export default class CategoryFilter extends Component {
 
   render() {
     const { categories } = this.state;
+    const { onClick } = this.props;
+
     if (!categories) return <p>loading...</p>;
     return (
-      <ul>
+      <div>
         {
           categories.map((cat) => (
-            <li data-testid="category" key={ cat.id }>
+            <label
+              htmlFor={ cat.id }
+              key={ cat.id }
+              style={ { display: 'block', padding: '5px' } }
+            >
+              <input
+                type="radio"
+                id={ cat.id }
+                name="category"
+                data-testid="category"
+                onClick={ onClick }
+              />
               { cat.name }
-            </li>
+            </label>
           ))
         }
-      </ul>
+      </div>
     );
   }
 }
