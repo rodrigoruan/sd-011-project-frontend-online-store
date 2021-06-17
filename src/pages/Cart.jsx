@@ -1,50 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ProductItem from '../components/ProductItem';
 
 class Cart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { location: { aboutProps: { itensCarrinho } } } = this.props;
     this.state = {
-      count: 0,
+      itensCarrinho,
     };
-    this.increment = this.increment.bind(this);
-    this.decrement = this.decrement.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
-  increment() {
-    const { count } = this.state;
+  deleteItem({ target: { id } }) {
+    const { itensCarrinho } = this.state;
+    const newItems = itensCarrinho.filter((item) => item.id !== id);
     this.setState({
-      count: count + 1,
+      itensCarrinho: newItems,
     });
   }
 
-  decrement() {
-    const { count } = this.state;
-    if (count > 1) {
-      return this.setState({
-        count: count - 1,
-      });
-    }
-  }
-
   render() {
-    const { location: { aboutProps: { itensCarrinho } } } = this.props;
-    const { count } = this.state;
+    const { itensCarrinho } = this.state;
+
+    console.log(itensCarrinho);
+
+    if (itensCarrinho.length === 0) {
+      return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;
+    }
     return (
       <div>
-        <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
-        { itensCarrinho.map((element) => (
-          <div key={ element.id }>
-            {/* <img src={ element.thumbnail } alt={ element.title } /> */}
-            <h3>{ element.id }</h3>
-            <h5 data-testid="shopping-cart-product-name">{ element.title }</h5>
-            <span>{ element.price }</span>
-            <div>
-              <button type="button" onClick={ this.decrement }>-</button>
-              <span data-testid="shopping-cart-product-quantity">{ count + 1 }</span>
-              <button type="button" onClick={ this.increment }>+</button>
-            </div>
-          </div>)) }
+        {
+          itensCarrinho.map((element) => (
+            <ProductItem
+              key={ element.id }
+              cart={ element }
+              deleteItem={ this.deleteItem }
+            />
+          ))
+        }
+        <strong>
+          Total: R$
+          {itensCarrinho.reduce((acc, curr) => acc + parseFloat(curr.price), 0)}
+        </strong>
+        <button type="button">Finalizar compra</button>
       </div>
     );
   }

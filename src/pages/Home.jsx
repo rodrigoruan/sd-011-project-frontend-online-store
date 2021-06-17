@@ -73,7 +73,7 @@ export default class Home extends Component {
     const newObject = { title: target.name,
       price: target.value,
       id: target.id,
-      thumbnail: target.imagem };
+      thumbnail: target.icon };
     const accumulator = [...itensCart, newObject];
     this.setState({
       itensCart: accumulator,
@@ -94,7 +94,6 @@ export default class Home extends Component {
               itensCarrinho: itensCart,
             },
           } }
-          itemCart={ itensCart }
           data-testid="shopping-cart-button"
         >
           Carrinho
