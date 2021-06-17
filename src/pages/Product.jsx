@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 export default class Product extends Component {
@@ -5,21 +6,31 @@ export default class Product extends Component {
     const { location: { state:  { product } } } = this.props;
     console.log(product);
     return (
-      <section>
-        Especificações do produto
-        <div>
+      <main>
+        <section>
+          <h1>Especificações do produto</h1>
           <h1>{ `${product.title} - R$${product.price}` }</h1>
           <img src={ product.thumbnail } alt={ product.title }/>
-        </div>
-        <div>
+        </section>
+        <section>
+          <h1>Formas de pagamento</h1>
           { product.shipping.free_shipping ? <p>Free Shipping</p> : ''}
-          <p>{ `Quantide: ${product.available_quantity}` }</p>
-          <h2>Formas de pagamento</h2>
+          <p>{ `Disponível: ${product.available_quantity}` }</p>
           <p>{ `${product.installments.amount}` }</p>
-        </div>
-        <div>
-        </div>
-      </section>
+        </section>
+
+        <section>
+          <h1>Avaliações</h1>
+        </section>
+      </main>
     );
   }
 }
+
+Product.propTypes = {
+  location: PropTypes.shape(({
+    state: PropTypes.shape({
+      title: PropTypes.string,
+    }),
+  })),
+}.isRequired;
