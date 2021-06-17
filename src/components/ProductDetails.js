@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Comments from './Comments';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       productObject: null,
+      comments: [],
       counter: 1,
     };
     this.getProduct = this.getProduct.bind(this);
+    this.addComment = this.addComment.bind(this);
     this.setItem = this.setItem.bind(this);
     this.getProduct();
   }
@@ -34,16 +37,22 @@ class ProductDetails extends React.Component {
     const { state } = location;
     const { title, thumbnail, price, id } = state;
     const { counter } = this.state;
-    this.setState((previus) => ({
-      counter: previus.counter + 1,
+    this.setState((previous) => ({
+      counter: previous.counter + 1,
     }));
     const obj = { title, thumbnail, price, id, counter };
     const objJSON = JSON.stringify(obj);
     localStorage.setItem(id, objJSON);
   }
 
+  addComment(comment = {}) {
+    this.setState((state) => (
+      { comments: [...state.comments, comment] }
+    ));
+  }
+
   render() {
-    const { productObject } = this.state;
+    const { productObject, comments } = this.state;
     return (
       <div data-testid="product-detail-name">
         {(productObject === null)
@@ -56,16 +65,28 @@ class ProductDetails extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        <Comments addComment={ this.addComment } comments={ comments } />
       </div>
     );
   }
 }
 
 ProductDetails.propTypes = {
-  match: PropTypes.isRequired,
-  category: PropTypes.isRequired,
-  query: PropTypes.isRequired,
-  location: PropTypes.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      ProductId: PropTypes.string,
+    }),
+  }).isRequired,
+  category: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      id: PropTypes.string,
+      price: PropTypes.number,
+      thumbnail: PropTypes.string,
+      title: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  query: PropTypes.string.isRequired,
 };
 
 export default ProductDetails;
