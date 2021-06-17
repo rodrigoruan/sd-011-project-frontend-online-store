@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Home, Cart } from './pages';
+import { Home, Cart, Product } from './pages';
 import * as api from './services/api';
 import './App.css';
 
@@ -60,9 +60,14 @@ class App extends Component {
                 addItemToCart={ this.addItemToCart }
               />) }
             />
+
             <Route
               path="/cart"
               render={ () => <Cart productList={ shoppingCart } /> }
+            />
+            <Route
+              path="/product/:id"
+              component={ Product }
             />
           </Switch>
         </BrowserRouter>
