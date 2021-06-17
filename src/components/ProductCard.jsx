@@ -1,19 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ProductCard extends React.Component {
   render() {
     const { product } = this.props;
-    const { thumbnail, title, price } = product;
+    const { thumbnail, title, price, id } = product;
 
     return (
-      <li data-testid="product">
-        <h1>{ title }</h1>
-        <picture>
-          <img src={ thumbnail } alt={ title } />
-        </picture>
-        <h2>{ price }</h2>
-      </li>
+      <Link
+        to={ `/product/${id}` }
+        product={ product }
+      >
+        <li
+          data-testid="product"
+          className="product-card"
+        >
+          <h1>{ title }</h1>
+          <picture>
+            <img src={ thumbnail } alt={ title } />
+          </picture>
+          <h2>{ price }</h2>
+        </li>
+      </Link>
     );
   }
 }
