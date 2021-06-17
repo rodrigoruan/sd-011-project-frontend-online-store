@@ -57,8 +57,16 @@ export default class ProductDetail extends Component {
   }
 
   addToCart({ target: { value } }) {
-    const key = JSON.parse(value).title;
-    sessionStorage.setItem(key, value);
+    const data = JSON.parse(value);
+    const key = data.title;
+    if (sessionStorage[key]) {
+      const recoveredObject = JSON.parse(sessionStorage[key]);
+      const copy = { ...recoveredObject };
+      copy.quantity += 1;
+      sessionStorage[key] = JSON.stringify(copy);
+    } else {
+      sessionStorage.setItem(key, value);
+    }
     this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
   }
 
