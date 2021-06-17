@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 export default class ShoppingCart extends Component {
   render() {
-    const { cartItems } = this.props;
+    const storage = Object.keys(localStorage);
+    const cartItems = storage.map((key) => {
+      const item = JSON.parse(localStorage[key]);
+      return item;
+    });
+    console.log(cartItems);
     return (
       <div>
         {
@@ -13,7 +17,7 @@ export default class ShoppingCart extends Component {
             : cartItems.map((product, index) => (
               <div key={ index }>
                 <p data-testid="shopping-cart-product-name">{ product.title }</p>
-                <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
+                <p data-testid="shopping-cart-product-quantity">{product.counter}</p>
               </div>
             ))
         }
@@ -22,7 +26,3 @@ export default class ShoppingCart extends Component {
     );
   }
 }
-
-ShoppingCart.propTypes = {
-  cartItems: PropTypes.isRequired,
-};

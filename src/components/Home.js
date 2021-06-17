@@ -13,11 +13,9 @@ export default class Home extends Component {
       query: ' ',
       category: 'MLB1648',
       products: undefined,
-      cartItems: [],
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.searchApi = this.searchApi.bind(this);
-    this.addCartFunc = this.addCartFunc.bind(this);
   }
 
   componentDidMount() {
@@ -44,13 +42,6 @@ export default class Home extends Component {
     }
   }
 
-  addCartFunc(data) {
-    data.quantity = 1;
-    this.setState((previous) => ({
-      cartItems: [...previous.cartItems, data],
-    }));
-  }
-
   render() {
     const { products, query, category, cartItems } = this.state;
     return (
@@ -65,7 +56,6 @@ export default class Home extends Component {
                 products={ products }
                 category={ category }
                 query={ query }
-                addCartFunc={ this.addCartFunc }
               />
             ) }
           />
@@ -80,7 +70,6 @@ export default class Home extends Component {
                 { ...props }
                 query={ query }
                 category={ category }
-                addCartFunc={ this.addCartFunc }
               />
             ) }
           />

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
-import AddToCartBtn from './AddCardButton';
 
 export default class ListCards extends Component {
   render() {
-    const { products, query, category, addCartFunc } = this.props;
+    const { products, query, category } = this.props;
     return (
       <div>
         {(products === undefined) ? <p>Loading...</p>
@@ -16,7 +15,6 @@ export default class ListCards extends Component {
                 query={ query }
                 category={ category }
               />
-              <AddToCartBtn addCartFunc={ addCartFunc } product={ product } />
             </div>))}
       </div>
     );
