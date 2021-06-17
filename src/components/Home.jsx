@@ -35,7 +35,7 @@ export default class Home extends Component {
     const { categoryId, search } = this.state;
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
-    console.log(fetchedProducts);
+    // console.log(fetchedProducts.results);
     this.setState({ productCards: fetchedProducts.results });
   }
 
@@ -119,7 +119,6 @@ export default class Home extends Component {
                 product={ product }
                 addCart={ this.addCart }
               />))}
-        </div>
       </div>
     );
   }
