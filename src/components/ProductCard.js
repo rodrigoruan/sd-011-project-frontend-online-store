@@ -15,7 +15,7 @@ class ProductCard extends Component {
     if (!productInfo) {
       localStorage.setItem('productInfos', JSON.stringify([]));
     }
-  } 
+  }
 
   setItemStorage() {
     const productInfo = JSON.parse(localStorage.getItem('productInfos'));
