@@ -13,9 +13,11 @@ export default class Home extends Component {
       query: ' ',
       category: 'MLB1648',
       products: undefined,
+      cartItems: [],
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.searchApi = this.searchApi.bind(this);
+    this.addCartFunc = this.addCartFunc.bind(this);
   }
 
   componentDidMount() {
@@ -42,8 +44,14 @@ export default class Home extends Component {
     }
   }
 
+  addCartFunc(data) {
+    this.setState((previous) => ({
+      cartItems: [...previous.cartItems, data],
+    }));
+  }
+
   render() {
-    const { products, query, category } = this.state;
+    const { products, query, category, cartItems } = this.state;
     return (
       <div>
         <TopBar handleOnChange={ this.handleOnChange } />
@@ -56,10 +64,14 @@ export default class Home extends Component {
                 products={ products }
                 category={ category }
                 query={ query }
+                addCartFunc={ this.addCartFunc }
               />
             ) }
           />
-          <Route path="/ShoppingCart" component={ ShoppingCart } />
+          <Route
+            path="/ShoppingCart"
+            render={ () => (<ShoppingCart cartItems={ cartItems } />) }
+          />
           <Route
             path="/product/:id"
             render={ (props) => (
