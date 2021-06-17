@@ -68,8 +68,6 @@ class Home extends Component {
 
   addToCart = (title, price, thumbnail, id) => {
     const { quantity } = this.state;
-    // const product = { title, price, thumbnail, id };
-    // const listJson = JSON.stringify(product);
 
     localStorage.setItem(id, [title, '/n', thumbnail, '/n', price, '/n', quantity]);
   }
