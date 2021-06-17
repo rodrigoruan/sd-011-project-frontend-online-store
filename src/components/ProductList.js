@@ -26,8 +26,9 @@ export default class ProductList extends Component {
   }
 
   render() {
-    const { products: { title, price, thumbnail, id } } = this.props;
+    const { products: { title, price, thumbnail, id, shipping } } = this.props;
     const { products, foundQuantityItemsCart } = this.props;
+    const { free_shipping: freeShipping } = shipping;
 
     return (
       <div data-testid="product">
@@ -37,6 +38,9 @@ export default class ProductList extends Component {
           R$
           {price}
         </p>
+        { freeShipping
+          ? <p data-testid="free-shipping">Frete Gratis</p>
+          : <p>A combinar com o vendedor</p> }
         <button
           data-testid="product-add-to-cart"
           value={ id }
@@ -68,6 +72,9 @@ ProductList.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
     id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
   foundQuantityItemsCart: PropTypes.func.isRequired,
 };
