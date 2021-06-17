@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Products.css';
 import { Link } from 'react-router-dom';
 
 class Products extends Component {
   render() {
     const { title, img, price } = this.props;
     return (
-      <div data-testid="product">
-        <Link to="/details" className="details">
+      <Link to={ `/product-details/${title}` } data-testid="product-detail-link">
+        <div className="product" data-testid="product" aria-hidden="true">
           <p>{ title }</p>
           <img src={ img } alt="produto" />
           <p>{ price }</p>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   }
 }

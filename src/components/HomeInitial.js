@@ -31,20 +31,20 @@ class HomeInitial extends Component {
       products: products.results,
       search: '',
     });
+    console.log(products.results);
   }
 
   async filterProductsByCategory({ target }) {
     if (target.className === 'Category') {
       const { id } = target;
-      // console.log(id);
       const { search } = this.state;
-      if (search) {
-        const products = await getProductsFromCategoryAndQuery(`$${id}`, `$${search}`);
+      if (search !== '') {
+        const products = await getProductsFromCategoryAndQuery(`${id}`, `$${search}`);
         this.setState({
           products: products.results,
         });
       } else {
-        const products = await getProductsFromCategoryAndQuery(`$${id}`, '$QUERY');
+        const products = await getProductsFromCategoryAndQuery(`${id}`, '$QUERY');
         this.setState({
           products: products.results,
         });
