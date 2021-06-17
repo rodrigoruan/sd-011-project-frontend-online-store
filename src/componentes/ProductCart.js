@@ -4,6 +4,7 @@ class ProductCart extends Component {
   render() {
     return (
       <div>
+        teste
       </div>
     );
   }

@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ProductCart from './ProductCart';
+// import ProductCart from './ProductCart';
 
 class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: [],
+      // product: [],
     };
-    // this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  // handleClick() {
+  handleClick() {
 
-  // }
+  }
 
   render() {
     const { products } = this.props;
