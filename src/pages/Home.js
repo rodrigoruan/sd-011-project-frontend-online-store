@@ -49,9 +49,11 @@ export default class Home extends Component {
   render() {
     return (
       <div className="home-div">
-        <Categories />
         <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
-        <SearchList products={this.state.products} />
+        <div class="search-results">
+          <Categories />  
+          <SearchList products={this.state.products} />
+        </div>
       </div>
     );
   }
