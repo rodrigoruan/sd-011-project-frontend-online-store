@@ -21,10 +21,10 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
-    this.fetchProducts();
   }
 
   async handleCategory(categoryId) {
+    await this.fetchProducts(categoryId);
     this.setState({
       category: categoryId,
     });
@@ -42,6 +42,7 @@ class Home extends Component {
     this.setState({
       products: resultProducts.results,
     });
+    console.log(resultProducts.results);
   }
 
   async fetchCategories() {
