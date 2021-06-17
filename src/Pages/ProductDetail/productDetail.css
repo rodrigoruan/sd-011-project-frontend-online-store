@@ -9,8 +9,8 @@
 
 .product-details {
   align-items: center;
-  justify-content: space-evenly;
   display: flex;
+  justify-content: space-evenly;
 }
 
 .product-img {
