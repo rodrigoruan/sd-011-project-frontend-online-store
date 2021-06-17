@@ -34,11 +34,6 @@ class Home extends React.Component {
     const { productCategories, filterCategories } = this.state;
     return (
       <fragment>
-        <h3
-          data-testid="home-initial-message"
-        >
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h3>
         <ProductList selectedCategory={ filterCategories } />
         <div>
           { productCategories.map((category) => (
