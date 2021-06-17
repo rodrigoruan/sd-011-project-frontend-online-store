@@ -27,13 +27,13 @@ class Cart extends React.Component {
 
   render() {
     const produtoDoCarrinho = JSON.parse(localStorage.getItem('cart'));
-    const valorProducts = produtoDoCarrinho
-      .map(({ price }) => price).reduce((acc, curr) => acc + curr);
-    console.log(valorProducts);
     const mensagem = (
       <p data-testid="shopping-cart-empty-message">
         Seu carrinho está vazio
       </p>);
+    const valorProducts = !produtoDoCarrinho ? mensagem : produtoDoCarrinho
+      .map(({ price }) => price).reduce((acc, curr) => acc + curr);
+    console.log(valorProducts);
     return (
       <div>
         {!localStorage.cart ? (mensagem) : produtoDoCarrinho
