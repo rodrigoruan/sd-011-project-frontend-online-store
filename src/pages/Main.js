@@ -74,11 +74,18 @@ class Main extends Component {
               <button
                 type="button"
                 onClick={ () => {
-                  const addedCart = [...addingCart, product];
-                  localStorage.setItem('addingCart', JSON.stringify(addedCart));
-                  this.setState(() => ({
-                    addingCart: JSON.parse(localStorage.getItem('addingCart')) || [] }
-                  ));
+                  if (localStorage.getItem('addingCart')) {
+                    const cart = JSON.parse(localStorage.getItem('addingCart'));
+                    const addToCart = [...cart, product];
+                    localStorage.setItem('addingCart', JSON.stringify(addToCart));
+                    this.setState({ addingCart: cart });
+                  } else {
+                    const addedCart = [...addingCart, product];
+                    localStorage.setItem('addingCart', JSON.stringify(addedCart));
+                    this.setState(() => ({
+                      addingCart: JSON.parse(localStorage.getItem('addingCart')) || [] }
+                    ));
+                  }
                 } }
                 data-testid="product-add-to-cart"
               >
