@@ -21,7 +21,7 @@ class PageProduct extends Component {
   addToCart = (title, price, thumbnail, id) => {
     const { quantity } = this.state;
 
-    localStorage.setItem(id, [title, '/n', thumbnail, '/n', price, '/n', quantity]);
+    localStorage.setItem(id, [title, '/n', thumbnail, '/n', price, '/n', quantity, '/n', id]);
   }
 
   async catchId() {
