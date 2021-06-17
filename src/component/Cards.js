@@ -11,6 +11,7 @@ export default class Cards extends Component {
   handleAdd(id, title) {
     const obj = { id, title };
     const { addItems } = this.props;
+    console.log(obj);
     addItems(obj);
   }
 
