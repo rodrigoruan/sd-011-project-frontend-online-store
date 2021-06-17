@@ -30,13 +30,6 @@ class AddToCart extends React.Component {
         >
           Adicionar ao Carrinho
         </button>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => this.readLocalStorage() }
-        >
-          teste
-        </button>
       </div>
     );
   }
@@ -45,5 +38,5 @@ class AddToCart extends React.Component {
 export default AddToCart;
 
 AddToCart.propTypes = {
-  item: PropTypes.objectOf(PropTypes.object()).isRequired,
+  item: PropTypes.objectOf().isRequired,
 };
