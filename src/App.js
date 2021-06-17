@@ -16,7 +16,7 @@ function App() {
             <ShoppingCart />
           </Route>
           <Route path="/cart" component={ Cart } />
-          <Route path="/product/:id" component={ Product } />
+          <Route path="/product/:id" render={ (props) => <Product { ...props } /> } />
         </Switch>
       </BrowserRouter>
     </div>
