@@ -4,13 +4,18 @@ import Card from './Card';
 
 export default class ListCards extends Component {
   render() {
-    const { products } = this.props;
+    const { products, query, category } = this.props;
     return (
       <div>
-        { products.map((product, index) => (<Card
-          { ...product }
-          key={ index }
-        />))}
+        {(products === undefined) ? <p>Loading...</p>
+          : products.map((product, index) => (
+            <div key={ index }>
+              <Card
+                { ...product }
+                query={ query }
+                category={ category }
+              />
+            </div>))}
       </div>
     );
   }
@@ -18,4 +23,7 @@ export default class ListCards extends Component {
 
 ListCards.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  query: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  addCartFunc: PropTypes.func.isRequired,
 };

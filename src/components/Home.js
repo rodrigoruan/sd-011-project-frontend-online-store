@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import ListCards from './ListCards';
-import Filtros from './Filtros';
+import ProductDetails from './ProductDetails';
+import ShoppingCart from './ShoppingCart';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import Input from './Input';
+import TopBar from './TopBar';
 
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
-      query: '',
-      category: 'MLB1953',
+      query: ' ',
+      category: 'MLB1648',
       products: undefined,
     };
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -32,8 +33,8 @@ export default class Home extends Component {
     const { query, category } = this.state;
     try {
       let products = await getProductsFromCategoryAndQuery(category, query);
-      products = products.results.map(({ title, id, price, thumbnail }) => (
-        { name: title, key: id, price, thumbnail }
+      products = products.results.map(({ title, id, price, thumbnail, attributes }) => (
+        { title, id, price, thumbnail, attributes }
       ));
       this.setState({ products });
     } catch (error) {
@@ -42,22 +43,37 @@ export default class Home extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { products, query, category, cartItems } = this.state;
     return (
       <div>
-        <h2 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h2>
-        <Input onClick={ this.handleOnChange } />
-        <Filtros onClick={ this.handleOnChange } />
-        <Link to="/ShoppingCart">
-          <button data-testid="shopping-cart-button" type="button">
-            Carrinho de Compras
-          </button>
-        </Link>
-        {(products === undefined)
-          ? <p>Loading...</p>
-          : <ListCards products={ products } />}
+        <TopBar handleOnChange={ this.handleOnChange } />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={ () => (
+              <ListCards
+                products={ products }
+                category={ category }
+                query={ query }
+              />
+            ) }
+          />
+          <Route
+            path="/ShoppingCart"
+            render={ () => (<ShoppingCart cartItems={ cartItems } />) }
+          />
+          <Route
+            path="/product/:ProductId"
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                query={ query }
+                category={ category }
+              />
+            ) }
+          />
+        </Switch>
       </div>
     );
   }
