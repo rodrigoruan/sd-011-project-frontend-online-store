@@ -30,9 +30,9 @@ class App extends Component {
     });
   }
 
-  removeItemFromCart(id){
+  removeItemFromCart(id) {
     this.setState(({ shoppingCart }) => ({
-      shoppingCart:shoppingCart.filter((product) => product.id !== id )
+      shoppingCart: shoppingCart.filter((product) => product.id !== id),
     }));
   }
 
@@ -69,7 +69,10 @@ class App extends Component {
             />
             <Route
               path="/cart"
-              render={ () => <Cart removeItemFromCart={ this.removeItemFromCart } productList={ shoppingCart } /> }
+              render={ () => (<Cart
+                removeItemFromCart={ this.removeItemFromCart }
+                productList={ shoppingCart }
+              />) }
             />
           </Switch>
         </BrowserRouter>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { CartItem } from '../components';
 import PropTypes from 'prop-types';
+import { CartItem } from '../components';
 
 class Cart extends React.Component {
   render() {
@@ -8,23 +8,22 @@ class Cart extends React.Component {
     return (
       <main>
         <h1>Carrinho de Compras</h1>
-          {!productList
+        {!productList
           ? (
             <div data-testid="shopping-cart-empty-message">
-            <p>Seu carrinho está vazio</p>
+              <p>Seu carrinho está vazio</p>
             </div>
-          ) 
+          )
           : (
             <ul>
               {productList.map(((product) => (<CartItem
                 removeItemFromCart={ removeItemFromCart }
                 key={ product.id }
                 product={ product }
-                />)
-                ))}
+              />)
+              ))}
             </ul>
-          )
-          }
+          )}
       </main>
     );
   }

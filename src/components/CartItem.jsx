@@ -1,39 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class CartItem extends Component {
-  constructor(){
-    super();
+  constructor(props) {
+    super(props);
+    const { product } = this.props;
+    const { quantity } = product;
     this.state = {
-      stock: 99,
-      quantity: 1,
+      quantity,
     };
     this.handleFluctuation = this.handleFluctuation.bind(this);
     this.removeItem = this.removeItem.bind(this);
   }
 
-  removeItem() {
-    const { removeItemFromCart, product } = this.props
-    const { id } = product;
-    removeItemFromCart(id);
-  }
-
-  componentDidMount() {
-    const { quantity } = this.props.product;
-    this.setState({
-      quantity,
-    });
-  }
-
   handleFluctuation({ target }) {
-    if(target.innerText === '+') {
+    if (target.innerText === '+') {
       this.setState((currentState) => ({
         quantity: currentState.quantity + 1,
       }));
     } else {
       this.setState((currentState) => ({
-        quantity: currentState.quantity > 1 ? currentState.quantity - 1 : currentState.quantity,
+        quantity: currentState.quantity > 1
+          ? currentState.quantity - 1
+          : currentState.quantity,
       }));
     }
+  }
+
+  removeItem() {
+    const { removeItemFromCart, product } = this.props;
+    const { id } = product;
+    removeItemFromCart(id);
   }
 
   render() {
@@ -41,19 +38,42 @@ export default class CartItem extends Component {
     const { thumbnail, title, price } = product;
     const { quantity } = this.state;
     return (
-        <li className="cart-item-container">
-          <button type="button" onClick={ this.removeItem }>X</button>
+      <li className="cart-item-container">
+        <button type="button" onClick={ this.removeItem }>X</button>
         <picture>
           <img src={ thumbnail } alt={ title } />
         </picture>
         <h1 data-testid="shopping-cart-product-name">{ title }</h1>
         <div className="quantity-switch">
-          <button data-testid="product-increase-quantity" type="button" onClick={this.handleFluctuation}>+</button>
-          <p data-testid="shopping-cart-product-quantity">{ quantity }</p> 
-          <button data-testid="product-decrease-quantity" type="button" onClick={this.handleFluctuation}>-</button>
+          <button
+            data-testid="product-increase-quantity"
+            type="button"
+            onClick={ this.handleFluctuation }
+          >
+            +
+          </button>
+          <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
+          <button
+            data-testid="product-decrease-quantity"
+            type="button"
+            onClick={ this.handleFluctuation }
+          >
+            -
+          </button>
         </div>
         <h2>{`R$ ${(price * quantity).toFixed(2)}`}</h2>
       </li>
-    )
+    );
   }
 }
+
+CartItem.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    quantity: PropTypes.number,
+  }),
+  addItemToCart: PropTypes.func,
+}.isRequired;

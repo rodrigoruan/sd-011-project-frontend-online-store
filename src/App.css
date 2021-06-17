@@ -83,11 +83,11 @@ footer {
 }
 
 .cart-item-container {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .quantity-switch {
-  display: flex;
   align-items: center;
+  display: flex;
 }
