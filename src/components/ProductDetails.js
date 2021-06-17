@@ -10,6 +10,22 @@ export default class ProductDetails extends Component {
     this.state = {
       itemsCart: [],
     };
+
+    this.getValues = this.getValues.bind(this);
+  }
+
+  componentDidMount() {
+    this.getValues();
+  }
+
+  getValues() {
+    const keys = Object.values(localStorage);
+    if (keys.length > 0) {
+      keys.forEach((value) => {
+        const obj = JSON.parse(value);
+        console.log(obj);
+      });
+    }
   }
 
   render() {
@@ -70,7 +86,7 @@ export default class ProductDetails extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <Form />
+        <Form idProduct={ id } />
       </div>
     );
   }
