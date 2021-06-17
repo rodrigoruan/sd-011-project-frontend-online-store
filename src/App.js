@@ -12,17 +12,17 @@ class App extends React.Component {
 
     this.state = {
       cart: [],
-      quantity: 0,
+      quantity: 1,
     };
   }
 
   addState(product) {
-    let counter = 1;
-    const { cart, quantity } = this.state;
-    this.setState({
+    const counter = 1;
+    const { cart } = this.state;
+    this.setState((previouState) => ({
       cart: [...cart, product],
-      quantity: quantity + counter,
-    });
+      quantity: previouState.quantity + counter,
+    }));
   }
 
   render() {
