@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends Component {
   render() {
-    const { title, imgPath, price, id, product: { category_id }, apiResp, search } = this.props;
+    const { title, imgPath, price, id, category_id, apiResp, search } = this.props;
     return (
       <Link
         to={ `/detalhesproduto/${search}/${category_id}/${id}` }

@@ -18,8 +18,9 @@ class ListaCategoria extends Component {
     this.fetchCategories();
   }
 
-  handleClick({ target: { key } }) {
-    this.fetchCategory(key);
+  handleClick({ target: { id } }) {
+    console.log(id);
+    this.fetchCategory(id);
   }
 
   async fetchCategory(id) {
@@ -40,6 +41,7 @@ class ListaCategoria extends Component {
 
   render() {
     const { loading, categories, filteredCategories } = this.state;
+    console.log(filteredCategories, "filtered");
     const loadingComponent = <Loading />;
     const categoryFiltered = (
       <div>
