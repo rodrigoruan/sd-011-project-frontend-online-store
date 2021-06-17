@@ -3,7 +3,7 @@ import React from 'react';
 
 export default class ProductCard extends React.Component {
   render() {
-    const { product } = this.props;
+    const { addItemToCart, product } = this.props;
     const { thumbnail, title, price } = product;
 
     return (
@@ -13,6 +13,12 @@ export default class ProductCard extends React.Component {
           <img src={ thumbnail } alt={ title } />
         </picture>
         <h2>{ price }</h2>
+        <button
+          type="button"
+          onClick={ () => addItemToCart(product) }
+        >
+          Adicionar ao Carrinho
+        </button>
       </li>
     );
   }
@@ -25,4 +31,5 @@ ProductCard.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }).isRequired,
+  addItemToCart: PropTypes.func.isRequired,
 };
