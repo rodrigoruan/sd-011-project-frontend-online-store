@@ -4,7 +4,7 @@ export default class ItemProduct extends Component {
   render() {
     const { thumbnail, title, price, id } = this.props.item;
     return (
-      <div className="content" data-testid="product" key={id}>
+      <div data-testid="product" className="content" key={id}>
         <img src={thumbnail} alt="product thumbnail" />
         <h3>{title}</h3>
         <h6>
