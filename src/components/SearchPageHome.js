@@ -14,7 +14,7 @@ export default class SearchPageHome extends Component {
       loading: true,
       query: '',
       categories: '',
-      itemsCart: [],
+      itemsCart: 0,
     };
 
     this.getProducts = this.getProducts.bind(this);
@@ -23,6 +23,7 @@ export default class SearchPageHome extends Component {
     this.changeCategory = this.changeCategory.bind(this);
     this.addItemCart = this.addItemCart.bind(this);
     this.handleListCategories = this.handleListCategories.bind(this);
+    this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
 
   componentDidMount() {
@@ -82,6 +83,18 @@ export default class SearchPageHome extends Component {
     });
   }
 
+  foundQuantityItemsCart() {
+    const getLocal = JSON.parse(localStorage.getItem('item'));
+    let sumProduct = 0;
+    getLocal.forEach((product) => {
+      sumProduct += product.countP;
+      return 1;
+    });
+    this.setState({
+      itemsCart: sumProduct,
+    });
+  }
+
   render() {
     const { categoriesData, product, loading, itemsCart } = this.state;
     return (
@@ -116,7 +129,7 @@ export default class SearchPageHome extends Component {
           } }
         >
           Carrinho(
-          {itemsCart.length}
+          <span data-testid="shopping-cart-size">{itemsCart}</span>
           )
         </Link>
         {loading ? (
@@ -127,6 +140,7 @@ export default class SearchPageHome extends Component {
           products={ item }
           key={ item.id }
           addItemCart={ this.addItemCart }
+          foundQuantityItemsCart={ this.foundQuantityItemsCart }
         />)))}
       </div>
     );
