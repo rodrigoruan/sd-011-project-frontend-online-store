@@ -81,7 +81,7 @@ class ShoppingCart extends Component {
           {this.getCartTotal(shopCart)}
         </p>
 
-        <button type="button">Finalizar Compra</button>
+        <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
       </>
     );
   }
