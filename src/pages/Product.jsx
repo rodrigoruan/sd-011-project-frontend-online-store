@@ -32,7 +32,7 @@ export default class Product extends Component {
     e.preventDefault();
 
     this.setState(({ evaluations, evaluationForm }) => {
-      const userEvaluation = { ...evaluationForm, id: evaluationForm.id };
+      const userEvaluation = { ...evaluationForm, id: evaluationForm.email };
       const newEvaluations = [...evaluations, userEvaluation];
 
       return {
