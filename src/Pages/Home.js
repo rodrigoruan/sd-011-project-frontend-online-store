@@ -7,12 +7,20 @@ class Home extends React.Component {
     super();
     this.state = {
       productCategories: [],
+      filterCategories: '',
     };
     this.categoriesNames = this.categoriesNames.bind(this);
+    this.onClickCategories = this.onClickCategories.bind(this);
   }
 
   componentDidMount() {
     this.categoriesNames();
+  }
+
+  onClickCategories({ target: { value } }) {
+    this.setState({
+      filterCategories: value,
+    });
   }
 
   async categoriesNames() {
@@ -23,24 +31,21 @@ class Home extends React.Component {
   }
 
   render() {
-    const { productCategories } = this.state;
+    const { productCategories, filterCategories } = this.state;
     return (
       <fragment>
-        <h3
-          data-testid="home-initial-message"
-        >
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h3>
-        <ProductList />
+        <ProductList selectedCategory={ filterCategories } />
         <div>
           { productCategories.map((category) => (
             <div key={ category.id }>
               <input
-                data-testid="category"
                 type="radio"
+                data-testid="category"
+                value={ category.id }
                 name="categoria"
+                onClick={ this.onClickCategories }
               />
-              {category.name}
+              { category.name }
             </div>))}
         </div>
       </fragment>
