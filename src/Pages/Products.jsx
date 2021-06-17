@@ -50,10 +50,10 @@ class Products extends Component {
 }
 
 Products.propTypes = {
-  prodList: PropTypes.arrayOf(
+  prodList: PropTypes.oneOfType([
     PropTypes.array,
     PropTypes.object,
-  ).isRequired,
+  ]).isRequired,
 };
 
 export default Products;
