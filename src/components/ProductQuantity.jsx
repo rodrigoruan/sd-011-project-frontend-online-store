@@ -7,7 +7,7 @@ export default class ProductQuantity extends Component {
     return (
       <div>
         <button type="button" onClick={ decreaseQuantity }> - </button>
-        <strong>{quantity}</strong>
+        <strong data-testid="shopping-cart-product-quantity">{quantity}</strong>
         <button type="button" onClick={ increaseQuantity }> + </button>
       </div>
     );

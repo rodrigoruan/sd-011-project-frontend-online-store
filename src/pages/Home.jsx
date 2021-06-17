@@ -15,10 +15,12 @@ export default class Home extends Component {
       isUpdated: false,
       product: '',
       productsArray: [],
+      itensCart: [],
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.requestCategories = this.requestCategories.bind(this);
     this.requestProducts = this.requestProducts.bind(this);
+    this.addCart = this.addCart.bind(this);
   }
 
   componentDidMount() {
@@ -66,14 +68,36 @@ export default class Home extends Component {
     });
   }
 
+  addCart({ target }) {
+    const { itensCart } = this.state;
+    const newObject = { title: target.name,
+      price: target.value,
+      id: target.id,
+      thumbnail: target.imagem };
+    const accumulator = [...itensCart, newObject];
+    this.setState({
+      itensCart: accumulator,
+    });
+  }
+
   render() {
-    const { categories, isNotFound, product, productsArray } = this.state;
+    const { categories, isNotFound, product, productsArray, itensCart } = this.state;
     if (isNotFound) {
       return <div>Nenhum produto foi encontrado</div>;
     }
     return (
       <div>
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link
+          to={ {
+            pathname: '/cart',
+            aboutProps: {
+              itensCarrinho: itensCart,
+            },
+          } }
+          data-testid="shopping-cart-button"
+        >
+          Carrinho
+        </Link>
         <h2 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
@@ -89,9 +113,11 @@ export default class Home extends Component {
         { productsArray.map((element) => (
           <Product
             key={ element.id }
+            id={ element.id }
             title={ element.title }
             thumbnail={ element.thumbnail }
             price={ element.price }
+            addCart={ this.addCart }
           />
         ))}
       </div>

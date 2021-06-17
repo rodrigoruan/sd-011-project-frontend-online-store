@@ -34,7 +34,7 @@ export default class ProductItem extends Component {
         <div className="cart-item" key={ cart.id }>
           <button type="button" id={ cart.id } onClick={ deleteItem }>delete</button>
           <span>image</span>
-          <h3>{ cart.title }</h3>
+          <h3 data-testid="shopping-cart-product-name">{ cart.title }</h3>
           <ProductQuantity
             increaseQuantity={ this.increaseQuantity }
             decreaseQuantity={ this.decreaseQuantity }

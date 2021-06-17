@@ -1,56 +1,45 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProductItem from '../components/ProductItem';
 
 class Cart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { location: { aboutProps: { itensCarrinho } } } = this.props;
     this.state = {
-      cartSimulator: [
-        {
-          id: 1,
-          title: 'Livro Harry Potter e a Pedra Filosofal',
-          price: 80,
-          thumbnail: 'image',
-        },
-        {
-          id: 2,
-          title: 'Livro Harry Potter e a Câmara Secreta',
-          price: 40,
-          thumbnail: 'image',
-        },
-        {
-          id: 3,
-          title: 'Livro Harry Potter e a Prisioneiro de Azkaban',
-          price: 70,
-          thumbnail: 'image',
-        },
-      ],
+      itensCarrinho,
+
     };
     this.deleteItem = this.deleteItem.bind(this);
   }
 
   deleteItem({ target: { id } }) {
-    const { cartSimulator } = this.state;
-    cartSimulator.forEach((item) => {
+    const { itensCarrinho } = this.state;
+    itensCarrinho.forEach((item) => {
       if (item.id !== id) {
         console.log(id);
         delete item[id];
-        this.setState({ cartSimulator });
+        this.setState({ itensCarrinho });
       }
     });
   }
 
   render() {
-    const { cartSimulator } = this.state;
-    if (cartSimulator.length === 0) {
+    const { itensCarrinho } = this.state;
+
+    if (itensCarrinho.length === 0) {
       return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;
     }
     return (
       <div>
         {
-          cartSimulator.map((cart) => (
+          itensCarrinho.map((element) => (
 
-            <ProductItem key={ cart.id } cart={ cart } deleteItem={ this.deleteItem } />
+            <ProductItem
+              key={ element.id }
+              cart={ element }
+              deleteItem={ this.deleteItem }
+            />
 
           ))
         }
@@ -60,3 +49,11 @@ class Cart extends Component {
 }
 
 export default Cart;
+
+Cart.propTypes = {
+  location: PropTypes.shape({
+    aboutProps: PropTypes.shape({
+      itensCarrinho: PropTypes.arrayOf,
+    }),
+  }),
+}.isRequired;
