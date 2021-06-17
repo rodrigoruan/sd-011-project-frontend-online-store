@@ -1,29 +1,29 @@
 import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
   Link,
 } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home';
 import ShoppingCart from './Pages/ShoppingCart';
+import ShoppingCartButton from './Pages/ShoppingCartButton';
 
 class App extends React.Component {
   render() {
     return (
       <div>
         <Router>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-              <Link data-testid="shopping-cart-button" to="/cart">Ir ao Carrinho</Link>
-            </Route>
-            <Route path="/cart">
-              <ShoppingCart />
-              <Link to="/">Voltar à Home</Link>
-            </Route>
-          </Switch>
+          <Route exact path="/">
+            <Home />
+            <Link data-testid="shopping-cart-button" to="/cart">
+              <ShoppingCartButton />
+            </Link>
+          </Route>
+          <Route path="/cart">
+            <ShoppingCart />
+            <Link to="/">Voltar à Home</Link>
+          </Route>
         </Router>
       </div>);
   }
