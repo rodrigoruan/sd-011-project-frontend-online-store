@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Input extends React.Component {
   constructor() {
@@ -28,16 +29,18 @@ class Input extends React.Component {
           onChange={ this.handleOnChange }
           data-testid="query-input"
         />
-        <button
-          type="button"
-          name="query"
-          id="butQuery"
-          value={ query }
-          onClick={ onClick }
-          data-testid="query-button"
-        >
-          Pesquisar
-        </button>
+        <Link to="/">
+          <button
+            type="button"
+            name="query"
+            id="butQuery"
+            value={ query }
+            onClick={ onClick }
+            data-testid="query-button"
+          >
+            Pesquisar
+          </button>
+        </Link>
       </div>
     );
   }

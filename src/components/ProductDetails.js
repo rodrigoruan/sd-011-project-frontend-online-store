@@ -13,7 +13,7 @@ class ProductDetails extends React.Component {
   }
 
   async getProduct() {
-    const { match: { params: { id, category, query } } } = this.props;
+    const { match: { params: { id } }, category, query } = this.props;
     const products = await getProductsFromCategoryAndQuery(category, query);
     const product = products.results.find((prod) => prod.id === id);
     this.setState({ product });
@@ -33,6 +33,8 @@ class ProductDetails extends React.Component {
 
 ProductDetails.propTypes = {
   match: PropTypes.isRequired,
+  category: PropTypes.isRequired,
+  query: PropTypes.isRequired,
 };
 
 export default ProductDetails;
