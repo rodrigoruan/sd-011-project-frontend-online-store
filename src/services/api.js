@@ -6,7 +6,7 @@ export async function getCategories() {
 }
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
-  const apiURL = `https://api.mercadolibre.com/sites/MLB/search?q=${query}`;
+  const apiURL = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`;
 
   return fetch(apiURL)
     .then((response) => response.json());
