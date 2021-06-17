@@ -28,17 +28,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 .filter-container form {
@@ -48,7 +48,7 @@
   gap: 2px;
 }
 
-.filter-container form:before{
+.filter-container form:before {
   content: "Categorias";
   display: block;
   /* align-self: center; */
@@ -89,7 +89,7 @@
 } */
 
 .products-container div[data-testid="product"] {
-  background:lightgrey;
+  background: lightgrey;
   margin-bottom: 6px;
   display: flex;
   word-wrap: normal;
