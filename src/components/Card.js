@@ -12,15 +12,27 @@ export default class Card extends Component {
   }
 
   handleClick = () => {
+    const { sumCartItems } = this.props;
+    // this.setState((previous) => ({ counter: previous.counter + 1 }));
+
+    // const { counter } = this.state;
+    // const { title, price, thumbnail, id, attributes } = this.props;
+
+    // const object = { counter, price, thumbnail, id, attributes, title };
+    // const json = JSON.stringify(object);
+
+    const { location: { state } } = this.props;
+    const { title } = state;
+
+    const local = JSON.parse(localStorage.getItem(title));
+
     this.setState((previous) => ({ counter: previous.counter + 1 }));
-
     const { counter } = this.state;
-    const { title, price, thumbnail, id, attributes } = this.props;
-
-    const object = { counter, price, thumbnail, id, attributes, title };
-    const json = JSON.stringify(object);
-
+    local.counter = counter;
+    const json = JSON.stringify(local);
     localStorage.setItem(title, json);
+    // localStorage.setItem(title, json);
+    sumCartItems();
   };
 
   render() {

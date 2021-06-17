@@ -10,11 +10,14 @@ export default class Product extends Component {
       comment: '',
       stars: '',
       allComments: null,
+      sum: 0,
     };
   }
 
   componentDidMount() {
+    this.changeState();
     this.saveCommentOnLocal();
+    this.sumCartItems();
   }
 
   setComments = ({ target: { value, name } }) => this.setState({ [name]: value });
@@ -38,23 +41,41 @@ export default class Product extends Component {
     this.setState({ allComments: localStorage.getItem(id) });
   };
 
-  handleClick = () => {
-    this.setState((previous) => ({ counter: previous.counter + 1 }));
-
-    const { counter } = this.state;
+  changeState = () => {
     const { location: { state } } = this.props;
-    const { title, id, price, thumbnail, attributes } = state;
+    const { title } = state;
 
-    const object = { counter, price, thumbnail, id, attributes, title };
-    const json = JSON.stringify(object);
+    const local = JSON.parse(localStorage.getItem(title));
+
+    this.setState({ counter: local.counter + 1 });
+  }
+
+  handleClick = () => {
+    const { location: { state } } = this.props;
+    const { title } = state;
+
+    const local = JSON.parse(localStorage.getItem(title));
+
+    this.setState((previous) => ({ counter: previous.counter + 1 }));
+    const { counter } = this.state;
+    local.counter = counter;
+    const json = JSON.stringify(local);
     localStorage.setItem(title, json);
+    this.sumCartItems();
   };
+
+  sumCartItems = () => {
+    const objeto = { ...localStorage };
+    const objJson = Object.values(objeto).map((e) => JSON.parse(e));
+    const total = objJson.reduce((acc, curr) => acc + curr.counter, 0);
+    this.setState({ sum: total });
+  }
 
   render() {
     const { props, state } = this;
     const { location:
       { state: { title, price, thumbnail, attributes, id, shipping } } } = props;
-    const { allComments } = state;
+    const { allComments, sum } = state;
     return (
       <>
         <h1 data-testid="product-detail-name">{title}</h1>
@@ -84,6 +105,9 @@ export default class Product extends Component {
         <Link data-testid="shopping-cart-button" to="/cart">
           Carrinho
         </Link>
+        <span data-testid="shopping-cart-size">
+          {sum}
+        </span>
         <div>
           <textarea
             name="comment"
@@ -131,6 +155,7 @@ Product.propTypes = {
       thumbnail: PropTypes.string,
       attributes: PropTypes.arrayOf(PropTypes.object),
       free_shipping: PropTypes.bool,
+      sum: PropTypes.number,
     },
   }).isRequired,
 };

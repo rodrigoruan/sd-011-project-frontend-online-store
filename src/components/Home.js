@@ -17,11 +17,13 @@ export default class Home extends Component {
       noFindProducts: false,
       inputText: false,
       category: false,
+      sum: 0,
     };
   }
 
   componentDidMount() {
     getCategories().then((response) => this.setState({ api: response }));
+    this.sumCartItems();
   }
 
   handle = ({ target }) => this.setState({ [target.name]: target.value });
@@ -44,8 +46,15 @@ export default class Home extends Component {
         : this.setState({ products: results })));
   };
 
+  sumCartItems = () => {
+    const objeto = { ...localStorage };
+    const objJson = Object.values(objeto).map((e) => JSON.parse(e));
+    const total = objJson.reduce((acc, curr) => acc + curr.counter, 0);
+    this.setState({ sum: total });
+  }
+
   render() {
-    const { api, products, noFindProducts, category, inputText } = this.state;
+    const { api, products, noFindProducts, category, inputText, sum } = this.state;
     if (!api) return <h1>carregando...</h1>;
     return (
       <>
@@ -85,6 +94,9 @@ export default class Home extends Component {
 
           <Link className="cart" data-testid="shopping-cart-button" to="cart">
             Carrinho 🛒
+            <span data-testid="shopping-cart-size">
+              { sum }
+            </span>
           </Link>
         </div>
 
@@ -96,7 +108,8 @@ export default class Home extends Component {
 
         <div className="cards-container">
           {noFindProducts ? (<NoFoundProducts />) : (products
-            .map(({ ...props }, index) => (<Card key={ index } { ...props } />))
+            .map(({ ...props }, index) => (
+              <Card key={ index } { ...props } sumCartItems={ this.sumCartItems } />))
           )}
         </div>
       </>
