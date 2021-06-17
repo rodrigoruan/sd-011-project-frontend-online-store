@@ -22,13 +22,25 @@ class Details extends Component {
         <img src={ image } alt={ title } />
         <p data-testid="product-detail-name">{title}</p>
         <p>{`R$: ${price}`}</p>
-        <AddToCartButton
-          id={ productId }
-          addCart={ addCartFunction }
-          title={ title }
-          price={ price }
-        />
-        <Link to="/cart">Carrinho</Link>
+        <div data-testid="product-detail-add-to-cart">
+          <AddToCartButton
+            id={ productId }
+            addCart={ addCartFunction }
+            title={ title }
+            price={ price }
+          />
+        </div>
+        <Link
+          to={ {
+            pathname: '/cart',
+            aboutProps: {
+              itensCarrinho: [productDetails],
+            },
+          } }
+          data-testid="shopping-cart-button"
+        >
+          Carrinho
+        </Link>
       </div>
     );
   }
