@@ -7,7 +7,7 @@ class ProductCard extends Component {
     super();
 
     this.state = {
-      test: 'funcionou!!',
+      // test: 'funcionou!!',
     };
   }
 

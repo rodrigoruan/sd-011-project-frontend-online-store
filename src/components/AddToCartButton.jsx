@@ -5,7 +5,7 @@ class AddToCartButton extends Component {
     super();
 
     this.state = {
-      cart: [],
+      // cart: [],
     };
   }
 
@@ -23,7 +23,7 @@ class AddToCartButton extends Component {
     const itemToAdd = results.find((product) => product.id === id);
     localStorage.setItem('cart', itemToAdd);
     this.setState({
-      cart: [...cart, itemToAdd],
+      // cart: [...cart, itemToAdd],
     });
     this.saveToLocalStorage(cart);
   }

@@ -5,7 +5,7 @@ class Cart extends React.Component {
     super();
 
     this.state = {
-      cartProducts: [],
+      // cartProducts: [],
     };
   }
 
