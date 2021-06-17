@@ -9,22 +9,6 @@ class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
-    // this.state = {
-    //   shopCart: props.shopCart,
-    // };
-
-    this.state = {
-      shopCart: [
-        {
-          id: '345',
-          title: 'Fórmula Infantil Em Pó Mead Johnson Enfagrow Em Lata 800g',
-          thumbnail: 'http://http2.mlstatic.com/D_621120-MLA45304433058_032021-I.jpg',
-          price: 44,
-          amount: 0,
-        },
-      ],
-    };
-
     this.renderShopCart = this.renderShopCart.bind(this);
     this.getCartTotal = this.getCartTotal.bind(this);
   }
@@ -36,37 +20,13 @@ class ShoppingCart extends Component {
     }, 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  removeItemFromCart(itemId) {
-    const { shopCart } = this.state;
-    const updatedCart = shopCart.filter((item) => item.id !== itemId);
-    this.updateCart(updatedCart);
-  }
-
-  increaseItemAmount(itemId) {
-    const { shopCart } = this.state;
-    const itemIndex = shopCart.findIndex((item) => item.id === itemId);
-    const updatedCart = [...shopCart];
-    updatedCart[itemIndex].amount += 1;
-    this.updateCart(updatedCart);
-  }
-
-  decreaseItemAmount(itemId) {
-    const { shopCart } = this.state;
-    const itemIndex = shopCart.findIndex((item) => item.id === itemId);
-    const updatedCart = [...shopCart];
-
-    if (updatedCart[itemIndex].amount > 1) {
-      updatedCart[itemIndex].amount -= 1;
-    }
-
-    this.updateCart(updatedCart);
-  }
-
-  updateCart(updatedCart) {
-    this.setState({ shopCart: updatedCart });
-  }
-
   renderShopCart(shopCart) {
+    const {
+      handleRemoveItemFromCart,
+      handleIncreaseItemAmount,
+      handleDecreaseItemAmount,
+    } = this.props;
+
     return (
       <>
         {shopCart.map(({ id, thumbnail, title, price, amount }) => (
@@ -74,7 +34,7 @@ class ShoppingCart extends Component {
             <button
               type="button"
               className="cart-item-button"
-              onClick={ () => this.removeItemFromCart(id) }
+              onClick={ () => handleRemoveItemFromCart(id) }
             >
               x
             </button>
@@ -90,16 +50,21 @@ class ShoppingCart extends Component {
             <button
               type="button"
               className="cart-item-button"
-              onClick={ () => this.decreaseItemAmount(id) }
-              data-testid="product-increase-quantity"
+              onClick={ () => handleDecreaseItemAmount(id) }
+              data-testid="product-decrease-quantity"
             >
               -
             </button>
-            <div className="cart-item-amount">{ amount }</div>
+            <div
+              className="cart-item-amount"
+              data-testid="shopping-cart-product-quantity"
+            >
+              { amount }
+            </div>
             <button
               type="button"
               className="cart-item-button"
-              onClick={ () => this.increaseItemAmount(id) }
+              onClick={ () => handleIncreaseItemAmount(id) }
               data-testid="product-increase-quantity"
             >
               +
@@ -122,7 +87,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const { shopCart } = this.state;
+    const { shopCart } = this.props;
 
     return (
       <>
@@ -143,7 +108,7 @@ class ShoppingCart extends Component {
 
         {shopCart.length
           ? this.renderShopCart(shopCart)
-          : <p>Seu carrinho está vazio</p>}
+          : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
       </>
     );
   }

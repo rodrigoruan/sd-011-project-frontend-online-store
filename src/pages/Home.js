@@ -23,7 +23,6 @@ class Home extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.handleSelectCategory = this.handleSelectCategory.bind(this);
-    this.renderShopCart = this.renderShopCart.bind(this);
   }
 
   componentDidMount() {
@@ -75,30 +74,9 @@ class Home extends Component {
     );
   }
 
-  renderShopCart() {
-    const { shopCart } = this.props;
-    return (
-      shopCart.map(({ title, amount }, index) => (
-        <div key={ index }>
-          <span
-            data-testid="shopping-cart-product-name"
-          >
-            { title }
-          </span>
-          <p
-            data-testid="shopping-cart-product-quantity"
-          >
-            Quantidade
-            { amount }
-          </p>
-        </div>
-      ))
-    );
-  }
-
   render() {
     const { loading, categories, products, searchInput } = this.state;
-    const { handleAddToShopCart, shopCart } = this.props;
+    const { handleAddToShopCart } = this.props;
     return (
       <>
         <ProductSearch
@@ -106,19 +84,20 @@ class Home extends Component {
           onChange={ this.handleInputChange }
           value={ searchInput }
         />
-        <Link to="/ShoppingCart">
+        <Link to="/ShoppingCart" data-testid="shopping-cart-button">
           <img
             width="30px"
             src={ Cart }
             alt="imagem do carrinho"
           />
         </Link>
-        <main data-testid="shopping-cart-button" />
-        {shopCart.length === 0
-          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-          : this.renderShopCart()}
-        {loading ? 'Loading...' : this.renderCategories(categories)}
-        <ProductsList products={ products } handleAddToShopCart={ handleAddToShopCart } />
+        <main>
+          {loading ? 'Loading...' : this.renderCategories(categories)}
+          <ProductsList
+            products={ products }
+            handleAddToShopCart={ handleAddToShopCart }
+          />
+        </main>
       </>
     );
   }

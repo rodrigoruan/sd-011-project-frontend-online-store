@@ -1,23 +1,23 @@
 .shopping-cart-item-card {
-  display: flex;
   align-items: center;
+  display: flex;
   padding: 10px;
 }
 
 .cart-item-button {
-  border: 0;
   background-color: white;
+  border: 0;
   color: gray;
   cursor: pointer;
   font-size: 40px;
-  padding: 0 5px;
   margin: auto 20px;
+  padding: 0 5px;
 }
 
 
 .cart-item-img-container {
-  width: 150px;
   height: 150px;
+  width: 150px;
 }
 
 .cart-item-img-container img {
@@ -25,17 +25,17 @@
 }
 
 .cart-item-title {
-  width: 300px;
-  margin: 0 40px;
   line-height: 1.5;
+  margin: 0 40px;
+  width: 300px;
 }
 
 .cart-item-amount {
-  display: flex;
-  border-radius: 50%;
-  border: 1px solid black;
-  width: 45px;
-  height: 45px;
   align-items: center;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: flex;
+  height: 45px;
   justify-content: center;
+  width: 45px;
 }

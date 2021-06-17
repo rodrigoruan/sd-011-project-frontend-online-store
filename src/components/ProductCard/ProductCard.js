@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 export default class ProductCard extends Component {
   render() {
-    console.log(this.props);
     const { title, price, thumbnail, id, handleAddToShopCart } = this.props;
     return (
       <div data-testid="product">
@@ -28,7 +27,7 @@ export default class ProductCard extends Component {
           id={ title }
           className={ thumbnail }
           name={ price }
-          onClick={ () => handleAddToShopCart(title, thumbnail, price) }
+          onClick={ () => handleAddToShopCart(id, title, thumbnail, price) }
           data-testid="product-add-to-cart"
         >
           Comprar
