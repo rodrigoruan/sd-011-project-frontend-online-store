@@ -3,14 +3,44 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import ShoppingCart from './components/ShoppingCart';
+import ProductDetails from './components/productDetails';
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      productDetails: {},
+    };
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(value) {
+    this.setState({ productDetails: value });
+  }
+
   render() {
+    const { productDetails } = this.state;
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={ (props) => <LandingPage { ...props } /> } />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (
+              <LandingPage
+                { ...props }
+                getProductDetails={ this.onClick }
+              />) }
+          />
           <Route exact path="/shopping-cart" component={ ShoppingCart } />
+          <Route
+            path="/productDetails/:id?"
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                productDetails={ productDetails }
+              />) }
+          />
         </Switch>
       </Router>
     );
