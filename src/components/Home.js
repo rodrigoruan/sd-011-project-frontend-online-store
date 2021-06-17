@@ -5,6 +5,7 @@ import ProductDetails from './ProductDetails';
 import ShoppingCart from './ShoppingCart';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import TopBar from './TopBar';
+import CheckoutPage from './CheckoutPage';
 
 export default class Home extends Component {
   constructor() {
@@ -73,6 +74,7 @@ export default class Home extends Component {
               />
             ) }
           />
+          <Route to="/CheckoutPage" component={ CheckoutPage } />
         </Switch>
       </div>
     );
