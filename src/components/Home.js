@@ -36,7 +36,7 @@ export default class Home extends Component {
     try {
       let products = await getProductsFromCategoryAndQuery(category, query);
       products = products.results.map(({ title, id, price, thumbnail, attributes }) => (
-        { name: title, id, price, thumbnail, attributes }
+        { title, id, price, thumbnail, attributes }
       ));
       this.setState({ products });
     } catch (error) {
@@ -73,9 +73,14 @@ export default class Home extends Component {
             render={ () => (<ShoppingCart cartItems={ cartItems } />) }
           />
           <Route
-            path="/product/:id"
+            path="/product/:ProductId"
             render={ (props) => (
-              <ProductDetails { ...props } query={ query } category={ category } />
+              <ProductDetails
+                { ...props }
+                query={ query }
+                category={ category }
+                addCartFunc={ this.addCartFunc }
+              />
             ) }
           />
         </Switch>

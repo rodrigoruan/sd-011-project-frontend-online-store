@@ -12,7 +12,7 @@ export default class ShoppingCart extends Component {
             ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
             : cartItems.map((product, index) => (
               <p key={ index } data-testid="shopping-cart-product-name">
-                { product.name }
+                { product.title }
               </p>
             ))
         }
