@@ -7,7 +7,7 @@ class ProductDetails extends React.Component {
     const product = JSON.parse(sessionStorage.getItem(id));
     return (
       <div>
-        {(product === undefined) ? <p>loading...</p> : <p data-testid="product-detail-name">{ product.name }</p>}
+        <p data-testid="product-detail-name">{ product.name }</p>
       </div>
     );
   }
