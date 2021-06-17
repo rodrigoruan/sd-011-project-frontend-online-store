@@ -38,6 +38,7 @@ export default class ShoppingCart extends Component {
   render() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
     return (
+
       <div>
         { !localStorage.item
           ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
@@ -51,20 +52,7 @@ export default class ShoppingCart extends Component {
                   {price}
                 </p>
               </div>
-            ))) }
-          {/* <Purchase /> */}
-          <Link to="checkout" data-testid="checkout-products">Checkout</Link>
-          <Link to="/">Voltar</Link>
-        </div>
-        {/* <div className="cart_item">
-          <ol>
-            <img src={ thumbnail } alt={ title } />
-            <p>{ title }</p>
-            <p>{ `R$${price}`}</p>
-            <span>{this.sumtotal()}</span>
-          </ol>
-        </div> */}
-      </>
+              )));
               <Button
                 quantity={ countP }
                 subClick={ this.subClick }
@@ -74,6 +62,7 @@ export default class ShoppingCart extends Component {
               />
             </div>
           ))) }
+        <Link to="checkout" data-testid="checkout-products">Checkout</Link>
         <Link to="/">Voltar</Link>
       </div>
     );
