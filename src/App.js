@@ -16,7 +16,7 @@ class App extends Component {
           <Route
             exact
             path="/shoppingcart"
-            render={ () => (<ShoppingCart { ...props } />) }
+            render={ (props) => (<ShoppingCart { ...props } />) }
           />
           <Route exact path="/" render={ () => <Home /> } />
         </Switch>

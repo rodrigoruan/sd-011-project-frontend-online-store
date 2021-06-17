@@ -7,12 +7,13 @@ class Products extends Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.loadList = this.loadList.bind(this);
   }
 
-  // implementar variável "prodList"
   handleClick() {
     const { prodList } = this.props;
     const cardList = this.loadList();
+    const productList = [];
 
     productList.push({ prodList });
     localStorage.setItem('cart', JSON.stringify(cardList));
@@ -50,10 +51,10 @@ class Products extends Component {
 }
 
 Products.propTypes = {
-  prodList: PropTypes.oneOfType([
+  prodList: PropTypes.arrayOf(
     PropTypes.array,
     PropTypes.object,
-  ]).isRequired,
+  ).isRequired,
 };
 
 export default Products;
