@@ -34,7 +34,6 @@ class ProductList extends React.Component {
   }
 
   render() {
-    console.log('productlist');
     const { products } = this.state;
     return (
       <section>
