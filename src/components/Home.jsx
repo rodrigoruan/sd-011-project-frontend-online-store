@@ -79,6 +79,7 @@ class Home2 extends React.Component {
 
   render() {
     const { allCategories, inputQuery, category, response } = this.state;
+    const { addState } = this.props;
     return (
       <div className="main-page">
         <div className="categories">
@@ -123,7 +124,7 @@ class Home2 extends React.Component {
           <Link to="/carrinho" data-testid="shopping-cart-button">
             Carrinho de compras 🛒
           </Link>
-          <CardItem products={ response } />
+          <CardItem products={ response } addState={ addState } />
         </div>
       </div>
     );

@@ -1,5 +1,4 @@
 import React from 'react';
-import * as api from '../services/api';
 
 class Details extends React.Component {
   // constructor() {
@@ -32,15 +31,16 @@ class Details extends React.Component {
   //   });
   // }
   render() {
-    const { product :{title, price, thumbnail}} = this.props.location.state
+    const { product: { title, price, thumbnail } } = this.props.location.state;
     return (
-        <div
-          key={ title } >
-          <p data-testid='product-detail-name'>{ title }</p>
-          <img src={ thumbnail } alt={ title } />
-          <p>{price}</p>
-        </div>
-    )
+      <div
+        key={ title }
+      >
+        <p data-testid="product-detail-name">{title}</p>
+        <img src={ thumbnail } alt={ title } />
+        <p>{price}</p>
+      </div>
+    );
   }
 }
 
