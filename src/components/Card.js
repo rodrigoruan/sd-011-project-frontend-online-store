@@ -33,6 +33,8 @@ export default class Card extends Component {
     localStorage.setItem(title, json);
     // localStorage.setItem(title, json);
     sumCartItems();
+
+    // AJUSTAR ESSA FUNÇÃO  PARA FUNCIONALIDADE DA HOME //
   };
 
   render() {
