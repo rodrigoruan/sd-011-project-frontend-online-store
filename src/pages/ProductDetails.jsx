@@ -23,20 +23,22 @@ class ProductDetails extends React.Component {
     this.setState({ product: responseJSON });
   }
 
-  mapProd() {
-
-  }
-
   render() {
-    const { product: { title, price, thumbnail, warranty, condition } } = this.state;
+    const { product: { title, price, thumbnail, attributes } } = this.state;
+    console.log(attributes);
     return (
       <section>
         <p data-testid="product-detail-name">{ title }</p>
         <p>{ price }</p>
         <img src={ thumbnail } alt="product" />
         <div>
-          <p>{ warranty }</p>
-          <p>{ condition }</p>
+          {!attributes ? null : attributes.map((spec) => (
+            <p key={ spec.id }>
+              { spec.name }
+              :
+              {' '}
+              { spec.value_name }
+            </p>))}
         </div>
       </section>
     );
