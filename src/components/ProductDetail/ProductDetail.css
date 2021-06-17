@@ -16,9 +16,9 @@
 }
 
 .LinkBack {
-  text-decoration: none;
-  font-size: 20px;
   color: white;
+  font-size: 20px;
+  text-decoration: none;
 }
 
 .LinkBack:hover {
