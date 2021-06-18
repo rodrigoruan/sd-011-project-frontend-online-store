@@ -13,6 +13,7 @@ class Home extends React.Component {
     };
     this.categoriesNames = this.categoriesNames.bind(this);
     this.onClickCategories = this.onClickCategories.bind(this);
+    localStorage.clear();
   }
 
   componentDidMount() {
