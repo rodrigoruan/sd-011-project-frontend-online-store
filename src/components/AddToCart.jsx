@@ -17,7 +17,7 @@ class AddToCart extends React.Component {
     const existingItem = existingCart.find(
       (currItem, index) => {
         position = index;
-        return currItem.product.id === item.id;
+        return currItem.id === item.id;
       },
     );
     if (existingItem === undefined) {
