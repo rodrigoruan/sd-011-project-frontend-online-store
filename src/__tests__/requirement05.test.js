@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent, getAllByTestId } from '@testing-library/react';
 import App from '../App';
 import * as api from '../services/api';
 import mockedCategoriesResult from '../__mocks__/categories';
