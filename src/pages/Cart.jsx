@@ -37,7 +37,6 @@ class Cart extends React.Component {
             </ul>
           )}
         <h2>
-          {' '}
           VALOR TOTAL : R$
           { this.getTotalPrice() }
         </h2>
