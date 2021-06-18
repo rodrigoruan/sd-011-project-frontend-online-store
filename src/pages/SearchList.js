@@ -30,7 +30,7 @@ export default class SearchList extends Component {
     const { empty } = this.state;
     if (!empty && products.length > 1) {
       return products.map((el, index) => (
-        <ProductCard item={el} key={index} handleAddToCart={handleAddToCart} />
+        <ProductCard item={ el } key={ index } handleAddToCart={ handleAddToCart } />
       ));
     }
     if (products.length < 1) {
@@ -50,9 +50,10 @@ export default class SearchList extends Component {
 }
 
 SearchList.propTypes = {
-  products: PropTypes.arrayOf(PropTypes.object),
-};
-
-SearchList.defaultProps = {
-  products: '',
-};
+  handleAddToCart: PropTypes.func.isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+  })).isRequired };
