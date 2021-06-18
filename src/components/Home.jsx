@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
+import cartImage from '../images/cart.svg';
 
 export default class Home extends Component {
   render() {
@@ -11,8 +13,6 @@ export default class Home extends Component {
       addCart,
       categories,
       productCards,
-      categoryId,
-      search,
       cartItems,
     } = this.props;
 
@@ -27,7 +27,7 @@ export default class Home extends Component {
               state: cartItems,
             } }
           >
-            <img src="./images/cart.svg" alt="Cart" />
+            <img src={ cartImage } alt="Cart" />
           </Link>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -77,3 +77,23 @@ export default class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  addCart: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  fetchProducts: PropTypes.func.isRequired,
+  fetchCategories: PropTypes.func.isRequired,
+  categories: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    map: PropTypes.func,
+  }).isRequired,
+  cartItems: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+  }).isRequired,
+  productCards: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+
+};

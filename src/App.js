@@ -68,7 +68,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { categories, productCards, categoryId, search, cartItems } = this.state;
+    const { categories, productCards, cartItems } = this.state;
     return (
       <div className="App">
         <Router>
@@ -82,12 +82,19 @@ export default class App extends Component {
                   fetchProducts={ this.fetchProducts }
                   fetchCategories={ this.fetchCategories }
                   addCart={ this.addCart }
+                  categories={ categories }
+                  productCards={ productCards }
+                  cartItems={ cartItems }
                 />) }
             />
             <Route path="/cart" component={ ShopCart } />
             <Route
               path="/details/:id"
-              render={ (props) => <ProductDetails { ...props } /> }
+              render={ (props) => (<ProductDetails
+                cartItems={ cartItems }
+                addCart={ this.addCart }
+                { ...props }
+              />) }
             />
           </Switch>
         </Router>
