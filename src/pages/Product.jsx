@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { ShoppingCartButton } from '../components';
 
 export default class Product extends Component {
   constructor(props) {
@@ -15,6 +16,13 @@ export default class Product extends Component {
 
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmitRating = this.handleSubmitRating.bind(this);
+  }
+
+  getInstallmentsElement({ installments }) {
+    if (installments && installments.quantity && installments.amount) {
+      return <p>{`Em até: ${installments.quantity}x de R$${installments.amount}` }</p>;
+    }
+    return null;
   }
 
   handleFormChange({ target }) {
@@ -47,12 +55,55 @@ export default class Product extends Component {
   }
 
   render() {
-    const { location: { state: { product } } } = this.props;
+    const { location: { state: { product } }, addItemToCart } = this.props;
     const { evaluationForm, evaluations } = this.state;
+    const {
+      title,
+      thumbnail,
+      shipping,
+      availableQuantity,
+      soldQuantity,
+      price,
+    } = product;
 
     return (
       <main>
-        <p data-testid="product-detail-name">{ product.title }</p>
+        <article>
+          <h1>Especificações do produto</h1>
+
+          <section>
+            <h1 data-testid="product-detail-name">{ title }</h1>
+            <img src={ thumbnail } alt={ title } />
+          </section>
+
+          <section>
+            <h1>Disponibilidade</h1>
+            { availableQuantity ? (
+              <p>{ `Produtos Disponíveis: ${availableQuantity}` }</p>
+            )
+              : '' }
+            { soldQuantity ? <p>{ `Produtos Vendidos: ${soldQuantity}` }</p> : '' }
+          </section>
+
+          <section>
+            <h1>Formas de pagamento</h1>
+            { shipping.free_shipping ? <p>Free Shipping</p> : '' }
+            <p>{ `R$${price}` }</p>
+            { this.getInstallmentsElement(product) }
+          </section>
+        </article>
+
+        <section>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={() => addItemToCart(product)}
+          >
+            Adicionar ao carrinho
+          </button>
+          <ShoppingCartButton />
+        </section>
+
         <section>
           <h1>Avaliações</h1>
 
@@ -138,9 +189,22 @@ export default class Product extends Component {
 }
 
 Product.propTypes = {
-  location: PropTypes.shape(({
+  location: PropTypes.shape({
     state: PropTypes.shape({
-      title: PropTypes.string,
+      product: PropTypes.shape({
+        title: PropTypes.string,
+        thumbnail: PropTypes.string,
+        shipping: PropTypes.shape({
+          free_shipping: PropTypes.bool,
+        }),
+        availableQuantity: PropTypes.number,
+        soldQuantity: PropTypes.string,
+        installments: PropTypes.shape({
+          quantity: PropTypes.number,
+          amount: PropTypes.number,
+        }),
+        price: PropTypes.number,
+      }),
     }),
-  })),
+  }),
 }.isRequired;

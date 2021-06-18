@@ -36,5 +36,5 @@ Categories.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
-  })).isRequired,
+  })),
 }.isRequired;
