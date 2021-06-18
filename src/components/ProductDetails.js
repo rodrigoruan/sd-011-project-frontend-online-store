@@ -42,10 +42,8 @@ export default class ProductDetails extends Component {
     const keys = Object.values(localStorage);
     if (keys.length > 0) {
       keys.forEach((value) => {
-        const obj = JSON.parse(value);
-        console.log(obj);
+        JSON.parse(value);
       });
-      this.handlerLocalStore = this.handlerLocalStore.bind(this);
     }
   }
 
