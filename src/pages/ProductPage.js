@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
+import ProductEvaluation from '../components/ProductEvaluation';
 
 export default class ProductPage extends Component {
   constructor() {
@@ -82,6 +83,7 @@ export default class ProductPage extends Component {
             { price }
           </h3>
           <img alt={ title } src={ thumbnail } />
+          <ProductEvaluation />
         </div>
       );
     }
