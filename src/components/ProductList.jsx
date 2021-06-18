@@ -8,20 +8,19 @@ class ProductList extends Component {
   render() {
     const { productsList, addToCart } = this.props;
     return (
-      <div>
-        <ul className="productList">
-          {productsList.map(({ title, thumbnail, price, id }) => (
-            <ProductCard
-              key={ title }
-              title={ title }
-              thumbnail={ thumbnail }
-              price={ price }
-              id={ id }
-              addToCart={ addToCart }
-            />
-          ))}
-        </ul>
-      </div>
+      <ul className="productList">
+        {productsList.map(({ title, thumbnail, price, id, shipping }) => (
+          <ProductCard
+            key={ title }
+            title={ title }
+            thumbnail={ thumbnail }
+            price={ price }
+            id={ id }
+            addToCart={ addToCart }
+            hasFreeShipping={ shipping.free_shipping }
+          />
+        ))}
+      </ul>
     );
   }
 }
