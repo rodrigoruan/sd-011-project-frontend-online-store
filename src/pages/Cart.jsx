@@ -1,29 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CartItem } from '../components';
+import { Link } from 'react-router-dom';
+import { CartItem, EmptyCart } from '../components';
 
 class Cart extends React.Component {
-  getTotalPrice() {
-    const { productList } = this.props;
-    if (productList.length) {
-      return productList.reduce((acc, current) => {
-        acc += (current.price * current.quantity);
-        return acc;
-      }, 0).toFixed(2);
-    }
-    return 0;
-  }
-
   render() {
-    const { productList, removeItemFromCart, updateQuantity } = this.props;
+    const { removeItemFromCart, updateQuantity, getTotalPrice, productList } = this.props;
+    const totalPrice = getTotalPrice();
     return (
       <main>
         <h1>Carrinho de Compras</h1>
         {!productList.length
           ? (
-            <div data-testid="shopping-cart-empty-message">
-              <p>Seu carrinho está vazio</p>
-            </div>
+            <EmptyCart />
           )
           : (
             <ul>
@@ -38,8 +27,11 @@ class Cart extends React.Component {
           )}
         <h2>
           VALOR TOTAL : R$
-          { this.getTotalPrice() }
+          { totalPrice }
         </h2>
+        <Link to="/checkout">
+          Comprar agora
+        </Link>
       </main>
     );
   }
