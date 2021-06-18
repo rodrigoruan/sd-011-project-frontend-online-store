@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import CategoryList from './CategoryList';
 import * as api from '../services/api';
 import Products from './Products';
+import Checkout from './CheckoutPage';
 
 class Home extends Component {
   constructor() {
@@ -44,7 +45,7 @@ class Home extends Component {
     const { prodList } = this.state;
     return (
       <div>
-        <p data-testid="home-initial-message">
+        {/* <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <CategoryList selectListner={ this.selectListner } />
@@ -61,9 +62,9 @@ class Home extends Component {
         >
           Enviar
         </button>
-        <Products prodList={ prodList } />
-        <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
-        {/* <Checkout /> */}
+        <Products prodList={ prodList } /> */}
+        {/* <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link> */}
+        <Checkout />
       </div>
     );
   }
