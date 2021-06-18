@@ -21,7 +21,10 @@ class ProductCard extends React.Component {
           <img src={ thumbnail } alt={ title } />
           <p>{ price }</p>
         </Link>
-        <AddItemToCart product={ product } />
+        <AddItemToCart
+          product={ product }
+          dataTestId="product-add-to-cart"
+        />
       </div>
     );
   }
