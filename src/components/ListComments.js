@@ -19,9 +19,5 @@ export default class ListComments extends Component {
 }
 
 ListComments.propTypes = {
-  comments: PropTypes.arrayOf(PropTypes.shape({
-    email: PropTypes.string,
-    review: PropTypes.number,
-    comment: PropTypes.string,
-  })).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
