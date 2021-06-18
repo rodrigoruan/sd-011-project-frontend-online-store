@@ -45,6 +45,7 @@ export default class SearchBar extends Component {
   }
 
   async getProducts() {
+
     const { categoria, textSearch } = this.state;
     const returnGetProducts = await
     Api.getProductsFromCategoryAndQuery(categoria, textSearch);
@@ -84,6 +85,7 @@ export default class SearchBar extends Component {
           <button
             data-testid="query-button"
             type="button"
+            onClick={ this.getProducts }
           >
             Buscar Produto
           </button>
@@ -102,7 +104,7 @@ export default class SearchBar extends Component {
         </section>
         <section>
           <div>
-            {products.map((product) => (
+            { products.map((product) => (
               <div key={ product.id }>
                 <Link
                   key={ product.id }
