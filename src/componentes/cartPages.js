@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import ProductQuantity from './ProductQuantity';
 // import ProductCart from './ProductCart';
 
 class CartPages extends Component {
@@ -24,6 +25,9 @@ class CartPages extends Component {
               <h3 data-testid="shopping-cart-product-name">{ item.products.title }</h3>
               <h4>{ item.products.price }</h4>
               <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
+              <button type="button" data-testid="product-increase-quantity">+</button>
+              <button type="button" data-testid="product-decrease-quantity">-</button>
+              {/* <ProductQuantity productsList={ productsList } /> */}
             </div>
           ))}
 
