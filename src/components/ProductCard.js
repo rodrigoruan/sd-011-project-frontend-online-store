@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ItemProduct extends Component {
   render() {
@@ -12,6 +13,14 @@ export default class ItemProduct extends Component {
           {parseFloat(price, 10).toFixed(2)}
         </h6>
         <button className="btn btn-success">Add to Cart!</button>
+        <Link
+          to={ {
+            pathname: `/details/${id}`,
+          } }
+          data-testid="product-detail-link"
+        >
+          Ver Detalhes
+        </Link>
       </div>
     );
   }

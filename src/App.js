@@ -6,6 +6,7 @@ import './css/home.css';
 import * as api from './services/api';
 import { About, NotFound, ShoppingCart, Home } from './pages/zPageMenu';
 import { Footer, Header } from './components/zComponentsMenu';
+import ProductDetails from './pages/ProductDetails';
 
 export default class App extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ export default class App extends Component {
         <Header />
         <Switch>
           {/* prettier-ignore */}
+          <Route path="/details/:id" render={ (props) => <ProductDetails { ...props } /> } />
           <Route exact path="/" render={ (props) => <Home { ...props } searchQuery={ this.state.searchQuery } radioFilter={ this.state.radioFilter } sendSubmit={ this.getSearchQuery } sendRadio={ this.getRadio } /> } />
           <Route exact path="/cart" render={ (props) => <ShoppingCart { ...props } /> } />
           <Route exact path="/about" component={ About } />
