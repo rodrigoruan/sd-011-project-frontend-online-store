@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ButtonCart from './ButtonCart';
+import Form from './Form';
 import { saveStorage } from '../services/saveService';
 
 class ProductDetails extends Component {
@@ -49,6 +50,7 @@ class ProductDetails extends Component {
           Adicionar ao Carrinho
         </button>
         <ButtonCart />
+        <Form />
       </div>
     );
   }
