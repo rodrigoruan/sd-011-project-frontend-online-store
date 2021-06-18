@@ -12,8 +12,9 @@ export default class CartItem extends Component {
   }
 
   handleClick(operator) {
+    const { cart: { available_quantity: available } } = this.props;
     const { quantity } = this.state;
-    if (operator === 'increase') {
+    if (operator === 'increase' && quantity < available) {
       this.setState((previousState) => ({
         quantity: previousState.quantity + 1,
       }));
@@ -69,5 +70,6 @@ CartItem.propTypes = {
   cart: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
+    available_quantity: PropTypes.number,
   }).isRequired,
 };
