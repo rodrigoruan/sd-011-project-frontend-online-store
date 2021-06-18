@@ -7,9 +7,15 @@ class ShoppingCart extends Component {
 
     const shoppingCartItens = JSON.parse(localStorage.getItem('shoppingCart'));
 
-    this.state = {
-      shoppingCartItens,
-    };
+    if (!shoppingCartItens) {
+      this.state = {
+        shoppingCartItens: [],
+      };
+    } else {
+      this.state = {
+        shoppingCartItens,
+      };
+    }
 
     this.handleClickIncrease = this.handleClickIncrease.bind(this);
     this.handleClickDecrease = this.handleClickDecrease.bind(this);
@@ -48,7 +54,7 @@ class ShoppingCart extends Component {
     const { shoppingCartItens } = this.state;
     const totalPrice = this.getShoppingCartPrice();
 
-    if (!shoppingCartItens) {
+    if (shoppingCartItens.length === 0) {
       return (
         <div>
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
