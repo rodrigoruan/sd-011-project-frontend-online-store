@@ -13,10 +13,10 @@ export default class ProductCard extends Component {
       price,
       thumbnail,
       id,
+      shipping,
       handleAddToShopCart,
       availableQuantity,
     } = this.props;
-    const { title, price, thumbnail, id, shipping, handleAddToShopCart } = this.props;
     return (
       <div className="product-card" data-testid="product">
         <Link

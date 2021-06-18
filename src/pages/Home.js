@@ -9,6 +9,7 @@ import {
   getProductsFromCategoryAndQuery,
 } from '../services/api';
 import './Home.css';
+import CartProductsAmount from '../components/CartProductsAmount/CartProductsAmount';
 
 class Home extends Component {
   constructor(props) {
@@ -88,7 +89,7 @@ class Home extends Component {
 
   render() {
     const { loading, categories, products, searchInput } = this.state;
-    const { handleAddToShopCart } = this.props;
+    const { handleAddToShopCart, shopCart } = this.props;
     return (
       <>
         <header className="home-header">
@@ -104,8 +105,8 @@ class Home extends Component {
           >
             <img width="30px" src={ Cart } alt="imagem do carrinho" />
           </Link>
+          <CartProductsAmount shopCart={ shopCart } />
         </header>
-
         <main className="home-main-container">
           <div className="categories-container">
             { loading ? 'Loading...' : this.renderCategories(categories) }

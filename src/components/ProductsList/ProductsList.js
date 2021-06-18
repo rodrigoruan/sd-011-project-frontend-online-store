@@ -11,7 +11,7 @@ export default class ProductsList extends React.Component {
       <div className="products-list-container">
         {products.length ? (
           products.map(
-            ({ id, thumbnail, title, price, availableQuantity }, index) => (
+            ({ id, thumbnail, title, price, availableQuantity, shipping }, index) => (
               <ProductCard
                 key={ index }
                 id={ id }
@@ -20,6 +20,7 @@ export default class ProductsList extends React.Component {
                 price={ price }
                 handleAddToShopCart={ handleAddToShopCart }
                 availableQuantity={ availableQuantity }
+                shipping={ shipping?.free_shipping }
               />
             ),
           )
@@ -28,26 +29,6 @@ export default class ProductsList extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         )}
-        {
-          products.length
-            ? (
-              products.map(({ id, thumbnail, title, price, shipping }, index) => (
-                <ProductCard
-                  key={ index }
-                  id={ id }
-                  thumbnail={ thumbnail }
-                  title={ title }
-                  price={ price }
-                  shipping={ shipping?.free_shipping }
-                  handleAddToShopCart={ handleAddToShopCart }
-                />
-              ))
-            ) : (
-              <p data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </p>
-            )
-        }
       </div>
     );
   }

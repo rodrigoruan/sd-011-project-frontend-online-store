@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import backImg from '../imgs/Seta.png';
 import cartImg from '../imgs/Carrinho.png';
 import './ShoppingCart.css';
+import CartProductsAmount from '../components/CartProductsAmount/CartProductsAmount';
 
 class ShoppingCart extends Component {
   constructor(props) {
@@ -109,7 +110,7 @@ class ShoppingCart extends Component {
         <Link to="/">
           <img width="30px" src={ backImg } alt="imagem de voltar" />
         </Link>
-
+        <CartProductsAmount shopCart={ shopCart } />
         <div>
           <h1>
             <img width="30px" src={ cartImg } alt="carrinho de compras" />

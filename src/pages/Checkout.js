@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import backImg from '../imgs/Seta.png';
+import CartProductsAmount from '../components/CartProductsAmount/CartProductsAmount';
 
 export default class Checkout extends React.Component {
   constructor(props) {
@@ -29,6 +30,7 @@ export default class Checkout extends React.Component {
             alt="imagem de voltar"
           />
         </Link>
+        <CartProductsAmount shopCart={ shopCart } />
         <section>
           <h3>Revise seus Produtos</h3>
           {shopCart.map(({ id, title }) => (
