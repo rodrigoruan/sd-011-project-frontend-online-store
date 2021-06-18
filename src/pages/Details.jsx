@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Details extends React.Component {
   /*
@@ -34,24 +35,35 @@ class Details extends React.Component {
   // }
   */
   render() {
+    const { addState } = this.props;
     const {
       location: {
         state: {
-          product: {
-            title,
-            price,
-            thumbnail,
-          },
+          product,
         },
       },
     } = this.props;
+
     return (
       <div
-        key={ title }
+        key={ product.title }
       >
-        <p data-testid="product-detail-name">{title}</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
+        <p data-testid="product-detail-name">{product.title}</p>
+        <img src={ product.thumbnail } alt={ product.title } />
+        <p>{product.price}</p>
+        <button
+          type="button"
+          onClick={ () => addState(product) }
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao carrinho
+        </button>
+        <Link
+          to="/carrinho"
+          data-testid="shopping-cart-button"
+        >
+          Carrinho de compras
+        </Link>
       </div>
     );
   }
@@ -67,6 +79,7 @@ Details.propTypes = {
       }),
     }),
   }).isRequired,
+  addState: PropTypes.func.isRequired,
 };
 
 export default Details;

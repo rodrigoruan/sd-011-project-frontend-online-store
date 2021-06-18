@@ -41,7 +41,15 @@ class App extends React.Component {
                 quantity={ quantity }
               />) }
             />
-            <Route exact path="/details/:id" component={ Details } />
+            <Route
+              exact
+              path="/details/:id"
+              render={ (props) => (
+                <Details
+                  { ...props }
+                  addState={ this.addState }
+                />) }
+            />
           </Switch>
         </BrowserRouter>
       </div>
