@@ -62,7 +62,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { products, query, category, cartItems, totalCounter } = this.state;
+    const { products, query, category, totalCounter } = this.state;
     return (
       <div>
         <TopBar handleOnChange={ this.handleOnChange } totalCounter={ totalCounter } />
@@ -82,7 +82,16 @@ export default class Home extends Component {
           <Route
             path="/ShoppingCart"
             render={ () => (
-              <ShoppingCart cartItems={ cartItems } someCounter={ this.someCounter } />) }
+              <ShoppingCart someCounter={ this.someCounter } />) }
+          />
+          <Route
+            path="/ShoppingCart"
+            render={ (props) => (
+              <ShoppingCart
+                { ...props }
+                someCounter={ this.someCounter }
+              />
+            ) }
           />
           <Route
             path="/product/:ProductId"
