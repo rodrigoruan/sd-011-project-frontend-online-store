@@ -6,17 +6,13 @@ export default class Header extends Component {
   render() {
     return (
       <header>
-        <nav
-          className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg">
-          <a className="navbar-brand" href="/">
-            MercadoDibre
-          </a>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg">
           <section className=" " id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <a className="nav-link" href="/">
-                  Home
-                </a>
+                <Link className="nav-link" to="/">
+                  <strong>MercadoDibre</strong>
+                </Link>
               </li>
               <li className="nav-item">
                 <Link
@@ -28,11 +24,10 @@ export default class Header extends Component {
                   Carrinho
                 </Link>
               </li>
-              {' '}
-              <li className="nav-item">
-                <a className="nav-link" href="/about">
+              <li>
+                <Link className="nav-item" to="/about">
                   About
-                </a>
+                </Link>
               </li>
             </ul>
           </section>

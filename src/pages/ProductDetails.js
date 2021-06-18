@@ -27,7 +27,14 @@ export default class ProductDetails extends Component {
   }
 
   render() {
-    const { loading, product } = this.state;
+    let quantity;
+    const { product } = this.state;
+    const {
+      handleAddToCart,
+      location: {
+        state: { id, thumbnail, title, price },
+      },
+    } = this.props;
     if (!product) {
       return 'Loading...';
     }
@@ -42,6 +49,14 @@ export default class ProductDetails extends Component {
               {att.name}-{att.value_name}
             </p>
           ))}
+        <button
+          data-testid="product-detail-add-to-cart"
+          type="button"
+          className="btn btn-success"
+          onClick={() => handleAddToCart(id, thumbnail, title, price, (quantity = 1))}
+        >
+          Add to Cart!
+        </button>
       </div>
     );
   }
