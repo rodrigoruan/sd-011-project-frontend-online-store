@@ -10,13 +10,37 @@ class ShoppingCart extends Component {
   subtractItem = (id) => {
     const getItemById = localStorage.getItem(id);
     let number = parseInt(getItemById.split(',/n')[3].replace(',', ''), 10);
+    const title = getItemById.split(',/n')[0];
+    const thumbnail = getItemById.split(',/n')[1].replace(',', '');
+    const price = getItemById.split(',/n')[2];
 
     if (number >= 1) {
       number -= 1;
     } else {
       number = 0;
     }
-    // localStorage.setItem();
+
+    localStorage
+      .setItem(id, [title, '/n', thumbnail, '/n', price, '/n', number, '/n', id]);
+    const quantityElement = document.getElementById('quantity');
+    quantityElement.innerHTML = number;
+  }
+
+  addItem = (id) => {
+    const getItemById = localStorage.getItem(id);
+    let number = parseInt(getItemById.split(',/n')[3].replace(',', ''), 10);
+    const title = getItemById.split(',/n')[0];
+    const thumbnail = getItemById.split(',/n')[1].replace(',', '');
+    const price = getItemById.split(',/n')[2];
+
+    console.log(number);
+    number += 1;
+    console.log(number);
+
+    localStorage
+      .setItem(id, [title, '/n', thumbnail, '/n', price, '/n', number, '/n', id]);
+    const quantityElement = document.getElementById('quantity');
+    quantityElement.innerHTML = number;
   }
 
   render() {
@@ -32,17 +56,20 @@ class ShoppingCart extends Component {
           >
             X
           </button>
-          <p data-testid="shopping-cart-product-quantity">
+          <p id="quantity" data-testid="shopping-cart-product-quantity">
             { element.split(',/n')[3].replace(',', '') }
           </p>
           <button
+            data-testid="product-decrease-quantity"
             type="button"
-            onClick={ this.subtractItem(element.split(',/n')[4].replace(',', '')) }
+            onClick={ () => this.subtractItem(element.split(',/n')[4].replace(',', '')) }
           >
             -
           </button>
           <button
+            data-testid="product-increase-quantity"
             type="button"
+            onClick={ () => this.addItem(element.split(',/n')[4].replace(',', '')) }
           >
             +
           </button>
