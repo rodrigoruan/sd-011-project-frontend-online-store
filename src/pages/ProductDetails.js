@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import { ProductReviewForm } from '../components/zComponentsMenu';
+import * as storage from '../services/storage';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -10,6 +12,8 @@ export default class ProductDetails extends Component {
     };
     this.getProduct = this.getProduct.bind(this);
   }
+
+  componentDidUpdate() {}
 
   componentDidMount() {
     this.getProduct();
@@ -26,7 +30,20 @@ export default class ProductDetails extends Component {
     this.setState({ product });
   }
 
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const formReview = {
+      message: data.get('message'),
+      email: data.get('email'),
+      score: data.get('score'),
+    };
+    storage.createReview(formReview);
+    this.forceUpdate();
+  };
+
   render() {
+    const getReviews = storage.readReviews('reviews');
     let quantity;
     const { product } = this.state;
     const {
@@ -57,6 +74,24 @@ export default class ProductDetails extends Component {
         >
           Add to Cart!
         </button>
+        <hr />
+        <ProductReviewForm handleFormSubmit={this.handleFormSubmit} />
+        <div>
+          <h4>Avaliações já feitas:</h4>
+          {console.log(getReviews)}
+          {getReviews &&
+            getReviews.map((el, index) => {
+              return (
+                <div key={index}>
+                  <hr />
+                  <h5>E-mail: {el.email}</h5>
+                  <h5>Nota: {el.score}</h5>
+                  <h5>Avaliação: {el.message}</h5>
+                  <hr />
+                </div>
+              );
+            })}
+        </div>
       </div>
     );
   }
