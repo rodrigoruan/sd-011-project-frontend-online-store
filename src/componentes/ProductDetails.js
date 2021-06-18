@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ButtonCart from './ButtonCart';
+import Form from '../componentes/Form';
 
 class ProductDetails extends Component {
   render() {
@@ -19,6 +20,7 @@ class ProductDetails extends Component {
           <li>{ condition }</li>
         </ul>
         <ButtonCart />
+        <Form />
       </div>
     );
   }
