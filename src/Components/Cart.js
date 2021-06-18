@@ -3,35 +3,23 @@ import PropTypes from 'prop-types';
 import style from './Cart.module.css';
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
-    const { location: { product } } = this.props;
-    this.state = {
-      products: product,
-    };
-  }
-
-  componentDidMount() {
-  }
-
   render() {
-    const { products } = this.state;
-    return (
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    return !cart ? (
+      <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+    ) : (
       <section className={ style.cart }>
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        <ul>
-          { products && products.map((item, index) => (
-            <li key={ index }>
-              <h2 data-testid="shopping-cart-product-name">{ item.title }</h2>
-              <img src={ item.thumbnail } alt="foto do produto no carro" />
-              <p>
-                R$
-                { item.price }
-              </p>
-              <span data-testid="shopping-cart-product-quantity">{item.quantity}</span>
-            </li>
-          ))}
-        </ul>
+        {cart && cart.map((item, index) => (
+          <div key={ index }>
+            <h2 data-testid="shopping-cart-product-name">{ item.title }</h2>
+            <img src={ item.thumbnail } alt="foto do produto no carro" />
+            <p>
+              R$
+              { item.price }
+            </p>
+            <span data-testid="shopping-cart-product-quantity">{item.quantity}</span>
+          </div>
+        ))}
       </section>
     );
   }

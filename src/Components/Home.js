@@ -12,7 +12,6 @@ class Home extends React.Component {
       products: null,
       categories: null,
       search: false,
-      selectedProduct: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleClickLi = this.handleClickLi.bind(this);
@@ -41,51 +40,47 @@ class Home extends React.Component {
     this.setState({ products: query.results });
   }
 
-  async sendProductDetails({ target: { id } }) {
-    const { selectedProduct } = this.state;
-    const product = await fetch(`https://api.mercadolibre.com/items/${id}`);
-    const json = await product.json();
+  async sendProductDetails(object) {
     const response = {
-      thumbnail: json.thumbnail,
-      title: json.title,
-      price: json.price,
-      id: json.id,
+      thumbnail: object.thumbnail,
+      title: object.title,
+      price: object.price,
+      id: object.id,
       quantity: 1,
     };
     let initial = false;
-    console.log(response.id);
-    if (selectedProduct.length === 0) {
-      selectedProduct.push(response);
-      console.log(selectedProduct);
+    if (!localStorage.cart) {
+      localStorage.setItem('cart', JSON.stringify([response]));
       initial = true;
     }
-    if (selectedProduct.length > 0 && initial === false) {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    console.log(cart);
+    if (cart.length > 0 && initial === false) {
       let equal = false;
-      for (let index = 0; index < selectedProduct.length; index += 1) {
-        if (selectedProduct[index].id === response.id) {
-          selectedProduct[index].quantity += 1;
+      for (let index = 0; index < cart.length; index += 1) {
+        if (cart[index].id === response.id) {
+          cart[index].quantity += 1;
           equal = true;
-          console.log(selectedProduct);
-          return (selectedProduct, equal);
+          return (cart, equal);
         }
       }
       if (equal === false) {
-        selectedProduct.push(response);
-        console.log(selectedProduct);
+        cart.push(response);
+        console.log(cart);
       }
     }
-    this.setState(selectedProduct);
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   render() {
-    const { products, search, selectedProduct } = this.state;
+    const { products, search } = this.state;
     const { categories } = this.state;
     return (
       <>
         {/* Renderiza o card de produtos após clicar no botão */}
         <section className={ style.inputContent }>
           <Link
-            to={ { pathname: '/cart', product: selectedProduct } }
+            to="/cart"
             data-testid="shopping-cart-button"
           >
             <img className={ style.cart } src={ Picture } alt="Carrinho de compras" />
@@ -126,7 +121,7 @@ class Home extends React.Component {
                 type="button"
                 data-testid="product-add-to-cart"
                 id={ product.id }
-                onClick={ this.sendProductDetails }
+                onClick={ () => this.sendProductDetails(product) }
               >
                 Adicionar ao carrinho
               </button>
