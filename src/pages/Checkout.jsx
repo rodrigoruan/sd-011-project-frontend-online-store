@@ -12,6 +12,7 @@ export default class Checkout extends Component {
           ? (
             <section>
               <section>
+                <h1>Revise seus Produtos</h1>
                 { productList.map((item) => (
                   <section key={ item.id }>
                     <p>{ item.title }</p>
@@ -23,6 +24,20 @@ export default class Checkout extends Component {
               </section>
               <section>
                 { totalPrice }
+              </section>
+              <section>
+                <h1>Informações do comprador</h1>
+                <form>
+                  formulário
+                </form>
+              </section>
+              <section>
+                <h1>Método de pagamento</h1>
+              </section>
+              <section>
+                <button type="submit">
+                  Comprar
+                </button>
               </section>
             </section>
           )
