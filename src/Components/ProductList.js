@@ -6,7 +6,7 @@ class ProductList extends Component {
   render() {
     const { productsList } = this.props;
     return (
-      <ul>
+      <ul className="listProducts">
         {productsList.map(({ title, thumbnail, price, id }) => (
           <ItemCard
             key={ title }

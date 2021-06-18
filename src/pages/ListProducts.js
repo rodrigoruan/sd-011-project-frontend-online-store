@@ -46,7 +46,6 @@ class ListProducts extends Component {
   }
 
   getProductsByQuery() {
-    /**/
     const { search, category } = this.state;
     this.setState({ data: [] }, () => {
       api.getProductsFromCategoryAndQuery(category, search)
