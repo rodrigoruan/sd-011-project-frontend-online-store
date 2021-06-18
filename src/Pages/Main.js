@@ -4,7 +4,6 @@ import ShoppingCart from './ShoppingCart';
 import Search from '../component/Search';
 import Categorys from '../component/Categorys';
 import Cards from '../component/Cards';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Main extends Component {
   constructor() {
@@ -15,18 +14,6 @@ export default class Main extends Component {
     };
     this.eventSearch = this.eventSearch.bind(this);
     this.eventCtg = this.eventCtg.bind(this);
-    this.defaultSearch = this.defaultSearch.bind(this);
-  }
-
-  componentDidMount() {
-    this.defaultSearch();
-  }
-
-  async defaultSearch() {
-    const { results } = await getProductsFromCategoryAndQuery('MLB1953', '');
-    this.setState({
-      arraySearch: results,
-    });
   }
 
   eventSearch(obj) {
@@ -45,7 +32,7 @@ export default class Main extends Component {
     return (
       <>
         <Search evSrch={ this.eventSearch } ctgId={ ctgId } />
-        <Categorys evCtg={ this.eventCtg } />
+        <Categorys evCtg={ this.eventCtg } evSrch={ this.eventSearch } />
         <Cards resultSearch={ arraySearch } addItems={ addItens } />
         <ShoppingCart itensArray={ itensAdded } />
       </>
