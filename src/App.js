@@ -15,7 +15,7 @@ export default class App extends Component {
 
     this.addItems = this.addItems.bind(this);
     this.remove = this.remove.bind(this);
-    this.ShowQuantity = this.remove.bind(this);
+    this.ShowQuantity = this.remove.bind(this)
   }
 
   addItems(obj) {

@@ -25,8 +25,6 @@ class ShoppingCart extends React.Component {
     ShowQuantity()
   }
 
-
-
   render() {
     const { itensArray, remove, actualValue } = this.props;
 
@@ -43,7 +41,6 @@ class ShoppingCart extends React.Component {
           ))}
           <p data-testid="shopping-cart-product-quantity">{ actualValue }</p>
           <button type="button" data-testid="shopping-cart-button">Comprar</button>
-
         </div>
       );
     }
