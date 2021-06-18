@@ -59,7 +59,7 @@ export default class CartItem extends Component {
         >
           -
         </button>
-        <CartQuantity quantity={ this.state } />
+        <CartQuantity />
       </div>
     );
   }
