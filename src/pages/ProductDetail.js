@@ -4,7 +4,14 @@ import PropTypes from 'prop-types';
 class ProductDetail extends Component {
   render() {
     const { location: { state: { detail } } } = this.props;
-    const { title, thumbnail, price, attributes, installments } = detail;
+    const {
+      title,
+      thumbnail,
+      price,
+      attributes,
+      installments,
+      sold_quantity: soldQuantity,
+    } = detail;
 
     return (
       <div>
@@ -17,7 +24,7 @@ class ProductDetail extends Component {
         {
           installments ? (
             <ul>
-              <li>{`${detail.sold_quantity} unidades vendidas.`}</li>
+              <li>{`${soldQuantity} unidades vendidas.`}</li>
               <li>{`Estoque: ${installments.quantity}`}</li>
             </ul>
           ) : <p>Unidade única</p>
@@ -43,22 +50,20 @@ class ProductDetail extends Component {
 }
 
 ProductDetail.propTypes = {
-  location: {
-    state: {
-      details: {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      detail: PropTypes.shape({
         title: PropTypes.string,
         thumbnail: PropTypes.string,
         price: PropTypes.number,
-        attributes: {
-          name: PropTypes.string,
-          value_name: PropTypes.string,
-        },
-        installment: {
+        attributes: PropTypes.arrayOf(PropTypes.object),
+        installments: PropTypes.shape({
           quantity: PropTypes.number,
-        },
-      },
-    },
-  }.isRequired,
+        }),
+        sold_quantity: PropTypes.number,
+      }),
+    }),
+  }).isRequired,
 };
 
 export default ProductDetail;
