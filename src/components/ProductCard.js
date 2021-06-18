@@ -21,7 +21,7 @@ export default class ItemProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={() => handleAddToCart(id, title, thumbnail, price, (quantity = 1))}
+          onClick={() => handleAddToCart(id, thumbnail, title, price, (quantity = 1))}
           className="btn btn-success"
         >
           Add to Cart!
@@ -29,7 +29,7 @@ export default class ItemProduct extends Component {
         <Link
           to={{
             pathname: `/details/${id}`,
-            state: { id, category_id, title },
+            state: { id, category_id, title, thumbnail, price, quantity },
           }}
           data-testid="product-detail-link"
         >

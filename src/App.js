@@ -29,17 +29,42 @@ export default class App extends Component {
     api.getProductsFromCategoryAndQuery();
   }
 
-  handleAddToCart = (id, title, thumbnail, price, quantity) => {
+  handleAddToCart = (id, thumbnail, title, price, quantity) => {
     const { shoppingCart } = this.state;
     const oldItems = [...shoppingCart];
-    const newItem = { id, title, thumbnail, price, quantity: 1 };
+    const newItem = { id, title, thumbnail, price, quantity };
     const itemExists = oldItems.find((el) => el.id === id);
     if (itemExists) {
       const updatedItem = { id, title, thumbnail, price, quantity: itemExists.quantity + 1 };
-      this.setState({ shoppingCart: [...oldItems, updatedItem] });
+      const updatedShoppingCart = oldItems.map((el) => (el.id === id ? updatedItem : el));
+      return this.setState({ shoppingCart: [...updatedShoppingCart] });
     }
-
     this.setState({ shoppingCart: [...oldItems, newItem] });
+  };
+
+  handleDecreaseQuantity = (id, thumbnail, title, price) => {
+    const { shoppingCart } = this.state;
+    const oldItems = [...shoppingCart];
+    const itemExists = oldItems.find((el) => el.id === id);
+    if (itemExists && itemExists.quantity > 1) {
+      const updatedItem = { id, title, thumbnail, price, quantity: itemExists.quantity - 1 };
+      const updatedShoppingCart = oldItems.map((el) => (el.id === id ? updatedItem : el));
+      return this.setState({ shoppingCart: [...updatedShoppingCart] });
+    }
+    if (itemExists && itemExists.quantity === 1) {
+      const updatedShoppingCart = oldItems.filter((el) => el.id !== id);
+      return this.setState({ shoppingCart: [...updatedShoppingCart] });
+    }
+  };
+
+  handleRemoveFromCart = (id) => {
+    const { shoppingCart } = this.state;
+    const oldItems = [...shoppingCart];
+    const itemExists = oldItems.find((el) => el.id === id);
+    if (itemExists) {
+      const updatedShoppingCart = oldItems.filter((el) => el.id !== id);
+      return this.setState({ shoppingCart: [...updatedShoppingCart] });
+    }
   };
 
   render() {
@@ -56,11 +81,22 @@ export default class App extends Component {
               (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } />
             }
           />
-          <Route path="/details/:id" render={(props) => <ProductDetails {...props} />} />
+          <Route
+            path="/details/:id"
+            render={(props) => <ProductDetails {...props} handleAddToCart={this.handleAddToCart} />}
+          />
           <Route
             exact
             path="/cart"
-            render={(props) => <ShoppingCart {...props} cartItems={shoppingCart} />}
+            render={(props) => (
+              <ShoppingCart
+                {...props}
+                cartItems={shoppingCart}
+                handleRemoveFromCart={this.handleRemoveFromCart}
+                handleDecreaseQuantity={this.handleDecreaseQuantity}
+                handleAddToCart={this.handleAddToCart}
+              />
+            )}
           />
           <Route exact path="/about" component={About} />
           <Route exact path="/finishscreen" component={FinishScreen} />
