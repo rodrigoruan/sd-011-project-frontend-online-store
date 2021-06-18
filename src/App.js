@@ -23,15 +23,13 @@ export default class App extends Component {
     this.fetchCategories = this.fetchCategories.bind(this);
     this.addCart = this.addCart.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);
+    this.increaseItemQuantity = this.increaseItemQuantity.bind(this);
+    this.decreaseItemQuantity = this.decreaseItemQuantity.bind(this);
   }
 
   componentDidMount() {
     this.fetchProductCategory();
   }
-
-  // componentDidUpdate() {
-  //   this.removeCartItem();
-  // }
 
   handleChange({ target }) {
     const { value, name } = target;
@@ -44,7 +42,6 @@ export default class App extends Component {
     const { categoryId, search } = this.state;
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
-    // console.log(fetchedProducts.results);
     this.setState({ productCards: fetchedProducts.results });
   }
 
@@ -74,15 +71,18 @@ export default class App extends Component {
 
   removeCartItem({ target: { value } }) {
     const { cartItems } = this.state;
-    console.log(value);
     const updateCart = cartItems.filter(({ id }) => id !== value);
-    console.log(updateCart);
     this.setState({
       cartItems: updateCart,
     });
-    console.log(cartItems);
-    // const index = cartItems.includes(value);
-    // console.log(cartItems[index]);
+  }
+
+  increaseItemQuantity({ target: { value } }) {
+    console.log(value);
+  }
+
+  decreaseItemQuantity({ target: { value } }) {
+    console.log(value);
   }
 
   render() {
@@ -109,6 +109,8 @@ export default class App extends Component {
               path="/cart"
               render={ (props) => (<ShopCart
                 removeCartItem={ this.removeCartItem }
+                increaseItemQuantity={ this.increaseItemQuantity }
+                decreaseItemQuantity={ this.decreaseItemQuantity }
                 cartItems={ cartItems }
                 { ...props }
               />) }

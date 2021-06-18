@@ -7,8 +7,8 @@ import backImage from '../images/back.png';
 
 export default class ShopCart extends Component {
   render() {
-    const { location: { state }, removeCartItem } = this.props;
-    if (state.length === 0) return <EmptyShopCart />;
+    const { cartItems, removeCartItem, increaseItemQuantity, decreaseItemQuantity } = this.props;
+    if (cartItems.length === 0) return <EmptyShopCart />;
 
     return (
       <div>
@@ -22,9 +22,9 @@ export default class ShopCart extends Component {
           </Link>
         </nav>
         <p data-testid="shopping-cart-product-quantity">
-          {`Quantidade: ${state.length}`}
+          {`Quantidade: ${cartItems.length}`}
         </p>
-        { state.map((item) => (
+        { cartItems.map((item) => (
           <div className="cart-product-container" key={ item.id }>
             <button
               onClick={ removeCartItem }
@@ -40,6 +40,22 @@ export default class ShopCart extends Component {
             >
               { item.title }
             </p>
+            <button
+              onClick={ decreaseItemQuantity }
+              type="button"
+              value={ item.id }
+              data-testid="product-decrease-quantity"
+            >
+              -
+            </button>
+            <button
+              onClick={ increaseItemQuantity }
+              type="button"
+              value={ item.id }
+              data-testid="product-increase-quantity"
+            >
+              +
+            </button>
             <p>{`R$ ${item.price}`}</p>
           </div>))}
       </div>
@@ -48,12 +64,5 @@ export default class ShopCart extends Component {
 }
 
 ShopCart.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      length: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      map: PropTypes.func,
-    }),
-  }).isRequired,
-  removeCartItem: PropTypes.func.isRequired,
+
 };
