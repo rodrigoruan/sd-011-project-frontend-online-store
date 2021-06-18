@@ -4,12 +4,12 @@ import * as storage from '../services/storage';
 
 export default class AddItemToCart extends React.Component {
   render() {
-    const { product } = this.props;
+    const { product, dataTestId } = this.props;
 
     return (
       <button
         type="button"
-        data-testid="product-add-to-cart"
+        data-testid={ dataTestId }
         onClick={ () => storage.saveProduct(product, 1) }
       >
         Adicionar ao carrinho
@@ -23,5 +23,6 @@ AddItemToCart.propTypes = {
     productInfo: PropTypes.shape({
       id: PropTypes.string,
     }),
-  }).isRequired,
-};
+  }),
+  dataTestId: PropTypes.string,
+}.isRequired;

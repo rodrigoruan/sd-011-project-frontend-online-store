@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import CategoryFilter from '../components/CategoryFilter';
 import ProductList from '../components/ProductList';
 import SearchBar from '../components/SearchBar';
+import CartButton from '../components/CartButton';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -32,11 +32,7 @@ export default class Main extends React.Component {
     return (
       <div>
         <SearchBar onClick={ this.handleSubmit } />
-        <nav>
-          <Link data-testid="shopping-cart-button" to="/shoppingcart">
-            Carrinho
-          </Link>
-        </nav>
+        <CartButton />
         { !query && !selectedCategoryId
           ? <p data-testid="home-initial-message">{ paragraph }</p>
           : <ProductList categoryId={ selectedCategoryId } query={ query } />}
