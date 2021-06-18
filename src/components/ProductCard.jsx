@@ -6,10 +6,10 @@ export default class ProductCard extends Component {
   render() {
     const { product: { title, price, thumbnail, id }, addCart } = this.props;
     return (
-      <div data-testid="product">
-        <h4 data-testid="product-detail-name">{title}</h4>
+      <div className="product-card" data-testid="product">
+        <p data-testid="product-detail-name">{title}</p>
+        <img src={ thumbnail } alt={ title } style={ { width: '150px' } } />
         <p>{`R$ ${price}`}</p>
-        <img src={ thumbnail } alt={ title } />
         <button
           data-testid="product-add-to-cart"
           type="button"

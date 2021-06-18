@@ -37,7 +37,7 @@ export default class ProductDetails extends Component {
           onClick={ addCart }
           value={ id }
         >
-          Adicionar ao ao carrinho
+          Adicionar ao carrinho
         </button>
       </>
     );
