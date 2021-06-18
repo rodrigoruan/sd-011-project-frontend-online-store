@@ -26,7 +26,7 @@ class cardCreator extends React.Component {
             <p className="productPrice">{price}</p>
           </div>
         </Link>
-        <AddToCart item={ this.props } />
+        <AddToCart item={ this.props } className="product-add-to-cart" />
       </div>
     );
   }

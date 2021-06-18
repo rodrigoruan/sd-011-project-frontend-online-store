@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import carrinho from '../carrinho.png';
+import Form from './Form';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -39,6 +40,9 @@ class ProductDetails extends React.Component {
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ carrinho } alt="carrinho" />
         </Link>
+        <div>
+          <Form />
+        </div>
       </div>
     );
   }
