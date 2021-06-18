@@ -10,10 +10,6 @@ class AddToCart extends React.Component {
 
   addItem() {
     const { item } = this.props;
-<<<<<<< HEAD
-    console.log(item.product.id);
-=======
->>>>>>> 845de785ca5ecb3e8177450f6f1db6867917c33c
     let existingCart = JSON.parse(localStorage.getItem('items'));
     if (existingCart == null) existingCart = [];
     let existingQuantity = JSON.parse(localStorage.getItem('quantity'));
