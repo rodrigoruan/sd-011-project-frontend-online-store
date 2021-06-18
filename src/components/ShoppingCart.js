@@ -10,11 +10,17 @@ export default class ShoppingCart extends Component {
     };
   }
 
-  plusItem = (id) => {
+  plusItem = (id, availableQuantity) => {
     const { someCounter } = this.props;
     const cart = JSON.parse(localStorage.ShoppingCart);
     const objJSON = cart.map((element) => {
-      if (element.id === id) element.counter += 1;
+      if (element.id === id) {
+        if (element.counter < availableQuantity) {
+          element.counter += 1;
+        } else {
+          element.counter = availableQuantity;
+        }
+      }
       return element;
     });
     localStorage.ShoppingCart = JSON.stringify(objJSON);
@@ -60,7 +66,7 @@ export default class ShoppingCart extends Component {
                 <button
                   type="button"
                   data-testid="product-increase-quantity"
-                  onClick={ () => this.plusItem(product.id) }
+                  onClick={ () => this.plusItem(product.id, product.availableQuantity) }
                 >
                   +
                 </button>

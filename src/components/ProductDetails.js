@@ -21,12 +21,14 @@ class ProductDetails extends React.Component {
     const products = await getProductsFromCategoryAndQuery(category, query);
     const product = products.results.find((prod) => prod.id === ProductId);
     const { title, id, price, thumbnail, attributes } = product;
+    const availableQuantity = product.available_quantity;
     const productObject = {
       title,
       id,
       price,
       thumbnail,
       attributes,
+      availableQuantity,
     };
     this.setState({ productObject });
   }
@@ -35,7 +37,7 @@ class ProductDetails extends React.Component {
     const cart = JSON.parse(localStorage.ShoppingCart);
     const { location, someCounter } = this.props;
     const { state } = location;
-    const { title, thumbnail, price, id } = state;
+    const { title, thumbnail, price, id, availableQuantity } = state;
     if (cart.find((element) => element.id === id)) {
       const objJSON = cart.map((element) => {
         if (element.id === id) element.counter += 1;
@@ -48,6 +50,7 @@ class ProductDetails extends React.Component {
         thumbnail,
         price,
         id,
+        availableQuantity,
         counter: 1,
       };
       const objJSON = [...cart, obj];
@@ -95,6 +98,7 @@ ProductDetails.propTypes = {
       price: PropTypes.number,
       thumbnail: PropTypes.string,
       title: PropTypes.string,
+      availableQuantity: PropTypes.number,
     }).isRequired,
   }).isRequired,
   query: PropTypes.string.isRequired,
