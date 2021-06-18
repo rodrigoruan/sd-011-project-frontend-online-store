@@ -6,7 +6,6 @@ export default class ShoppingCart extends Component {
     super();
     this.state = {
       local: '',
-      count: 0,
     };
     this.recuperaLocalStorage = this.recuperaLocalStorage.bind(this);
   }
