@@ -66,10 +66,10 @@ export default class ShoppingCart extends Component {
           </p>
         )
           : items.map(
-            ({ product: { title, thumbnail, price, id } }, index) => {
+            ({ title, thumbnail, price, id }, index) => {
               totalPrice += price * quantity[index][id];
               return (
-                <div key={ index } data-testid="shopping-cart-product-name">
+                <div key={ index }>
                   <button type="button" onClick={ this.removeAllItems }>
                     <img
                       src={ closeButton }
@@ -78,7 +78,7 @@ export default class ShoppingCart extends Component {
                     />
                   </button>
                   <img src={ thumbnail } alt="Foto do Produto" />
-                  <p>{title}</p>
+                  <p data-testid="shopping-cart-product-name">{title}</p>
                   <button
                     name={ index }
                     id={ id }
