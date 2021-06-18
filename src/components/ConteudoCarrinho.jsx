@@ -20,20 +20,20 @@ class ConteudoCarrinho extends Component {
 
   getProductsFromStorage() {
     const productsSelected = JSON.parse(localStorage.getItem('products'));
-    
-    if(productsSelected !== null ) this.setState({ productsSelected });
-    
+
+    if (productsSelected !== null) this.setState({ productsSelected });
   }
 
   removeProduct(product) {
     const { productsSelected } = this.state;
-    let quantityTotal = parseInt(localStorage.getItem('quantidade'));
-    const productData = productsSelected.find((element) => element.title === product.title);
+    const quantityTotal = parseInt(localStorage.getItem('quantidade'), 10);
+    const productData = productsSelected.find((element) => element.title
+    === product.title);
     const indexOfProduct = productsSelected.indexOf(productData);
 
     console.log(productsSelected[indexOfProduct].quantity);
     productsSelected.splice(indexOfProduct, 1);
-    
+
     if (productsSelected.length <= 0) {
       this.setState({ productsSelected });
       localStorage.setItem('quantidade', quantityTotal);
@@ -42,12 +42,12 @@ class ConteudoCarrinho extends Component {
     } else {
       this.setState({ productsSelected });
       localStorage.setItem('products', JSON.stringify(productsSelected));
-    } 
+    }
   }
 
   renderProducts() {
     let { productsSelected } = this.state;
-    
+
     productsSelected = productsSelected.reverse();
 
     if (productsSelected.length !== 0) {

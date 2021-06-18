@@ -12,7 +12,6 @@ class AvaliaProduto extends Component {
   }
 
   onChangeValue(event) {
-    
     this.setState({ rating: event.target.value });
   }
 
