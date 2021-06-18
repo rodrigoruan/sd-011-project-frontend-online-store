@@ -12,7 +12,10 @@ export default class ShoppingCart extends Component {
 
   handleIncrease(index) {
     const increaseItemObject = JSON.parse(localStorage.getItem('item'));
-    increaseItemObject[`${index}`].countProduct += 1;
+    if (increaseItemObject[`${index}`].countProduct
+      < (increaseItemObject[`${index}`].available_quantity)) {
+      increaseItemObject[`${index}`].countProduct += 1;
+    }
     localStorage.setItem('item', JSON.stringify([...increaseItemObject]));
     // increaseItemObject = localStorage.setItem(`${index}`, countProduct += 1);
   }
