@@ -63,8 +63,10 @@ class DetalhesProduto extends Component {
       );
     }
     const produto = itemsArr.find((produc) => produc.id === productId);
-    const { title, thumbnail, price, id, shipping: { free_shipping: freeShipping } } = produto;
-    const shippingStatus = freeShipping ? <p data-testid="free-shipping">Frete Gratis</p> : <p>Frete Pago</p>;
+    const {
+      title, thumbnail, price, id, shipping: { free_shipping: freeShipping } } = produto;
+    const shippingStatus = freeShipping
+      ? <p data-testid="free-shipping">Frete Gratis</p> : <p>Frete Pago</p>;
 
     return (
       <div>

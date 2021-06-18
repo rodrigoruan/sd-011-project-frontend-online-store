@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import FormularioPagamento from './pages/FormularioPagamento';
 import { ListagemDeProdutos, ShoppingCart, DetalhesProduto } from './pages/index';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
           path="/detalhesproduto/:category_id/:product_id/:title"
           render={ (props) => <DetalhesProduto { ...props } /> }
         />
+        <Route path="/teste" component={ FormularioPagamento } />
       </Switch>
     </BrowserRouter>
   );
