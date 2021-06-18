@@ -33,7 +33,7 @@ class ProductDetails extends React.Component {
   }
 
   setItem = () => {
-    const { location } = this.props;
+    const { location, someCounter } = this.props;
     const { state } = location;
     const { title, thumbnail, price, id } = state;
     const { counter } = this.state;
@@ -43,6 +43,7 @@ class ProductDetails extends React.Component {
     const obj = { title, thumbnail, price, id, counter };
     const objJSON = JSON.stringify(obj);
     localStorage.setItem(id, objJSON);
+    someCounter();
   }
 
   addComment(comment = {}) {
@@ -87,6 +88,7 @@ ProductDetails.propTypes = {
     }).isRequired,
   }).isRequired,
   query: PropTypes.string.isRequired,
+  someCounter: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

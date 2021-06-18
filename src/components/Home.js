@@ -13,13 +13,16 @@ export default class Home extends Component {
       query: ' ',
       category: 'MLB1648',
       products: undefined,
+      totalCounter: 0,
     };
     this.handleOnChange = this.handleOnChange.bind(this);
     this.searchApi = this.searchApi.bind(this);
+    this.someCounter = this.someCounter.bind(this);
   }
 
   componentDidMount() {
     this.searchApi();
+    this.someCounter();
   }
 
   async handleOnChange({ target }) {
@@ -42,11 +45,25 @@ export default class Home extends Component {
     }
   }
 
+  someCounter() {
+    if (localStorage.length !== 0) {
+      const storage = Object.keys(localStorage);
+      const counter = storage.map((key) => {
+        const item = JSON.parse(localStorage[key]);
+        return item.counter;
+      });
+      const some = counter.reduce((total, currentElement) => total + currentElement);
+      this.setState({ totalCounter: some });
+    } else {
+      this.setState({ totalCounter: 0 });
+    }
+  }
+
   render() {
-    const { products, query, category, cartItems } = this.state;
+    const { products, query, category, cartItems, totalCounter } = this.state;
     return (
       <div>
-        <TopBar handleOnChange={ this.handleOnChange } />
+        <TopBar handleOnChange={ this.handleOnChange } totalCounter={ totalCounter } />
         <Switch>
           <Route
             exact
@@ -56,12 +73,14 @@ export default class Home extends Component {
                 products={ products }
                 category={ category }
                 query={ query }
+                someCounter={ this.someCounter }
               />
             ) }
           />
           <Route
             path="/ShoppingCart"
-            render={ () => (<ShoppingCart cartItems={ cartItems } />) }
+            render={ () => (
+              <ShoppingCart cartItems={ cartItems } someCounter={ this.someCounter } />) }
           />
           <Route
             path="/product/:ProductId"
@@ -70,6 +89,7 @@ export default class Home extends Component {
                 { ...props }
                 query={ query }
                 category={ category }
+                someCounter={ this.someCounter }
               />
             ) }
           />

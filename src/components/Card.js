@@ -11,7 +11,7 @@ class Card extends Component {
   }
 
   setItem = () => {
-    const { title, thumbnail, price, id } = this.props;
+    const { title, thumbnail, price, id, someCounter } = this.props;
     const { counter } = this.state;
     this.setState((previous) => ({
       counter: previous.counter + 1,
@@ -19,6 +19,7 @@ class Card extends Component {
     const obj = { title, thumbnail, price, id, counter };
     const objJSON = JSON.stringify(obj);
     localStorage.setItem(id, objJSON);
+    someCounter();
   }
 
   render() {
@@ -54,6 +55,7 @@ Card.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  someCounter: PropTypes.func.isRequired,
 };
 
 export default Card;

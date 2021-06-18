@@ -8,7 +8,6 @@ export default class ShoppingCart extends Component {
       const item = JSON.parse(localStorage[key]);
       return item;
     });
-    console.log(cartItems);
     return (
       <div>
         {

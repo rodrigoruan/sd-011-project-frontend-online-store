@@ -6,7 +6,7 @@ import Filtros from './Filtros';
 
 class TopBar extends React.Component {
   render() {
-    const { handleOnChange } = this.props;
+    const { handleOnChange, totalCounter } = this.props;
     return (
       <div>
         <h2 data-testid="home-initial-message">
@@ -18,6 +18,7 @@ class TopBar extends React.Component {
           <button data-testid="shopping-cart-button" type="button">
             Carrinho de Compras
           </button>
+          <p data-testid="shopping-cart-size">{ totalCounter }</p>
         </Link>
       </div>
     );
@@ -26,6 +27,7 @@ class TopBar extends React.Component {
 
 TopBar.propTypes = {
   handleOnChange: PropTypes.func.isRequired,
+  totalCounter: PropTypes.number.isRequired,
 };
 
 export default TopBar;

@@ -4,7 +4,7 @@ import Card from './Card';
 
 export default class ListCards extends Component {
   render() {
-    const { products, query, category } = this.props;
+    const { products, query, category, someCounter } = this.props;
     return (
       <div>
         {(products === undefined) ? <p>Loading...</p>
@@ -14,6 +14,7 @@ export default class ListCards extends Component {
                 { ...product }
                 query={ query }
                 category={ category }
+                someCounter={ someCounter }
               />
             </div>))}
       </div>
@@ -25,5 +26,5 @@ ListCards.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
   query: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
-  addCartFunc: PropTypes.func.isRequired,
+  someCounter: PropTypes.func.isRequired,
 };
