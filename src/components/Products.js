@@ -5,10 +5,14 @@ export default class Products extends Component {
   render() {
     const { title, thumbnail, price } = this.props;
     return (
-      <div data-testid="product">
-        <h2>{title}</h2>
-        <img src={ thumbnail } alt={ title } />
-        <p>{price}</p>
+      <div>
+        <div id="conteiner-product" data-testid="product">
+          <div>
+            <h2>{title}</h2>
+            <img src={ thumbnail } alt={ title } />
+            <p>{price}</p>
+          </div>
+        </div>
       </div>
     );
   }
