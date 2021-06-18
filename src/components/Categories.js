@@ -30,16 +30,16 @@ class Categories extends Component {
       <div className="categories">
         <h5>Categorias:</h5>
         {categories.map((el) => (
-          <label key={el.id} htmlFor={el.id}>
+          <label key={ el.id } htmlFor={ el.id }>
             {el.name}
             <input
-              key={el.id}
+              key={ el.id }
               type="radio"
-              id={el.id}
+              id={ el.id }
               name="categories"
               data-testid="category"
-              value={el.id}
-              onClick={handleRadioClick}
+              value={ el.id }
+              onClick={ handleRadioClick }
             />
           </label>
         ))}
@@ -50,6 +50,7 @@ class Categories extends Component {
 
 Categories.propTypes = {
   handleRadioClick: PropTypes.func,
+  categories: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };
 
 Categories.defaultProps = {

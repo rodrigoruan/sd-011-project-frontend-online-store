@@ -7,7 +7,13 @@ export default class Assessment extends Component {
         <h2>Avaliações</h2>
 
         <label htmlFor="email">
-          <input type="text" placeholder="Digite seu email" id="email" name="email" required />
+          <input
+            type="text"
+            placeholder="Digite seu email"
+            id="email"
+            name="email"
+            required
+          />
         </label>
 
         <label htmlFor="message">

@@ -6,7 +6,9 @@ export default class Header extends Component {
   render() {
     return (
       <header>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg">
+        <nav
+          className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg"
+        >
           <section className=" " id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">

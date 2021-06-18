@@ -27,26 +27,26 @@ export default class CartProduct extends Component {
       <div>
         <button
           type="button"
-          onClick={() => handleRemoveFromCart(id, thumbnail, title, price, quantity)}
+          onClick={ () => handleRemoveFromCart(id, thumbnail, title, price, quantity) }
         >
           X
         </button>
         <p data-testid="shopping-cart-product-name">{title}</p>
-        <img height="150px" src={thumbnail} alt="thumbnail" />
+        <img height="150px" src={ thumbnail } alt="thumbnail" />
         <span>{price}</span>
         <div data-testid="shopping-cart-product-quantity">{quantity}</div>
 
         <button
           data-testid="product-decrease-quantity"
           type="button"
-          onClick={() => handleDecreaseQuantity(id, thumbnail, title, price, quantity)}
+          onClick={ () => handleDecreaseQuantity(id, thumbnail, title, price, quantity) }
         >
           -
         </button>
         <button
           data-testid="product-increase-quantity"
           type="button"
-          onClick={() => handleAddToCart(id, thumbnail, title, price, quantity)}
+          onClick={ () => handleAddToCart(id, thumbnail, title, price, quantity) }
         >
           +
         </button>
@@ -62,6 +62,6 @@ CartProduct.propTypes = {
       price: PropTypes.number,
       thumbnail: PropTypes.string,
       title: PropTypes.string,
-    })
+    }),
   ),
 }.isRequired;

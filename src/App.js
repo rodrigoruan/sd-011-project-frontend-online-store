@@ -35,7 +35,11 @@ export default class App extends Component {
     const newItem = { id, title, thumbnail, price, quantity };
     const itemExists = oldItems.find((el) => el.id === id);
     if (itemExists) {
-      const updatedItem = { id, title, thumbnail, price, quantity: itemExists.quantity + 1 };
+      const updatedItem = { id,
+        title,
+        thumbnail,
+        price,
+        quantity: itemExists.quantity + 1 };
       const updatedShoppingCart = oldItems.map((el) => (el.id === id ? updatedItem : el));
       return this.setState({ shoppingCart: [...updatedShoppingCart] });
     }
@@ -47,7 +51,11 @@ export default class App extends Component {
     const oldItems = [...shoppingCart];
     const itemExists = oldItems.find((el) => el.id === id);
     if (itemExists && itemExists.quantity > 1) {
-      const updatedItem = { id, title, thumbnail, price, quantity: itemExists.quantity - 1 };
+      const updatedItem = { id,
+        title,
+        thumbnail,
+        price,
+        quantity: itemExists.quantity - 1 };
       const updatedShoppingCart = oldItems.map((el) => (el.id === id ? updatedItem : el));
       return this.setState({ shoppingCart: [...updatedShoppingCart] });
     }
@@ -83,24 +91,27 @@ export default class App extends Component {
           />
           <Route
             path="/details/:id"
-            render={(props) => <ProductDetails {...props} handleAddToCart={this.handleAddToCart} />}
+            render={ (props) => (<ProductDetails
+              { ...props }
+              handleAddToCart={ this.handleAddToCart }
+            />) }
           />
           <Route
             exact
             path="/cart"
-            render={(props) => (
+            render={ (props) => (
               <ShoppingCart
-                {...props}
-                cartItems={shoppingCart}
-                handleRemoveFromCart={this.handleRemoveFromCart}
-                handleDecreaseQuantity={this.handleDecreaseQuantity}
-                handleAddToCart={this.handleAddToCart}
+                { ...props }
+                cartItems={ shoppingCart }
+                handleRemoveFromCart={ this.handleRemoveFromCart }
+                handleDecreaseQuantity={ this.handleDecreaseQuantity }
+                handleAddToCart={ this.handleAddToCart }
               />
-            )}
+            ) }
           />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/finishscreen" component={FinishScreen} />
-          <Route component={NotFound} />
+          <Route exact path="/about" component={ About } />
+          <Route exact path="/finishscreen" component={ FinishScreen } />
+          <Route component={ NotFound } />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>

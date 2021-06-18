@@ -61,6 +61,7 @@ export default class Home extends Component {
   render() {
     const { handleAddToCart } = this.props;
     const { categories, products } = this.state;
+    console.log(categories);
     return (
       // prettier-ignore
       <div className="home-div">

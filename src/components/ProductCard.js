@@ -11,8 +11,8 @@ export default class ItemProduct extends Component {
       item: { thumbnail, title, price, id, category_id },
     } = this.props;
     return (
-      <div data-testid="product" className="content" key={id}>
-        <img src={thumbnail} alt="product thumbnail" />
+      <div data-testid="product" className="content" key={ id }>
+        <img src={ thumbnail } alt="product thumbnail" />
         <h3>{title}</h3>
         <h6>
           R$
@@ -21,16 +21,16 @@ export default class ItemProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={() => handleAddToCart(id, thumbnail, title, price, (quantity = 1))}
+          onClick={ () => handleAddToCart(id, thumbnail, title, price, (quantity = 1)) }
           className="btn btn-success"
         >
           Add to Cart!
         </button>
         <Link
-          to={{
+          to={ {
             pathname: `/details/${id}`,
             state: { id, category_id, title, thumbnail, price, quantity },
-          }}
+          } }
           data-testid="product-detail-link"
         >
           Ver Detalhes
@@ -43,6 +43,7 @@ export default class ItemProduct extends Component {
 ItemProduct.propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
   item: PropTypes.shape({
+    category_id: PropTypes.string,
     thumbnail: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
