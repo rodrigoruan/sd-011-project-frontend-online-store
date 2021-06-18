@@ -7,6 +7,12 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
+
+    this.updateSearchResults = this.updateSearchResults.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
+    this.removeItemFromCart = this.removeItemFromCart.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
+
     this.state = {
       searchResults: { results: [] },
       categories: [],
@@ -16,24 +22,69 @@ class App extends Component {
       },
     };
 
-    this.updateSearchResults = this.updateSearchResults.bind(this);
-    this.addItemToCart = this.addItemToCart.bind(this);
-    this.removeItemFromCart = this.removeItemFromCart.bind(this);
-    this.updateQuantity = this.updateQuantity.bind(this);
+    try {
+      const storedState = this.getStorage();
+      this.state = storedState;
+    } catch (err) {
+      console.log(`Could not fetch stored state: ${err}`);
+    }
   }
 
   componentDidMount() {
-    this.defineStateCategories();
+    const { categories } = this.state;
+    if (!categories.length) {
+      this.defineStateCategories();
+    }
+  }
+
+  componentDidUpdate() {
+    this.saveStorage();
+  }
+
+  getStorage() {
+    if (!Storage || !localStorage) return;
+
+    const retrievedState = localStorage.getItem('frontend-store');
+
+    if (!retrievedState) throw new Error('Sem nada');
+
+    try {
+      const parsedState = JSON.parse(retrievedState);
+      return parsedState;
+    } catch (err) {
+      console.log('to no error');
+      throw new Error(err);
+    }
+  }
+
+  saveStorage() {
+    if (!Storage || !localStorage) return;
+
+    const jsonState = JSON.stringify(this.state);
+
+    localStorage.setItem('frontend-store', jsonState);
   }
 
   addItemToCart(product) {
     this.setState(({ shoppingCart: { totalItemCount, itemList } }) => {
-      product.quantity = 1;
-
       const newShoppingCart = {
         totalItemCount: totalItemCount + 1,
-        itemList: [...itemList, product],
+        itemList: JSON.parse(JSON.stringify(itemList)),
       };
+
+      let hasUpdatedItemQuantity = false;
+
+      newShoppingCart.itemList.forEach((item) => {
+        if (item.id === product.id) {
+          item.quantity += 1;
+          hasUpdatedItemQuantity = true;
+        }
+      });
+
+      if (!hasUpdatedItemQuantity) {
+        product.quantity = 1;
+        newShoppingCart.itemList.push(product);
+      }
 
       return { shoppingCart: newShoppingCart };
     });
@@ -52,7 +103,7 @@ class App extends Component {
           const newQuantity = newItem.quantity + delta;
           newItem.quantity = Math.max(Math.min(newQuantity, max), min);
 
-          const totalDelta = newQuantity - previousQuantity;
+          const totalDelta = newItem.quantity - previousQuantity;
           newShoppingCart.totalItemCount += totalDelta;
           return newItem;
         }
