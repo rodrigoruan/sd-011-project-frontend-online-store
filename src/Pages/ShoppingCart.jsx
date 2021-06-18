@@ -15,30 +15,33 @@ class ShoppingCart extends Component {
     this.handleClickDecrease = this.handleClickDecrease.bind(this);
   }
 
-  getShoppingCartPrice() {
-    const { shoppingCartItens } = this.state;
-
-    return shoppingCartItens.reduce((acc, item) => acc + (item.productInfo[0].price * item.quantity), 0);
-  }
-
   handleClickIncrease(item) {
     const { shoppingCartItens } = this.state;
 
-    shoppingCartItens.find((productItem) => productItem.productId === item.productId).quantity += 1;
-  
+    shoppingCartItens
+      .find((productItem) => productItem.productId === item.productId).quantity += 1;
+
     this.setState({
       shoppingCartItens,
-    })
+    });
   }
 
   handleClickDecrease(item) {
     const { shoppingCartItens } = this.state;
 
-    shoppingCartItens.find((productItem) => productItem.productId === item.productId).quantity -= 1;
-  
+    shoppingCartItens
+      .find((productItem) => productItem.productId === item.productId).quantity -= 1;
+
     this.setState({
       shoppingCartItens,
-    })
+    });
+  }
+
+  getShoppingCartPrice() {
+    const { shoppingCartItens } = this.state;
+
+    return shoppingCartItens
+      .reduce((acc, item) => acc + (item.productInfo[0].price * item.quantity), 0);
   }
 
   render() {
@@ -56,14 +59,31 @@ class ShoppingCart extends Component {
     return (
       <div>
         {shoppingCartItens.map((item) => (
-          <div key={item.productId} className="cart-item">
-            <button> X </button>
-            <img src={item.productInfo[0].thumbnail} alt={item.productInfo[0].title} />
-            <h4 data-testid="shopping-cart-product-name">{item.productInfo[0].title}</h4>
-            <button data-testid="product-decrease-quantity" onClick={ () => this.handleClickDecrease(item) } > - </button>
+          <div key={ item.productId } className="cart-item">
+            <button type="button"> X </button>
+            <img
+              src={ item.productInfo[0].thumbnail }
+              alt={ item.productInfo[0].title }
+            />
+            <h4 data-testid="shopping-cart-product-name">
+              { item.productInfo[0].title }
+            </h4>
+            <button
+              type="button"
+              data-testid="product-decrease-quantity"
+              onClick={ () => this.handleClickDecrease(item) }
+            >
+              -
+            </button>
             <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
-            <button data-testid="product-increase-quantity" onClick={ () => this.handleClickIncrease(item) }> + </button>
-            <p>{`R$: ${item.productInfo[0].price}`}</p>
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ () => this.handleClickIncrease(item) }
+            >
+              +
+            </button>
+            <p>{ `R$: ${item.productInfo[0].price}` }</p>
           </div>
         ))}
 
