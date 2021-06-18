@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Free from './Free';
 
 class Card extends Component {
   constructor() {
@@ -21,8 +22,14 @@ class Card extends Component {
     localStorage.setItem(id, objJSON);
   }
 
+  renderShipping(shipping) {
+    if (shipping.free_shipping) {
+      return <Free />;
+    }
+  }
+
   render() {
-    const { title, thumbnail, price, id } = this.props;
+    const { title, thumbnail, price, id, shipping } = this.props;
     return (
       <div data-testid="product">
         <Link
@@ -34,6 +41,7 @@ class Card extends Component {
         >
           <h2>{title}</h2>
           <img src={ thumbnail } alt={ title } />
+          { this.renderShipping(shipping) }
           <p>{price}</p>
           Mais informações
         </Link>
@@ -52,6 +60,9 @@ class Card extends Component {
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
+  shipping: PropTypes.shape({
+    free_shipping: PropTypes.bool,
+  }).isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
 };
