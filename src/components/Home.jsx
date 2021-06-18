@@ -1,74 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
-import * as fetchAPI from '../services/api';
+import cartImage from '../images/cart.svg';
 
 export default class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-      productCards: [],
-      categoryId: '',
-      search: '',
-      cartItems: [],
-    };
-    this.fetchProductCategory = this.fetchProductCategory.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
-    this.fetchCategories = this.fetchCategories.bind(this);
-    this.addCart = this.addCart.bind(this);
-  }
-
-  componentDidMount() {
-    this.fetchProductCategory();
-  }
-
-  handleChange({ target }) {
-    const { value, name } = target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  async fetchProducts() {
-    const { categoryId, search } = this.state;
-    const fetchedProducts = await
-    fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
-    // console.log(fetchedProducts.results);
-    this.setState({ productCards: fetchedProducts.results });
-  }
-
-  async fetchProductCategory() {
-    const fetchedCategories = await fetchAPI.getCategories();
-    this.setState({
-      categories: fetchedCategories,
-    });
-  }
-
-  async fetchCategories(id) {
-    const fetchedProductsFromCategories = await
-    fetchAPI.getProductsFromCategoryAndQuery(id);
-    this.setState({
-      productCards: fetchedProductsFromCategories.results,
-      categoryId: id,
-    });
-  }
-
-  addCart({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    this.setState({
-      cartItems: [...cartItems, itemToCart],
-    });
-  }
-
   render() {
-    const { categories, productCards, cartItems } = this.state;
+    const {
+      handleChange,
+      fetchProducts,
+      fetchCategories,
+      addCart,
+      categories,
+      productCards,
+      cartItems,
+    } = this.props;
+
     if (categories === []) return <div>Loading...</div>;
     return (
       <div>
-        <div>
+
+        <header className="home-header">
+          <h1>Front-End Online Store</h1>
+        </header>
+
+        <nav className="nav-home">
           <Link
             data-testid="shopping-cart-button"
             to={ {
@@ -76,8 +32,11 @@ export default class Home extends Component {
               state: cartItems,
             } }
           >
-            <img src="./images/cart.svg" alt="Cart" />
+            <img src={ cartImage } alt="Cart" style={ { width: '80px' } } />
           </Link>
+        </nav>
+
+        <div className="search-bar-home">
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
@@ -86,43 +45,68 @@ export default class Home extends Component {
               type="text"
               data-testid="query-input"
               name="search"
-              onChange={ this.handleChange }
+              onChange={ handleChange }
             />
           </label>
-
           <button
             type="button"
             aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
             data-testid="query-button"
-            onClick={ this.fetchProducts }
+            onClick={ fetchProducts }
           >
             Enviar
           </button>
-          <h2>Categorias:</h2>
-          {categories.map((category) => (
-            <button
-              type="button"
-              data-testid="category"
-              key={ category.id }
-              value={ category.id }
-              name="categoryId"
-              onClick={ () => this.fetchCategories(category.id) }
-            >
-              {category.name}
-            </button>
-          ))}
         </div>
-        <div>
-          {!productCards
-            ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar
-            : productCards.map((product) => (
-              <ProductCard
-                key={ product.id }
-                product={ product }
-                addCart={ this.addCart }
-              />))}
+        <div className="main-container-home">
+          <div className="category-buttons-container">
+            <h2>Categorias</h2>
+            {categories.map((category) => (
+              <button
+                className="category-buttons"
+                type="button"
+                data-testid="category"
+                key={ category.id }
+                value={ category.id }
+                name="categoryId"
+                onClick={ () => fetchCategories(category.id) }
+              >
+                {category.name}
+              </button>
+            ))}
+          </div>
+
+          <div className="cards-container">
+            {!productCards
+              ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar
+              : productCards.map((product) => (
+                <ProductCard
+                  key={ product.id }
+                  product={ product }
+                  addCart={ addCart }
+                />))}
+          </div>
         </div>
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  addCart: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  fetchProducts: PropTypes.func.isRequired,
+  fetchCategories: PropTypes.func.isRequired,
+  categories: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    map: PropTypes.func,
+  }).isRequired,
+  cartItems: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+  }).isRequired,
+  productCards: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+
+};
