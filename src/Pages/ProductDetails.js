@@ -15,6 +15,7 @@ class ProductDetails extends React.Component {
       },
     };
     this.fetchDataFromProduct = this.fetchDataFromProduct.bind(this);
+    this.addtocart = this.addtocart.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,11 @@ class ProductDetails extends React.Component {
     });
   }
 
+  addtocart() {
+    const { product } = this.state;
+    localStorage.setItem('productInfo', JSON.stringify(product));
+  }
+
   render() {
     const { product } = this.state;
     const { title, thumbnail, price, atributtes } = product;
@@ -51,9 +57,16 @@ class ProductDetails extends React.Component {
         <p>{ atributtes }</p>
         {/* nome do produto, imagem, preço e especificação técnica. */}
         <br />
-        <Link to="/cart">
+        <Link data-testid="shopping-cart-button" to="/cart">
           <button type="button">Retorne ao carrinho de compras</button>
         </Link>
+        <button
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addtocart }
+          type="button"
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
