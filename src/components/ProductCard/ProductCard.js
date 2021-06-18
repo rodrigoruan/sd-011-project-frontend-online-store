@@ -1,11 +1,15 @@
+/* eslint-disable max-len */
+/* eslint-disable camelcase */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './ProductCard.css';
+import Ship from '../../imgs/frete.jpg';
 
 export default class ProductCard extends Component {
   render() {
-    const { title, price, thumbnail, id, handleAddToShopCart } = this.props;
+    const { title, price, thumbnail, id, shipping, handleAddToShopCart } = this.props;
+
     return (
       <div className="product-card" data-testid="product">
         <Link
@@ -16,12 +20,21 @@ export default class ProductCard extends Component {
               price,
               thumbnail,
               id,
+              shipping,
             },
           } }
         >
           { title }
         </Link>
         <img src={ thumbnail } alt={ title } />
+        <p>
+          { shipping ? <img
+            data-testid="free-shipping"
+            className="free-shipping"
+            src={ Ship }
+            alt="Frete Grátis!!!"
+          /> : '' }
+        </p>
         { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
         <button
           type="button"
