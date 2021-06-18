@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 export default class Cart extends Component {
   constructor() {
     super();
-    this.state = {
-      products: [],
-      count: 0,
-    };
+    this.state = { products: [], count: 0 };
   }
 
   componentDidMount() {
@@ -18,10 +15,7 @@ export default class Cart extends Component {
     const getProducts = { ...localStorage };
     const arrayOfproducts = Object.values(getProducts).map((e) => JSON.parse(e));
 
-    this.setState({
-      products: arrayOfproducts,
-      count: arrayOfproducts,
-    });
+    this.setState({ products: arrayOfproducts, count: arrayOfproducts });
   };
 
   handleClick = ({ target: { id, name } }) => {
@@ -29,7 +23,6 @@ export default class Cart extends Component {
 
     if (name === 'add' && product.counter < product.availableQuantity) {
       product.counter += 1;
-      console.log(product.counter);
     }
     if (name === 'sub' && product.counter > 1) {
       product.counter -= 1;
@@ -47,11 +40,13 @@ export default class Cart extends Component {
   render() {
     const { count } = this.state;
     const { products } = this.state;
+
     if (!products.length) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       );
     }
+
     return (
       <div>
         {products.map(({ title, price, thumbnail, id, availableQuantity }) => (
@@ -66,10 +61,8 @@ export default class Cart extends Component {
               {count.find((item) => item.title === title).counter}
             </p>
             <button
-              disabled={
-                availableQuantity
-                === count.find((item) => item.title === title).counter
-              }
+              disabled={ availableQuantity === count
+                .find((item) => item.title === title).counter }
               data-testid="product-increase-quantity"
               type="button"
               name="add"

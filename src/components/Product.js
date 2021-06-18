@@ -23,11 +23,7 @@ export default class Product extends Component {
   setComments = ({ target: { value, name } }) => this.setState({ [name]: value });
 
   saveCommentOnLocal = () => {
-    const {
-      location: {
-        state: { id },
-      },
-    } = this.props;
+    const { location: { state: { id } } } = this.props;
     const { comment, stars } = this.state;
 
     if (stars) {
@@ -46,42 +42,31 @@ export default class Product extends Component {
   };
 
   changeState = () => {
-    const {
-      location: { state },
-    } = this.props;
+    const { location: { state } } = this.props;
     const { title } = state;
 
     const local = JSON.parse(localStorage.getItem(title));
-
-    this.setState({ counter: local ? local.counter + 1 : 1 });
+    if (local) {
+      this.setState({ counter: local.counter + 1 });
+    }
   };
 
   handleClick = () => {
-    const {
-      location: {
-        state: { title, price, thumbnail, attributes, id, shipping, availableQuantity },
-      },
-    } = this.props;
+    const { location: { state } } = this.props;
+    const { location: { state: { title } } } = this.props;
     const { counter } = this.state;
+    const local = JSON.parse(localStorage.getItem(title));
+
     this.setState((previous) => ({ counter: previous.counter + 1 }));
 
-    const local = JSON.parse(localStorage.getItem(title));
     if (local) {
       local.counter = counter;
       localStorage.setItem(title, JSON.stringify(local));
     } else {
-      const object = {
-        counter,
-        title,
-        price,
-        thumbnail,
-        attributes,
-        id,
-        shipping,
-        availableQuantity,
-      };
+      const object = { ...state, counter };
       localStorage.setItem(title, JSON.stringify(object));
     }
+
     this.sumCartItems();
   };
 
@@ -100,12 +85,12 @@ export default class Product extends Component {
       },
     } = props;
     const { allComments, sum, counter } = state;
+
     return (
       <>
         <h1 data-testid="product-detail-name">{title}</h1>
         <img src={ thumbnail } alt={ title } />
-        {shipping.free_shipping ? (
-          <p data-testid="free-shipping">Frete Grátis!</p>
+        {shipping.free_shipping ? (<p data-testid="free-shipping">Frete Grátis!</p>
         ) : null}
         <p>
           R$
@@ -113,8 +98,8 @@ export default class Product extends Component {
         </p>
         <div>
           <ul>
-            {attributes
-              && attributes.map(({ name }, index) => <li key={ index }>{name}</li>)}
+            {attributes && attributes
+              .map(({ name }, index) => <li key={ index }>{name}</li>)}
           </ul>
         </div>
         <button
@@ -150,19 +135,18 @@ export default class Product extends Component {
         </div>
         <div>
           <h4>Avaliações</h4>
-          {allComments
-            && allComments.split('*').map((item, index) => {
-              const { comment, stars } = JSON.parse(item);
-              return (
-                <div key={ index }>
-                  <p>{comment}</p>
-                  <p>
-                    STARS:
-                    {stars}
-                  </p>
-                </div>
-              );
-            })}
+          {allComments && allComments.split('*').map((item, index) => {
+            const { comment, stars } = JSON.parse(item);
+            return (
+              <div key={ index }>
+                <p>{comment}</p>
+                <p>
+                  STARS:
+                  {stars}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </>
     );

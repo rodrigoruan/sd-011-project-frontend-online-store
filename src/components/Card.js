@@ -6,28 +6,24 @@ import '../css/Card.css';
 export default class Card extends Component {
   constructor() {
     super();
-    this.state = {
-      counter: 1,
-    };
+    this.state = { counter: 1 };
   }
 
   handleClick = () => {
-    let { counter } = this.state;
-    const { props } = this;
+    const { props, state } = this;
+    let { counter } = state;
     const { title, price, thumbnail, id, attributes, sumCartItems } = props;
-
     const availableQuantity = props.available_quantity;
 
     if (localStorage.getItem(title)) {
       const product = JSON.parse(localStorage.getItem(title)).counter;
-      this.setState({ counter: +product + 1 });
-      counter = +product + 1;
+      this.setState({ counter: Number(product) + 1 });
+      counter = Number(product) + 1;
     } else {
       this.setState((previous) => ({ counter: previous.counter + 1 }));
     }
-    //
-    const object = {
-      counter,
+
+    const object = { counter,
       price,
       thumbnail,
       id,
@@ -35,23 +31,18 @@ export default class Card extends Component {
       title,
       availableQuantity,
     };
-    const json = JSON.stringify(object);
 
+    const json = JSON.stringify(object);
     localStorage.setItem(title, json);
     sumCartItems();
   };
 
   render() {
-    const {
-      title,
-      price,
-      thumbnail,
-      id,
-      attributes,
-      shipping,
-    } = this.props;
-    const availableQuantity = Object.values(this.props)[8];
-    const { counter } = this.state;
+    const { props, state } = this;
+    const { counter } = state;
+    const { title, price, thumbnail, id, attributes, shipping } = props;
+    const availableQuantity = props.available_quantity;
+
     return (
       <div className="container-card" data-testid="product">
         <Link
@@ -59,8 +50,7 @@ export default class Card extends Component {
           data-testid="product-detail-link"
           to={ {
             pathname: `/produtos/${id}`,
-            state: {
-              title,
+            state: { title,
               price,
               thumbnail,
               id,

@@ -32,8 +32,7 @@ export default class Home extends Component {
     const { inputText, category } = this.state;
 
     getProductsFromCategoryAndQuery(category, inputText).then(({ results }) => (
-      results.length === 0
-        ? this.setState({ noFindProducts: true })
+      results.length === 0 ? this.setState({ noFindProducts: true })
         : this.setState({ products: results })));
   };
 
@@ -41,21 +40,22 @@ export default class Home extends Component {
     const { category } = this.state;
 
     getProductsFromCategoryAndQuery(category, false).then(({ results }) => (
-      !results.length
-        ? this.setState({ noFindProducts: true })
+      !results.length ? this.setState({ noFindProducts: true })
         : this.setState({ products: results })));
   };
 
   sumCartItems = () => {
     const objeto = { ...localStorage };
     const objJson = Object.values(objeto).map((e) => JSON.parse(e));
-    const total = objJson.reduce((acc, curr) => (curr ? acc + curr.counter : 0), 0);
+    const total = objJson.reduce((acc, curr) => acc + curr.counter, 0);
     this.setState({ sum: total });
   }
 
   render() {
     const { api, products, noFindProducts, category, inputText, sum } = this.state;
+
     if (!api) return <h1>carregando...</h1>;
+
     return (
       <>
         <div className="container">
@@ -85,6 +85,7 @@ export default class Home extends Component {
             <button
               className="button"
               type="button"
+              name="input"
               data-testid="query-button"
               onClick={ this.handleSearch }
             >
