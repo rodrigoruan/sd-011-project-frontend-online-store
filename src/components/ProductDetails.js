@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Rating from './Rating';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class ProductDetails extends React.Component {
         <p data-testid="product-detail-name">{title}</p>
         <p>{`Preço: ${price} R$`}</p>
         <img src={ thumbnail } alt={ title } />
-        {attributes.map(({ name }, index) => <p key={ index }>{ name }</p>)}
+        {attributes.map(({ name }, index) => <p key={ index }>{name}</p>)}
         <button
           type="submit"
           data-testid="product-detail-add-to-cart"
@@ -55,6 +56,8 @@ class ProductDetails extends React.Component {
         >
           Carrinho de compras
         </Link>
+        <br />
+        <Rating />
       </div>
     );
   }
