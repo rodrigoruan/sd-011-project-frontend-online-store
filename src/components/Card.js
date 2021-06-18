@@ -13,33 +13,45 @@ export default class Card extends Component {
 
   handleClick = () => {
     const { sumCartItems } = this.props;
-    // this.setState((previous) => ({ counter: previous.counter + 1 }));
 
-    // const { counter } = this.state;
-    // const { title, price, thumbnail, id, attributes } = this.props;
+    let { counter } = this.state;
+    const { title, price, thumbnail, id, attributes } = this.props;
+    const availableQuantity = Object.values(this.props)[8];
+    console.log(availableQuantity);
+    if (localStorage.getItem(title)) {
+      const product = JSON.parse(localStorage.getItem(title)).counter;
+      this.setState({ counter: +product + 1 });
+      counter = +product + 1;
+    } else {
+      this.setState((previous) => ({ counter: previous.counter + 1 }));
+    }
 
-    // const object = { counter, price, thumbnail, id, attributes, title };
-    // const json = JSON.stringify(object);
+    const object = {
+      counter,
+      price,
+      thumbnail,
+      id,
+      attributes,
+      title,
+      availableQuantity,
+    };
+    const json = JSON.stringify(object);
 
-    const { location: { state } } = this.props;
-    const { title } = state;
-
-    const local = JSON.parse(localStorage.getItem(title));
-
-    this.setState((previous) => ({ counter: previous.counter + 1 }));
-    const { counter } = this.state;
-    local.counter = counter;
-    const json = JSON.stringify(local);
     localStorage.setItem(title, json);
-    // localStorage.setItem(title, json);
     sumCartItems();
-
-    // AJUSTAR ESSA FUNÇÃO  PARA FUNCIONALIDADE DA HOME //
   };
 
   render() {
-    const { title, price, thumbnail, id, attributes, shipping } = this.props;
-
+    const {
+      title,
+      price,
+      thumbnail,
+      id,
+      attributes,
+      shipping,
+    } = this.props;
+    const availableQuantity = Object.values(this.props)[8];
+    const { counter } = this.state;
     return (
       <div className="container-card" data-testid="product">
         <Link
@@ -47,21 +59,29 @@ export default class Card extends Component {
           data-testid="product-detail-link"
           to={ {
             pathname: `/produtos/${id}`,
-            state: { title, price, thumbnail, id, attributes, shipping },
+            state: {
+              title,
+              price,
+              thumbnail,
+              id,
+              attributes,
+              shipping,
+              availableQuantity,
+            },
           } }
         >
           <p className="title">{title}</p>
           <img src={ thumbnail } alt={ title } />
-          {
-            shipping.free_shipping
-              ? <p data-testid="free-shipping">Frete Grátis!</p> : null
-          }
+          {shipping.free_shipping ? (
+            <p data-testid="free-shipping">Frete Grátis!</p>
+          ) : null}
           <p className="price">
             R$
             {price}
           </p>
         </Link>
         <button
+          disabled={ counter > availableQuantity }
           className="add-cart-button"
           data-testid="product-add-to-cart"
           onClick={ this.handleClick }

@@ -49,7 +49,7 @@ export default class Home extends Component {
   sumCartItems = () => {
     const objeto = { ...localStorage };
     const objJson = Object.values(objeto).map((e) => JSON.parse(e));
-    const total = objJson.reduce((acc, curr) => acc + curr.counter, 0);
+    const total = objJson.reduce((acc, curr) => (curr ? acc + curr.counter : 0), 0);
     this.setState({ sum: total });
   }
 
