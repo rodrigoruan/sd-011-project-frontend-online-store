@@ -22,6 +22,9 @@ export default class App extends Component {
     this.fetchProducts = this.fetchProducts.bind(this);
     this.fetchCategories = this.fetchCategories.bind(this);
     this.addCart = this.addCart.bind(this);
+    this.removeCartItem = this.removeCartItem.bind(this);
+    this.increaseItemQuantity = this.increaseItemQuantity.bind(this);
+    this.decreaseItemQuantity = this.decreaseItemQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -39,7 +42,6 @@ export default class App extends Component {
     const { categoryId, search } = this.state;
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
-    // console.log(fetchedProducts.results);
     this.setState({ productCards: fetchedProducts.results });
   }
 
@@ -62,9 +64,50 @@ export default class App extends Component {
   addCart({ target: { value } }) {
     const { productCards, cartItems } = this.state;
     const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === value);
+    if (!isInCart) {
+      itemToCart.quantity = 1;
+      this.setState({
+        cartItems: [...cartItems, itemToCart],
+      });
+    } else {
+      this.setState({
+        cartItems: [...cartItems],
+      });
+      itemToCart.quantity += 1;
+    }
+  }
+
+  removeCartItem({ target: { value } }) {
+    const { cartItems } = this.state;
+    const updateCart = cartItems.filter(({ id }) => id !== value);
     this.setState({
-      cartItems: [...cartItems, itemToCart],
+      cartItems: updateCart,
     });
+  }
+
+  increaseItemQuantity({ target: { value } }) {
+    const { productCards, cartItems } = this.state;
+    const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === value);
+    if (isInCart) {
+      this.setState({
+        cartItems: [...cartItems],
+      });
+      itemToCart.quantity += 1;
+    }
+  }
+
+  decreaseItemQuantity({ target: { value } }) {
+    const { productCards, cartItems } = this.state;
+    const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === value);
+    if (isInCart && itemToCart.quantity > 1) {
+      this.setState({
+        cartItems: [...cartItems],
+      });
+      itemToCart.quantity -= 1;
+    }
   }
 
   render() {
@@ -87,7 +130,16 @@ export default class App extends Component {
                   cartItems={ cartItems }
                 />) }
             />
-            <Route path="/cart" component={ ShopCart } />
+            <Route
+              path="/cart"
+              render={ (props) => (<ShopCart
+                removeCartItem={ this.removeCartItem }
+                increaseItemQuantity={ this.increaseItemQuantity }
+                decreaseItemQuantity={ this.decreaseItemQuantity }
+                cartItems={ cartItems }
+                { ...props }
+              />) }
+            />
             <Route
               path="/details/:id"
               render={ (props) => (<ProductDetails
