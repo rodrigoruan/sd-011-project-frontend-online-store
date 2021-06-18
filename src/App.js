@@ -10,32 +10,34 @@ export default class App extends Component {
 
     this.state = {
       itensAdded: [],
-      check: false,
     };
 
     this.addItems = this.addItems.bind(this);
   }
 
   addItems(obj) {
-    const { itensAdded, check } = this.state;
-    const { id, title, price, quantity } = obj;
+    const { itensAdded } = this.state;
+    const { id } = obj;
 
-    if(itensAdded.length) {
-      itensAdded.some((product) => (
-        product.id === id ? this.setState({ check: true }) : this.setState({ check: false })
-      ));
-    }
-
-
-    if(!check) {
+    const alreadyExist = itensAdded.filter((product, index) => ( product.id === id ));
+    console.log(alreadyExist)
+    if(!alreadyExist.length) {
       this.setState({
         itensAdded: [...itensAdded, obj],
-        check: true,
       })
     } else {
-      itensAdded.find((product) => id === product.id)
+      alreadyExist[0].quantity = alreadyExist[0].quantity += 1
     }
   }
+  
+
+    // if(!check) {
+    //   this.setState({
+    //     itensAdded: [...itensAdded, obj],
+    //   })
+    // } else {
+    //   // itensAdded.find((product) => id === product.id)
+    // }
 
   render() {
     const { itensAdded } = this.state;
