@@ -28,7 +28,7 @@ export default class CartItem extends Component {
 
   render() {
     const { quantity } = this.state;
-    const { cart: { title, price } } = this.props;
+    const { cart: { title, price, shipping:{ free_shipping: freeShipping } } } = this.props;
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">
@@ -46,6 +46,12 @@ export default class CartItem extends Component {
           Preço total:
           {quantity * price}
         </p>
+
+        {
+          freeShipping
+            ? <p data-testid="free-shipping">Frete Grátis</p>
+            : undefined
+        }
         <button
           type="button"
           data-testid="product-increase-quantity"

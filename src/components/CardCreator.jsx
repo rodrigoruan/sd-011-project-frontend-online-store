@@ -10,8 +10,7 @@ class CardCreator extends Component {
   }
 
   createCard(item) {
-    const { title, thumbnail, price } = item;
-
+    const { title, thumbnail, price, shipping: { free_shipping: freeShipping } } = item;
     return (
       <div className="product-card" data-testid="product">
         <h2 className="product-title">{title}</h2>
@@ -21,6 +20,11 @@ class CardCreator extends Component {
           alt={ `imagem do produto: ${title}` }
         />
         <h3 className="product-price">{`R$ ${price}`}</h3>
+        {
+          freeShipping
+            ? <p data-testid="free-shipping"> Frete Grátis </p>
+            : undefined
+        }
       </div>
     );
   }
