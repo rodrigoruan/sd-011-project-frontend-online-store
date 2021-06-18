@@ -9,7 +9,7 @@ class CarrinhoCompras extends Component {
     );
     return (
       <div>
-        { cartItems.lenght === 0 ? emptyCart : cartItems.map((item, index) => (
+        { cartItems.length === 0 ? emptyCart : cartItems.map((item, index) => (
           <div className="cartProduct" key={ index }>
             <p data-testid="shopping-cart-product-name">{ item.title }</p>
             <img src={ item.thumbnail } alt="produto" />
