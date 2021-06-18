@@ -24,12 +24,12 @@ export default class AvaliationForm extends Component {
   handleForm(event) {
     event.preventDefault();
     // recebe props
-    const { id, getForm } = this.props;
-    // clona o estado
-    const state = { ...this.state };
-    console.log([...state, ...{ id }]);
-    // const info = [...state, id];
-    getForm(state, id);
+    const { productId, getForm } = this.props;
+    const idObj = { id: productId };
+    // junta o objeto do id com o estado atual da aplicação
+    const obj = Object.assign(idObj, this.state);
+    // passa as informações para o componente pai
+    getForm(obj);
   }
 
   render() {
@@ -123,6 +123,6 @@ export default class AvaliationForm extends Component {
 }
 
 AvaliationForm.propTypes = {
-  id: PropTypes.string.isRequired,
+  productId: PropTypes.string.isRequired,
   getForm: PropTypes.func.isRequired,
 };

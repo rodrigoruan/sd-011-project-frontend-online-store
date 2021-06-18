@@ -7,17 +7,15 @@ export default class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      avaliation: [],
+      avaliationsArray: [],
     };
     this.getForm = this.getForm.bind(this);
   }
-  // componentDidMount() {
-  // }
 
-  getForm(state, id) {
-    this.setState({
-      avaliation: [...state, id],
-    });
+  getForm(obj) {
+    this.setState((state) => ({
+      avaliationsArray: [...state.avaliationsArray, obj],
+    }));
   }
 
   render() {
@@ -27,7 +25,7 @@ export default class ProductDetail extends Component {
         <h1>PRODUTO</h1>
         <AvaliationForm
           getForm={ this.getForm }
-          id={ id }
+          productId={ id }
         />
         <Avaliations />
       </div>
