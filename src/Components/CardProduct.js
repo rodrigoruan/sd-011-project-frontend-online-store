@@ -29,7 +29,13 @@ class CardProduct extends Component {
   render() {
     const { redirect } = this.state;
     const { listProduct, onClick, cartProps } = this.props;
-    const { thumbnail, title, price } = listProduct;
+    const {
+      thumbnail,
+      title,
+      price,
+      shipping: { free_shipping: freeShipping } } = listProduct;
+    const shipping = freeShipping ? (<p data-testid="free-shipping">Frete Grátis</p>)
+      : '';
     return !redirect ? (
       <div className="card" data-testid="product">
         <div className="title">
@@ -62,6 +68,7 @@ class CardProduct extends Component {
           >
             Adicionar ao carrinho
           </button>
+          { shipping }
         </div>
       </div>
     ) : (<Redirect to="/product" />);
