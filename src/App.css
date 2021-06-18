@@ -4,24 +4,6 @@
 
   --header: #14213d;
 }
-/* 
-
-@media (min-width: 800px) {
-  .card {
-    height: 10%;
-  }
-  .title {
-    font-size: 10px;
-  }
-  .price {
-    width: 100%;
-    font-size: 10px;
-  }
-  .buttonton {
-    width: 100%;
-    font-size: 10px;;
-  }
-} */
 
 * {
   box-sizing: border-box;
@@ -31,9 +13,9 @@
 
 .free-shipping {
   background-color: green;
-  width: 100%;
-  text-align: center;
   color: white;
+  text-align: center;
+  width: 100%;
 }
 
 .disabled-button {
@@ -52,34 +34,50 @@
   justify-content: center;
 }
 
+button {
+  background-color: var(--button);
+  border: none;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 6px;
+  padding: 6px;
+}
+
 .search-button {
-  width: 100vw;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 100vw;
+}
+
+input {
+  border: none;
+  padding: 9px;
 }
 
 .search-button input {
-  width: 80%;
-  background-color: rgb(255, 255, 255);
-  margin: 0;
+  background-color: white;
   border: solid 1px;
+  margin: 0;
   padding: 13px;
+  width: 80%;
 }
 
 .search-button button {
+  height: 43px;
   margin: 0;
   padding: 8px;
   width: 20%;
-  height: 43px;
 }
 
 .shopping {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  position: relative;
   padding: 10px;
+  position: relative;
 }
 
 .shopping img {
@@ -87,17 +85,17 @@
 }
 
 .cart-quantity {
+  align-items: center;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  height: 25px;
+  justify-content: center;
   position: absolute;
   right: 1px;
+  text-align: center;
   top: 5px;
   width: 25px;
-  height: 25px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: black;
 }
 
 .App {
@@ -130,9 +128,9 @@
 }
 
 .body2 {
+  align-items: stretch;
   display: flex;
   flex-wrap: wrap;
-  align-items:stretch;
   height: 100%;
 }
 
@@ -149,10 +147,10 @@
   box-shadow: 1px 1px 1pt 1pt #00000052;
   display: flex;
   flex-direction: column;
+  height: 12%;
   margin: 10px;
   transition: ease-in-out 0.3s;
   width: 15%;
-  height: 12%;
 }
 
 .card:hover {
@@ -184,19 +182,19 @@
 }
 
 .price {
-  border-radius: 2px;
   border: solid 1px;
+  border-radius: 2px;
   text-align: center;
   width: 50%;
 }
 
 .category {
-  width: 100%;
-  padding: 2px;
-  border-radius: 0;
-  border: 1px solid;
-  margin: 0;
   background-color: var(--header);
+  border: 1px solid;
+  border-radius: 0;
+  margin: 0;
+  padding: 2px;
+  width: 100%;
 }
 
 .category:hover {
@@ -205,23 +203,23 @@
 
 .active {
   background-color: var(--header);
-  width: 100%;
-  padding: 2px;
-  border-radius: 0;
   border: 1px solid;
+  border-radius: 0;
   margin: 0;
+  padding: 2px;
+  width: 100%;
 }
 
 .aside {
+  align-items: center;
   background-color: rgb(58, 58, 58);
   border-radius: 3px solid white;
   color: whitesmoke;
   display: flex;
-  width: 15%;
-  align-items: center;
-  justify-content: flex-start;
   flex-flow: column wrap;
+  justify-content: flex-start;
   min-height: 100%;
+  width: 15%;
 }
 
 .buttons-container {
@@ -233,28 +231,8 @@
   width: 100%;
 }
 
-button {
-  background-color: var(--button);
-  border: none;
-  border-radius: 2px;
-  color: white;
-  cursor: pointer;
-  font-size: 20px;
-  margin: 6px;
-  padding: 6px;
-}
-
 button:hover {
   transform: scale(1.1);
-}
-
-input {
-  padding: 9px;
-  border: none;
-}
-
-#root {
-  width: 100vw;
 }
 
 .logo {
@@ -286,15 +264,15 @@ a {
 }
 
 .ajuda-deus {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
 .increase-decrease-buttons {
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
 }
