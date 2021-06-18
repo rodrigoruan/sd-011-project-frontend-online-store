@@ -29,10 +29,16 @@ export default class App extends Component {
     api.getProductsFromCategoryAndQuery();
   }
 
-  handleAddToCart = (id, title, thumbnail, price) => {
+  handleAddToCart = (id, title, thumbnail, price, quantity) => {
     const { shoppingCart } = this.state;
     const oldItems = [...shoppingCart];
-    const newItem = { id, title, thumbnail, price };
+    const newItem = { id, title, thumbnail, price, quantity: 1 };
+    const itemExists = oldItems.find((el) => el.id === id);
+    if (itemExists) {
+      const updatedItem = { id, title, thumbnail, price, quantity: itemExists.quantity + 1 };
+      this.setState({ shoppingCart: [...oldItems, updatedItem] });
+    }
+
     this.setState({ shoppingCart: [...oldItems, newItem] });
   };
 
@@ -50,15 +56,15 @@ export default class App extends Component {
               (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } />
             }
           />
-          <Route path="/details/:id" render={ (props) => <ProductDetails { ...props } /> } />
+          <Route path="/details/:id" render={(props) => <ProductDetails {...props} />} />
           <Route
             exact
             path="/cart"
-            render={ (props) => <ShoppingCart { ...props } cartItems={ shoppingCart } /> }
+            render={(props) => <ShoppingCart {...props} cartItems={shoppingCart} />}
           />
-          <Route exact path="/about" component={ About } />
-          <Route exact path="/finishscreen" component={ FinishScreen } />
-          <Route component={ NotFound } />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/finishscreen" component={FinishScreen} />
+          <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>

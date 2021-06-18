@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default class ItemProduct extends Component {
   render() {
+    let quantity;
     const num = 10;
     const {
       handleAddToCart,
@@ -20,7 +21,7 @@ export default class ItemProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={() => handleAddToCart(id, title, thumbnail, price)}
+          onClick={() => handleAddToCart(id, title, thumbnail, price, (quantity = 1))}
           className="btn btn-success"
         >
           Add to Cart!
