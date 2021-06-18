@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import ProductItem from '../components/ProductItem';
 
 class Cart extends Component {
@@ -43,7 +44,9 @@ class Cart extends Component {
           Total: R$
           {itensCarrinho.reduce((acc, curr) => acc + parseFloat(curr.price), 0)}
         </strong>
-        <button type="button">Finalizar compra</button>
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">Finalizar compra</button>
+        </Link>
       </div>
     );
   }
