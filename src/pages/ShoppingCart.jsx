@@ -16,9 +16,8 @@ class ShoppingCart extends React.Component {
 
   filterFunction() {
     const { cart } = this.props;
-    const result = cart.reduce((acc, curr) => {
-      return acc.includes(curr) ? acc : acc.concat(curr);
-    }, []);
+    const result = cart.reduce((acc, curr) => (acc
+      .includes(curr) ? acc : acc.concat(curr)), []);
     this.setState({
       filteredCart: result,
     });
@@ -49,8 +48,8 @@ ShoppingCart.propTypes = {
   cart: PropTypes.shape({
     map: PropTypes.func.isRequired,
     length: PropTypes.arrayOf().isRequired,
+    reduce: PropTypes.func.isRequired,
   }).isRequired,
-  // quantity: PropTypes.number.isRequired,
 };
 
 export default ShoppingCart;
