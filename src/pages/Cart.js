@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 
 export default class Cart extends Component {
@@ -28,6 +29,7 @@ export default class Cart extends Component {
                 <CartItem cart={ result } />
               </div>
             ))}
+          <Link to="/checkout" data-testid="checkout-products">checkout </Link>
         </div>
       );
     }
