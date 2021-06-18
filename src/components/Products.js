@@ -13,21 +13,23 @@ class Products extends Component {
   }
 
   addItemCart() {
-    const { product, func, products } = this.props;
+    const { product, func } = this.props;
     const { count } = this.state;
     product.cartItem = true;
     product.cartCount = count;
-    func(products);
+    func(product);
     this.setState((previous) => ({
       count: previous.count + 1,
     }));
   }
 
   render() {
-    const { title, img, price } = this.props;
+    const { title, img, price, product } = this.props;
     return (
       <div>
-        <Link to={ `/product-details/${title}` } data-testid="product-detail-link">
+        <Link to={{ pathname: `/product-details/${title}`, state: { productToAdd: product } }} 
+        data-testid="product-detail-link"
+        >
           <div className="product" data-testid="product" aria-hidden="true">
             <p>{ title }</p>
             <img src={ img } alt="produto" />

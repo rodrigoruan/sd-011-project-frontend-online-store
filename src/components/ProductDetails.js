@@ -10,12 +10,27 @@ class ProductDetails extends Component {
     super(props);
     this.state = {
       product: {},
+      count: 1,
     };
     this.getProduct = this.getProduct.bind(this);
+    this.addItemCart = this.addItemCart.bind(this);
   }
 
   componentDidMount() {
     this.getProduct();
+  }
+
+  addItemCart() {
+    const { createCart, location } = this.props;
+    const { count } = this.state;
+    const { productToAdd } = location.state;
+    console.log(productToAdd);
+    productToAdd.cartItem = true;
+    productToAdd.cartCount = count;
+    createCart(productToAdd);
+    this.setState((previous) => ({
+      count: previous.count + 1,
+    }));
   }
 
   async getProduct() {
@@ -50,6 +65,13 @@ class ProductDetails extends Component {
             { att.value_name }
           </p>
         ))}
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addItemCart }
+        >
+          Adicionar ao carrinho
+        </button>
         <Rating id={ id } />
         <Link to="/carrinho-compras">
           <img
