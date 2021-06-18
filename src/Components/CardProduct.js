@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 // teste
 
 class CardProduct extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       redirect: false,
     };
@@ -29,7 +28,7 @@ class CardProduct extends Component {
 
   render() {
     const { redirect } = this.state;
-    const { listProduct, onClick } = this.props;
+    const { listProduct, onClick, cartProps } = this.props;
     const { thumbnail, title, price } = listProduct;
     return !redirect ? (
       <div className="card" data-testid="product">
@@ -43,19 +42,23 @@ class CardProduct extends Component {
             {' '}
             { price }
           </div>
-          <button
-            type="button"
-            onClick={ this.setStorage }
-            data-testid="product-detail-link"
-            id="details-button"
-          >
-            Ver mais
-          </button>
+          <Link to={ { pathname: '/product', state: cartProps } }>
+            <button
+              type="button"
+              onClick={ this.setStorage }
+              data-testid="product-detail-link"
+              id="details-button"
+              className="buttonton"
+            >
+              Ver mais
+            </button>
+          </Link>
           <button
             onClick={ () => onClick(listProduct) }
             type="button"
             data-testid="product-add-to-cart"
             id="add-to-cart-button"
+            className="buttonton"
           >
             Adicionar ao carrinho
           </button>
@@ -72,6 +75,7 @@ CardProduct.propTypes = {
     price: PropTypes.string,
   })).isRequired,
   onClick: PropTypes.func.isRequired,
+  cartProps: PropTypes.shape().isRequired,
 };
 
 export default CardProduct;

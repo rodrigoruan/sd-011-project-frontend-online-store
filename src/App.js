@@ -3,6 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Shopcart from './Pages/Shopcart';
+import NewItem from './Components/NewItem';
 import ProductDetails from './Pages/ProductDetails';
 import PurchasePage from './Pages/PurchasePage';
 
@@ -23,6 +24,7 @@ function App() {
             ) }
           />
           <Route path="/PurchasePage" component={ PurchasePage } />
+          <Route path="/NewItem" component={ NewItem } />
           <Route path="/" component={ Home } />
         </Switch>
       </Router>

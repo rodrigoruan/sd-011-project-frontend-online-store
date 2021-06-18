@@ -4,6 +4,83 @@
 
   --header: #14213d;
 }
+/* 
+
+@media (min-width: 800px) {
+  .card {
+    height: 10%;
+  }
+  .title {
+    font-size: 10px;
+  }
+  .price {
+    width: 100%;
+    font-size: 10px;
+  }
+  .buttonton {
+    width: 100%;
+    font-size: 10px;;
+  }
+} */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-button {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-button input {
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  margin: 0;
+  border: solid 1px;
+  padding: 13px;
+}
+
+.search-button button {
+  margin: 0;
+  padding: 8px;
+  width: 20%;
+  height: 43px;
+}
+
+.shopping {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+}
+
+.shopping img {
+  width: 50px;
+}
+
+.cart-quantity {
+  position: absolute;
+  right: 1px;
+  top: 5px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: black;
+}
 
 .App {
   align-items: center;
@@ -13,19 +90,20 @@
 }
 
 .body {
-  background-color: white;
+  background-color: rgb(231, 231, 231);
   display: flex;
   flex-direction: column;
+  width: 100vw;
 
 }
 
 .header {
-  align-items: baseline;
+  align-items: center;
   background-color: var(--header);
-  border-radius: 1px;
   color: #e5e5e5;
   display: flex;
   justify-content: space-around;
+  padding: 5px;
   width: 100%;
 }
 
@@ -36,41 +114,49 @@
 .body2 {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  align-items:stretch;
+  height: 100%;
 }
 
-.card-container {
+.container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100vw;
+  flex-wrap: wrap;
+  width: 85%;
 }
 
 .card {
   align-items: center;
   background-color: white;
   border-radius: 3px;
-  box-shadow: 0 0 3pt 2pt #14213d;
+  box-shadow: 1px 1px 1pt 1pt #00000052;
   display: flex;
   flex-direction: column;
-  height: 6%;
   margin: 10px;
   transition: ease-in-out 0.3s;
-  width: 20%;
+  width: 15%;
+  height: 12%;
 }
 
 .card:hover {
-  transform: scale(1.1);
+  box-shadow: 3px 3px 3px 3px #00000063;
   transition: ease-in-out 0.4s;
 }
 
 .title {
+  border-radius: 2px;
+  border-top: 1px solid;
+  color: #838383;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.title-active {
   background-color: var(--header);
   border-radius: 2px;
   color: #e5e5e5;
   margin-bottom: 5px;
-  padding: 4px;
-  width: 100%;
+  padding: 18px;
+  width: 90%;
 }
 
 .img {
@@ -81,23 +167,43 @@
 
 .price {
   border-radius: 2px;
-  box-shadow: 0 0 3pt 2pt #e5e5e5;
+  border: solid 1px;
   text-align: center;
-  width: 30%;
+  width: 50%;
 }
 
 .category {
-  display: flex;
-  flex-direction: row;
-  margin: 5px;
+  width: 100%;
+  padding: 2px;
+  border-radius: 0;
+  border: 1px solid;
+  margin: 0;
+  background-color: var(--header);
+}
+
+.category:hover {
+  background-color: var(--button);
+}
+
+.active {
+  background-color: var(--header);
+  width: 100%;
+  padding: 2px;
+  border-radius: 0;
+  border: 1px solid;
+  margin: 0;
 }
 
 .aside {
-  background-color: black;
+  background-color: rgb(58, 58, 58);
   border-radius: 3px solid white;
   color: whitesmoke;
   display: flex;
-  flex-flow: row wrap;
+  width: 15%;
+  align-items: center;
+  justify-content: flex-start;
+  flex-flow: column wrap;
+  min-height: 100%;
 }
 
 .buttons-container {
@@ -115,7 +221,7 @@ button {
   border-radius: 2px;
   color: white;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 20px;
   margin: 6px;
   padding: 6px;
 }
@@ -125,7 +231,12 @@ button:hover {
 }
 
 input {
-  padding: 5px;
+  padding: 9px;
+  border: none;
+}
+
+#root {
+  width: 100vw;
 }
 
 .logo {
@@ -159,10 +270,13 @@ a {
 .ajuda-deus {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
 .increase-decrease-buttons {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

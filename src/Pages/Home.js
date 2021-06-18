@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import ShoppingCartSize from '../Components/ShoppingCartSize';
 import * as Data from '../services/api';
 import RadialButton from '../Components/RadialButton';
 import CardProduct from '../Components/CardProduct';
@@ -22,10 +23,20 @@ export default class Home extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.getProductsFromCategory = this.getProductsFromCategory.bind(this);
     this.addCart = this.addCart.bind(this);
+    this.addCartProducts = this.addCartProducts.bind(this);
   }
 
   componentDidMount() {
     this.getProducts();
+    const cartItem = JSON.parse(localStorage.getItem('cartItem'));
+    if (cartItem !== null && cartItem.length > 0) {
+      this.addCartProducts(cartItem);
+    }
+  }
+
+  componentDidUpdate() {
+    const { cartProducts } = this.state;
+    localStorage.setItem('cartItem', JSON.stringify([...cartProducts]));
   }
 
   handleChange({ target }) {
@@ -45,6 +56,7 @@ export default class Home extends Component {
   async getProducts() {
     const fetchApi = await Data.getCategories();
     this.setState({
+      loading: false,
       categories: fetchApi,
     });
   }
@@ -68,6 +80,12 @@ export default class Home extends Component {
     }));
   }
 
+  addCartProducts(product) {
+    this.setState(() => ({
+      cartProducts: [...product],
+    }));
+  }
+
   render() {
     const {
       categories,
@@ -86,27 +104,28 @@ export default class Home extends Component {
           <Link
             to={ { pathname: '/shopcart', state: cartProducts } }
           >
-            <button type="button" data-testid="shopping-cart-button">
-              Carrinho de Compras
+            <button className="shopping" type="button" data-testid="shopping-cart-button">
+              <img src="https://image.flaticon.com/icons/png/512/263/263142.png" alt="a" />
+              <ShoppingCartSize shop={ cartProducts.length } />
             </button>
           </Link>
-          <label className="search-button" htmlFor="search">
-            <input
-              data-testid="query-input"
-              onChange={ this.handleChange }
-              className="search"
-              type="text"
-            />
-            <button
-              data-testid="query-button"
-              type="button"
-              onClick={ this.getProductById }
-            >
-              Search
-            </button>
-          </label>
 
         </header>
+        <label className="search-button" htmlFor="search">
+          <input
+            data-testid="query-input"
+            onChange={ this.handleChange }
+            className="search"
+            type="text"
+          />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ this.getProductById }
+          >
+            Search
+          </button>
+        </label>
         <div className="body2">
 
           <aside className="aside">
@@ -120,16 +139,19 @@ export default class Home extends Component {
               />
             ))}
           </aside>
-          {searchProducts.map((eachItem) => (
+          <div className="container">
+            {searchProducts.map((eachItem) => (
 
-            <CardProduct
-              data-testid="product"
-              key={ eachItem.id }
-              listProduct={ eachItem }
-              onClick={ this.addCart }
-            />
+              <CardProduct
+                data-testid="product"
+                key={ eachItem.id }
+                listProduct={ eachItem }
+                cartProps={ cartProducts }
+                onClick={ this.addCart }
+              />
 
-          ))}
+            ))}
+          </div>
 
           {!loading ? searchCategory.map((eachCategoryItem) => (
 
