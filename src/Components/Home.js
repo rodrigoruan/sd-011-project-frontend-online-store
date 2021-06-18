@@ -15,6 +15,7 @@ class Home extends Component {
       products: [],
       categoryId: '',
       quantity: 1,
+      productsInCart: [],
     };
   }
 
@@ -74,8 +75,14 @@ class Home extends Component {
 
   addToCart = (title, price, thumbnail, id) => {
     const { quantity } = this.state;
-
-    localStorage.setItem(id, [title, '/n', thumbnail, '/n', price, '/n', quantity, '/n', id]);
+    const setLocalItems = { title, thumbnail, price, quantity, id };
+    this.setState((previousState) => ({
+      productsInCart: [...previousState.productsInCart, setLocalItems],
+    }), () => {
+      const { productsInCart } = this.state;
+      const JsonObject = JSON.stringify(productsInCart);
+      localStorage.setItem('productsInCart', JsonObject);
+    });
   }
 
   saveCategorieId = (id) => {

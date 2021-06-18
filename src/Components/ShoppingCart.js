@@ -2,84 +2,99 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
-  // constructor() {
-  //   super();
+  constructor() {
+    super();
 
-  // }
+    this.state = {
+      products: [],
+    };
+  }
+
+  componentDidMount() {
+    this.getProductsInLocalStorage();
+  }
+
+  getProductsInLocalStorage = () => {
+    const productsInCartString = localStorage.getItem('productsInCart');
+    this.setState({
+      products: JSON.parse(productsInCartString),
+    });
+  }
 
   subtractItem = (id) => {
-    const getItemById = localStorage.getItem(id);
-    let number = parseInt(getItemById.split(',/n')[3].replace(',', ''), 10);
-    const title = getItemById.split(',/n')[0];
-    const thumbnail = getItemById.split(',/n')[1].replace(',', '');
-    const price = getItemById.split(',/n')[2];
+    const { products } = this.state;
+    const newProducts = products.map((product) => {
+      if (product.id === id && product.quantity >= 1) {
+        product.quantity -= 1;
+        return product;
+      }
+      return product;
+    });
 
-    if (number >= 1) {
-      number -= 1;
-    } else {
-      number = 0;
-    }
-
-    localStorage
-      .setItem(id, [title, '/n', thumbnail, '/n', price, '/n', number, '/n', id]);
-    const quantityElement = document.getElementById('quantity');
-    quantityElement.innerHTML = number;
+    localStorage.setItem('productsInCart', JSON.stringify(newProducts));
+    this.setState({
+      products: newProducts,
+    });
   }
 
   addItem = (id) => {
-    const getItemById = localStorage.getItem(id);
-    let number = parseInt(getItemById.split(',/n')[3].replace(',', ''), 10);
-    const title = getItemById.split(',/n')[0];
-    const thumbnail = getItemById.split(',/n')[1].replace(',', '');
-    const price = getItemById.split(',/n')[2];
+    const { products } = this.state;
+    const newProducts = products.map((product) => {
+      if (product.id === id) {
+        product.quantity += 1;
+        return product;
+      }
+      return product;
+    });
 
-    console.log(number);
-    number += 1;
-    console.log(number);
-
-    localStorage
-      .setItem(id, [title, '/n', thumbnail, '/n', price, '/n', number, '/n', id]);
-    const quantityElement = document.getElementById('quantity');
-    quantityElement.innerHTML = number;
+    localStorage.setItem('productsInCart', JSON.stringify(newProducts));
+    this.setState({
+      products: newProducts,
+    });
   }
 
-  render() {
-    const cartItems = { ...localStorage };
-
-    const renderCartObjects = Object.values(cartItems).map((element) => (
-      <div key={ element.split(',/n')[0] }>
-        <h3 data-testid="shopping-cart-product-name">{ element.split(',/n')[0] }</h3>
-        <img src={ element.split(',/n')[1].replace(',', '') } alt={ element } />
+  renderCartObjects = () => {
+    const { products } = this.state;
+    const renderCartObjects = products.map((element) => (
+      <div key={ element.id }>
+        <h3 data-testid="shopping-cart-product-name">{ element.title }</h3>
+        <img src={ element.thumbnail } alt={ element } />
         <div>
           <button
             type="button"
           >
             X
           </button>
-          <p id="quantity" data-testid="shopping-cart-product-quantity">
-            { element.split(',/n')[3].replace(',', '') }
+          <p data-testid="shopping-cart-product-quantity">
+            { element.quantity }
           </p>
           <button
             data-testid="product-decrease-quantity"
             type="button"
-            onClick={ () => this.subtractItem(element.split(',/n')[4].replace(',', '')) }
+            onClick={ () => this.subtractItem(element.id) }
           >
             -
           </button>
           <button
             data-testid="product-increase-quantity"
             type="button"
-            onClick={ () => this.addItem(element.split(',/n')[4].replace(',', '')) }
+            onClick={ () => this.addItem(element.id) }
           >
             +
           </button>
         </div>
       </div>
     ));
+    return renderCartObjects;
+  }
+
+  render() {
+    const { products } = this.state;
     return (
       <div>
-        <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
-        <div>{ renderCartObjects }</div>
+        { products === null
+          ? <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
+          : this.renderCartObjects() }
         {/* adiciona requisito 12 abaixo ---- */}
         <Link to={ { pathname: '/checkout' } }>
           <button

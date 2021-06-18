@@ -11,6 +11,7 @@ class PageProduct extends Component {
       thumbnail: '',
       loading: true,
       quantity: 1,
+      productsInCart: [],
     };
   }
 
@@ -20,8 +21,14 @@ class PageProduct extends Component {
 
   addToCart = (title, price, thumbnail, id) => {
     const { quantity } = this.state;
-
-    localStorage.setItem(id, [title, '/n', thumbnail, '/n', price, '/n', quantity, '/n', id]);
+    const setLocalItems = { title, thumbnail, price, quantity, id };
+    this.setState((previousState) => ({
+      productsInCart: [...previousState.productsInCart, setLocalItems],
+    }), () => {
+      const { productsInCart } = this.state;
+      const JsonObject = JSON.stringify(productsInCart);
+      localStorage.setItem('productsInCart', JsonObject);
+    });
   }
 
   async catchId() {
@@ -48,6 +55,15 @@ class PageProduct extends Component {
         <h1 data-testid="product-detail-name">{ title }</h1>
         <p>{ price }</p>
         <img src={ thumbnail } alt={ title } />
+        <form>
+          <label htmlFor="product-detail-evaluation">
+            Mensagem(opcional)
+            <br />
+            <textarea data-testid="product-detail-evaluation" />
+          </label>
+          <br />
+          <button type="button">Avaliar</button>
+        </form>
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
