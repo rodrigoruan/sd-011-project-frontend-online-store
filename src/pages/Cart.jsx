@@ -95,6 +95,42 @@ export default class Cart extends Component {
     return totalPrice;
   }
 
+  elementList([id, { title, price, thumbnail, quantity }], disabled) {
+    return (
+      <li key={ id }>
+        <button
+          data-testid=""
+          type="button"
+          name={ title }
+          onClick={ this.removeItem }
+        >
+          Remover
+        </button>
+        <img alt="Foto produto" src={ thumbnail } />
+        <p data-testid="shopping-cart-product-name">{title}</p>
+        <button
+          data-testid="product-decrease-quantity"
+          type="button"
+          name={ id }
+          onClick={ this.decreasesItem }
+        >
+          decrementar
+        </button>
+        <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+        <button
+          data-testid="product-increase-quantity"
+          type="button"
+          name={ id }
+          disabled={ disabled[id] }
+          onClick={ this.addItem }
+        >
+          Incrementar
+        </button>
+        <p>{price * quantity}</p>
+      </li>
+    );
+  }
+
   render() {
     const { cartList, disabled } = this.state;
     if (Object.entries(cartList).length === 0) {
@@ -111,38 +147,8 @@ export default class Cart extends Component {
       <div>
         <Link to="/">Voltar</Link>
         {Object.entries(cartList).map(
-          ([id, { title, price, thumbnail, quantity }]) => (
-            <li key={ id }>
-              <button
-                data-testid=""
-                type="button"
-                name={ title }
-                onClick={ this.removeItem }
-              >
-                Remover
-              </button>
-              <img alt="Foto produto" src={ thumbnail } />
-              <p data-testid="shopping-cart-product-name">{title}</p>
-              <button
-                data-testid="product-decrease-quantity"
-                type="button"
-                name={ id }
-                onClick={ this.decreasesItem }
-              >
-                decrementar
-              </button>
-              <p data-testid="shopping-cart-product-quantity">{quantity}</p>
-              <button
-                data-testid="product-increase-quantity"
-                type="button"
-                name={ id }
-                disabled={ disabled[id] }
-                onClick={ this.addItem }
-              >
-                Incrementar
-              </button>
-              <p>{price * quantity}</p>
-            </li>
+          (cartItem) => (
+            this.elementList(cartItem, disabled)
           ),
         )}
         {`Valor total da compra: R$${this.totalPrice()}`}
