@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 
 export default class AvaliationForm extends Component {
@@ -25,9 +26,21 @@ export default class AvaliationForm extends Component {
     event.preventDefault();
     // recebe props
     const { productId, getForm } = this.props;
+
+    // Recebe as avaliações do item do localStorage
+    let storage = JSON.parse(localStorage.getItem(`reviewsProduct${productId}`));
+    if (!storage) {
+      storage = [];
+    }
+    // const storageCheck = storage ? storage : [];
     const idObj = { id: productId };
+
     // junta o objeto do id com o estado atual da aplicação
     const obj = Object.assign(idObj, this.state);
+
+    // Adiciona ao localStorage a avaliação
+    storage.push(obj);
+    localStorage.setItem(`reviewsProduct${productId}`, JSON.stringify([...storage]));
     // passa as informações para o componente pai
     getForm(obj);
   }
@@ -105,6 +118,7 @@ export default class AvaliationForm extends Component {
             <label htmlFor="form-text-area">
               <textarea
                 name="message"
+                data-testid="product-detail-evaluation"
                 id="form-text-area"
                 value={ message }
                 cols="30"

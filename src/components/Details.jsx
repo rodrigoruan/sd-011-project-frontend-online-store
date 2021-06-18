@@ -20,6 +20,7 @@ export default class ProductDetail extends Component {
 
   render() {
     const { match: { params: { id } } } = this.props;
+    const { avaliationsArray } = this.state;
     return (
       <div>
         <h1>PRODUTO</h1>
@@ -27,7 +28,10 @@ export default class ProductDetail extends Component {
           getForm={ this.getForm }
           productId={ id }
         />
-        <Avaliations />
+        <Avaliations
+          productId={ id }
+          avaliationsArray={ avaliationsArray }
+        />
       </div>
     );
   }
