@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ButtonCart from './ButtonCart';
-import Form from '../componentes/Form';
+import Form from './Form';
 
 class ProductDetails extends Component {
   render() {
