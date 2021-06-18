@@ -45,4 +45,5 @@ ProductCard.propTypes = {
   id: PropTypes.string.isRequired,
   category_id: PropTypes.string.isRequired,
   manipulateState: PropTypes.func.isRequired,
+  freeShipping: PropTypes.bool.isRequired,
 };

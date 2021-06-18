@@ -73,6 +73,7 @@ export default AddCarrinho;
 
 AddCarrinho.propTypes = {
   title: PropTypes.string.isRequired,
+  imgPath: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,

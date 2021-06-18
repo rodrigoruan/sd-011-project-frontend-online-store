@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ConteudoCarrinho } from '../components/index';
+import ConteudoCarrinho from '../components/ConteudoCarrinho';
 
 class ShoppingCart extends Component {
   render() {

@@ -5,7 +5,7 @@ class ProductCartCard extends Component {
   constructor(props) {
     super(props);
 
-    let { quantity } = this.props;
+    const { quantity } = this.props;
 
     this.state = {
       quantity,
@@ -17,12 +17,12 @@ class ProductCartCard extends Component {
   }
 
   increaseQuantity() {
-    let { quantity } = this.state;
+    const { quantity } = this.state;
     const incrementQuantity = quantity + 1;
     const storageData = JSON.parse(localStorage.getItem('products'));
-    const quantityTotal = parseInt(localStorage.getItem('quantidade'));
+    const quantityTotal = parseInt(localStorage.getItem('quantidade'), 10);
     const { index } = this.props;
-    this.setState({quantity: incrementQuantity});
+    this.setState({ quantity: incrementQuantity });
 
     storageData[index].quantity = incrementQuantity;
     localStorage.setItem('products', JSON.stringify(storageData));
@@ -30,12 +30,12 @@ class ProductCartCard extends Component {
   }
 
   decreaseQuantity() {
-    let { quantity } = this.state;
+    const { quantity } = this.state;
     const decrementQuantity = quantity - 1;
     const storageData = JSON.parse(localStorage.getItem('products'));
-    const quantityTotal = parseInt(localStorage.getItem('quantidade'));
+    const quantityTotal = parseInt(localStorage.getItem('quantidade'), 10);
     const { index } = this.props;
-    this.setState({quantity: decrementQuantity});
+    this.setState({ quantity: decrementQuantity });
 
     storageData[index].quantity = decrementQuantity;
     localStorage.setItem('products', JSON.stringify(storageData));
@@ -45,7 +45,7 @@ class ProductCartCard extends Component {
   removeProductFunction() {
     const { removeProduct, index } = this.props;
     const storageData = JSON.parse(localStorage.getItem('products'));
-    
+
     removeProduct(storageData[index]);
   }
 
@@ -61,7 +61,8 @@ class ProductCartCard extends Component {
           { price }
         </p>
         <p>
-          Quantidade:{' '}
+          Quantidade:
+          {' '}
           <span data-testid="shopping-cart-product-quantity">{quantity}</span>
           <span>
             <button
@@ -98,5 +99,8 @@ ProductCartCard.propTypes = {
   title: PropTypes.string.isRequired,
   imgPath: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
+  removeProduct: PropTypes.func.isRequired,
 };
