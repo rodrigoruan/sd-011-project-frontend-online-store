@@ -2,6 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Details extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title,
+      thumbnail,
+      price,
+      attributes,
+    };
+  }
+  addToCart({ target:{ value } }) {
+    const objectCart = JSON.parse(value).title;
+    localStorage.setItem(objectCart, value);
+  }
   render() {
     const { location: { state: { element } } } = this.props;
     const { title, price, thumbnail, attributes } = element;
@@ -26,6 +39,7 @@ export default class Details extends Component {
         <span>
           <button
             type="button"
+            onClick={ this.addToCart }
             data-testid="product-detail-add-to-cart"
           >
             Adicionar ao carrinho
