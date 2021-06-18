@@ -34,10 +34,10 @@ export default class App extends Component {
         <Header />
         <Switch>
           {/* prettier-ignore */}
-          <Route exact path="/" render={ (props) => <Home { ...props }  handleAddToCart = {this.handleAddToCart}    /> } />
-          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
-          <Route exact path="/about" component={About} />
-          <Route component={NotFound} />
+          <Route exact path="/" render={ (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } /> } />
+          <Route exact path="/cart" render={ (props) => <ShoppingCart { ...props } /> } />
+          <Route exact path="/about" component={ About } />
+          <Route component={ NotFound } />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
