@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import Cart from '../imgs/Carrinho.png';
 import ProductSearch from '../components/ProductSearch/ProductSearch';
 import ProductsList from '../components/ProductsList/ProductsList';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import {
+  getCategories,
+  getProductsFromCategoryAndQuery,
+} from '../services/api';
 import './Home.css';
 
 class Home extends Component {
@@ -44,8 +47,17 @@ class Home extends Component {
 
   async getProducts() {
     const { selectedCategory, searchInput } = this.state;
-    const data = await getProductsFromCategoryAndQuery(selectedCategory, searchInput);
-    this.setState({ products: data.results });
+    const data = await getProductsFromCategoryAndQuery(
+      selectedCategory,
+      searchInput,
+    );
+    const formatData = data.results.map(
+      ({ available_quantity: availableQuantity, ...datas }) => ({
+        ...datas,
+        availableQuantity,
+      }),
+    );
+    this.setState({ products: formatData });
   }
 
   async setLoadState() {
@@ -59,10 +71,8 @@ class Home extends Component {
   renderCategories(data) {
     return (
       <ul>
-        {data.map(({ id, name }) => (
-          <li
-            key={ id }
-          >
+        { data.map(({ id, name }) => (
+          <li key={ id }>
             <button
               data-testid="category"
               type="button"
@@ -70,7 +80,8 @@ class Home extends Component {
             >
               { name }
             </button>
-          </li>))}
+          </li>
+        ))}
       </ul>
     );
   }
@@ -91,17 +102,13 @@ class Home extends Component {
             className="shopping-cart-button"
             data-testid="shopping-cart-button"
           >
-            <img
-              width="30px"
-              src={ Cart }
-              alt="imagem do carrinho"
-            />
+            <img width="30px" src={ Cart } alt="imagem do carrinho" />
           </Link>
         </header>
 
         <main className="home-main-container">
           <div className="categories-container">
-            {loading ? 'Loading...' : this.renderCategories(categories)}
+            { loading ? 'Loading...' : this.renderCategories(categories) }
           </div>
           <ProductsList
             products={ products }
@@ -116,10 +123,12 @@ export default Home;
 
 Home.propTypes = {
   handleAddToShopCart: PropTypes.func,
-  shopCart: PropTypes.arrayOf(PropTypes.shape({
-    amount: PropTypes.number,
-    price: PropTypes.number,
-    thumbnail: PropTypes.string,
-    title: PropTypes.string,
-  })),
+  shopCart: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number,
+      price: PropTypes.number,
+      thumbnail: PropTypes.string,
+      title: PropTypes.string,
+    }),
+  ),
 }.isRequired;

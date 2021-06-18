@@ -5,34 +5,41 @@ import './ProductCard.css';
 
 export default class ProductCard extends Component {
   render() {
-    const { title, price, thumbnail, id, handleAddToShopCart,available_quantity } = this.props;
+    const {
+      title,
+      price,
+      thumbnail,
+      id,
+      handleAddToShopCart,
+      availableQuantity,
+    } = this.props;
     return (
       <div className="product-card" data-testid="product">
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: `/details/${id}`,
+          to={ {
+            pathname: `/details/${id}`,
             state: {
               title,
               price,
               thumbnail,
               id,
-              available_quantity
+              availableQuantity,
             },
           } }
         >
-          { title }
+          {title}
         </Link>
         <img src={ thumbnail } alt={ title } />
-        { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+        {price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
         <button
           type="button"
           id={ title }
           className={ thumbnail }
           name={ price }
-          onClick={ () => handleAddToShopCart(id, title, thumbnail, price) }
+          onClick={ () => handleAddToShopCart(this.props) }
           data-testid="product-add-to-cart"
         >
-          
           Comprar
         </button>
       </div>

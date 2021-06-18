@@ -11,42 +11,38 @@ export default class ProductDetails extends React.Component {
   }
 
   render() {
-    const { title, thumbnail, price, id ,available_quantity} = this.state;
+    const { title, thumbnail, price, id, availableQuantity } = this.state;
+
     const { handleAddToShopCart } = this.props;
     return (
       <div key={ id }>
         <span data-testid="product-detail-name">{ title }</span>
         <span>
-          {available_quantity}
+          { availableQuantity }
           { price }
         </span>
         <img src={ thumbnail } alt="imagem do produto" />
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: '/ShoppingCart',
+          to={ {
+            pathname: '/ShoppingCart',
             state: {
               item: this.state,
             },
           } }
         >
-
           <Link
             to="/ShoppingCart"
             className="shopping-cart-button"
             data-testid="shopping-cart-button"
           >
-            <img
-              width="30px"
-              src={ Cart }
-              alt="imagem do carrinho"
-            />
+            <img width="30px" src={ Cart } alt="imagem do carrinho" />
           </Link>
-
         </Link>
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => handleAddToShopCart(id, title, thumbnail, price,available_quantity) }
+          onClick={ () => handleAddToShopCart(this.state) }
         >
           Adicionar ao carrinho
         </button>
