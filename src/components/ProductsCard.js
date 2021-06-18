@@ -37,7 +37,8 @@ export default class ProductsCard extends Component {
     return (
       <div>
         { results.map((result, index) => {
-          const { id, title, thumbnail, price } = result;
+          const { id, title, thumbnail, price, shipping } = result;
+          const { free_shipping: freeDelivery } = shipping;
           return (
             <div data-testid="product" key={ index }>
               <h2>{title}</h2>
@@ -59,6 +60,11 @@ export default class ProductsCard extends Component {
                   Adicionar Carrinho
                 </button>
               </Link>
+              <div>
+                { freeDelivery
+                  ? <p data-testid="free-shipping">Frete grátis!</p>
+                  : <p>Frete a combinar!</p>}
+              </div>
             </div>
           );
         })}
