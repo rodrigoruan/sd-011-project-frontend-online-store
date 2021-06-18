@@ -13,7 +13,8 @@ function App() {
         item.cartCount += 1;
         return true;
       }
-    })
+      return false;
+    });
     if (add === false) {
       setCartItems([...cartItems, product]);
     }

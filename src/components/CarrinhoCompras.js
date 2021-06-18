@@ -15,7 +15,7 @@ class CarrinhoCompras extends Component {
             <img src={ item.thumbnail } alt="produto" />
             <p>
               {'R$'}
-              { item.price.toFixed(2) * item.cartCount }
+              { (item.price * item.cartCount).toFixed(2) }
             </p>
             <p data-testid="shopping-cart-product-quantity">
               { item.cartCount }

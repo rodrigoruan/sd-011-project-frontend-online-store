@@ -10,7 +10,6 @@ class ProductDetails extends Component {
     super(props);
     this.state = {
       product: {},
-      count: 1,
     };
     this.getProduct = this.getProduct.bind(this);
     this.addItemCart = this.addItemCart.bind(this);
@@ -18,19 +17,6 @@ class ProductDetails extends Component {
 
   componentDidMount() {
     this.getProduct();
-  }
-
-  addItemCart() {
-    const { createCart, location } = this.props;
-    const { count } = this.state;
-    const { productToAdd } = location.state;
-    console.log(productToAdd);
-    productToAdd.cartItem = true;
-    productToAdd.cartCount = count;
-    createCart(productToAdd);
-    this.setState((previous) => ({
-      count: previous.count + 1,
-    }));
   }
 
   async getProduct() {
@@ -44,6 +30,13 @@ class ProductDetails extends Component {
       product: product[0],
     });
     return product[0];
+  }
+
+  addItemCart() {
+    const { createCart, location } = this.props;
+    const { productToAdd } = location.state;
+    productToAdd.cartItem = true;
+    createCart(productToAdd);
   }
 
   render() {
@@ -91,6 +84,8 @@ class ProductDetails extends Component {
 
 ProductDetails.propTypes = {
   match: PropTypes.objectOf(String).isRequired,
+  location: PropTypes.objectOf(String).isRequired,
+  createCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;
