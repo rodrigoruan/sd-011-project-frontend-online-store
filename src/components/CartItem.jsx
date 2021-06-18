@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CartQuantity from './CartQuantity';
 
 export default class CartItem extends Component {
   constructor(props) {
@@ -58,6 +59,7 @@ export default class CartItem extends Component {
         >
           -
         </button>
+        <CartQuantity quantity={ this.state } />
       </div>
     );
   }

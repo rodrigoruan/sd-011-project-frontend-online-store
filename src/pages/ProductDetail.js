@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import CustomerRatingForm from '../components/CustomerRatingForm';
 import CartButton from '../components/CartButton';
+import CartQuantity from '../components/CartQuantity';
 
 class ProductDetail extends Component {
   // constructor() {
@@ -99,6 +100,7 @@ class ProductDetail extends Component {
         >
           Adicione ao carrinho
         </button>
+        <CartQuantity />
         <CartButton
           link={ {
             pathname: '/cart',

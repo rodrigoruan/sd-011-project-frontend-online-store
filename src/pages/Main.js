@@ -6,6 +6,7 @@ import ProductListing from '../components/ProductListing';
 import Category from '../components/Category';
 import CardCreator from '../components/CardCreator';
 import * as api from '../services/api';
+import CartQuantity from '../components/CartQuantity';
 
 class Main extends Component {
   constructor() {
@@ -71,26 +72,28 @@ class Main extends Component {
           : productList.map((product, index) => (
             <div key={ index }>
               <CardCreator item={ product } />
-              <button
-                type="button"
-                onClick={ () => {
-                  if (localStorage.getItem('addingCart')) {
-                    const cart = JSON.parse(localStorage.getItem('addingCart'));
-                    const addToCart = [...cart, product];
-                    localStorage.setItem('addingCart', JSON.stringify(addToCart));
-                    this.setState({ addingCart: cart });
-                  } else {
-                    const addedCart = [...addingCart, product];
-                    localStorage.setItem('addingCart', JSON.stringify(addedCart));
-                    this.setState(() => ({
-                      addingCart: JSON.parse(localStorage.getItem('addingCart')) || [] }
-                    ));
-                  }
-                } }
-                data-testid="product-add-to-cart"
-              >
-                Adicione ao carrinho
-              </button>
+              <div>
+                <button
+                  type="button"
+                  onClick={ () => {
+                    if (localStorage.getItem('addingCart')) {
+                      const cart = JSON.parse(localStorage.getItem('addingCart'));
+                      const addToCart = [...cart, product];
+                      localStorage.setItem('addingCart', JSON.stringify(addToCart));
+                      this.setState({ addingCart: cart });
+                    } else {
+                      const addedCart = [...addingCart, product];
+                      localStorage.setItem('addingCart', JSON.stringify(addedCart));
+                      this.setState(() => ({
+                        addingCart: JSON.parse(localStorage.getItem('addingCart')) || [] }
+                      ));
+                    }
+                  } }
+                  data-testid="product-add-to-cart"
+                >
+                  Adicione ao carrinho
+                </button>
+              </div>
               <Link
                 data-testid="product-detail-link"
                 to={ { pathname: `/product-detail/${product.id}`,
@@ -101,6 +104,7 @@ class Main extends Component {
               </Link>
             </div>
           ))}
+        <CartQuantity />
       </div>
     );
   }
