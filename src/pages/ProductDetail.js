@@ -6,7 +6,7 @@ class ProductDetail extends React.Component {
     const { location } = this.props;
     const { state } = location;
     const { product } = state;
-    return <div>{ product.title }</div>;
+    return <div data-testid="product-detail-name">{ product.title }</div>;
   }
 }
 
