@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ShoppingCartButton } from '../components';
 
 export default class Product extends Component {
   getInstallmentsElement({ installments }) {
@@ -10,7 +11,7 @@ export default class Product extends Component {
   }
 
   render() {
-    const { location: { state: { product } } } = this.props;
+    const { location: { state: { product } }, addItemToCart } = this.props;
     const {
       title,
       thumbnail,
@@ -37,6 +38,14 @@ export default class Product extends Component {
           <h2>Formas de pagamento</h2>
           <p>{ `R$${price}` }</p>
           { this.getInstallmentsElement(product) }
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => addItemToCart(product) }
+          >
+            Adicionar ao carrinho
+          </button>
+          <ShoppingCartButton />
         </div>
       </section>
     );
