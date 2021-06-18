@@ -16,13 +16,24 @@ export default class ProductDetail extends Component {
         cartSize += data.quantity;
       }
     });
+
+    let disabled = false;
+    const item = sessionStorage[location.state.id];
+    if (item) {
+      const itemObject = JSON.parse(item);
+      disabled = itemObject.quantity >= itemObject.inStorage;
+    }
+
     this.state = {
+      id: location.state.id,
       price: location.state.price,
       thumbnail: location.state.thumbnail,
       title: location.state.title,
+      inStorage: location.state.inStorage,
       email: '',
       textArea: '',
       rating: 1,
+      disabled,
       cartSize,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -58,22 +69,38 @@ export default class ProductDetail extends Component {
 
   addToCart({ target: { value } }) {
     const data = JSON.parse(value);
-    const key = data.title;
+    const key = data.id;
     if (sessionStorage[key]) {
       const recoveredObject = JSON.parse(sessionStorage[key]);
       const copy = { ...recoveredObject };
-      copy.quantity += 1;
-      sessionStorage[key] = JSON.stringify(copy);
+      if (copy.quantity < copy.inStorage) {
+        copy.quantity += 1;
+        sessionStorage[key] = JSON.stringify(copy);
+        this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
+      } else {
+        this.setState({ disabled: true });
+      }
     } else {
       sessionStorage.setItem(key, value);
+      this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
     }
-    this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
   }
 
   render() {
-    const { title, thumbnail, price, email, textArea, rating, cartSize } = this.state;
+    const {
+      id,
+      title,
+      thumbnail,
+      price,
+      email,
+      textArea,
+      rating,
+      inStorage,
+      disabled,
+      cartSize,
+    } = this.state;
 
-    const showEvaluations = localStorage.getItem(title) || false;
+    const showEvaluations = localStorage.getItem(id) || false;
     return (
       <div>
         <Link to="/">Voltar</Link>
@@ -87,8 +114,16 @@ export default class ProductDetail extends Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
+          disabled={ disabled }
           onClick={ this.addToCart }
-          value={ JSON.stringify({ title, price, thumbnail, quantity: 1 }) }
+          value={ JSON.stringify({
+            id,
+            title,
+            price,
+            thumbnail,
+            quantity: 1,
+            inStorage,
+          }) }
         >
           Adicionar ao carrinho
         </button>
@@ -134,7 +169,7 @@ export default class ProductDetail extends Component {
           showEvaluations
             ? (
               <ProductEvaluation
-                name={ title }
+                name={ id }
               />
             )
             : null

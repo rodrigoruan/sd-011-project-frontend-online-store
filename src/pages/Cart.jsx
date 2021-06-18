@@ -8,11 +8,19 @@ export default class Cart extends Component {
     Object.values(sessionStorage).forEach((value) => {
       if (!value.includes('rendererID')) {
         const item = JSON.parse(value);
-        cartList[item.title] = item;
+        cartList[item.id] = item;
+      }
+    });
+    const disabled = {};
+    Object.values(sessionStorage).forEach((value) => {
+      if (!value.includes('rendererID')) {
+        const item = JSON.parse(value);
+        disabled[item.id] = (item.quantity + 1) >= item.inStorage;
       }
     });
     this.state = {
       cartList,
+      disabled,
     };
 
     this.addItem = this.addItem.bind(this);
@@ -25,19 +33,23 @@ export default class Cart extends Component {
     const { cartList } = this.state;
     Object.values(cartList).forEach((listItem) => {
       const value = JSON.stringify(listItem);
-      sessionStorage.setItem(listItem.title, value);
+      sessionStorage.setItem(listItem.id, value);
     });
   }
 
-  // Limpar storage quando o componente for desmontado no compoenntWillUnmonte
   addItem({ target: { name } }) {
     const { cartList } = this.state;
     const cart = { ...cartList };
     const item = { ...cart[name] };
+    const disabled = (item.quantity + 1) >= item.inStorage;
     item.quantity += 1;
     cart[name] = item;
-    this.setState(() => ({
+    this.setState((prevState) => ({
       cartList: cart,
+      disabled: {
+        ...prevState.disabled,
+        [name]: disabled,
+      },
     }));
   }
 
@@ -54,8 +66,12 @@ export default class Cart extends Component {
     } else {
       item.quantity -= 1;
       cart[name] = item;
-      this.setState(() => ({
+      this.setState((prevState) => ({
         cartList: cart,
+        disabled: {
+          ...prevState.disabled,
+          [name]: false,
+        },
       }));
     }
   }
@@ -79,47 +95,9 @@ export default class Cart extends Component {
     return totalPrice;
   }
 
-  // Função que monta li que é item do produto
-  // Do evento (item clicado) extrai foto, preco
-  elementList(thumbnail, price, title, quantity) {
-    return (
-      <li key={ title }>
-        <button
-          data-testid=""
-          type="button"
-          name={ title }
-          onClick={ this.removeItem }
-        >
-          Remover
-        </button>
-        <img alt="Foto produto" src={ thumbnail } />
-        <p data-testid="shopping-cart-product-name">{title}</p>
-        <button
-          data-testid="product-decrease-quantity"
-          type="button"
-          name={ title }
-          onClick={ this.decreasesItem }
-        >
-          decrementar
-        </button>
-        <p data-testid="shopping-cart-product-quantity">{quantity}</p>
-        <button
-          data-testid="product-increase-quantity"
-          type="button"
-          name={ title }
-          onClick={ this.addItem }
-        >
-          Incrementar
-        </button>
-        <p>{price * quantity}</p>
-      </li>
-    );
-  }
-
   render() {
-    const { cartList } = this.state;
+    const { cartList, disabled } = this.state;
     if (Object.entries(cartList).length === 0) {
-      // sessionStorage.clear();
       return (
         <div>
           <Link to="/">Voltar</Link>
@@ -133,8 +111,38 @@ export default class Cart extends Component {
       <div>
         <Link to="/">Voltar</Link>
         {Object.entries(cartList).map(
-          ([title, { price, thumbnail, quantity }]) => (
-            this.elementList(thumbnail, price, title, quantity)
+          ([id, { title, price, thumbnail, quantity }]) => (
+            <li key={ id }>
+              <button
+                data-testid=""
+                type="button"
+                name={ title }
+                onClick={ this.removeItem }
+              >
+                Remover
+              </button>
+              <img alt="Foto produto" src={ thumbnail } />
+              <p data-testid="shopping-cart-product-name">{title}</p>
+              <button
+                data-testid="product-decrease-quantity"
+                type="button"
+                name={ id }
+                onClick={ this.decreasesItem }
+              >
+                decrementar
+              </button>
+              <p data-testid="shopping-cart-product-quantity">{quantity}</p>
+              <button
+                data-testid="product-increase-quantity"
+                type="button"
+                name={ id }
+                disabled={ disabled[id] }
+                onClick={ this.addItem }
+              >
+                Incrementar
+              </button>
+              <p>{price * quantity}</p>
+            </li>
           ),
         )}
         {`Valor total da compra: R$${this.totalPrice()}`}

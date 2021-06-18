@@ -9,16 +9,19 @@ class ProductList extends Component {
     const { productsList, addToCart } = this.props;
     return (
       <ul className="productList">
-        {productsList.map(({ title, thumbnail, price, id }) => (
-          <ProductCard
-            key={ title }
-            title={ title }
-            thumbnail={ thumbnail }
-            price={ price }
-            id={ id }
-            addToCart={ addToCart }
-          />
-        ))}
+        {productsList.map(
+          ({ title, thumbnail, price, id, available_quantity: inStorage }) => (
+            <ProductCard
+              key={ id }
+              id={ id }
+              title={ title }
+              thumbnail={ thumbnail }
+              price={ price }
+              inStorage={ inStorage }
+              addToCart={ addToCart }
+            />
+          ),
+        )}
       </ul>
     );
   }
