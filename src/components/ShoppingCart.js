@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CheckoutPage from './CheckoutPage';
 
 export default class ShoppingCart extends Component {
   render() {
