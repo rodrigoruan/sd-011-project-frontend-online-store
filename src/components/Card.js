@@ -25,7 +25,7 @@ export default class Card extends Component {
     } else {
       this.setState((previous) => ({ counter: previous.counter + 1 }));
     }
-
+    //
     const object = {
       counter,
       price,
