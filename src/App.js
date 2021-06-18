@@ -64,9 +64,18 @@ export default class App extends Component {
   addCart({ target: { value } }) {
     const { productCards, cartItems } = this.state;
     const itemToCart = productCards.find((item) => item.id === value);
-    this.setState({
-      cartItems: [...cartItems, itemToCart],
-    });
+    const isInCart = cartItems.some((item) => item.id === value);
+    if (!isInCart) {
+      itemToCart.quantity = 1;
+      this.setState({
+        cartItems: [...cartItems, itemToCart],
+      });
+    } else {
+      this.setState({
+        cartItems: [...cartItems],
+      });
+      itemToCart.quantity += 1;
+    }
   }
 
   removeCartItem({ target: { value } }) {
@@ -78,11 +87,27 @@ export default class App extends Component {
   }
 
   increaseItemQuantity({ target: { value } }) {
-    console.log(value);
+    const { productCards, cartItems } = this.state;
+    const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === value);
+    if (isInCart) {
+      this.setState({
+        cartItems: [...cartItems],
+      });
+      itemToCart.quantity += 1;
+    }
   }
 
   decreaseItemQuantity({ target: { value } }) {
-    console.log(value);
+    const { productCards, cartItems } = this.state;
+    const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === value);
+    if (isInCart && itemToCart.quantity > 1) {
+      this.setState({
+        cartItems: [...cartItems],
+      });
+      itemToCart.quantity -= 1;
+    }
   }
 
   render() {

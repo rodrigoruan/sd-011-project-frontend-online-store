@@ -7,7 +7,12 @@ import backImage from '../images/back.png';
 
 export default class ShopCart extends Component {
   render() {
-    const { cartItems, removeCartItem, increaseItemQuantity, decreaseItemQuantity } = this.props;
+    const {
+      cartItems,
+      removeCartItem,
+      increaseItemQuantity,
+      decreaseItemQuantity,
+    } = this.props;
     if (cartItems.length === 0) return <EmptyShopCart />;
 
     return (
@@ -21,9 +26,6 @@ export default class ShopCart extends Component {
             <img src={ backImage } alt="Cart" style={ { width: '50px' } } />
           </Link>
         </nav>
-        <p data-testid="shopping-cart-product-quantity">
-          {`Quantidade: ${cartItems.length}`}
-        </p>
         { cartItems.map((item) => (
           <div className="cart-product-container" key={ item.id }>
             <button
@@ -48,6 +50,7 @@ export default class ShopCart extends Component {
             >
               -
             </button>
+            <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
             <button
               onClick={ increaseItemQuantity }
               type="button"
@@ -64,5 +67,14 @@ export default class ShopCart extends Component {
 }
 
 ShopCart.propTypes = {
-
+  cartItems: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    length: PropTypes.number,
+    map: PropTypes.func,
+    quantity: PropTypes.number,
+  }).isRequired,
+  removeCartItem: PropTypes.func.isRequired,
+  increaseItemQuantity: PropTypes.func.isRequired,
+  decreaseItemQuantity: PropTypes.func.isRequired,
 };
