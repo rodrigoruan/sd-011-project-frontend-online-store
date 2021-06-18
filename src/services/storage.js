@@ -7,8 +7,6 @@ export function saveProduct(product, amount) {
   } else {
     const shoppingCart = JSON.parse(previousShoppingCart);
     const { id } = product;
-    console.log(id);
-    console.log(shoppingCart[id]);
 
     if (shoppingCart[id]) {
       shoppingCart[id].quantity += amount;
