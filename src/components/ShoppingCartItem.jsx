@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import './ShoppingCartItem.css';
+import PropTypes from 'prop-types';
 
 export default class ShoppingCartItem extends Component {
   constructor(props) {
@@ -10,12 +11,13 @@ export default class ShoppingCartItem extends Component {
       thumbnail: props.item.thumbnail,
       quantity: props.item.quantity,
       price: props.item.price,
-      totalPrice: props.item.price
-    }
+      totalPrice: props.item.price,
+    };
 
     this.handleIncrease = this.handleIncrease.bind(this);
     this.handleDecrease = this.handleDecrease.bind(this);
     this.totalPrice = this.totalPrice.bind(this);
+    this.updatePriceAndProduct = this.updatePriceAndProduct.bind(this);
   }
 
   handleIncrease() {
@@ -23,17 +25,26 @@ export default class ShoppingCartItem extends Component {
     this.setState({
       quantity: quantity + 1,
     }, () => {
-      this.totalPrice();
+      this.updatePriceAndProduct();
     });
   }
 
   handleDecrease() {
     const { quantity } = this.state;
-    this.setState({
-      quantity: quantity - 1,
-    }, () => {
-      this.totalPrice();
-    });
+    if (quantity > 0) {
+      this.setState({
+        quantity: quantity - 1,
+      }, () => {
+        this.updatePriceAndProduct();
+      });
+    }
+  }
+
+  updatePriceAndProduct() {
+    const { id, title, thumbnail, quantity, price } = this.state;
+    const { updatedProduct } = this.props;
+    this.totalPrice();
+    updatedProduct({ id, title, thumbnail, quantity, price });
   }
 
   totalPrice() {
@@ -41,21 +52,67 @@ export default class ShoppingCartItem extends Component {
     const newTotalPrice = quantity * price;
     this.setState({
       totalPrice: newTotalPrice,
-    })
+    });
   }
 
   render() {
-    const { title, thumbnail, quantity, totalPrice } = this.state; 
+    const { id, title, thumbnail, quantity, totalPrice } = this.state;
+    const { deletProduct } = this.props;
     return (
       <div className="shopping-cart-item-section">
-        <button type="button" className="erase-product">X</button>
-        <img src={ thumbnail} alt={ title } />
-        <span>{ title }</span>
-        <button type="button" onClick={ this.handleDecrease } data-testid="product-decrease-quantity">-</button>
-        <p>{ quantity }</p>
-        <button type="button" onClick={ this.handleIncrease } data-testid="product-increase-quantity">+</button>
-        <p>R$ { totalPrice }</p>
+        <button
+          type="button"
+          onClick={ () => deletProduct(id) }
+          className="delet-product"
+        >
+          X
+        </button>
+        <img className="image-product" src={ thumbnail } alt={ title } />
+        <span
+          className="title-product"
+          data-testid="shopping-cart-product-name"
+        >
+          { title }
+        </span>
+        <button
+          className="button-quantity"
+          type="button"
+          onClick={ this.handleDecrease }
+          data-testid="product-decrease-quantity"
+        >
+          -
+        </button>
+        <p
+          className="quantity-producty"
+          data-testid="shopping-cart-product-quantity"
+        >
+          { quantity }
+        </p>
+        <button
+          className="button-quantity"
+          type="button"
+          onClick={ this.handleIncrease }
+          data-testid="product-increase-quantity"
+        >
+          +
+        </button>
+        <p className="price-product">
+          R$
+          { totalPrice }
+        </p>
       </div>
-    )
+    );
   }
 }
+
+ShoppingCartItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+  updatedProduct: PropTypes.func.isRequired,
+  deletProduct: PropTypes.func.isRequired,
+};
