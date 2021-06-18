@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import { ProductReviewForm } from '../components/zComponentsMenu';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -57,6 +58,8 @@ export default class ProductDetails extends Component {
         >
           Add to Cart!
         </button>
+        <hr />
+        <ProductReviewForm />
       </div>
     );
   }
