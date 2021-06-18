@@ -19,7 +19,7 @@ class App extends Component {
 
   handleAddToShopCart(id, title, thumbnail, price, available_quantity) {
     this.setState((state) => ({
-      shopCart: [...state.shopCart, { id, title, thumbnail, price, available_quantity,amount: 1 }],
+      shopCart: [...state.shopCart, { id, title, thumbnail, price, available_quantity,amount:1}],
     }));
   }
 

@@ -61,15 +61,26 @@ class ShoppingCart extends Component {
             >
               { amount }
             </div>
-            <button
+            { 
+            ( 
+              (amount )>=available_quantity) ?
+              <button
               type="button"
               className="cart-item-button"
               onClick={ () => handleIncreaseItemAmount(id) }
               data-testid="product-increase-quantity"
+              disabled
             >
               +
-            </button>
-            <span>{available_quantity}</span>
+            </button>:
+            <button
+            type="button"
+            className="cart-item-button"
+            onClick={ () => handleIncreaseItemAmount(id) }
+            data-testid="product-increase-quantity"
+          >
+            +
+          </button>}
             <p>
               { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
             </p>
