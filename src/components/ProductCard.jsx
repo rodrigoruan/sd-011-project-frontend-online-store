@@ -5,7 +5,10 @@ import { AddCarrinho } from './index';
 
 class ProductCard extends Component {
   render() {
-    const { title, imgPath, price, id, category_id: catId, manipulateState } = this.props;
+    const { title, imgPath, price, id, category_id: catId,
+      manipulateState, freeShipping } = this.props;
+    const shippingStatus = freeShipping ? <p data-testid="free-shipping">Frete Gratis</p> : <p>Frete Pago</p>;
+
     return (
       <div>
         <Link
@@ -16,6 +19,7 @@ class ProductCard extends Component {
             <h3>{title}</h3>
             <img src={ imgPath } alt={ title } />
             <p>{price}</p>
+            {shippingStatus}
           </div>
         </Link>
         <AddCarrinho
