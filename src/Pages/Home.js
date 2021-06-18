@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../ProductList';
+import ShoppingCartButton from './ShoppingCartButton';
 
 class Home extends React.Component {
   constructor() {
@@ -9,6 +11,7 @@ class Home extends React.Component {
       productCategories: [],
       filterCategories: '',
     };
+    localStorage.setItem('productList', JSON.stringify([]));
     this.categoriesNames = this.categoriesNames.bind(this);
     this.onClickCategories = this.onClickCategories.bind(this);
   }
@@ -33,7 +36,7 @@ class Home extends React.Component {
   render() {
     const { productCategories, filterCategories } = this.state;
     return (
-      <fragment>
+      <section>
         <ProductList selectedCategory={ filterCategories } />
         <div className="categoriesList">
           { productCategories.map((category) => (
@@ -48,7 +51,10 @@ class Home extends React.Component {
               { category.name }
             </div>))}
         </div>
-      </fragment>
+        <Link data-testid="shopping-cart-button" to="/cart">
+          <ShoppingCartButton />
+        </Link>
+      </section>
     );
   }
 }
