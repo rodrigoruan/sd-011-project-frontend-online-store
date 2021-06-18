@@ -6,7 +6,7 @@ export default class Cart extends Component {
     super();
     this.state = {
       products: [],
-      count: 0,
+      count: 1,
     };
   }
 
@@ -20,13 +20,14 @@ export default class Cart extends Component {
 
     this.setState({
       products: arrayOfproducts,
-      count: arrayOfproducts.map(({ counter, title }) => ({ counter, title })),
+      count: arrayOfproducts,
     });
   };
 
   handleClick = ({ target: { id, name } }) => {
     const product = JSON.parse(localStorage.getItem(id));
 
+    this.getItemLocalStorage();
     if (name === 'add') {
       product.counter += 1;
     }
@@ -35,25 +36,24 @@ export default class Cart extends Component {
     }
 
     localStorage.setItem(id, JSON.stringify(product));
-    this.getItemLocalStorage();
   };
 
   handleDelete = ({ target: { id } }) => {
     localStorage.removeItem(id);
     this.getItemLocalStorage();
-  }
+  };
 
   render() {
     const { count } = this.state;
     const { products } = this.state;
-
     if (!products.length) {
-      return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
+      return (
+        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+      );
     }
-
     return (
       <div>
-        {products.map(({ title, price, thumbnail, id }) => (
+        {products.map(({ title, price, thumbnail, id, availableQuantity }) => (
           <div key={ id }>
             <p data-testid="shopping-cart-product-name">{title}</p>
             <img src={ thumbnail } alt={ title } />
@@ -65,6 +65,10 @@ export default class Cart extends Component {
               {count.find((item) => item.title === title).counter}
             </p>
             <button
+              disabled={
+                availableQuantity
+                === count.find((item) => item.title === title).counter
+              }
               data-testid="product-increase-quantity"
               type="button"
               name="add"
@@ -93,10 +97,7 @@ export default class Cart extends Component {
           </div>
         ))}
         <Link to={ { pathname: '/checkout' } }>
-          <button
-            data-testid="checkout-products"
-            type="button"
-          >
+          <button data-testid="checkout-products" type="button">
             Comprar
           </button>
         </Link>
