@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import handleCart from '../services/localStorage';
 
 export default class Product extends Component {
+  addQuantity(product) {
+    const quantityProduct = { quantity: 1 };
+    const obj = Object.assign(quantityProduct, product);
+    handleCart(obj);
+  }
+
   render() {
     const { product } = this.props;
     const { id, title, price, thumbnail } = product;
@@ -22,6 +29,14 @@ export default class Product extends Component {
         >
           Detalhes
         </Link>
+        <button
+          id={ id }
+          type="button"
+          onClick={ () => this.addQuantity(product) }
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }

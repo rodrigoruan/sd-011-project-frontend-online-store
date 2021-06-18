@@ -6,31 +6,29 @@ export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shoppingCart: [
-        {
-          id: 'teste1',
-          title: 'title teste1',
-          thumbnail: 'teste1',
-          quantity: 1,
-          price: 10,
-        },
-        {
-          id: 'teste2',
-          title: 'title teste2',
-          thumbnail: 'teste2',
-          quantity: 1,
-          price: 3,
-        },
-      ],
+      shoppingCart: [],
       totalShoppingCart: 0,
     };
     this.deletProduct = this.deletProduct.bind(this);
     this.updatedProduct = this.updatedProduct.bind(this);
     this.totalShoppingCart = this.totalShoppingCart.bind(this);
+    this.retrieveCartItems = this.retrieveCartItems.bind(this);
   }
 
   componentDidMount() {
-    this.totalShoppingCart();
+    this.retrieveCartItems();
+  }
+
+  retrieveCartItems() {
+    let cartItems = JSON.parse(localStorage.getItem('cart'));
+    if (cartItems === null) {
+      cartItems = [];
+    }
+    this.setState((state) => ({
+      shoppingCart: [...state.shoppingCart, ...cartItems],
+    }), () => {
+      this.totalShoppingCart();
+    });
   }
 
   deletProduct(id) {
@@ -82,13 +80,15 @@ export default class ShoppingCart extends Component {
           <h2>Carrinho de Compras</h2>
         </div>
         <div className="shopping-cart-products-list">
-          { shoppingCart.map((product) => (
-            <ShoppingCartItem
-              key={ product.id }
-              item={ product }
-              deletProduct={ this.deletProduct }
-              updatedProduct={ this.updatedProduct }
-            />)) }
+          { shoppingCart.length === 0
+            ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
+            : shoppingCart.map((product) => (
+              <ShoppingCartItem
+                key={ product.id }
+                item={ product }
+                deletProduct={ this.deletProduct }
+                updatedProduct={ this.updatedProduct }
+              />)) }
         </div>
         <div className="total-shopping-cart-section">
           <p className="total-shopping-cart">
