@@ -42,6 +42,8 @@ export default class MainPage extends Component {
     });
   }
 
+  
+
   render() {
     const { searchInput, loading, categories, products } = this.state;
     return (
@@ -67,7 +69,7 @@ export default class MainPage extends Component {
           <div className="product">
             {products
               .map((product, index) => (
-                <ProductCard key={ index } product={ product } />)) }
+                <ProductCard key={ index } onClick={ this.addToCart } product={ product } />)) }
           </div>
         </div>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">

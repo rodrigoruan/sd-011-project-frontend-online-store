@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from './Button';
 
 export default class ProductCard extends Component {
   render() {
-    const { product: { title, price, thumbnail, id }, product } = this.props;
+    const { product, onClick } = this.props;
+    const { title, price, thumbnail, id } = product;
     return (
       <div data-testid="product">
         <Link
@@ -17,6 +19,7 @@ export default class ProductCard extends Component {
             <img src={ thumbnail } alt={ title } width="70px" />
           </div>
         </Link>
+        <Button product={ product } />
       </div>
     );
   }
