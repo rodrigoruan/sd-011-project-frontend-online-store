@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from './Button';
 
 export default class ProductCard extends Component {\
   constructor() {
@@ -13,7 +14,8 @@ export default class ProductCard extends Component {\
   addTo
 
   render() {
-    const { product: { title, price, thumbnail, id }, product } = this.props;
+    const { product, onClick } = this.props;
+    const { title, price, thumbnail, id } = product;
     return (
       <div data-testid="product">
         <Link

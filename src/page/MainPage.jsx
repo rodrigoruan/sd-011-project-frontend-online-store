@@ -42,6 +42,8 @@ export default class MainPage extends Component {
     });
   }
 
+
+
   render() {
     const { searchInput, loading, categories, products } = this.state;
     return (
@@ -49,9 +51,9 @@ export default class MainPage extends Component {
         <div className="nav">
           {loading ? <Loading /> : categories
             .map((element) => (<CategorieList
-              key={ element.id }
-              category={ element }
-              onClick={ this.handleChange }
+              key={element.id}
+              category={element}
+              onClick={this.handleChange}
             />))}
         </div>
         <div>
@@ -62,16 +64,16 @@ export default class MainPage extends Component {
               Digite algum termo de pesquisa ou escolha uma categoria.
             </h5>
             <SearchBar
-              value={ searchInput }
-              onChange={ this.handleChange }
-              onClick={ this.searchProduct }
+              value={searchInput}
+              onChange={this.handleChange}
+              onClick={this.searchProduct}
             />
           </div>
 
           <div className="product">
             {products
               .map((product, index) => (
-                <ProductCard key={ index } product={ product } />)) }
+                <ProductCard key={index} onClick={this.addToCart} product={product} />))}
           </div>
         </div>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">
