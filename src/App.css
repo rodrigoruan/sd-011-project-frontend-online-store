@@ -5,6 +5,104 @@
   --header: #14213d;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap') ;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.free-shipping {
+  background-color: green;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.disabled-button {
+  background-color: rgba(116, 102, 86, 0.103);
+  border: none;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 6px;
+  padding: 6px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  background-color: var(--button);
+  border: none;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 6px;
+  padding: 6px;
+  text-transform: uppercase;
+}
+
+.search-button {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+input {
+  border: none;
+  padding: 9px;
+}
+
+.search-button input {
+  background-color: white;
+  border: solid 1px;
+  margin: 0;
+  padding: 13px;
+  padding-left: 100px;
+  text-align: center;
+  width: 80%;
+}
+
+.search-button button {
+  height: 43px;
+  margin: 0;
+  padding: 8px;
+  width: 20%;
+}
+
+.shopping {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+}
+
+.shopping img {
+  width: 50px;
+}
+
+.cart-quantity {
+  align-items: center;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  position: absolute;
+  right: 1px;
+  text-align: center;
+  top: 5px;
+  width: 25px;
+}
+
 .App {
   align-items: center;
   display: flex;
@@ -12,20 +110,31 @@
   width: 100vw;
 }
 
+.grupo-16 {
+  align-items: center;
+  background: linear-gradient(180deg, #d2080800 0%, #00cefb80 100%) , var(--header);
+  color: white;
+  display: flex;
+  font-family: Poiret One , cursive;
+  height: 80px;
+  justify-content: space-around;
+}
+
 .body {
-  background-color: white;
+  background-color: rgb(231, 231, 231);
   display: flex;
   flex-direction: column;
+  width: 100vw;
 
 }
 
 .header {
-  align-items: baseline;
+  align-items: center;
   background-color: var(--header);
-  border-radius: 1px;
   color: #e5e5e5;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 35px;
   width: 100%;
 }
 
@@ -34,43 +143,53 @@
 }
 
 .body2 {
+  align-items: stretch;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  height: 100%;
 }
 
-.card-container {
+.container {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100vw;
+  flex-wrap: wrap;
+  width: 85%;
 }
 
 .card {
   align-items: center;
   background-color: white;
   border-radius: 3px;
-  box-shadow: 0 0 3pt 2pt #14213d;
+  box-shadow: 1px 1px 1pt 1pt #00000052;
   display: flex;
   flex-direction: column;
-  height: 6%;
+  height: 12%;
   margin: 10px;
+  text-align: center;
+  text-transform: uppercase;
   transition: ease-in-out 0.3s;
-  width: 20%;
+  width: 15%;
 }
 
 .card:hover {
-  transform: scale(1.1);
+  box-shadow: 3px 3px 3px 3px #00000063;
   transition: ease-in-out 0.4s;
 }
 
 .title {
+  border-radius: 2px;
+  border-top: 1px solid;
+  color: #838383;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.title-active {
   background-color: var(--header);
   border-radius: 2px;
   color: #e5e5e5;
   margin-bottom: 5px;
-  padding: 4px;
-  width: 100%;
+  padding: 18px;
+  width: 90%;
 }
 
 .img {
@@ -80,24 +199,44 @@
 }
 
 .price {
+  border: solid 1px;
   border-radius: 2px;
-  box-shadow: 0 0 3pt 2pt #e5e5e5;
   text-align: center;
-  width: 30%;
+  width: 50%;
 }
 
 .category {
-  display: flex;
-  flex-direction: row;
-  margin: 5px;
+  background-color: var(--header);
+  border: 1px solid;
+  border-radius: 0;
+  margin: 0;
+  padding: 2px;
+  width: 100%;
+}
+
+.category:hover {
+  background-color: var(--button);
+}
+
+.active {
+  background-color: var(--header);
+  border: 1px solid;
+  border-radius: 0;
+  margin: 0;
+  padding: 2px;
+  width: 100%;
 }
 
 .aside {
-  background-color: black;
+  align-items: center;
+  background-color: rgb(58, 58, 58);
   border-radius: 3px solid white;
   color: whitesmoke;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  min-height: 100%;
+  width: 15%;
 }
 
 .buttons-container {
@@ -109,23 +248,8 @@
   width: 100%;
 }
 
-button {
-  background-color: var(--button);
-  border: none;
-  border-radius: 2px;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  margin: 6px;
-  padding: 6px;
-}
-
 button:hover {
   transform: scale(1.1);
-}
-
-input {
-  padding: 5px;
 }
 
 .logo {
@@ -157,12 +281,15 @@ a {
 }
 
 .ajuda-deus {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .increase-decrease-buttons {
+  align-items: center;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }

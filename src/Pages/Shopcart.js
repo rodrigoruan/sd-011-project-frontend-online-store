@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import NewItem from '../Components/NewItem';
+import ShoppingCartSize from '../Components/ShoppingCartSize';
 
 class Shopcart extends Component {
   constructor(props) {
@@ -59,17 +60,21 @@ class Shopcart extends Component {
                 G16 Store
               </h1>
             </Link>
+            <button className="shopping" type="button" data-testid="shopping-cart-button">
+              <img src="https://image.flaticon.com/icons/png/512/263/263142.png" alt="a" />
+              <ShoppingCartSize shop={ products.length } />
+            </button>
           </header>
           <div className="card-container">
             {products.map((product, index) => (
               <NewItem newProduct={ product } key={ index } />
             ))}
-            <Link to={ { pathname: '/PurchasePage', state: products } }>
-              <button data-testid="checkout-products" type="button">
-                Finalizar Compra
-              </button>
-            </Link>
           </div>
+          <Link to={ { pathname: '/PurchasePage', state: products } }>
+            <button data-testid="checkout-products" type="button">
+              Finalizar Compra
+            </button>
+          </Link>
         </div>
 
       ));

@@ -5,16 +5,16 @@ class RadialButton extends Component {
   render() {
     const { category: { name }, onClick, value } = this.props;
     return (
-      <label className="category" htmlFor="category">
+      <button
+        type="button"
+        data-testid="category"
+        className="category"
+        onClick={ onClick }
+        name="category"
+        value={ value }
+      >
         { name }
-        <input
-          data-testid="category"
-          onClick={ onClick }
-          name="category"
-          type="radio"
-          value={ value }
-        />
-      </label>
+      </button>
     );
   }
 }

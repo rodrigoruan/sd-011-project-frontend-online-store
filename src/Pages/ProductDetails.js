@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import ShoppingCartSize from '../Components/ShoppingCartSize';
 
 class ProductDetails extends Component {
   constructor(props) {
     super(props);
+    const { location: { state } } = this.props;
+    console.log(state);
     this.state = {
       redirect: false,
       product: {},
-      cartProducts: [],
+      cartProducts: state,
     };
 
     this.setProduct = this.setProduct.bind(this);
@@ -63,6 +67,14 @@ class ProductDetails extends Component {
               G16 Store
             </h1>
           </Link>
+          <Link
+            to={ { pathname: '/shopcart', state: cartProducts } }
+          >
+            <button className="shopping" type="button">
+              <img src="https://image.flaticon.com/icons/png/512/263/263142.png" alt="a" />
+              <ShoppingCartSize shop={ cartProducts.length } />
+            </button>
+          </Link>
         </header>
         <div className="card">
           <div className="title">
@@ -103,5 +115,11 @@ class ProductDetails extends Component {
     ) : (<Redirect to="/" />);
   }
 }
+
+ProductDetails.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.arrayOf().isRequired,
+  }).isRequired,
+};
 
 export default ProductDetails;
