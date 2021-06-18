@@ -56,18 +56,25 @@ export default class MainPage extends Component {
         </div>
         <div>
           <div>
-            <h3>Digite algum termo de pesquisa ou escolha uma categoria</h3>
+            <h5
+              data-testid="home-initial-message"
+            >
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </h5>
             <SearchBar
               value={ searchInput }
               onChange={ this.handleChange }
               onClick={ this.searchProduct }
             />
           </div>
-
           <div className="product">
             {products
               .map((product, index) => (
-                <ProductCard key={ index } product={ product } />)) }
+                <ProductCard
+                  key={ index }
+                  onClick={ this.addToCart }
+                  product={ product }
+                />)) }
           </div>
         </div>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">
