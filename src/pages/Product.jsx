@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { ShoppingCartButton } from '../components';
+import { AddToCartButton, ShoppingCartButton } from '../components';
 
 export default class Product extends Component {
   constructor(props) {
@@ -16,13 +16,6 @@ export default class Product extends Component {
 
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmitRating = this.handleSubmitRating.bind(this);
-  }
-
-  getInstallmentsElement({ installments }) {
-    if (installments && installments.quantity && installments.amount) {
-      return <p>{`Em até: ${installments.quantity}x de R$${installments.amount}` }</p>;
-    }
-    return null;
   }
 
   handleFormChange({ target }) {
@@ -52,6 +45,13 @@ export default class Product extends Component {
         },
       };
     });
+  }
+
+  getInstallmentsElement({ installments }) {
+    if (installments && installments.quantity && installments.amount) {
+      return <p>{`Em até: ${installments.quantity}x de R$${installments.amount}` }</p>;
+    }
+    return null;
   }
 
   render() {
@@ -94,13 +94,11 @@ export default class Product extends Component {
         </article>
 
         <section>
-          <button
-            type="button"
-            data-testid="product-detail-add-to-cart"
-            onClick={() => addItemToCart(product)}
-          >
-            Adicionar ao carrinho
-          </button>
+          <AddToCartButton
+            product={ product }
+            addItemToCart={ addItemToCart }
+            testid="product-detail-add-to-cart"
+          />
           <ShoppingCartButton />
         </section>
 
@@ -207,4 +205,5 @@ Product.propTypes = {
       }),
     }),
   }),
+  addItemToCart: PropTypes.func,
 }.isRequired;
