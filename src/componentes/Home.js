@@ -21,10 +21,10 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
-    this.fetchProducts();
   }
 
   async handleCategory(categoryId) {
+    await this.fetchProducts(categoryId);
     this.setState({
       category: categoryId,
     });
@@ -53,7 +53,6 @@ class Home extends Component {
 
   render() {
     const { categories, searchText, category, products } = this.state;
-    console.log(products);
     return (
       <div>
         <label data-testid="home-initial-message" htmlFor="home-initial">
