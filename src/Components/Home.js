@@ -109,13 +109,15 @@ class Home extends React.Component {
             <div key={ product.id }>
               <Link
                 className="product"
-                to="/product/:id"
+                to={ `/product/${product.id}` }
                 key={ product.id }
-                data-testid="product"
+                data-testid="product-detail-link"
               >
-                <img src={ product.thumbnail } alt="foto-produto" />
-                <h2>{product.title}</h2>
-                <p>{product.price}</p>
+                <div data-testid="product">
+                  <img src={ product.thumbnail } alt="foto-produto" />
+                  <h2>{product.title}</h2>
+                  <p>{product.price}</p>
+                </div>
               </Link>
               <button
                 type="button"
@@ -127,6 +129,7 @@ class Home extends React.Component {
               </button>
             </div>
           ))}
+
           {search && products.length === 0 && <p>Nenhum produto encontrado</p>}
         </section>
 
