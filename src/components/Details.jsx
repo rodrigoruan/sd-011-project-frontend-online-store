@@ -23,6 +23,14 @@ export default class Details extends Component {
             ))}
           </div>
         </div>
+        <span>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+          >
+            Adicionar ao carrinho
+          </button>
+        </span>
       </div>
     );
   }
