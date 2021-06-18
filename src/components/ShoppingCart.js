@@ -11,7 +11,7 @@ export default class ShoppingCart extends Component {
     const quantity = JSON.parse(localStorage.getItem('quantity'));
     this.state = {
       items,
-      quantity,
+      quantity: 1,
     };
   }
 

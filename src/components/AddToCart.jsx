@@ -10,7 +10,7 @@ class AddToCart extends React.Component {
 
   addItem() {
     const { item } = this.props;
-    console.log(item.product.id)
+    console.log(item.product.id);
     let existingCart = JSON.parse(localStorage.getItem('items'));
     if (existingCart == null) existingCart = [];
     let existingQuantity = JSON.parse(localStorage.getItem('quantity'));
@@ -43,7 +43,7 @@ class AddToCart extends React.Component {
       <div>
         <button
           type="button"
-          data-testid="product-add-to-cart"
+          data-testid="{ classId }"
           onClick={ () => this.addItem() }
         >
           Adicionar ao Carrinho
