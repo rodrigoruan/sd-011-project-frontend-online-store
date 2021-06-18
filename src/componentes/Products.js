@@ -1,8 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { saveStorage } from '../services/saveService';
 
 class Products extends Component {
+  constructor(props) {
+    super(props);
+    const { products } = this.props;
+    this.state = {
+      quantity: 0,
+      products,
+    };
+    this.addToCart = this.addToCart.bind(this);
+  }
+
+  addToCart() {
+    const { quantity } = this.state;
+    const count = quantity + 1;
+    this.setState({ quantity: count }, () => { saveStorage(this.state); });
+  }
+
   render() {
     const { products } = this.props;
     const { title, price, thumbnail, category_id: id } = products;
@@ -20,6 +37,13 @@ class Products extends Component {
         >
           Detalhes
         </Link>
+        <button
+          onClick={ () => this.addToCart() }
+          type="button"
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
