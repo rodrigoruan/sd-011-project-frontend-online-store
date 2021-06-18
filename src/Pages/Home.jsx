@@ -43,6 +43,8 @@ class Home extends Component {
 
   render() {
     const { prodList, wasSearched } = this.state;
+    console.log(prodList);
+    console.log(wasSearched);
     return (
       <div>
         <p data-testid="home-initial-message">

@@ -1,19 +1,70 @@
 import React, { Component } from 'react';
 import './productDetail.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+// import * as api from '../../services/api';
 
 class ProductDetail extends Component {
+  constructor(props) {
+    super(props);
+    const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    if (!shoppingCart) {
+      this.state = {
+        shoppingCart: [],
+      };
+    } else {
+      this.state = {
+        shoppingCart,
+      };
+    }
+
+    this.getApiProducts = this.getApiProducts.bind(this);
+    this.setShoppingCartToLocalStorage = this.setShoppingCartToLocalStorage.bind(this);
+  }
+
+  setShoppingCartToLocalStorage() {
+    const { shoppingCart } = this.state;
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+  }
+
+  getApiProducts(item) {
+    const { shoppingCart } = this.state;
+
+    if (shoppingCart.some((productItem) => productItem.productId === item.id)) {
+      shoppingCart.find((productItem) => productItem.productId === item.id).quantity += 1;
+
+      this.setState({
+        shoppingCart,
+      },
+      async () => this.setShoppingCartToLocalStorage());
+    } else {
+      const productInfo = {
+        quantity: 1,
+        productId: item.id,
+        productInfo: [item],
+      };
+      this.setState((prevState) => ({
+        shoppingCart: [...prevState.shoppingCart, productInfo],
+      }),
+      async () => this.setShoppingCartToLocalStorage());
+    }
+  }
+
   render() {
+    const { shoppingCarts } = this.state;
+    console.log(shoppingCarts);
     const {
       location:
-        { state:
-          { item },
-        },
+      { state:
+        { item },
+      },
     } = this.props;
     return (
       <>
         {item.map((info) => (
           <div key={ info.id }>
+            <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
             <div className="main-product-info">
               <h1 data-testid="product-detail-name">{info.title}</h1>
               <h1>{ `R$: ${info.price}` }</h1>
@@ -28,6 +79,13 @@ class ProductDetail extends Component {
                 ))}
               </div>
             </div>
+            <button
+              type="button"
+              data-testid="product-detail-add-to-cart"
+              onClick={ () => this.getApiProducts(info) }
+            >
+              Colocar no carrinho
+            </button>
           </div>
         ))}
       </>
