@@ -31,16 +31,19 @@ class Home extends Component {
 
   addToCart({ target: { value } }) {
     const data = JSON.parse(value);
-    const key = data.title;
+    const key = data.id;
     if (sessionStorage[key]) {
       const recoveredObject = JSON.parse(sessionStorage[key]);
       const copy = { ...recoveredObject };
-      copy.quantity += 1;
-      sessionStorage[key] = JSON.stringify(copy);
+      if (copy.quantity < copy.inStorage) {
+        copy.quantity += 1;
+        sessionStorage[key] = JSON.stringify(copy);
+        this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
+      }
     } else {
       sessionStorage.setItem(key, value);
+      this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
     }
-    this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
   }
 
   HandlerState(event) {
