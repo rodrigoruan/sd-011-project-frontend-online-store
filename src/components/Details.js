@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AddToCartButton from './AddToCartButton';
+import DetailsAddToCartButton from './AddToCartButton';
 // import * as api from '../services/api';
 
 export default class Details extends React.Component {
@@ -30,7 +30,7 @@ export default class Details extends React.Component {
         <Link to="/">Voltar</Link>
         <h1 data-testid="product-detail-name">{product.title}</h1>
         {this.buildTechSpecifications(product)}
-        <AddToCartButton product={ product } />
+        <DetailsAddToCartButton product={ product } />
       </div>
     );
   }
