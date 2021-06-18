@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import * as api from '../services/api';
+// import * as api from '../services/api';
 // import Cart from './Cart';
 
 export default class ProductDetails extends Component {
@@ -9,19 +9,6 @@ export default class ProductDetails extends Component {
     this.state = {
       product: {},
     };
-    console.log(props);
-
-    this.getProductById = this.getProductById.bind(this);
-  }
-
-  async getProductById() {
-    const { match: { params: { id } } } = this.props;
-    const results = await api.getProductsFromCategoryAndQuery(id, false);
-    console.log(results);
-  }
-
-  componentDidMount() {
-    this.getProductById();
   }
 
   render() {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './products-list.css';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 import { ProductCard } from '../../components/Components';
 
@@ -13,7 +12,7 @@ class ProductsList extends Component {
         { products
           .map((product, idx) => {
             return (
-              <ProductCard id={ product.id } key={ idx } product={ product } />
+              <ProductCard key={ idx } product={ product } />
             )
           }) }
       </div>

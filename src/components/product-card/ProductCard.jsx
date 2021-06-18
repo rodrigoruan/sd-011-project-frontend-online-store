@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as api from '../../services/api';
+// import * as api from '../../services/api';
 import './product-card.css';
 import { Link } from 'react-router-dom';
+import CartButton from '../../components/cart-button/CartButton'
 
 export default class ProductCard extends Component {
-
-  async getProductById({ currentTarget }) {
-    const { id, title } = currentTarget;
-    const result = await api.getProductsFromCategoryAndQuery(id, title);
-    return result;
+  constructor(props) {
+    super(props)
+    this.state = {
+      id: '',
+      title: '',
+      thumbnail: '',
+      price: '',
+    }
+    // this.getProductInfo = this.getProductInfo.bind(this);
   }
+
+  // getProductInfo() {
+  //   const { product: { id, title, price, thumbnail } } = this.props;
+  //   this.setState(() => {
+  //     return {
+  //       id, title, price, thumbnail
+  //     }
+  //   });
+  // }
+
+  // componentDidUpdate() {
+  //   console.log(this.state)
+  // }
 
   render() {
     const { product } = this.props;
-    console.log(product)
     const { title, price, id, thumbnail } = product;
   
     return (
       <div
-        title={ id }
-        onClick={ this.getProductById }
+        // onClick={ () => this.getProductInfo() }
         data-testid="product"
         id={ id }
         key={ id }
@@ -31,8 +47,9 @@ export default class ProductCard extends Component {
           <p>
             Preço:
             { price }
-            <Link to={ `/product-details/${id}`}>Ver Detalhes</Link>
           </p>
+          <Link to={ `/product-details/${id}`}>Ver Detalhes</Link>
+          <CartButton prod={product} />
         </div>
       </div>
     );
