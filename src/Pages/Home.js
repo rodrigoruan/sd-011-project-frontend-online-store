@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../ProductList';
+import ShoppingCartButton from './ShoppingCartButton';
 
 class Home extends React.Component {
   constructor() {
@@ -48,6 +50,9 @@ class Home extends React.Component {
               { category.name }
             </div>))}
         </div>
+        <Link data-testid="shopping-cart-button" to="/cart">
+          <ShoppingCartButton />
+        </Link>
       </fragment>
     );
   }
