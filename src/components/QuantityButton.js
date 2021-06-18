@@ -23,7 +23,7 @@ class QuantityButton extends Component {
     });
   }
 
-  moreOne() {
+  addQuantity() {
     this.setState((prevState) => ({
       quantity: prevState.quantity + 1,
     }), () => {
@@ -35,7 +35,7 @@ class QuantityButton extends Component {
     });
   }
 
-  lessOne() {
+  subtractQuantity() {
     this.setState((prevState) => ({
       quantity: prevState.quantity - 1,
     }), () => {
