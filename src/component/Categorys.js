@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Categorys extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ export default class Categorys extends Component {
       category: [],
     };
     this.getCategorys = this.getCategorys.bind(this);
-    this.getIdrdbtn = this.getIdrdbtn.bind(this);
+    this.rdBtn = this.rdBtn.bind(this);
   }
 
   componentDidMount() {
@@ -22,10 +22,13 @@ export default class Categorys extends Component {
     });
   }
 
-  getIdrdbtn({ target }) {
+  async rdBtn({ target }) {
     const { value } = target;
-    const { evCtg } = this.props;
+    const { evCtg, evSrch } = this.props;
     evCtg(value);
+    console.log('aqui');
+    const result = await getProductsFromCategoryAndQuery(value, '');
+    evSrch(result.results);
   }
 
   render() {
@@ -35,7 +38,6 @@ export default class Categorys extends Component {
       <div>
         { category.map(({ name, id }, index) => (
           <label htmlFor={ index } key={ index }>
-            { name }
             <input
               data-testid="category"
               id={ index }
@@ -43,8 +45,9 @@ export default class Categorys extends Component {
               type="radio"
               value={ id }
               key={ index }
-              onClick={ this.getIdrdbtn }
+              onClick={ this.rdBtn }
             />
+            { name }
           </label>
         )) }
       </div>
@@ -54,4 +57,5 @@ export default class Categorys extends Component {
 
 Categorys.propTypes = {
   evCtg: PropTypes.func.isRequired,
+  evSrch: PropTypes.func.isRequired,
 };
