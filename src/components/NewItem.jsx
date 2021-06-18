@@ -33,9 +33,9 @@ class NewItem extends Component {
             - MENOS
             </button>
           <img src={product.thumbnail} alt={product.title} />
-          <p>Valor unitário R${product.price}</p>
+          <p>{product.price}</p>
           <span data-testid="shopping-cart-product-quantity">{product.quantity}</span>
-          <span data-testid="shopping-cart-product-quantity">{product.quantity * product.price}</span>
+          {/* <span>{product.quantity * product.price}</span> */}
         </div>
       </div>
     );
