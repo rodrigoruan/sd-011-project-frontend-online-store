@@ -6,7 +6,7 @@ export default class Cart extends Component {
     super();
     this.state = {
       products: [],
-      count: 1,
+      count: 0,
     };
   }
 
@@ -27,15 +27,16 @@ export default class Cart extends Component {
   handleClick = ({ target: { id, name } }) => {
     const product = JSON.parse(localStorage.getItem(id));
 
-    this.getItemLocalStorage();
-    if (name === 'add') {
+    if (name === 'add' && product.counter < product.availableQuantity) {
       product.counter += 1;
+      console.log(product.counter);
     }
     if (name === 'sub' && product.counter > 1) {
       product.counter -= 1;
     }
 
     localStorage.setItem(id, JSON.stringify(product));
+    this.getItemLocalStorage();
   };
 
   handleDelete = ({ target: { id } }) => {
