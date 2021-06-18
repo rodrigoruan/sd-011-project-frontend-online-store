@@ -12,7 +12,7 @@ class AvaliaProduto extends Component {
   }
 
   onChangeValue(event) {
-    console.log(event.target.value);
+    
     this.setState({ rating: event.target.value });
   }
 
