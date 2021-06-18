@@ -99,13 +99,10 @@ class Home extends Component {
             {
               voidSearch
                 ? <h1>Nenhum produto foi encontrado </h1>
-                : searchResult.map(({ id, title, price, thumbnail }) => (
+                : searchResult.map((product) => (
                   <Product
-                    key={ id }
-                    id={ id }
-                    title={ title }
-                    price={ price }
-                    thumbnail={ thumbnail }
+                    key={ product.id }
+                    product={ product }
                   />
                 ))
             }
