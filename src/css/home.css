@@ -19,7 +19,6 @@
 }
 
 input {
-  background-color: blue;
   font-size: 1.5em;
   margin-right: 10px;
   margin-top: 5rem;
@@ -38,6 +37,16 @@ footer {
 
 .navbar-brand {
   margin-left: 2%;
+}
+
+.navbar-nav {
+  display: flex!important;
+  flex-direction: row!important;
+  padding: 0 15px;
+}
+
+.navbar-nav li {
+  padding: 0 15px;
 }
 
 .search-list {
