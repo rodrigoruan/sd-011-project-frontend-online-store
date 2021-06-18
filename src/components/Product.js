@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import '../css/Product.css';
 
 export default class Product extends Component {
   constructor() {
@@ -87,22 +88,28 @@ export default class Product extends Component {
     const { allComments, sum, counter } = state;
 
     return (
-      <>
-        <h1 data-testid="product-detail-name">{title}</h1>
-        <img src={ thumbnail } alt={ title } />
-        {shipping.free_shipping ? (<p data-testid="free-shipping">Frete Grátis!</p>
-        ) : null}
-        <p>
+      <div className="product-container">
+        <h1 className="product-name" data-testid="product-detail-name">{title}</h1>
+        <div className="img-container">
+          <img className="img-detail" src={ thumbnail } alt={ title } />
+          {shipping.free_shipping ? (
+            <p className="free-shipping" data-testid="free-shipping">Frete Grátis!</p>
+          ) : null}
+        </div>
+        <p className="product-price">
           R$
           {price}
         </p>
         <div>
           <ul>
             {attributes && attributes
-              .map(({ name }, index) => <li key={ index }>{name}</li>)}
+              .map(({ name }, index) => (
+                <li className="product-spec" key={ index }>{name}</li>
+              ))}
           </ul>
         </div>
         <button
+          className="button-add-to-cart"
           disabled={ counter > availableQuantity }
           data-testid="product-detail-add-to-cart"
           onClick={ this.handleClick }
@@ -110,45 +117,63 @@ export default class Product extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <Link data-testid="shopping-cart-button" to="/cart">
-          Carrinho
+        <Link className="to-cart-link" data-testid="shopping-cart-button" to="/cart">
+          Carrinho 🛒
+          {' '}
+          <span className="cart-items" data-testid="shopping-cart-size">{sum}</span>
         </Link>
-        <span data-testid="shopping-cart-size">{sum}</span>
+
         <div>
           <textarea
+            className="input-comment"
+            cols="60"
+            rows="5"
             name="comment"
             onChange={ this.setComments }
             data-testid="product-detail-evaluation"
             type="text"
           />
-          <select name="stars" onChange={ this.setComments }>
-            <option>Avaliar</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-          <button name={ id } type="button" onClick={ this.saveCommentOnLocal }>
-            Enviar comentário
-          </button>
+          <div className="avaliation-container">
+            <select
+              className="avaliation-input"
+              name="stars"
+              onChange={ this.setComments }
+            >
+              <option>Avaliar</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+            <button
+              className="button-input"
+              name={ id }
+              type="button"
+              onClick={ this.saveCommentOnLocal }
+            >
+              Enviar comentário
+            </button>
+          </div>
         </div>
         <div>
-          <h4>Avaliações</h4>
+          <h3 className="avaliations">Avaliações</h3>
           {allComments && allComments.split('*').map((item, index) => {
             const { comment, stars } = JSON.parse(item);
             return (
-              <div key={ index }>
-                <p>{comment}</p>
+              <div className="avaliation-comment" key={ index }>
                 <p>
-                  STARS:
+                  {comment}
+                  :
+                </p>
+                <p>
                   {stars}
                 </p>
               </div>
             );
           })}
         </div>
-      </>
+      </div>
     );
   }
 }

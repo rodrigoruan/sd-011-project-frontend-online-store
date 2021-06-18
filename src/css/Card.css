@@ -22,13 +22,25 @@ img {
   width: 100px;
 }
 
+.shipping {
+  color: #3483fa;
+}
+
 .add-cart-button {
   background-color: #eee;
   border: 1px solid #252525;
   border-radius: 2px;
   color: #333;
+  cursor: pointer;
   margin-bottom: 15px;
   padding: 4px;
+  transition: 1s;
+}
+
+.add-cart-button:hover {
+  background-color: #333;
+  color: #eee;
+  transition: 1s;
 }
 
 .price {

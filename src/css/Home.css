@@ -7,6 +7,12 @@
   padding: 15px 0;
 }
 
+.initial-message {
+  color: #333;
+  font-size: 20px;
+  text-align: center;
+}
+
 .container input {
   border: none;
   font-size: 17px;

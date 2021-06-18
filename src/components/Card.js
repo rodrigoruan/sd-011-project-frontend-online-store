@@ -12,25 +12,19 @@ export default class Card extends Component {
   handleClick = () => {
     const { props, state } = this;
     let { counter } = state;
-    const { title, price, thumbnail, id, attributes, sumCartItems } = props;
+    const { title, sumCartItems } = props;
     const availableQuantity = props.available_quantity;
+    const product = localStorage.getItem(title);
 
-    if (localStorage.getItem(title)) {
-      const product = JSON.parse(localStorage.getItem(title)).counter;
-      this.setState({ counter: Number(product) + 1 });
-      counter = Number(product) + 1;
+    if (product) {
+      const productCounter = JSON.parse(product).counter;
+      this.setState({ counter: Number(productCounter) + 1 });
+      counter = Number(productCounter) + 1;
     } else {
       this.setState((previous) => ({ counter: previous.counter + 1 }));
     }
 
-    const object = { counter,
-      price,
-      thumbnail,
-      id,
-      attributes,
-      title,
-      availableQuantity,
-    };
+    const object = { ...props, counter, availableQuantity };
 
     const json = JSON.stringify(object);
     localStorage.setItem(title, json);
@@ -63,7 +57,7 @@ export default class Card extends Component {
           <p className="title">{title}</p>
           <img src={ thumbnail } alt={ title } />
           {shipping.free_shipping ? (
-            <p data-testid="free-shipping">Frete Grátis!</p>
+            <p className="shipping" data-testid="free-shipping">Frete Grátis!</p>
           ) : null}
           <p className="price">
             R$
