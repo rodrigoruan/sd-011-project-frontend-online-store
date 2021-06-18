@@ -4,7 +4,6 @@ import './App.css';
 import Cart from './Components/Cart';
 import { Product } from './Components/Product';
 import Home from './Components/Home';
-import ShoppingCart from './Components/ShoppingCart';
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
-            <ShoppingCart />
           </Route>
           <Route path="/cart" component={ Cart } />
           <Route path="/product/:id" render={ (props) => <Product { ...props } /> } />
