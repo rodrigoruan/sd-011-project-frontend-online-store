@@ -66,7 +66,9 @@ class QuantityButton extends Component {
 }
 
 QuantityButton.propTypes = {
-  product: PropTypes.shape(PropTypes.quantity),
+  product: PropTypes.shape({
+    quantity: PropTypes.number,
+  }),
 }.isRequired;
 
 export default QuantityButton;
