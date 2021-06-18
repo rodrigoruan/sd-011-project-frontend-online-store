@@ -9,7 +9,7 @@ class ProductList extends Component {
     const { productsList, addToCart } = this.props;
     return (
       <ul className="productList">
-        {productsList.map(({ title, thumbnail, price, id }) => (
+        {productsList.map(({ title, thumbnail, price, id, shipping }) => (
           <ProductCard
             key={ title }
             title={ title }
@@ -17,6 +17,7 @@ class ProductList extends Component {
             price={ price }
             id={ id }
             addToCart={ addToCart }
+            hasFreeShipping={ shipping.free_shipping }
           />
         ))}
       </ul>

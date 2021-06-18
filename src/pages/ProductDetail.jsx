@@ -20,6 +20,7 @@ export default class ProductDetail extends Component {
       price: location.state.price,
       thumbnail: location.state.thumbnail,
       title: location.state.title,
+      hasFreeShipping: location.state.hasFreeShipping,
       email: '',
       textArea: '',
       rating: 1,
@@ -71,8 +72,17 @@ export default class ProductDetail extends Component {
   }
 
   render() {
-    const { title, thumbnail, price, email, textArea, rating, cartSize } = this.state;
-
+    const { title,
+      thumbnail,
+      price,
+      email,
+      textArea,
+      rating,
+      cartSize,
+      hasFreeShipping,
+    } = this.state;
+    let freeShipping = null;
+    if (hasFreeShipping) freeShipping = 'Frete Grátis';
     const showEvaluations = localStorage.getItem(title) || false;
     return (
       <div>
@@ -84,6 +94,7 @@ export default class ProductDetail extends Component {
         <h3 data-testid="product-detail-name">{ title }</h3>
         <h3>{price}</h3>
         <img src={ thumbnail } alt={ title } />
+        <h4 data-testid="free-shipping">{ freeShipping }</h4>
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
