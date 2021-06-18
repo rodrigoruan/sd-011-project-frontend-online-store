@@ -1,9 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from './Button';
 
 export default class Details extends Component {
+  // constructor() {
+  //   super();
+
+  //   this.state = {
+  //     count: 0,
+  //   };
+
+  //   this.getLocalStorage = this.getLocalStorage.bind(this);
+  // }
+
+  // componentDidMount() {
+  //   this.getLocalStorage();
+  // }
+
+  // getLocalStorage() {
+  //   const { location } = this.props;
+  //   const { state } = location;
+  //   const { product } = state;
+  //   const { title } = product;
+  //   const keyProductName = localStorage.getItem(title);
+  //   const changeToObject = JSON.parse(keyProductName);
+  //   // const object = changeToObject.find((item) => item.sumCount);
+  //   this.setState({
+  //     count: changeToObject.sumCount + 1,
+  //   });
+  //   console.log(changeToObject.sumCount);
+  // }
+
   render() {
+    // const { count } = this.state;
     const { location } = this.props;
     const { state } = location;
     const { product } = state;
@@ -28,6 +58,12 @@ export default class Details extends Component {
           </ul>
         </div>
         <Link to="/">Voltar</Link>
+        <Button
+          title={ product.title }
+          thumbnail={ product.thumbnail }
+          price={ product.price }
+          // count={ count }
+        />
       </div>
     );
   }

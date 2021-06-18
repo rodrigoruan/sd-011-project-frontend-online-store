@@ -32,14 +32,14 @@ export default class CartItems extends Component {
 
     return (
       <div>
-        {allProducts.map(({ title, thumbnail, price, count }, index) => (
+        {allProducts.map(({ title, thumbnail, price, sumCount }, index) => (
           <div key={ index }>
             <h3 data-testid="shopping-cart-product-name">
               {`${title} - R$${price}`}
             </h3>
             <img src={ thumbnail } alt={ title } />
             <span data-testid="shopping-cart-product-quantity">
-              { count }
+              { sumCount }
             </span>
           </div>
         ))}

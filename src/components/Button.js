@@ -12,11 +12,25 @@ export default class Button extends Component {
 
   addToCart() {
     const { title, price, thumbnail } = this.props;
-    this.setState((oldValue) => ({ count: oldValue.count + 1 }));
-    const { count } = this.state;
-    const objeto = { count, title, price, thumbnail };
-
-    localStorage.setItem(title, JSON.stringify(objeto));
+    const keyProductName = localStorage.getItem(title);
+    const changeToObject = JSON.parse(keyProductName);
+    if (!changeToObject) {
+      this.setState((oldValue) => ({ count: oldValue.count + 1 }));
+      const { count } = this.state;
+      const objeto = { count, title, price, thumbnail };
+      localStorage.setItem(title, JSON.stringify(objeto));
+    } else {
+      const sumCount = changeToObject.count + 1;
+      this.setState({
+        count: sumCount,
+      });
+      const { count } = this.state;
+      const objeto = { count, title, price, thumbnail };
+      localStorage.setItem(title, JSON.stringify(objeto));
+    }
+    // const { count } = this.state;
+    // const objeto = { count, title, price, thumbnail };
+    // localStorage.setItem(title, JSON.stringify(objeto));
   }
 
   render() {

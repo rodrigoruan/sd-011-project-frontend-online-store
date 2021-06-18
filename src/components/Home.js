@@ -45,7 +45,6 @@ export default class SearchBar extends Component {
   }
 
   async getProducts() {
-
     const { categoria, textSearch } = this.state;
     const returnGetProducts = await
     Api.getProductsFromCategoryAndQuery(categoria, textSearch);
