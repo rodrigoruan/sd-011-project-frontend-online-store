@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 class ShoppingCart extends React.Component {
   render() {
     const productFromDetails = JSON.parse(localStorage.getItem('productInfo'));
-    if (productFromDetails === undefined) {
+    if (productFromDetails === null) {
       return (
         <h3 data-testid="shopping-cart-empty-message">
           Seu carrinho está vazio
