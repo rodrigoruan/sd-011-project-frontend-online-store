@@ -4,7 +4,7 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import { About, NotFound, ShoppingCart, Home } from './pages/zPageMenu';
+import { About, NotFound, ShoppingCart, Home, FinishScreen } from './pages/zPageMenu';
 import { Footer, Header } from './components/zComponentsMenu';
 
 export default class App extends Component {
@@ -12,7 +12,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      ShoppingCart: '',
+      shoppingCart: '',
     };
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
@@ -22,21 +22,32 @@ export default class App extends Component {
     api.getProductsFromCategoryAndQuery();
   }
 
-  handleAddToCart = (id, thumbnail, title, price) => {
-    const oldItems = [...this.state.ShoppingCart];
-    const newItem = { id, thumbnail, title, price };
-    this.setState({ ShoppingCart: [...oldItems, newItem] });
+  handleAddToCart = (id, title, thumbnail, price) => {
+    const { shoppingCart } = this.state;
+    const oldItems = [...shoppingCart];
+    const newItem = { id, title, thumbnail, price };
+    this.setState({ shoppingCart: [...oldItems, newItem] });
   };
 
   render() {
+    const { shoppingCart } = this.state;
     return (
       <BrowserRouter>
         <Header />
         <Switch>
           {/* prettier-ignore */}
-          <Route exact path="/" render={ (props) => <Home { ...props }  handleAddToCart = {this.handleAddToCart}    /> } />
-          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
+          <Route
+            exact
+            path="/"
+            render={ (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } /> }
+          />
+          <Route
+            exact
+            path="/cart"
+            render={(props) => <ShoppingCart {...props} cartItems={shoppingCart} />}
+          />
           <Route exact path="/about" component={About} />
+          <Route exact path="/finishscreen" component={FinishScreen} />
           <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}
