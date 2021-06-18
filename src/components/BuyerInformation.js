@@ -25,7 +25,7 @@ export default class BuyerInformation extends Component {
     const { fullName, cpf, email, phone, cep, address } = this.state;
 
     return (
-      <div>
+      <form>
         <h2>Informações do Comprador:</h2>
 
         <input
@@ -81,7 +81,7 @@ export default class BuyerInformation extends Component {
           value={address}
           onChange={this.handleChange}
         />
-      </div>
+      </form>
     );
   }
 }

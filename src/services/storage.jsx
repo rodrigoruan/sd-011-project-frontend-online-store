@@ -13,3 +13,7 @@ export const createReview = (noteData) => {
   }
   saveReviews(notes);
 };
+
+export const readStorage = (item) => JSON.parse(localStorage.getItem(item));
+export const saveStorage = (products) =>
+  localStorage.setItem('cartStorage', JSON.stringify(products));
