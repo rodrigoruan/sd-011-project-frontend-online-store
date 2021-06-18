@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CartButton from '../components/CartButton';
+import CartQuantity from '../components/CartQuantity';
 import RatingSection from '../components/RatingSection';
 
 class ProductDetail extends Component {
@@ -28,6 +29,7 @@ class ProductDetail extends Component {
         >
           Adicione ao carrinho
         </button>
+        <CartQuantity />
         <CartButton
           link={ {
             pathname: '/cart',
