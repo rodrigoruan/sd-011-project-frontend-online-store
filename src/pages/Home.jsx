@@ -88,7 +88,6 @@ class Home extends React.Component {
           <ul className="list-categories">
             {this.listCategories()}
           </ul>
-
           <Link
             data-testid="shopping-cart-button"
             to={ {
