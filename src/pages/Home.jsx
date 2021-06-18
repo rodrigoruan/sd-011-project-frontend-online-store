@@ -12,12 +12,13 @@ class Home extends React.Component {
       categories: [],
       products: [],
       searchText: '',
-
+      shoppingCart: [],
     };
     this.fetchCategories = this.fetchCategories.bind(this);
     this.listCategories = this.listCategories.bind(this);
     this.handleSearchs = this.handleSearchs.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.addProductToShoppingCartState = this.addProductToShoppingCartState.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +30,6 @@ class Home extends React.Component {
     const { name } = target;
     const { searchText } = this.state;
     const arrayProdutcs = await Api.getProductsFromCategoryAndQuery(name, searchText);
-    console.log(arrayProdutcs);
     this.setState({
       products: arrayProdutcs.results,
     });
@@ -64,9 +64,16 @@ class Home extends React.Component {
     ));
   }
 
-  render() {
-    const { products } = this.state;
+  addProductToShoppingCartState(item) {
+    const { shoppingCart } = this.state;
+    this.setState({
+      shoppingCart: [...shoppingCart, item],
+    });
+    console.log(shoppingCart);
+  }
 
+  render() {
+    const { products, shoppingCart } = this.state;
     return (
       <main>
         <SearchBar onInputChangeProps={ this.onInputChange } />
@@ -82,11 +89,23 @@ class Home extends React.Component {
             {this.listCategories()}
           </ul>
 
-          <Link to="/shopping-cart" data-testid="shopping-cart-button">
+          <Link
+            data-testid="shopping-cart-button"
+            to={ {
+              pathname: '/shopping-cart',
+              state: { shoppingCart },
+            } }
+          >
             <MdShoppingCart />
           </Link>
           {products.length > 0
-            ? products.map((item) => (<ProductCard key={ item.id } item={ item } />))
+            ? products.map((item) => (
+              <ProductCard
+                key={ item.id }
+                item={ item }
+                addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
+              />
+            ))
             : <p>Nenhum produto encontrado</p> }
         </section>
       </main>

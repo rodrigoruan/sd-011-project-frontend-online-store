@@ -25,7 +25,6 @@ class ProductDetails extends React.Component {
 
   render() {
     const { product: { title, price, thumbnail, attributes } } = this.state;
-    console.log(attributes);
     return (
       <section>
         <p data-testid="product-detail-name">{ title }</p>
