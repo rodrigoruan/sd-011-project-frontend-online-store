@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import ShoppingItem from '../components/ShoppingItem';
 
 class ShoppingCart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       products: '',
     };
@@ -21,6 +21,7 @@ class ShoppingCart extends Component {
     if (currentCart) {
       this.setState({ products: JSON.parse(currentCart) });
     }
+    return currentCart;
   }
 
   removeItem(id) {
@@ -39,6 +40,7 @@ class ShoppingCart extends Component {
 
   render() {
     const { products } = this.state;
+    // const { match: { params: { productsCart } } } = this.props;
     return (
       <div>
         <p>ShoppingCart</p>

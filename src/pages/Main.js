@@ -2,7 +2,6 @@ import React from 'react';
 import CategoryFilter from '../components/CategoryFilter';
 import ProductList from '../components/ProductList';
 import SearchBar from '../components/SearchBar';
-import CartButton from '../components/CartButton';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -32,7 +31,6 @@ export default class Main extends React.Component {
     return (
       <div>
         <SearchBar onClick={ this.handleSubmit } />
-        <CartButton />
         { !query && !selectedCategoryId
           ? <p data-testid="home-initial-message">{ paragraph }</p>
           : <ProductList categoryId={ selectedCategoryId } query={ query } />}
