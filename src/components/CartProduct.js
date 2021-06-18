@@ -23,6 +23,7 @@ export default class CartProduct extends Component {
     // prettier-ignore
     const { handleAddToCart, handleDecreaseQuantity, handleRemoveFromCart,
       productData: { quantity } } = this.props;
+
     const showButtons = () => {
       if (handleAddToCart && handleDecreaseQuantity && handleRemoveFromCart) {
         return (
@@ -58,6 +59,7 @@ export default class CartProduct extends Component {
         );
       }
     };
+
     return (
       <div>
         {showRemoveButton()}

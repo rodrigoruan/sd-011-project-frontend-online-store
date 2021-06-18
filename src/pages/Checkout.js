@@ -5,6 +5,12 @@ import * as storage from '../services/storage';
 import { CartProduct } from '../components/zComponentsMenu';
 
 export default class FinishScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
   render() {
     const products = storage.readStorage('cartStorage');
     console.log(products);

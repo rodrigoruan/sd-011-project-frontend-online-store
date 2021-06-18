@@ -1,20 +1,33 @@
 import React, { Component } from 'react';
 import { CartProduct } from '../components/zComponentsMenu';
 import * as storage from '../services/storage';
-import { Link } from 'react-router-dom';
+import { Redirect} from 'react-router-dom';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      shouldRedirect:false
+    };
   }
 
   handleBuyAction = () => {
     const { cartItems } = this.props;
     storage.saveStorage(cartItems);
     console.log(localStorage);
+    this.setState({shouldRedirect:true})
   };
+
+  componentDidMount() {
+    const { cartItems } = this.props;
+    let getPrice = 0;
+    // cartItems.forEach((el) =>
+      // getPrice += el.price
+      // console.log(el)
+    // );
+    console.log(getPrice);
+  }
 
   render() {
     const emptyCartMessage = (
@@ -24,6 +37,8 @@ export default class ShoppingCart extends Component {
     if (!cartItems) {
       return emptyCartMessage;
     }
+    if(this.state.shouldRedirect)
+    {return <Redirect to = '/checkout'/>}
     return (
       <div>
         {cartItems.map((item) => (
@@ -35,8 +50,9 @@ export default class ShoppingCart extends Component {
             handleRemoveFromCart={handleRemoveFromCart}
           />
         ))}
+        <h5>Valor total :</h5>
         <button data-testid="checkout-products" onClick={this.handleBuyAction}>
-          <Link to="/checkout">Comprar</Link>
+        Comprar
         </button>
       </div>
     );
