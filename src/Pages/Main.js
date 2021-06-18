@@ -41,10 +41,10 @@ export default class Main extends Component {
 
   render() {
     const { arraySearch, ctgId } = this.state;
-    const { itensAdded, addItens } = this.props;
+    const { itensAdded, addItens, remove, actualValue, ShowQuantity } = this.props;
     return (
       <>
-        <ShoppingCart itensArray={ itensAdded } />
+        <ShoppingCart itensArray={ itensAdded } addItens={ addItens } remove={ remove } actualValue={ actualValue } ShowQuantity={ ShowQuantity } />
         <Search evSrch={ this.eventSearch } ctgId={ ctgId } />
         <Categorys evCtg={ this.eventCtg } />
         <Cards resultSearch={ arraySearch } addItems={ addItens } />

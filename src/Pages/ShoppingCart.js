@@ -6,33 +6,44 @@ class ShoppingCart extends React.Component {
     super(props);
 
     this.IncrementItem = this.IncrementItem.bind(this);
-    this.DecreaseItem = this.DecreaseItem.bind(this); 
+    this.DecreaseItem = this.DecreaseItem.bind(this);
+
   }
 
-  IncrementItem() {
-    const { itensArray } = this.props;
-    console.log(itensArray)
+  IncrementItem(id) {
+    const { itensArray, ShowQuantity } = this.props;
+    itensArray.find((product) => product.id === id).quantity += 1
+    ShowQuantity()
   }
 
-  DecreaseItem() {
-    const { itensArray } = this.props;
-    console.log(itensArray)
+  DecreaseItem(id) {
+    const { itensArray, ShowQuantity } = this.props;
+    const verifiedItem = itensArray.find((product) => product.id === id)
+    if(verifiedItem.quantity > 0) {
+      verifiedItem.quantity -= 1
+    }
+    ShowQuantity()
   }
+
+
 
   render() {
-    const { itensArray } = this.props;
+    const { itensArray, remove, actualValue } = this.props;
+
     if (itensArray.length) {
       return (
         <div>
           { itensArray.map(({ id, title, price, quantity }) => (
             <div data-testid="shopping-cart-product-name" key={ id }>
-              <p>{ title } { quantity }</p>
-              <button onClick={ this.IncrementItem } data-testid="product-increase-quantity">+</button>
-              <button onClick={ this.DecreaseItem } data-testid="product-decrease-quantity">-</button>
+              <p>{ title } { quantity } { price }</p>
+              <button type="button" onClick={() => this.IncrementItem(id) } data-testid="product-increase-quantity">+</button>
+              <button type="button" onClick={() => this.DecreaseItem(id) } data-testid="product-decrease-quantity">-</button>
+              <button type="button" onClick={() => remove(id) }>X</button>
             </div>
           ))}
-          <p data-testid="shopping-cart-product-quantity">{ itensArray.length }</p>
+          <p data-testid="shopping-cart-product-quantity">{ actualValue }</p>
           <button type="button" data-testid="shopping-cart-button">Comprar</button>
+
         </div>
       );
     }

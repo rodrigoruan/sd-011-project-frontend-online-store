@@ -10,38 +10,47 @@ export default class App extends Component {
 
     this.state = {
       itensAdded: [],
+      actualValue: 0,
     };
 
     this.addItems = this.addItems.bind(this);
+    this.remove = this.remove.bind(this);
+    this.ShowQuantity = this.remove.bind(this);
   }
 
   addItems(obj) {
     const { itensAdded } = this.state;
     const { id } = obj;
+    const check = itensAdded.some((product) => product.id === id);
 
-    const alreadyExist = itensAdded.filter((product, index) => ( product.id === id ));
-    console.log(alreadyExist)
-    if(!alreadyExist.length) {
+    if(!check) {
       this.setState({
         itensAdded: [...itensAdded, obj],
-      })
+      }) 
     } else {
-      alreadyExist[0].quantity = alreadyExist[0].quantity += 1
-    }
+      itensAdded.find((product) => product.id === id).quantity += 1
+   }
   }
-  
 
-    // if(!check) {
-    //   this.setState({
-    //     itensAdded: [...itensAdded, obj],
-    //   })
-    // } else {
-    //   // itensAdded.find((product) => id === product.id)
-    // }
+  remove(id) {
+    const { itensAdded } = this.state;
+    const newArray = itensAdded.filter((product) => product.id !== id);
+    this.setState({
+      itensAdded: newArray
+    })
+  }
+
+  ShowQuantity() {
+    const { itensArray } = this.props;
+    const result = itensArray.reduce((prevProduct, currentProduct) => prevProduct + currentProduct.quantity, 0)
+
+    this.setState({
+      totalValue: result,
+    })
+  }
 
   render() {
     const { itensAdded } = this.state;
-    console.log(itensAdded)
     return (
       <div className="App">
         <BrowserRouter>
@@ -55,6 +64,9 @@ export default class App extends Component {
                     { ...props }
                     itensAdded={ itensAdded }
                     addItens={ this.addItems }
+                    remove={ this.remove }
+                    actualValue={ this.actualValue }
+                    ShowQuantity={ this.ShowQuantity }
                   />)
               }
             />
