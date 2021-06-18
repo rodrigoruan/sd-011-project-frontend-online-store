@@ -34,12 +34,6 @@ class ShoppingCart extends React.Component {
 
     return !cart.length ? emptyCart : filteredCart.map((product, index) => (
       <NewItem product={ product } cart={ cart } key={ index } />
-      // <div key={ product.title }>
-      //   <p data-testid="shopping-cart-product-name">{product.title}</p>
-      //   <img src={ product.thumbnail } alt={ product.title } />
-      //   <p>{product.price}</p>
-      //   <span data-testid="shopping-cart-product-quantity">{ quantity }</span>
-      // </div>
     ));
   }
 }

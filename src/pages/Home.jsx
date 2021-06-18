@@ -54,22 +54,7 @@ class Home extends React.Component {
   async requestButton() {
     this.clearState();
     const { inputQuery, category } = this.state;
-    // const request = await this.getItemsFromInput(inputQuery);
-    // this.setState({
-    //   response: request.results,
-    // });
-
-    // if (category && inputQuery) {
-    // Caso verdadeiro, faça a requisição através de uma
-    // função assíncrona e adicione o resultado à propriedade
-    // results, no state.
     this.getItemsFromCategoryAndQuery(category, inputQuery);
-    // }
-    // else if (inputQuery) {
-    //   this.getItemsFromInput(inputQuery);
-    // } else if (category) {
-    //   this.getItemsFromCategory(category);
-    // }
   }
 
   clearState() {
@@ -101,7 +86,6 @@ class Home extends React.Component {
             </div>
           </aside>
         </div>
-        {/* <Categoryy */}
         <div>
           <form className="search-bar">
             <label htmlFor="queryInput" data-testid="home-initial-message">
