@@ -62,7 +62,12 @@ class Home extends React.Component {
           currentCategoryFilter={ currentCategoryFilter }
           addItemToCart={ addItemToCart }
         />
-        <Link to="/cart">Ver Carrinho</Link>
+        <Link
+          to="/cart"
+          data-testid="shopping-cart-button"
+        >
+          <button type="button">ver carrinho</button>
+        </Link>
       </main>
     );
   }
