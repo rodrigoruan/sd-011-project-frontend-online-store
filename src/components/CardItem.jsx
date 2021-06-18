@@ -10,7 +10,7 @@ class CardItem extends React.Component {
     return products.length === 0 ? notFound : (
       products.map((product) => (
         <>
-          {/* Lembrar de referenciar como passar props por Link */}
+          {/* Lembrar de referenciar como passar props por Linkk */}
           <Link
             to={ {
               pathname: `/details/${product.id}`,
