@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Details extends React.Component {
   // constructor() {
@@ -31,7 +32,17 @@ class Details extends React.Component {
   //   });
   // }
   render() {
-    const { product: { title, price, thumbnail } } = this.props.location.state;
+    const {
+      location: {
+        state: {
+          product: {
+            title,
+            price,
+            thumbnail,
+          },
+        },
+      },
+    } = this.props;
     return (
       <div
         key={ title }
@@ -43,5 +54,17 @@ class Details extends React.Component {
     );
   }
 }
+
+Details.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      product: PropTypes.shape({
+        title: PropTypes.string,
+        price: PropTypes.number,
+        thumbnail: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};
 
 export default Details;

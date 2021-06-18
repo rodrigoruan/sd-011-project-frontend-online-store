@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ShoppingCart extends React.Component {
   render() {
@@ -8,17 +9,23 @@ class ShoppingCart extends React.Component {
         Seu carrinho está vazio
       </h3>);
 
-    return !cart.length ? emptyCart : cart.map((product) => {
-      return (
-        <div key={ product.title }>
-          <p data-testid="shopping-cart-product-name">{product.title}</p>
-          <img src={ product.thumbnail } alt={ product.title } />
-          <p>{product.price}</p>
-          <span data-testid="shopping-cart-product-quantity">{ quantity }</span>
-        </div>
-      );
-    });
+    return !cart.length ? emptyCart : cart.map((product) => (
+      <div key={ product.title }>
+        <p data-testid="shopping-cart-product-name">{product.title}</p>
+        <img src={ product.thumbnail } alt={ product.title } />
+        <p>{product.price}</p>
+        <span data-testid="shopping-cart-product-quantity">{ quantity }</span>
+      </div>
+    ));
   }
 }
+
+ShoppingCart.propTypes = {
+  cart: PropTypes.shape({
+    map: PropTypes.func.isRequired,
+    length: PropTypes.arrayOf().isRequired,
+  }).isRequired,
+  quantity: PropTypes.number.isRequired,
+};
 
 export default ShoppingCart;

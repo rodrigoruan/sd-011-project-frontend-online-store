@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import CardItem from './CardItem';
 import * as api from '../services/api';
 
-class Home2 extends React.Component {
+class Home extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -78,7 +79,7 @@ class Home2 extends React.Component {
   }
 
   render() {
-    const { allCategories, inputQuery, category, response } = this.state;
+    const { allCategories, response } = this.state;
     const { addState } = this.props;
     return (
       <div className="main-page">
@@ -131,4 +132,8 @@ class Home2 extends React.Component {
   }
 }
 
-export default Home2;
+Home.propTypes = {
+  addState: PropTypes.func.isRequired,
+};
+
+export default Home;
