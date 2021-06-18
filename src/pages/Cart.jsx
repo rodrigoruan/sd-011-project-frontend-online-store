@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 export default class Cart extends Component {
   constructor() {
     super();
-    const cartItems = {};
+    const cartList = {};
     Object.values(sessionStorage).forEach((value) => {
       if (!value.includes('rendererID')) {
         const item = JSON.parse(value);
-        cartItems[item.title] = item;
+        cartList[item.title] = item;
       }
     });
     this.state = {
-      cartList: cartItems,
+      cartList,
     };
 
     this.addItem = this.addItem.bind(this);
