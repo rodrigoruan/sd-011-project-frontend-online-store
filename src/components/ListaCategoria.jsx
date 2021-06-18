@@ -42,6 +42,7 @@ class ListaCategoria extends Component {
 
   render() {
     const { loading, categories, filteredCategories } = this.state;
+    const { manipulateState, countState } = this.props;
     const loadingComponent = <Loading />;
     const categoryFiltered = (
       <div>
@@ -53,6 +54,8 @@ class ListaCategoria extends Component {
             imgPath={ thumbnail }
             price={ price }
             category_id={ catId }
+            manipulateState={ manipulateState }
+            countState={ countState }
           />
         ))}
       </div>);

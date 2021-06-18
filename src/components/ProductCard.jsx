@@ -5,12 +5,13 @@ import { AddCarrinho } from './index';
 
 class ProductCard extends Component {
   render() {
-    const { title, imgPath, price, id, category_id: catId } = this.props;
+    const { title, imgPath, price, id, category_id: catId, manipulateState, countState} = this.props;
     return (
       <div>
         <Link
           to={ `/detalhesproduto/${catId}/${id}/${title}` }
           data-testid="product-detail-link"
+          countState={ countState }
         >
           <div data-testid="product">
             <h3>{title}</h3>
@@ -23,6 +24,7 @@ class ProductCard extends Component {
           title={ title }
           price={ price }
           id={ id }
+          manipulateState={ manipulateState }
         />
       </div>
     );

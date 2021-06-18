@@ -14,11 +14,11 @@ class AddCarrinho extends Component {
   }
 
   sendToCart() {
+    const { testId, manipulateState } = this.props;
     let arrProducts = [];
     const storageData = JSON.parse(localStorage.getItem('products'));
     const { title, price, id } = this.props;
-    console.log(this.props);
-    const { quantity } = this.state;
+    const { quantity, quantidadeTotal } = this.state;
     const product = {
       title,
       id,
@@ -43,22 +43,17 @@ class AddCarrinho extends Component {
       }
       const quantidadeTotal = parseInt(localStorage.getItem('quantidade'), 10) + 1;
       localStorage.setItem('quantidade', quantidadeTotal);
-      this.setState({
-        quantidadeTotal,
-      });
+      manipulateState(quantidadeTotal);
       localStorage.setItem('products', JSON.stringify(arrProducts));
     } else {
       localStorage.setItem('products', JSON.stringify([product]));
       localStorage.setItem('quantidade', 1);
-      this.setState({
-        quantidadeTotal: 1,
-      });
+      manipulateState(quantidadeTotal);
     }
   }
 
   render() {
     const { testId } = this.props;
-    const { quantidadeTotal } = this.state;
     return (
       <div>
         <button
@@ -68,9 +63,6 @@ class AddCarrinho extends Component {
         >
           Adicionar ao Carrinho
         </button>
-        <span data-testid="shopping-cart-size">
-          { quantidadeTotal }
-        </span>
       </div>
 
     );
