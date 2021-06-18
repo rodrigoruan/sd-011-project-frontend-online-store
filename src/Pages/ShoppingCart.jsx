@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './shoppingCart.css';
 
 class ShoppingCart extends Component {
@@ -97,6 +98,8 @@ class ShoppingCart extends Component {
           Valor Total da Compra:
           <span>{` R$ ${totalPrice}`}</span>
         </p>
+
+        <Link to="/CheckoutPage" data-testid="checkout-products">Finalizar compra</Link>
       </div>
     );
   }

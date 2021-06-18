@@ -32,7 +32,7 @@ class StatesBR extends Component {
       'Tocantins (TO)'];
 
     return states.map((item) => (
-      <option key="item">{item}</option>
+      <option key={item}>{item}</option>
     ));
   }
 }
