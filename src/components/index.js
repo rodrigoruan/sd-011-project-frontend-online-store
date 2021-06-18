@@ -6,3 +6,5 @@ export { default as CartButton } from './CartButton';
 export { default as AddCarrinho } from './AddCarrinho';
 export { default as ConteudoCarrinho } from './ConteudoCarrinho';
 // export { default as ProductDetailCard } from './ProductDetailCard';
+export { default as ProductCartCard } from './ProductCartCard';
+

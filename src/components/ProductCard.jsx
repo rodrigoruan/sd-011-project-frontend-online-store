@@ -29,6 +29,7 @@ class ProductCard extends Component {
           price={ price }
           id={ id }
           manipulateState={ manipulateState }
+          imgPath={ imgPath }
         />
       </div>
     );

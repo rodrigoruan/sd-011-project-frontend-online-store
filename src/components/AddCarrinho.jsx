@@ -16,13 +16,14 @@ class AddCarrinho extends Component {
     const { manipulateState } = this.props;
     let arrProducts = [];
     const storageData = JSON.parse(localStorage.getItem('products'));
-    const { title, price, id } = this.props;
+    const { title, price, id, imgPath } = this.props;
     const { quantity } = this.state;
     const product = {
       title,
       id,
       price,
       quantity,
+      imgPath,
     };
 
     this.setState((oldState) => ({

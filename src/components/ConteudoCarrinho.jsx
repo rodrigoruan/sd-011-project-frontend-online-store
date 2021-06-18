@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ProductCartCard } from './index';
 
 class ConteudoCarrinho extends Component {
   constructor() {
@@ -10,6 +11,7 @@ class ConteudoCarrinho extends Component {
 
     this.getProductsFromStorage = this.getProductsFromStorage.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
+    this.removeProduct = this.removeProduct.bind(this);
   }
 
   componentDidMount() {
@@ -18,32 +20,50 @@ class ConteudoCarrinho extends Component {
 
   getProductsFromStorage() {
     const productsSelected = JSON.parse(localStorage.getItem('products'));
+    
+    if(productsSelected !== null ) this.setState({ productsSelected });
+    
+  }
 
-    this.setState({ productsSelected });
+  removeProduct(product) {
+    const { productsSelected } = this.state;
+    let quantityTotal = parseInt(localStorage.getItem('quantidade'));
+    const productData = productsSelected.find((element) => element.title === product.title);
+    const indexOfProduct = productsSelected.indexOf(productData);
+
+    console.log(productsSelected[indexOfProduct].quantity);
+    productsSelected.splice(indexOfProduct, 1);
+    
+    if (productsSelected.length <= 0) {
+      this.setState({ productsSelected });
+      localStorage.setItem('quantidade', quantityTotal);
+      localStorage.removeItem('products');
+      localStorage.removeItem('quantidade');
+    } else {
+      this.setState({ productsSelected });
+      localStorage.setItem('products', JSON.stringify(productsSelected));
+    } 
   }
 
   renderProducts() {
-    const { productsSelected } = this.state;
+    let { productsSelected } = this.state;
+    
+    productsSelected = productsSelected.reverse();
 
-    if (productsSelected !== null) {
-      return productsSelected.map(({ title, price, quantity, id }) => (
-        <div key={ id }>
-          <p data-testid="shopping-cart-product-name">{title}</p>
-          <p>
-            R$
-            { price }
-          </p>
-          <p>
-            Quantidade:
-            {' '}
-            <span data-testid="shopping-cart-product-quantity">
-              {quantity}
-            </span>
-          </p>
-        </div>
+    if (productsSelected.length !== 0) {
+      return productsSelected.map(({ title, price, quantity, id, imgPath }, index) => (
+        <ProductCartCard
+          key={ id }
+          title={ title }
+          price={ price }
+          quantity={ quantity }
+          imgPath={ imgPath }
+          index={ index }
+          removeProduct={ this.removeProduct }
+        />
       ));
     }
-    return undefined;
+    return productsSelected;
   }
 
   render() {
@@ -51,7 +71,7 @@ class ConteudoCarrinho extends Component {
     const emptyCart = (
       <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
     );
-    return renderCart !== undefined ? renderCart : emptyCart;
+    return renderCart.length !== 0 ? renderCart : emptyCart;
   }
 }
 
