@@ -13,8 +13,6 @@ export default class ProductDetails extends Component {
     this.getProduct = this.getProduct.bind(this);
   }
 
-  componentDidUpdate() {}
-
   componentDidMount() {
     this.getProduct();
   }
@@ -38,13 +36,13 @@ export default class ProductDetails extends Component {
       email: data.get('email'),
       score: data.get('score'),
     };
-    storage.createReview(formReview);
+    storage.createReview(formReview, 'reviews');
     this.forceUpdate();
   };
 
   render() {
     const getReviews = storage.readReviews('reviews');
-    let quantity;
+    const quantity = 1;
     const { product } = this.state;
     const {
       handleAddToCart,
@@ -70,7 +68,7 @@ export default class ProductDetails extends Component {
           data-testid="product-detail-add-to-cart"
           type="button"
           className="btn btn-success"
-          onClick={() => handleAddToCart(id, thumbnail, title, price, (quantity = 1))}
+          onClick={() => handleAddToCart(id, thumbnail, title, price, quantity)}
         >
           Add to Cart!
         </button>
@@ -78,7 +76,6 @@ export default class ProductDetails extends Component {
         <ProductReviewForm handleFormSubmit={this.handleFormSubmit} />
         <div>
           <h4>Avaliações já feitas:</h4>
-          {console.log(getReviews)}
           {getReviews &&
             getReviews.map((el, index) => {
               return (

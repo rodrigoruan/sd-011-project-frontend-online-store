@@ -4,14 +4,8 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import {
-  About,
-  NotFound,
-  ShoppingCart,
-  Home,
-  FinishScreen,
-  ProductDetails,
-} from './pages/zPageMenu';
+
+import { About, NotFound, ShoppingCart, Home, Checkout, ProductDetails } from './pages/zPageMenu';
 import { Header } from './components/zComponentsMenu';
 
 export default class App extends Component {
@@ -99,7 +93,7 @@ export default class App extends Component {
             )}
           />
           <Route exact path="/about" component={About} />
-          <Route exact path="/finishscreen" component={FinishScreen} />
+          <Route exact path="/checkout" component={Checkout} />
           <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}
