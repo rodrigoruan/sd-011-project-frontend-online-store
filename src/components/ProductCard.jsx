@@ -5,7 +5,7 @@ import { AddCarrinho } from './index';
 
 class ProductCard extends Component {
   render() {
-    const { title, imgPath, price, id, category_id: catId } = this.props;
+    const { title, imgPath, price, id, category_id: catId, manipulateState } = this.props;
     return (
       <div>
         <Link
@@ -23,6 +23,7 @@ class ProductCard extends Component {
           title={ title }
           price={ price }
           id={ id }
+          manipulateState={ manipulateState }
         />
       </div>
     );
@@ -37,4 +38,5 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   category_id: PropTypes.string.isRequired,
+  manipulateState: PropTypes.func.isRequired,
 };

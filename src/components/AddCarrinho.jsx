@@ -13,10 +13,10 @@ class AddCarrinho extends Component {
   }
 
   sendToCart() {
+    const { manipulateState } = this.props;
     let arrProducts = [];
     const storageData = JSON.parse(localStorage.getItem('products'));
     const { title, price, id } = this.props;
-    console.log(this.props);
     const { quantity } = this.state;
     const product = {
       title,
@@ -40,23 +40,30 @@ class AddCarrinho extends Component {
         arrProducts.push(product);
         arrProducts = arrProducts.concat(storageData);
       }
-
+      const quantidadeTotal = parseInt(localStorage.getItem('quantidade'), 10) + 1;
+      localStorage.setItem('quantidade', quantidadeTotal);
+      manipulateState(quantidadeTotal);
       localStorage.setItem('products', JSON.stringify(arrProducts));
     } else {
       localStorage.setItem('products', JSON.stringify([product]));
+      localStorage.setItem('quantidade', 1);
+      manipulateState(1);
     }
   }
 
   render() {
     const { testId } = this.props;
     return (
-      <button
-        data-testid={ testId }
-        type="button"
-        onClick={ this.sendToCart }
-      >
-        Adicionar ao Carrinho
-      </button>
+      <div>
+        <button
+          data-testid={ testId }
+          type="button"
+          onClick={ this.sendToCart }
+        >
+          Adicionar ao Carrinho
+        </button>
+      </div>
+
     );
   }
 }
@@ -68,4 +75,5 @@ AddCarrinho.propTypes = {
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
+  manipulateState: PropTypes.func.isRequired,
 };
