@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Categories, SearchResults } from '../components';
+import { Categories, SearchResults, ShoppingCartButton } from '../components';
 import * as api from '../services/api';
 
 class Home extends React.Component {
@@ -62,12 +61,7 @@ class Home extends React.Component {
           currentCategoryFilter={ currentCategoryFilter }
           addItemToCart={ addItemToCart }
         />
-        <Link
-          to="/cart"
-          data-testid="shopping-cart-button"
-        >
-          <button type="button">ver carrinho</button>
-        </Link>
+        <ShoppingCartButton />
       </main>
     );
   }
