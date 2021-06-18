@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default class ProductCard extends Component {
+export default class ProductCard extends Component {\
+  constructor() {
+    super()
+    this.state = {
+      selectedProduct:{}
+    }
+  }
+  
+  addTo
+
   render() {
     const { product: { title, price, thumbnail, id }, product } = this.props;
     return (
@@ -17,6 +26,7 @@ export default class ProductCard extends Component {
             <img src={ thumbnail } alt={ title } width="70px" />
           </div>
         </Link>
+        <button type="button">Adicionar ou Carrinho</button>
       </div>
     );
   }
