@@ -8,17 +8,30 @@ class ShoppingCart extends Component {
     this.state = {
       products: '',
     };
-    this.removeItem = this.removeItem.bind(this);
+    // this.removeItem = this.removeItem.bind(this);
   }
 
-  removeItem(id) {
-    const { products } = this.state;
-    const results = products.filter((product) => product.id !== id);
-    this.setState({ products: results });
+  componentDidMount() {
+    this.retrieveCart();
   }
+
+  retrieveCart() {
+    const currentCart = localStorage.getItem('shoppingCart');
+
+    if (currentCart) {
+      this.setState({ products: JSON.parse(currentCart) });
+    }
+  }
+
+  // removeItem(id) {
+  //   const { products } = this.state;
+  //   const results = products.filter((product) => product.id !== id);
+  //   this.setState({ products: results });
+  // }
 
   render() {
     const { products } = this.state;
+
     return (
       <div>
         <p>ShoppingCart</p>
@@ -26,10 +39,10 @@ class ShoppingCart extends Component {
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
-        ) : (products.map((item) => (<ShoppingItem
-          key={ item.id }
-          item={ item }
-          onClick={ this.removeItem }
+        ) : (products.map(({ productInfo }) => (<ShoppingItem
+          key={ productInfo.id }
+          item={ productInfo }
+          // onClick={ this.removeItem }
         />))
         )}
         <Link to="/">Voltar</Link>

@@ -42,7 +42,7 @@ class ShoppingItem extends Component {
       <div>
         <button type="button" onClick={ () => onClick(id) }>X</button>
         <img src={ thumbnail } alt={ title } width="40px" />
-        <span>{ title }</span>
+        <span data-testid="shopping-cart-product-name">{ title }</span>
         <button
           type="button"
           data-testid="product-decrease-quantity"
@@ -50,7 +50,7 @@ class ShoppingItem extends Component {
         >
           -
         </button>
-        <span>{ counter }</span>
+        <span data-testid="shopping-cart-product-quantity">{ counter }</span>
         <button
           type="button"
           data-testid="product-increase-quantity"

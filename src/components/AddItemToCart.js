@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as storage from '../services/storage';
 
 export default class AddItemToCart extends React.Component {
@@ -16,3 +17,11 @@ export default class AddItemToCart extends React.Component {
     );
   }
 }
+
+AddItemToCart.propTypes = {
+  product: PropTypes.shape({
+    productInfo: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
