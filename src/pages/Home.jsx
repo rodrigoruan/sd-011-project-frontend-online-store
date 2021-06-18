@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import CardItem from './CardItem';
+import CardItem from '../components/CardItem';
 import * as api from '../services/api';
 
 class Home extends React.Component {

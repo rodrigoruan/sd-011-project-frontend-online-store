@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class CardItem extends React.Component {
-  // constructor() {
-  //   super();
-
-  // }
-
   render() {
     const { products, addState } = this.props;
     const notFound = 'Nenhum produto foi encontrado';
@@ -15,6 +10,7 @@ class CardItem extends React.Component {
     return products.length === 0 ? notFound : (
       products.map((product) => (
         <>
+          {/* Lembrar de referenciar como passar props por Link */}
           <Link
             to={ {
               pathname: `/details/${product.id}`,
