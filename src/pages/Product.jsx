@@ -55,7 +55,9 @@ export default class Product extends Component {
   }
 
   render() {
-    const { location: { state: { product } }, addItemToCart } = this.props;
+    const { location: { state: { product } },
+      addItemToCart,
+      totalItemCount } = this.props;
     const { evaluationForm, evaluations } = this.state;
     const {
       title,
@@ -99,7 +101,7 @@ export default class Product extends Component {
             addItemToCart={ addItemToCart }
             testid="product-detail-add-to-cart"
           />
-          <ShoppingCartButton />
+          <ShoppingCartButton totalItemCount={ totalItemCount } />
         </section>
 
         <section>
@@ -206,4 +208,5 @@ Product.propTypes = {
     }),
   }),
   addItemToCart: PropTypes.func,
+  totalItemCount: PropTypes.number,
 }.isRequired;

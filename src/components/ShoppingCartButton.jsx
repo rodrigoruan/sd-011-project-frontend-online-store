@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 export default class ShoppingCartButton extends Component {
   render() {
-    return (
+    const { totalItemCount } = this.props;
 
+    return (
       <Link
         to="/cart"
         data-testid="shopping-cart-button"
@@ -14,7 +17,7 @@ export default class ShoppingCartButton extends Component {
           <span
             data-testid="shopping-cart-size"
           >
-            3
+            { totalItemCount }
           </span>
         </button>
       </Link>
@@ -22,3 +25,7 @@ export default class ShoppingCartButton extends Component {
     );
   }
 }
+
+ShoppingCartButton.propTypes = {
+  totalItemCount: PropTypes.number,
+}.isRequired;

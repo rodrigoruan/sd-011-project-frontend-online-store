@@ -40,18 +40,26 @@ class App extends Component {
   }
 
   updateQuantity(product, delta) {
-    this.setState(({ shoppingCart }) => {
-      const newShoppingCart = shoppingCart.map((item) => {
+    this.setState(({ shoppingCart: { totalItemCount, itemList } }) => {
+      const newShoppingCart = { totalItemCount };
+
+      newShoppingCart.itemList = itemList.map((item) => {
         const newItem = { ...item };
         if (newItem.id === product.id) {
           const min = 1;
           const max = newItem.available_quantity;
+          const previousQuantity = newItem.quantity;
           const newQuantity = newItem.quantity + delta;
           newItem.quantity = Math.max(Math.min(newQuantity, max), min);
+
+          const totalDelta = newQuantity - previousQuantity;
+          newShoppingCart.totalItemCount += totalDelta;
           return newItem;
         }
+
         return newItem;
       });
+
       return {
         shoppingCart: newShoppingCart,
       };
@@ -59,9 +67,19 @@ class App extends Component {
   }
 
   removeItemFromCart(id) {
-    this.setState(({ shoppingCart }) => ({
-      shoppingCart: shoppingCart.filter((product) => product.id !== id),
-    }));
+    this.setState(({ shoppingCart: { totalItemCount, itemList } }) => {
+      const newShoppingCart = { totalItemCount };
+
+      newShoppingCart.itemList = itemList.filter((item) => {
+        if (item.id === id) {
+          newShoppingCart.totalItemCount -= item.quantity;
+          return false;
+        }
+        return true;
+      });
+
+      return { shoppingCart: newShoppingCart };
+    });
   }
 
   async defineStateCategories() {
@@ -79,6 +97,7 @@ class App extends Component {
 
   render() {
     const { categories, searchResults, shoppingCart } = this.state;
+    const { totalItemCount } = shoppingCart;
 
     return (
       <>
@@ -93,6 +112,7 @@ class App extends Component {
                 updateSearchResults={ this.updateSearchResults }
                 categories={ categories }
                 addItemToCart={ this.addItemToCart }
+                totalItemCount={ totalItemCount }
               />) }
             />
 
@@ -104,10 +124,12 @@ class App extends Component {
                 shoppingCart={ shoppingCart }
               />) }
             />
+
             <Route
               path="/product/:id"
               render={ (props) => (<Product
                 addItemToCart={ this.addItemToCart }
+                totalItemCount={ totalItemCount }
                 { ...props }
               />) }
             />

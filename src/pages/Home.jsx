@@ -42,7 +42,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { addItemToCart, categories, updateSearchResults, searchResults } = this.props;
+    const { addItemToCart,
+      categories,
+      updateSearchResults,
+      searchResults,
+      totalItemCount } = this.props;
     const { currentCategoryFilter, searchTerm } = this.state;
     return (
       <main className="home-container">
@@ -61,7 +65,7 @@ class Home extends React.Component {
           currentCategoryFilter={ currentCategoryFilter }
           addItemToCart={ addItemToCart }
         />
-        <ShoppingCartButton />
+        <ShoppingCartButton totalItemCount={ totalItemCount } />
       </main>
     );
   }
@@ -79,6 +83,7 @@ Home.propTypes = {
     name: PropTypes.string,
   })),
   addItemToCart: PropTypes.func,
+  totalItemCount: PropTypes.number,
 }.isRequired;
 
 export default Home;
