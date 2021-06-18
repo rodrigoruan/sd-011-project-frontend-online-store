@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import CheckoutPage from './CheckoutPage';
 
 export default class ShoppingCart extends Component {
   render() {
@@ -22,6 +23,9 @@ export default class ShoppingCart extends Component {
             ))
         }
         <Link to="/">Voltar</Link>
+        <Link to="/CheckoutPage">
+          <button type="button" data-testid="checkout-products">Finalizar compra</button>
+        </Link>
       </div>
     );
   }

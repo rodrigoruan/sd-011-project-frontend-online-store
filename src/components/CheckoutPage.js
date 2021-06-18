@@ -15,59 +15,52 @@ export default class CheckoutPage extends Component {
         <form>
           <label htmlFor="checkout">
             Nome completo:
-            <input data-testid="checkout-fullname" type="text" />
+            <input data-testid="checkout-fullname" type="text" required />
           </label>
           <br />
           <label htmlFor="checkout">
             E-mail:
-            <input data-testid="checkout-email" type="email" />
+            <input data-testid="checkout-email" type="email" required />
           </label>
           <br />
           <label htmlFor="checkout">
             CPF:
-            <input data-testid="checkout-cpf" type="text" />
+            <input data-testid="checkout-cpf" type="text" required />
           </label>
           <br />
           <label htmlFor="checkout">
             Telefone:
-            <input data-testid="checkout-phone" type="text" />
+            <input data-testid="checkout-phone" type="text" required />
           </label>
           <br />
           <label htmlFor="checkout">
             CEP:
-            <input data-testid="checkout-cep" type="text" />
+            <input data-testid="checkout-cep" type="text" required />
           </label>
           <br />
           <label htmlFor="checkout">
             Endereço:
-            <input data-testid="checkout-address" type="text" />
+            <input data-testid="checkout-address" type="text" required />
           </label>
-        </form>
-        <br />
-        <form>
-
+          <br />
           Forma de pagamento:
           <br />
-          <label htmlFor="boleto">
+          <label htmlFor="payment">
             Boleto
-            <input type="radio" value="boleto" name="boleto" />
-          </label>
-          <br />
-          Cartão de Crédito
-          <label htmlFor="cartao">
-            <input type="radio" value="visa" name="visa" />
+            <input type="radio" value="boleto" name="payment" required />
+            <br />
+            Cartão de Crédito
+            <input type="radio" value="visa" name="payment" />
             Visa
-          </label>
-          <label htmlFor="cartao">
-            <input type="radio" value="mastercard" name="visa" />
+            <input type="radio" value="mastercard" name="payment" />
             MasterCard
-          </label>
-          <label htmlFor="cartao">
-            <input type="radio" value="elo" name="visa" />
+            <input type="radio" value="elo" name="payment" />
             Elo
+            <br />
           </label>
+          <button type="submit"> Finalizar compra </button>
+
         </form>
-        <button type="button"> Finalizar compra </button>
       </div>
     );
   }
