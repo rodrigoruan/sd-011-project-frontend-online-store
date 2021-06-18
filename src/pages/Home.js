@@ -8,7 +8,7 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      loading: true,
+      loading: false,
       inputText: '',
       products: '',
       radioFilter: '',
@@ -23,7 +23,6 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.getQuery();
     this.getCategories();
   }
 
@@ -40,13 +39,12 @@ export default class Home extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({ loading: false });
     this.getQuery();
   };
 
   handleRadioClick = ({ target }) => {
     const categoryObj = { id: target.id, name: target.name };
-    this.setState({ radioFilter: categoryObj });
+    this.getQuery();
   };
 
   async getCategories() {
@@ -57,20 +55,18 @@ export default class Home extends Component {
   async getQuery() {
     const { radioFilter, inputText } = this.state;
     const getList = await api.getProductsFromCategoryAndQuery(radioFilter.id, inputText);
-    return this.setState({ products: getList.results });
+    return this.setState({ products: getList.results, loading: false });
   }
 
   showResults = () => {
-    const { handleAddToCart } = this.props;
+    const { handleAddToCart, inputText } = this.props;
     const { loading, products } = this.state;
-    if (loading) {
-      return <div>Loading...</div>;
-    }
-    if (!loading) return <SearchList products={products} handleAddToCart={handleAddToCart} />;
+    return <SearchList products={products} handleAddToCart={handleAddToCart} />;
   };
 
   render() {
     const { categories } = this.state;
+
     return (
       <div className="home-div">
         <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
