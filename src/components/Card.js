@@ -6,7 +6,7 @@ import Free from './Free';
 class Card extends Component {
   setItem = () => {
     const cart = JSON.parse(localStorage.ShoppingCart);
-    const { title, thumbnail, price, id, someCounter } = this.props;
+    const { title, thumbnail, price, id, someCounter, availableQuantity } = this.props;
     if (cart.find((element) => element.id === id)) {
       const objJSON = cart.map((element) => {
         if (element.id === id) element.counter += 1;
@@ -19,6 +19,7 @@ class Card extends Component {
         thumbnail,
         price,
         id,
+        availableQuantity,
         counter: 1,
       };
       const objJSON = [...cart, obj];
@@ -34,14 +35,14 @@ class Card extends Component {
   }
 
   render() {
-    const { title, thumbnail, price, id, shipping } = this.props;
+    const { title, thumbnail, price, id, shipping, availableQuantity } = this.props;
     return (
       <div data-testid="product">
         <Link
           data-testid="product-detail-link"
           to={ {
             pathname: `/product/${id}`,
-            state: { title, thumbnail, price, id },
+            state: { title, thumbnail, price, id, availableQuantity },
           } }
         >
           <h2>{title}</h2>
@@ -71,6 +72,7 @@ Card.propTypes = {
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   someCounter: PropTypes.func.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
 };
 
 export default Card;
