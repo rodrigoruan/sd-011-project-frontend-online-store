@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import StatesBR from '../services/states';
 
 class Checkout extends Component {
@@ -8,11 +9,10 @@ class Checkout extends Component {
         <section>
           <ul>Revise seus produtos</ul>
           {/* <li>produtos</li> */}
-          <p>valor total da compra:</p>
+          {/* Valor total da compra */}
         </section>
         <section>
           Informações do Comprador
-          <br />
           <input
             type="text"
             data-testid="checkout-fullname"
@@ -20,47 +20,58 @@ class Checkout extends Component {
           />
           <input
             type="text"
-            maxLength="11"
-            min="0"
             data-testid="checkout-cpf"
             placeholder="CPF"
-          />
-          <input type="email" data-testid="checkout-email" placeholder="Email" />
-          <input
-            type="text"
             maxLength="11"
             min="0"
-            data-testid="checkout-phone"
-            placeholder="Telefone"
           />
-          <br />
+          <input
+            type="email"
+            data-testid="checkout-email"
+            placeholder="Email"
+          />
           <input
             type="text"
-            maxLength="8"
+            data-testid="checkout-phone"
+            placeholder="Telefone"
+            maxLength="11"
             min="0"
+          />
+          <input
+            type="text"
             data-testid="checkout-cep"
             placeholder="CEP"
+            maxLength="8"
+            min="0"
           />
-          <input type="text" data-testid="checkout-address" placeholder="Endereço" />
-          <br />
-          <input type="text" placeholder="Complemento" />
-          <input type="text" placeholder="Número" />
-          <input type="text" placeholder="Cidade" />
+          <input
+            type="text"
+            data-testid="checkout-address"
+            placeholder="Endereço"
+          />
+          <input
+            type="text"
+            placeholder="Complemento"
+          />
+          <input
+            type="text"
+            placeholder="Número"
+          />
+          <input
+            type="text"
+            placeholder="Cidade"
+          />
           <select>
             <StatesBR />
           </select>
         </section>
         <section>
-          <br />
           Método de Pagamento
-          <br />
           <label htmlFor="boleto">
             <input type="radio" id="boleto" />
             Boleto
           </label>
-          <br />
           Cartão de Crédito:
-          <br />
           <label htmlFor="creditCard">
             <span id="creditCard">
               <input type="radio" />
@@ -71,9 +82,9 @@ class Checkout extends Component {
               Elo
             </span>
           </label>
-          <br />
           <button type="button">Comprar</button>
         </section>
+        <Link to="/">Continuar comprando</Link>
       </div>
     );
   }

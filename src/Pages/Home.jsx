@@ -66,7 +66,7 @@ class Home extends Component {
         </button>
         {(!wasSearched) ? null : <Products prodList={ prodList } />}
         <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
-        {/* <Checkout /> */}
+        <Link to="/CheckoutPage">Finalizar compra</Link>
       </div>
     );
   }
