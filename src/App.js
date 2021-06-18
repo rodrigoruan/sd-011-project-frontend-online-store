@@ -12,7 +12,7 @@ class App extends React.Component {
 
     this.state = {
       cart: [],
-      quantity: 1,
+      quantity: 0,
     };
   }
 
@@ -26,7 +26,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { cart } = this.state;
+    const { cart, quantity } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -35,7 +35,7 @@ class App extends React.Component {
             <Route
               exact
               path="/carrinho"
-              render={ () => <ShoppingCart addState={ this.addState } cart={ cart } /> }
+              render={ () => <ShoppingCart addState={ this.addState } cart={ cart } quantity={quantity} /> }
             />
             <Route exact path="/details/:id" component={ Details } />
           </Switch>
