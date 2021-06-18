@@ -14,6 +14,8 @@ class Home extends Component {
       categoriesList: [],
       products: [],
       categoryId: '',
+      quantity: 1,
+      productsInCart: [],
     };
   }
 
@@ -43,6 +45,22 @@ class Home extends Component {
       <div>
         { products.map(({ title, price, thumbnail, id }) => (
           <div data-testid="product" key={ id }>
+            <div className="cartProducts">
+              <img src={ thumbnail } alt={ title } />
+              <h3>{ title }</h3>
+              <p>{ price }</p>
+            </div>
+            <Link data-testid="product-detail-link" to={ `/pageProduct/${id}` }>
+              Ver detalhes
+            </Link>
+            <button
+              type="button"
+              data-testid="product-add-to-cart"
+              value={ title }
+              onClick={ () => this.addToCart(title, price, thumbnail, id) }
+            >
+              Adicionar ao Carrinho
+            </button>
             <img src={ thumbnail } alt={ title } />
             <h3>{ title }</h3>
             <p>{ price }</p>
@@ -53,6 +71,18 @@ class Home extends Component {
         ))}
       </div>
     );
+  }
+
+  addToCart = (title, price, thumbnail, id) => {
+    const { quantity } = this.state;
+    const setLocalItems = { title, thumbnail, price, quantity, id };
+    this.setState((previousState) => ({
+      productsInCart: [...previousState.productsInCart, setLocalItems],
+    }), () => {
+      const { productsInCart } = this.state;
+      const JsonObject = JSON.stringify(productsInCart);
+      localStorage.setItem('productsInCart', JsonObject);
+    });
   }
 
   saveCategorieId = (id) => {
