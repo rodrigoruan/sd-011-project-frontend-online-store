@@ -54,7 +54,7 @@ class Home extends Component {
           Enviar
         </button>
         <Products prodList={ prodList } />
-        <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
+        <Link data-testid="shopping-cart-button" to="/shoppingcart">Carrinho</Link>
       </div>
     );
   }
