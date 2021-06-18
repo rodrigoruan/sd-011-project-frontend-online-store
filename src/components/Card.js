@@ -3,22 +3,27 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class Card extends Component {
-  constructor() {
-    super();
-    this.state = {
-      counter: 1,
-    };
-  }
-
   setItem = () => {
-    const { title, thumbnail, price, id } = this.props;
-    const { counter } = this.state;
-    this.setState((previous) => ({
-      counter: previous.counter + 1,
-    }));
-    const obj = { title, thumbnail, price, id, counter };
-    const objJSON = JSON.stringify(obj);
-    localStorage.setItem(id, objJSON);
+    const cart = JSON.parse(localStorage.ShoppingCart);
+    const { title, thumbnail, price, id, someCounter } = this.props;
+    if (cart.find((element) => element.id === id)) {
+      const objJSON = cart.map((element) => {
+        if (element.id === id) element.counter += 1;
+        return element;
+      });
+      localStorage.ShoppingCart = JSON.stringify(objJSON);
+    } else {
+      const obj = {
+        title,
+        thumbnail,
+        price,
+        id,
+        counter: 1,
+      };
+      const objJSON = [...cart, obj];
+      localStorage.ShoppingCart = JSON.stringify(objJSON);
+    }
+    someCounter();
   }
 
   render() {
@@ -54,6 +59,7 @@ Card.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
+  someCounter: PropTypes.func.isRequired,
 };
 
 export default Card;
