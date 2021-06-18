@@ -8,7 +8,8 @@ class ShoppingCart extends Component {
     this.state = {
       products: '',
     };
-    // this.removeItem = this.removeItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+    this.totalPriceCart = this.totalPriceCart.bind(this);
   }
 
   componentDidMount() {
@@ -17,21 +18,27 @@ class ShoppingCart extends Component {
 
   retrieveCart() {
     const currentCart = localStorage.getItem('shoppingCart');
-
     if (currentCart) {
       this.setState({ products: JSON.parse(currentCart) });
     }
   }
 
-  // removeItem(id) {
-  //   const { products } = this.state;
-  //   const results = products.filter((product) => product.id !== id);
-  //   this.setState({ products: results });
-  // }
+  removeItem(id) {
+    const { products } = this.state;
+    delete products[id];
+    this.setState({ products });
+    localStorage.setItem('shoppingCart', JSON.stringify(products));
+  }
+
+  totalPriceCart() {
+    const { products } = this.state;
+    const total = Object.values(products)
+      .reduce((acc, { details, quantity }) => acc + (details.price * quantity), 0);
+    return total;
+  }
 
   render() {
     const { products } = this.state;
-
     return (
       <div>
         <p>ShoppingCart</p>
@@ -39,12 +46,14 @@ class ShoppingCart extends Component {
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
-        ) : (products.map(({ productInfo }) => (<ShoppingItem
-          key={ productInfo.id }
-          item={ productInfo }
-          // onClick={ this.removeItem }
+        ) : (Object.values(products).map(({ details, quantity }) => (<ShoppingItem
+          key={ details.id }
+          productCart={ details }
+          quantity={ quantity }
+          onClick={ this.removeItem }
         />))
         )}
+        <p>{ this.totalPriceCart() }</p>
         <Link to="/">Voltar</Link>
       </div>
     );

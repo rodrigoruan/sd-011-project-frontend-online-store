@@ -1,43 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import * as storage from '../services/storage';
 
 class ShoppingItem extends Component {
   constructor(props) {
     super(props);
-    const { item: { price } } = this.props;
+    const { quantity, productCart: { price } } = this.props;
     this.state = {
-      counter: 1,
-      totalPrice: price,
+      counter: quantity,
+      totalPrice: quantity * price,
     };
     this.sumCounter = this.sumCounter.bind(this);
     this.minusCounter = this.minusCounter.bind(this);
   }
 
   sumCounter() {
-    const { item: { price } } = this.props;
+    const { productCart } = this.props;
+    const { price } = productCart;
     const { counter } = this.state;
     const totalPrice = Math.round((counter + 1) * price * 100) / 100;
     this.setState({
       counter: counter + 1,
       totalPrice,
     });
+    storage.saveProduct(productCart, 1);
   }
 
   minusCounter() {
     const { counter } = this.state;
+    const { productCart } = this.props;
+    const amount = -1;
     if (counter > 1) {
-      const { item: { price } } = this.props;
+      const { price } = productCart;
       const totalPrice = Math.round((counter - 1) * price * 100) / 100;
       this.setState({
         counter: counter - 1,
         totalPrice,
       });
     }
+    storage.saveProduct(productCart, amount);
   }
 
   render() {
     const { counter, totalPrice } = this.state;
-    const { onClick, item: { id, title, thumbnail } } = this.props;
+    const { onClick, productCart: { id, title, price, thumbnail } } = this.props;
     return (
       <div>
         <button type="button" onClick={ () => onClick(id) }>X</button>
@@ -59,7 +65,11 @@ class ShoppingItem extends Component {
           +
         </button>
         <span>
-          R$
+          Valor unitário R$
+          { price }
+        </span>
+        <span>
+          Valor total R$
           { totalPrice }
         </span>
       </div>
