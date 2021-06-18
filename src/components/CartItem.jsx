@@ -28,7 +28,13 @@ export default class CartItem extends Component {
 
   render() {
     const { quantity } = this.state;
-    const { cart: { title, price, shipping:{ free_shipping: freeShipping } } } = this.props;
+    const {
+      cart: {
+        title,
+        price,
+        shipping: {
+          free_shipping: freeShipping,
+        } } } = this.props;
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">
@@ -77,5 +83,8 @@ CartItem.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
     available_quantity: PropTypes.number,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }),
   }).isRequired,
 };
