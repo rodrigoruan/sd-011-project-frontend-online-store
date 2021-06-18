@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CardItem from './CardItem';
+import PropTypes from 'prop-types';
+import CardItem from '../components/CardItem';
 import * as api from '../services/api';
 
-class Home2 extends React.Component {
+class Home extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -53,22 +54,7 @@ class Home2 extends React.Component {
   async requestButton() {
     this.clearState();
     const { inputQuery, category } = this.state;
-    // const request = await this.getItemsFromInput(inputQuery);
-    // this.setState({
-    //   response: request.results,
-    // });
-
-    // if (category && inputQuery) {
-    // Caso verdadeiro, faça a requisição através de uma
-    // função assíncrona e adicione o resultado à propriedade
-    // results, no state.
     this.getItemsFromCategoryAndQuery(category, inputQuery);
-    // }
-    // else if (inputQuery) {
-    //   this.getItemsFromInput(inputQuery);
-    // } else if (category) {
-    //   this.getItemsFromCategory(category);
-    // }
   }
 
   clearState() {
@@ -78,7 +64,7 @@ class Home2 extends React.Component {
   }
 
   render() {
-    const { allCategories, inputQuery, category, response } = this.state;
+    const { allCategories, response } = this.state;
     const { addState } = this.props;
     return (
       <div className="main-page">
@@ -100,7 +86,6 @@ class Home2 extends React.Component {
             </div>
           </aside>
         </div>
-        {/* <Category */}
         <div>
           <form className="search-bar">
             <label htmlFor="queryInput" data-testid="home-initial-message">
@@ -131,4 +116,8 @@ class Home2 extends React.Component {
   }
 }
 
-export default Home2;
+Home.propTypes = {
+  addState: PropTypes.func.isRequired,
+};
+
+export default Home;

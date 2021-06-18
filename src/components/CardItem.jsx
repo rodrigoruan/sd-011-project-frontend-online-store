@@ -3,11 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class CardItem extends React.Component {
-  // constructor() {
-  //   super();
-
-  // }
-
   render() {
     const { products, addState } = this.props;
     const notFound = 'Nenhum produto foi encontrado';
@@ -15,23 +10,32 @@ class CardItem extends React.Component {
     return products.length === 0 ? notFound : (
       products.map((product) => (
         <>
+          {/* Lembrar de referenciar como passar props por Link */}
           <Link
-            to={{
+            to={ {
               pathname: `/details/${product.id}`,
               state: {
                 product,
-              }
-            }}
+              },
+            } }
             data-testid="product-detail-link"
           >
-            <div data-testid="product"
-              key={product.title}>
+            <div
+              data-testid="product"
+              key={ product.title }
+            >
               <p>{product.title}</p>
-              <img src={product.thumbnail} alt={product.title} />
+              <img src={ product.thumbnail } alt={ product.title } />
               <p>{product.price}</p>
             </div>
           </Link>
-          <button type="button" data-testid="product-add-to-cart" onClick={ () => addState(product) }>add</button>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => addState(product) }
+          >
+            add
+          </button>
         </>
       ))
     );
@@ -44,4 +48,5 @@ CardItem.propTypes = {
     map: PropTypes.func.isRequired,
     length: PropTypes.arrayOf().isRequired,
   }).isRequired,
+  addState: PropTypes.func.isRequired,
 };

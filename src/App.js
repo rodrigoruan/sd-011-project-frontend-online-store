@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import ShoppingCart from './components/ShoppingCart';
-import Details from './components/Details';
+import Home from './pages/Home';
+import ShoppingCart from './pages/ShoppingCart';
+import Details from './pages/Details';
 
 class App extends React.Component {
   constructor() {
@@ -12,7 +12,7 @@ class App extends React.Component {
 
     this.state = {
       cart: [],
-      quantity: 1,
+      quantity: 0,
     };
   }
 
@@ -26,7 +26,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { cart } = this.state;
+    const { cart, quantity } = this.state;
     return (
       <div>
         <BrowserRouter>
@@ -35,9 +35,21 @@ class App extends React.Component {
             <Route
               exact
               path="/carrinho"
-              render={ () => <ShoppingCart addState={ this.addState } cart={ cart } /> }
+              render={ () => (<ShoppingCart
+                addState={ this.addState }
+                cart={ cart }
+                quantity={ quantity }
+              />) }
             />
-            <Route exact path="/details/:id" component={ Details } />
+            <Route
+              exact
+              path="/details/:id"
+              render={ (props) => (
+                <Details
+                  { ...props }
+                  addState={ this.addState }
+                />) }
+            />
           </Switch>
         </BrowserRouter>
       </div>
