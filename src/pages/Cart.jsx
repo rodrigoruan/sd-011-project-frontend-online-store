@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PaymentForm from '../components/PaymentForm';
 
 export default class Cart extends Component {
   constructor() {
@@ -11,8 +12,10 @@ export default class Cart extends Component {
         cartList[item.title] = item;
       }
     });
+
     this.state = {
       cartList,
+      pay: false,
     };
 
     this.addItem = this.addItem.bind(this);
@@ -117,9 +120,8 @@ export default class Cart extends Component {
   }
 
   render() {
-    const { cartList } = this.state;
+    const { cartList, pay } = this.state;
     if (Object.entries(cartList).length === 0) {
-      // sessionStorage.clear();
       return (
         <div>
           <Link to="/">Voltar</Link>
@@ -129,6 +131,22 @@ export default class Cart extends Component {
         </div>
       );
     }
+
+    if (pay) {
+      return (
+        <div>
+          <Link to="/">Voltar</Link>
+          {Object.entries(cartList).map(
+            ([title, { price, thumbnail, quantity }]) => (
+              this.elementList(thumbnail, price, title, quantity)
+            ),
+          )}
+          {`Valor total da compra: R$${this.totalPrice()}`}
+          <PaymentForm />
+        </div>
+      );
+    }
+
     return (
       <div>
         <Link to="/">Voltar</Link>
@@ -138,6 +156,14 @@ export default class Cart extends Component {
           ),
         )}
         {`Valor total da compra: R$${this.totalPrice()}`}
+
+        <button
+          type="button"
+          data-testid="checkout-products"
+          onClick={ () => this.setState({ pay: true }) }
+        >
+          finalizar compras
+        </button>
       </div>
     );
   }
