@@ -11,7 +11,6 @@ class CartButton extends Component {
           data-testid="shopping-cart-button"
         >
           carrinho
-
         </Link>
       </div>);
   }
