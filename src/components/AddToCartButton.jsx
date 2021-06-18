@@ -1,31 +1,39 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class AddToCartButton extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {
-      // cart: [],
-    };
+    this.addToCart = this.addToCart.bind(this);
   }
 
   getProductFromLocalStorage() {
-    JSON.parse(localStorage.getItem('cart'));
+    const cart = localStorage.getItem('cart')
+    if (!cart) return [];
+    return JSON.parse(cart);
   }
 
   saveToLocalStorage(cart) {
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  async addToCart(id) {
-    const { productsList: { results } } = this.state;
-    console.log(results);
-    const itemToAdd = results.find((product) => product.id === id);
-    localStorage.setItem('cart', itemToAdd);
-    this.setState({
-      // cart: [...cart, itemToAdd],
-    });
-    this.saveToLocalStorage(cart);
+  addToCart() {
+    const { product } = this.props;
+    const { thumbnail, price, title, id } = product;
+
+    const cartItem = {
+      thumbnail,
+      price,
+      title,
+      id,
+    };
+
+    const oldCart = this.getProductFromLocalStorage();
+
+    const newCart = [...oldCart, cartItem];
+
+    this.saveToLocalStorage(newCart);
   }
 
   render() {
@@ -41,3 +49,12 @@ class AddToCartButton extends Component {
 }
 
 export default AddToCartButton;
+
+AddToCartButton.propTypes = {
+  product: PropTypes.shape({
+    thumbnail: PropTypes.string,
+    price: PropTypes.number,
+    title: PropTypes.string,
+    id: PropTypes.string,
+  }).isRequired,
+};

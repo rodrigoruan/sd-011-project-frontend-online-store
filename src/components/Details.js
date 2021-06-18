@@ -1,20 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AddToCartButton from './AddToCartButton';
 // import * as api from '../services/api';
 
 export default class Details extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      item: props.location.state,
-    };
 
     this.buildTechSpecifications = this.buildTechSpecifications.bind(this);
   }
 
-  buildTechSpecifications() {
-    const { item: { product } } = this.state;
+  buildTechSpecifications(product) {
     return product.attributes.map((attribute) => (
       <ul key={ attribute.id }>
         <li>
@@ -25,13 +22,15 @@ export default class Details extends React.Component {
   }
 
   render() {
-    const { item: { product: { title } } } = this.state;
+    const { location } = this.props;
+    const { state } = location;
+    const { product } = state;
     return (
       <div>
         <Link to="/">Voltar</Link>
-        <h1 data-testid="product-detail-name">{title}</h1>
-        {this.buildTechSpecifications()}
-        <button type="button">Adicionar ao carrinho</button>
+        <h1 data-testid="product-detail-name">{product.title}</h1>
+        {this.buildTechSpecifications(product)}
+        <AddToCartButton product={ product } />
       </div>
     );
   }
