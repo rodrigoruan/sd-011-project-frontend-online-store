@@ -32,8 +32,6 @@ class Products extends Component {
   addProductToCart(item) {
     const { shoppingCart } = this.state;
 
-    console.log('shoppingCart antes do if', shoppingCart);
-
     if (shoppingCart.some((productItem) => productItem.productId === item.id)) {
       shoppingCart.find((productItem) => productItem.productId === item.id).quantity += 1;
 
