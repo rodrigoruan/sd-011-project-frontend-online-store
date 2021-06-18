@@ -29,6 +29,24 @@
   padding: 0;
 }
 
+.free-shipping {
+  background-color: green;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+.disabled-button {
+  background-color: rgba(116, 102, 86, 0.103);
+  border: none;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 6px;
+  padding: 6px;
+}
+
 .card-container {
   display: flex;
   justify-content: center;

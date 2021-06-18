@@ -35,7 +35,7 @@ class CardProduct extends Component {
       price,
       shipping: { free_shipping: freeShipping } } = listProduct;
     const shipping = freeShipping ? (<p data-testid="free-shipping">Frete Grátis</p>)
-      : '';
+      : null;
     return !redirect ? (
       <div className="card" data-testid="product">
         <div className="title">
@@ -46,7 +46,7 @@ class CardProduct extends Component {
           <div className="price">
             R$
             {' '}
-            { price }
+            { price.toFixed(2) }
           </div>
           <Link to={ { pathname: '/product', state: cartProps } }>
             <button
@@ -68,7 +68,9 @@ class CardProduct extends Component {
           >
             Adicionar ao carrinho
           </button>
-          { shipping }
+          <div className="free-shipping">
+            { shipping }
+          </div>
         </div>
       </div>
     ) : (<Redirect to="/product" />);

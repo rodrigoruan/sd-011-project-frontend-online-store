@@ -70,7 +70,7 @@ class ProductDetails extends Component {
           <Link
             to={ { pathname: '/shopcart', state: cartProducts } }
           >
-            <button className="shopping" type="button" data-testid="shopping-cart-button">
+            <button className="shopping" type="button">
               <img src="https://image.flaticon.com/icons/png/512/263/263142.png" alt="a" />
               <ShoppingCartSize shop={ cartProducts.length } />
             </button>
@@ -90,7 +90,7 @@ class ProductDetails extends Component {
           <button
             onClick={ () => this.addCart(product) }
             type="button"
-            data-testid="product-add-to-cart"
+            data-testid="product-detail-add-to-cart"
             id="add-to-cart-button-details"
           >
             Adicionar ao carrinho

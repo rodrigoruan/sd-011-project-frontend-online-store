@@ -40,16 +40,28 @@ export default class NewItem extends Component {
 
         <p>
           Preço total:
-          {quantity * newProduct.price}
+          {(quantity * newProduct.price).toFixed(2)}
         </p>
         <div className="increase-decrease-buttons">
-          <button
-            type="button"
-            data-testid="product-increase-quantity"
-            onClick={ () => { this.handleClick('increase'); } }
-          >
-            +
-          </button>
+          {quantity === newProduct.available_quantity ? (
+            <button
+              disabled
+              type="button"
+              className="disabled-button"
+              data-testid="product-increase-quantity"
+              onClick={ () => { this.handleClick('increase'); } }
+            >
+              +
+            </button>
+          ) : (
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ () => { this.handleClick('increase'); } }
+            >
+              +
+            </button>
+          )}
           <p data-testid="shopping-cart-product-quantity">
             {quantity}
           </p>
