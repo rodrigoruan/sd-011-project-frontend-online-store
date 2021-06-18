@@ -4,14 +4,6 @@ import { Link } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
 
 class ProductCard extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      // test: 'funcionou!!',
-    };
-  }
-
   render() {
     const { product } = this.props;
     const { title, thumbnail, price, id } = product;
@@ -29,7 +21,7 @@ class ProductCard extends Component {
           data-testid="product-detail-link"
         >
           <h4>{ title }</h4>
-          <img src={ thumbnail } alt="imagem do produto pesquisado" />
+          <img src={ thumbnail } alt="imagem do produto pesquisado" width="100px" />
           <p>{ price }</p>
         </Link>
         <AddToCartButton product={ product } />
