@@ -55,6 +55,7 @@ class ShoppingCart extends Component {
         )}
         <p>{ this.totalPriceCart() }</p>
         <Link to="/">Voltar</Link>
+        <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
       </div>
     );
   }
