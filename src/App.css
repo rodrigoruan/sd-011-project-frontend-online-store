@@ -82,6 +82,17 @@ footer {
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4) inset;
 }
 
+
+.cart-item-container {
+  align-items: center;
+  display: flex;
+}
+
+.quantity-switch {
+  align-items: center;
+  display: flex;
+}
+
 .product-card {
   border: 1px solid black;
   height: 500px;

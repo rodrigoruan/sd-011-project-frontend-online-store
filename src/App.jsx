@@ -15,6 +15,8 @@ class App extends Component {
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.removeItemFromCart = this.removeItemFromCart.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +29,31 @@ class App extends Component {
       const newShoppingCart = [...shoppingCart, product];
       return { shoppingCart: newShoppingCart };
     });
+  }
+
+  updateQuantity(product, delta) {
+    this.setState(({ shoppingCart }) => {
+      const newShoppingCart = shoppingCart.map((item) => {
+        const newItem = { ...item };
+        if (newItem.id === product.id) {
+          const min = 1;
+          const max = newItem.available_quantity;
+          const newQuantity = newItem.quantity + delta;
+          newItem.quantity = Math.max(Math.min(newQuantity, max), min);
+          return newItem;
+        }
+        return newItem;
+      });
+      return {
+        shoppingCart: newShoppingCart,
+      };
+    });
+  }
+
+  removeItemFromCart(id) {
+    this.setState(({ shoppingCart }) => ({
+      shoppingCart: shoppingCart.filter((product) => product.id !== id),
+    }));
   }
 
   async defineStateCategories() {
@@ -63,7 +90,11 @@ class App extends Component {
 
             <Route
               path="/cart"
-              render={ () => <Cart productList={ shoppingCart } /> }
+              render={ () => (<Cart
+                updateQuantity={ this.updateQuantity }
+                removeItemFromCart={ this.removeItemFromCart }
+                productList={ shoppingCart }
+              />) }
             />
             <Route
               path="/product/:id"
