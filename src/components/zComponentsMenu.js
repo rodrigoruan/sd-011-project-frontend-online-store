@@ -6,3 +6,4 @@ export { default as Header } from './Header';
 export { default as ProductCard } from './ProductCard';
 export { default as SearchInput } from './SearchInput';
 export { default as ProductReviewForm } from './ProductReviewForm';
+export { default as BuyerInformation } from './BuyerInformation';
