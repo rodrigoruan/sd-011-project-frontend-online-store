@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as api from '../services/api';
 
 export default class Details extends Component {
-
   render() {
-    const { title, price, thumbnail, specifications } = this.props;
+    const { location: { state: { element } } } = this.props;
+    const { title, price, thumbnail, attributes } = element;
     return (
       <div>
-        <span data-testid="product-detail-name">{ title, price }</span>
+        <span data-testid="product-detail-name">{`${title}, ${price}`}</span>
         <div>
           <div>
-          { thumbnail }
+            <img src={ thumbnail } alt={ title } />
           </div>
           <div>
             <h3>Especificações técnicas</h3>
-            { specifications }
+            { attributes.map(({ name, value_name: valueName, id }) => (
+              <p key={ id }>
+                { name }
+                :
+                { valueName }
+              </p>
+            ))}
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
-Details.propTypes = {
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    specifications: PropTypes.array.isRequired,
-};
 
+Details.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      element: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        thumbnail: PropTypes.string.isRequired,
+        attributes: PropTypes.arrayOf(PropTypes.object).isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
+};
