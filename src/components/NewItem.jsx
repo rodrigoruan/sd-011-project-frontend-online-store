@@ -2,13 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class NewItem extends Component {
+
   render() {
-    const { product, cart } = this.props;
+    console.log('renderizou')
+    const { product, 
+      cart, 
+      handleDelete, 
+      increaseQuantity, 
+      decreaseQuantity 
+    } = this.props;
     const quantity = cart.filter((item) => item === product);
+
     return (
       <div>
         <div key={ product.title }>
           <p data-testid="shopping-cart-product-name">{product.title}</p>
+          <button type="button" onClick={() => handleDelete(product)}>X</button>
+          <button type="button" data-testid="product-increase-quantity" 
+            onClick={() => increaseQuantity(product)}>
+              +
+          </button>
+          <button type="button" data-testid="product-decrease-quantity"
+            onClick={() => decreaseQuantity(product)}>
+              -
+            </button>
           <img src={ product.thumbnail } alt={ product.title } />
           <p>{product.price}</p>
           <span data-testid="shopping-cart-product-quantity">{quantity.length}</span>

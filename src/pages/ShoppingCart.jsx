@@ -8,6 +8,7 @@ class ShoppingCart extends React.Component {
     this.state = {
       filteredCart: [],
     };
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,25 @@ class ShoppingCart extends React.Component {
     });
   }
 
+  handleDelete(product) {
+    const { filteredCart } = this.state;
+     const newList = filteredCart.filter((item) => {
+      return item.id !== product.id
+    })
+    this.setState({
+      filteredCart: newList,
+    });
+  }
+
+  increaseQuantity(product) {
+    console.log('AUMENTA PRODUTO');
+  }
+
+  decreaseQuantity(product) {
+    console.log('DIMINUI PRODUTO');
+  }
+  
+
   render() {
     const { cart } = this.props;
     const { filteredCart } = this.state;
@@ -33,7 +53,11 @@ class ShoppingCart extends React.Component {
       </h3>);
 
     return !cart.length ? emptyCart : filteredCart.map((product, index) => (
-      <NewItem product={ product } cart={ cart } key={ index } />
+      <NewItem product={ product } cart={ cart } key={ index } 
+        handleDelete={this.handleDelete} 
+        increaseQuantity={this.increaseQuantity}
+        decreaseQuantity={this.decreaseQuantity}
+      />
     ));
   }
 }
