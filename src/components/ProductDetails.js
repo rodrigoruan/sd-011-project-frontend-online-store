@@ -67,7 +67,6 @@ export default class ProductDetails extends Component {
     const { itemsCart, quantityItems } = this.state;
     const { location: { state: { detail } } } = this.props;
     const { id, title, thumbnail, price, attributes, installments } = detail;
-    console.log(this.props);
 
     return (
       <div>
@@ -111,18 +110,6 @@ export default class ProductDetails extends Component {
             ))}
           </p>
         </div>
-        <Link
-          data-testid="shopping-cart-button"
-          to={ {
-            pathname: '/shoppingCart',
-            state: itemsCart,
-          } }
-        >
-          Carrinho(
-          {itemsCart.length}
-          )
-        </Link>
-
         <Link to="/">Voltar</Link>
         <button
           data-testid="product-detail-add-to-cart"

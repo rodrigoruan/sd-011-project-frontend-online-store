@@ -52,7 +52,6 @@ export default class ShoppingCart extends Component {
                   {price}
                 </p>
               </div>
-              )));
               <Button
                 quantity={ countP }
                 subClick={ this.subClick }
