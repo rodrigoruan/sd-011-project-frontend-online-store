@@ -73,6 +73,7 @@ class Home extends Component {
         >
           Pesquisar
         </button>
+        <ButtonCart />
         { categories.map((item, index) => (
           <button
             type="button"
@@ -89,7 +90,6 @@ class Home extends Component {
             products={ item }
           />)) }
         </div>
-        <ButtonCart />
       </div>
     );
   }
