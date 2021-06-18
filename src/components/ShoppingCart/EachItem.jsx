@@ -10,7 +10,6 @@ export default class EachItem extends Component {
       price: item.price,
     };
     this.changeQuantity = this.changeQuantity.bind(this);
-    this.removeItem = this.removeItem.bind(this);
   }
 
   changeQuantity({ target }) {
@@ -33,13 +32,8 @@ export default class EachItem extends Component {
     }
   }
 
-  removeItem({ target }) {
-    const { value } = target;
-    localStorage.removeItem([value]);
-  }
-
   render() {
-    const { item } = this.props;
+    const { item, removeItem } = this.props;
     const { total, price } = this.state;
     return (
       <div className="productCartContainer" key={ item.id }>
@@ -71,9 +65,7 @@ export default class EachItem extends Component {
         </div>
         <button
           type="button"
-          value={ item.id }
-          name="delete"
-          onClick={ this.removeItem }
+          onClick={ () => removeItem(item.id) }
         >
           X
         </button>
@@ -91,4 +83,5 @@ EachItem.propTypes = {
     price: PropTypes.number.isRequired,
     currencyId: PropTypes.string.isRequired,
   }).isRequired,
+  removeItem: PropTypes.func.isRequired,
 };

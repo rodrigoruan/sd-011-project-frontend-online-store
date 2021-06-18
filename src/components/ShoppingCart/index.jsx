@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './ShoppingCart.css';
-import EmptyCartLine from './EmptyCartLine';
 import ProductInCart from './ProductInCart';
 
 export default class ShoppingCart extends Component {
@@ -10,19 +9,27 @@ export default class ShoppingCart extends Component {
     this.state = {
       items: [],
     };
-    this.storageCartItem = this.storageCartItem.bind(this);
+    this.getItemFromLocalStorage = this.getItemFromLocalStorage.bind(this);
+    this.removeFromArray = this.removeFromArray.bind(this);
   }
 
   componentDidMount() {
-    this.storageCartItem();
+    this.getItemFromLocalStorage();
   }
 
-  storageCartItem() {
+  getItemFromLocalStorage() {
     const items = { ...localStorage };
     const cartItems = Object.values(items).map((item) => JSON.parse(item));
     this.setState({
       items: cartItems,
     });
+  }
+
+  removeFromArray(id) {
+    this.setState((pState) => ({
+      items: pState.items.filter((item) => item.id !== id),
+    }));
+    localStorage.removeItem(id);
   }
 
   render() {
@@ -32,7 +39,7 @@ export default class ShoppingCart extends Component {
         <header className="cartHeader">
           <Link to="/" className="LinkBack">Voltar</Link>
         </header>
-        {items.length === 0 ? <EmptyCartLine /> : <ProductInCart items={ items } />}
+        <ProductInCart items={ items } removeItem={ this.removeFromArray } />
       </div>
     );
   }
