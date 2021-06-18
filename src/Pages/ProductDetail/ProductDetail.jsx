@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './productDetail.css';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import Rating from '../Rating';
+import './productDetail.css';
 
 // import * as api from '../../services/api';
 
@@ -86,6 +87,8 @@ class ProductDetail extends Component {
             >
               Colocar no carrinho
             </button>
+
+            <Rating />
           </div>
         ))}
       </>
