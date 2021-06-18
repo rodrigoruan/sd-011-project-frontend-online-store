@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AddToCart from './AddToCart';
 
 class cardCreator extends React.Component {
   render() {
@@ -10,20 +11,23 @@ class cardCreator extends React.Component {
     } = this.props;
     const { product } = this.props;
     return (
-      <Link
-        to={ `/productDetails/${id}` }
-        data-testid="product-detail-link"
-        className="productDetails"
-        onClick={ () => {
-          getProductDetails(product);
-        } }
-      >
-        <div data-testid="product">
-          <p className="productName">{title}</p>
-          <img src={ thumbnail } alt="Foto do Produto" className="productPicture" />
-          <p className="productPrice">{price}</p>
-        </div>
-      </Link>
+      <div>
+        <Link
+          to={ `/productDetails/${id}` }
+          data-testid="product-detail-link"
+          className="productDetails"
+          onClick={ () => {
+            getProductDetails(product);
+          } }
+        >
+          <div data-testid="product">
+            <p className="productName">{title}</p>
+            <img src={ thumbnail } alt="Foto do Produto" className="productPicture" />
+            <p className="productPrice">{price}</p>
+          </div>
+        </Link>
+        <AddToCart item={ this.props } />
+      </div>
     );
   }
 }
