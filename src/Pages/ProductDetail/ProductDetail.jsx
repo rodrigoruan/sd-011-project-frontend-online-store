@@ -2,13 +2,62 @@ import React, { Component } from 'react';
 import './productDetail.css';
 import PropTypes from 'prop-types';
 
+// import * as api from '../../services/api';
+
 class ProductDetail extends Component {
+  constructor(props) {
+    super(props);
+    const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+    if (!shoppingCart) {
+      this.state = {
+        shoppingCart: [],
+      };
+    } else {
+      this.state = {
+        shoppingCart,
+      };
+    }
+
+    this.getApiProducts = this.getApiProducts.bind(this);
+    this.setShoppingCartToLocalStorage = this.setShoppingCartToLocalStorage.bind(this);
+  }
+
+  setShoppingCartToLocalStorage() {
+    const { shoppingCart } = this.state;
+    localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart));
+  }
+
+  getApiProducts(item) {
+    const { shoppingCart } = this.state;
+
+    if (shoppingCart.some((productItem) => productItem.productId === item.id)) {
+      shoppingCart.find((productItem) => productItem.productId === item.id).quantity += 1;
+
+      this.setState({
+        shoppingCart,
+      },
+      async () => this.setShoppingCartToLocalStorage());
+    } else {
+      const productInfo = {
+        quantity: 1,
+        productId: item.id,
+        productInfo: [item],
+      };
+      this.setState((prevState) => ({
+        shoppingCart: [...prevState.shoppingCart, productInfo],
+      }),
+      async () => this.setShoppingCartToLocalStorage());
+    }
+  }
+
   render() {
+    const { shoppingCarts } = this.state;
+    console.log(shoppingCarts);
     const {
       location:
-        { state:
-          { item },
-        },
+      { state:
+        { item },
+      },
     } = this.props;
     return (
       <>
@@ -16,10 +65,19 @@ class ProductDetail extends Component {
           <div key={ info.id }>
             <h1 data-testid="product-detail-name">{info.title}</h1>
             <img src={ info.thumbnail } alt={ info.title } />
-            <p>{ info.price }</p>
-            { info.attributes.map((attributes) => (
+            <p>{info.price}</p>
+
+            <button
+              type="button"
+              data-testid="product-detail-add-to-cart"
+              onClick={ () => this.getApiProducts(info) }
+            >
+              Colocar no carrinho
+            </button>
+
+            {info.attributes.map((attributes) => (
               <p key={ attributes.id }>
-                { `${attributes.name}: ${attributes.value_name}` }
+                {`${attributes.name}: ${attributes.value_name}`}
               </p>
             ))}
           </div>
