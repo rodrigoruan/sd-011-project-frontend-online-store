@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './productDetail.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // import * as api from '../../services/api';
 
@@ -63,10 +64,21 @@ class ProductDetail extends Component {
       <>
         {item.map((info) => (
           <div key={ info.id }>
-            <h1 data-testid="product-detail-name">{info.title}</h1>
-            <img src={ info.thumbnail } alt={ info.title } />
-            <p>{info.price}</p>
-
+            <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
+            <div className="main-product-info">
+              <h1 data-testid="product-detail-name">{info.title}</h1>
+              <h1>{ `R$: ${info.price}` }</h1>
+            </div>
+            <div className="product-details">
+              <img className="product-img" src={ info.thumbnail } alt={ info.title } />
+              <div>
+                { info.attributes.map((attributes) => (
+                  <p key={ attributes.id }>
+                    { `${attributes.name}: ${attributes.value_name}` }
+                  </p>
+                ))}
+              </div>
+            </div>
             <button
               type="button"
               data-testid="product-detail-add-to-cart"
@@ -74,12 +86,6 @@ class ProductDetail extends Component {
             >
               Colocar no carrinho
             </button>
-
-            {info.attributes.map((attributes) => (
-              <p key={ attributes.id }>
-                {`${attributes.name}: ${attributes.value_name}`}
-              </p>
-            ))}
           </div>
         ))}
       </>
