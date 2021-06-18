@@ -38,7 +38,7 @@ export default class Home extends Component {
 
         <div className="search-bar-home">
           <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria
+            Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           <label htmlFor="search">
             <input
