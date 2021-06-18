@@ -10,7 +10,10 @@ class AddToCart extends React.Component {
 
   addItem() {
     const { item } = this.props;
+<<<<<<< HEAD
     console.log(item.product.id);
+=======
+>>>>>>> 845de785ca5ecb3e8177450f6f1db6867917c33c
     let existingCart = JSON.parse(localStorage.getItem('items'));
     if (existingCart == null) existingCart = [];
     let existingQuantity = JSON.parse(localStorage.getItem('quantity'));
@@ -32,12 +35,6 @@ class AddToCart extends React.Component {
     localStorage.setItem('quantity', JSON.stringify(existingQuantity));
   }
 
-  readLocalStorage() {
-    const { item } = this.props;
-    console.log(JSON.parse(localStorage.getItem('items')));
-    console.log(JSON.parse(localStorage.getItem(item.product.id)));
-  }
-
   render() {
     return (
       <div>
@@ -47,13 +44,6 @@ class AddToCart extends React.Component {
           onClick={ () => this.addItem() }
         >
           Adicionar ao Carrinho
-        </button>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => this.readLocalStorage() }
-        >
-          teste
         </button>
       </div>
     );
