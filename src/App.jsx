@@ -67,7 +67,10 @@ class App extends Component {
             />
             <Route
               path="/product/:id"
-              component={ Product }
+              render={ (props) => (<Product
+                addItemToCart={ this.addItemToCart }
+                { ...props }
+              />) }
             />
           </Switch>
         </BrowserRouter>
