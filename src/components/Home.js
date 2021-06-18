@@ -37,9 +37,11 @@ export default class Home extends Component {
     const { query, category } = this.state;
     try {
       let products = await getProductsFromCategoryAndQuery(category, query);
-      products = products.results.map(({ title, id, price, thumbnail, attributes }) => (
-        { title, id, price, thumbnail, attributes }
-      ));
+      console.log('products', products);
+      products = products.results
+        .map(({ title, id, price, thumbnail, attributes, shipping }) => (
+          { title, id, price, thumbnail, attributes, shipping }
+        ));
       this.setState({ products });
     } catch (error) {
       console.error(error);
