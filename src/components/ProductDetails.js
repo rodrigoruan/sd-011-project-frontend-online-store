@@ -9,13 +9,16 @@ export default class ProductDetails extends Component {
 
     this.state = {
       itemsCart: [],
+      quantityItems: 0,
     };
 
     this.getValues = this.getValues.bind(this);
+    this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
 
   componentDidMount() {
     this.getValues();
+    this.foundQuantityItemsCart();
   }
 
   handlerLocalStore(param) {
@@ -46,13 +49,38 @@ export default class ProductDetails extends Component {
     }
   }
 
+  foundQuantityItemsCart() {
+    const getLocal = JSON.parse(localStorage.getItem('item'));
+    let sumProduct = 0;
+    if (getLocal) {
+      getLocal.forEach((product) => {
+        sumProduct += product.countP;
+        return 1;
+      });
+      this.setState({
+        quantityItems: sumProduct,
+      });
+    }
+  }
+
   render() {
-    const { itemsCart } = this.state;
+    const { itemsCart, quantityItems } = this.state;
     const { location: { state: { detail } } } = this.props;
     const { id, title, thumbnail, price, attributes, installments } = detail;
 
     return (
       <div>
+        <Link
+          data-testid="shopping-cart-button"
+          to={ {
+            pathname: '/shoppingCart',
+            state: itemsCart,
+          } }
+        >
+          Carrinho(
+          <span data-testid="shopping-cart-size">{quantityItems}</span>
+          )
+        </Link>
         <div>
           <h1 data-testid="product-detail-name">{title}</h1>
           <img src={ thumbnail } alt={ title } />
@@ -82,18 +110,6 @@ export default class ProductDetails extends Component {
             ))}
           </p>
         </div>
-        <Link
-          data-testid="shopping-cart-button"
-          to={ {
-            pathname: '/shoppingCart',
-            state: itemsCart,
-          } }
-        >
-          Carrinho(
-          {itemsCart.length}
-          )
-        </Link>
-
         <Link to="/">Voltar</Link>
         <button
           data-testid="product-detail-add-to-cart"

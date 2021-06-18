@@ -27,7 +27,7 @@ export default class ProductList extends Component {
 
   render() {
     const { products: { title, price, thumbnail, id, shipping } } = this.props;
-    const { products } = this.props;
+    const { products, foundQuantityItemsCart } = this.props;
     const { free_shipping: freeShipping } = shipping;
 
     return (
@@ -44,7 +44,10 @@ export default class ProductList extends Component {
         <button
           data-testid="product-add-to-cart"
           value={ id }
-          onClick={ () => this.handlerLocalStore(products) }
+          onClick={ () => {
+            this.handlerLocalStore(products);
+            foundQuantityItemsCart();
+          } }
           type="button"
         >
           Adicionar ao Carrinho
@@ -73,4 +76,5 @@ ProductList.propTypes = {
       free_shipping: PropTypes.bool.isRequired,
     }).isRequired,
   }).isRequired,
+  foundQuantityItemsCart: PropTypes.func.isRequired,
 };
