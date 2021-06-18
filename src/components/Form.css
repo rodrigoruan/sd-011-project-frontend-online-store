@@ -1,0 +1,86 @@
+.evaluation-form {
+    margin: 20px;
+  }
+  
+  .form-title {
+    color: #0a06e9;
+    padding: 5px 10px;
+  }
+  
+  .form-space {
+    border: 1px solid black;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  .inputs-space {
+    background-color: transparent;
+    justify-content: space-between;
+    padding: 8px;
+    width: 500px;
+  }
+  
+  .input-email {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    width: 288px;
+  }
+  
+  .rating-stars {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  
+  .star {
+    color:  #0a06e9;
+    cursor: pointer;
+    font-size: 40px;
+    vertical-align: middle;
+  }
+  
+  .text-message {
+    border-radius: 5px;
+    margin: 10px 0;
+    padding: 15px;
+    resize: none;
+    width: 100%;
+  }
+  
+  .submit-evaluation {
+    background-color:  #88888a;
+    border: none;
+    border-radius: 5px;
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 15px 40px;
+  }
+  
+  .submit-evaluation:hover {
+    background-color: #0a06e9;
+  }
+  
+  .submit-evaluation:active {
+    background-color: #06dae9;
+  }
+
+  .voltar {
+    background-color:  #338a10;
+    border: none;
+    border-radius: 5px;
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 15px 40px;
+  }
+
+  .c {
+    background-color:  #12d61c;
+    border: none;
+    border-radius: 5px;
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 15px 40px;
+  }
