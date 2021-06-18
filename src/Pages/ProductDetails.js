@@ -24,12 +24,8 @@ class ProductDetails extends React.Component {
 
   async fetchDataFromProduct() {
     const { location: { data }, match: { params: { id } } } = this.props;
-    // console.log(this.props.match.params.id)
-    // const { categoryId, query } = this.props;
     const productsDetails = await api.getProductsFromCategoryAndQuery('', data);
-    // console.log(productsDetails)
     const productDetails = productsDetails.results.find((prod) => prod.id === id);
-    // console.log(productDetails)
     this.setState({
       product: {
         title: productDetails.title,
@@ -42,7 +38,10 @@ class ProductDetails extends React.Component {
 
   addtocart() {
     const { product } = this.state;
-    localStorage.setItem('productInfo', JSON.stringify(product));
+    let getItem = JSON.parse(localStorage.getItem('productList'));
+    getItem = [...getItem, product];
+    console.log(getItem);
+    localStorage.setItem('productList', JSON.stringify(getItem));
   }
 
   render() {
@@ -55,7 +54,6 @@ class ProductDetails extends React.Component {
         <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
         <p>{ atributtes }</p>
-        {/* nome do produto, imagem, preço e especificação técnica. */}
         <br />
         <Link data-testid="shopping-cart-button" to="/cart">
           <button type="button">Retorne ao carrinho de compras</button>

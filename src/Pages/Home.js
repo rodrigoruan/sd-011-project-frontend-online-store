@@ -11,9 +11,9 @@ class Home extends React.Component {
       productCategories: [],
       filterCategories: '',
     };
+    localStorage.setItem('productList', JSON.stringify([]));
     this.categoriesNames = this.categoriesNames.bind(this);
     this.onClickCategories = this.onClickCategories.bind(this);
-    localStorage.clear();
   }
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class Home extends React.Component {
   render() {
     const { productCategories, filterCategories } = this.state;
     return (
-      <fragment>
+      <section>
         <ProductList selectedCategory={ filterCategories } />
         <div className="categoriesList">
           { productCategories.map((category) => (
@@ -54,7 +54,7 @@ class Home extends React.Component {
         <Link data-testid="shopping-cart-button" to="/cart">
           <ShoppingCartButton />
         </Link>
-      </fragment>
+      </section>
     );
   }
 }

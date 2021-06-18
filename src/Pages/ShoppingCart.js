@@ -1,29 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CartList from '../CartList';
 
 class ShoppingCart extends React.Component {
   render() {
-    const productFromDetails = JSON.parse(localStorage.getItem('productInfo'));
-    if (productFromDetails === null) {
+    const productFromDetails = JSON.parse(localStorage.getItem('productList'));
+    if (productFromDetails.length === 0) {
       return (
-        <h3 data-testid="shopping-cart-empty-message">
-          Seu carrinho está vazio
-        </h3>);
+        <div>
+          <h3 data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </h3>
+          <Link to="/">Voltar à Home</Link>
+        </div>);
     }
-    const { title, thumbnail, price } = productFromDetails;
     return (
       <div>
-        <div data-testid="product" className="product">
-          <h3 data-testid="shopping-cart-product-name">{ title }</h3>
-          <img className="product-img" width="100px" src={ thumbnail } alt={ title } />
-          <p className="price">
-            Preço: R$
-            { price }
-          </p>
-          <p data-testid="shopping-cart-product-quantity">
-            1
-          </p>
-        </div>
+        {productFromDetails.map((product) => (
+          <CartList key={ product.title } product={ product } />
+        ))}
         <Link to="/">Voltar à Home</Link>
       </div>
     );
