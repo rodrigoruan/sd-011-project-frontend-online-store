@@ -7,7 +7,7 @@ import backImage from '../images/back.png';
 
 export default class ShopCart extends Component {
   render() {
-    const { location: { state } } = this.props;
+    const { location: { state }, removeCartItem } = this.props;
     if (state.length === 0) return <EmptyShopCart />;
 
     return (
@@ -26,6 +26,13 @@ export default class ShopCart extends Component {
         </p>
         { state.map((item) => (
           <div className="cart-product-container" key={ item.id }>
+            <button
+              onClick={ removeCartItem }
+              type="button"
+              value={ item.id }
+            >
+              X
+            </button>
             <img className="image-product-cart" src={ item.thumbnail } alt={ item.id } />
             <p
               className="cart-product-title"
@@ -48,4 +55,5 @@ ShopCart.propTypes = {
       map: PropTypes.func,
     }),
   }).isRequired,
+  removeCartItem: PropTypes.func.isRequired,
 };

@@ -19,11 +19,10 @@ export default class Home extends Component {
     if (categories === []) return <div>Loading...</div>;
     return (
       <div>
-
+        {console.log(cartItems)}
         <header className="home-header">
           <h1>Front-End Online Store</h1>
         </header>
-
         <nav className="nav-home">
           <Link
             data-testid="shopping-cart-button"

@@ -22,11 +22,16 @@ export default class App extends Component {
     this.fetchProducts = this.fetchProducts.bind(this);
     this.fetchCategories = this.fetchCategories.bind(this);
     this.addCart = this.addCart.bind(this);
+    this.removeCartItem = this.removeCartItem.bind(this);
   }
 
   componentDidMount() {
     this.fetchProductCategory();
   }
+
+  // componentDidUpdate() {
+  //   this.removeCartItem();
+  // }
 
   handleChange({ target }) {
     const { value, name } = target;
@@ -67,6 +72,19 @@ export default class App extends Component {
     });
   }
 
+  removeCartItem({ target: { value } }) {
+    const { cartItems } = this.state;
+    console.log(value);
+    const updateCart = cartItems.filter(({ id }) => id !== value);
+    console.log(updateCart);
+    this.setState({
+      cartItems: updateCart,
+    });
+    console.log(cartItems);
+    // const index = cartItems.includes(value);
+    // console.log(cartItems[index]);
+  }
+
   render() {
     const { categories, productCards, cartItems } = this.state;
     return (
@@ -87,7 +105,14 @@ export default class App extends Component {
                   cartItems={ cartItems }
                 />) }
             />
-            <Route path="/cart" component={ ShopCart } />
+            <Route
+              path="/cart"
+              render={ (props) => (<ShopCart
+                removeCartItem={ this.removeCartItem }
+                cartItems={ cartItems }
+                { ...props }
+              />) }
+            />
             <Route
               path="/details/:id"
               render={ (props) => (<ProductDetails
