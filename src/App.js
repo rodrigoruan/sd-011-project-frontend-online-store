@@ -21,6 +21,7 @@ function App() {
             path="/checkout"
             render={ (props) => <Checkout { ...props } /> }
           />
+
         </Switch>
       </BrowserRouter>
 

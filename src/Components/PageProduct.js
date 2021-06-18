@@ -42,6 +42,7 @@ class PageProduct extends Component {
 
   renderProduct = () => {
     const { title, price, thumbnail, id } = this.state;
+
     return (
       <div>
         <h1 data-testid="product-detail-name">{ title }</h1>
