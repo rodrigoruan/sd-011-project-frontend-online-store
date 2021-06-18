@@ -16,12 +16,20 @@ class App extends Component {
     this.handleRemoveItemFromCart = this.handleRemoveItemFromCart.bind(this);
     this.handleIncreaseItemAmount = this.handleIncreaseItemAmount.bind(this);
     this.handleDecreaseItemAmount = this.handleDecreaseItemAmount.bind(this);
+    this.getFromLocalStorage = this.getFromLocalStorage.bind(this);
   }
 
-  handleAddToShopCart(id, title, thumbnail, price) {
+  componentDidMount() {
+    this.getFromLocalStorage();
+  }
+
+  handleAddToShopCart(item) {
+    const { shopCart } = this.state;
     this.setState((state) => ({
-      shopCart: [...state.shopCart, { id, title, thumbnail, price, amount: 1 }],
-    }));
+      shopCart: [...state.shopCart, { ...item, amount: 1 }],
+    }),
+    () => (localStorage.setItem('shopCart', JSON.stringify([...shopCart,
+      { ...item, amount: 1 }]))));
   }
 
   handleRemoveItemFromCart(itemId) {
@@ -34,8 +42,12 @@ class App extends Component {
     const { shopCart } = this.state;
     const itemIndex = shopCart.findIndex((item) => item.id === itemId);
     const updatedCart = [...shopCart];
-    updatedCart[itemIndex].amount += 1;
-    this.setState({ shopCart: updatedCart });
+    if (
+      updatedCart[itemIndex].availableQuantity > updatedCart[itemIndex].amount
+    ) {
+      updatedCart[itemIndex].amount += 1;
+      this.setState({ shopCart: updatedCart });
+    }
   }
 
   handleDecreaseItemAmount(itemId) {
@@ -50,6 +62,15 @@ class App extends Component {
     this.setState({ shopCart: updatedCart });
   }
 
+  getFromLocalStorage() {
+    const dataFromLocalStorage = JSON.parse(localStorage.getItem('shopCart'));
+    if (dataFromLocalStorage) {
+      this.setState((state) => ({
+        shopCart: [...state.shopCart, ...dataFromLocalStorage],
+      }));
+    }
+  }
+
   render() {
     const { shopCart } = this.state;
     return (
@@ -61,6 +82,7 @@ class App extends Component {
               <ProductDetails
                 { ...props }
                 handleAddToShopCart={ this.handleAddToShopCart }
+                shopCart={ shopCart }
               />
             ) }
           />

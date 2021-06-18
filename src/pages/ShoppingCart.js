@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import backImg from '../imgs/Seta.png';
 import cartImg from '../imgs/Carrinho.png';
 import './ShoppingCart.css';
+import CartProductsAmount from '../components/CartProductsAmount/CartProductsAmount';
 
 class ShoppingCart extends Component {
   constructor(props) {
@@ -14,10 +15,12 @@ class ShoppingCart extends Component {
   }
 
   getCartTotal(cart) {
-    return cart.reduce((acc, curr) => {
-      acc += curr.price * curr.amount;
-      return acc;
-    }, 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    return cart
+      .reduce((acc, curr) => {
+        acc += curr.price * curr.amount;
+        return acc;
+      }, 0)
+      .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
   renderShopCart(shopCart) {
@@ -29,28 +32,28 @@ class ShoppingCart extends Component {
 
     return (
       <>
-        {shopCart.map(({ id, thumbnail, title, price, amount }) => (
-          <div className="shopping-cart-item-card" key={ id }>
+        { shopCart.map((item) => (
+          <div className="shopping-cart-item-card" key={ item.id }>
             <button
               type="button"
               className="cart-item-button"
-              onClick={ () => handleRemoveItemFromCart(id) }
+              onClick={ () => handleRemoveItemFromCart(item.id) }
             >
               x
             </button>
             <div className="cart-item-img-container">
-              <img src={ thumbnail } alt="product" />
+              <img src={ item.thumbnail } alt="product" />
             </div>
             <p
               className="cart-item-title"
               data-testid="shopping-cart-product-name"
             >
-              { title }
+              { item.title }
             </p>
             <button
               type="button"
               className="cart-item-button"
-              onClick={ () => handleDecreaseItemAmount(id) }
+              onClick={ () => handleDecreaseItemAmount(item.id) }
               data-testid="product-decrease-quantity"
             >
               -
@@ -59,26 +62,39 @@ class ShoppingCart extends Component {
               className="cart-item-amount"
               data-testid="shopping-cart-product-quantity"
             >
-              { amount }
+              { item.amount }
             </div>
-            <button
-              type="button"
-              className="cart-item-button"
-              onClick={ () => handleIncreaseItemAmount(id) }
-              data-testid="product-increase-quantity"
-            >
-              +
-            </button>
+            { item.amount === item.availableQuantity ? (
+              <button
+                type="button"
+                className="cart-item-button"
+                onClick={ () => handleIncreaseItemAmount(item.id) }
+                data-testid="product-increase-quantity"
+                disabled
+              >
+                +
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="cart-item-button"
+                onClick={ () => handleIncreaseItemAmount(item.id) }
+                data-testid="product-increase-quantity"
+              >
+                +
+              </button>
+            )}
             <p>
-              { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+              { item.price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              }) }
             </p>
           </div>
         ))}
         <p>
-          <strong>
-            Valor Total do Carrinho:
-          </strong>
-          {this.getCartTotal(shopCart)}
+          <strong>Valor Total do Carrinho:</strong>
+          { this.getCartTotal(shopCart) }
         </p>
 
         <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
@@ -92,13 +108,9 @@ class ShoppingCart extends Component {
     return (
       <>
         <Link to="/">
-          <img
-            width="30px"
-            src={ backImg }
-            alt="imagem de voltar"
-          />
+          <img width="30px" src={ backImg } alt="imagem de voltar" />
         </Link>
-
+        <CartProductsAmount shopCart={ shopCart } />
         <div>
           <h1>
             <img width="30px" src={ cartImg } alt="carrinho de compras" />
@@ -106,9 +118,13 @@ class ShoppingCart extends Component {
           </h1>
         </div>
 
-        {shopCart.length
-          ? this.renderShopCart(shopCart)
-          : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
+        { shopCart.length ? (
+          this.renderShopCart(shopCart)
+        ) : (
+          <p data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </p>
+        ) }
       </>
     );
   }
@@ -116,10 +132,12 @@ class ShoppingCart extends Component {
 export default ShoppingCart;
 
 ShoppingCart.propTypes = {
-  shopCart: PropTypes.arrayOf(PropTypes.shape({
-    amount: PropTypes.number,
-    price: PropTypes.number,
-    thumbnail: PropTypes.string,
-    title: PropTypes.string,
-  })),
+  shopCart: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number,
+      price: PropTypes.number,
+      thumbnail: PropTypes.string,
+      title: PropTypes.string,
+    }),
+  ),
 }.isRequired;
