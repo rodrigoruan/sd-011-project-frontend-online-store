@@ -2,14 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class NewItem extends Component {
+  constructor() {
+    super();
+     this.state = {
+       quantity: 1,
+     }
+  }
 
   render() {
-    console.log('renderizou')
-    const { product, 
-      cart, 
-      handleDelete, 
-      increaseQuantity, 
-      decreaseQuantity 
+    const { product,
+      cart,
+      handleDelete,
+      increaseQuantity,
+      decreaseQuantity,
     } = this.props;
     const quantity = cart.filter((item) => item === product);
 
@@ -18,17 +23,19 @@ class NewItem extends Component {
         <div key={ product.title }>
           <p data-testid="shopping-cart-product-name">{product.title}</p>
           <button type="button" onClick={() => handleDelete(product)}>X</button>
-          <button type="button" data-testid="product-increase-quantity" 
+          <button type="button" data-testid="product-increase-quantity"
             onClick={() => increaseQuantity(product)}>
-              +
+            + MAIS
           </button>
           <button type="button" data-testid="product-decrease-quantity"
-            onClick={() => decreaseQuantity(product)}>
-              -
+            onClick={ () => decreaseQuantity(product) }
+          >
+            - MENOS
             </button>
-          <img src={ product.thumbnail } alt={ product.title } />
-          <p>{product.price}</p>
-          <span data-testid="shopping-cart-product-quantity">{quantity.length}</span>
+          <img src={product.thumbnail} alt={product.title} />
+          <p>Valor unitário R${product.price}</p>
+          <span data-testid="shopping-cart-product-quantity">{product.quantity}</span>
+          <span data-testid="shopping-cart-product-quantity">{product.quantity * product.price}</span>
         </div>
       </div>
     );

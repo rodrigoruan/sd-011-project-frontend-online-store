@@ -7,14 +7,24 @@ class ShoppingCart extends React.Component {
     super();
     this.state = {
       filteredCart: [],
+      // count: 0,
+      // products: [],
     };
     this.handleDelete = this.handleDelete.bind(this);
-    this.increaseQuantity = this.increaseQuantity.bind(this);
-    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
     this.filterFunction();
+  }
+
+  handleDelete(product) {
+    const { filteredCart } = this.state;
+    const newList = filteredCart.filter((item) => {
+      return item.id !== product.id;
+    });
+    this.setState({
+      filteredCart: newList,
+    });
   }
 
   filterFunction() {
@@ -26,28 +36,9 @@ class ShoppingCart extends React.Component {
     });
   }
 
-  handleDelete(product) {
-    const { filteredCart } = this.state;
-     const newList = filteredCart.filter((item) => {
-      return item.id !== product.id
-    })
-    this.setState({
-      filteredCart: newList,
-    });
-  }
-
-  increaseQuantity(product) {
-    console.log('AUMENTA PRODUTO', product);
-  }
-
-  decreaseQuantity(product) {
-    console.log('DIMINUI PRODUTO');
-  }
-  
-
   render() {
-    const { cart } = this.props;
-    const { filteredCart } = this.state;
+    const { cart, increaseQuantity, decreaseQuantity } = this.props;
+    const { filteredCart, count, products } = this.state;
 
     const emptyCart = (
       <h3 data-testid="shopping-cart-empty-message">
@@ -55,10 +46,13 @@ class ShoppingCart extends React.Component {
       </h3>);
 
     return !cart.length ? emptyCart : filteredCart.map((product, index) => (
-      <NewItem product={ product } cart={ cart } key={ index } 
-        handleDelete={this.handleDelete} 
-        increaseQuantity={this.increaseQuantity}
-        decreaseQuantity={this.decreaseQuantity}
+      <NewItem
+        product={ product }
+        cart={ cart }
+        key={ index }
+        handleDelete={ this.handleDelete }
+        increaseQuantity={ increaseQuantity }
+        decreaseQuantity={ decreaseQuantity }
       />
     ));
   }

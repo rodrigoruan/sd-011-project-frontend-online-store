@@ -14,15 +14,63 @@ class App extends React.Component {
       cart: [],
       quantity: 0,
     };
+    this.increaseQuantity = this.increaseQuantity.bind(this)
+    this.decreaseQuantity = this.decreaseQuantity.bind(this)
   }
 
   addState(product) {
+    let newCart = [];
     const counter = 1;
     const { cart } = this.state;
-    this.setState((previouState) => ({
-      cart: [...cart, product],
-      quantity: previouState.quantity + counter,
+    const anyProduct = cart.find((item) => {
+      return item.id === product.id;
+    });
+
+    if (anyProduct) {
+       newCart = cart.map((item) => {
+         if(item.id === anyProduct.id) {
+           item.quantity += 1;
+           return item;
+        }
+          return item;
+      })
+    } else {
+      product.quantity = 1;
+      newCart = [...cart, product];
+    }
+
+    this.setState(() => ({
+      cart: newCart,
+      // quantity: previouState.quantity + counter,
     }));
+  }
+
+  increaseQuantity(product) {
+    const { cart } = this.state;
+    const newArr = cart.map((item) => {
+      if (item.id === product.id) {
+        item.quantity += 1;
+        return item;
+      }
+      return item;
+    });
+    this.setState({
+      cart: newArr,
+    })
+  }
+
+  decreaseQuantity(product) {
+    const { cart } = this.state;
+    const newArr = cart.map((item) => {
+      if (item.id === product.id && item.quantity > 0) {
+        item.quantity -= 1;
+        return item;
+      }
+      return item;
+    });
+    this.setState({
+      cart: newArr,
+    });
   }
 
   render() {
@@ -39,6 +87,8 @@ class App extends React.Component {
                 addState={ this.addState }
                 cart={ cart }
                 quantity={ quantity }
+                decreaseQuantity={ this.decreaseQuantity }
+                increaseQuantity={ this.increaseQuantity }
               />) }
             />
             <Route
