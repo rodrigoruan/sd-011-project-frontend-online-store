@@ -16,11 +16,18 @@ class ProductList extends React.Component {
     this.fetchProducts();
   }
 
+  componentDidUpdate(prevProps) {
+    const { categoryId, query } = this.props;
+    if (prevProps.query !== query || prevProps.categoryId !== categoryId) {
+      this.fetchProducts();
+    }
+  }
+
   async fetchProducts() {
     const { categoryId, query } = this.props;
-    const API = await getProductsFromCategoryAndQuery(categoryId, query);
-    console.log(API);
-    const { results } = API;
+    const data = await getProductsFromCategoryAndQuery(categoryId, query);
+
+    const { results } = data;
     this.setState({
       products: results,
     });
