@@ -34,9 +34,10 @@ class AvaliaProduto extends Component {
           5
         </div>
 
-        <label htmlFor>
+        <label htmlFor="textareaId">
           Deixe seu comentário:
           <textarea
+            id="textareaId"
             data-testid="product-detail-evaluation"
             type="text"
             name="avalia"
