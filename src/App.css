@@ -5,7 +5,7 @@
   --header: #14213d;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap') ;
 
 * {
   box-sizing: border-box;
@@ -44,8 +44,8 @@ button {
   cursor: pointer;
   font-size: 16px;
   margin: 6px;
-  text-transform: uppercase;
   padding: 6px;
+  text-transform: uppercase;
 }
 
 .search-button {
@@ -112,12 +112,12 @@ input {
 
 .grupo-16 {
   align-items: center;
-  background: linear-gradient(180deg, rgba(210, 8, 8, 0) 0%, rgba(0, 206, 251, 0.5) 100%), var(--header);
+  background: linear-gradient(180deg, #d2080800 0%, #00cefb80 100%) , var(--header);
   color: white;
   display: flex;
-  font-family: 'Poiret One', cursive;
-  justify-content: space-around;
+  font-family: Poiret One , cursive;
   height: 80px;
+  justify-content: space-around;
 }
 
 .body {
@@ -164,8 +164,8 @@ input {
   flex-direction: column;
   height: 12%;
   margin: 10px;
-  text-transform: uppercase;
   text-align: center;
+  text-transform: uppercase;
   transition: ease-in-out 0.3s;
   width: 15%;
 }
