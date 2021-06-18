@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Details extends React.Component {
+  /*
   // constructor() {
   //   super();
   //   this.state = {
@@ -31,6 +32,7 @@ class Details extends React.Component {
   //     products,
   //   });
   // }
+  */
   render() {
     const {
       location: {
