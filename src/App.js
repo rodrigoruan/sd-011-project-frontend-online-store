@@ -4,7 +4,7 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import { About, NotFound, ShoppingCart, Home } from './pages/zPageMenu';
+import { About, NotFound, ShoppingCart, Home, FinishScreen } from './pages/zPageMenu';
 import { Footer, Header } from './components/zComponentsMenu';
 
 export default class App extends Component {
@@ -22,20 +22,24 @@ export default class App extends Component {
     api.getProductsFromCategoryAndQuery();
   }
 
-  handleAddToCart = (id, thumbnail, title, price) => {
-    const newItem = { id, thumbnail, title, price };
+  handleAddToCart = (id, title, thumbnail, price) => {
+    const newItem = { id, title, thumbnail, price };
     this.setState((prev) => ({ ShoppingCart: [...prev.ShoppingCart, newItem] }));
   };
 
+
+
   render() {
+    const {  } = this.state
     return (
       <BrowserRouter>
         <Header />
         <Switch>
           {/* prettier-ignore */}
           <Route exact path="/" render={ (props) => <Home { ...props }  handleAddToCart = {this.handleAddToCart}    /> } />
-          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} />} />
+          <Route exact path="/cart" render={(props) => <ShoppingCart {...props} cartItems={this.state.ShoppingCart}/>} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/finishscreen" component={FinishScreen} />
           <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}

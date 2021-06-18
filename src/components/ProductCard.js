@@ -14,6 +14,7 @@ export default class ItemProduct extends Component {
         </h6>
         <button
           type="button"
+          data-testid="product-add-to-cart"
           onClick={() => handleAddToCart(id, title, thumbnail, price)}
           className="btn btn-success"
         >
