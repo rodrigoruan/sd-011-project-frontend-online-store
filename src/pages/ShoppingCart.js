@@ -9,8 +9,8 @@ export default class ShoppingCart extends Component {
     };
   }
 
-  componentDidMount(){
-    
+  componentDidMount() {
+
   }
 
   render() {
@@ -21,6 +21,6 @@ export default class ShoppingCart extends Component {
     if (!cartItems) {
       return emptyCartMessage;
     }
-    return cartItems.map(item => <CartProduct productData={item} />);
+    return cartItems.map((item) => <CartProduct productData={ item } key={ item.id } />);
   }
 }

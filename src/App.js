@@ -12,7 +12,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      ShoppingCart: '',
+      shoppingCart: '',
     };
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
@@ -23,12 +23,14 @@ export default class App extends Component {
   }
 
   handleAddToCart = (id, title, thumbnail, price) => {
+    const { shoppingCart } = this.state;
+    const oldItems = [...shoppingCart];
     const newItem = { id, title, thumbnail, price };
-    this.setState((prev) => ({ ShoppingCart: [...prev.ShoppingCart, newItem] }));
+    this.setState({ shoppingCart: [...oldItems, newItem] });
   };
 
   render() {
-    const { ShoppingCart } = this.state;
+    const { shoppingCart } = this.state;
     return (
       <BrowserRouter>
         <Header />
@@ -37,18 +39,16 @@ export default class App extends Component {
           <Route
             exact
             path="/"
-            render={
-              (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } />
-            }
+            render={ (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } /> }
           />
           <Route
             exact
             path="/cart"
-            render={ (props) => <ShoppingCart { ...props } cartItems={ ShoppingCart } /> }
+            render={(props) => <ShoppingCart {...props} cartItems={shoppingCart} />}
           />
-          <Route exact path="/about" component={ About } />
-          <Route exact path="/finishscreen" component={ FinishScreen } />
-          <Route component={ NotFound } />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/finishscreen" component={FinishScreen} />
+          <Route component={NotFound} />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
