@@ -6,11 +6,11 @@ class Cart extends Component {
   constructor() {
     super();
     this.state = {
-      shoppingCart: JSON.parse(localStorage.getItem('cart')),
+      shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
   }
 
-  handleClickAdd(_item, index) {
+  handleClickAdd(item, index) {
     const cart = JSON.parse(localStorage.getItem('cart'));
     cart[index].quantity += 1;
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -19,7 +19,7 @@ class Cart extends Component {
     });
   }
 
-  handleClickSub(_item, index) {
+  handleClickSub(item, index) {
     const cart = JSON.parse(localStorage.getItem('cart'));
     if (cart[index].quantity > 1) cart[index].quantity -= 1;
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -40,7 +40,7 @@ class Cart extends Component {
   render() {
     // const cart = JSON.parse(localStorage.getItem('cart'));
     const { shoppingCart } = this.state;
-    return !shoppingCart ? (
+    return (shoppingCart.length === 0) ? (
       <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
     ) : (
       <section className={ style.cart }>
@@ -76,6 +76,10 @@ class Cart extends Component {
             </button>
           </div>
         ))}
+        <h2>
+          Total:R$
+          {shoppingCart.reduce((acc, cv) => acc + (cv.price * cv.quantity), 0).toFixed(2)}
+        </h2>
       </section>
     );
   }
