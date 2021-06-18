@@ -36,8 +36,8 @@ class QuantityButton extends Component {
   }
 
   subtractQuantity() {
-    this.setState((prevState) => ({
-      quantity: prevState.quantity - 1,
+    this.setState(({ quantity }) => ({
+      quantity: quantity - 1,
     }), () => {
       const { product } = this.props;
       const products = JSON.parse(localStorage.getItem('products'));
