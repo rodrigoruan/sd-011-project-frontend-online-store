@@ -1,10 +1,35 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CustomerRating from '../components/CustomerRating';
+import Rating from '../components/Rating';
 
 class ProductDetail extends Component {
+  constructor() {
+    super();
+    this.addRating = this.addRating.bind(this);
+  }
+
+  getRatings(id) {
+    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+    let productRatings;
+    if (ratings.length > 0) {
+      productRatings = ratings.filter((rating) => rating.id === id);
+      console.log(productRatings);
+    }
+    return productRatings;
+  }
+
+  addRating(rating) {
+    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+    ratings.push(rating);
+    localStorage.setItem('ratings', JSON.stringify(ratings));
+    this.forceUpdate();
+  }
+
   render() {
     const { location: { state: { detail } } } = this.props;
-    const { title, thumbnail, price, attributes, installments } = detail;
+    const { title, thumbnail, price, attributes, installments, id } = detail;
+    const productRatings = this.getRatings(id);
 
     return (
       <div>
@@ -37,6 +62,13 @@ class ProductDetail extends Component {
             ))}
           </ul>
         </div>
+        <CustomerRating addRatingFunction={ this.addRating } productId={ id } />
+        {
+          productRatings
+            ? productRatings
+              .map((rating, index) => <Rating key={ index } rating={ rating } />)
+            : null
+        }
       </div>
     );
   }
