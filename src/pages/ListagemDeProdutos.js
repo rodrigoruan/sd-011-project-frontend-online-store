@@ -7,24 +7,24 @@ class ListagemDeProdutos extends Component {
   constructor() {
     super();
     this.state = {
-      countState: 0,
+      quantityTotal: 0,
     };
     this.manipulateState = this.manipulateState.bind(this);
   }
 
-  manipulateState(state) {
+  manipulateState(quantityTotal) {
     this.setState({
-      countState: state,
+      quantityTotal,
     });
   }
 
   render() {
-    const { countState } = this.state;
+    const { quantityTotal } = this.state;
     return (
       <div>
-        <BuscaProduto />
-        <CartButton countState={ countState } />
-        <ListaCategoria manipulateState={ this.manipulateState } countState={ countState } />
+        <BuscaProduto manipulateState={ this.manipulateState } />
+        <CartButton quantityTotal={ quantityTotal } />
+        <ListaCategoria manipulateState={ this.manipulateState } />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import { Loading } from './index';
 import ProductCard from './ProductCard';
@@ -23,7 +24,6 @@ class ListaCategoria extends Component {
     this.fetchCategory(id);
   }
 
-  // oi
   async fetchCategory(id) {
     const response = await api.getProductsFromCategoryAndQuery(id, '$QUERY');
     this.setState({
@@ -42,7 +42,7 @@ class ListaCategoria extends Component {
 
   render() {
     const { loading, categories, filteredCategories } = this.state;
-    const { manipulateState, countState } = this.props;
+    const { manipulateState } = this.props;
     const loadingComponent = <Loading />;
     const categoryFiltered = (
       <div>
@@ -55,7 +55,6 @@ class ListaCategoria extends Component {
             price={ price }
             category_id={ catId }
             manipulateState={ manipulateState }
-            countState={ countState }
           />
         ))}
       </div>);
@@ -87,3 +86,7 @@ class ListaCategoria extends Component {
 }
 
 export default ListaCategoria;
+
+ListaCategoria.propTypes = {
+  manipulateState: PropTypes.func.isRequired,
+};

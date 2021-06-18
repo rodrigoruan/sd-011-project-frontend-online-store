@@ -5,13 +5,12 @@ import { AddCarrinho } from './index';
 
 class ProductCard extends Component {
   render() {
-    const { title, imgPath, price, id, category_id: catId, manipulateState, countState} = this.props;
+    const { title, imgPath, price, id, category_id: catId, manipulateState } = this.props;
     return (
       <div>
         <Link
           to={ `/detalhesproduto/${catId}/${id}/${title}` }
           data-testid="product-detail-link"
-          countState={ countState }
         >
           <div data-testid="product">
             <h3>{title}</h3>
@@ -39,4 +38,5 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   category_id: PropTypes.string.isRequired,
+  manipulateState: PropTypes.func.isRequired,
 };

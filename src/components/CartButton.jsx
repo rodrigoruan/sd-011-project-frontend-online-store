@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class CartButton extends Component {
-  constructor(props) {
-    super(props);
-    const { countState } = this.props;
+  constructor() {
+    super();
+
     this.state = {
-      quantidade: 0,
-      countState: 0,
+      quantityTotalInitial: 0,
     };
-    this.updateComponent = this.updateComponent.bind(this);
+    this.updateQuantity = this.updateQuantity.bind(this);
   }
 
   componentDidMount() {
-    this.updateComponent();
+    this.updateQuantity();
   }
 
-  updateComponent() {
-    const quantity = localStorage.getItem('quantidade');
+  updateQuantity() {
+    const qttTotalStorage = parseInt(localStorage.getItem('quantidade'), 10);
     this.setState({
-      quantidade: quantity,
-      countState: quantity,
+      quantityTotalInitial: qttTotalStorage,
     });
   }
 
   render() {
-    const { countState } = this.state;
-    const { countState: countProps } = this.props;
+    const { quantityTotalInitial } = this.state;
+    const { quantityTotal } = this.props;
+
     return (
       <div>
         <Link
@@ -37,10 +37,14 @@ class CartButton extends Component {
           carrinho
         </Link>
         <span data-testid="shopping-cart-size">
-          { countProps > countState ? countProps : countState }
+          { quantityTotalInitial > quantityTotal ? quantityTotalInitial : quantityTotal }
         </span>
       </div>);
   }
 }
 
 export default CartButton;
+
+CartButton.propTypes = {
+  quantityTotal: PropTypes.number.isRequired,
+};

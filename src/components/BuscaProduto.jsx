@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import ProductCard from './ProductCard';
 
@@ -35,6 +36,7 @@ class BuscaProduto extends Component {
 
   render() {
     const { productsData, inputData } = this.state;
+    const { manipulateState } = this.props;
     return (
       <div>
         <input
@@ -53,6 +55,7 @@ class BuscaProduto extends Component {
             imgPath={ thumbnail }
             price={ price }
             category_id={ catId }
+            manipulateState={ manipulateState }
           />
         ))}
       </div>
@@ -61,3 +64,7 @@ class BuscaProduto extends Component {
 }
 
 export default BuscaProduto;
+
+BuscaProduto.propTypes = {
+  manipulateState: PropTypes.func.isRequired,
+};

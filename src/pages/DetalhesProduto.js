@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import { Loading, CartButton } from '../components/index';
+import { Loading } from '../components/index';
 import ProductDetailCard from '../components/ProductDetailCard';
 
 class DetalhesProduto extends Component {
@@ -37,15 +37,10 @@ class DetalhesProduto extends Component {
     const { itemsArr, loading } = this.state;
 
     if (loading) {
-      return (
-        <div>
-          <Loading />
-          <CartButton />
-        </div>);
+      return <Loading />;
     }
     const produto = itemsArr.find((produc) => produc.id === productId);
     const { title, thumbnail, price, id } = produto;
-    const { countState } = this.props;
 
     return (
       <div>
@@ -56,9 +51,6 @@ class DetalhesProduto extends Component {
           imgPath={ thumbnail }
           price={ price }
         />
-        <span>
-          { countState }
-        </span>
       </div>
     );
   }
