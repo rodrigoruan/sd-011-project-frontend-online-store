@@ -1,33 +1,49 @@
 import React, { Component } from 'react';
 import { CartProduct } from '../components/zComponentsMenu';
 import * as storage from '../services/storage';
-import { Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      shouldRedirect:false
+      shouldRedirect: false,
+      totalPrice: 0,
+      cartItems: [],
     };
+    this.sumProducts = this.sumProducts.bind(this);
+    this.setCartItems = this.setCartItems.bind(this);
   }
 
   handleBuyAction = () => {
     const { cartItems } = this.props;
     storage.saveStorage(cartItems);
     console.log(localStorage);
-    this.setState({shouldRedirect:true})
+    this.setState({ shouldRedirect: true });
   };
 
   componentDidMount() {
-    const { cartItems } = this.props;
-    let getPrice = 0;
-    // cartItems.forEach((el) =>
-      // getPrice += el.price
-      // console.log(el)
-    // );
-    console.log(getPrice);
+    this.sumProducts();
+    this.setCartItems();
   }
+
+  sumProducts = () => {
+    const { cartItems } = this.props;
+    if (cartItems) {
+      const reducer = (a, b) => (a.price * a.quantity + b.price * b.quantity).toFixed(2);
+      const totalPrice = cartItems.reduce(reducer);
+      this.setState({ totalPrice });
+      this.forceUpdate();
+    }
+  };
+
+  setCartItems = () => {
+    const { cartItems } = this.props;
+    this.setState({ cartItems });
+  };
+
+  // componentDidUpdate(prevProps, prevState) {}
 
   render() {
     const emptyCartMessage = (
@@ -37,8 +53,9 @@ export default class ShoppingCart extends Component {
     if (!cartItems) {
       return emptyCartMessage;
     }
-    if(this.state.shouldRedirect)
-    {return <Redirect to = '/checkout'/>}
+    if (this.state.shouldRedirect) {
+      return <Redirect to="/checkout" />;
+    }
     return (
       <div>
         {cartItems.map((item) => (
@@ -50,9 +67,9 @@ export default class ShoppingCart extends Component {
             handleRemoveFromCart={handleRemoveFromCart}
           />
         ))}
-        <h5>Valor total :</h5>
+        <h5>Valor total : {this.state.totalPrice}</h5>
         <button data-testid="checkout-products" onClick={this.handleBuyAction}>
-        Comprar
+          Comprar
         </button>
       </div>
     );
