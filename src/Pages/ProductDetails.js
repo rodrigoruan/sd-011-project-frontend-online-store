@@ -41,7 +41,18 @@ class ProductDetails extends Component {
 
   render() {
     const { redirect, product, cartProducts } = this.state;
-    const { title, thumbnail, price } = product;
+    const {
+      title,
+      thumbnail,
+      price,
+      shipping,
+    } = product;
+    let freeShipping = false;
+
+    if (shipping) freeShipping = shipping.free_shipping;
+    const shippingAlert = freeShipping ? (<p data-testid="free-shipping">Frete Grátis</p>)
+      : '';
+
     return !redirect ? (
       <div className="details-container">
         <header className="header">
@@ -63,6 +74,7 @@ class ProductDetails extends Component {
             {' '}
             { price }
           </div>
+          { shippingAlert }
           <button
             onClick={ () => this.addCart(product) }
             type="button"
