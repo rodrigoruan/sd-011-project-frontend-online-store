@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { Loading } from '../components/index';
 import ProductDetailCard from '../components/ProductDetailCard';
+import AvaliaProduto from '../components/AvaliaProduto';
 
 class DetalhesProduto extends Component {
   constructor() {
@@ -11,13 +12,23 @@ class DetalhesProduto extends Component {
     this.state = {
       itemsArr: [],
       loading: true,
+      ratings: [],
+      comments: [],
     };
 
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.saveRating = this.saveRating.bind(this);
   }
 
   componentDidMount() {
     this.fetchProducts();
+    this.getRatings();
+  }
+
+  getRatings() {
+    const savedRatings = localStorage.getItem('ratings');
+    const savedComments = localStorage.getItem('comments');
+    this.setState({ ratings: savedRatings, comments: savedComments });
   }
 
   async fetchProducts() {
@@ -31,7 +42,14 @@ class DetalhesProduto extends Component {
     });
   }
 
+  saveRating(comment, rating) {
+    localStorage.setItem('comments', comment);
+    localStorage.setItem('ratings', rating);
+    this.setState({ ratings: rating, comments: comment });
+  }
+
   render() {
+    const { ratings, comments } = this.state;
     const { match } = this.props;
     const { product_id: productId } = match.params;
     const { itemsArr, loading } = this.state;
@@ -49,6 +67,9 @@ class DetalhesProduto extends Component {
           imgPath={ thumbnail }
           price={ price }
         />
+        <AvaliaProduto formSubmit={ this.saveRating } />
+        {ratings}
+        {comments}
       </div>
     );
   }
