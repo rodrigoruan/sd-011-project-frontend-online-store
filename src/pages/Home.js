@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Categories, SearchInput } from '../components/zComponentsMenu';
 import SearchList from './SearchList';
 import * as api from '../services/api';
@@ -16,13 +17,11 @@ export default class Home extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleRadioClick = this.handleRadioClick.bind(this);
-    // this.showResults = this.showResults.bind(this);
     this.getQuery = this.getQuery.bind(this);
     this.getCategories = this.getCategories.bind(this);
   }
 
   componentDidMount() {
-    this.getQuery();
     this.getCategories();
   }
 
@@ -39,16 +38,11 @@ export default class Home extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState(() => {
-      console.log('carregando...');
-      return { loading: true };
-    });
+    this.getQuery();
   };
 
   handleRadioClick = ({ target }) => {
     const categoryObj = { id: target.id, name: target.name };
-    console.log('mudou cat');
-    // this.setState({ radioFilter: categoryObj, loading: true });
     this.getQuery(categoryObj);
   };
 
@@ -64,26 +58,36 @@ export default class Home extends Component {
     this.setState({ products: getList.results, loading: false });
   }
 
-  // showResults = () => {
-  //   const { handleAddToCart } = this.props;
-  //   const { loading, products } = this.state;
-  //   // if (loading) {
-  //   //   return <div>Loading...</div>;
-  //   // }
-  //   return <SearchList products={products} handleAddToCart={handleAddToCart} />;
-  // };
-
   render() {
     const { handleAddToCart } = this.props;
-    const { categories, loading, products } = this.state;
+    const { categories, products } = this.state;
     return (
+      // prettier-ignore
       <div className="home-div">
-        <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
+        <SearchInput
+          handleSubmit={ this.handleSubmit }
+          handleInput={ this.handleInput }
+        />
         <div className="search-results">
-          <Categories handleRadioClick={this.handleRadioClick} categories={categories} />
-          {loading ? <div>Loading...</div> : <SearchList products={products} handleAddToCart={handleAddToCart} /> }
+          <Categories
+            handleRadioClick={ this.handleRadioClick }
+            categories={ categories }
+          />
+          <SearchList products={ products } handleAddToCart={ handleAddToCart } />
         </div>
       </div>
     );
   }
 }
+
+Home.propTypes = {
+  handleAddToShopCart: PropTypes.func,
+  shopCart: PropTypes.arrayOf(
+    PropTypes.shape({
+      amount: PropTypes.number,
+      price: PropTypes.number,
+      thumbnail: PropTypes.string,
+      title: PropTypes.string,
+    }),
+  ),
+}.isRequired;
