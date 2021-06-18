@@ -9,6 +9,8 @@ class ShoppingCart extends React.Component {
       filteredCart: [],
     };
     this.handleDelete = this.handleDelete.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -35,7 +37,7 @@ class ShoppingCart extends React.Component {
   }
 
   increaseQuantity(product) {
-    console.log('AUMENTA PRODUTO');
+    console.log('AUMENTA PRODUTO', product);
   }
 
   decreaseQuantity(product) {
