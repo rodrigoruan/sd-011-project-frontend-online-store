@@ -9,20 +9,11 @@ export default class CartButton extends Component {
       products: [],
     };
 
-    this.addToCart = this.addToCart.bind(this);
   }
 
-  addToCart() {
-    this.setState((prevState) => {
-      return {
-        products: [...prevState.products, this.props],
-      };
-    })
-  }
-
-  componentDidUpdate() {
-    console.log(this.state)
-  }
+  // componentDidUpdate() {
+  //   console.log(this.state)
+  // }
 
   render() {
     return (

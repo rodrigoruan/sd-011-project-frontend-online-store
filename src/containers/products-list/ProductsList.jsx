@@ -5,14 +5,15 @@ import PropTypes from 'prop-types';
 import { ProductCard } from '../../components/Components';
 
 class ProductsList extends Component {
+
   render() {
-    const { products } = this.props;
+    const { products, onClick } = this.props;
     return (
       <div className="products-container">
         { products
           .map((product, idx) => {
             return (
-              <ProductCard key={ idx } product={ product } />
+              <ProductCard onClick={ onClick } key={ idx } product={ product } />
             )
           }) }
       </div>

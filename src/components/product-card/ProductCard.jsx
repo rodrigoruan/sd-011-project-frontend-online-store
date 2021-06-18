@@ -31,12 +31,12 @@ export default class ProductCard extends Component {
   // }
 
   render() {
-    const { product } = this.props;
+    const { product, onClick } = this.props;
     const { title, price, id, thumbnail } = product;
   
     return (
       <div
-        // onClick={ () => this.getProductInfo() }
+        onClick={ () => onClick(product) }
         data-testid="product"
         id={ id }
         key={ id }
@@ -48,8 +48,17 @@ export default class ProductCard extends Component {
             Preço:
             { price }
           </p>
-          <Link to={ `/product-details/${id}`}>Ver Detalhes</Link>
-          <CartButton prod={product} />
+          <div className="link-container">
+            <Link
+              data-testid="product-detail-link"
+              to={{
+                pathname: `/product-details/${id}`, 
+                selectedProduct: product,
+              }}>
+              Ver Detalhes
+            </Link>
+          </div>
+          <CartButton prod={ product } />
         </div>
       </div>
     );

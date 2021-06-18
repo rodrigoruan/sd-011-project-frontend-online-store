@@ -16,11 +16,21 @@ export default class Home extends React.Component {
       products: [],
       loading: false,
       searchText: '',
+      cartItems: [],
     };
 
-    this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.addToCart = this.addToCart.bind(this);
     this.setCategory = this.setCategory.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
+  }
+
+  addToCart(product) {
+    this.setState((prevState) => {
+      return {
+        cartItems: [...prevState.cartItems, product],
+      };
+    })
   }
 
   componentDidMount() {
@@ -110,7 +120,7 @@ export default class Home extends React.Component {
           </h1>
 
           { loading ? <Loading />
-            : <ProductsList products={ products } /> }
+            : <ProductsList onClick={ this.addToCart } products={ products } /> }
         </div>
       </div>
     );
