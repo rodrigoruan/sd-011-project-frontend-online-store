@@ -9,7 +9,6 @@ class ProductDetails extends React.Component {
     this.state = {
       productObject: null,
       comments: [],
-      counter: 1,
     };
     this.getProduct = this.getProduct.bind(this);
     this.addComment = this.addComment.bind(this);
@@ -33,16 +32,27 @@ class ProductDetails extends React.Component {
   }
 
   setItem = () => {
+    const cart = JSON.parse(localStorage.ShoppingCart);
     const { location, someCounter } = this.props;
     const { state } = location;
     const { title, thumbnail, price, id } = state;
-    const { counter } = this.state;
-    this.setState((previous) => ({
-      counter: previous.counter + 1,
-    }));
-    const obj = { title, thumbnail, price, id, counter };
-    const objJSON = JSON.stringify(obj);
-    localStorage.setItem(id, objJSON);
+    if (cart.find((element) => element.id === id)) {
+      const objJSON = cart.map((element) => {
+        if (element.id === id) element.counter += 1;
+        return element;
+      });
+      localStorage.ShoppingCart = JSON.stringify(objJSON);
+    } else {
+      const obj = {
+        title,
+        thumbnail,
+        price,
+        id,
+        counter: 1,
+      };
+      const objJSON = [...cart, obj];
+      localStorage.ShoppingCart = JSON.stringify(objJSON);
+    }
     someCounter();
   }
 

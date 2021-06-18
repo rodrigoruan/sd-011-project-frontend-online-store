@@ -22,7 +22,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.searchApi();
-    this.someCounter();
+    this.cartMount();
   }
 
   async handleOnChange({ target }) {
@@ -46,16 +46,17 @@ export default class Home extends Component {
   }
 
   someCounter() {
-    if (localStorage.length !== 0) {
-      const storage = Object.keys(localStorage);
-      const counter = storage.map((key) => {
-        const item = JSON.parse(localStorage[key]);
-        return item.counter;
-      });
-      const some = counter.reduce((total, currentElement) => total + currentElement);
-      this.setState({ totalCounter: some });
-    } else {
-      this.setState({ totalCounter: 0 });
+    const cart = JSON.parse(localStorage.ShoppingCart);
+    const totalCounter = cart.reduce(((total, number) => {
+      total += number.counter;
+      return total;
+    }), 0);
+    this.setState({ totalCounter });
+  }
+
+  cartMount() {
+    if (!localStorage.ShoppingCart) {
+      localStorage.setItem('ShoppingCart', JSON.stringify([]));
     }
   }
 
