@@ -5,17 +5,18 @@ export default class Button extends Component {
   constructor() {
     super();
     this.state = {
-      title: '',
-      price: '',
-      thumbnail: '',
+      count: 1,
     };
     this.addToCart = this.addToCart.bind(this);
   }
 
   addToCart() {
-    const { title, price, id, thumbnail, updateCartItem } = this.props;
-    localStorage.setItem(`${id}`, [`${title} - R$${price}`, `${thumbnail}`]);
-    updateCartItem();
+    const { title, price, thumbnail } = this.props;
+    this.setState((oldValue) => ({ count: oldValue.count + 1 }));
+    const { count } = this.state;
+    const objeto = { count, title, price, thumbnail };
+
+    localStorage.setItem(title, JSON.stringify(objeto));
   }
 
   render() {
@@ -31,14 +32,14 @@ export default class Button extends Component {
   }
 }
 
-// Button.propTypes = {
-//   title: PropTypes.string,
-//   thumbnail: PropTypes.string,
-//   price: PropTypes.number,
-// };
+Button.propTypes = {
+  title: PropTypes.string,
+  thumbnail: PropTypes.string,
+  price: PropTypes.number,
+};
 
-// Button.defaultProps = {
-//   title: '',
-//   thumbnail: '',
-//   price: 0,
-// };
+Button.defaultProps = {
+  title: '',
+  thumbnail: '',
+  price: 0,
+};

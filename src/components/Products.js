@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-// import Button from './Button';
 
 export default class Products extends Component {
   render() {
@@ -12,10 +10,8 @@ export default class Products extends Component {
             <h2>{title}</h2>
             <img src={ thumbnail } alt={ title } />
             <p>{price}</p>
-
           </div>
         </div>
-        {/* <Button product={ product } id={ id } /> */}
       </div>
     );
   }

@@ -27,6 +27,7 @@ export default class Details extends Component {
             ))}
           </ul>
         </div>
+        <Link to="/">Voltar</Link>
       </div>
     );
   }

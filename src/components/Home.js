@@ -14,12 +14,11 @@ export default class SearchBar extends Component {
       textSearch: '',
       products: [],
       categoria: '',
-      cart: 0,
     };
     this.getCategory = this.getCategory.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.getValuTextInput = this.getValuTextInput.bind(this);
-    this.updateCartItem = this.updateCartItem.bind(this);
+    // this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -55,16 +54,12 @@ export default class SearchBar extends Component {
     });
   }
 
-  updateCartItem() {
-    this.setState((oldValue) => ({ cart: oldValue.cart + 1 }));
-  }
-  // addToCart() {
-  //   const { title, price, thumbnail } = this.props;
-  //   localStorage.setItem(`item ${title}`, [`${title} - R$${price}`, `${thumbnail}`]);
+  // updateCartItem() {
+  //   this.setState((oldValue) => ({ cart: oldValue.cart + 1 }));
   // }
-
   render() {
-    const { categories, products, textSearch, cart } = this.state;
+    const { categories, products, textSearch } = this.state;
+
     return (
       <div className="main-container">
         <div>
@@ -81,9 +76,9 @@ export default class SearchBar extends Component {
           <div>
             <Link data-testid="shopping-cart-button" to="/cartitems">
               Carrinho de compras
-              <span data-testeid="shopping-cart-product-quantity">
+              {/* <span data-testeid="shopping-cart-product-quantity">
                 { cart }
-              </span>
+              </span> */}
             </Link>
           </div>
           <button
@@ -115,17 +110,19 @@ export default class SearchBar extends Component {
                   data-testid="product-detail-link"
                 >
                   <Products
+                    key={ product.id }
                     title={ product.title }
                     thumbnail={ product.thumbnail }
                     price={ product.price }
+
                   />
                 </Link>
                 <Button
                   title={ product.title }
                   thumbnail={ product.thumbnail }
                   price={ product.price }
-                  updateCartItem={ this.updateCartItem }
-                  id={ product.id }
+                  // updateCartItem={ this.updateCartItem }
+                  // id={ product.id }
                 />
               </div>
             ))}
