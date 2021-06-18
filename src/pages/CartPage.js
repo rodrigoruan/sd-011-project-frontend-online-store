@@ -4,11 +4,10 @@ import EmptyCart from '../components/EmptyCart';
 
 class cartPage extends Component {
   render() {
-    const newArray = JSON.parse(localStorage.getItem('products') || '[]');
-    console.log(newArray);
+    const products = JSON.parse(localStorage.getItem('products') || '[]');
     return (
       <div data-testid="shopping-cart-empty-message">
-        {newArray.length > 0 ? <CardCart /> : <EmptyCart />}
+        {products.length > 0 ? <CardCart products={ products } /> : <EmptyCart />}
       </div>
     );
   }

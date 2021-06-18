@@ -10,7 +10,13 @@ class AllProducts extends Component {
 
   addToCart(product) {
     const products = JSON.parse(localStorage.getItem('products')) || [];
-    products.push(product);
+    product.quantity = 1;
+    if (!products.some((value) => value.id === product.id)) {
+      products.push(product);
+    } else {
+      const currentIndex = products.map((value) => value.id).indexOf(product.id);
+      products[currentIndex].quantity += 1;
+    }
     localStorage.setItem('products', JSON.stringify(products));
   }
 
