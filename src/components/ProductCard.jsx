@@ -5,13 +5,8 @@ import PropTypes from 'prop-types';
 import '../styles/ProductCard.css';
 
 class ProductCard extends Component {
-  addToCart({ target: { value } }) {
-    const key = JSON.parse(value).title;
-    sessionStorage.setItem(key, value);
-  }
-
   render() {
-    const { title, price, thumbnail, id } = this.props;
+    const { title, price, thumbnail, id, addToCart } = this.props;
     return (
       <li className="product-card" data-testid="product">
         <Link
@@ -33,7 +28,7 @@ class ProductCard extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ this.addToCart }
+          onClick={ addToCart }
           value={ JSON.stringify({ title, price, thumbnail, quantity: 1 }) }
         >
           Adicionar
