@@ -32,7 +32,7 @@ export default class Home extends Component {
               state: cartItems,
             } }
           >
-            <img src={ cartImage } alt="Cart" style={ { width: '80px' } }/>
+            <img src={ cartImage } alt="Cart" style={ { width: '80px' } } />
           </Link>
         </nav>
 
