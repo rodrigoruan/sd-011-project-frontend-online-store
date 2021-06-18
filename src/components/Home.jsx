@@ -100,7 +100,7 @@ class Home2 extends React.Component {
             </div>
           </aside>
         </div>
-        {/* <Category */}
+        {/* <Categoryy */}
         <div>
           <form className="search-bar">
             <label htmlFor="queryInput" data-testid="home-initial-message">
