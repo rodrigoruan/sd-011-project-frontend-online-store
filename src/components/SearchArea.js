@@ -4,7 +4,7 @@ import Products from './Products';
 
 class SearchArea extends Component {
   render() {
-    const { products } = this.props;
+    const { products, createCart } = this.props;
     return (
       <div>
         { products.map((product, index) => (
@@ -13,7 +13,9 @@ class SearchArea extends Component {
             title={ product.title }
             price={ product.price }
             img={ product.thumbnail }
-            id={ product.id }
+            product={ product }
+            func={ createCart }
+            products={ products }
           />
         ))}
       </div>
@@ -23,6 +25,7 @@ class SearchArea extends Component {
 
 SearchArea.propTypes = {
   products: PropTypes.arrayOf(Object).isRequired,
+  createCart: PropTypes.func.isRequired,
 };
 
 export default SearchArea;
