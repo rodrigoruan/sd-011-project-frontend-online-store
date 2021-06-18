@@ -46,7 +46,14 @@ class ListaCategoria extends Component {
     const loadingComponent = <Loading />;
     const categoryFiltered = (
       <div>
-        {filteredCategories.map(({ id, title, thumbnail, price, category_id: catId, shipping: { free_shipping: freeShipping } }) => (
+        {filteredCategories.map(({
+          id,
+          title,
+          thumbnail,
+          price,
+          category_id: catId,
+          shipping: { free_shipping: freeShipping },
+        }) => (
           <ProductCard
             freeShipping={ freeShipping }
             id={ id }
