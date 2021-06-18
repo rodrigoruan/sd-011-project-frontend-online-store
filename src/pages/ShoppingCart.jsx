@@ -15,16 +15,21 @@ class ShoppingCart extends React.Component {
     const { location: { state: { shoppingCart } } } = this.props;
     console.log(shoppingCart.length);
     return (
+
       <div className="cart-products-container">
         {shoppingCart.length < 1
           ? <h4 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h4>
           : shoppingCart.map((product, index) => (
-            <ProductCard
-              className="cart-product-card"
-              key={ index }
-              item={ product }
-              addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
-            />)) }
+            <div key={ index }>
+              <ProductCard
+                className="cart-product-card"
+                item={ product }
+                addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
+              />
+              <span data-testid="shopping-cart-product-quantity">
+                {shoppingCart.filter((item) => item === product).length}
+              </span>
+            </div>))}
       </div>
     );
   }
