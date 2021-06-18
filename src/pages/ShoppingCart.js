@@ -29,7 +29,7 @@ class ShoppingCart extends Component {
 
     return (
       <>
-        {shopCart.map(({ id, thumbnail, title, price, amount }) => (
+        {shopCart.map(({ id, thumbnail, title, price,available_quantity,amount }) => (
           <div className="shopping-cart-item-card" key={ id }>
             <button
               type="button"
@@ -69,6 +69,7 @@ class ShoppingCart extends Component {
             >
               +
             </button>
+            <span>{available_quantity}</span>
             <p>
               { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
             </p>

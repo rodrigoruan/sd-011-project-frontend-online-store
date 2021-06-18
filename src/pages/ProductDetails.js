@@ -11,12 +11,13 @@ export default class ProductDetails extends React.Component {
   }
 
   render() {
-    const { title, thumbnail, price, id } = this.state;
+    const { title, thumbnail, price, id ,available_quantity} = this.state;
     const { handleAddToShopCart } = this.props;
     return (
       <div key={ id }>
         <span data-testid="product-detail-name">{ title }</span>
         <span>
+          {available_quantity}
           { price }
         </span>
         <img src={ thumbnail } alt="imagem do produto" />
@@ -45,7 +46,7 @@ export default class ProductDetails extends React.Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => handleAddToShopCart(id, title, thumbnail, price) }
+          onClick={ () => handleAddToShopCart(id, title, thumbnail, price,available_quantity) }
         >
           Adicionar ao carrinho
         </button>

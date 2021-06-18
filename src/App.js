@@ -17,9 +17,9 @@ class App extends Component {
     this.handleDecreaseItemAmount = this.handleDecreaseItemAmount.bind(this);
   }
 
-  handleAddToShopCart(id, title, thumbnail, price) {
+  handleAddToShopCart(id, title, thumbnail, price, available_quantity) {
     this.setState((state) => ({
-      shopCart: [...state.shopCart, { id, title, thumbnail, price, amount: 1 }],
+      shopCart: [...state.shopCart, { id, title, thumbnail, price, available_quantity,amount: 1 }],
     }));
   }
 

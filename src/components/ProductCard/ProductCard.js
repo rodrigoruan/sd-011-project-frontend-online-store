@@ -5,7 +5,7 @@ import './ProductCard.css';
 
 export default class ProductCard extends Component {
   render() {
-    const { title, price, thumbnail, id, handleAddToShopCart } = this.props;
+    const { title, price, thumbnail, id, handleAddToShopCart,available_quantity } = this.props;
     return (
       <div className="product-card" data-testid="product">
         <Link
@@ -16,6 +16,7 @@ export default class ProductCard extends Component {
               price,
               thumbnail,
               id,
+              available_quantity
             },
           } }
         >
@@ -31,6 +32,7 @@ export default class ProductCard extends Component {
           onClick={ () => handleAddToShopCart(id, title, thumbnail, price) }
           data-testid="product-add-to-cart"
         >
+          
           Comprar
         </button>
       </div>

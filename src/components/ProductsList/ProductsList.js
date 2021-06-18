@@ -6,13 +6,12 @@ import './ProductsList.css';
 export default class ProductsList extends React.Component {
   render() {
     const { products, handleAddToShopCart } = this.props;
-
     return (
       <div className="products-list-container">
         {
           products.length
             ? (
-              products.map(({ id, thumbnail, title, price }, index) => (
+              products.map(({ id, thumbnail, title, price,available_quantity }, index) => (
                 <ProductCard
                   key={ index }
                   id={ id }
@@ -20,7 +19,9 @@ export default class ProductsList extends React.Component {
                   title={ title }
                   price={ price }
                   handleAddToShopCart={ handleAddToShopCart }
+                  available_quantity={ available_quantity}
                 />
+                
               ))
             ) : (
               <p data-testid="home-initial-message">
