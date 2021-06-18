@@ -48,7 +48,6 @@ class AddCarrinho extends Component {
     } else {
       localStorage.setItem('products', JSON.stringify([product]));
       localStorage.setItem('quantidade', 1);
-      manipulateState(quantidadeTotal);
     }
   }
 
