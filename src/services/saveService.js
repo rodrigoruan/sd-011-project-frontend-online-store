@@ -1,7 +1,8 @@
-function verifyQuantity(product) {
+export function verifyQuantity(product) {
+  const { products } = product;
   const cartItens = JSON.parse(localStorage.getItem('carrinho'));
   const objectFilter = cartItens.filter((item) => {
-    if (item.products.id === product.id) {
+    if (item.products.id === products.id) {
       return false;
     }
     return true;
@@ -17,8 +18,4 @@ export function saveStorage(product) {
     cartItens.push(product);
     localStorage.setItem('carrinho', JSON.stringify(cartItens));
   }
-}
-
-export function oioi() {
-  console.log('oi');
 }
