@@ -12,8 +12,8 @@ class FormularioPagamento extends Component {
     const productArray = JSON.parse(localStorage.getItem('products'));
 
     const productsArr = productArray.reduce((acc, { price, quantity }) => (
-      (acc + parseFloat(price * quantity), 0)
-    ));
+      (acc + parseFloat(price * quantity))
+    ), 0);
     return productsArr;
   }
 

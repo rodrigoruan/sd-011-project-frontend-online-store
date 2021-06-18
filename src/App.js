@@ -13,7 +13,7 @@ function App() {
           path="/detalhesproduto/:category_id/:product_id/:title"
           render={ (props) => <DetalhesProduto { ...props } /> }
         />
-        <Route path="/teste" component={ FormularioPagamento } />
+        <Route path="/FinalizarCompra" component={ FormularioPagamento } />
       </Switch>
     </BrowserRouter>
   );
