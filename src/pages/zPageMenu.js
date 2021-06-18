@@ -4,3 +4,4 @@ export { default as SearchList } from './SearchList';
 export { default as ShoppingCart } from './ShoppingCart';
 export { default as FinishScreen } from './FinishScreen';
 export { default as Home } from './Home';
+export { default as ProductDetails } from './ProductDetails';

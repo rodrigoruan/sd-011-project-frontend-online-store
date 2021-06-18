@@ -4,8 +4,15 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import { About, NotFound, ShoppingCart, Home, FinishScreen } from './pages/zPageMenu';
-import { Footer, Header } from './components/zComponentsMenu';
+import {
+  About,
+  NotFound,
+  ShoppingCart,
+  Home,
+  FinishScreen,
+  ProductDetails,
+} from './pages/zPageMenu';
+import { Header } from './components/zComponentsMenu';
 
 export default class App extends Component {
   constructor(props) {
@@ -39,16 +46,19 @@ export default class App extends Component {
           <Route
             exact
             path="/"
-            render={ (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } /> }
+            render={
+              (props) => <Home { ...props } handleAddToCart={ this.handleAddToCart } />
+            }
           />
+          <Route path="/details/:id" render={ (props) => <ProductDetails { ...props } /> } />
           <Route
             exact
             path="/cart"
-            render={(props) => <ShoppingCart {...props} cartItems={shoppingCart} />}
+            render={ (props) => <ShoppingCart { ...props } cartItems={ shoppingCart } /> }
           />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/finishscreen" component={FinishScreen} />
-          <Route component={NotFound} />
+          <Route exact path="/about" component={ About } />
+          <Route exact path="/finishscreen" component={ FinishScreen } />
+          <Route component={ NotFound } />
         </Switch>
         {/* <Footer /> */}
       </BrowserRouter>
