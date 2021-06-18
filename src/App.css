@@ -6,6 +6,7 @@ body {
   border: 1px solid black;
   height: auto;
   width: 100px;
+  margin: 20px;
 }
 
 .product-card img {
@@ -24,8 +25,4 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 auto;
-}
-
-.product-card {
-  margin: 20px;
 }
