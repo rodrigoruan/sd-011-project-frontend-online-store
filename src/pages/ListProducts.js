@@ -68,7 +68,6 @@ class ListProducts extends Component {
           <div className="row">
             <label htmlFor="search">
               <input
-                className="inputShoppingCart"
                 data-testid="query-input"
                 type="text"
                 name="search"
@@ -76,7 +75,6 @@ class ListProducts extends Component {
               />
             </label>
             <button
-              className="searchButton"
               data-testid="query-button"
               type="submit"
               onClick={ this.getProductsByQuery }
@@ -88,7 +86,6 @@ class ListProducts extends Component {
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h2>
-          <hr />
           <ProductList productsList={ data } />
         </div>
       </div>
