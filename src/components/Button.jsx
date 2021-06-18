@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Button extends Component {
   constructor() {
@@ -8,8 +9,12 @@ export default class Button extends Component {
 
   addToCart() {
     const { product } = this.props;
-    localStorage.setItem('product', JSON.stringify(product));
-    console.log(JSON.parse(localStorage.getItem('product')));
+    if (localStorage.getItem('product')) {
+      const storage = JSON.parse(localStorage.getItem('product'));
+      localStorage.setItem('product', JSON.stringify([...storage, product]));
+    } else {
+      localStorage.setItem('product', JSON.stringify([product]));
+    }
   }
 
   render() {
@@ -24,3 +29,12 @@ export default class Button extends Component {
     );
   }
 }
+
+Button.propTypes = {
+  product: PropTypes.shape({
+    title: PropTypes.string,
+    price: PropTypes.number,
+    thumbnail: PropTypes.string,
+    id: PropTypes.string,
+  }).isRequired,
+};

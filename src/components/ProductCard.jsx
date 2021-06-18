@@ -3,18 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from './Button';
 
-export default class ProductCard extends Component {\
-  constructor() {
-    super()
-    this.state = {
-      selectedProduct:{}
-    }
-  }
-  
-  addTo
-
+export default class ProductCard extends Component {
   render() {
-    const { product, onClick } = this.props;
+    const { product } = this.props;
     const { title, price, thumbnail, id } = product;
     return (
       <div data-testid="product">
@@ -28,7 +19,7 @@ export default class ProductCard extends Component {\
             <img src={ thumbnail } alt={ title } width="70px" />
           </div>
         </Link>
-        <button type="button">Adicionar ou Carrinho</button>
+        <Button product={ product } />
       </div>
     );
   }
