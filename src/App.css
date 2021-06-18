@@ -5,6 +5,8 @@
   --header: #14213d;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -40,8 +42,9 @@ button {
   border-radius: 2px;
   color: white;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
   margin: 6px;
+  text-transform: uppercase;
   padding: 6px;
 }
 
@@ -62,6 +65,8 @@ input {
   border: solid 1px;
   margin: 0;
   padding: 13px;
+  padding-left: 100px;
+  text-align: center;
   width: 80%;
 }
 
@@ -105,6 +110,16 @@ input {
   width: 100vw;
 }
 
+.grupo-16 {
+  align-items: center;
+  background: linear-gradient(180deg, rgba(210, 8, 8, 0) 0%, rgba(0, 206, 251, 0.5) 100%), var(--header);
+  color: white;
+  display: flex;
+  font-family: 'Poiret One', cursive;
+  justify-content: space-around;
+  height: 80px;
+}
+
 .body {
   background-color: rgb(231, 231, 231);
   display: flex;
@@ -118,8 +133,8 @@ input {
   background-color: var(--header);
   color: #e5e5e5;
   display: flex;
-  justify-content: space-around;
-  padding: 5px;
+  justify-content: space-between;
+  padding: 35px;
   width: 100%;
 }
 
@@ -149,6 +164,8 @@ input {
   flex-direction: column;
   height: 12%;
   margin: 10px;
+  text-transform: uppercase;
+  text-align: center;
   transition: ease-in-out 0.3s;
   width: 15%;
 }

@@ -98,9 +98,10 @@ export default class Home extends Component {
     return (
       <div className="body">
         <header className="header">
-          <h1 className="text-search-h1" data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </h1>
+          <div>
+            <img src="./SVG/GRUPO 16.svg" alt="logo" />
+            <img src="./SVG/Black and White Collection 12.svg" alt="logo" />
+          </div>
           <Link
             to={ { pathname: '/shopcart', state: cartProducts } }
           >
@@ -111,10 +112,17 @@ export default class Home extends Component {
           </Link>
 
         </header>
+        <div className="grupo-16">
+          <h2>Ivaldo Souza</h2>
+          <h2>Gabriel Pimentel Fernandes</h2>
+          <h2>Guilherme Nunes</h2>
+          <h2>Lucas Maestrelli</h2>
+        </div>
         <label className="search-button" htmlFor="search">
           <input
             data-testid="query-input"
             onChange={ this.handleChange }
+            placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
             className="search"
             type="text"
           />
@@ -164,7 +172,7 @@ export default class Home extends Component {
 
           )) : (
             <div className="loading-parent">
-              <img className="loading" src="https://i.pinimg.com/originals/2b/02/15/2b02159fee58d573c079ad5212d56b63.gif" alt="loading" />
+              TURMA 16
             </div>
           )}
 
