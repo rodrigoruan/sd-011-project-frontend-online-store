@@ -7,8 +7,8 @@ import Cards from '../component/Cards';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 export default class Main extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       arraySearch: [],
       ctgId: '',
@@ -44,10 +44,10 @@ export default class Main extends Component {
     const { itensAdded, addItens } = this.props;
     return (
       <>
+        <ShoppingCart itensArray={ itensAdded } />
         <Search evSrch={ this.eventSearch } ctgId={ ctgId } />
         <Categorys evCtg={ this.eventCtg } />
         <Cards resultSearch={ arraySearch } addItems={ addItens } />
-        <ShoppingCart itensArray={ itensAdded } />
       </>
     );
   }

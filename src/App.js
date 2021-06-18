@@ -7,21 +7,39 @@ import Main from './Pages/Main';
 export default class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       itensAdded: [],
+      check: false,
     };
+
     this.addItems = this.addItems.bind(this);
   }
 
   addItems(obj) {
-    const { itensAdded } = this.state;
-    this.setState({
-      itensAdded: [...itensAdded, obj],
-    });
+    const { itensAdded, check } = this.state;
+    const { id, title, price, quantity } = obj;
+
+    if(itensAdded.length) {
+      itensAdded.some((product) => (
+        product.id === id ? this.setState({ check: true }) : this.setState({ check: false })
+      ));
+    }
+
+
+    if(!check) {
+      this.setState({
+        itensAdded: [...itensAdded, obj],
+        check: true,
+      })
+    } else {
+      itensAdded.find((product) => id === product.id)
+    }
   }
 
   render() {
     const { itensAdded } = this.state;
+    console.log(itensAdded)
     return (
       <div className="App">
         <BrowserRouter>
