@@ -18,4 +18,11 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
     .then((result) => result.json());
 }
 
+// Tiramos daqui por conta do teste e colocamos no componente paymentForm.
+// export async function getStates() {
+//   return fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome')
+//     .then((result) => result.json());
+// }
+
+// https://servicodados.ibge.gov.br/api/v1/localidades/estados
 // Teste: category=MLB1055&q=Motorola
