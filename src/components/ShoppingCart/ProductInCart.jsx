@@ -1,23 +1,54 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './ProductInCart.css';
+import EachItem from './EachItem';
 
 export default class ProductInCart extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   const { items } = this.props;
+  //   this.state = {
+  //     total: items.map((item) => (
+  //       item.counter
+  //     )),
+  //     price: items.map((item) => (
+  //       item.price
+  //     )),
+  //   };
+  //   this.changeQuantity = this.changeQuantity.bind(this);
+  // }
+
+  // changeQuantity({ target }) {
+  //   const { name, value } = target;
+  //   const saveItem = JSON.parse(localStorage.getItem([value]));
+  //   this.setState({
+  //     total: saveItem.counter,
+  //     price: saveItem.price,
+  //   });
+
+  //   if (name === 'increase') {
+  //     this.setState({
+  //       total: saveItem.counter += 1,
+  //       price: saveItem.price,
+  //     });
+  //     saveItem.counter += 1;
+  //     localStorage.setItem(value, JSON.stringify(saveItem));
+  //   } else if (name === 'decrease') {
+  //     this.setState({
+  //       total: saveItem.counter -= 1,
+  //       price: saveItem.price,
+  //     });
+  //     saveItem.counter -= 1;
+  //     localStorage.setItem(value, JSON.stringify(saveItem));
+  //   }
+  // }
+
   render() {
     const { items } = this.props;
     return (
-      <div>
+      <div className="mainCartContainer">
         {items.map((item) => (
-          <div key={ item.id }>
-            <img src={ item.thumbnail } alt="Product Thumbnail" />
-            <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
-            <div>
-              <button type="button">-</button>
-              <h5 data-testid="shopping-cart-product-quantity">{item.counter}</h5>
-              <button type="button">+</button>
-              <h5>{item.price * item.counter}</h5>
-              <span>{ item.currency }</span>
-            </div>
-          </div>
+          <EachItem item={ item } key={ item.id } />
         ))}
       </div>
     );

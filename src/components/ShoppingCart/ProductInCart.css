@@ -1,0 +1,15 @@
+.mainCartContainer {
+  height: 90vh;
+  overflow: auto;
+}
+
+.productCartContainer {
+  background-color: rgb(233, 232, 232);
+  border: 1px solid black;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  padding: 20px;
+  width: 50vw;
+}
