@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class CartItem extends Component {
-
   // getProductFromLocalStorage() {
   //   const cart = localStorage.getItem('cart');
   //   if (!cart) return [];
