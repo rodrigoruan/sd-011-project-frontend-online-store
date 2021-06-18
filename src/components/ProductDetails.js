@@ -39,7 +39,10 @@ class ProductDetails extends Component {
       <div>
         <img src={ product.thumbnail } alt="product" />
         <p data-testid="product-detail-name">{product.title}</p>
-        <p>{ product.price }</p>
+        <p>
+          {'R$ '}
+          { product.price }
+        </p>
         { product.attributes && product.attributes.map((att, index) => (
           <p key={ index }>
             { att.name }

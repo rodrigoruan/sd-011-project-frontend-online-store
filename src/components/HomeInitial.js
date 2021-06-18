@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import cart from '../Images/cart.png';
@@ -31,7 +32,6 @@ class HomeInitial extends Component {
       products: products.results,
       search: '',
     });
-    console.log(products.results);
   }
 
   async filterProductsByCategory({ target }) {
@@ -54,6 +54,7 @@ class HomeInitial extends Component {
 
   render() {
     const { products, search } = this.state;
+    const { createCart } = this.props;
     return (
       <div>
         <form>
@@ -88,11 +89,15 @@ class HomeInitial extends Component {
             />
           </Link>
         </div>
-        <SearchArea products={ products } />
+        <SearchArea products={ products } createCart={ createCart } />
         <Filter onClick={ this.filterProductsByCategory } />
       </div>
     );
   }
 }
+
+HomeInitial.propTypes = {
+  createCart: PropTypes.func.isRequired,
+};
 
 export default HomeInitial;

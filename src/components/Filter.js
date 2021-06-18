@@ -21,7 +21,6 @@ class Filter extends React.Component {
     this.setState({
       request,
     });
-    console.log(request);
   }
 
   render() {
