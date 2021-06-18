@@ -32,10 +32,9 @@ export default class FormComment extends Component {
           value={ email }
           onChange={ this.handlkeChange }
         />
-        <input
+        <textarea
           data-testid="product-detail-evaluation"
           name="msg"
-          type="text"
           value={ msg }
           onChange={ this.handlkeChange }
         />
