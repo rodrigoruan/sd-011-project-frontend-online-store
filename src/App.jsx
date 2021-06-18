@@ -10,7 +10,10 @@ class App extends Component {
     this.state = {
       searchResults: { results: [] },
       categories: [],
-      shoppingCart: [],
+      shoppingCart: {
+        totalItemCount: 0,
+        itemList: [],
+      },
     };
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
@@ -24,9 +27,14 @@ class App extends Component {
   }
 
   addItemToCart(product) {
-    this.setState(({ shoppingCart }) => {
+    this.setState(({ shoppingCart: { totalItemCount, itemList } }) => {
       product.quantity = 1;
-      const newShoppingCart = [...shoppingCart, product];
+
+      const newShoppingCart = {
+        totalItemCount: totalItemCount + 1,
+        itemList: [...itemList, product],
+      };
+
       return { shoppingCart: newShoppingCart };
     });
   }
@@ -93,7 +101,7 @@ class App extends Component {
               render={ () => (<Cart
                 updateQuantity={ this.updateQuantity }
                 removeItemFromCart={ this.removeItemFromCart }
-                productList={ shoppingCart }
+                shoppingCart={ shoppingCart }
               />) }
             />
             <Route
@@ -105,7 +113,15 @@ class App extends Component {
             />
           </Switch>
         </BrowserRouter>
-        <footer>Feito pelo Grupo 14, o grupo brabo</footer>
+        <footer>
+          <p>Feito pelo Grupo 14, o grupo brabo</p>
+          <p>
+            Ícones por&nbsp;
+            <a href="https://freeicons.io/profile/730">anumithun</a>
+            &nbsp;do&nbsp;
+            <a href="https://freeicons.io">freeicons.io</a>
+          </p>
+        </footer>
       </>
     );
   }

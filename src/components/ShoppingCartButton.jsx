@@ -9,7 +9,14 @@ export default class ShoppingCartButton extends Component {
         to="/cart"
         data-testid="shopping-cart-button"
       >
-        <button type="button">ver carrinho</button>
+        <button type="button">
+          <img src="/img/shopping-cart.svg" alt="View shopping cart" />
+          <span
+            data-testid="shopping-cart-size"
+          >
+            3
+          </span>
+        </button>
       </Link>
 
     );
