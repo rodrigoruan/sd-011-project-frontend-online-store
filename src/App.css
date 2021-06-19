@@ -7,12 +7,10 @@
   pointer-events: none;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
+@media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-
 }
 
 .App-header {
@@ -31,7 +29,6 @@
 }
 
 @keyframes App-logo-spin {
-
   from {
     transform: rotate(0deg);
   }
@@ -39,7 +36,6 @@
   to {
     transform: rotate(360deg);
   }
-
 }
 
 .product-card {
@@ -53,4 +49,12 @@
 .details {
   color: rgb(7, 6, 6);
   text-decoration: none;
+}
+
+.checkout-product-card {
+  display: flex;
+}
+
+.checkout-products-list {
+  background-color: rgb(22, 124, 90);
 }

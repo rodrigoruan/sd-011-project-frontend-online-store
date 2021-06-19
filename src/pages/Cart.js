@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 
 class Cart extends React.Component {
@@ -17,6 +18,12 @@ class Cart extends React.Component {
       <div>
         { this.getProductFromLocalStorage() }
         <p>Soma Total</p>
+        <Link
+          to="/Checkout"
+          data-testid="checkout-products"
+        >
+          Finalizar compra
+        </Link>
       </div>
     );
   }
