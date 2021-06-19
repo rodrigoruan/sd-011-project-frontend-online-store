@@ -122,6 +122,7 @@ export default class SearchBar extends Component {
                   title={ product.title }
                   thumbnail={ product.thumbnail }
                   price={ product.price }
+                  dataTestid="product-add-to-cart"
                   // updateCartItem={ this.updateCartItem }
                   // id={ product.id }
                 />

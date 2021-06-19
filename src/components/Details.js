@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Button from './Button';
 
 export default class Details extends Component {
   render() {
@@ -8,6 +9,7 @@ export default class Details extends Component {
     const { state } = location;
     const { product } = state;
     const { title, price, thumbnail, attributes } = product;
+
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cartitems">
@@ -28,6 +30,18 @@ export default class Details extends Component {
           </ul>
         </div>
         <Link to="/">Voltar</Link>
+        <Button
+          title={ product.title }
+          thumbnail={ product.thumbnail }
+          price={ product.price }
+          dataTestid="product-detail-add-to-cart"
+        />
+        {/* <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+        >
+          Adicionar ao carrinho
+        </button> */}
       </div>
     );
   }
