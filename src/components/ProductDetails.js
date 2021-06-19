@@ -12,6 +12,7 @@ class ProductDetails extends Component {
       product: {},
     };
     this.getProduct = this.getProduct.bind(this);
+    this.addItemCart = this.addItemCart.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,13 @@ class ProductDetails extends Component {
       product: product[0],
     });
     return product[0];
+  }
+
+  addItemCart() {
+    const { createCart, location } = this.props;
+    const { productToAdd } = location.state;
+    productToAdd.cartItem = true;
+    createCart(productToAdd);
   }
 
   render() {
@@ -50,6 +58,13 @@ class ProductDetails extends Component {
             { att.value_name }
           </p>
         ))}
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addItemCart }
+        >
+          Adicionar ao carrinho
+        </button>
         <Rating id={ id } />
         <Link to="/carrinho-compras">
           <img
@@ -69,6 +84,8 @@ class ProductDetails extends Component {
 
 ProductDetails.propTypes = {
   match: PropTypes.objectOf(String).isRequired,
+  location: PropTypes.objectOf(String).isRequired,
+  createCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

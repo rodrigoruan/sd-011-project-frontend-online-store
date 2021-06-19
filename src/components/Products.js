@@ -6,28 +6,26 @@ import { Link } from 'react-router-dom';
 class Products extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      count: 1,
-    };
     this.addItemCart = this.addItemCart.bind(this);
   }
 
   addItemCart() {
-    const { product, func, products } = this.props;
-    const { count } = this.state;
+    const { product, func } = this.props;
     product.cartItem = true;
-    product.cartCount = count;
-    func(products);
-    this.setState((previous) => ({
-      count: previous.count + 1,
-    }));
+    func(product);
   }
 
   render() {
-    const { title, img, price } = this.props;
+    const { title, img, price, product } = this.props;
     return (
       <div>
-        <Link to={ `/product-details/${title}` } data-testid="product-detail-link">
+        <Link
+          to={ {
+            pathname: `/product-details/${title}`,
+            state: { productToAdd: product },
+          } }
+          data-testid="product-detail-link"
+        >
           <div className="product" data-testid="product" aria-hidden="true">
             <p>{ title }</p>
             <img src={ img } alt="produto" />
@@ -55,7 +53,6 @@ Products.propTypes = {
   img: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   func: PropTypes.func.isRequired,
-  products: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default Products;

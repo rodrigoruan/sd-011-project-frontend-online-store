@@ -7,8 +7,9 @@ class SearchArea extends Component {
     const { products, createCart } = this.props;
     return (
       <div>
-        { products.map((product, index) => (
-          <Products
+        { products.map((product, index) => {
+          product.cartCount = 1;
+          return (<Products
             key={ index }
             title={ product.title }
             price={ product.price }
@@ -17,7 +18,8 @@ class SearchArea extends Component {
             func={ createCart }
             products={ products }
           />
-        ))}
+          );
+        })}
       </div>
     );
   }
