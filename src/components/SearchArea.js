@@ -6,9 +6,14 @@ import '../styles/SearchArea.css'
 class SearchArea extends Component {
   render() {
     const { products, createCart } = this.props;
+    const preText = (
+      <h1 data-testid="home-initial-message">
+        Digite algum termo de pesquisa ou escolha uma categoria.
+      </h1>
+    );
     return (
       <div className="searchArea">
-        { products.map((product, index) => {
+        { products.length === 0 ? preText : products.map((product, index) => {
           product.cartCount = 1;
           return (<Products
             key={ index }

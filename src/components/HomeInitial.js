@@ -58,38 +58,37 @@ class HomeInitial extends Component {
     const { createCart } = this.props;
     return (
       <div>
-        <form>
-          <label htmlFor="search-bar">
-            <input
-              type="text"
-              data-testid="query-input"
-              placeholder="Search"
-              id="search-bar"
-              value={ search }
-              onChange={ this.onChange }
-            />
-          </label>
-          <button
-            data-testid="query-button"
-            onClick={ this.filterProductsBySearch }
-            type="button"
-          >
-            Buscar
-          </button>
-        </form>
-        <h1 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h1>
-        <div>
-          <Link to="/carrinho-compras">
-            <img
-              src={ cart }
-              alt="carrinho-compras"
-              data-testid="shopping-cart-button"
-              height="200px"
-            />
-          </Link>
-        </div>
+        <header>
+          <form>
+            <label htmlFor="search-bar">
+              <input
+                type="text"
+                data-testid="query-input"
+                placeholder="Search"
+                id="search-bar"
+                value={ search }
+                onChange={ this.onChange }
+              />
+            </label>
+            <button
+              data-testid="query-button"
+              onClick={ this.filterProductsBySearch }
+              type="button"
+            >
+              Buscar
+            </button>
+          </form>
+          <div>
+            <Link to="/carrinho-compras">
+              <img
+                src={ cart }
+                alt="carrinho-compras"
+                data-testid="shopping-cart-button"
+                height="200px"
+              />
+            </Link>
+          </div>
+        </header>
         <div className="contentArea">
           <Filter className="filter" onClick={ this.filterProductsByCategory } />
           <SearchArea className="search" products={ products } createCart={ createCart } />
