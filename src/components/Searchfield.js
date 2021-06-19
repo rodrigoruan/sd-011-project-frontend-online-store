@@ -6,7 +6,7 @@ class Searchfield extends Component {
   render() {
     const { products } = this.props;
     return (
-      <div>
+      <div className="container-products">
         { products.map((product) => (
           <Cardproduct
             key={ product.id }
