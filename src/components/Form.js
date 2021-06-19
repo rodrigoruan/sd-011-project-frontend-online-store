@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import Comments from './Comments';
 
-export default class Form extends Component {
+export default class Forms extends Component {
   constructor() {
     super();
     this.state = {
@@ -55,32 +55,29 @@ export default class Form extends Component {
     const { idProduct } = this.props;
     return (
       <div>
-        <form>
-          <label htmlFor="email">
-            <input
-              id="email"
-              type="email"
-              placeholder="Insira seu e-mail"
-              required
-            />
-          </label>
-          <label htmlFor="rating">
-            <input
-              placeholder="✓"
-              id="rating"
-              type="number"
-              min="1"
-              max="5"
-              required
-            />
-          </label>
-          <label htmlFor="comment">
-            <textarea
-              id="comment"
-              placeholder="Insira seu comentário"
+        <form controlId="formBasicEmail">
+          <Form.Group controlId="exampleForm.ControlInput1">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="name@example.com" />
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+            <Form.Label>Example select</Form.Label>
+            <Form.Control as="select">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </Form.Control>
+          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Example textarea</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={ 3 }
               data-testid="product-detail-evaluation"
             />
-          </label>
+          </Form.Group>
           <Button
             variant="success"
             type="button"
@@ -99,6 +96,6 @@ export default class Form extends Component {
   }
 }
 
-Form.propTypes = {
+Forms.propTypes = {
   idProduct: PropTypes.string.isRequired,
 };
