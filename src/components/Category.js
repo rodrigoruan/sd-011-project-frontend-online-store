@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class Category extends Component {
   render() {
     const { value, name, onClick } = this.props;
+
     return (
       <div>
         <label htmlFor={ value }>

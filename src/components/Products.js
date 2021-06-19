@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class Products extends Component {
   render() {
     const { title, thumbnail, price } = this.props;
+
     return (
       <div>
         <div id="conteiner-product" data-testid="product">

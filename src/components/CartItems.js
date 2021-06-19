@@ -18,7 +18,6 @@ export default class CartItems extends Component {
     this.setState({
       allProducts: itemProduct,
     });
-    console.log(itemProduct);
   }
 
   render() {
