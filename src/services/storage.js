@@ -18,6 +18,10 @@ export function saveProduct(product, amount) {
   }
 }
 
-export function removeProduct() {
-  console.log('todo');
+export function retrieveCart() {
+  const currentCart = localStorage.getItem('shoppingCart');
+  if (currentCart) {
+    const parsedCart = JSON.parse(currentCart);
+    return parsedCart;
+  }
 }
