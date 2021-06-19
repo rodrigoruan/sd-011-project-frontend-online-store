@@ -1,3 +1,95 @@
 .App {
   text-align: center;
 }
+
+.input-email-forms {
+  padding: 0.4rem;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.star-rating {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+textarea {
+  display: block;
+  margin-top: 1rem;
+}
+
+.btn-submit-avaliation {
+  width: 8rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.header-details-product {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.2rem;
+}
+
+.container-image-especification {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-image-and-product-details {
+  display: flex;
+  justify-content: space-between;
+  width:50%;
+  padding-top:20px;
+  padding-left:15px;
+  padding-right:15px;
+}
+
+.container-image-details {
+  float:left;
+  width:50%;
+  height: auto;
+}
+
+.container-description-details {
+  float:left;
+  margin-left: 2rem;
+  width:100%;
+  height: auto;
+}
+
+.image-details {
+  width: 100%;
+  height: auto;
+}
+
+
+.decrease-btn {
+  padding: 10px;
+  margin: 10px;
+}
+
+.increase-btn {
+  padding: 10px;
+  margin: 10px;
+}
+
+.quantity-product-details {
+  border-radius: 100%;
+  padding: 0.6rem;
+  border: 1px solid black;
+}
+
+.add-to-cart-btn-details {
+  padding: 10px;
+  margin: 10px;
+}
+
+.container-forms {
+  display: flex;
+}
+
+.container-stars {
+  margin-left: 30px;
+}
