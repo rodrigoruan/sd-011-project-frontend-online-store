@@ -13,7 +13,10 @@ class Form extends React.Component {
   }
 
   componentDidMount() {
-
+    // const { id } = this.props.match.params;
+    // this.setState({
+    //   [id]: { avaliacoes, rating, commentary },
+    // });
   }
 
   handleChanges(event) {
@@ -27,6 +30,8 @@ class Form extends React.Component {
     // Quando o componemte montar vc tem que pensar em algo para atualizar todos os comentários que haviam sido feitos
     const { avaliacoes, rating, commentary } = this.state;
     const avaliacao = { rating, commentary };
+    // const { funcao } = this.props;
+    // funcao(avaliacao)
     // console.log(avaliacao)
     this.setState({
       avaliacoes: [...avaliacoes, avaliacao],
@@ -37,6 +42,7 @@ class Form extends React.Component {
 
   render() {
     const { rating, commentary } = this.state;
+    // const { funcao } = this.props;
     return (
       <div>
         <form>

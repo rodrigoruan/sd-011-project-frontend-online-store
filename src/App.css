@@ -13,14 +13,30 @@
 }
 
 .product {
+  align-content: center;
   border: 1px solid black;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   margin: 10px;
   padding: 10px;
   width: 20vw;
+
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
+/* .product-img {
+  width: 60%;
+  margin: 20px;
+}
+
+.price {
+  background-color:cadetblue;
+  font-weight: bold;
+  text-align: center;
+} */
+
+/* @media ( prefers-reduced-motion : no-preference ) {
 
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -52,4 +68,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

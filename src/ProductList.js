@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCards';
+import ShoppingCartButton from './Pages/ShoppingCartButton';
 import * as api from './services/api';
 
 class ProductList extends React.Component {
@@ -10,10 +12,12 @@ class ProductList extends React.Component {
       filtrar: '',
       produtosFiltrados: [],
       controlador: '', // Controlador criado para que possamos saber se foi feito o click em outra categoria ou nao.
+      produtosAoCarrinho: [],
     };
 
     this.getInput = this.getInput.bind(this);
     this.filterElements = this.filterElements.bind(this);
+    this.addProductToCart = this.addProductToCart.bind(this);
   }
 
   componentDidUpdate() { // esse componentDidUpdate é para que toda vez que for feito o click em alguma categoria seja rodado oupdate e assim possamos rodar a função de filterElements, caso o controlador (que garante que foi feito alteração) seja diferente da categoria nova selecionada (selectedCategory)
@@ -40,15 +44,27 @@ class ProductList extends React.Component {
     });
   }
 
+  addProductToCart(title, thumbnail, price) {
+    const productAdd = { title, thumbnail, price };
+    const { produtosAoCarrinho } = this.state;
+    this.setState({
+      produtosAoCarrinho: [...produtosAoCarrinho, productAdd],
+    });
+    const { handleCart } = this.props;
+    const teste = () => handleCart(produtosAoCarrinho);
+    teste();
+  }
+
   render() {
-    const { produtosFiltrados } = this.state;
+    const { produtosFiltrados, produtosAoCarrinho } = this.state;
     return (
       <div>
         <div className="product-list">
           {produtosFiltrados.map((product) => (
             <ProductCard
               produto={ product }
-              key={ product.title }
+              key={ product.id }
+              addProduct={ this.addProductToCart }
             />))}
         </div>
         <h4
@@ -71,6 +87,9 @@ class ProductList extends React.Component {
         >
           Filtrar
         </button>
+        <Link data-testid="shopping-cart-button" to={ { pathname: '/cart', productsFromList: produtosAoCarrinho } }>
+          <ShoppingCartButton />
+        </Link>
       </div>);
   }
 }
