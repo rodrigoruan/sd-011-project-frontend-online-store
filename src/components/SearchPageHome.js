@@ -21,7 +21,6 @@ export default class SearchPageHome extends Component {
     this.filterProducts = this.filterProducts.bind(this);
     this.getCategories = this.getCategories.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
-    this.addItemCart = this.addItemCart.bind(this);
     this.handleListCategories = this.handleListCategories.bind(this);
     this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
@@ -69,17 +68,6 @@ export default class SearchPageHome extends Component {
   filterProducts({ target }) {
     this.setState({
       query: target.value,
-    });
-  }
-
-  addItemCart({ target }) {
-    const { product, itemsCart } = this.state;
-    product.countP = 1;
-    const { value } = target;
-    const productForCart = product.find((item) => item.id === value);
-
-    this.setState({
-      itemsCart: [...itemsCart, productForCart],
     });
   }
 
@@ -139,7 +127,6 @@ export default class SearchPageHome extends Component {
         ) : (product.map((item) => (<ProductList
           products={ item }
           key={ item.id }
-          addItemCart={ this.addItemCart }
           foundQuantityItemsCart={ this.foundQuantityItemsCart }
         />)))}
       </div>
