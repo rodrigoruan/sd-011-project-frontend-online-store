@@ -67,9 +67,9 @@ export default class SearchPageHome extends Component {
 
   foundQuantityItemsCart() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
-    const redu = getLocal.reduce((acr, value) => acr + value.countP, 0);
+    const count = getLocal.reduce((acr, value) => acr + value.countP, 0);
     this.setState({
-      itemsCart: redu,
+      itemsCart: count,
     });
   }
 
