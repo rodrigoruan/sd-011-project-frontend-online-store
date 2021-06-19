@@ -38,14 +38,10 @@ export default class ProductDetails extends Component {
 
   foundQuantityItemsCart() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
-    let sumProduct = 0;
     if (getLocal) {
-      getLocal.forEach((product) => {
-        sumProduct += product.countP;
-        return 1;
-      });
+      const count = getLocal.reduce((acr, value) => acr + value.countP, 0);
       this.setState({
-        quantityItems: sumProduct,
+        quantityItems: count,
       });
     }
   }
