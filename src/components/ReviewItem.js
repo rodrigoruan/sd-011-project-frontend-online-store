@@ -4,7 +4,6 @@ export default class ReviewItem extends Component {
   render() {
     const { productReview } = this.props;
     const { email, message } = productReview;
-
     return (
       <section>
         <h3>{ email }</h3>
@@ -14,7 +13,7 @@ export default class ReviewItem extends Component {
   }
 }
 
-ReviewItem.propTypes = ({
-  email: PropTypes.string,
-  message: PropTypes.string,
-}).isRequired;
+// ReviewItem.propTypes = ({
+//   email: PropTypes.string,
+//   message: PropTypes.string,
+// }).isRequired;

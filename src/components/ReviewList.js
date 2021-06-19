@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import ReviewItem from './ReviewItem';
 
 export default class ReviewList extends Component {
-  // http://localhost:3000/
   render() {
-    const shoppingCart = localStorage.getItem('shoppingCart');
-    const shoppingCartInfos = JSON.parse(shoppingCart);
-    const { reviews } = shoppingCartInfos;
+    let allProductsReviews = localStorage.getItem('reviews');
+    let productReviews = [];
+    const { productId } = this.props;
+
+    if(allProductsReviews) {
+      allProductsReviews = JSON.parse(allProductsReviews);
+      productReviews = [...allProductsReviews[productId]];
+    }
     return (
       <section>
         {
-          reviews.map(() => (
-              <li key={  }>
-                <ReviewItem reviwes={ reviews } />
+          productReviews.map((obj, index) => (
+              <li key={ index }>
+                <ReviewItem productReview={ obj } />
               </li>
             )
           )
