@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import shoppingCartImage from '../images/shoppingCart.jpg';
 
 class ProductDetail extends Component {
+  constructor() {
+    super();
+    this.addToCart = this.addToCart.bind(this);
+  }
+
+  addToCart(product) {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    product.quantity = 1;
+    if (!products.some((value) => value.id === product.id)) {
+      products.push(product);
+    } else {
+      const currentIndex = products.map((value) => value.id).indexOf(product.id);
+      products[currentIndex].quantity += 1;
+    }
+    localStorage.setItem('products', JSON.stringify(products));
+  }
+
   render() {
     const { location: { state: { detail } } } = this.props;
     const {
@@ -44,6 +63,16 @@ class ProductDetail extends Component {
             ))}
           </ul>
         </div>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => this.addToCart(detail) }
+        >
+          Adicionar ao carrinho
+        </button>
+        <Link to="/cart" data-testid="shopping-cart-button">
+          <img src={ shoppingCartImage } alt="Cart" />
+        </Link>
       </div>
     );
   }
