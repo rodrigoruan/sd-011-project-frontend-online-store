@@ -4,33 +4,18 @@ import AvaliationForm from './AvaliationForm';
 import Avaliations from './Avaliations';
 
 export default class Details extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      avaliationsArray: [],
-    };
-    this.getForm = this.getForm.bind(this);
-  }
-
-  getForm(obj) {
-    this.setState((state) => ({
-      avaliationsArray: [...state.avaliationsArray, obj],
-    }));
-  }
-
   render() {
     const {
       match: { params: { id } },
       location: { state: { element } },
     } = this.props;
     const { title, price, thumbnail, attributes } = element;
-    const { avaliationsArray } = this.state;
     return (
       <div>
         <div>
-          <span data-testid="product-detail-name">{`${title}, ${price}`}</span>
-        </div>
-        <div>
+          <div>
+            <span data-testid="product-detail-name">{`${title}, ${price}`}</span>
+          </div>
           <div>
             <img src={ thumbnail } alt={ title } />
           </div>
@@ -52,7 +37,6 @@ export default class Details extends Component {
           />
           <Avaliations
             productId={ id }
-            avaliationsArray={ avaliationsArray }
           />
         </div>
       </div>

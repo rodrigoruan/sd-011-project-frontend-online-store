@@ -25,7 +25,8 @@ export default class Product extends Component {
           to={ {
             pathname: `/Details/${id}`,
             state: {
-              element: product } } }
+              element: product },
+          } }
         >
           Detalhes
         </Link>
