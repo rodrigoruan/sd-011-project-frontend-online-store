@@ -14,8 +14,7 @@ class CartItem extends Component {
   // }
 
   render() {
-    const itemQuantity = 1;
-    const { product: { thumbnail, price, title } } = this.props;
+    const { product: { thumbnail, price, title, quantity } } = this.props;
     return (
       <div>
         <h3 data-testid="shopping-cart-product-name">{ title }</h3>
@@ -29,7 +28,7 @@ class CartItem extends Component {
         <span
           data-testid="shopping-cart-product-quantity"
         >
-          { itemQuantity }
+          { quantity }
         </span>
         <button
           type="button"
@@ -48,6 +47,6 @@ CartItem.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
     title: PropTypes.string,
-    // id: PropTypes.string,
+    quantity: PropTypes.number,
   }).isRequired,
 };
