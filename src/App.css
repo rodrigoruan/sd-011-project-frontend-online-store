@@ -80,3 +80,8 @@
   margin-top: 10px;
   width: 80%;
 }
+
+.total-price {
+  font-weight: 800;
+  font-size: 25px;
+}

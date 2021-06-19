@@ -61,6 +61,10 @@ export default class ShopCart extends Component {
             </button>
             <p>{`R$ ${item.price}`}</p>
           </div>))}
+        <div className="total-price">
+          {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
+            acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
+        </div>
       </div>
     );
   }
@@ -73,6 +77,7 @@ ShopCart.propTypes = {
     length: PropTypes.number,
     map: PropTypes.func,
     quantity: PropTypes.number,
+    reduce: PropTypes.func,
   }).isRequired,
   removeCartItem: PropTypes.func.isRequired,
   increaseItemQuantity: PropTypes.func.isRequired,
