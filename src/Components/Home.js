@@ -49,19 +49,17 @@ class Home extends React.Component {
       quantity: 1,
     };
     let initial = false;
-    if (!localStorage.cart) {
+    if (!localStorage.cart || localStorage.length === 0) {
       localStorage.setItem('cart', JSON.stringify([response]));
       initial = true;
     }
     const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(cart);
-    if (cart.length > 0 && initial === false) {
+    if (initial === false) {
       let equal = false;
       for (let index = 0; index < cart.length; index += 1) {
         if (cart[index].id === response.id) {
           cart[index].quantity += 1;
           equal = true;
-          return (cart, equal);
         }
       }
       if (equal === false) {

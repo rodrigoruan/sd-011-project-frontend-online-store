@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import style from './Cart.module.css';
 
@@ -80,6 +81,9 @@ class Cart extends Component {
           Total:R$
           {shoppingCart.reduce((acc, cv) => acc + (cv.price * cv.quantity), 0).toFixed(2)}
         </h2>
+        <Link to="/checkout">
+          <button data-testid="checkout-products" type="button">Finalizar compra</button>
+        </Link>
       </section>
     );
   }
