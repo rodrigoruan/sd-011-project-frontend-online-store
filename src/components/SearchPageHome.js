@@ -20,7 +20,6 @@ export default class SearchPageHome extends Component {
     this.getProducts = this.getProducts.bind(this);
     this.filterProducts = this.filterProducts.bind(this);
     this.getCategories = this.getCategories.bind(this);
-    // this.changeCategory = this.changeCategory.bind(this);
     this.handleListCategories = this.handleListCategories.bind(this);
     this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
@@ -56,7 +55,6 @@ export default class SearchPageHome extends Component {
   }
 
   filterProducts({ target }) {
-    console.log(target.value);
     this.setState({
       query: target.value,
     });
