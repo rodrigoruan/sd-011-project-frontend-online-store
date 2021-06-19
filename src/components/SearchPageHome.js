@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Categories from './Categories';
 import * as api from '../services/api';
 import ProductList from './ProductList';
+import NavHome from './NavHome';
 
 export default class SearchPageHome extends Component {
   constructor() {
@@ -73,6 +74,7 @@ export default class SearchPageHome extends Component {
     const { categoriesData, product, loading, itemsCart } = this.state;
     return (
       <div>
+        <NavHome />
         <label htmlFor="initialMessage">
           <input
             data-testid="query-input"
@@ -82,12 +84,15 @@ export default class SearchPageHome extends Component {
             name="query"
           />
         </label>
-        { categoriesData.map((item) => (<Categories
-          listCategories={ item }
-          changeCategory={ this.handleListCategories }
-          key={ item.name }
-        />
-        ))}
+        <div className="category">
+          { categoriesData.map((item) => (<Categories
+            listCategories={ item }
+            changeCategory={ this.handleListCategories }
+            key={ item.name }
+          />
+          ))}
+
+        </div>
         <Button
           variant="secondary"
           data-testid="query-button"

@@ -7,7 +7,9 @@ export default class Categories extends Component {
 
     return (
       <div>
-        <label htmlFor={ id }>
+        <label
+          htmlFor={ id }
+        >
           {name}
           <input
             type="radio"
