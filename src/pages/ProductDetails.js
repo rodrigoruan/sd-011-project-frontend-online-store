@@ -7,13 +7,15 @@ export default class ProductDetails extends React.Component {
   render() {
     const { location, forceAppUpdate } = this.props;
     const { state } = location;
-    const { id, title, price, thumbnail } = state;
+    const { id, title, price, thumbnail, shipping } = state;
+    const { free_shipping: freeShipping } = shipping;
 
     return (
       <section>
         <img alt="imagem do produto" src={ thumbnail } />
         <h3 data-testid="product-detail-name">{ title }</h3>
         <p>{`R$ ${price}`}</p>
+        <div>{ freeShipping && <p data-testid="free-shipping">Frete Gratis</p> }</div>
         <AddItemToCart
           product={ state }
           dataTestId="product-detail-add-to-cart"
@@ -33,6 +35,9 @@ ProductDetails.propTypes = {
       title: PropTypes.string,
       price: PropTypes.number,
       thumbnail: PropTypes.string,
+      shipping: PropTypes.shape({
+        free_shipping: PropTypes.bool,
+      }),
     }),
   }).isRequired,
 };
