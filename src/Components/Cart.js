@@ -29,7 +29,7 @@ class Cart extends Component {
     // console.log('', );
   }
 
-  handleClickSub(item, index, { target }) {
+  handleClickSub(item, index) {
     const cart = JSON.parse(localStorage.getItem('cart'));
     if (cart[index].quantity > 1) cart[index].quantity -= 1;
     localStorage.setItem('cart', JSON.stringify(cart));
