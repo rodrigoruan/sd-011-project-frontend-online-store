@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Button from './Button';
+import Buttons from './Button';
 
 export default class ShoppingCart extends Component {
   subClick = (index, id) => {
@@ -50,7 +51,7 @@ export default class ShoppingCart extends Component {
                   {price}
                 </p>
               </div>
-              <Button
+              <Buttons
                 deleteItem={ this.deleteItem }
                 quantity={ countP }
                 subClick={ this.subClick }
@@ -61,7 +62,13 @@ export default class ShoppingCart extends Component {
             </div>
           ))) }
         <Link to="/shoppingCart">
-          <button type="button" onClick={ this.deleteCart }>Limpar Carrinho</button>
+          <Button
+            variant="danger"
+            type="button"
+            onClick={ this.deleteCart }
+          >
+            Limpar Carrinho
+          </Button>
         </Link>
         <Link to="checkout" data-testid="checkout-products">Checkout</Link>
         <Link to="/">Voltar</Link>
