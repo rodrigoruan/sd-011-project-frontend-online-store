@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import Comments from './Comments';
 
 export default class Form extends Component {
@@ -80,12 +81,13 @@ export default class Form extends Component {
               data-testid="product-detail-evaluation"
             />
           </label>
-          <button
+          <Button
+            variant="success"
             type="button"
             onClick={ this.addComment }
           >
             Avaliar
-          </button>
+          </Button>
         </form>
         { this.sortComment() }
         { comment.map((commentForComponent) => (<Comments
