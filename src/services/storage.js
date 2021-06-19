@@ -23,6 +23,8 @@ export function retrieveCart() {
   if (currentCart) {
     const parsedCart = JSON.parse(currentCart);
     return parsedCart;
+  }
+}
 
 export function saveReview(formState) {
   // formState: {
