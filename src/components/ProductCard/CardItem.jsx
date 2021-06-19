@@ -40,7 +40,7 @@ export default class CardItem extends Component {
             } }
             data-testid="product-detail-link"
           >
-            Mais detalhes
+            <div>Mais detalhes</div>
           </Link>
           <AddToCartBttn
             product={ {
