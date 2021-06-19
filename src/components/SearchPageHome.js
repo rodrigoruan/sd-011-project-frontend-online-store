@@ -60,6 +60,7 @@ export default class SearchPageHome extends Component {
   }
 
   filterProducts({ target }) {
+    console.log(target.value);
     this.setState({
       query: target.value,
     });
