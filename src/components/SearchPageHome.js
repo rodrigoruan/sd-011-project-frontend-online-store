@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Categories from './Categories';
 import * as api from '../services/api';
@@ -87,13 +88,14 @@ export default class SearchPageHome extends Component {
           key={ item.name }
         />
         ))}
-        <button
+        <Button
+          variant="secondary"
           data-testid="query-button"
           type="button"
           onClick={ this.getProducts }
         >
           Pesquisar
-        </button>
+        </Button>
         <Link
           data-testid="shopping-cart-button"
           to={ {
@@ -101,9 +103,13 @@ export default class SearchPageHome extends Component {
             state: itemsCart,
           } }
         >
-          Carrinho(
-          <span data-testid="shopping-cart-size">{itemsCart}</span>
-          )
+          <Button
+            variant="primary"
+          >
+            Carrinho(
+            <span data-testid="shopping-cart-size">{itemsCart}</span>
+            )
+          </Button>
         </Link>
         {loading ? (
           <p data-testid="home-initial-message">
