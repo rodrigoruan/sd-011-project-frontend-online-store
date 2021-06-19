@@ -17,6 +17,8 @@ export default class CartItems extends Component {
     const itemProduct = Object.values(getStorage).map((item) => JSON.parse(item));
     this.setState({
       allProducts: itemProduct,
+      sumItens: 0,
+      totalValue: 0,
     });
   }
 
@@ -31,7 +33,7 @@ export default class CartItems extends Component {
 
     return (
       <div>
-        {allProducts.map(({ title, thumbnail, price, count }, index) => (
+        {allProducts.map(({ title, thumbnail, price, count, totalValue }, index) => (
           <div key={ index }>
             <h3 data-testid="shopping-cart-product-name">
               {`${title} - R$${price}`}
@@ -40,6 +42,7 @@ export default class CartItems extends Component {
             <span data-testid="shopping-cart-product-quantity">
               { count }
             </span>
+            <h2>{ `Valor do(s) produto(s): R$${count * price}` }</h2>
           </div>
         ))}
       </div>
