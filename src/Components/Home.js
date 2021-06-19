@@ -12,6 +12,7 @@ class Home extends React.Component {
       products: null,
       categories: null,
       search: false,
+      shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleClickLi = this.handleClickLi.bind(this);
@@ -23,6 +24,11 @@ class Home extends React.Component {
       .then((json) => this.setState({ categories: json }));
   }
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState !== this.state) {
+  //     this.sendProductDetails();
+  //   }
+  // }
   handleClick() {
     const { value } = document.querySelector('input');
     const id = getCategories()
@@ -64,7 +70,8 @@ class Home extends React.Component {
       }
       if (equal === false) {
         cart.push(response);
-        console.log(cart);
+        console.log('gambiarra cart:', cart);
+        this.setState({ shoppingCart: cart });
       }
     }
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -72,17 +79,24 @@ class Home extends React.Component {
 
   render() {
     const { products, search } = this.state;
-    const { categories } = this.state;
+    const { categories, shoppingCart } = this.state;
     return (
       <>
-        {/* Renderiza o card de produtos após clicar no botão */}
-        <section className={ style.inputContent }>
+        <section>
           <Link
             to="/cart"
             data-testid="shopping-cart-button"
           >
             <img className={ style.cart } src={ Picture } alt="Carrinho de compras" />
           </Link>
+          <span data-testid="shopping-cart-size">
+            {/* {number ? number.map((product) => product.quantity) : 'ok'} */}
+            {shoppingCart.length > 0
+              ? shoppingCart.reduce((total, cv) => total + cv.quantity, 0) : 0}
+          </span>
+        </section>
+        {/* Renderiza o card de produtos após clicar no botão */}
+        <section className={ style.inputContent }>
           <label htmlFor="site-search">
             <input
               data-testid="query-input"
