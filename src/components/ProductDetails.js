@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Form from './Form';
 
@@ -60,9 +61,13 @@ export default class ProductDetails extends Component {
             state: itemsCart,
           } }
         >
-          Carrinho(
-          <span data-testid="shopping-cart-size">{quantityItems}</span>
-          )
+          <Button
+            variant="primary"
+          >
+            Carrinho(
+            <span data-testid="shopping-cart-size">{quantityItems}</span>
+            )
+          </Button>
         </Link>
         <div>
           <h1 data-testid="product-detail-name">{title}</h1>
@@ -93,15 +98,22 @@ export default class ProductDetails extends Component {
             ))}
           </div>
         </div>
-        <Link to="/">Voltar</Link>
-        <button
+        <Link to="/">
+          <Button
+            variant="primary"
+          >
+            Voltar
+          </Button>
+        </Link>
+        <Button
+          variant="outline-success"
           data-testid="product-detail-add-to-cart"
           value={ id }
           onClick={ () => this.handlerLocalStore(detail) }
           type="button"
         >
           Adicionar ao Carrinho
-        </button>
+        </Button>
         <Form idProduct={ id } />
       </div>
     );
