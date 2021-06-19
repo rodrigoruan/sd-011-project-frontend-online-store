@@ -20,20 +20,12 @@ class App extends React.Component {
     };
     this.updateState = this.updateState.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.forceUpdate = this.forceUpdate.bind(this);
   }
 
   componentDidMount() {
     this.updateState();
   }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   const storageCart = storage.retrieveCart()
-  //   const { productsCart } = prevState;
-  //   if (JSON.stringify(productsCart) !== JSON.stringify(storageCart)) {
-  //     console.log('teste')
-  //     this.updateState();
-  //   }
-  // }
 
   updateState() {
     const storageCart = storage.retrieveCart();
@@ -55,18 +47,36 @@ class App extends React.Component {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Route exact path="/" component={ Main } />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (<Main
+              { ...props }
+              forceAppUpdate={ this.forceUpdate }
+            />) }
+          />
           <Route
             exact
             path="/shoppingcart"
-            render={ (props) => <ShoppingCart { ...props } productsCart={ productsCart } onClick={ this.removeItem } /> }
+            render={ (props) => (<ShoppingCart
+              { ...props }
+              productsCart={ productsCart }
+              onClick={ this.removeItem }
+              forceAppUpdate={ this.forceUpdate }
+            />) }
           />
           <Route
             exact
             path="/categoryfilter"
             component={ CategoryFilter }
           />
-          <Route path="/detalhes/:id" component={ ProductDetails } />
+          <Route
+            path="/detalhes/:id"
+            render={ (props) => (<ProductDetails
+              { ...props }
+              forceAppUpdate={ this.forceUpdate }
+            />) }
+          />
           <Route exact path="/checkout" component={ Checkout } />
         </Switch>
       </BrowserRouter>

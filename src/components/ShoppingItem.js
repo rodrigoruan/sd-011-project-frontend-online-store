@@ -15,7 +15,7 @@ class ShoppingItem extends Component {
   }
 
   increase() {
-    const { productCart } = this.props;
+    const { productCart, forceAppUpdate } = this.props;
     const { price } = productCart;
     const { counter } = this.state;
     const totalPrice = Math.round((counter + 1) * price * 100) / 100;
@@ -24,11 +24,12 @@ class ShoppingItem extends Component {
       totalPrice,
     });
     storage.saveProduct(productCart, 1);
+    forceAppUpdate();
   }
 
   decrease() {
     const { counter } = this.state;
-    const { productCart } = this.props;
+    const { productCart, forceAppUpdate } = this.props;
     const amount = -1;
     if (counter > 1) {
       const { price } = productCart;
@@ -39,6 +40,7 @@ class ShoppingItem extends Component {
       });
     }
     storage.saveProduct(productCart, amount);
+    forceAppUpdate();
   }
 
   render() {

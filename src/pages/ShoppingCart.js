@@ -1,44 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ShoppingItem from '../components/ShoppingItem';
 
 class ShoppingCart extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     products: '',
-  //   };
-  //   this.removeItem = this.removeItem.bind(this);
-  //   this.totalPriceCart = this.totalPriceCart.bind(this);
-  // }
-
-  // componentDidMount() {
-  //   this.retrieveCart();
-  // }
-
-  // retrieveCart() {
-  //   const currentCart = localStorage.getItem('shoppingCart');
-  //   if (currentCart) {
-  //     this.setState({ products: JSON.parse(currentCart) });
-  //   }
-  //   return currentCart;
-  // }
-
-  // removeItem(id) {
-  //   const { productsCart } = this.props;
-  //   delete productsCart[id];
-  //   localStorage.setItem('shoppingCart', JSON.stringify(productsCart));
-  // }
-
   totalPriceCart() {
     const { productsCart } = this.props;
-    const total = Object.values(productsCart)
-      .reduce((acc, { details, quantity }) => acc + (details.price * quantity), 0);
-    return total;
+    if (productsCart) {
+      const total = Object.values(productsCart)
+        .reduce((acc, { details, quantity }) => acc + (details.price * quantity), 0);
+      return total;
+    }
+    return 0;
   }
 
   render() {
-    const { productsCart, onClick } = this.props;
+    const { productsCart, onClick, forceAppUpdate } = this.props;
     return (
       <div>
         <p>ShoppingCart</p>
@@ -51,6 +28,7 @@ class ShoppingCart extends Component {
           productCart={ details }
           quantity={ quantity }
           onClick={ onClick }
+          forceAppUpdate={ forceAppUpdate }
         />))
         )}
         <p>{ this.totalPriceCart() }</p>
@@ -62,3 +40,9 @@ class ShoppingCart extends Component {
 }
 
 export default ShoppingCart;
+
+ShoppingCart.propTypes = {
+  forceAppUpdate: PropTypes.func,
+  onClick: PropTypes.func,
+  productCart: PropTypes.objectOf(PropTypes.object),
+}.isRequired;
