@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './css/Products.css';
+import '../css/Products.css';
 
 class ProductCard extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class ProductCard extends Component {
     const { id, title, thumbnail, price } = products;
 
     return (
-      <div className="card">
+      <li className="card">
         <Link
           to={ { pathname: `/product/${id}`, state: products } }
           data-testid="product-detail-link"
@@ -44,7 +44,7 @@ class ProductCard extends Component {
           <div data-testid="product" className="product">
             <img src={ thumbnail } alt={ `Foto do produto ${title}` } />
             <h3>{ title }</h3>
-            <p>{ `${price} R$` }</p>
+            <p>{ `R$ ${price.toLocaleString('pt-BR')}` }</p>
           </div>
         </Link>
         <button
@@ -55,7 +55,7 @@ class ProductCard extends Component {
         >
           Adicionar ao carrinho
         </button>
-      </div>
+      </li>
     );
   }
 }

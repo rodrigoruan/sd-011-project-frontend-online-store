@@ -1,0 +1,148 @@
+.first {
+  box-shadow: 0 0 5px #ccc;
+  margin-top: 10px;
+  min-height: 870px;
+  padding: 15px 10px;
+}
+
+.first div {
+  display: flex;
+  flex-direction: row;
+}
+
+.label-radio {
+  cursor: pointer;
+  font-size: large;
+  position: relative;
+}
+
+.label-radio input {
+  cursor: pointer;
+  font-size: large;
+  margin: 5px;
+}
+
+.label-radio:hover {
+  color: lightseagreen;
+}
+
+.loading {
+  align-items: center;
+  background: black;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 99;
+}
+
+.category-section {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  width: 300px;
+}
+
+.category-section h1 {
+  color: black;
+  text-align: center;
+}
+
+.searchbar {
+  align-items: center;
+  border-radius: 40px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 500px;
+}
+
+.searchbar-btn {
+  background: none;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  width: 75px;
+}
+
+.searchbar-btn img {
+  width: 30px;
+}
+
+.search-txt {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 40px;
+  outline: none;
+  padding: 0;
+  text-align: center;
+  transition: 0.4s;
+  width: 500px;
+}
+
+.cart-screen {
+  cursor: pointer;
+  position: relative;
+}
+
+.cart-scree {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-screen span {
+  background-color: crimson;
+  border-radius: 50%;
+  color: white;
+  font-size: 10px;
+  left: -3px;
+  padding: 3px 5px;
+  position: absolute;
+  top: -12px;
+  z-index: -1;
+}
+
+.search-txt::placeholder {
+  color: #555;
+  text-align: right;
+}
+
+.info {
+  color: rgb(34, 5, 11);
+  font-size: 1.5rem;
+  margin-left: 275px;
+  text-align: center;
+}
+
+@media ( max-width : 650px ) {
+
+  .info {
+    display: none;
+  }
+
+  .searchbar, .search-txt {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0;
+    width: 350px;
+  }
+
+  .category-section {
+    float: none;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    width: 300px;
+  }
+}

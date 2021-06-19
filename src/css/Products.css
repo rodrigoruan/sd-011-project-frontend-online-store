@@ -5,15 +5,32 @@
   width: 200px;
 }
 
+a:link {
+  text-decoration: none;
+}
+
 .card {
   border: 1px solid #eee;
   box-shadow: 2px 8px 20px #ddd;
+  display: inline-block;
+  flex-direction: row;
   margin: 10px;
   min-height: 150px;
   min-width: 150px;
   overflow: hidden;
   padding: 10px;
   transition: 0.5s linear;
+}
+
+.cart-items {
+  align-items: right;
+  margin-left: 55px;
+}
+
+.cart-items h4 {
+  left: 40%;
+  position: relative;
+  top: 50%;
 }
 
 .card:hover {
@@ -55,4 +72,11 @@ p {
   outline: none;
   text-transform: uppercase;
   width: 100%;
+}
+
+@media ( max-width : 650px ) {
+
+  .cart-items h4 {
+    display: none;
+  }
 }

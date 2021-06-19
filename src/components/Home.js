@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import CategoryList from './CategoryList';
 import ProductSearch from './ProductSearch';
-import './css/Section.css';
+import Search from '../img/search-solid.svg';
+import '../css/Section.css';
+import CartIcon from '../img/shopping-cart-solid.svg';
 
 export default class Home extends Component {
   constructor() {
@@ -43,35 +45,46 @@ export default class Home extends Component {
     const { dataApi, request, query } = this.state;
 
     return (
-      <div>
-        <div>
-          <CategoryList fetchProducts={ this.fetchProducts } />
+      <>
+        <div className="cart-screen">
+          <span>0</span>
+          <Link to="/cart">
+            <button
+              type="button"
+              className="cart-scree"
+              data-testid="shopping-cart-button"
+            >
+              <img src={ CartIcon } alt="" width="20" />
+            </button>
+          </Link>
         </div>
-        <div className="searchbar">
+        <p className="info" data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+        <CategoryList fetchProducts={ this.fetchProducts } />
+
+        <section className="searchbar">
           <input
+            className="search-txt"
+            placeholder="Search"
             data-testid="query-input"
             type="text"
             onChange={ this.onSearchTextChange }
+
           />
           <button
+            className="searchbar-btn"
             data-testid="query-button"
             type="button"
-            placeholder="Pesquisar Items"
             onClick={ () => this.fetchProducts() }
             query={ query }
           >
-            Pesquisar
+            <img src={ Search } alt="" width="20" />
           </button>
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        </div>
-        <ProductSearch products={ dataApi } request={ request } />
+        </section>
 
-        <Link to="/cart">
-          <button type="button" data-testid="shopping-cart-button">Carrinho</button>
-        </Link>
-      </div>
+        <ProductSearch products={ dataApi } request={ request } />
+      </>
     );
   }
 }

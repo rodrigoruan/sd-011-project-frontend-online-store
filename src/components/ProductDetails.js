@@ -34,7 +34,6 @@ export default class ProductDetails extends Component {
       thumbnail,
       price,
     });
-    console.log(productInfo);
     localStorage.setItem('productInfos', JSON.stringify(productInfo));
   }
 
@@ -54,7 +53,7 @@ export default class ProductDetails extends Component {
     const { location: { state: { title, thumbnail, price } } } = this.props;
     const { email, message, rating, showForm } = this.state;
     return (
-      <div>
+      <>
         <Link to="/cart">
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
@@ -142,7 +141,7 @@ export default class ProductDetails extends Component {
           <button onClick={ this.renderRating } type="button">Avaliar</button>
         </form>
         { showForm ? <Rating email={ email } msg={ message } rating={ rating } /> : null}
-      </div>
+      </>
     );
   }
 }

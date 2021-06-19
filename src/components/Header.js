@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Menu from './img/bars-solid.svg';
-import Close from './img/times-solid.svg';
-import CartIcon from './img/shopping-cart-solid.svg';
-import './css/Header.css';
+import Menu from '../img/bars-solid.svg';
+import Close from '../img/times-solid.svg';
+import CartIcon from '../img/shopping-cart-solid.svg';
+import '../css/Header.css';
 
 class Header extends Component {
   constructor() {
