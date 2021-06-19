@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import Rating from './Rating';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class ProductDetails extends React.Component {
   }
 
   handleClickForm() {
-    /* Função feita com a ajuda do RRR = Rodrigo Ruan Regex */
+    /* Função feita com a ajuda do Rodrigo Ruan */
     const { nome, nota, comentario } = this.state;
     const { location } = this.props;
     const { state } = location;

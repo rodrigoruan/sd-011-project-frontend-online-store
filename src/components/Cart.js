@@ -9,17 +9,16 @@ class Cart extends React.Component {
     };
     this.sumLocalStorage = this.sumLocalStorage.bind(this);
     this.subLocalStorage = this.subLocalStorage.bind(this);
-    this.Nome = this.Nome.bind(this);
+    this.renderCart = this.renderCart.bind(this);
     this.removeItem = this.removeItem.bind(this);
   }
 
   componentDidMount() {
-    this.Nome();
+    this.renderCart();
   }
 
   sumLocalStorage(param) {
     const { itens } = this.state;
-    // const qtdLocalStorage = JSON.parse(localStorage.getItem('cart'));
     const checkId = itens.map((valor) => valor.id);
     const verifyId = checkId.indexOf(param);
     itens[verifyId].qtdItems += 1;
@@ -28,18 +27,10 @@ class Cart extends React.Component {
 
   subLocalStorage(param) {
     const { itens } = this.state;
-    // const qtdLocalStorage = JSON.parse(localStorage.getItem('cart'));
     const checkId = itens.map((valor) => valor.id);
     const verifyId = checkId.indexOf(param);
     itens[verifyId].qtdItems -= 1;
     localStorage.setItem('cart', JSON.stringify([...itens]));
-  }
-
-  Nome() {
-    const produtoDoCarrinho = JSON.parse(localStorage.getItem('cart'));
-    this.setState({
-      itens: produtoDoCarrinho,
-    });
   }
 
   removeItem(id) {
@@ -51,9 +42,15 @@ class Cart extends React.Component {
     localStorage.setItem('cart', JSON.stringify(Arr));
   }
 
+  renderCart() {
+    const produtoDoCarrinho = JSON.parse(localStorage.getItem('cart'));
+    this.setState({
+      itens: produtoDoCarrinho,
+    });
+  }
+
   render() {
     const { itens } = this.state;
-    // const produtoDoCarrinho = JSON.parse(localStorage.getItem('cart'));
     const mensagem = (
       <p data-testid="shopping-cart-empty-message">
         Seu carrinho está vazio
