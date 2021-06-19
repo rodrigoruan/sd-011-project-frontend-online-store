@@ -7,18 +7,19 @@ export default class Cart extends React.Component {
     this.getAllValues = this.getAllValues.bind(this);
   }
 
-  getAllValues(){
-    const items =  {...localStorage} ;
-    const totalValues = Object.values(items).reduce((e,e1) => {
-   const valuesIndex = JSON.parse(e1)
-   return e += valuesIndex.price
-  }, 0);
-    return(
-       <div>
-        Valor total: {totalValues}
+  getAllValues() {
+    const items = { ...localStorage };
+    const totalValues = Object.values(items).reduce((e, e1) => {
+      const valuesIndex = JSON.parse(e1);
+      return e + valuesIndex.totalValues;
+    }, 0);
+    return (
+      <div>
+        Valor total:
+        {' '}
+        {totalValues}
       </div>
-     );
-
+    );
   }
 
   render() {
@@ -26,11 +27,9 @@ export default class Cart extends React.Component {
     const text = 'shopping-cart-empty-message';
     const renderCart1 = Object.values(items).map((e) => (
       <div key={ JSON.parse(e).id }>
-        <CartCard {...JSON.parse(e)} />
-        <div>
+        <CartCard { ...JSON.parse(e) } />
+        <div />
       </div>
-      </div>
-      
 
     ));
     return (
@@ -39,8 +38,8 @@ export default class Cart extends React.Component {
           .length > 0 ? renderCart1 : <p data-testid={ text }>Seu carrinho está vazio</p>}
         <div>
           <br />
-        {this.getAllValues()}
-          </div>
+          {this.getAllValues()}
+        </div>
       </div>
     );
   }
