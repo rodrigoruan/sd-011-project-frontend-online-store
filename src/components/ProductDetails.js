@@ -12,12 +12,10 @@ export default class ProductDetails extends Component {
       quantityItems: 0,
     };
 
-    this.getValues = this.getValues.bind(this);
     this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
 
   componentDidMount() {
-    this.getValues();
     this.foundQuantityItemsCart();
   }
 
@@ -35,15 +33,6 @@ export default class ProductDetails extends Component {
         getLocal[verify].countP += 1;
         localStorage.setItem('item', JSON.stringify([...getLocal]));
       }
-    }
-  }
-
-  getValues() {
-    const keys = Object.values(localStorage);
-    if (keys.length > 0) {
-      keys.forEach((value) => {
-        JSON.parse(value);
-      });
     }
   }
 
@@ -98,7 +87,7 @@ export default class ProductDetails extends Component {
 
         <div>
           <h3>Especificações Técnicas:</h3>
-          <p>
+          <div>
             {attributes.map((attribute, index) => (
               <p key={ index }>
                 {attribute.name}
@@ -106,7 +95,7 @@ export default class ProductDetails extends Component {
                 {attribute.value_name}
               </p>
             ))}
-          </p>
+          </div>
         </div>
         <Link to="/">Voltar</Link>
         <button
