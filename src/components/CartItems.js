@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AddAndRemoveCartItem from './AddAndRemoveCartItem';
 
 export default class CartItems extends Component {
   constructor() {
@@ -18,6 +19,14 @@ export default class CartItems extends Component {
     this.setState({
       allProducts: itemProduct,
     });
+  }
+
+  increaseItem = () => {
+    console.log('increase');
+  }
+
+  decreaseItem = () => {
+    console.log('decrease');
   }
 
   render() {
@@ -40,6 +49,18 @@ export default class CartItems extends Component {
             <span data-testid="shopping-cart-product-quantity">
               { count }
             </span>
+            <div>
+              <AddAndRemoveCartItem
+                dataTestId="product-decrease-quantity"
+                operator="-"
+                decrease={ this.decreaseItem }
+              />
+              <AddAndRemoveCartItem
+                dataTestId="product-increase-quantity"
+                operator="+"
+                increase={ this.increaseItem }
+              />
+            </div>
             <h2>{ `Valor do(s) produto(s): R$${count * price}` }</h2>
           </div>
         ))}
