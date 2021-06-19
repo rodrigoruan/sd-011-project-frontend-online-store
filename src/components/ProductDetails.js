@@ -109,7 +109,7 @@ export default class ProductDetails extends Component {
 }
 
 ProductDetails.propTypes = {
-  location: {
+  location: PropTypes.shape({
     state: {
       details: {
         title: PropTypes.string,
@@ -124,5 +124,5 @@ ProductDetails.propTypes = {
         },
       },
     },
-  }.isRequired,
+  }).isRequired,
 };
