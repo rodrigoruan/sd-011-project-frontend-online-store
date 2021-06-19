@@ -22,6 +22,10 @@ export default class ShoppingCart extends Component {
     localStorage.setItem('item', JSON.stringify([...getLocal]));
   }
 
+  deleteCart() {
+    localStorage.clear();
+  }
+
   render() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
     return (
@@ -48,6 +52,9 @@ export default class ShoppingCart extends Component {
               />
             </div>
           ))) }
+        <Link to="/shoppingCart">
+          <button type="button" onClick={ this.deleteCart }>Limpar Carrinho</button>
+        </Link>
         <Link to="checkout" data-testid="checkout-products">Checkout</Link>
         <Link to="/">Voltar</Link>
       </div>
