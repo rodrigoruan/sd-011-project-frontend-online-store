@@ -92,7 +92,11 @@ class Cart extends Component {
     return (
       <div>
         <button type="button">X</button>
-        <img className="image-details" alt={ `${product.title}` } src={ product.thumbnail } />
+        <img
+          className="image-details"
+          alt={ `${product.title}` }
+          src={ product.thumbnail }
+        />
         <h4 data-testid="shopping-cart-product-name">{ product.title }</h4>
         <button
           type="button"
