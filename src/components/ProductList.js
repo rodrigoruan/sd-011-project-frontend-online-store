@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
@@ -44,7 +45,8 @@ export default class ProductList extends Component {
             ? <p data-testid="free-shipping">Frete Gratis</p>
             : <p>A combinar com o vendedor</p> }
         </div>
-        <button
+        <Button
+          variant="outline-success"
           data-testid="product-add-to-cart"
           value={ id }
           onClick={ () => {
@@ -54,7 +56,7 @@ export default class ProductList extends Component {
           type="button"
         >
           Adicionar ao Carrinho
-        </button>
+        </Button>
         <Link
           to={ {
             pathname: `/details/${id}`,
@@ -62,7 +64,7 @@ export default class ProductList extends Component {
           } }
           data-testid="product-detail-link"
         >
-          detalhes
+          <Button variant="info">Detalhes</Button>
         </Link>
       </div>
     );
