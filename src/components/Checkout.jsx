@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../CSS/Checkout.css';
 
 //Muitas coisas foram comentadas para o componente ser renderizado. Terminar o requisito 12 amanhã, lembrar de colocar a handleState() em todos os inputs que refenciam o state. Lembrar também de limpar o estado após submitar o formulário.
 
@@ -8,34 +9,6 @@ export default class Checkout extends Component {
     super();
     this.state = {
       cartProducts: JSON.parse(localStorage.getItem('cart')),
-      /* name: '',
-      cpf: '',
-      email: '',
-      phone: '',
-      cep: '',
-      address: '',
-      complemento: '',
-      number: 0,
-      city: '',
-      estado: '',
-      payOption: false, */
-    };
-
-    this.buildCard = this.buildCard.bind(this);
-    this.total = this.total.bind(this);
-    /* this.handleState = this.handleState.bind(this); */
-  }
-
-  /* handleState({ target }) {
-    const { name } = target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    });
-  } */
-
-  /* clearState() {
-    this.setState({
       name: '',
       cpf: '',
       email: '',
@@ -46,16 +19,48 @@ export default class Checkout extends Component {
       number: 0,
       city: '',
       estado: '',
+      payOption: false,
+    };
+
+    this.buildCard = this.buildCard.bind(this);
+    this.total = this.total.bind(this);
+    this.handleState = this.handleState.bind(this);
+    this.clearState = this.clearState.bind(this);
+  }
+
+  handleState({ target }) {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({
+      [name]: value,
     });
-  } */
+  }
+
+  clearState() {
+    /* this.setState({
+      name: '',
+      cpf: '',
+      email: '',
+      phone: '',
+      cep: '',
+      address: '',
+      complemento: '',
+      number: 0,
+      city: '',
+      estado: '',
+    }); */
+    alert('Olá');
+  }
 
   buildCard() {
     const { cartProducts } = this.state;
     return cartProducts.map((product) => (
       <div key={ product.id } className="checkout-product-card">
-        <img src={ product.thumbnail } alt="imagem" width="100px" />
-        <p>{product.title}</p>
-        <p>{`R$ ${product.price}` }</p>
+        <img src={ product.thumbnail } alt="imagem" width="220px" className="checkout-product-img" />
+        <Link to="/Cart" className="checkout-product-card-link">
+          <p className="checkout-product-title">{product.title}</p>
+        </Link>
+        <p className="checkout-product-price">{`R$ ${product.price}` }</p>
       </div>
     ));
   }
@@ -69,12 +74,12 @@ export default class Checkout extends Component {
   render() {
     const { cartProducts } = this.state;
     return (
-      <div>
-        <Link to="/Cart">voltar para o carrinho</Link>
+      <div className="checkout-div">
         <div className="checkout-products-list">
+          <Link to="/Cart" className="checkout-cart-link">voltar para o carrinho</Link>
           <h3>Revise seus Produtos</h3>
+          <p className="checkout-total-price">{`Total a pagar: ${this.total()}`}</p>
           {this.buildCard()}
-          <p>{`Total: ${this.total()}`}</p>
         </div>
         <form>
           <h3>Informações do Comprador</h3>
@@ -116,7 +121,7 @@ export default class Checkout extends Component {
               <input type="radio" id="cartao-visa" name="Pagamento" value="elo-card" required />
             </label>
           </fieldset>
-          <button type="submit"/* onClick={ this.clearState() } */>Comprar</button>
+          <button type="submit" onClick={ this.clearState }>Comprar</button>
         </form>
       </div>
     );
