@@ -10,16 +10,20 @@ class Cardproduct extends Component {
   }
 
   handleClick() {
-    const { title, thumbnail, price } = this.props;
+    const { id, title, thumbnail, price } = this.props;
     const previousList = this.loadCartList();
-    previousList.push({ title, thumbnail, price });
+    if (previousList[id]) {
+      previousList[id].quantity += 1;
+    } else {
+      previousList[id] = { id, title, thumbnail, price, quantity: 1 };
+    }
     localStorage.setItem('cartList', JSON.stringify(previousList));
   }
 
   loadCartList() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
-      previousList = [];
+      previousList = {};
       return previousList;
     }
     return JSON.parse(previousList);
@@ -40,7 +44,7 @@ class Cardproduct extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <p>{ `R$ ${parseFloat(price).toFixed(2)}` }</p>
+        <p>{ `R$ ${parseFloat(price).toFixed(2).replace('.', ',')}` }</p>
         <Link
           to={ `/product-detail/${categoryId}/${id}` }
           data-testid="product-detail-link"
