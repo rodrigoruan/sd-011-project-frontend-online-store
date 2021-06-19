@@ -6,7 +6,7 @@
   padding: 0.4rem;
 }
 
-input[type="radio"] {
+.radio-star {
   display: none;
 }
 
@@ -21,9 +21,9 @@ textarea {
 }
 
 .btn-submit-avaliation {
-  width: 8rem;
-  padding: 1rem;
   margin-top: 1rem;
+  padding: 1rem;
+  width: 8rem;
 }
 
 .header-details-product {
@@ -40,50 +40,50 @@ textarea {
 .container-image-and-product-details {
   display: flex;
   justify-content: space-between;
-  width:50%;
-  padding-top:20px;
-  padding-left:15px;
-  padding-right:15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20px;
+  width: 50%;
 }
 
 .container-image-details {
-  float:left;
-  width:50%;
+  float: left;
   height: auto;
+  width: 50%;
 }
 
 .container-description-details {
-  float:left;
-  margin-left: 2rem;
-  width:100%;
+  float: left;
   height: auto;
+  margin-left: 2rem;
+  width: 100%;
 }
 
 .image-details {
-  width: 100%;
   height: auto;
+  width: 100%;
 }
 
 
 .decrease-btn {
-  padding: 10px;
   margin: 10px;
+  padding: 10px;
 }
 
 .increase-btn {
-  padding: 10px;
   margin: 10px;
+  padding: 10px;
 }
 
 .quantity-product-details {
+  border: 1px solid black;
   border-radius: 100%;
   padding: 0.6rem;
-  border: 1px solid black;
 }
 
 .add-to-cart-btn-details {
-  padding: 10px;
   margin: 10px;
+  padding: 10px;
 }
 
 .container-forms {

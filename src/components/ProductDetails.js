@@ -151,6 +151,7 @@ class ProductDetails extends React.Component {
                   <label htmlFor={ index } key={ index }>
                     <input
                       id={ index }
+                      className="radio-star"
                       type="radio"
                       name="rating"
                       value={ ratingValue }
