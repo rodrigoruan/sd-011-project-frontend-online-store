@@ -13,6 +13,7 @@ export default class Home extends Component {
       addCart,
       categories,
       productCards,
+      cartItems,
     } = this.props;
 
     if (categories === []) return <div>Loading...</div>;
@@ -28,6 +29,12 @@ export default class Home extends Component {
           >
             <img src={ cartImage } alt="Cart" style={ { width: '80px' } } />
           </Link>
+          <p
+            data-testid="shopping-cart-size"
+          >
+            {cartItems.reduce((acc, curr) => (
+              (acc + (curr.quantity))), 0)}
+          </p>
         </nav>
 
         <div className="search-bar-home">
@@ -98,6 +105,7 @@ Home.propTypes = {
   cartItems: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
+    reduce: PropTypes.func,
   }).isRequired,
   productCards: PropTypes.shape({
     map: PropTypes.func,

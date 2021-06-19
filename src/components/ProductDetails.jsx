@@ -24,6 +24,12 @@ export default class ProductDetails extends Component {
         >
           Voltar ao carrinho
         </Link>
+        <p
+          data-testid="shopping-cart-size"
+        >
+          {cartItems.reduce((acc, curr) => (
+            (acc + (curr.quantity))), 0)}
+        </p>
         <div data-testid="product">
           <h4 data-testid="product-detail-name">{title}</h4>
           <p>{`R$ ${price}`}</p>
@@ -57,5 +63,6 @@ ProductDetails.propTypes = {
   cartItems: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
+    reduce: PropTypes.func,
   }).isRequired,
 };
