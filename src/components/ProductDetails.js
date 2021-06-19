@@ -8,7 +8,7 @@ import '../App.css';
 class ProductDetails extends React.Component {
   constructor() {
     super();
-    const details = this.cartItensStorage();
+    const details = this.loadCartList();
     const productArray = Object.values(details);
     this.state = {
       product: [],
@@ -20,7 +20,6 @@ class ProductDetails extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.loadCartList = this.loadCartList.bind(this);
     this.setRating = this.setRating.bind(this);
-    this.cartItensStorage = this.cartItensStorage.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +31,7 @@ class ProductDetails extends React.Component {
     const previousList = this.loadCartList();
     previousList.push({ title, thumbnail, price });
     localStorage.setItem('cartList', JSON.stringify(previousList));
-    const details = this.cartItensStorage();
+    const details = this.loadCartList();
     const productArray = Object.values(details);
     this.setState({
       quantity: productArray.length,
@@ -51,15 +50,6 @@ class ProductDetails extends React.Component {
     this.setState({
       rating: event,
     });
-  }
-
-  cartItensStorage() {
-    let previousList = localStorage.getItem('cartList');
-    if (previousList === null) {
-      previousList = {};
-      return previousList;
-    }
-    return JSON.parse(previousList);
   }
 
   loadCartList() {
@@ -87,7 +77,7 @@ class ProductDetails extends React.Component {
         </header>
         <h3 data-testid="product-detail-name">
           { title }
-          {' - R$ '}
+          { ' - R$ ' }
           { price === undefined ? price : parseFloat(price).toFixed(2).replace('.', ',') }
         </h3>
         <div className="container-image-and-product-details">
@@ -145,7 +135,7 @@ class ProductDetails extends React.Component {
               onChange={ this.getEmailAndMessage }
             />
             <div className="container-stars">
-              {[...Array(numberOfStars)].map((star, index) => {
+              { [...Array(numberOfStars)].map((star, index) => {
                 const ratingValue = index + 1;
                 return (
                   <label htmlFor={ index } key={ index }>
@@ -166,7 +156,7 @@ class ProductDetails extends React.Component {
                     />
                   </label>
                 );
-              })}
+              }) }
             </div>
           </div>
           <textarea
