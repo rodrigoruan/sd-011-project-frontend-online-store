@@ -14,7 +14,7 @@ class TopBar extends React.Component {
         </h2>
         <Input onClick={ handleOnChange } />
         <Filtros onClick={ handleOnChange } />
-        <Link to="/ShoppingCart">
+        <Link to="/shopping-cart">
           <button data-testid="shopping-cart-button" type="button">
             Carrinho de Compras
           </button>
