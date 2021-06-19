@@ -32,12 +32,25 @@ p {
   position: relative;
 }
 
-.lupaIcon {
-  color: black;
-  height: 40px;
+.searchButton {
   position: absolute;
-  right: 20px;
-  top: 23px;
+  border: none;
+  border-radius: 0px 4px 4px 0px;
+  background-color: #f08804;
+  height: 37px;
+  right: 10px;
+  top: 12px;  
+  width: 48px;
+}
+
+.searchButton:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.lupaIcon {
+  font-size: 20px;
+  color: black;
 }
 
 .heroContent {

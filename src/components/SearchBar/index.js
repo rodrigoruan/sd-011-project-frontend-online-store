@@ -81,13 +81,12 @@ export default class SearchBar extends React.Component {
               onChange={ this.handleInputChange }
             />
             <button
+              className="searchButton"
               type="button"
               onClick={ this.fetchProductsByTerm }
               data-testid="query-button"
             >
-              {/* <i className="fa fa-search lupaIcon">
-              </i> */}
-              Buscar
+              <i className="fa fa-search lupaIcon" />
             </button>
           </label>
           <CartButton />
