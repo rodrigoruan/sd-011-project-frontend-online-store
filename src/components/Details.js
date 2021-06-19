@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import DetailsAddToCartButton from './DetailsAddToCartButton';
 // import * as api from '../services/api';
+import EvaluationForm from './EvaluationForm';
+import Reviews from './Reviews';
 
 export default class Details extends React.Component {
   constructor(props) {
@@ -27,11 +29,13 @@ export default class Details extends React.Component {
     const { product } = state;
     return (
       <div>
-        <Link to="/">Voltar</Link>
-        <Link to="/Cart" data-testid="shopping-cart-button">Carrinho!</Link>
+        <Link className="voltar" to="/">Voltar</Link>
+        <Link className="c" to="/Cart" data-testid="shopping-cart-button">Carrinho!</Link>
         <h1 data-testid="product-detail-name">{product.title}</h1>
         {this.buildTechSpecifications(product)}
         <DetailsAddToCartButton product={ product } />
+        <EvaluationForm id={ product.id } />
+        <Reviews id={ product.id } />
       </div>
     );
   }

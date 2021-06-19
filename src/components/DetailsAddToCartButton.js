@@ -21,18 +21,27 @@ class DetailsAddToCartButton extends Component {
   addToCart() {
     const { product } = this.props;
     const { thumbnail, price, title, id } = product;
-
-    const cartItem = {
-      thumbnail,
-      price,
-      title,
-      id,
-    };
-
+    let newCart = [];
     const oldCart = this.getProductFromLocalStorage();
-
-    const newCart = [...oldCart, cartItem];
-
+    const existingProductInCart = oldCart.find((item) => item.id === id);
+    if (existingProductInCart) {
+      newCart = oldCart.map((item) => {
+        if (item.id === id) {
+          item.quantity += 1;
+          return item;
+        }
+        return item;
+      });
+    } else {
+      const cartItem = {
+        thumbnail,
+        price,
+        title,
+        id,
+        quantity: 1,
+      };
+      newCart = [...oldCart, cartItem];
+    }
     this.saveToLocalStorage(newCart);
   }
 

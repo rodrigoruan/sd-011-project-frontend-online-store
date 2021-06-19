@@ -58,3 +58,12 @@
 .checkout-products-list {
   background-color: rgb(22, 124, 90);
 }
+
+.cart-render-link {
+  background-color: rgb(22, 124, 90);
+  color: white;
+  text-decoration: none;
+  margin: 10px;
+  border: 1px solid black;
+  padding: 5px;
+}
