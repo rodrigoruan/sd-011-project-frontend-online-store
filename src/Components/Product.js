@@ -88,12 +88,12 @@ export class Product extends Component {
     const product = this.state;
     return (
       <>
-        <Link
+        {/* <Link
           to="/cart"
           data-testid="shopping-cart-button"
         >
           <img className={ style.cart } src={ Picture } alt="Carrinho de compras" />
-        </Link>
+        </Link> */}
         <div className={ style.product }>
           <h3 data-testid="product-detail-name">{ title }</h3>
           <img src={ imagePath } alt="" />

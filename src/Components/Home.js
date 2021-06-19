@@ -77,12 +77,12 @@ class Home extends React.Component {
       <>
         {/* Renderiza o card de produtos após clicar no botão */}
         <section className={ style.inputContent }>
-          <Link
+          {/* <Link
             to="/cart"
             data-testid="shopping-cart-button"
           >
             <img className={ style.cart } src={ Picture } alt="Carrinho de compras" />
-          </Link>
+          </Link> */}
           <label htmlFor="site-search">
             <input
               data-testid="query-input"
