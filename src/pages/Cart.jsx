@@ -10,11 +10,8 @@ class Cart extends React.Component {
     return (
       <main>
         <h1>Carrinho de Compras</h1>
-        {!productList.length
+        { productList.length
           ? (
-            <EmptyCart />
-          )
-          : (
             <ul>
               {productList.map(((product) => (<CartItem
                 updateQuantity={ updateQuantity }
@@ -24,7 +21,10 @@ class Cart extends React.Component {
               />)
               ))}
             </ul>
-          )}
+          )
+          : (
+            <EmptyCart />
+          ) }
         <h2>
           VALOR TOTAL : R$
           { totalPrice }
