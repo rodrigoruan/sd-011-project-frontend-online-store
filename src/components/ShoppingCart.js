@@ -22,6 +22,17 @@ export default class ShoppingCart extends Component {
     localStorage.setItem('item', JSON.stringify([...getLocal]));
   }
 
+  deleteItem({ target }) {
+    const { value } = target;
+    const getLocal = JSON.parse(localStorage.getItem('item'));
+    const deleteItem = getLocal.filter((item) => item.id !== value);
+    localStorage.setItem('item', JSON.stringify([...deleteItem]));
+  }
+
+  deleteCart() {
+    localStorage.clear();
+  }
+
   render() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
     return (
@@ -40,6 +51,7 @@ export default class ShoppingCart extends Component {
                 </p>
               </div>
               <Button
+                deleteItem={ this.deleteItem }
                 quantity={ countP }
                 subClick={ this.subClick }
                 addClick={ this.addClick }
@@ -48,6 +60,9 @@ export default class ShoppingCart extends Component {
               />
             </div>
           ))) }
+        <Link to="/shoppingCart">
+          <button type="button" onClick={ this.deleteCart }>Limpar Carrinho</button>
+        </Link>
         <Link to="checkout" data-testid="checkout-products">Checkout</Link>
         <Link to="/">Voltar</Link>
       </div>
