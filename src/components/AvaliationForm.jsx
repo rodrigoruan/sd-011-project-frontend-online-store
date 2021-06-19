@@ -16,9 +16,7 @@ export default class AvaliationForm extends Component {
   }
 
   handleChange(event) {
-    // função genérica para definir estado a partir do nome e atualizar o shouldRedirect
     const { target: { name, value } } = event;
-
     // função seta o estado recuperando o valor anterior e espalhando ele no novo objeto
     this.setState((state) => ({
       avaliation: {
