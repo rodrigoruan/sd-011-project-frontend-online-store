@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import * as storage from '../services/storage';
 import PropTypes from 'prop-types';
+import * as storage from '../services/storage';
 
 export default class ReviewForm extends Component {
   constructor(props) {
@@ -17,7 +17,10 @@ export default class ReviewForm extends Component {
   }
 
   handleSubmit(event) {
+    const { forceReviewsUpdate } = this.props;
+
     storage.saveReview(this.state);
+    forceReviewsUpdate();
     event.preventDefault();
   }
 
@@ -56,14 +59,6 @@ export default class ReviewForm extends Component {
           type="submit"
           value="Avaliar"
         />
-        {/* <button
-          type="button"
-          onClick={ () => {
-            storage.saveEvaluation('parametro');
-          } }
-        >
-          Avaliar
-        </button> */}
       </form>
     );
   }

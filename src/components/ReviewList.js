@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReviewItem from './ReviewItem';
 
 export default class ReviewList extends Component {
@@ -7,22 +8,25 @@ export default class ReviewList extends Component {
     let productReviews = [];
     const { productId } = this.props;
 
-    if(allProductsReviews) {
+    if (allProductsReviews) {
       allProductsReviews = JSON.parse(allProductsReviews);
-      productReviews = [...allProductsReviews[productId]];
+      if (allProductsReviews[productId]) {
+        productReviews = [...allProductsReviews[productId]];
+      }
     }
+
+    const productReviewsList = productReviews.map((review, index) => (
+      <ReviewItem key={ index } productReview={ review } />
+    ));
+
     return (
-      <section>
-        {
-          productReviews.map((obj, index) => (
-              <li key={ index }>
-                <ReviewItem productReview={ obj } />
-              </li>
-            )
-          )
-        }
-        <h1>oi =D</h1>
-      </section>
+      productReviewsList.length === 0
+        ? <span>Esse produto ainda não possui avaliações!</span>
+        : <section>{ productReviewsList }</section>
     );
   }
+}
+
+ReviewList.propTypes = {
+  productId: PropTypes.string.isRequired,
 };

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ReviewItem extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class ReviewItem extends Component {
   }
 }
 
-// ReviewItem.propTypes = ({
-//   email: PropTypes.string,
-//   message: PropTypes.string,
-// }).isRequired;
+ReviewItem.propTypes = ({
+  email: PropTypes.string,
+  message: PropTypes.string,
+}).isRequired;

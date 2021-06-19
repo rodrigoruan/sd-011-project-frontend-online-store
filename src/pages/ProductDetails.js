@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AddItemToCart from '../components/AddItemToCart';
 import CartButton from '../components/CartButton';
-import ReviewForm from '../components/ReviewForm';
-import ReviewList from '../components/ReviewList';
+import Reviews from '../components/Reviews';
 
 export default class ProductDetails extends React.Component {
   render() {
     const { location } = this.props;
     const { state } = location;
     const { id, title, price, thumbnail } = state;
+
     return (
       <section>
         <CartButton />
@@ -20,8 +20,7 @@ export default class ProductDetails extends React.Component {
           product={ state }
           dataTestId="product-detail-add-to-cart"
         />
-        <ReviewForm productId={ id } />
-        <ReviewList productId={ id } />
+        <Reviews productId={ id } />
       </section>
     );
   }
