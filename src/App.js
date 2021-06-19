@@ -5,13 +5,11 @@ import Cart from './Components/Cart';
 import { Checkout } from './Components/Checkout';
 import { Product } from './Components/Product';
 import Home from './Components/Home';
-import ShoppingCart from './Components/ShoppingCart';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <ShoppingCart />
         <Switch>
           <Route exact path="/">
             <Home />

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import style from './Home.module.css';
-import Picture from '../img/shopping-cart.png';
+import ShoppingCart from './ShoppingCart';
 
 export class Product extends Component {
   constructor(props) {
@@ -16,6 +15,7 @@ export class Product extends Component {
       mensage: '',
       rating: '',
       id: '',
+      // shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
     this.submitButton = this.submitButton.bind(this);
     this.sendProductDetails = this.sendProductDetails.bind(this);
@@ -88,12 +88,7 @@ export class Product extends Component {
     const product = this.state;
     return (
       <>
-        {/* <Link
-          to="/cart"
-          data-testid="shopping-cart-button"
-        >
-          <img className={ style.cart } src={ Picture } alt="Carrinho de compras" />
-        </Link> */}
+        <ShoppingCart />
         <div className={ style.product }>
           <h3 data-testid="product-detail-name">{ title }</h3>
           <img src={ imagePath } alt="" />
@@ -126,7 +121,7 @@ export class Product extends Component {
                 id="email-id"
                 type="e-mail"
                 placeholder="Digite seu e-mail"
-                isRequired
+                required
               />
             </label>
             <label htmlFor="rating-id">
@@ -138,7 +133,7 @@ export class Product extends Component {
                 min={ 0 }
                 max={ 5 }
                 placeholder="0 a 5"
-                isRequired
+                required
               />
             </label>
             <label htmlFor="mensage-id">
@@ -171,6 +166,7 @@ export class Product extends Component {
             </h3>
           </section>
         </div>
+        <span>Direitos reservados.</span>
       </>
     );
   }

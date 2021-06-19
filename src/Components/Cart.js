@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import style from './Cart.module.css';
+import ShoppingCart from './ShoppingCart';
 
 class Cart extends Component {
   constructor() {
@@ -42,49 +43,61 @@ class Cart extends Component {
     // const cart = JSON.parse(localStorage.getItem('cart'));
     const { shoppingCart } = this.state;
     return (shoppingCart.length === 0) ? (
-      <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+      <>
+        <ShoppingCart />
+        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+      </>
     ) : (
-      <section className={ style.cart }>
-        {shoppingCart && shoppingCart.map((item, index) => (
-          <div key={ index }>
-            <h2 data-testid="shopping-cart-product-name">{ item.title }</h2>
-            <img src={ item.thumbnail } alt="foto do produto no carro" />
-            <p>
-              R$
-              { item.price }
-            </p>
+      <>
+        <ShoppingCart />
+        <section className={ style.cart }>
+          {shoppingCart && shoppingCart.map((item, index) => (
+            <div key={ index }>
+              <h2 data-testid="shopping-cart-product-name">{ item.title }</h2>
+              <img src={ item.thumbnail } alt="foto do produto no carro" />
+              <p>
+                R$
+                { item.price }
+              </p>
+              <button
+                type="button"
+                onClick={ () => this.handleClickRemove(item) }
+                id={ item.id }
+              >
+                X
+              </button>
+              <button
+                type="button"
+                data-testid="product-decrease-quantity"
+                onClick={ () => this.handleClickSub(item, index) }
+              >
+                -
+              </button>
+              <span data-testid="shopping-cart-product-quantity">{item.quantity}</span>
+              <button
+                type="button"
+                data-testid="product-increase-quantity"
+                onClick={ () => this.handleClickAdd(item, index) }
+              >
+                +
+              </button>
+            </div>
+          ))}
+          <h2>
+            Total:R$
+            {shoppingCart.reduce((acc, cv) => acc + (cv.price * cv.quantity),
+              0).toFixed(2)}
+          </h2>
+          <Link to="/checkout">
             <button
+              data-testid="checkout-products"
               type="button"
-              onClick={ () => this.handleClickRemove(item) }
-              id={ item.id }
             >
-              X
+              Finalizar compra
             </button>
-            <button
-              type="button"
-              data-testid="product-decrease-quantity"
-              onClick={ () => this.handleClickSub(item, index) }
-            >
-              -
-            </button>
-            <span data-testid="shopping-cart-product-quantity">{item.quantity}</span>
-            <button
-              type="button"
-              data-testid="product-increase-quantity"
-              onClick={ () => this.handleClickAdd(item, index) }
-            >
-              +
-            </button>
-          </div>
-        ))}
-        <h2>
-          Total:R$
-          {shoppingCart.reduce((acc, cv) => acc + (cv.price * cv.quantity), 0).toFixed(2)}
-        </h2>
-        <Link to="/checkout">
-          <button data-testid="checkout-products" type="button">Finalizar compra</button>
-        </Link>
-      </section>
+          </Link>
+        </section>
+      </>
     );
   }
 }
