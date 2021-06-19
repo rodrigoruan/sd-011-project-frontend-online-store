@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { EmptyCart } from '../components';
+import { EmptyCart, BuyerInfo } from '../components';
 
 export default class Checkout extends Component {
   render() {
@@ -27,9 +27,7 @@ export default class Checkout extends Component {
               </section>
               <section>
                 <h1>Informações do comprador</h1>
-                <form>
-                  formulário
-                </form>
+                <BuyerInfo />
               </section>
               <section>
                 <h1>Método de pagamento</h1>

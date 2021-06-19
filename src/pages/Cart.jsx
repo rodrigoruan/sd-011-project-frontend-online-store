@@ -29,7 +29,7 @@ class Cart extends React.Component {
           VALOR TOTAL : R$
           { totalPrice }
         </h2>
-        <Link to="/checkout">
+        <Link to="/checkout" data-testid="checkout-products">
           Comprar agora
         </Link>
       </main>

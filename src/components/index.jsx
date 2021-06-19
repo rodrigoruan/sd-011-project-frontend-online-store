@@ -6,3 +6,4 @@ export { default as ShoppingCartButton } from './ShoppingCartButton';
 export { default as AddToCartButton } from './AddToCartButton';
 export { default as CheckoutButton } from './CheckoutButton';
 export { default as EmptyCart } from './EmptyCart';
+export { default as BuyerInfo } from './BuyerInfo';
