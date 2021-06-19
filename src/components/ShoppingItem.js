@@ -16,15 +16,17 @@ class ShoppingItem extends Component {
 
   increase() {
     const { productCart, forceAppUpdate } = this.props;
-    const { price } = productCart;
+    const { price, available_quantity: availableQuantity } = productCart;
     const { counter } = this.state;
-    const totalPrice = Math.round((counter + 1) * price * 100) / 100;
-    this.setState({
-      counter: counter + 1,
-      totalPrice,
-    });
-    storage.saveProduct(productCart, 1);
-    forceAppUpdate();
+    if (counter < availableQuantity) {
+      const totalPrice = ((counter + 1) * price).toFixed(2);
+      this.setState({
+        counter: counter + 1,
+        totalPrice,
+      });
+      storage.saveProduct(productCart, 1);
+      forceAppUpdate();
+    }
   }
 
   decrease() {
@@ -33,14 +35,14 @@ class ShoppingItem extends Component {
     const amount = -1;
     if (counter > 1) {
       const { price } = productCart;
-      const totalPrice = Math.round((counter - 1) * price * 100) / 100;
+      const totalPrice = ((counter - 1) * price).toFixed(2);
       this.setState({
         counter: counter - 1,
         totalPrice,
       });
+      storage.saveProduct(productCart, amount);
+      forceAppUpdate();
     }
-    storage.saveProduct(productCart, amount);
-    forceAppUpdate();
   }
 
   render() {

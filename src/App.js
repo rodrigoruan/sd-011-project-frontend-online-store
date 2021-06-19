@@ -34,8 +34,6 @@ class App extends React.Component {
             path="/shoppingcart"
             render={ (props) => (<ShoppingCart
               { ...props }
-              // productsCart={ productsCart }
-              // onClick={ this.removeItem }
               forceAppUpdate={ this.forceUpdate }
             />) }
           />

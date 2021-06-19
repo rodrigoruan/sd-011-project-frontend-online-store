@@ -37,7 +37,7 @@ class ShoppingCart extends Component {
     if (productsCart) {
       const total = Object.values(productsCart)
         .reduce((acc, { details, quantity }) => acc + (details.price * quantity), 0);
-      return total;
+      return total.toFixed(2);
     }
     return 0;
   }
