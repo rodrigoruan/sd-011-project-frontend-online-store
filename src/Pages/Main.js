@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ShoppingCart from './ShoppingCart';
+// import ShoppingCart from './ShoppingCart';
+import { Link } from 'react-router-dom';
 import Search from '../component/Search';
 import Categorys from '../component/Categorys';
 import Cards from '../component/Cards';
@@ -28,19 +28,19 @@ export default class Main extends Component {
 
   render() {
     const { arraySearch, ctgId } = this.state;
-    const { itensAdded, addItens } = this.props;
+    const { addItens } = this.props;
+
     return (
       <>
         <Search evSrch={ this.eventSearch } ctgId={ ctgId } />
         <Categorys evCtg={ this.eventCtg } evSrch={ this.eventSearch } />
         <Cards resultSearch={ arraySearch } addItems={ addItens } />
-        <ShoppingCart itensArray={ itensAdded } />
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
       </>
     );
   }
 }
 
-Main.propTypes = {
-  itensAdded: PropTypes.arrayOf(PropTypes.object).isRequired,
-  addItens: PropTypes.func.isRequired,
-};
+// Main.propTypes = {
+//   addItens: PropTypes.func.isRequired,
+// };

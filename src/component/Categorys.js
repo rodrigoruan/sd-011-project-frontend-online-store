@@ -26,7 +26,6 @@ export default class Categorys extends Component {
     const { value } = target;
     const { evCtg, evSrch } = this.props;
     evCtg(value);
-    console.log('aqui');
     const result = await getProductsFromCategoryAndQuery(value, '');
     evSrch(result.results);
   }

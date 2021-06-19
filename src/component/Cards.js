@@ -8,8 +8,8 @@ export default class Cards extends Component {
     this.handleAdd = this.handleAdd.bind(this);
   }
 
-  handleAdd(id, title) {
-    const obj = { id, title };
+  handleAdd(id, title, maxQtd, value) {
+    const obj = { id, title, maxQtd, qtd: 1, value };
     const { addItems } = this.props;
     addItems(obj);
   }
@@ -18,21 +18,18 @@ export default class Cards extends Component {
     const { resultSearch } = this.props;
     return (
       <div className="list-cards">
-        { resultSearch.map(({ id, title, shipping }) => (
+        { resultSearch.map(({ id, title, shipping, sold_quantity, price }) => (
           <div className="cards" data-testid="product" key={ id }>
             <p>{ title }</p>
             { shipping.free_shipping
               ? <spam data-testid="free-shipping">Frete Grátis</spam> : '' }
-            <Link
-              to={ `/product/${id}` }
-              data-testid="product-detail-link"
-            >
+            <Link to={ `/product/${id}` } data-testid="product-detail-link">
               Ver detalhes
             </Link>
             <button
               type="button"
               data-testid="product-add-to-cart"
-              onClick={ () => this.handleAdd(id, title) }
+              onClick={ () => this.handleAdd(id, title, sold_quantity, price) }
             >
               Adicionar
             </button>

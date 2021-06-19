@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import FormComment from '../component/FormComment';
 import Comments from '../component/Comments';
-import ShoppingCart from './ShoppingCart';
+// import ShoppingCart from './ShoppingCart';
 
 export default class ProductDetail extends Component {
   constructor() {
@@ -22,9 +23,13 @@ export default class ProductDetail extends Component {
   }
 
   handleAdd(product) {
+    const { id, title, shipping, sold_quantity, price } = product;
     const obj = {
-      id: product.id,
-      title: product.title,
+      id,
+      title,
+      maxQtd: sold_quantity,
+      qtd: 1,
+      value: price,
     };
     const { addItens } = this.props;
     addItens(obj);
@@ -50,13 +55,11 @@ export default class ProductDetail extends Component {
 
   render() {
     const { product, shipping, comments } = this.state;
-    const { itensAdded } = this.props;
     return (
       <div>
         <p data-testid="product-detail-name">{ product.title }</p>
         <p>{ `R$ ${product.price}` }</p>
-        { shipping.free_shipping
-          ? <p data-testid="free-shipping">Frete Grátis</p> : '' }
+        { shipping.free_shipping && <p data-testid="free-shipping">Frete Grátis</p> }
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
@@ -64,9 +67,9 @@ export default class ProductDetail extends Component {
         >
           Adicionar
         </button>
-        <ShoppingCart itensArray={ itensAdded } />
         <FormComment idPrd={ product.id } evBtn={ this.setCommentarray } />
         <Comments idPrd={ product.id } arrayComment={ comments } />
+        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
       </div>
     );
   }
@@ -78,6 +81,4 @@ ProductDetail.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
-  itensAdded: PropTypes.arrayOf(PropTypes.object).isRequired,
-  addItens: PropTypes.func.isRequired,
 };
