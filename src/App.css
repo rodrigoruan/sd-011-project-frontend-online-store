@@ -102,8 +102,8 @@ textarea {
 .categories-container {
   display: flex;
   flex-direction: column;
-  width: 200px;
   margin: 0 20px;
+  width: 200px;
 }
 
 .category-button {
@@ -116,7 +116,6 @@ textarea {
 }
 
 .product-card {
-  width: 200px;
-  /* border: 1px solid red; */
   padding: 10px;
+  width: 200px;
 }
