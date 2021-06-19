@@ -6,7 +6,8 @@ import AddItemToCart from './AddItemToCart';
 class ProductCard extends React.Component {
   render() {
     const { product, forceAppUpdate } = this.props;
-    const { product: { title, price, thumbnail, id } } = this.props;
+    const { product: { title, price, thumbnail, id, shipping } } = this.props;
+    const { free_shipping: freeShipping } = shipping;
 
     return (
       <div className="product-card" data-testid="product">
@@ -20,6 +21,7 @@ class ProductCard extends React.Component {
           <h3>{ title }</h3>
           <img src={ thumbnail } alt={ title } />
           <p>{ price }</p>
+          <div>{ freeShipping && <p data-testid="free-shipping">Frete Gratis</p> }</div>
         </Link>
         <AddItemToCart
           product={ product }
