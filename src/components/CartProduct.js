@@ -6,23 +6,21 @@ export default class CartProduct extends Component {
     super(props);
 
     this.state = {};
-    // this.showButtons = this.showButtons.bind(this);
   }
 
   componentDidMount() {
-    const {
-      handleAddToCart,
-      productData: { id, thumbnail, title, price },
-    } = this.props;
-
-    this.setState({ id, thumbnail, title, price });
+    this.setItemObj();
   }
 
+  setItemObj = () => {
+    const { productData } = this.props;
+    this.setState(productData);
+  };
+
   render() {
-    const { title, thumbnail, price, id } = this.state;
+    const { productData } = this.props;
     // prettier-ignore
-    const { handleAddToCart, handleDecreaseQuantity, handleRemoveFromCart,
-      productData: { quantity } } = this.props;
+    const { handleAddToCart, handleDecreaseQuantity, handleRemoveFromCart } = this.props;
 
     const showButtons = () => {
       if (handleAddToCart && handleDecreaseQuantity && handleRemoveFromCart) {
@@ -31,14 +29,14 @@ export default class CartProduct extends Component {
             <button
               data-testid="product-decrease-quantity"
               type="button"
-              onClick={() => handleDecreaseQuantity(id, thumbnail, title, price, quantity)}
+              onClick={ () => handleDecreaseQuantity(productData) }
             >
               -
             </button>
             <button
               data-testid="product-increase-quantity"
               type="button"
-              onClick={() => handleAddToCart(id, thumbnail, title, price, quantity)}
+              onClick={ () => handleAddToCart(productData) }
             >
               +
             </button>
@@ -50,10 +48,7 @@ export default class CartProduct extends Component {
     const showRemoveButton = () => {
       if (handleRemoveFromCart) {
         return (
-          <button
-            type="button"
-            onClick={() => handleRemoveFromCart(id, thumbnail, title, price, quantity)}
-          >
+          <button type="button" onClick={ () => handleRemoveFromCart(productData) }>
             X
           </button>
         );
@@ -63,10 +58,10 @@ export default class CartProduct extends Component {
     return (
       <div>
         {showRemoveButton()}
-        <p data-testid="shopping-cart-product-name">{title}</p>
-        <img height="150px" src={thumbnail} alt="thumbnail" />
-        <span>{price}</span>
-        <div data-testid="shopping-cart-product-quantity">{quantity}</div>
+        <p data-testid="shopping-cart-product-name">{productData.title}</p>
+        <img height="150px" src={ productData.thumbnail } alt="thumbnail" />
+        <span>{productData.price}</span>
+        <div data-testid="shopping-cart-product-quantity">{productData.quantity}</div>
         {showButtons()}
       </div>
     );
@@ -79,6 +74,6 @@ CartProduct.propTypes = {
       price: PropTypes.number,
       thumbnail: PropTypes.string,
       title: PropTypes.string,
-    })
+    }),
   ),
 }.isRequired;

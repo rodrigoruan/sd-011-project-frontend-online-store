@@ -18,9 +18,7 @@ export default class FinishScreen extends Component {
       <div>
         <div>
           <h3>Revise seus produtos:</h3>
-          {products.map((el, index) => {
-            return <CartProduct productData={el} key={index} />;
-          })}
+          {products.map((el, index) => <CartProduct productData={ el } key={ index } />)}
         </div>
         <BuyerInformation />
         <PaymentMethod />
