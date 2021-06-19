@@ -1,0 +1,16 @@
+.container {
+  margin: 0 auto;
+  width: 70%;
+}
+
+.products {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  height: 350px;
+}
+
+.products div {
+  border: 3px solid #ddd;
+  margin-top: 30px;
+}
