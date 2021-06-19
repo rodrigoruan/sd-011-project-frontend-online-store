@@ -1,8 +1,8 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../ProductList';
-// import ShoppingCartButton from './ShoppingCartButton';
+import ShoppingCartButton from './ShoppingCartButton';
 
 class Home extends React.Component {
   constructor() {
@@ -10,21 +10,14 @@ class Home extends React.Component {
     this.state = {
       productCategories: [],
       filterCategories: '',
-      productsFromList: [],
     };
+    localStorage.setItem('productList', JSON.stringify([]));
     this.categoriesNames = this.categoriesNames.bind(this);
     this.onClickCategories = this.onClickCategories.bind(this);
-    this.handleCart = this.handleCart.bind(this);
   }
 
   componentDidMount() {
     this.categoriesNames();
-  }
-
-  handleCart(array) {
-    this.setState({
-      productsFromList: array,
-    });
   }
 
   onClickCategories({ target: { value } }) {
@@ -43,8 +36,8 @@ class Home extends React.Component {
   render() {
     const { productCategories, filterCategories } = this.state;
     return (
-      <fragment>
-        <ProductList selectedCategory={ filterCategories } handleCart={ this.handleCart } />
+      <section>
+        <ProductList selectedCategory={ filterCategories } />
         <div className="categoriesList">
           { productCategories.map((category) => (
             <div key={ category.id }>
@@ -58,10 +51,10 @@ class Home extends React.Component {
               { category.name }
             </div>))}
         </div>
-        {/* <Link data-testid="shopping-cart-button" to="/cart">
+        <Link data-testid="shopping-cart-button" to="/cart">
           <ShoppingCartButton />
-        </Link> */}
-      </fragment>
+        </Link>
+      </section>
     );
   }
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import ShoppingCartButton from './ShoppingCartButton';
 // import Form from '../Form';
 
 class ProductDetails extends React.Component {
@@ -17,6 +16,7 @@ class ProductDetails extends React.Component {
       },
     };
     this.fetchDataFromProduct = this.fetchDataFromProduct.bind(this);
+    this.addtocart = this.addtocart.bind(this);
   }
 
   componentDidMount() {
@@ -37,10 +37,17 @@ class ProductDetails extends React.Component {
     });
   }
 
+  addtocart() {
+    const { product } = this.state;
+    let getItem = JSON.parse(localStorage.getItem('productList'));
+    getItem = [...getItem, product];
+    console.log(getItem);
+    localStorage.setItem('productList', JSON.stringify(getItem));
+  }
+
   render() {
     const { product } = this.state;
     const { title, thumbnail, price, atributtes } = product;
-    // const { location: { teste, funcao } } = this.props;
     return (
       <div>
         Detalhes do Produto
@@ -49,13 +56,16 @@ class ProductDetails extends React.Component {
         <p>{ price }</p>
         <p>{ atributtes }</p>
         <br />
-        <Link data-testid="shopping-cart-button" to={ { pathname: '/cart', productFromDetails: product } }>
-          <ShoppingCartButton />
-        </Link>
-        <Link to="/cart">
+        <Link data-testid="shopping-cart-button" to="/cart">
           <button type="button">Retorne ao carrinho de compras</button>
         </Link>
-        {/* <Form teste={ teste } funcao={ funcao } /> */}
+        <button
+          data-testid="product-detail-add-to-cart"
+          onClick={ this.addtocart }
+          type="button"
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
