@@ -9,40 +9,14 @@ import Checkout from './pages/Checkout';
 import CategoryFilter from './components/CategoryFilter';
 import Header from './components/Header';
 import './App.css';
-// Serviços
-import * as storage from './services/storage';
 
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      productsCart: '',
-    };
-    this.updateState = this.updateState.bind(this);
-    this.removeItem = this.removeItem.bind(this);
     this.forceUpdate = this.forceUpdate.bind(this);
   }
 
-  componentDidMount() {
-    this.updateState();
-  }
-
-  updateState() {
-    const storageCart = storage.retrieveCart();
-    this.setState({
-      productsCart: storageCart,
-    });
-  }
-
-  removeItem(id) {
-    const { productsCart } = this.state;
-    delete productsCart[id];
-    localStorage.setItem('shoppingCart', JSON.stringify(productsCart));
-    this.updateState();
-  }
-
   render() {
-    const { productsCart } = this.state;
     return (
       <BrowserRouter>
         <Header />
@@ -60,8 +34,8 @@ class App extends React.Component {
             path="/shoppingcart"
             render={ (props) => (<ShoppingCart
               { ...props }
-              productsCart={ productsCart }
-              onClick={ this.removeItem }
+              // productsCart={ productsCart }
+              // onClick={ this.removeItem }
               forceAppUpdate={ this.forceUpdate }
             />) }
           />
