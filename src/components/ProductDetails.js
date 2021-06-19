@@ -12,12 +12,10 @@ export default class ProductDetails extends Component {
       quantityItems: 0,
     };
 
-    this.getValues = this.getValues.bind(this);
     this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
 
   componentDidMount() {
-    this.getValues();
     this.foundQuantityItemsCart();
   }
 
@@ -36,27 +34,14 @@ export default class ProductDetails extends Component {
         localStorage.setItem('item', JSON.stringify([...getLocal]));
       }
     }
-  }
-
-  getValues() {
-    const keys = Object.values(localStorage);
-    if (keys.length > 0) {
-      keys.forEach((value) => {
-        JSON.parse(value);
-      });
-    }
-  }
+  }// Rodolfo Rezende Turma 11, Me ajudou na logica dessa função;
 
   foundQuantityItemsCart() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
-    let sumProduct = 0;
     if (getLocal) {
-      getLocal.forEach((product) => {
-        sumProduct += product.countP;
-        return 1;
-      });
+      const count = getLocal.reduce((acr, value) => acr + value.countP, 0);
       this.setState({
-        quantityItems: sumProduct,
+        quantityItems: count,
       });
     }
   }
@@ -98,7 +83,7 @@ export default class ProductDetails extends Component {
 
         <div>
           <h3>Especificações Técnicas:</h3>
-          <p>
+          <div>
             {attributes.map((attribute, index) => (
               <p key={ index }>
                 {attribute.name}
@@ -106,7 +91,7 @@ export default class ProductDetails extends Component {
                 {attribute.value_name}
               </p>
             ))}
-          </p>
+          </div>
         </div>
         <Link to="/">Voltar</Link>
         <button
@@ -124,7 +109,7 @@ export default class ProductDetails extends Component {
 }
 
 ProductDetails.propTypes = {
-  location: {
+  location: PropTypes.shape({
     state: {
       details: {
         title: PropTypes.string,
@@ -139,5 +124,5 @@ ProductDetails.propTypes = {
         },
       },
     },
-  }.isRequired,
+  }).isRequired,
 };

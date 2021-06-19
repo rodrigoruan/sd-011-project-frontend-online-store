@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from './Button';
 
 export default class ShoppingCart extends Component {
-  sumtotal = () => {
-    const { location } = this.props;
-    const { state } = location;
-
-    const total = [];
-    state.map((item) => total.push(item.price));
-
-    // const { price } = state[0];
-    // const prices = [...price];
-    // return prices;
-  }
-
   subClick = (index, id) => {
     const getLocal = JSON.parse(localStorage.getItem('item'));
     if (getLocal[`${index}`].countP > 1) {
@@ -25,7 +12,7 @@ export default class ShoppingCart extends Component {
       const deleteItem = getLocal.filter((value) => value.id !== id);
       localStorage.setItem('item', JSON.stringify([...deleteItem]));
     }
-  }
+  }// Rodolfo Rezende da Turma 11 me ajudou a criar a logica dessa função;
 
   addClick = (index) => {
     const getLocal = JSON.parse(localStorage.getItem('item'));
@@ -67,9 +54,3 @@ export default class ShoppingCart extends Component {
     );
   }
 }
-
-ShoppingCart.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
-};

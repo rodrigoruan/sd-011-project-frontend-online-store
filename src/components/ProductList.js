@@ -38,9 +38,12 @@ export default class ProductList extends Component {
           R$
           {price}
         </p>
-        { freeShipping
-          ? <p data-testid="free-shipping">Frete Gratis</p>
-          : <p>A combinar com o vendedor</p> }
+        <div>
+          Frete:
+          { freeShipping
+            ? <p data-testid="free-shipping">Frete Gratis</p>
+            : <p>A combinar com o vendedor</p> }
+        </div>
         <button
           data-testid="product-add-to-cart"
           value={ id }

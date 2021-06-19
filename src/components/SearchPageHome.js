@@ -20,8 +20,6 @@ export default class SearchPageHome extends Component {
     this.getProducts = this.getProducts.bind(this);
     this.filterProducts = this.filterProducts.bind(this);
     this.getCategories = this.getCategories.bind(this);
-    this.changeCategory = this.changeCategory.bind(this);
-    this.addItemCart = this.addItemCart.bind(this);
     this.handleListCategories = this.handleListCategories.bind(this);
     this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
@@ -31,11 +29,7 @@ export default class SearchPageHome extends Component {
   }
 
   async handleListCategories({ target }) {
-    const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    });
     const { query } = this.state;
     const response = await api.getProductsFromCategoryAndQuery(value, query);
     this.setState({
@@ -60,38 +54,17 @@ export default class SearchPageHome extends Component {
     });
   }
 
-  changeCategory({ target }) {
-    this.setState({
-      categories: target.value,
-    });
-  }
-
   filterProducts({ target }) {
     this.setState({
       query: target.value,
     });
   }
 
-  addItemCart({ target }) {
-    const { product, itemsCart } = this.state;
-    product.countP = 1;
-    const { value } = target;
-    const productForCart = product.find((item) => item.id === value);
-
-    this.setState({
-      itemsCart: [...itemsCart, productForCart],
-    });
-  }
-
   foundQuantityItemsCart() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
-    let sumProduct = 0;
-    getLocal.forEach((product) => {
-      sumProduct += product.countP;
-      return 1;
-    });
+    const count = getLocal.reduce((acr, value) => acr + value.countP, 0);
     this.setState({
-      itemsCart: sumProduct,
+      itemsCart: count,
     });
   }
 
@@ -139,7 +112,6 @@ export default class SearchPageHome extends Component {
         ) : (product.map((item) => (<ProductList
           products={ item }
           key={ item.id }
-          addItemCart={ this.addItemCart }
           foundQuantityItemsCart={ this.foundQuantityItemsCart }
         />)))}
       </div>
