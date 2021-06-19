@@ -30,11 +30,7 @@ export default class SearchPageHome extends Component {
   }
 
   async handleListCategories({ target }) {
-    const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({
-      [name]: value,
-    });
     const { query } = this.state;
     const response = await api.getProductsFromCategoryAndQuery(value, query);
     this.setState({
