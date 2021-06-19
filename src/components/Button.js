@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default class Button extends Component {
   render() {
-    const { subClick, addClick, quantity, id, index } = this.props;
+    const { subClick, addClick, quantity, id, index, deleteItem } = this.props;
     return (
       <div>
         <Link to="/ShoppingCart">
@@ -32,7 +32,15 @@ export default class Button extends Component {
             +
           </button>
         </Link>
-
+        <Link to="/ShoppingCart">
+          <button
+            onClick={ deleteItem }
+            type="button"
+            value={ id }
+          >
+            Deletar Item
+          </button>
+        </Link>
       </div>
     );
   }
@@ -41,6 +49,7 @@ export default class Button extends Component {
 Button.propTypes = {
   subClick: PropTypes.func.isRequired,
   addClick: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
   quantity: PropTypes.number.isRequired,
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
