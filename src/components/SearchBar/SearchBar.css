@@ -51,7 +51,7 @@ aside {
   background-color: rgba(240, 236, 236, 0.555);
   box-shadow: 11px 3px 16px -4px rgba(210, 210, 210, 0.56);
   overflow: auto;
-  padding: 10px;
+  /* padding: 10px; */
   width: 15vw;
 }
 
@@ -61,12 +61,42 @@ aside {
   width: 85vw;
 }
 
-.categoryItem {
-  padding: 7px;
-}
-
 .categoryItem label {
   cursor: pointer;
+}
+
+.categoryItem button {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  background-color: none;
+  border: none;
+}
+
+.categoryItem button:hover {
+  font-size: 16px;
+  color: white;
+  background-color: rgba(19, 25, 32, 0.555);
+}
+
+aside::-webkit-scrollbar {
+  width: 10px;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background: #f08804; 
+  border-radius: 10px;
+}
+
+aside::-webkit-scrollbar-thumb:hover {
+  background: rgba(19, 25, 32, 0.75); 
+}
+
+aside::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
 }
 
 .categoryItem i {
