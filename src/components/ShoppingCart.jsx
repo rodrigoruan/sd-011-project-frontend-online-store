@@ -96,6 +96,16 @@ export default class ShoppingCart extends Component {
             { totalShoppingCart }
           </p>
         </div>
+        <Link
+          data-testid="checkout-products"
+          to={ {
+            pathname: '/Checkout',
+            state: {
+              cart: shoppingCart },
+          } }
+        >
+          Ir para Checkout
+        </Link>
       </div>
     );
   }
