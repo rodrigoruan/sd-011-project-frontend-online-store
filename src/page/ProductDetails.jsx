@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Button2 from '../components/Button2';
 
 export default class ProductDetails extends Component {
   render() {
@@ -28,6 +29,7 @@ export default class ProductDetails extends Component {
             </li>
           ))}
         </ul>
+        <Button2 product={ state } />
       </div>
     );
   }
