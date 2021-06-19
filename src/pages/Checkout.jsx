@@ -23,7 +23,7 @@ export default class Checkout extends Component {
                 )) }
               </section>
               <section>
-                { totalPrice }
+                { `Valor Total: R$${totalPrice}` }
               </section>
               <section>
                 <h1>Informações do comprador</h1>

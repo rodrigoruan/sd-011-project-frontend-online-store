@@ -5,7 +5,6 @@ export default class BuyerInfo extends Component {
     return (
       <form>
         <label htmlFor="fullname-input">
-          Nome Completo
           <input
             type="text"
             placeholder="Nome Completo"
@@ -13,9 +12,8 @@ export default class BuyerInfo extends Component {
             id="fullname-input"
           />
         </label>
-
+        <br />
         <label htmlFor="checkout-input">
-          Email
           <input
             type="email"
             placeholder="Email"
@@ -23,9 +21,8 @@ export default class BuyerInfo extends Component {
             id="email-input"
           />
         </label>
-
+        <br />
         <label htmlFor="cpf-input">
-          CPF
           <input
             type="text"
             placeholder="CPF"
@@ -33,9 +30,8 @@ export default class BuyerInfo extends Component {
             id="cpf-input"
           />
         </label>
-
+        <br />
         <label htmlFor="phone-input">
-          Telefone
           <input
             type="text"
             placeholder="Telefone"
@@ -43,9 +39,8 @@ export default class BuyerInfo extends Component {
             id="phone-input"
           />
         </label>
-
+        <br />
         <label htmlFor="cep-input">
-          CEP
           <input
             type="text"
             placeholder="CEP"
@@ -53,9 +48,8 @@ export default class BuyerInfo extends Component {
             id="cep-input"
           />
         </label>
-
+        <br />
         <label htmlFor="adress-input">
-          Endereço
           <input
             type="text"
             placeholder="Endereço"
@@ -63,8 +57,7 @@ export default class BuyerInfo extends Component {
             id="address-input"
           />
         </label>
-
-        <button type="button">Finalizar a compra!</button>
+        <br />
       </form>
     );
   }
