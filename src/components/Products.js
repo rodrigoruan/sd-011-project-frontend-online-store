@@ -17,12 +17,16 @@ class Products extends Component {
 
   render() {
     const { title, img, price, product } = this.props;
+    const { id } = product;
     return (
-      <div>
+      <div className="productArea">
         <Link
           to={ {
             pathname: `/product-details/${title}`,
-            state: { productToAdd: product },
+            state: { 
+              productToAdd: product, 
+              productId: id 
+            },
           } }
           data-testid="product-detail-link"
         >
@@ -31,7 +35,7 @@ class Products extends Component {
             <img src={ img } alt="produto" />
             <p>
               {'R$'}
-              { price.toFixed(2) }
+              { price ? price.toFixed(2) : '00' }
             </p>
           </div>
         </Link>
@@ -51,7 +55,7 @@ Products.propTypes = {
   product: PropTypes.objectOf(String).isRequired,
   title: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.number,
   func: PropTypes.func.isRequired,
 };
 

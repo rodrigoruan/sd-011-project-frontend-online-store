@@ -1,0 +1,13 @@
+.contentArea {
+	display: flex;
+	width: 80%;
+	margin: 0 auto;
+}
+
+.filterArea {
+	width: 18%;
+}
+
+.searchArea {
+	width: 82%;
+}

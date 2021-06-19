@@ -28,7 +28,7 @@ class Filter extends React.Component {
     const { onClick } = this.props;
 
     return (
-      <div>
+      <div className="filterArea">
         <ul aria-hidden="true" onClick={ onClick }>
           {request.map((req, index) => (
             <li data-testid="category" id={ req.id } key={ index } className="Category">

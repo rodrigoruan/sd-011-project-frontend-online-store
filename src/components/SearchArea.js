@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Products from './Products';
+import '../styles/SearchArea.css'
 
 class SearchArea extends Component {
   render() {
     const { products, createCart } = this.props;
     return (
-      <div>
+      <div className="searchArea">
         { products.map((product, index) => {
           product.cartCount = 1;
           return (<Products
