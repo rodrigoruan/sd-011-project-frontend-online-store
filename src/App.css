@@ -82,6 +82,15 @@
 }
 
 .total-price {
-  font-weight: 800;
   font-size: 25px;
+  font-weight: 800;
+}
+
+.checkout-product {
+  display: flex;
+  margin: 50px 20px;
+}
+
+.price-params {
+  margin: 0 10px;
 }

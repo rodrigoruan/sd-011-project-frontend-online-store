@@ -151,7 +151,9 @@ export default class App extends Component {
             />
             <Route
               path="/checkout"
-              render={ () => <Checkout /> }
+              render={ () => (<Checkout
+                cartItems={ cartItems }
+              />) }
             />
           </Switch>
         </Router>
