@@ -63,19 +63,51 @@ class ProductDetail extends Component {
     } = this.props;
     return (
       <>
+        <div className="product-details-header">
+          <Link to="/">
+            <img
+              src="/imgs/return.png"
+              alt="Shopping-cart-button"
+              width="25px"
+            />
+          </Link>
+          <Link
+            data-testid="shopping-cart-button"
+            to="/shoppingcart"
+          >
+            <img
+              src="/imgs/shopping-cart.png"
+              alt="Shopping-cart-button"
+              width="25px"
+            />
+          </Link>
+        </div>
         {item.map((info) => (
-          <div key={ info.id }>
-            <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
+          <div className="product-info" key={ info.id }>
             <div className="main-product-info">
-              <h1 data-testid="product-detail-name">{info.title}</h1>
-              <h1>{ `R$: ${info.price}` }</h1>
+              <h1 data-testid="product-detail-name">
+                {info.title}
+              </h1>
+              <h1>
+                -
+              </h1>
+              <h1>
+                { `R$: ${info.price}` }
+              </h1>
             </div>
             <div className="product-details">
               <img className="product-img" src={ info.thumbnail } alt={ info.title } />
-              <div>
+              <div className="product-description">
+                <h1>
+                  Descrição do Produto:
+                </h1>
                 { info.attributes.map((attributes) => (
                   <p key={ attributes.id }>
-                    { `${attributes.name}: ${attributes.value_name}` }
+                    <span>
+                      { attributes.name }
+                      :
+                    </span>
+                    { attributes.value_name }
                   </p>
                 ))}
               </div>
