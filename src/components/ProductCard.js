@@ -12,7 +12,7 @@ class ProductCard extends React.Component {
       <div className="product-card" data-testid="product">
         <Link
           to={ {
-            pathname: `/detalhes/:${id}`,
+            pathname: `/detalhes/${id}`,
             state: product,
           } }
           data-testid="product-detail-link"
