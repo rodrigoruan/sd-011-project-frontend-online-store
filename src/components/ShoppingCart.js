@@ -70,8 +70,20 @@ export default class ShoppingCart extends Component {
             Limpar Carrinho
           </Button>
         </Link>
-        <Link to="checkout" data-testid="checkout-products">Checkout</Link>
-        <Link to="/">Voltar</Link>
+        <Link to="checkout" data-testid="checkout-products">
+          <Button
+            variant="success"
+          >
+            Checkout
+          </Button>
+        </Link>
+        <Link to="/">
+          <Button
+            variant="secondary"
+          >
+            Voltar
+          </Button>
+        </Link>
       </div>
     );
   }
