@@ -4,16 +4,92 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  font-family: Arial;
   justify-content: space-between;
-  margin: 10px;
-  padding: 10px;
-  width: 20%;
+  margin: 10px 10px 0px 10px;
+  width: 350px;
+  height: 420px;
+}
+
+.CardContainer:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.CardContainer:hover .titleContainer {
+  font-weight: 600;
+}
+
+.titleContainer {
+  align-items: center;
+  background-color: rgb(19, 25, 32);
+  color: white;
+  display: flex;
+  font-size: 17px;
+  font-weight: 400;
+
+  height: 80px;
+  justify-content: center;
+  width: 100%;
+}
+
+.thumbContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
+  height: 200px;
 }
 
 .Thumbnail {
   width: 150px;
+  /* height: 70%; */
 }
 
-.pPrice {
-  color: black;
+.priceContainer {
+  height: 30px;
+  width: 100%;
+  font-size: 22px;
+}
+
+.ratingContainer {
+  width: 100%;
+  font-size: 15px;
+}
+
+.addToCartAndDetailsContainer {
+  width: 100%;
+  height: 67px;
+  /* background-color: rgb(19, 25, 32); */
+}
+
+.moreDetails {
+  color: orange;
+  font-size: 20px;
+  height: 30;
+  text-decoration: none;
+  width: 100%;
+}
+
+.addToCartAndDetailsContainer button {
+  color: #f08804;
+  font-weight: 400;
+  font-size: 20px;
+  height: 45px;
+  width: 100%;
+  background-color: rgb(19, 25, 32);
+  border: none;
+}
+
+.addToCartAndDetailsContainer button:hover {
+  cursor: pointer;
+  /* background-color: rgb(19, 25, 32, 0.1); */
+  background-color: white;
+}
+
+.CardContainer:hover button {
+  background-color: #f08804;
+  color: rgb(19, 25, 32);
+  font-weight: 700;
 }
