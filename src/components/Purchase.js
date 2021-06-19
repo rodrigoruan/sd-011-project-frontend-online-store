@@ -1,21 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class Purchase extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      total: 0,
-    };
-  }
-
   render() {
-    const { total } = this.state;
-
     return (
       <div>
         <h2>Revise seus produtos</h2>
-        <h4>{ `Total: ${total}` }</h4>
         <label htmlFor="name">
           <input type="string" data-testid="checkout-fullname" id="name" />
         </label>
@@ -43,9 +32,5 @@ class Purchase extends React.Component {
     );
   }
 }
-
-Purchase.propTypes = {
-  cart: PropTypes.array,
-}.isRequired;
 
 export default Purchase;
