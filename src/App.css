@@ -19,7 +19,8 @@
 }
 
 .cart-product-container {
-  background-color: green;
+  align-items: center;
+  border: black 1px solid;
   display: flex;
   margin: 50px 20px;
 }
@@ -32,6 +33,12 @@
 .cart-product-title {
   justify-content: center;
   margin-right: 30px;
+}
+
+.shop-cart-buttons {
+  border-radius: 70%;
+  margin: 0 15px;
+  width: 25px;
 }
 
 .home-header {
@@ -87,10 +94,43 @@
 }
 
 .checkout-product {
+  align-items: center;
   display: flex;
   margin: 50px 20px;
 }
 
 .price-params {
   margin: 0 10px;
+}
+
+.checkout-container {
+  margin: 0 10px;
+}
+
+.checkout-products-review {
+  border: black 1px solid;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.go-to-checkout-button {
+  margin: 20px;
+  padding: 10px;
+}
+
+.client-info {
+  border: black 1px solid;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.payment-method {
+  border: black 1px solid;
+  margin: 15px 0;
+  padding: 10px;
+}
+
+.finish-checkout-button {
+  margin: 15px 0;
+  padding: 10px;
 }

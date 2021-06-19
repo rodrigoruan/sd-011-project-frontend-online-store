@@ -4,20 +4,23 @@ import { Link, Redirect } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
 import backImage from '../images/back.png';
 
+const initialFormState = {
+  fullname: '',
+  email: '',
+  cpf: '',
+  phone: '',
+  cep: '',
+  address: '',
+  paymentMethod: '',
+  formIsValid: false,
+};
+
 export default class Checkout extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
-    this.state = {
-      fullname: '',
-      email: '',
-      cpf: '',
-      phone: '',
-      cep: '',
-      address: '',
-      paymentMethod: '',
-    };
+    this.state = initialFormState;
   }
 
   handleValidation() {
@@ -30,30 +33,28 @@ export default class Checkout extends Component {
       address,
       paymentMethod,
     } = this.state;
-    let formValidation = true;
     if (fullname === '') {
-      formValidation = false;
+      return console.log('Nome completo deve ser preenchido!');
     }
     if (email === '') {
-      formValidation = false;
+      return console.log('Email deve ser preenchido!');
     }
     if (cpf === '') {
-      formValidation = false;
+      return console.log('CPF deve ser preenchido!');
     }
     if (phone === '') {
-      formValidation = false;
+      return console.log('Telefone deve ser preenchido!');
     }
     if (cep === '') {
-      formValidation = false;
+      return console.log('CEP deve ser preenchido!');
     }
     if (address === '') {
-      formValidation = false;
+      return console.log('Endereço deve ser preenchido!');
     }
     if (paymentMethod === '') {
-      formValidation = false;
+      return console.log('Método de pagamento deve ser preenchido!');
     }
-
-    if (formValidation) return <Redirect to="/" />;
+    this.setState({ formIsValid: true });
   }
 
   handleChange({ target: { value, name } }) {
@@ -62,8 +63,10 @@ export default class Checkout extends Component {
 
   render() {
     const { cartItems } = this.props;
+    const { formIsValid } = this.state;
+    if (formIsValid) return <Redirect to="/" />;
     return (
-      <div>
+      <div className="checkout-container">
         <Link exact to="/cart">
           <img src={ backImage } alt="Cart" style={ { width: '50px' } } />
         </Link>
@@ -94,6 +97,7 @@ export default class Checkout extends Component {
         </div>
         <CheckoutForm handleChange={ this.handleChange } />
         <button
+          className="finish-checkout-button"
           type="button"
           onClick={ this.handleValidation }
         >
