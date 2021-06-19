@@ -12,7 +12,11 @@ class Cardproduct extends Component {
   handleClick() {
     const { id, title, thumbnail, price } = this.props;
     const previousList = this.loadCartList();
-    previousList[id] = { title, thumbnail, price, quantity: 0 };
+    if (previousList[id]) {
+      previousList[id].quantity += 1;
+    } else {
+      previousList[id] = { id, title, thumbnail, price, quantity: 1 };
+    }
     localStorage.setItem('cartList', JSON.stringify(previousList));
   }
 
@@ -40,7 +44,7 @@ class Cardproduct extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <p>{ `R$ ${parseFloat(price).toFixed(2)}` }</p>
+        <p>{ `R$ ${parseFloat(price).toFixed(2).replace('.', ',')}` }</p>
         <Link
           to={ `/product-detail/${categoryId}/${id}` }
           data-testid="product-detail-link"
