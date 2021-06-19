@@ -65,6 +65,17 @@ export default class ShopCart extends Component {
           {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
             acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
         </div>
+        <Link
+          to="/checkout"
+        >
+          <button
+            type="button"
+            data-testid="checkout-products"
+            value={ cartItems }
+          >
+            Finalizar Compra
+          </button>
+        </Link>
       </div>
     );
   }
