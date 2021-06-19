@@ -34,7 +34,7 @@ export default class ProductDetails extends Component {
         localStorage.setItem('item', JSON.stringify([...getLocal]));
       }
     }
-  }
+  }// Rodolfo Rezende Turma 11, Me ajudou na logica dessa função;
 
   foundQuantityItemsCart() {
     const getLocal = JSON.parse(localStorage.getItem('item'));

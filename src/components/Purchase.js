@@ -4,7 +4,6 @@ class Purchase extends React.Component {
   render() {
     return (
       <div>
-        <h2>Revise seus produtos</h2>
         <label htmlFor="name">
           <input type="string" data-testid="checkout-fullname" id="name" />
         </label>

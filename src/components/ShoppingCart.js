@@ -12,7 +12,7 @@ export default class ShoppingCart extends Component {
       const deleteItem = getLocal.filter((value) => value.id !== id);
       localStorage.setItem('item', JSON.stringify([...deleteItem]));
     }
-  }
+  }// Rodolfo Rezende da Turma 11 me ajudou a criar a logica dessa função;
 
   addClick = (index) => {
     const getLocal = JSON.parse(localStorage.getItem('item'));

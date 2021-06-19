@@ -65,6 +65,7 @@ export default class Form extends Component {
           </label>
           <label htmlFor="rating">
             <input
+              placeholder="✓"
               id="rating"
               type="number"
               min="1"
