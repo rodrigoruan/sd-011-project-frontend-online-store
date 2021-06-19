@@ -29,14 +29,14 @@ export default class CartProduct extends Component {
             <button
               data-testid="product-decrease-quantity"
               type="button"
-              onClick={ () => handleDecreaseQuantity(productData) }
+              onClick={() => handleDecreaseQuantity(productData)}
             >
               -
             </button>
             <button
               data-testid="product-increase-quantity"
               type="button"
-              onClick={ () => handleAddToCart(productData) }
+              onClick={() => handleAddToCart(productData)}
             >
               +
             </button>
@@ -48,7 +48,7 @@ export default class CartProduct extends Component {
     const showRemoveButton = () => {
       if (handleRemoveFromCart) {
         return (
-          <button type="button" onClick={ () => handleRemoveFromCart(productData) }>
+          <button type="button" onClick={() => handleRemoveFromCart(productData)}>
             X
           </button>
         );
@@ -59,7 +59,7 @@ export default class CartProduct extends Component {
       <div>
         {showRemoveButton()}
         <p data-testid="shopping-cart-product-name">{productData.title}</p>
-        <img height="150px" src={ productData.thumbnail } alt="thumbnail" />
+        <img height="150px" src={productData.thumbnail} alt="thumbnail" />
         <span>{productData.price}</span>
         <div data-testid="shopping-cart-product-quantity">{productData.quantity}</div>
         {showButtons()}
@@ -74,6 +74,6 @@ CartProduct.propTypes = {
       price: PropTypes.number,
       thumbnail: PropTypes.string,
       title: PropTypes.string,
-    }),
+    })
   ),
 }.isRequired;
