@@ -10,24 +10,33 @@ class Cart extends Component {
     this.state = {
       shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
+
+    // this.getLocal = this.getLocal.bind(this);
+    this.checkQuantity = this.checkQuantity.bind(this);
   }
 
-  handleClickAdd(item, index) {
+  handleClickAdd(item, index, { target }) {
     const cart = JSON.parse(localStorage.getItem('cart'));
     cart[index].quantity += 1;
+    const productCurrentQuantity = cart[index].quantity;
     localStorage.setItem('cart', JSON.stringify(cart));
     this.setState({
       shoppingCart: JSON.parse(localStorage.getItem('cart')),
     });
+    this.checkQuantity(item, target, productCurrentQuantity);
+    console.log('esse é o item: ', item);
+    console.log('esse é o target: ', productCurrentQuantity);
+    // console.log('', );
   }
 
-  handleClickSub(item, index) {
+  handleClickSub(item, index, { target }) {
     const cart = JSON.parse(localStorage.getItem('cart'));
     if (cart[index].quantity > 1) cart[index].quantity -= 1;
     localStorage.setItem('cart', JSON.stringify(cart));
     this.setState({
       shoppingCart: JSON.parse(localStorage.getItem('cart')),
     });
+    // this.checkQuantity(item, target);
   }
 
   handleClickRemove(item) {
@@ -39,8 +48,26 @@ class Cart extends Component {
     });
   }
 
+  // getLocal() {
+  //   return JSON.parse(localStorage.getItem('cart'));
+  // }
+
+  checkQuantity(cartItem, target, cv) {
+    const { availableQuantity, quantity } = cartItem;
+    console.log('cartItem: ', cartItem);
+    console.log('quantity -1: ', quantity);
+    console.log('available -1: ', availableQuantity);
+
+    if (availableQuantity - parseInt(cv, 10) === 0) {
+      console.log('quantity 1: ', quantity);
+      console.log('available 1: ', availableQuantity);
+      console.log('entrou no if quantity');
+      const plusBtn = target;
+      plusBtn.setAttribute('disabled', 'disabled');
+    }
+  }
+
   render() {
-    // const cart = JSON.parse(localStorage.getItem('cart'));
     const { shoppingCart } = this.state;
     return (shoppingCart.length === 0) ? (
       <>
@@ -69,7 +96,7 @@ class Cart extends Component {
               <button
                 type="button"
                 data-testid="product-decrease-quantity"
-                onClick={ () => this.handleClickSub(item, index) }
+                onClick={ (event) => this.handleClickSub(item, index, event) }
               >
                 -
               </button>
@@ -77,7 +104,8 @@ class Cart extends Component {
               <button
                 type="button"
                 data-testid="product-increase-quantity"
-                onClick={ () => this.handleClickAdd(item, index) }
+                onClick={ (event) => this.handleClickAdd(item, index, event) }
+                // id={ `btn ${index}` }
               >
                 +
               </button>

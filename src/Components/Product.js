@@ -15,7 +15,6 @@ export class Product extends Component {
       mensage: '',
       rating: '',
       id: '',
-      // shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
     this.submitButton = this.submitButton.bind(this);
     this.sendProductDetails = this.sendProductDetails.bind(this);
