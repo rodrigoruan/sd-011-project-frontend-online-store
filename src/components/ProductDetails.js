@@ -27,9 +27,14 @@ class ProductDetails extends React.Component {
   }
 
   handleClick() {
-    const { product: { title, thumbnail, price } } = this.state;
+    const { product: { title, thumbnail, price, id } } = this.state;
     const previousList = this.loadCartList();
-    previousList.push({ title, thumbnail, price });
+    if (previousList[id]) {
+      previousList[id].quantity += 1;
+    } else {
+      previousList[id] = { title, thumbnail, price, quantity: 1 };
+    }
+    // previousList.push({ title, thumbnail, price });
     localStorage.setItem('cartList', JSON.stringify(previousList));
     const details = this.loadCartList();
     const productArray = Object.values(details);
@@ -55,7 +60,7 @@ class ProductDetails extends React.Component {
   loadCartList() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
-      previousList = [];
+      previousList = {};
       return previousList;
     }
     return JSON.parse(previousList);
