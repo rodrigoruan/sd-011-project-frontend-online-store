@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CategoryFilter from '../components/CategoryFilter';
 import ProductList from '../components/ProductList';
 import SearchBar from '../components/SearchBar';
-import CartButton from '../components/CartButton';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -27,17 +27,26 @@ export default class Main extends React.Component {
 
   render() {
     const { selectedCategoryId, query } = this.state;
+    const { forceAppUpdate } = this.props;
+    const renderProductList = (<ProductList
+      categoryId={ selectedCategoryId }
+      query={ query }
+      forceAppUpdate={ forceAppUpdate }
+    />);
     const paragraph = 'Digite algum termo de pesquisa ou escolha uma categoria.';
 
     return (
       <div>
         <SearchBar onClick={ this.handleSubmit } />
-        <CartButton />
         { !query && !selectedCategoryId
           ? <p data-testid="home-initial-message">{ paragraph }</p>
-          : <ProductList categoryId={ selectedCategoryId } query={ query } />}
+          : renderProductList }
         <CategoryFilter onClick={ this.handleCategoryClick } />
       </div>
     );
   }
 }
+
+Main.propTypes = {
+  forceAppUpdate: PropTypes.func,
+}.isRequired;

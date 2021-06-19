@@ -10,12 +10,12 @@ class ShoppingItem extends Component {
       counter: quantity,
       totalPrice: quantity * price,
     };
-    this.sumCounter = this.sumCounter.bind(this);
-    this.minusCounter = this.minusCounter.bind(this);
+    this.increase = this.increase.bind(this);
+    this.decrease = this.decrease.bind(this);
   }
 
-  sumCounter() {
-    const { productCart } = this.props;
+  increase() {
+    const { productCart, forceAppUpdate } = this.props;
     const { price } = productCart;
     const { counter } = this.state;
     const totalPrice = Math.round((counter + 1) * price * 100) / 100;
@@ -24,11 +24,12 @@ class ShoppingItem extends Component {
       totalPrice,
     });
     storage.saveProduct(productCart, 1);
+    forceAppUpdate();
   }
 
-  minusCounter() {
+  decrease() {
     const { counter } = this.state;
-    const { productCart } = this.props;
+    const { productCart, forceAppUpdate } = this.props;
     const amount = -1;
     if (counter > 1) {
       const { price } = productCart;
@@ -39,6 +40,7 @@ class ShoppingItem extends Component {
       });
     }
     storage.saveProduct(productCart, amount);
+    forceAppUpdate();
   }
 
   render() {
@@ -52,7 +54,7 @@ class ShoppingItem extends Component {
         <button
           type="button"
           data-testid="product-decrease-quantity"
-          onClick={ this.minusCounter }
+          onClick={ this.decrease }
         >
           -
         </button>
@@ -60,7 +62,7 @@ class ShoppingItem extends Component {
         <button
           type="button"
           data-testid="product-increase-quantity"
-          onClick={ this.sumCounter }
+          onClick={ this.increase }
         >
           +
         </button>

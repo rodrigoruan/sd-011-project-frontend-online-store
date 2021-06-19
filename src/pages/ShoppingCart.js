@@ -1,56 +1,63 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ShoppingItem from '../components/ShoppingItem';
+import * as storage from '../services/storage';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
     this.state = {
-      products: '',
+      productsCart: '',
     };
+    this.updateState = this.updateState.bind(this);
     this.removeItem = this.removeItem.bind(this);
-    this.totalPriceCart = this.totalPriceCart.bind(this);
   }
 
   componentDidMount() {
-    this.retrieveCart();
+    this.updateState();
   }
 
-  retrieveCart() {
-    const currentCart = localStorage.getItem('shoppingCart');
-    if (currentCart) {
-      this.setState({ products: JSON.parse(currentCart) });
-    }
+  updateState() {
+    const productsCart = storage.retrieveCart();
+    this.setState({ productsCart });
   }
 
   removeItem(id) {
-    const { products } = this.state;
-    delete products[id];
-    this.setState({ products });
-    localStorage.setItem('shoppingCart', JSON.stringify(products));
+    const { productsCart } = this.state;
+    const { forceAppUpdate } = this.props;
+    delete productsCart[id];
+    this.setState({ productsCart });
+    localStorage.setItem('shoppingCart', JSON.stringify(productsCart));
+    forceAppUpdate();
   }
 
   totalPriceCart() {
-    const { products } = this.state;
-    const total = Object.values(products)
-      .reduce((acc, { details, quantity }) => acc + (details.price * quantity), 0);
-    return total;
+    const productsCart = storage.retrieveCart(); // pode-se refatorar
+    if (productsCart) {
+      const total = Object.values(productsCart)
+        .reduce((acc, { details, quantity }) => acc + (details.price * quantity), 0);
+      return total;
+    }
+    return 0;
   }
 
   render() {
-    const { products } = this.state;
+    const { productsCart } = this.state;
+    const { forceAppUpdate } = this.props;
     return (
       <div>
         <p>ShoppingCart</p>
-        {!products ? (
+        {!productsCart ? (
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
-        ) : (Object.values(products).map(({ details, quantity }) => (<ShoppingItem
+        ) : (Object.values(productsCart).map(({ details, quantity }) => (<ShoppingItem
           key={ details.id }
           productCart={ details }
           quantity={ quantity }
           onClick={ this.removeItem }
+          forceAppUpdate={ forceAppUpdate }
         />))
         )}
         <p>{ this.totalPriceCart() }</p>
@@ -62,3 +69,9 @@ class ShoppingCart extends Component {
 }
 
 export default ShoppingCart;
+
+ShoppingCart.propTypes = {
+  forceAppUpdate: PropTypes.func,
+  onClick: PropTypes.func,
+  productCart: PropTypes.objectOf(PropTypes.object),
+}.isRequired;

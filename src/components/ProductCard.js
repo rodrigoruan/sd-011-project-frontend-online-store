@@ -5,7 +5,7 @@ import AddItemToCart from './AddItemToCart';
 
 class ProductCard extends React.Component {
   render() {
-    const { product } = this.props;
+    const { product, forceAppUpdate } = this.props;
     const { product: { title, price, thumbnail, id } } = this.props;
 
     return (
@@ -24,6 +24,7 @@ class ProductCard extends React.Component {
         <AddItemToCart
           product={ product }
           dataTestId="product-add-to-cart"
+          forceAppUpdate={ forceAppUpdate }
         />
       </div>
     );

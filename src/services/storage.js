@@ -18,6 +18,14 @@ export function saveProduct(product, amount) {
   }
 }
 
+export function retrieveCart() {
+  const currentCart = localStorage.getItem('shoppingCart');
+  if (currentCart) {
+    const parsedCart = JSON.parse(currentCart);
+    return parsedCart;
+  }
+}
+
 export function saveReview(formState) {
   // formState: {
   //  productId: 'MLB213123123123',

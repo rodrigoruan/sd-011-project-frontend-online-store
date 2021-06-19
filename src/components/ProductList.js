@@ -35,11 +35,16 @@ class ProductList extends React.Component {
 
   render() {
     const { products } = this.state;
+    const { forceAppUpdate } = this.props;
     return (
       <section>
         {
           products.length === 0 ? <NotFound /> : products
-            .map((product) => <ProductCard key={ product.id } product={ product } />)
+            .map((product) => (<ProductCard
+              key={ product.id }
+              product={ product }
+              forceAppUpdate={ forceAppUpdate }
+            />))
         }
       </section>
     );

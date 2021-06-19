@@ -3,14 +3,25 @@ import PropTypes from 'prop-types';
 import * as storage from '../services/storage';
 
 export default class AddItemToCart extends React.Component {
+  constructor() {
+    super();
+    this.handleclick = this.handleclick.bind(this);
+  }
+
+  handleclick() {
+    const { product, forceAppUpdate } = this.props;
+    storage.saveProduct(product, 1);
+    forceAppUpdate();
+  }
+
   render() {
-    const { product, dataTestId } = this.props;
+    const { dataTestId } = this.props;
 
     return (
       <button
         type="button"
         data-testid={ dataTestId }
-        onClick={ () => storage.saveProduct(product, 1) }
+        onClick={ this.handleclick }
       >
         Adicionar ao carrinho
       </button>
