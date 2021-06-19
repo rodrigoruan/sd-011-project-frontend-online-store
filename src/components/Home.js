@@ -45,7 +45,6 @@ export default class SearchBar extends Component {
   }
 
   async getProducts() {
-
     const { categoria, textSearch } = this.state;
     const returnGetProducts = await
     Api.getProductsFromCategoryAndQuery(categoria, textSearch);
@@ -123,6 +122,7 @@ export default class SearchBar extends Component {
                   title={ product.title }
                   thumbnail={ product.thumbnail }
                   price={ product.price }
+                  dataTestid="product-add-to-cart"
                   // updateCartItem={ this.updateCartItem }
                   // id={ product.id }
                 />
