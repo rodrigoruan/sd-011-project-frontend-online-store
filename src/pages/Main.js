@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 import SearchBar from '../components/SearchBar';
 import CartButton from '../components/CartButton';
 import ProductListing from '../components/ProductListing';
@@ -53,59 +53,60 @@ class Main extends Component {
   render() {
     const { productList, loading, query, addingCart } = this.state;
     return (
-      <div>
-        <Category change={ this.handleChange } click={ this.handleClick } />
-        <SearchBar
-          click={ this.fetchProductCategory }
-          change={ this.handleChange }
-          value={ query }
-        />
-        <CartButton
-          link={ {
-            pathname: '/cart',
-            state: { cart: addingCart },
-          } }
-        />
-        <ProductListing texto="Nenhum produto foi encontrado" />
-        {loading
-          ? null
-          : productList.map((product, index) => (
-            <div key={ index }>
-              <CardCreator item={ product } />
-              <div>
-                <button
-                  type="button"
-                  onClick={ () => {
-                    if (localStorage.getItem('addingCart')) {
-                      const cart = JSON.parse(localStorage.getItem('addingCart'));
-                      const addToCart = [...cart, product];
-                      localStorage.setItem('addingCart', JSON.stringify(addToCart));
-                      this.setState({ addingCart: cart });
-                    } else {
-                      const addedCart = [...addingCart, product];
-                      localStorage.setItem('addingCart', JSON.stringify(addedCart));
-                      this.setState(() => ({
-                        addingCart: JSON.parse(localStorage.getItem('addingCart')) || [] }
-                      ));
-                    }
+      <Container>
+        <Row>
+          <Col>
+            <Category change={ this.handleChange } click={ this.handleClick } />
+          </Col>
+          <Col xs={ 8 }>
+            <Row>
+              <Col xs={ 8 }>
+                <SearchBar
+                  click={ this.fetchProductCategory }
+                  change={ this.handleChange }
+                  value={ query }
+                />
+              </Col>
+              <Col xs={ 3 }>
+                <CartButton
+                  link={ {
+                    pathname: '/cart',
+                    state: { cart: addingCart },
                   } }
-                  data-testid="product-add-to-cart"
-                >
-                  Adicione ao carrinho
-                </button>
-              </div>
-              <Link
-                data-testid="product-detail-link"
-                to={ { pathname: `/product-detail/${product.id}`,
-                  state: { produto: product,
-                    addToCart: JSON.parse(localStorage.getItem('addingCart')) || [] } } }
-              >
-                Saiba Mais
-              </Link>
-            </div>
-          ))}
-        <CartQuantity />
-      </div>
+                />
+              </Col>
+              <Col xs={ 1 }>
+                <CartQuantity />
+              </Col>
+            </Row>
+            {loading && <ProductListing />}
+            <Row>
+            {loading
+              ? null
+              : productList.map((product, index) => (
+                <Col xs={ 4 } key={ index }>
+                  <CardCreator item={ product } onClick={() => {
+                        if (localStorage.getItem('addingCart')) {
+                          const cart = JSON.parse(localStorage.getItem('addingCart'));
+                          const addToCart = [...cart, product];
+                          localStorage.setItem('addingCart', JSON.stringify(addToCart));
+                          this.setState({ addingCart: cart });
+                        } else {
+                          const addedCart = [...addingCart, product];
+                          localStorage.setItem('addingCart', JSON.stringify(addedCart));
+                          this.setState(() => ({
+                            addingCart: JSON.parse(localStorage.getItem('addingCart')) || [] }
+                          ));
+                        }
+                      }} to={{ pathname: `/product-detail/${product.id}`,
+                      state: { produto: product,
+                        addToCart: JSON.parse(localStorage.getItem('addingCart')) || [] } }} />
+                </Col>
+              ))}
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

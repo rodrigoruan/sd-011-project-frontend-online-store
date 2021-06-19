@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Image } from 'react-bootstrap';
+import cartImage from '../img/cart.jpg';
 
 class CartButton extends Component {
   render() {
     const { link } = this.props;
     return (
-      <div className="container-cart-button">
-        <Link data-testid="shopping-cart-button" to={ link }>Carrinho de compras</Link>
-      </div>
+      <Link
+        data-testid="shopping-cart-button"
+        to={link}
+        style={{ textDecoration: 'none', color: 'black' }}
+      >
+        <Image
+          src={cartImage}
+          style={{ width: '30px', height: '30px', marginLeft: '100px' }}
+        />
+      </Link>
     );
   }
 }

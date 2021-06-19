@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Button, Card } from 'react-bootstrap';
 import './styles/CardCreator.css';
 
 class CardCreator extends Component {
@@ -9,29 +11,37 @@ class CardCreator extends Component {
     this.createCard = this.createCard.bind(this);
   }
 
-  createCard(item) {
-    const { title, thumbnail, price, shipping: { free_shipping: freeShipping } } = item;
+  createCard(item, onClick, to) {
+    const {
+      title,
+      thumbnail,
+      price,
+      shipping: { free_shipping: freeShipping },
+    } = item;
     return (
-      <div className="product-card" data-testid="product">
-        <h2 className="product-title">{title}</h2>
-        <img
-          className="product-image"
-          src={ thumbnail }
-          alt={ `imagem do produto: ${title}` }
-        />
-        <h3 className="product-price">{`R$ ${price}`}</h3>
-        {
-          freeShipping
-            ? <p data-testid="free-shipping"> Frete Grátis </p>
-            : undefined
-        }
-      </div>
+      <Card style={{ width: '18rem', height: '25rem' }}>
+        <Link data-testid="product-detail-link" to={to}>
+          <Card.Img variant="top" src={thumbnail} style={{ width: '8rem', height: '10rem' }} />
+        </Link>
+        <Card.Body style={{ overflow: 'hidden' }}>
+          <Card.Title>{title}</Card.Title>
+          <Card.Subtitle>{`R$ ${price}`}</Card.Subtitle>
+          {freeShipping ? (
+            <p data-testid="free-shipping"> Frete Grátis </p>
+          ) : undefined}
+        </Card.Body>
+        <Card.Body>
+          <Button variant="warning" onClick={onClick}>
+            Adicione ao carrinho
+          </Button>
+        </Card.Body>
+      </Card>
     );
   }
 
   render() {
-    const { item } = this.props;
-    return this.createCard(item);
+    const { item, onClick, to } = this.props;
+    return this.createCard(item, onClick, to);
   }
 }
 

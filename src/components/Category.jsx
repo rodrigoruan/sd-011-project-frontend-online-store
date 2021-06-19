@@ -19,31 +19,36 @@ export default class Category extends Component {
   fetchCategories() {
     api
       .getCategories()
-      .then((categorie) => this.setState({ categories: categorie, loading: false }));
+      .then((categorie) =>
+        this.setState({ categories: categorie, loading: false })
+      );
   }
 
   render() {
     const { categories, loading } = this.state;
     const { change, click } = this.props;
     return (
-      <div>
+      <form>
         <p>Categorias:</p>
         {loading
           ? null
           : categories.map(({ name, id }, index) => (
-            <div key={ index }>
-              <input
-                type="radio"
-                value={ id }
-                name="categories"
-                data-testid="category"
-                onChange={ change }
-                onClick={ click }
-              />
-              {name}
-            </div>
-          ))}
-      </div>
+              <div>
+                <label key={index} htmlFor={id}>
+                  <input
+                    type="radio"
+                    value={id}
+                    name="categories"
+                    data-testid="category"
+                    onChange={change}
+                    onClick={click}
+                    id={id}
+                  />
+                  {name}
+                </label>
+              </div>
+            ))}
+      </form>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { InputGroup, Button, FormControl } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 class SearchBar extends Component {
@@ -6,20 +7,19 @@ class SearchBar extends Component {
     const { click, change, value } = this.props;
     return (
       <div>
-        <input
-          name="query"
-          type="text"
-          data-testid="query-input"
-          onChange={ change }
-          value={ value }
-        />
-        <button
-          data-testid="query-button"
-          type="button"
-          onClick={ click }
-        >
-          Pesquisar
-        </button>
+        <InputGroup size="sm" className="mb-3">
+        <InputGroup.Text id="inputGroup-sizing-sm">Search</InputGroup.Text>
+          <FormControl
+            name="query"
+            type="text"
+            data-testid="query-input"
+            onChange={change}
+            value={value}
+          />
+          <Button data-testid="query-button" onClick={click}>
+            Pesquisar
+          </Button>
+        </InputGroup>
       </div>
     );
   }
