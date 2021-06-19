@@ -20,7 +20,7 @@ export default class SearchPageHome extends Component {
     this.getProducts = this.getProducts.bind(this);
     this.filterProducts = this.filterProducts.bind(this);
     this.getCategories = this.getCategories.bind(this);
-    this.changeCategory = this.changeCategory.bind(this);
+    // this.changeCategory = this.changeCategory.bind(this);
     this.handleListCategories = this.handleListCategories.bind(this);
     this.foundQuantityItemsCart = this.foundQuantityItemsCart.bind(this);
   }
@@ -59,12 +59,6 @@ export default class SearchPageHome extends Component {
     });
   }
 
-  changeCategory({ target }) {
-    this.setState({
-      categories: target.value,
-    });
-  }
-
   filterProducts({ target }) {
     this.setState({
       query: target.value,
@@ -73,13 +67,9 @@ export default class SearchPageHome extends Component {
 
   foundQuantityItemsCart() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
-    let sumProduct = 0;
-    getLocal.forEach((product) => {
-      sumProduct += product.countP;
-      return 1;
-    });
+    const redu = getLocal.reduce((acr, value) => acr + value.countP, 0);
     this.setState({
-      itemsCart: sumProduct,
+      itemsCart: redu,
     });
   }
 
