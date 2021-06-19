@@ -53,12 +53,14 @@ aside {
   overflow: auto;
   /* padding: 10px; */
   width: 15vw;
+  height: 100vh;
 }
 
 .mainContent {
   overflow: auto;
   text-align: center;
   width: 85vw;
+  height: 100vh;
 }
 
 .categoryItem label {
