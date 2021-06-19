@@ -1,52 +1,60 @@
 import React, { Component } from 'react';
-// import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 
 export default class AvaliationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formStars: 0,
-      email: '',
-      message: '',
+      avaliation: {
+        formStars: 0,
+        email: '',
+        message: '',
+      },
     };
     this.handleForm = this.handleForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    // função genérica para definir estado a partir do nome
+    // função genérica para definir estado a partir do nome e atualizar o shouldRedirect
     const { target: { name, value } } = event;
-    this.setState({
-      [name]: value,
-    });
+
+    // função seta o estado recuperando o valor anterior e espalhando ele no novo objeto
+    this.setState((state) => ({
+      avaliation: {
+        ...state.avaliation,
+        [name]: value,
+      },
+    }));
   }
 
-  handleForm(event) {
-    event.preventDefault();
-    // recebe props
-    const { productId, getForm } = this.props;
+  handleForm() {
+    // recebe props e estado
+    const { productId } = this.props;
+    const { avaliation } = this.state;
 
-    // Recebe as avaliações do item do localStorage
+    // Recebe as avaliações do item do localStorage e trata se estiver vazia
     let storage = JSON.parse(localStorage.getItem(`reviewsProduct${productId}`));
     if (!storage) {
       storage = [];
     }
-    // const storageCheck = storage ? storage : [];
+
     const idObj = { id: productId };
 
     // junta o objeto do id com o estado atual da aplicação
-    const obj = Object.assign(idObj, this.state);
+    const obj = Object.assign(idObj, avaliation);
 
     // Adiciona ao localStorage a avaliação
     storage.push(obj);
     localStorage.setItem(`reviewsProduct${productId}`, JSON.stringify([...storage]));
-    // passa as informações para o componente pai
-    getForm(obj);
+
+    // Força a página atualizar
+    window.location.reload();
   }
 
   render() {
-    const { email, message } = this.state;
+    const { avaliation } = this.state;
+    const { email, message } = avaliation;
     return (
       <form>
         <h2>Avaliações</h2>
@@ -128,7 +136,7 @@ export default class AvaliationForm extends Component {
             </label>
           </div>
           <div>
-            <button onClick={ this.handleForm } type="submit">Avaliar</button>
+            <button onClick={ this.handleForm } type="button">Avaliar</button>
           </div>
         </div>
       </form>
@@ -138,5 +146,4 @@ export default class AvaliationForm extends Component {
 
 AvaliationForm.propTypes = {
   productId: PropTypes.string.isRequired,
-  getForm: PropTypes.func.isRequired,
 };
