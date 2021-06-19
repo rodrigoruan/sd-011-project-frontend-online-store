@@ -1,0 +1,31 @@
+.SearchBarContainer input {
+  background: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px , rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
+  outline: none;
+  padding: 15px;
+  transition: border 0.3s ease-in-out;
+  width: 90%;
+}
+
+.SearchBarContainer input:focus {
+  border: 0.05px solid lightgrey;
+}
+
+.SearchBarContainer button {
+  background-color: #353a8c;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  box-shadow: #353a8c 2px 4px 6px -1px;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  padding: 15px;
+  transform: translateX(-100%);
+  transition: background 0.3s ease-in-out;
+}
+
+.SearchBarContainer button:hover {
+  background-color: #586ba6;
+}
