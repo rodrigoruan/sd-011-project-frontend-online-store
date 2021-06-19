@@ -18,9 +18,9 @@ export default class ProductDetails extends Component {
   }
 
   async getProduct() {
-    const { location, state } = this.props;
-    const { id, title } = location;
-    const categoryId = state.category_id;
+    const { location } = this.props;
+    const { state } = location;
+    const { categoryId, title, id } = state;
     const request = await getProductsFromCategoryAndQuery(categoryId, title);
     const product = await request.results.find((result) => result.id === id);
     this.setState({ product });
@@ -99,6 +99,11 @@ export default class ProductDetails extends Component {
 ProductDetails.propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
   location: PropTypes.shape({
+    state: PropTypes.shape({
+      categoryId: PropTypes.string,
+      title: PropTypes.string,
+      id: PropTypes.string,
+    }),
     id: PropTypes.string,
     title: PropTypes.string,
   }).isRequired,

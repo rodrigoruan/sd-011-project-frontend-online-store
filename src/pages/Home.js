@@ -11,7 +11,7 @@ export default class Home extends Component {
     this.state = {
       loading: false,
       inputText: '',
-      products: '',
+      products: [],
       categories: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);

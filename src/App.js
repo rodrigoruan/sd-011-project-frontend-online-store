@@ -7,8 +7,7 @@ import * as api from './services/api';
 // import * as storage from './services/storage';
 
 import { About,
-  NotFound,
-  ShoppingCart,
+  NotFound, ShoppingCart,
   Home,
   Checkout,
   ProductDetails } from './pages/zPageMenu';
@@ -19,7 +18,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      shoppingCart: '',
+      shoppingCart: [],
     };
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }

@@ -54,7 +54,7 @@ export default class ShoppingCart extends Component {
       handleAddToCart,
       handleDecreaseQuantity,
       handleRemoveFromCart } = this.props;
-    if (!cartItems) {
+    if (!cartItems || Object.keys(cartItems).length < 1) {
       return emptyCartMessage;
     }
     if (shouldRedirect) {
