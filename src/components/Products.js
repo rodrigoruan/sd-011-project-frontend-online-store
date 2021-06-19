@@ -21,6 +21,7 @@ class Products extends Component {
     return (
       <div className="productArea">
         <Link
+          className="detailsLink"
           to={ {
             pathname: `/product-details/${title}`,
             state: { 
@@ -31,12 +32,14 @@ class Products extends Component {
           data-testid="product-detail-link"
         >
           <div className="product" data-testid="product" aria-hidden="true">
-            <p>{ title }</p>
+            <div className="img" style={{ backgroundImage: `url(${img})` }} />
+            <div className="imgFront" />
             <img src={ img } alt="produto" />
             <p>
               {'R$'}
               { price ? price.toFixed(2) : '00' }
             </p>
+            <p className="title">{ title }</p>
           </div>
         </Link>
         <button
