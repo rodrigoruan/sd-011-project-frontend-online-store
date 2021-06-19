@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class CheckoutForm extends Component {
   render() {
-    const { handleChange } = this.props;
+    const { handleChange, handleSubmit } = this.props;
 
     return (
       <form>
@@ -107,6 +107,13 @@ export default class CheckoutForm extends Component {
             Elo
           </label>
         </fieldset>
+        <button
+          className="finish-checkout-button"
+          type="submit"
+          onClick={ handleSubmit }
+        >
+          Comprar
+        </button>
       </form>
     );
   }
@@ -114,4 +121,5 @@ export default class CheckoutForm extends Component {
 
 CheckoutForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };

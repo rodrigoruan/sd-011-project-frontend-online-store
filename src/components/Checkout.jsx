@@ -19,11 +19,12 @@ export default class Checkout extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
-    this.handleValidation = this.handleValidation.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.state = initialFormState;
   }
 
-  handleValidation() {
+  handleSubmit(event) {
+    event.preventDefault();
     const {
       fullname,
       email,
@@ -33,26 +34,30 @@ export default class Checkout extends Component {
       address,
       paymentMethod,
     } = this.state;
+    const error = [];
     if (fullname === '') {
-      return console.log('Nome completo deve ser preenchido!');
+      error.push('fullname');
     }
     if (email === '') {
-      return console.log('Email deve ser preenchido!');
+      error.push('email');
     }
     if (cpf === '') {
-      return console.log('CPF deve ser preenchido!');
+      error.push('cpf');
     }
     if (phone === '') {
-      return console.log('Telefone deve ser preenchido!');
+      error.push('phone');
     }
     if (cep === '') {
-      return console.log('CEP deve ser preenchido!');
+      error.push('cep');
     }
     if (address === '') {
-      return console.log('Endereço deve ser preenchido!');
+      error.push('address');
     }
     if (paymentMethod === '') {
-      return console.log('Método de pagamento deve ser preenchido!');
+      error.push('paymentMethod');
+    }
+    if (error.length) {
+      return;
     }
     this.setState({ formIsValid: true });
   }
@@ -95,14 +100,10 @@ export default class Checkout extends Component {
               acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
           </div>
         </div>
-        <CheckoutForm handleChange={ this.handleChange } />
-        <button
-          className="finish-checkout-button"
-          type="button"
-          onClick={ this.handleValidation }
-        >
-          Comprar
-        </button>
+        <CheckoutForm
+          handleChange={ this.handleChange }
+          handleSubmit={ this.handleSubmit }
+        />
       </div>
     );
   }
