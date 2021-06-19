@@ -24,11 +24,6 @@ class Home extends React.Component {
       .then((json) => this.setState({ categories: json }));
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState !== this.state) {
-  //     this.sendProductDetails();
-  //   }
-  // }
   handleClick() {
     const { value } = document.querySelector('input');
     const id = getCategories()
@@ -80,6 +75,7 @@ class Home extends React.Component {
   render() {
     const { products, search } = this.state;
     const { categories, shoppingCart } = this.state;
+    const free = 'product.shipping.free_shipping';
     return (
       <>
         <section>
@@ -90,7 +86,6 @@ class Home extends React.Component {
             <img className={ style.cart } src={ Picture } alt="Carrinho de compras" />
           </Link>
           <span data-testid="shopping-cart-size">
-            {/* {number ? number.map((product) => product.quantity) : 'ok'} */}
             {shoppingCart.length > 0
               ? shoppingCart.reduce((total, cv) => total + cv.quantity, 0) : 0}
           </span>
@@ -129,6 +124,10 @@ class Home extends React.Component {
                   <img src={ product.thumbnail } alt="foto-produto" />
                   <h2>{product.title}</h2>
                   <p>{product.price}</p>
+                  {
+                    product.shipping.free_shipping
+                  && <span data-testid="free-shipping">{free}</span>
+                  }
                 </div>
               </Link>
               <button
