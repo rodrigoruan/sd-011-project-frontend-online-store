@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-/* req 11  */
+import PropTypes from 'prop-types';
+
 export default class Product extends Component {
   constructor(props) {
     super(props);
@@ -10,11 +11,16 @@ export default class Product extends Component {
   render() {
     const { handleFormSubmit } = this.props;
     return (
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={ handleFormSubmit }>
         <h2>Avaliações</h2>
-
         <label htmlFor="email">
-          <input type="text" placeholder="Digite seu email" id="email" name="email" required />
+          <input
+            type="text"
+            placeholder="Digite seu email"
+            id="email"
+            name="email"
+            required
+          />
         </label>
         <br />
         <label htmlFor="avaliacao">
@@ -30,8 +36,12 @@ export default class Product extends Component {
             placeholder="Deixe seu comentário (opcional)"
           />
         </label>
-        <button type="submit">Avaliar</button>
+        <button type="submit">Avaliar </button>
       </form>
     );
   }
 }
+
+Product.propTypes = {
+  handleFormSubmit: PropTypes.func.isRequired,
+};

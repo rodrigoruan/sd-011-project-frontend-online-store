@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-/*req12*/
 
 export default class BuyerInformation extends Component {
   constructor(props) {
@@ -33,8 +32,8 @@ export default class BuyerInformation extends Component {
           name="fullName"
           data-testid="checkout-fullname"
           placeholder="Nome Completo"
-          value={fullName}
-          onChange={this.handleChange}
+          value={ fullName }
+          onChange={ this.handleChange }
         />
 
         <input
@@ -42,8 +41,8 @@ export default class BuyerInformation extends Component {
           name="cpf"
           data-testid="checkout-cpf"
           placeholder="CPF"
-          value={cpf}
-          onChange={this.handleChange}
+          value={ cpf }
+          onChange={ this.handleChange }
         />
 
         <input
@@ -51,8 +50,8 @@ export default class BuyerInformation extends Component {
           name="email"
           data-testid="checkout-email"
           placeholder="Email"
-          value={email}
-          onChange={this.handleChange}
+          value={ email }
+          onChange={ this.handleChange }
         />
 
         <input
@@ -60,8 +59,8 @@ export default class BuyerInformation extends Component {
           name="phone"
           data-testid="checkout-phone"
           placeholder="Telefone"
-          value={phone}
-          onChange={this.handleChange}
+          value={ phone }
+          onChange={ this.handleChange }
         />
 
         <input
@@ -69,8 +68,8 @@ export default class BuyerInformation extends Component {
           name="cep"
           data-testid="checkout-cep"
           placeholder="CEP"
-          value={cep}
-          onChange={this.handleChange}
+          value={ cep }
+          onChange={ this.handleChange }
         />
 
         <input
@@ -78,8 +77,8 @@ export default class BuyerInformation extends Component {
           name="address"
           data-testid="checkout-address"
           placeholder="Endereço"
-          value={address}
-          onChange={this.handleChange}
+          value={ address }
+          onChange={ this.handleChange }
         />
       </form>
     );

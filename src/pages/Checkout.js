@@ -11,16 +11,22 @@ export default class FinishScreen extends Component {
     this.state = {};
   }
 
-  render() {
+  getCartProducts = () => {
     const products = storage.readStorage('cartStorage');
-    console.log(products);
+    if (products) {
+      return products.map((el, index) => (<CartProduct
+        productData={ el }
+        key={ index }
+      />));
+    }
+  };
+
+  render() {
     return (
       <div>
         <div>
           <h3>Revise seus produtos:</h3>
-          {products.map((el, index) => {
-            return <CartProduct productData={el} key={index} />;
-          })}
+          {this.getCartProducts()}
         </div>
         <BuyerInformation />
         <PaymentMethod />
