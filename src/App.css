@@ -85,3 +85,16 @@
   flex-flow: row wrap;
   justify-content: space-around;
 }
+
+.cart {
+  border: 1px solid;
+  border-radius: 8px;
+  box-shadow: 2px 3px #888888;
+  padding: 10px;
+  margin: 15px;
+  width: 400px;
+}
+
+.btCart{
+  margin: 5px;
+}

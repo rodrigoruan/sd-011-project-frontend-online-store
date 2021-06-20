@@ -41,6 +41,34 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <NavHome loading={ loading } />
+        <div className="btCart">
+          <Link to="/shoppingCart">
+            <Button
+              className="btCart"
+              variant="danger"
+              type="button"
+              onClick={ this.deleteCart }
+            >
+              Limpar Carrinho
+            </Button>
+          </Link>
+          <Link to="checkout" data-testid="checkout-products">
+            <Button
+              className="btCart"
+              variant="success"
+            >
+              Checkout
+            </Button>
+          </Link>
+          <Link to="/">
+            <Button
+              className="btCart"
+              variant="secondary"
+            >
+              Voltar
+            </Button>
+          </Link>
+        </div>
         <div className="cartItems">
           { !localStorage.item
             ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
@@ -73,29 +101,6 @@ export default class ShoppingCart extends Component {
               </div>
             ))) }
         </div>
-        <Link to="/shoppingCart">
-          <Button
-            variant="danger"
-            type="button"
-            onClick={ this.deleteCart }
-          >
-            Limpar Carrinho
-          </Button>
-        </Link>
-        <Link to="checkout" data-testid="checkout-products">
-          <Button
-            variant="success"
-          >
-            Checkout
-          </Button>
-        </Link>
-        <Link to="/">
-          <Button
-            variant="secondary"
-          >
-            Voltar
-          </Button>
-        </Link>
       </div>
     );
   }
