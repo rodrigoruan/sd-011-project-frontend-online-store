@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AvaliationForm from './AvaliationForm';
 import Avaliations from './Avaliations';
+import handleCart from '../services/localStorage';
 
 export default class Details extends Component {
+  addQuantity(product) {
+    const quantityProduct = { quantity: 1 };
+    const obj = Object.assign(quantityProduct, product);
+    handleCart(obj);
+  }
+
   render() {
     const {
       match: { params: { id } },
@@ -12,6 +20,9 @@ export default class Details extends Component {
     const { title, price, thumbnail, attributes } = element;
     return (
       <div>
+        <div>
+          <Link to="/ShoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
+        </div>
         <div>
           <div>
             <span data-testid="product-detail-name">{`${title}, ${price}`}</span>
@@ -29,7 +40,17 @@ export default class Details extends Component {
               </p>
             ))}
           </div>
+          <div>
+            <button
+              type="button"
+              data-testid="product-detail-add-to-cart"
+              onClick={ () => this.addQuantity(element) }
+            >
+              Adicionar ao carrinho
+            </button>
+          </div>
         </div>
+
         <div>
           <AvaliationForm
             getForm={ this.getForm }
