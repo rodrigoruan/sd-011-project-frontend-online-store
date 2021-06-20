@@ -41,7 +41,6 @@ export default class ShoppingCart extends Component {
   }
 
   updatedProduct({ ...productUpdated }) {
-    console.log(productUpdated);
     const { shoppingCart } = this.state;
     const newShoppincart = shoppingCart.map((product) => {
       if (product.id === productUpdated.id) {

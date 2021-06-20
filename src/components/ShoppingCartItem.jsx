@@ -12,25 +12,32 @@ export default class ShoppingCartItem extends Component {
       quantity: props.item.quantity,
       price: props.item.price,
       totalPrice: props.item.price,
-      buttonIcrease: false,
+      buttonIncrease: false,
+      availableQuantity: props.item.available_quantity,
     };
 
     this.handleIncrease = this.handleIncrease.bind(this);
     this.handleDecrease = this.handleDecrease.bind(this);
     this.totalPrice = this.totalPrice.bind(this);
     this.updatePriceAndProduct = this.updatePriceAndProduct.bind(this);
+    this.checkQuantity = this.checkQuantity.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkQuantity();
   }
 
   handleIncrease() {
-    const { quantity } = this.state;
-    const { avaible_quantity } = this.props;
-    quantity === avaible_quantity ?
-    this.setState({ buttonIcrease: true }) :
-    this.setState({
-      quantity: quantity + 1,
-    }, () => {
-      this.updatePriceAndProduct();
-    });
+    const { quantity, availableQuantity } = this.state;
+    if (quantity === availableQuantity) {
+      this.setState({ buttonIncrease: true });
+    } else {
+      this.setState({
+        quantity: quantity + 1,
+      }, () => {
+        this.updatePriceAndProduct();
+      });
+    }
   }
 
   handleDecrease() {
@@ -38,9 +45,17 @@ export default class ShoppingCartItem extends Component {
     if (quantity > 0) {
       this.setState({
         quantity: quantity - 1,
+        buttonIncrease: false,
       }, () => {
         this.updatePriceAndProduct();
       });
+    }
+  }
+
+  checkQuantity() {
+    const { quantity, availableQuantity } = this.state;
+    if (quantity === availableQuantity) {
+      this.setState({ buttonIncrease: true });
     }
   }
 
@@ -60,7 +75,7 @@ export default class ShoppingCartItem extends Component {
   }
 
   render() {
-    const { id, title, thumbnail, quantity, totalPrice, buttonIcrease } = this.state;
+    const { id, title, thumbnail, quantity, totalPrice, buttonIncrease } = this.state;
     const { deletProduct } = this.props;
     return (
       <div className="shopping-cart-item-section">
@@ -97,7 +112,7 @@ export default class ShoppingCartItem extends Component {
           type="button"
           onClick={ this.handleIncrease }
           data-testid="product-increase-quantity"
-          disabled={ buttonIcrease }
+          disabled={ buttonIncrease }
         >
           +
         </button>
@@ -117,8 +132,8 @@ ShoppingCartItem.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     quantity: PropTypes.number.isRequired,
     price: PropTypes.number.isRequired,
+    available_quantity: PropTypes.number.isRequired,
   }).isRequired,
   updatedProduct: PropTypes.func.isRequired,
   deletProduct: PropTypes.func.isRequired,
-  buttonIcrease: PropTypes.bool.isRequired,
 };
