@@ -79,3 +79,13 @@
 .btDatails1 {
   margin-right: 50px;
 }
+
+.cartItems{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.cart {
+  
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Buttons from './Button';
 
@@ -37,30 +37,39 @@ export default class ShoppingCart extends Component {
   render() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
     return (
-
       <div>
-        { !localStorage.item
-          ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
-          : (getLocal.map(({ title, thumbnail, price, countP, id }, index) => (
-            <div key={ index }>
-              <div data-testid="shopping-cart-product-name">
-                <img src={ thumbnail } alt={ title } />
-                <p>{ title }</p>
-                <p>
-                  R$
-                  {price}
-                </p>
+        <div className="cartItems">
+          { !localStorage.item
+            ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
+            : (getLocal.map(({ title, thumbnail, price, countP, id }, index) => (
+              <div key={ index }>
+                <div className="cart" data-testid="shopping-cart-product-name">
+                  <Card.Img
+                    variant="top"
+                    className="imgr"
+                    src={ thumbnail }
+                    alt={ title }
+                  />
+                  <Card.Body>
+                    <Card.Title>{ title }</Card.Title>
+                    <Card.Text>
+                      {' '}
+                      R$:
+                      {price}
+                    </Card.Text>
+                    <Buttons
+                      deleteItem={ this.deleteItem }
+                      quantity={ countP }
+                      subClick={ this.subClick }
+                      addClick={ this.addClick }
+                      id={ id }
+                      index={ index }
+                    />
+                  </Card.Body>
+                </div>
               </div>
-              <Buttons
-                deleteItem={ this.deleteItem }
-                quantity={ countP }
-                subClick={ this.subClick }
-                addClick={ this.addClick }
-                id={ id }
-                index={ index }
-              />
-            </div>
-          ))) }
+            ))) }
+        </div>
         <Link to="/shoppingCart">
           <Button
             variant="danger"
