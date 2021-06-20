@@ -27,12 +27,18 @@ class Cart extends React.Component {
 
   updateTotalPrice() {
     const localCart = this.getProductFromLocalStorage();
-    const productPrices = localCart.map((product) => Math
+    let productPrices = 0;
+    if (!localCart) {
+      return productPrices;
+    }
+    productPrices = localCart.map((product) => Math
       .round((product.quantity * product.price) * 100) / 100);
+
     const totalPrice = productPrices.reduce((acc, current) => acc + current);
     this.setState({
       totalPrice,
     });
+
     this.saveToLocalStorage(totalPrice);
     return totalPrice;
   }
