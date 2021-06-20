@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 export default class ProductList extends Component {
   constructor() {
@@ -32,7 +33,7 @@ export default class ProductList extends Component {
     const { free_shipping: freeShipping } = shipping;
 
     return (
-      <>
+      <div className="productItem">
         <Card style={ { width: '18rem' } } data-testid="product">
           <Card.Img variant="top" src={ thumbnail } alt={ title } />
           <Card.Body>
@@ -71,22 +72,7 @@ export default class ProductList extends Component {
             </Link>
           </Card.Body>
         </Card>
-
-        {/* <div data-testid="product">
-          <p>{ title }</p>
-          <img />
-          <p>
-            R$
-            {price}
-          </p>
-          <div>
-            Frete:
-            { freeShipping
-              ? <p data-testid="free-shipping">Frete Gratis</p>
-              : <p>A combinar com o vendedor</p> }
-          </div>
-        </div> */}
-      </>
+      </div>
     );
   }
 }

@@ -21,7 +21,16 @@
 .product {
   align-items: stretch;
   display: flex;
-  flex-flow: row warp;
+  flex-flow: row wrap;
   justify-content: center;
-  padding: 5px;
+  padding: 50px;
+}
+
+.productItem {
+  display: flex;
+  flex-flow: column nowrap;
+  height: fit-content;
+  justify-content: space-evenly;
+  margin: 10px;
+  width: 350px;
 }
