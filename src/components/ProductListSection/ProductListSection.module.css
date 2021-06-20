@@ -1,36 +1,51 @@
 .product {
   align-items: center;
+  background-color: white;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px , rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
   display: flex;
   flex-direction: column;
   font-size: 12px;
-  height: 300px;
-  justify-content: center;
-  margin: 20px;
+  height: 400px;
+  justify-content: space-between;
   padding: 20px;
+  text-align: center;
   width: 300px;
 }
 
+.product span {
+  font-size: 25px;
+}
+
 .productImage {
+  border-radius: 10px;
+  height: 150px;
   width: 150px;
+
+}
+
+.productButtons {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
 }
 
 .cartBtn {
-  background-color: #48c774;
+  background-color: #353a8c;
   border-color: transparent;
   border-radius: 10px;
-  color: white;
   cursor: pointer;
-  font-size: 16px;
   padding: 5px;
 }
 
 .detailsBtn {
-  background-color: #fef059;
+  background-color: #586ba6;
   border-color: transparent;
   border-radius: 10px;
   color: white;
   cursor: pointer;
   font-size: 16px;
-  padding: 5px;
+  font-weight: 700;
+  padding: 9.5px;
 }

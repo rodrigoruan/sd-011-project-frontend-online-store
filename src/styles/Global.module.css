@@ -13,6 +13,7 @@ body {
   display: flex;
   gap: 30px;
   justify-content: center;
+  margin: 0 auto;
   width: 100%;
 }
 
@@ -28,21 +29,20 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: 1106px;
+  height: 1042px;
   margin-top: 50px;
   padding: 30px 50px;
 }
 
 .mainContent {
   margin-top: 50px;
-  width: 50vw;
+  width: 65vw;
 }
 
 .productSection {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px , rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
   margin-top: 50px;
-  padding: 30px 50px;
   width: 100%;
 }

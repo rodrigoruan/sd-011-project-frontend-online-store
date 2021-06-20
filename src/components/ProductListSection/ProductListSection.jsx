@@ -10,8 +10,16 @@ export default class ProductListSection extends Component {
         <img src={ thumbnail } alt={ title } className={ styles.productImage } />
         <h3>{title}</h3>
         <span>{`R$ ${price}`}</span>
-        <button className={ styles.cartBtn } type="button">Adicionar ao carrinho</button>
-        <button className={ styles.detailsBtn } type="button">Detalhes</button>
+        <div className={ styles.productButtons }>
+          <button
+            className={ styles.cartBtn }
+            type="button"
+          >
+            <img src="/add_shopping_cart_black_24dp.svg" alt="Adicionar ao carrinho" />
+          </button>
+
+          <button className={ styles.detailsBtn } type="button">Detalhes</button>
+        </div>
       </div>
     );
   }
