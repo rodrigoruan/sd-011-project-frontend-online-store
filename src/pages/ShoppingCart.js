@@ -84,6 +84,7 @@ class ShoppingCart extends Component {
                 +
               </button>
             )}
+
             <p>
               { item.price.toLocaleString('pt-BR', {
                 style: 'currency',

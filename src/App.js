@@ -57,6 +57,9 @@ class App extends Component {
 
     if (updatedCart[itemIndex].amount > 1) {
       updatedCart[itemIndex].amount -= 1;
+    } else if (updatedCart[itemIndex].amount <= 1) {
+      // eslint-disable-next-line no-alert
+      alert('A quantidade não pode ser negativa');
     }
 
     this.setState({ shopCart: updatedCart });
