@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+/** Este componente é responsável por exibir um novo item
+ * no carrinho de comprar. Ele é renderizado de forma dinâmica
+ * no componente ShoppingCart.jsx, onde algumas propa são
+ * passadas, incluindo funções e um produto em específico. */
 class NewItem extends Component {
   render() {
-    const { product,
-      // cart,
-      handleDelete,
-      increaseQuantity,
-      decreaseQuantity,
-    } = this.props;
+    const { product, handleDelete, increaseQuantity, decreaseQuantity } = this.props;
+
     // const quantity = cart.filter((item) => item === product);
 
     return (
+      /** O componente abaixo recebe gera um card de um produto adicionado ao carrinho.
+       * Recebe funções de incremento e decremento, para aumentar e diminuir a quantida-
+       * de de itens em um carrinho. */
       <div>
         <div key={ product.title }>
           <p data-testid="shopping-cart-product-name">{product.title}</p>
@@ -47,7 +50,6 @@ NewItem.propTypes = {
     price: PropTypes.number.isRequired,
     quantity: PropTypes.number.isRequired,
   }).isRequired,
-  // cart: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleDelete: PropTypes.func.isRequired,
   increaseQuantity: PropTypes.func.isRequired,
   decreaseQuantity: PropTypes.func.isRequired,

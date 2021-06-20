@@ -10,7 +10,9 @@ class CardItem extends React.Component {
     return products.length === 0 ? notFound : (
       products.map((product) => (
         <>
-          {/* Lembrar de referenciar como passar props por Linkk */}
+          {/* Para fazer a utilização de props em componentes <Link>
+          foi consultado um artigo em ui.dev
+          Source: https://ui.dev/react-router-v5-pass-props-to-link/ */}
           <Link
             to={ {
               pathname: `/details/${product.id}`,

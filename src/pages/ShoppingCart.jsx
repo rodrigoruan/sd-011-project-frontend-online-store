@@ -17,6 +17,7 @@ class ShoppingCart extends React.Component {
     this.filterFunction();
   }
 
+  // Função responsável por deletar um item do carrinho de comprar. By: Amandha B.
   handleDelete(product) {
     const { shoppingCart } = this.state;
     const newList = shoppingCart.filter((item) => item.id !== product.id);
@@ -46,7 +47,7 @@ class ShoppingCart extends React.Component {
     return !cart.length ? emptyCart : shoppingCart.map((product, index) => (
       <NewItem
         product={ product }
-        cart={ cart }
+        // cart={ cart }
         key={ index }
         handleDelete={ this.handleDelete }
         increaseQuantity={ increaseQuantity }

@@ -19,6 +19,9 @@ class Home extends React.Component {
     this.clearState = this.clearState.bind(this);
   }
 
+  /** A função getCategories é chamada no componentDidMount para
+   * que tenhamos a lista de categorias armazenada, para renderi-
+   * zação posterior. */
   componentDidMount() {
     this.getCategories();
   }
