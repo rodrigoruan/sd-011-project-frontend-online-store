@@ -25,16 +25,37 @@ export default class App extends Component {
     this.removeCartItem = this.removeCartItem.bind(this);
     this.increaseItemQuantity = this.increaseItemQuantity.bind(this);
     this.decreaseItemQuantity = this.decreaseItemQuantity.bind(this);
+    this.setStorage = this.setStorage.bind(this);
+    this.getStorage = this.getStorage.bind(this);
   }
 
   componentDidMount() {
     this.fetchProductCategory();
+    if (localStorage.getItem('localCart')) {
+      this.getStorage();
+    }
+  }
+
+  componentDidUpdate() {
+    this.setStorage();
   }
 
   handleChange({ target }) {
     const { value, name } = target;
     this.setState({
       [name]: value,
+    });
+  }
+
+  setStorage() {
+    const { cartItems } = this.state;
+    localStorage.setItem('localCart', JSON.stringify(cartItems));
+  }
+
+  getStorage() {
+    const cartItemsStorage = JSON.parse(localStorage.getItem('localCart'));
+    this.setState({
+      cartItems: cartItemsStorage,
     });
   }
 
@@ -70,12 +91,15 @@ export default class App extends Component {
       this.setState({
         cartItems: [...cartItems, itemToCart],
       });
+      // this.setStorage();
     } else {
       this.setState({
         cartItems: [...cartItems],
       });
       itemToCart.quantity += 1;
+      // this.setStorage();
     }
+    this.setStorage();
   }
 
   removeCartItem({ target: { value } }) {
@@ -84,6 +108,7 @@ export default class App extends Component {
     this.setState({
       cartItems: updateCart,
     });
+    // this.setStorage();
   }
 
   increaseItemQuantity({ target: { value } }) {
@@ -95,6 +120,7 @@ export default class App extends Component {
         cartItems: [...cartItems],
       });
       itemToCart.quantity += 1;
+      this.setStorage();
     }
   }
 
@@ -107,6 +133,7 @@ export default class App extends Component {
         cartItems: [...cartItems],
       });
       itemToCart.quantity -= 1;
+      this.setStorage();
     }
   }
 
