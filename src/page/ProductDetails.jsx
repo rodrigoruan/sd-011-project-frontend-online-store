@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Button2 from '../components/Button2';
+import Button from '../components/Button';
 
 export default class ProductDetails extends Component {
   render() {
     const { location: { state } } = this.props;
     const { title, thumbnail, price, attributes } = state;
+    const testid = 'product-detail-add-to-cart';
+
     return (
       <div>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">
@@ -29,7 +31,10 @@ export default class ProductDetails extends Component {
             </li>
           ))}
         </ul>
-        <Button2 product={ state } />
+        <Button
+          product={ state }
+          testid={ testid }
+        />
       </div>
     );
   }

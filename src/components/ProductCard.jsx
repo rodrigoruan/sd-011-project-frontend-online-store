@@ -7,6 +7,8 @@ export default class ProductCard extends Component {
   render() {
     const { product } = this.props;
     const { title, price, thumbnail, id } = product;
+    const testid = 'product-add-to-cart';
+
     return (
       <div data-testid="product">
         <Link
@@ -19,7 +21,10 @@ export default class ProductCard extends Component {
             <img src={ thumbnail } alt={ title } width="70px" />
           </div>
         </Link>
-        <Button product={ product } />
+        <Button
+          product={ product }
+          testid={ testid }
+        />
       </div>
     );
   }

@@ -9,19 +9,23 @@ export default class Button extends Component {
 
   addToCart() {
     const { product } = this.props;
-    if (localStorage.getItem('product')) {
-      const storage = JSON.parse(localStorage.getItem('product'));
-      localStorage.setItem('product', JSON.stringify([...storage, product]));
+    const productAsString = JSON.stringify(product);
+
+    if (localStorage.getItem(productAsString)) {
+      const quantityAsString = Object.values(localStorage.getItem(productAsString));
+      const itemQuantity = parseInt(quantityAsString, 10);
+      localStorage.setItem(JSON.stringify(product), itemQuantity + 1);
     } else {
-      localStorage.setItem('product', JSON.stringify([product]));
+      localStorage.setItem(productAsString, 1);
     }
   }
 
   render() {
+    const { testid } = this.props;
     return (
       <button
         type="button"
-        data-testid="product-add-to-cart"
+        data-testid={ testid }
         onClick={ this.addToCart }
       >
         Adicionar ao carrinho
@@ -37,4 +41,5 @@ Button.propTypes = {
     thumbnail: PropTypes.string,
     id: PropTypes.string,
   }).isRequired,
+  testid: PropTypes.string.isRequired,
 };
