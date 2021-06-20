@@ -98,3 +98,10 @@
 .btCart{
   margin: 5px;
 }
+
+.btCartItem {
+  display: flex;
+  margin: 5px;
+  align-items: center;
+  justify-content: space-around;
+}

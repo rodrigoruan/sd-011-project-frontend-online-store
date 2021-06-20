@@ -7,7 +7,7 @@ export default class Buttons extends Component {
   render() {
     const { subClick, addClick, quantity, id, index, deleteItem } = this.props;
     return (
-      <div>
+      <div className="btCartItem">
         <Link to="/ShoppingCart">
           <Button
             variant="primary"
