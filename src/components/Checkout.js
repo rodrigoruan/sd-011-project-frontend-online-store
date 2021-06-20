@@ -1,21 +1,16 @@
 import React from 'react';
-
-const fullnameRegex = new RegExp('[a-z]+$');
+const fullnameRegexp = new RegExp('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]{3}');
+const cpfRegexp = new RegExp('^([0-9]){3}.([0-9]){3}.([0-9]){3}-([0-9]){2}$');
+const emailRegexp = new RegExp('\\S+@\\S+\\.\\S+');
+const phoneRegexp = new RegExp('\\d{2}\\s\\d{4,5}\\-\\d{4}$'); // P/ HTML melhor c/ parênteses: (\d{2})\s(\d{4,5})-(\d{4})
+const cepRegexp = new RegExp('[0-9]{5}-[0-9]{3}$');
+const addressRegxp = new RegExp('[a-zA-Z0-9 ,.]{10}');
 
 export default class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
       products: [],
-      // form: {
-      //   fullname: '',
-      //   email: '',
-      //   cpf: null,
-      //   phone: null,
-      //   cep: null,
-      //   address: '',
-      //   method: '',
-      // },
       fullname: '',
       email: '',
       cpf: '',
@@ -35,26 +30,21 @@ export default class Checkout extends React.Component {
   }
 
   componentDidUpdate() { // Só pra testar
-    // console.log('Estado form mudando abaixo');
-    // console.log(this.state.form);
     console.log('componentDidupdate: Estado fulled mudando abaixo');
     console.log(this.state.fulled);
     console.log('componentDidupdate: onChange muda Estado como abaixo');
-    // console.log(this.state.form);
     console.log(this.state);
   }
 
   handleCheck() {
-    // const { form: { fullname, email, cpf, phone, cep, address, method } } = this.state;
     const { fullname, email, cpf, phone, cep, address, method } = this.state;
-    // && () && (phone !== null)
-    // && (cep !== null) && (address !== '') && (method !== ''))
-    if (fullnameRegex.test(fullname) && email !== '' && cpf !== '' && phone !== ''
-    && cep !== '' && address !== '' && method !== '') {
+    if (fullnameRegexp.test(fullname) && cpfRegexp.test(cpf) && emailRegexp.test(email)
+    && phoneRegexp.test(phone) && cepRegexp.test(cep) && addressRegxp.test(address)
+    && method !== '') {
       this.setState({ fulled: true });
-      console.log('Nome ok');
+      console.log('Tudo ok');
     } else {
-      console.log('Nome errado');
+      console.log('Algum campo errado');
       this.setState({ fulled: false });
     }
   }
@@ -67,48 +57,15 @@ export default class Checkout extends React.Component {
       products: arrayOfproducts,
       // count: arrayOfproducts.map(({ counter, title }) => ({ counter, title })),
     });
-  };
-
-  // fullname() {
-  //   const { form: { fullname } } = this.state;
-
-  //   // this.setState({ fulled: true }) :
-  //   // this.setState({ fulled: false });
-  // }
-
-  // emailValid() {
-  //   const { form: { email } } = this.state;
-  // }
-
-  // cpf() {
-  //   const { form: { cpf } } = this.state;
-  // }
-
-  // phone() {
-  //   const { form: { phone } } = this.state;
-  // }
-
-  // cep() {
-  //   const { form: { cep } } = this.state;
-  // }
-
-  // address() {
-  //   const { form: { address } } = this.state;
-  // }
-
-  // method() {
-  //   const { form: { method } } = this.state;
-  // }
+  }
 
   handle({ target }) {
-    // this.setState({ form: { [target.name]: target.value } });
     this.setState({ [target.name]: target.value });
   }
 
   render() {
     const { products } = this.state;
-    // const { form: { fullname, email, cpf, phone, cep, address } } = this.state;
-    const { fullname, email, cpf, phone, cep, address, method } = this.state;
+    const { fullname, email, cpf, phone, cep, address } = this.state;
     return (
       <div>
         <h1>Dados de compra</h1>
@@ -147,8 +104,9 @@ export default class Checkout extends React.Component {
               value={ fullname }
               data-testid="checkout-fullname"
               type="text"
-              pattern="[a-z\s]+$"
-              title="Só letras minúsculas entre a e z"
+              maxLength="50"
+              pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]{3,}"
+              title="Mínimo de três caracteres"
               placeholder="fullname"
               onChange={ this.handle }
             />
@@ -156,8 +114,11 @@ export default class Checkout extends React.Component {
               name="email"
               value={ email }
               data-testid="checkout-email"
-              type="email"
+              type="text"
+              pattern="\S+@\S+\.\S+"
+              title="Formato: alguém@algo.algo"
               placeholder="E-mail"
+              maxLength="50"
               onChange={ this.handle }
             />
             <input
@@ -165,7 +126,10 @@ export default class Checkout extends React.Component {
               value={ cpf }
               data-testid="checkout-cpf"
               type="text"
-              placeholder="cpf"
+              pattern="^([0-9]){3}.([0-9]){3}.([0-9]){3}-([0-9]){2}$"
+              title="Formato: 000.000.000-00"
+              placeholder="CPF"
+              maxLength="14"
               onChange={ this.handle }
             />
             <input
@@ -173,15 +137,23 @@ export default class Checkout extends React.Component {
               value={ phone }
               data-testid="checkout-phone"
               type="text"
-              placeholder="phone"
+              pattern="(\d{2})\s(\d{4,5})-(\d{4})"
+              title="00 0000-0000 ou 00 00000-0000"
+              placeholder="Phone Number"
+              maxLength="14"
               onChange={ this.handle }
             />
             <input
               name="cep"
               value={ cep }
+              required="true"
               data-testid="checkout-cep"
               type="text"
-              placeholder="cep"
+              pattern="[0-9]{5}-[0-9]{3}$"
+              title="Formato: 00000-000"
+              minLength="9"
+              maxLength="9"
+              placeholder="CEP"
               onChange={ this.handle }
             />
             <input
@@ -189,6 +161,9 @@ export default class Checkout extends React.Component {
               value={ address }
               data-testid="checkout-address"
               type="text"
+              pattern="[a-zA-Z0-9 '-/(/)]{10,}"
+              title="Mínimo de 10 caracteres"
+              maxLength="50"
               placeholder="Address"
               onChange={ this.handle }
             />
