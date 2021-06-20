@@ -39,3 +39,7 @@
 .category {
   text-align: left;
 }
+
+.itemCart {
+  border: solid 1px black;
+}
