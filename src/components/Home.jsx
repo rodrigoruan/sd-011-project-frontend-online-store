@@ -74,7 +74,6 @@ class Home extends Component {
 
   render() {
     const { categories, search, searchResult, voidSearch, cart } = this.state;
-    console.log(voidSearch);
     return (
       <div className="home-page">
         <div className="category-list">
