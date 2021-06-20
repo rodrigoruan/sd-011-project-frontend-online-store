@@ -23,7 +23,11 @@ export default class Product extends Component {
   setComments = ({ target: { value, name } }) => this.setState({ [name]: value });
 
   saveCommentOnLocal = () => {
-    const { location: { state: { id } } } = this.props;
+    const {
+      location: {
+        state: { id },
+      },
+    } = this.props;
     const { comment, stars } = this.state;
 
     if (stars) {
@@ -42,25 +46,42 @@ export default class Product extends Component {
   };
 
   changeState = () => {
-    const { location: { state } } = this.props;
+    const {
+      location: { state },
+    } = this.props;
     const { title } = state;
 
     const local = JSON.parse(localStorage.getItem(title));
 
-    this.setState({ counter: local.counter + 1 });
-  }
+    this.setState({ counter: local ? local.counter + 1 : 1 });
+  };
 
   handleClick = () => {
-    const { location: { state } } = this.props;
-    const { title } = state;
+    const {
+      location: {
+        state: { title, price, thumbnail, attributes, id, shipping, availableQuantity },
+      },
+    } = this.props;
+    const { counter } = this.state;
+    this.setState((previous) => ({ counter: previous.counter + 1 }));
 
     const local = JSON.parse(localStorage.getItem(title));
-
-    this.setState((previous) => ({ counter: previous.counter + 1 }));
-    const { counter } = this.state;
-    local.counter = counter;
-    const json = JSON.stringify(local);
-    localStorage.setItem(title, json);
+    if (local) {
+      local.counter = counter;
+      localStorage.setItem(title, JSON.stringify(local));
+    } else {
+      const object = {
+        counter,
+        title,
+        price,
+        thumbnail,
+        attributes,
+        id,
+        shipping,
+        availableQuantity,
+      };
+      localStorage.setItem(title, JSON.stringify(object));
+    }
     this.sumCartItems();
   };
 
@@ -69,33 +90,35 @@ export default class Product extends Component {
     const objJson = Object.values(objeto).map((e) => JSON.parse(e));
     const total = objJson.reduce((acc, curr) => acc + curr.counter, 0);
     this.setState({ sum: total });
-  }
+  };
 
   render() {
     const { props, state } = this;
-    const { location:
-      { state: { title, price, thumbnail, attributes, id, shipping } } } = props;
-    const { allComments, sum } = state;
+    const {
+      location: {
+        state: { title, price, thumbnail, attributes, id, shipping, availableQuantity },
+      },
+    } = props;
+    const { allComments, sum, counter } = state;
     return (
       <>
         <h1 data-testid="product-detail-name">{title}</h1>
         <img src={ thumbnail } alt={ title } />
-        {
-          shipping.free_shipping ? <p data-testid="free-shipping">Frete Grátis!</p> : null
-        }
+        {shipping.free_shipping ? (
+          <p data-testid="free-shipping">Frete Grátis!</p>
+        ) : null}
         <p>
           R$
           {price}
         </p>
         <div>
           <ul>
-            {attributes && attributes.map(({ name }, index) => (
-              <li key={ index }>
-                {name}
-              </li>))}
+            {attributes
+              && attributes.map(({ name }, index) => <li key={ index }>{name}</li>)}
           </ul>
         </div>
         <button
+          disabled={ counter > availableQuantity }
           data-testid="product-detail-add-to-cart"
           onClick={ this.handleClick }
           type="button"
@@ -105,9 +128,7 @@ export default class Product extends Component {
         <Link data-testid="shopping-cart-button" to="/cart">
           Carrinho
         </Link>
-        <span data-testid="shopping-cart-size">
-          {sum}
-        </span>
+        <span data-testid="shopping-cart-size">{sum}</span>
         <div>
           <textarea
             name="comment"
@@ -129,18 +150,19 @@ export default class Product extends Component {
         </div>
         <div>
           <h4>Avaliações</h4>
-          {allComments && allComments.split('*').map((item, index) => {
-            const { comment, stars } = JSON.parse(item);
-            return (
-              <div key={ index }>
-                <p>{comment}</p>
-                <p>
-                  STARS:
-                  {stars}
-                </p>
-              </div>
-            );
-          })}
+          {allComments
+            && allComments.split('*').map((item, index) => {
+              const { comment, stars } = JSON.parse(item);
+              return (
+                <div key={ index }>
+                  <p>{comment}</p>
+                  <p>
+                    STARS:
+                    {stars}
+                  </p>
+                </div>
+              );
+            })}
         </div>
       </>
     );
