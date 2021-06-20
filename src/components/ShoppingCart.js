@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Buttons from './Button';
+import NavHome from './NavHome';
 
 export default class ShoppingCart extends Component {
   subClick = (index, id) => {
@@ -36,8 +37,10 @@ export default class ShoppingCart extends Component {
 
   render() {
     const getLocal = JSON.parse(localStorage.getItem('item'));
+    const loading = false;
     return (
       <div>
+        <NavHome loading={ loading } />
         <div className="cartItems">
           { !localStorage.item
             ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>

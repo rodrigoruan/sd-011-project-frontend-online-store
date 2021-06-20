@@ -53,6 +53,7 @@ export default class ProductDetails extends Component {
     const { itemsCart, quantityItems } = this.state;
     const { location: { state: { detail } } } = this.props;
     const { id, title, thumbnail, price, attributes, installments } = detail;
+    const loading = true;
 
     return (
       <div>
@@ -60,6 +61,7 @@ export default class ProductDetails extends Component {
           filterProducts={ this.filterProducts }
           itemsCart={ itemsCart }
           quantityItems={ quantityItems }
+          loading={ loading }
         />
         <Card.Img variant="top" className="imgr" src={ thumbnail } alt={ title } />
         <Card.Body>
