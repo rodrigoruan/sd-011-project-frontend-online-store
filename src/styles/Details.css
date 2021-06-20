@@ -1,0 +1,34 @@
+.details {
+  margin: 20px;
+}
+
+.detail-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons {
+  font-size: 1.5rem;
+  margin-right: 20px;
+}
+
+.detail-image-info {
+  display: flex;
+}
+
+.detail-image {
+  margin: 20px;
+}
+
+.detail-information {
+  margin: 17px;
+}
+
+.detail-image img {
+  width: 350px;
+}
+
+.form-radio {
+  display: flex;
+}
+
