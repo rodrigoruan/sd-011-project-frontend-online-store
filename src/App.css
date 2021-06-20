@@ -80,7 +80,7 @@
   margin-right: 50px;
 }
 
-.cartItems{
+.cartItems {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -89,13 +89,13 @@
 .cart {
   border: 1px solid;
   border-radius: 8px;
-  box-shadow: 2px 3px #888888;
-  padding: 10px;
+  box-shadow: 2px 3px #888;
   margin: 15px;
+  padding: 10px;
   width: 400px;
 }
 
-.btCart{
+.btCart {
   margin: 5px;
 }
 
@@ -105,3 +105,4 @@
   align-items: center;
   justify-content: space-around;
 }
+ 
