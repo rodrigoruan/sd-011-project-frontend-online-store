@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Avaliacao extends React.Component {
+  // Component avaliacao
   render() {
     const { avaliacao: { rating, commentary } } = this.props;
     return (
