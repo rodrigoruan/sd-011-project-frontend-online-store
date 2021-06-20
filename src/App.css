@@ -102,6 +102,6 @@
 .btCartItem {
   align-items: center;
   display: flex;
-  margin: 5px;
   justify-content: space-around;
+  margin: 5px;
 }
