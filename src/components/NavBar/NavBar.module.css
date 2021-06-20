@@ -1,0 +1,10 @@
+.categoryButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.categoryButton:active {
+  color: red;
+}

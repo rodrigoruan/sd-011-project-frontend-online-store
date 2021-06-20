@@ -1,12 +1,17 @@
+.SearchBarContainer {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
 .SearchBarContainer input {
   background: white;
   border: none;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 6px -1px , rgba(0, 0, 0, 0.06) 0 2px 4px -1px;
   outline: none;
-  padding: 15px;
+  padding: 15px 40px 15px 15px;
   transition: border 0.3s ease-in-out;
-  width: 90%;
+  width: 95%;
 }
 
 .SearchBarContainer input:focus {
@@ -20,12 +25,26 @@
   box-shadow: #353a8c 2px 4px 6px -1px;
   color: white;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
   outline: none;
   padding: 15px;
-  transform: translateX(-100%);
-  transition: background 0.3s ease-in-out;
+  transform: translateX(-50%);
+  transition: background 0.2s ease-in-out;
 }
 
 .SearchBarContainer button:hover {
+  background-color: #586ba6;
+}
+
+.CartLink {
+  background-color: #353a8c;
+  border-radius: 10px;
+  box-shadow: #353a8c 0 4px 6px -1px;
+  padding: 15px;
+  transition: background 0.2s ease-in-out;
+}
+
+.CartLink:hover {
   background-color: #586ba6;
 }

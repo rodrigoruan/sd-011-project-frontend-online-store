@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './NavBar.module.css';
+
 export default class NavBar extends Component {
   render() {
     const { name, id, selectCategory } = this.props;
     console.log(id);
     return (
       <div>
-        <input
-          type="radio"
+        <button
+          className={ styles.categoryButton }
+          data-testid="category"
+          type="button"
           name="categoryRadio"
           id={ id }
-          onChange={ selectCategory }
-        />
-        <label htmlFor="categoryRadio" data-testid="category">
+          onClick={ selectCategory }
+        >
           {name}
-        </label>
+        </button>
       </div>
     );
   }
