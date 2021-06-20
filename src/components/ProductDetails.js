@@ -8,23 +8,26 @@ import '../App.css';
 class ProductDetails extends React.Component {
   constructor() {
     super();
-    const details = this.loadCartList();
-    const productArray = Object.values(details);
+    // const details = this.loadCartList();
+    // const productArray = Object.values(details);
     this.state = {
       product: [],
       rating: null,
-      quantity: productArray.length,
+      quantity: 1,
+      // quantity: productArray.length,
     };
 
     this.getProduct = this.getProduct.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.loadCartList = this.loadCartList.bind(this);
     this.setRating = this.setRating.bind(this);
+    this.getSetState = this.getSetState.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
     this.getProduct();
+    this.getSetState();
   }
 
   handleClick() {
@@ -36,11 +39,20 @@ class ProductDetails extends React.Component {
       previousList[id] = { title, thumbnail, price, quantity: 1 };
     }
     // previousList.push({ title, thumbnail, price });
-    localStorage.setItem('cartList', JSON.stringify(previousList));
-    const details = this.loadCartList();
-    const productArray = Object.values(details);
+    // const productArray = Object.values(details);
+    const quantityItem = previousList[id].quantity;
     this.setState({
-      quantity: productArray.length,
+      quantity: quantityItem,
+    });
+    localStorage.setItem('cartList', JSON.stringify(previousList));
+    // const details = this.loadCartList();
+  }
+
+  getSetState() {
+    const { quantity } = this.state;
+    console.log(`qtd do getSetState ${quantity}`);
+    this.setState({
+      quantity,
     });
   }
 
@@ -50,6 +62,8 @@ class ProductDetails extends React.Component {
     const product = productObj.results
       .find((prod) => prod.id === id);
     this.setState({ product });
+    // daria para fazer um if para verificar se o ID ja existe no localStorage
+    // se ja existir pegar as info caso contrario pegar da variavel acima que pega da API
   }
 
   setRating(event) {
@@ -64,12 +78,16 @@ class ProductDetails extends React.Component {
     if (previousList[id] && previousList[id].quantity > 1) {
       previousList[id].quantity -= 1;
     }
-    localStorage.setItem('cartList', JSON.stringify(previousList));
-    const details = this.loadCartList();
-    const productArray = Object.values(details);
+    // const details = this.loadCartList();
+    // const productArray = Object.values(details);
+    // this.setState({
+    //   quantity: productArray.length,
+    // });
+    const quantityItem = previousList[id].quantity;
     this.setState({
-      quantity: productArray.length,
+      quantity: quantityItem,
     });
+    localStorage.setItem('cartList', JSON.stringify(previousList));
   }
 
   loadCartList() {
@@ -83,6 +101,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const { product: { title, thumbnail, price }, quantity } = this.state;
+    console.log(`qtd do getSetState ${quantity}`);
     const { rating } = this.state;
     const numberOfStars = 5;
     return (

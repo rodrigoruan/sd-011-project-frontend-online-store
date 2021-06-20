@@ -21,8 +21,7 @@ class Cart extends Component {
   }
 
   getSetState() {
-    const { product } = this.props;
-    const { quantity } = product;
+    const { product: { quantity } } = this.props;
     this.setState({
       quantity,
     });
@@ -52,7 +51,10 @@ class Cart extends Component {
       this.setState({
         quantity: previousList[id].quantity,
       });
+    } else {
+      console.log('deletar o item e atualizar o carrinho');
     }
+
     localStorage.setItem('cartList', JSON.stringify(previousList));
     this.totalValue();
   }
