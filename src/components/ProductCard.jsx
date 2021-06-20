@@ -12,7 +12,6 @@ export default class ProductCard extends Component {
         shipping:
           { free_shipping: freeShipping } },
     addCart } = this.props;
-
     return (
       <div className="product-card" data-testid="product">
         <p data-testid="product-detail-name">{title}</p>
