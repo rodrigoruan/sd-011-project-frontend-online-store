@@ -13,17 +13,27 @@
 }
 
 .category {
+  border: solid 2px black;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 10px;
+  position: absolute;
+  width: 300px;
+  min-width: 300px;
+}
+
+.category input {
+  margin-left: 15px;
 }
 
 .product {
   align-items: stretch;
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: flex-end;
   padding: 50px;
+  max-width: 100px;
 }
 
 .productItem {
@@ -35,7 +45,7 @@
   width: 350px;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: max-content max-content;
+
+.containerHome {
+  display: flex;
 }

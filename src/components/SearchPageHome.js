@@ -96,41 +96,43 @@ export default class SearchPageHome extends Component {
               Pesquisar
             </Button>
           </Form>
-        </div>
-        <div className="category">
-          { categoriesData.map((item) => (<Categories
-            listCategories={ item }
-            changeCategory={ this.handleListCategories }
-            key={ item.name }
-          />
-          ))}
-
-        </div>
-        <Link
-          data-testid="shopping-cart-button"
-          to={ {
-            pathname: '/shoppingCart',
-            state: itemsCart,
-          } }
-        >
-          <Button
-            variant="primary"
+          <Link
+            data-testid="shopping-cart-button"
+            to={ {
+              pathname: '/shoppingCart',
+              state: itemsCart,
+            } }
           >
-            Carrinho(
-            <span data-testid="shopping-cart-size">{itemsCart}</span>
-            )
-          </Button>
-        </Link>
-        <div className="product">
-          {loading ? (
-            <p data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </p>
-          ) : (product.map((item) => (<ProductList
-            products={ item }
-            key={ item.id }
-            foundQuantityItemsCart={ this.foundQuantityItemsCart }
-          />)))}
+            <Button
+              variant="primary"
+            >
+              Carrinho(
+              <span data-testid="shopping-cart-size">{itemsCart}</span>
+              )
+            </Button>
+          </Link>
+        </div>
+        <div className="containerHome">
+          <div className="category">
+            { categoriesData.map((item) => (<Categories
+              listCategories={ item }
+              changeCategory={ this.handleListCategories }
+              key={ item.name }
+            />
+            ))}
+
+          </div>
+          <div className="product">
+            {loading ? (
+              <p data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </p>
+            ) : (product.map((item) => (<ProductList
+              products={ item }
+              key={ item.id }
+              foundQuantityItemsCart={ this.foundQuantityItemsCart }
+            />)))}
+          </div>
         </div>
       </div>
     );
