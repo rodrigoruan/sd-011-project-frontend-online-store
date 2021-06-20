@@ -55,22 +55,11 @@ export default class ProductDetails extends Component {
 
     return (
       <div>
-        <NavHome filterProducts={ this.filterProducts } />
-        <Link
-          data-testid="shopping-cart-button"
-          to={ {
-            pathname: '/shoppingCart',
-            state: itemsCart,
-          } }
-        >
-          <Button
-            variant="primary"
-          >
-            Carrinho(
-            <span data-testid="shopping-cart-size">{quantityItems}</span>
-            )
-          </Button>
-        </Link>
+        <NavHome
+          filterProducts={ this.filterProducts }
+          itemsCart={ itemsCart }
+          quantityItems={ quantityItems }
+        />
         <div>
           <h1 data-testid="product-detail-name">{title}</h1>
           <img src={ thumbnail } alt={ title } />

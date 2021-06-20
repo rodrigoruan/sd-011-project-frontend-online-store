@@ -17,8 +17,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-width: 300px;
   margin-right: 1050px;
+  min-width: 300px;
   padding: 10px;
   position: absolute;
   width: 20%;
