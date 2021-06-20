@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RenderComments from './RenderComments';
 
 export default class Comments extends Component {
   constructor() {
     super();
     this.state = {
+      email: '',
       comment: '',
-      rate: 0,
+      rate: '',
       /* comments: null, // com a primeira função Save precisa ser null, o array quebra */
       comments: [], // com a primeira função Save precisa ser null, o array quebra
 
@@ -14,11 +16,15 @@ export default class Comments extends Component {
     /* this.saveComments = this.saveComments.bind(this); */
     this.handleChange = this.handleChange.bind(this);
     this.saveComments2 = this.saveComments2.bind(this);
+    this.saveNew = this.saveNew.bind(this);
+    this.handleComments = this.handleComments.bind(this);
   }
 
   componentDidMount() {
+    const { id } = this.props
+    this.handleComments(id);
     /* this.saveComments(); */
-    this.saveComments2();
+    //  this.saveComments2();
   }
 
   handleChange({ target }) {
@@ -44,6 +50,16 @@ export default class Comments extends Component {
     this.setState({ comments: localStorage.getItem(id) }); // atualiza o estado com os comentários salvos no localStorage
   } */
 
+
+
+  handleComments(id) {
+    if (localStorage[id]) {
+      this.setState({
+        comments: JSON.parse(localStorage.getItem(id)),
+      });
+    }
+  }
+
   saveComments2() { // essa função adiciona o objeto corretamente no localStorage, mas não consegui incluir o map corretamente na página (adiciona apenas no segundo clique e atrasado)
     const { comment, rate } = this.state;
     const { id } = this.props;
@@ -59,6 +75,28 @@ export default class Comments extends Component {
         localStorage.setItem(id, JSON.stringify([...received, object]));
         this.setState({ comments: received }); // setState no escopo do else recebe
       }
+    }
+  }
+
+  saveNew() {
+    const object = {};
+    const { email, comment, rate } = this.state;
+    const { id } = this.props;
+
+    if (rate === '') {
+      console.log('Não há avaliação');
+    } else {
+      object.email = email;
+      object.comment = comment;
+      object.rate = rate;
+      if (!localStorage[id]) {
+        localStorage.setItem(id, JSON.stringify([object]));
+      } else {
+        const previousComments = JSON.parse(localStorage.getItem(id));
+        console.log(previousComments);
+        localStorage.setItem(id, JSON.stringify([...previousComments, object]));
+      }
+      this.handleComments(id);
     }
   }
 
@@ -126,23 +164,18 @@ export default class Comments extends Component {
               type="button"
               aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
               data-testid="query-button"
-              onClick={ this.saveComments2 }
+              onClick={ this.saveNew }
             >
               Avaliar
             </button>
           </div>
           <div>
-            <fieldset>
-              <h4>Avaliações</h4>
-              {comments.map(({ comment, rate }, index) => (
-                <fieldset key={ index }>
-                  <p>{comment}</p>
-                  <p>
-                    Avaliação
-                    {rate}
-                  </p>
-                </fieldset>))}
-            </fieldset>
+            <h4>Avaliações</h4>
+            {comments.map((value, index) => (
+              <RenderComments
+                key={ index }
+                comentario={ value }
+              />))}
           </div>
 
         </fieldset>
