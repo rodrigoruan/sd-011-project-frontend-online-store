@@ -91,22 +91,25 @@ export default class ProductDetails extends Component {
           </div>
         </Card.Body>
         <Card.Footer />
-        <Link to="/">
+        <div className="btDatails">
+          <Link to="/">
+            <Button
+              className="btDatails1"
+              variant="primary"
+            >
+              Voltar
+            </Button>
+          </Link>
           <Button
-            variant="primary"
+            variant="outline-success"
+            data-testid="product-detail-add-to-cart"
+            value={ id }
+            onClick={ () => this.handlerLocalStore(detail) }
+            type="button"
           >
-            Voltar
+            Adicionar ao Carrinho
           </Button>
-        </Link>
-        <Button
-          variant="outline-success"
-          data-testid="product-detail-add-to-cart"
-          value={ id }
-          onClick={ () => this.handlerLocalStore(detail) }
-          type="button"
-        >
-          Adicionar ao Carrinho
-        </Button>
+        </div>
         <Form idProduct={ id } />
       </div>
     );
