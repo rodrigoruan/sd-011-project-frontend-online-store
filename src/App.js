@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Home from './components/Home';
-import ShoppingCart from './components/ShoppingCart';
-import Details from './components/Details';
-import Checkout from './components/Checkout';
-import CheckoutSuccessful from './components/CheckoutSuccessful';
+import Home from './pages/Home';
+import ShoppingCart from './pages/ShoppingCart';
+import Details from './pages/Details';
+import Checkout from './pages/Checkout';
+import CheckoutSuccessful from './pages/CheckoutSuccessful';
 
 class App extends Component {
   render() {

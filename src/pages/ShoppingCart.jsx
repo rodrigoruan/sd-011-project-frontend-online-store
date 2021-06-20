@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ShoppingCartItem from './ShoppingCartItem';
+import ShoppingCartItem from '../components/ShoppingCartItem';
 
 export default class ShoppingCart extends Component {
   constructor(props) {

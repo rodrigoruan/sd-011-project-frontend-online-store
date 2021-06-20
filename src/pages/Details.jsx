@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AvaliationForm from './AvaliationForm';
-import Avaliations from './Avaliations';
+import AvaliationForm from '../components/AvaliationForm';
+import Avaliations from '../components/Avaliations';
 import handleCart from '../services/localStorage';
 
 export default class Details extends Component {

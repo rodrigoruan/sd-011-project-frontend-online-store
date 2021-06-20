@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Category from './Category';
-import Product from './Product';
+import Category from '../components/Category';
+import Product from '../components/Product';
 import * as api from '../services/api';
-import './Home.css';
+import '../styles/Home.css';
 
 class Home extends Component {
   constructor() {
@@ -87,31 +87,46 @@ class Home extends Component {
           ))}
         </div>
         <div className="main-page">
-          <label htmlFor="search-product" data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-            <input
-              name="search"
-              onChange={ this.handleChange }
-              type="text"
-              className="search-product"
-              data-testid="query-input"
-              value={ search }
-            />
-          </label>
-          <button
-            onClick={ this.queryResult }
-            type="button"
-            data-testid="query-button"
-          >
-            Pesquisar
-          </button>
-          <div>
-            <Link to="/ShoppingCart" data-testid="shopping-cart-button">
-              Carrinho
-              <span data-testid="shopping-cart-size">{ cart }</span>
+          <div className="main-input">
+            <label
+              htmlFor="search-product"
+              data-testid="home-initial-message"
+            >
+              <input
+                name="search"
+                onChange={ this.handleChange }
+                type="text"
+                className="search-product form-control"
+                placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
+                data-testid="query-input"
+                value={ search }
+              />
+              <span
+                className="input-search"
+              >
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </span>
+            </label>
+            <button
+              onClick={ this.queryResult }
+              type="button"
+              data-testid="query-button"
+              className="btn btn-primary"
+            >
+              <i className="fas fa-search" />
+            </button>
+            <Link
+              to="/ShoppingCart"
+              data-testid="shopping-cart-button"
+              className="btn btn-warning"
+            >
+              <i className="fas fa-shopping-cart" />
+              <span className="cart-size" data-testid="shopping-cart-size">
+                { cart }
+              </span>
             </Link>
           </div>
-          <div>
+          <div className="main-product">
             {
               voidSearch
                 ? <h1>Nenhum produto foi encontrado </h1>

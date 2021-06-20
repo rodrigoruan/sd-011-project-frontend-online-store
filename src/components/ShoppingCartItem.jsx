@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ShoppingCartItem.css';
+import '../styles/ShoppingCartItem.css';
 import PropTypes from 'prop-types';
 
 export default class ShoppingCartItem extends Component {
