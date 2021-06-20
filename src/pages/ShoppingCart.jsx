@@ -6,7 +6,7 @@ class ShoppingCart extends React.Component {
   constructor() {
     super();
     this.state = {
-      filteredCart: [],
+      shoppingCart: [],
       // count: 0,
       // products: [],
     };
@@ -18,10 +18,10 @@ class ShoppingCart extends React.Component {
   }
 
   handleDelete(product) {
-    const { filteredCart } = this.state;
-    const newList = filteredCart.filter((item) => item.id !== product.id);
+    const { shoppingCart } = this.state;
+    const newList = shoppingCart.filter((item) => item.id !== product.id);
     this.setState({
-      filteredCart: newList,
+      shoppingCart: newList,
     });
   }
 
@@ -30,20 +30,20 @@ class ShoppingCart extends React.Component {
     const result = cart.reduce((acc, curr) => (acc
       .includes(curr) ? acc : acc.concat(curr)), []);
     this.setState({
-      filteredCart: result,
+      shoppingCart: result,
     });
   }
 
   render() {
     const { cart, increaseQuantity, decreaseQuantity } = this.props;
-    const { filteredCart /* , count, products */ } = this.state;
+    const { shoppingCart /* , count, products */ } = this.state;
 
     const emptyCart = (
       <h3 data-testid="shopping-cart-empty-message">
         Seu carrinho está vazio
       </h3>);
 
-    return !cart.length ? emptyCart : filteredCart.map((product, index) => (
+    return !cart.length ? emptyCart : shoppingCart.map((product, index) => (
       <NewItem
         product={ product }
         cart={ cart }
