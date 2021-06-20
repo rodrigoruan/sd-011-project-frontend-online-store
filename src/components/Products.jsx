@@ -58,23 +58,29 @@ class Products extends Component {
       return <NotFound />;
     }
     return (
-      <div>
+      <main>
         { prodList.map((item) => (
           // Como enviar um objeto pelo Link -> https://reactrouter.com/web/api/Link
-          <div data-testid="product" key={ item.id }>
+          <div className="product-card" data-testid="product" key={ item.id }>
             <Link
               data-testid="product-detail-link"
+              className="product-card-link"
               key={ item.id }
               to={ {
                 pathname: `/product-detail/${item.id}`,
                 state: { item: [item] },
               } }
             >
-              <h1>{item.title}</h1>
-              <img src={ item.thumbnail } alt={ item.title } />
-              <p>{`R$: ${item.price}`}</p>
+              <div className="product-img">
+                <img src={ item.thumbnail } alt={ item.title } />
+              </div>
+              <div className="product-info">
+                <p>{`R$: ${item.price}`}</p>
+                <h1>{item.title}</h1>
+              </div>
             </Link>
             <button
+              className="product-add-to-cart"
               type="button"
               data-testid="product-add-to-cart"
               onClick={ () => this.addProductToCart(item) }
@@ -83,7 +89,7 @@ class Products extends Component {
             </button>
           </div>
         ))}
-      </div>
+      </main>
 
     );
   }
