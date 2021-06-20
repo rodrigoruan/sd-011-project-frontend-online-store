@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Avaliacao from './Avaliacao';
 
 class Form extends React.Component {
   constructor() {
@@ -10,13 +12,15 @@ class Form extends React.Component {
     };
     this.handleChanges = this.handleChanges.bind(this);
     this.updateComments = this.updateComments.bind(this);
+    this.importComments = this.importComments.bind(this);
   }
 
   componentDidMount() {
-    // const { id } = this.props.match.params;
-    // this.setState({
-    //   [id]: { avaliacoes, rating, commentary },
-    // });
+    const { productId } = this.props;
+    const importedComments = JSON.parse(localStorage.getItem(productId));
+    if (importedComments !== null) {
+      this.importComments(importedComments);
+    }
   }
 
   handleChanges(event) {
@@ -26,49 +30,66 @@ class Form extends React.Component {
     });
   }
 
-  updateComments() {
-    // Quando o componemte montar vc tem que pensar em algo para atualizar todos os comentários que haviam sido feitos
-    const { avaliacoes, rating, commentary } = this.state;
-    const avaliacao = { rating, commentary };
-    // const { funcao } = this.props;
-    // funcao(avaliacao)
-    // console.log(avaliacao)
+  importComments(comments) {
     this.setState({
-      avaliacoes: [...avaliacoes, avaliacao],
+      avaliacoes: comments,
+    });
+  }
+
+  updateComments() {
+    const { avaliacoes, rating, commentary } = this.state;
+    const { productId } = this.props;
+    const novaAvaliacao = { rating, commentary };
+    localStorage.setItem(productId, JSON.stringify([...avaliacoes, novaAvaliacao]));
+    this.setState({
+      avaliacoes: [...avaliacoes, novaAvaliacao],
       rating: '',
       commentary: '',
     });
   }
 
   render() {
-    const { rating, commentary } = this.state;
-    // const { funcao } = this.props;
+    const { rating, commentary, avaliacoes } = this.state;
     return (
       <div>
         <form>
           <label htmlFor="rating">
             Avaliação:
-            <input name="rating" type="number" max="5" min="1" required value={ rating } onChange={ this.handleChanges } />
+            <input
+              name="rating"
+              type="number"
+              max="5"
+              min="1"
+              required
+              value={ rating }
+              onChange={ this.handleChanges }
+            />
           </label>
           <label htmlFor="comment">
             Deixe seu comentário:
-            <textarea data-testid="product-detail-evaluation" name="commentary" value={ commentary } onChange={ this.handleChanges } />
+            <textarea
+              data-testid="product-detail-evaluation"
+              name="commentary"
+              value={ commentary }
+              onChange={ this.handleChanges }
+            />
           </label>
           <button type="button" onClick={ this.updateComments }>AVALIAR</button>
         </form>
         <div>
-          <div>
-            <h3>NOTA</h3>
-            <p>Comentário do Usuário</p>
-          </div>
-          <div>
-            <h3>NOTA</h3>
-            <p>Comentário do Usuário</p>
-          </div>
+          { avaliacoes.map((avaliacao, index) => (
+            <Avaliacao
+              avaliacao={ avaliacao }
+              key={ index }
+            />)) }
         </div>
       </div>
     );
   }
 }
+
+Form.propTypes = {
+  productId: PropTypes.string.isRequired,
+};
 
 export default Form;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-// import Form from '../Form';
+import Form from '../Form';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -41,13 +41,13 @@ class ProductDetails extends React.Component {
     const { product } = this.state;
     let getItem = JSON.parse(localStorage.getItem('productList'));
     getItem = [...getItem, product];
-    console.log(getItem);
     localStorage.setItem('productList', JSON.stringify(getItem));
   }
 
   render() {
     const { product } = this.state;
     const { title, thumbnail, price, atributtes } = product;
+    const { match: { params: { id } } } = this.props;
     return (
       <div>
         Detalhes do Produto
@@ -66,6 +66,7 @@ class ProductDetails extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        <Form productId={ id } />
       </div>
     );
   }
