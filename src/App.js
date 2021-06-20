@@ -34,6 +34,9 @@ export default class App extends Component {
     if (localStorage.getItem('localCart')) {
       this.getStorage();
     }
+    if (localStorage.getItem('localCards')) {
+      this.getStorage();
+    }
   }
 
   componentDidUpdate() {
@@ -48,14 +51,16 @@ export default class App extends Component {
   }
 
   setStorage() {
-    const { cartItems } = this.state;
+    const { cartItems, productCards } = this.state;
     localStorage.setItem('localCart', JSON.stringify(cartItems));
   }
 
   getStorage() {
     const cartItemsStorage = JSON.parse(localStorage.getItem('localCart'));
+    const cardsItemsStorage = JSON.parse(localStorage.getItem('localCards'));
     this.setState({
       cartItems: cartItemsStorage,
+      productCards: cardsItemsStorage,
     });
   }
 
@@ -64,6 +69,7 @@ export default class App extends Component {
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
     this.setState({ productCards: fetchedProducts.results });
+    localStorage.setItem('localCards', JSON.stringify(fetchedProducts.results));
   }
 
   async fetchProductCategory() {
@@ -80,6 +86,7 @@ export default class App extends Component {
       productCards: fetchedProductsFromCategories.results,
       categoryId: id,
     });
+    localStorage.setItem('localCards', JSON.stringify(fetchedProductsFromCategories.results));
   }
 
   addCart({ target: { value } }) {
