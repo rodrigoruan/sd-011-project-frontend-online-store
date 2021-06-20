@@ -15,18 +15,26 @@ class ShoppingCart extends React.Component {
     };
 
     this.handleIncrease = this.handleIncrease.bind(this);
+    this.handleDecrease = this.handleDecrease.bind(this);
   }
 
-  handleIncrease({ target }) {
-    const { name } = target;
+  handleIncrease({ currentTarget }) {
     const { cart } = this.state;
-    console.log(cart);
+    const { name } = currentTarget;
     cart.forEach((item) => {
       if (item.id === name) {
         this.setState({ cart: [...cart, item] });
       }
     });
-    console.log(cart);
+  }
+
+  handleDecrease({ currentTarget }) {
+    const { cart } = this.state;
+    const { name } = currentTarget;
+    const removed = cart.find((item) => item.id === name);
+    const index = cart.indexOf(removed);
+    cart.splice(index, 1);
+    this.setState({ cart: [...cart] });
   }
 
   render() {
@@ -42,15 +50,26 @@ class ShoppingCart extends React.Component {
                 item={ product }
                 addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
               />
-              <button name={ product.id } onClick={ this.handleIncrease } type="button" data-testid="product-decrease-quantity">
-                <IoMdAddCircle />
+              <button
+                name={ product.id }
+                onClick={ this.handleDecrease }
+                type="button"
+                data-testid="product-decrease-quantity"
+              >
+                <AiFillMinusCircle />
               </button>
               <span data-testid="shopping-cart-product-quantity">
                 {cart.filter((item) => item === product).length}
               </span>
-              <button type="button" data-testid="product-increase-quantity">
-                <AiFillMinusCircle />
+              <button
+                name={ product.id }
+                onClick={ this.handleIncrease }
+                type="button"
+                data-testid="product-increase-quantity"
+              >
+                <IoMdAddCircle />
               </button>
+              <button type="button">X</button>
             </div>))}
       </div>
     );

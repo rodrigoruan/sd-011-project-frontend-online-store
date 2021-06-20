@@ -69,7 +69,6 @@ class Home extends React.Component {
     this.setState({
       shoppingCart: [...shoppingCart, item],
     });
-    console.log(shoppingCart);
   }
 
   render() {
