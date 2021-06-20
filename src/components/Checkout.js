@@ -19,7 +19,7 @@ export default class Checkout extends React.Component {
       phone: '',
       cep: '',
       address: '',
-      method: '',
+      method: 'credito',
       fulled: false,
 
     };
@@ -48,7 +48,6 @@ export default class Checkout extends React.Component {
 
     this.setState({
       products: arrayOfproducts,
-      // count: arrayOfproducts.map(({ counter, title }) => ({ counter, title })),
     });
   }
 
@@ -60,18 +59,6 @@ export default class Checkout extends React.Component {
     const { fulled, products, fullname, email, cpf, phone, cep, address } = this.state;
 
     if (fulled) {
-      this.setState({
-        products: [],
-        fullname: '',
-        email: '',
-        cpf: '',
-        phone: '',
-        cep: '',
-        address: '',
-        method: '',
-        fulled: false,
-      });
-
       return <Redirect to="/" />;
     }
 
@@ -102,7 +89,10 @@ export default class Checkout extends React.Component {
             </ul>
             <p>
               TOTAL DA COMPRA: R$
-              {products.reduce((acc, curr) => acc + (curr.counter * curr.price), 0)}
+              {
+                Math.round(products.reduce((a, c) => a + (c.counter * c.price), 0) * 100)
+                / 100
+              }
             </p>
           </fieldset>
           <fieldset>
@@ -177,7 +167,13 @@ export default class Checkout extends React.Component {
           </fieldset>
           <fieldset>
             <legend><h2>Método de pagamento</h2></legend>
-            <input name="method" type="radio" value="credito" onChange={ this.handle } />
+            <input
+              name="method"
+              type="radio"
+              value="credito"
+              onChange={ this.handle }
+              checked
+            />
             Cartão de Crédito
             <input name="method" type="radio" value="boleto" onChange={ this.handle } />
             Boleto
