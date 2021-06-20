@@ -10,17 +10,16 @@ class ShoppingCart extends React.Component {
   }
 
   ctrlQtd(id, target) {
-    const { arrayCartItens, updateArray } = this.props;
-    const addqtd = arrayCartItens.find((idObj) => idObj.id === id);
+    const { updateArray } = this.props;
+    const getCart = JSON.parse(localStorage.getItem('cart'));
+    const addqtd = getCart.find((idObj) => idObj.id === id);
     if (target.innerText === '+') {
       addqtd.qtd += 1;
-      localStorage.setItem('cart', JSON.stringify([...arrayCartItens]));
     }
     if (target.innerText === '-' && addqtd.qtd > 0) {
       addqtd.qtd -= 1;
-      localStorage.setItem('cart', JSON.stringify([...arrayCartItens]));
     }
-    updateArray(arrayCartItens);
+    updateArray(getCart);
   }
 
   removeBtn(idRm) {
@@ -33,32 +32,25 @@ class ShoppingCart extends React.Component {
     const getCart = JSON.parse(localStorage.getItem('cart'));
     return (
       <>
-        { localStorage.cart ? getCart.map(({ id, title, qtd }) => (
+        { localStorage.cart ? getCart.map(({ id, title, qtd }, index) => (
           <div key={ id }>
             <p data-testid="shopping-cart-product-name">{ title }</p>
-            <Link to="/cart">
-              <button
-                type="button"
-                data-testid="product-increase-quantity"
-                onClick={ ({ target }) => this.ctrlQtd(id, target) }
-              >
-                +
-              </button>
-            </Link>
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ ({ target }) => this.ctrlQtd(id, target) }
+            >
+              +
+            </button>
             <span data-testid="shopping-cart-product-quantity">{ qtd }</span>
-            <Link to="/cart">
-              <button
-                type="button"
-                data-testid="product-decrease-quantity"
-                onClick={ ({ target }) => this.ctrlQtd(id, target) }
-              >
-                -
-              </button>
-            </Link>
-
-            <Link to="/cart">
-              <button type="button" onClick={ () => this.removeBtn(id) }>X</button>
-            </Link>
+            <button
+              type="button"
+              data-testid="product-decrease-quantity"
+              onClick={ ({ target }) => this.ctrlQtd(id, target) }
+            >
+              -
+            </button>
+            <button type="button" onClick={ () => this.removeBtn(id) }>X</button>
           </div>
         )) : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p> }
         <button type="button" data-testid="shopping-cart-button">Comprar</button>

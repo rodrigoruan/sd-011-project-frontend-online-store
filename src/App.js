@@ -18,6 +18,7 @@ export default class App extends Component {
 
   newArray(array) {
     localStorage.setItem('cart', JSON.stringify(array));
+    this.setState({ mastercartItens: array });
   }
 
   addItens(obj) {
