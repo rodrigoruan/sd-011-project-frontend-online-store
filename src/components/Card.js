@@ -13,31 +13,32 @@ export default class Card extends Component {
 
   handleClick = () => {
     const { sumCartItems } = this.props;
-    // this.setState((previous) => ({ counter: previous.counter + 1 }));
-
-    // const { counter } = this.state;
-    // const { title, price, thumbnail, id, attributes } = this.props;
-
-    // const object = { counter, price, thumbnail, id, attributes, title };
-    // const json = JSON.stringify(object);
-
-    const { location: { state } } = this.props;
-    const { title } = state;
-
-    const local = JSON.parse(localStorage.getItem(title));
-
     this.setState((previous) => ({ counter: previous.counter + 1 }));
+
     const { counter } = this.state;
-    local.counter = counter;
-    const json = JSON.stringify(local);
+    const { title, price, thumbnail, id, attributes } = this.props;
+
+    const object = { counter, price, thumbnail, id, attributes, title };
+    const json = JSON.stringify(object);
+
+    // const { location: { state } } = this.props; //*
+    // const { title } = state; //*
+    // console.log(` this.props.location.state de Card em Home: ${state}`); // Michel teste
+    // const local = JSON.parse(localStorage.getItem(title));//*
+
+    // this.setState((previous) => ({ counter: previous.counter + 1 }));//*
+    // const { counter } = this.state;//*
+    // local.counter = counter;//*
+    // const json = JSON.stringify(local); //*
+    // // localStorage.setItem(title, json);//*
     localStorage.setItem(title, json);
-    // localStorage.setItem(title, json);
     sumCartItems();
 
     // AJUSTAR ESSA FUNÇÃO  PARA FUNCIONALIDADE DA HOME //
   };
 
   render() {
+    // const { counter } = this.state; // Teste Michel
     const { title, price, thumbnail, id, attributes, shipping } = this.props;
 
     return (
