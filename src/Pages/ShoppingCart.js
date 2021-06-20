@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -62,6 +62,7 @@ class ShoppingCart extends React.Component {
 
 ShoppingCart.propTypes = {
   arrayCartItens: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateArray: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;
