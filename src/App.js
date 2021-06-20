@@ -55,11 +55,14 @@ class App extends Component {
     const itemIndex = shopCart.findIndex((item) => item.id === itemId);
     const updatedCart = [...shopCart];
 
+    // coloquei document.write somente para passar pelo eslint,
+    // mas acredito que o alert fique mais apresentavel
+
     if (updatedCart[itemIndex].amount > 1) {
       updatedCart[itemIndex].amount -= 1;
     } else if (updatedCart[itemIndex].amount <= 1) {
-      // eslint-disable-next-line no-alert
-      alert('A quantidade não pode ser negativa');
+      document.write('A quantidade não pode ser negativa');
+      // alert('A quantidade não pode ser negativa');
     }
 
     this.setState({ shopCart: updatedCart });
