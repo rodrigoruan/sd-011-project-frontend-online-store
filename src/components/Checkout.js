@@ -1,8 +1,10 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+
 const fullnameRegexp = new RegExp('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]{3}');
 const cpfRegexp = new RegExp('^([0-9]){3}.([0-9]){3}.([0-9]){3}-([0-9]){2}$');
 const emailRegexp = new RegExp('\\S+@\\S+\\.\\S+');
-const phoneRegexp = new RegExp('\\d{2}\\s\\d{4,5}\\-\\d{4}$'); // P/ HTML melhor c/ parênteses: (\d{2})\s(\d{4,5})-(\d{4})
+const phoneRegexp = new RegExp('\\d{2}\\s\\d{4,5}\\-\\d{4}$');
 const cepRegexp = new RegExp('[0-9]{5}-[0-9]{3}$');
 const addressRegxp = new RegExp('[a-zA-Z0-9 ,.]{10}');
 
@@ -29,22 +31,13 @@ export default class Checkout extends React.Component {
     this.getItemLocalStorage();
   }
 
-  componentDidUpdate() { // Só pra testar
-    console.log('componentDidupdate: Estado fulled mudando abaixo');
-    console.log(this.state.fulled);
-    console.log('componentDidupdate: onChange muda Estado como abaixo');
-    console.log(this.state);
-  }
-
   handleCheck() {
     const { fullname, email, cpf, phone, cep, address, method } = this.state;
     if (fullnameRegexp.test(fullname) && cpfRegexp.test(cpf) && emailRegexp.test(email)
     && phoneRegexp.test(phone) && cepRegexp.test(cep) && addressRegxp.test(address)
     && method !== '') {
       this.setState({ fulled: true });
-      console.log('Tudo ok');
     } else {
-      console.log('Algum campo errado');
       this.setState({ fulled: false });
     }
   }
@@ -64,8 +57,24 @@ export default class Checkout extends React.Component {
   }
 
   render() {
-    const { products } = this.state;
-    const { fullname, email, cpf, phone, cep, address } = this.state;
+    const { fulled, products, fullname, email, cpf, phone, cep, address } = this.state;
+
+    if (fulled) {
+      this.setState({
+        products: [],
+        fullname: '',
+        email: '',
+        cpf: '',
+        phone: '',
+        cep: '',
+        address: '',
+        method: '',
+        fulled: false,
+      });
+
+      return <Redirect to="/" />;
+    }
+
     return (
       <div>
         <h1>Dados de compra</h1>
@@ -100,7 +109,6 @@ export default class Checkout extends React.Component {
             <legend><h2>Informações do comprador</h2></legend>
             <input
               name="fullname"
-              required
               value={ fullname }
               data-testid="checkout-fullname"
               type="text"
@@ -146,7 +154,6 @@ export default class Checkout extends React.Component {
             <input
               name="cep"
               value={ cep }
-              required="true"
               data-testid="checkout-cep"
               type="text"
               pattern="[0-9]{5}-[0-9]{3}$"
