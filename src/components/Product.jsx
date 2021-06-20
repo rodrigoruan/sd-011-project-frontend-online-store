@@ -14,7 +14,8 @@ export default class Product extends Component {
 
   render() {
     const { product } = this.props;
-    const { id, title, price, thumbnail } = product;
+    const { id, title, price, thumbnail, shipping } = product;
+    const { free_shipping: freeShipping } = shipping;
 
     return (
       <div data-testid="product">
@@ -40,6 +41,11 @@ export default class Product extends Component {
         >
           Adicionar ao Carrinho
         </button>
+        {
+          freeShipping
+            ? <span data-testid="free-shipping">Frete Grátis</span>
+            : null
+        }
       </div>
     );
   }
@@ -50,6 +56,10 @@ Product.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
+
   callback: PropTypes.func.isRequired,
 };

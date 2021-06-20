@@ -40,8 +40,9 @@ export default class Details extends Component {
       match: { params: { id } },
       location: { state: { element } },
     } = this.props;
-    const { title, price, thumbnail, attributes } = element;
+    const { title, price, thumbnail, attributes, shipping } = element;
     const { cart } = this.state;
+    const { free_shipping: freeShipping } = shipping;
     return (
       <div>
         <div>
@@ -53,6 +54,11 @@ export default class Details extends Component {
         <div>
           <div>
             <span data-testid="product-detail-name">{`${title}, ${price}`}</span>
+            {
+              freeShipping
+                ? <span data-testid="free-shipping">Frete Grátis</span>
+                : null
+            }
           </div>
           <div>
             <img src={ thumbnail } alt={ title } />
@@ -104,6 +110,9 @@ Details.propTypes = {
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
         thumbnail: PropTypes.string.isRequired,
+        shipping: PropTypes.shape({
+          free_shipping: PropTypes.bool.isRequired,
+        }).isRequired,
         attributes: PropTypes.arrayOf(PropTypes.object).isRequired,
       }).isRequired,
     }).isRequired,
