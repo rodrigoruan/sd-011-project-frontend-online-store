@@ -56,6 +56,45 @@ export default class ProductCard extends Component {
         >
           Comprar
         </button>
+        <div class="ui card">
+          <div class="image">
+            <img src={ thumbnail }/>
+          </div>
+          <div class="content">
+            <div class="header">{ title }
+          </div>
+          <div class="meta">
+            Friend
+          </div>
+          <div class="description">
+          <p>
+          { shipping ? <img
+            data-testid="free-shipping"
+            className="free-shipping"
+            src={ Ship }
+            alt="Frete Grátis!!!"
+          /> : '' }
+        </p>
+        { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+          </div>
+          </div>
+          <div class="extra content">
+            <a>
+              <i aria-hidden="true" class="user icon" />
+              {availableQuantity}
+            </a>
+          <button
+          type="button"
+          id={ title }
+          className={ thumbnail }
+          name={ price }
+          onClick={ () => handleAddToShopCart(this.props) }
+          data-testid="product-add-to-cart"
+          >
+            Comprar
+          </button>
+          </div>
+        </div>
       </div>
     );
   }

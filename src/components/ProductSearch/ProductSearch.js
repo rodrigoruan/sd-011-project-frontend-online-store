@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ProductSearch.css';
+import { Button } from 'semantic-ui-react';
 
 export default class ProductSearch extends Component {
   render() {
@@ -8,21 +9,25 @@ export default class ProductSearch extends Component {
 
     return (
       <div>
-        <input
-          data-testid="query-input"
-          className="query-input"
-          name="searchProduct"
-          type="text"
-          value={ value }
-          onChange={ onChange }
-        />
-        <button
+        <div className="ui icon input">
+          <input
+            data-testid="query-input"
+            className="query-input ui icon input"
+            name="searchProduct"
+            type="text"
+            value={ value }
+            onChange={ onChange }
+          />
+          <i aria-hidden="true" class="search icon"></i>
+        </div>
+        <Button
+          primary
           type="submit"
           onClick={ handleSubmit }
           data-testid="query-button"
         >
           Buscar
-        </button>
+        </Button>
       </div>
     );
   }
