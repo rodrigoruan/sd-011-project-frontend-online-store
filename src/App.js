@@ -14,26 +14,24 @@ class App extends React.Component {
       cart: [],
       quantity: 0,
     };
-    this.increaseQuantity = this.increaseQuantity.bind(this)
-    this.decreaseQuantity = this.decreaseQuantity.bind(this)
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   addState(product) {
     let newCart = [];
-    const counter = 1;
+    // const counter = 1;
     const { cart } = this.state;
-    const anyProduct = cart.find((item) => {
-      return item.id === product.id;
-    });
+    const anyProduct = cart.find((item) => item.id === product.id);
 
     if (anyProduct) {
-       newCart = cart.map((item) => {
-         if(item.id === anyProduct.id) {
-           item.quantity += 1;
-           return item;
-        }
+      newCart = cart.map((item) => {
+        if (item.id === anyProduct.id) {
+          item.quantity += 1;
           return item;
-      })
+        }
+        return item;
+      });
     } else {
       product.quantity = 1;
       newCart = [...cart, product];
@@ -56,7 +54,7 @@ class App extends React.Component {
     });
     this.setState({
       cart: newArr,
-    })
+    });
   }
 
   decreaseQuantity(product) {
