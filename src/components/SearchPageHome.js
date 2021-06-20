@@ -81,6 +81,7 @@ export default class SearchPageHome extends Component {
           <Form inline>
             <FormControl
               type="text"
+              data-testid="query-input"
               placeholder="Search"
               className="mr-sm-2"
               id="initialMessage"
@@ -105,14 +106,6 @@ export default class SearchPageHome extends Component {
           ))}
 
         </div>
-        <Button
-          variant="secondary"
-          data-testid="query-button"
-          type="button"
-          onClick={ this.getProducts }
-        >
-          Pesquisar
-        </Button>
         <Link
           data-testid="shopping-cart-button"
           to={ {
