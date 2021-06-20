@@ -53,6 +53,7 @@ export default class SearchPageHome extends Component {
     this.setState({
       categoriesData: categories,
     });
+    console.log(categories);
   }
 
   filterProducts({ target }) {
@@ -71,6 +72,7 @@ export default class SearchPageHome extends Component {
 
   render() {
     const { categoriesData, product, loading, itemsCart } = this.state;
+    console.log(categoriesData);
     return (
       <div>
         <div className="navHome">

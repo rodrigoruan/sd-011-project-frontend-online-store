@@ -16,6 +16,9 @@ export default class NavHome extends React.Component {
               <Nav className="mr-auto">
                 <Nav.Link><Link to="/"> Home </Link></Nav.Link>
               </Nav>
+              <Nav className="mr-auto">
+                <Nav.Link><Link to="/about"> About </Link></Nav.Link>
+              </Nav>
               <Link
                 data-testid="shopping-cart-button"
                 to={ {
