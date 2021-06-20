@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import ShoppingCart from './ShoppingCart';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Search from '../component/Search';
 import Categorys from '../component/Categorys';
@@ -41,6 +42,6 @@ export default class Main extends Component {
   }
 }
 
-// Main.propTypes = {
-//   addItens: PropTypes.func.isRequired,
-// };
+Main.propTypes = {
+  addItens: PropTypes.func.isRequired,
+};

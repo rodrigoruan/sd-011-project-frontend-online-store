@@ -18,7 +18,7 @@ export default class Cards extends Component {
     const { resultSearch } = this.props;
     return (
       <div className="list-cards">
-        { resultSearch.map(({ id, title, shipping, sold_quantity, price }) => (
+        { resultSearch.map(({ id, title, shipping, price }) => (
           <div className="cards" data-testid="product" key={ id }>
             <p>{ title }</p>
             { shipping.free_shipping
@@ -29,7 +29,7 @@ export default class Cards extends Component {
             <button
               type="button"
               data-testid="product-add-to-cart"
-              onClick={ () => this.handleAdd(id, title, sold_quantity, price) }
+              onClick={ () => this.handleAdd(id, title, 0, price) }
             >
               Adicionar
             </button>

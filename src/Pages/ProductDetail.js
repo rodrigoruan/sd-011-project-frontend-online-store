@@ -23,11 +23,11 @@ export default class ProductDetail extends Component {
   }
 
   handleAdd(product) {
-    const { id, title, shipping, sold_quantity, price } = product;
+    const { id, title, price } = product;
     const obj = {
       id,
       title,
-      maxQtd: sold_quantity,
+      maxQtd: 0,
       qtd: 1,
       value: price,
     };
@@ -81,4 +81,5 @@ ProductDetail.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
+  addItens: PropTypes.func.isRequired,
 };

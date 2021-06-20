@@ -5,20 +5,24 @@ import PropTypes from 'prop-types';
 class ShoppingCart extends React.Component {
   constructor() {
     super();
-    this.ctrlQtd = this.ctrlQtd.bind(this);
+    this.addQtdprd = this.addQtdprd.bind(this);
+    this.rmQtd = this.rmQtd.bind(this);
     this.removeBtn = this.removeBtn.bind(this);
   }
 
-  ctrlQtd(id, target) {
+  rmQtd(id) {
     const { updateArray } = this.props;
     const getCart = JSON.parse(localStorage.getItem('cart'));
     const addqtd = getCart.find((idObj) => idObj.id === id);
-    if (target.innerText === '+') {
-      addqtd.qtd += 1;
-    }
-    if (target.innerText === '-' && addqtd.qtd > 1) {
-      addqtd.qtd -= 1;
-    }
+    addqtd.qtd -= 1;
+    updateArray(getCart);
+  }
+
+  addQtdprd(id) {
+    const { updateArray } = this.props;
+    const getCart = JSON.parse(localStorage.getItem('cart'));
+    const addqtd = getCart.find((idObj) => idObj.id === id);
+    addqtd.qtd += 1;
     updateArray(getCart);
   }
 
@@ -39,7 +43,7 @@ class ShoppingCart extends React.Component {
               <button
                 type="button"
                 data-testid="product-increase-quantity"
-                onClick={ ({ target }) => this.ctrlQtd(id, target) }
+                onClick={ () => this.addQtdprd(id) }
               >
                 +
               </button>
@@ -47,7 +51,7 @@ class ShoppingCart extends React.Component {
               <button
                 type="button"
                 data-testid="product-decrease-quantity"
-                onClick={ ({ target }) => this.ctrlQtd(id, target) }
+                onClick={ () => this.rmQtd(id) }
               >
                 -
               </button>
