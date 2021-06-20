@@ -1,33 +1,66 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
+import NavHome from './NavHome';
 
 class Purchase extends React.Component {
   render() {
+    const loading = true;
     return (
-      <div>
-        <label htmlFor="name">
-          <input type="string" data-testid="checkout-fullname" id="name" />
-        </label>
-
-        <label htmlFor="email">
-          <input type="string" data-testid="checkout-email" id="email" />
-        </label>
-
-        <label htmlFor="cpf">
-          <input type="string" data-testid="checkout-cpf" id="cpf" />
-        </label>
-
-        <label htmlFor="phone">
-          <input type="string" data-testid="checkout-phone" id="phone" />
-        </label>
-
-        <label htmlFor="cep">
-          <input type="string" data-testid="checkout-cep" id="cep" />
-        </label>
-
-        <label htmlFor="address">
-          <input type="string" data-testid="checkout-address" id="address" />
-        </label>
-      </div>
+      <>
+        <NavHome loading={ loading } />
+        <div className="forms">
+          <Form>
+            <Form.Group controlId="formGroupEmail">
+              <Form.Label>Seu Nome</Form.Label>
+              <Form.Control
+                type="string"
+                data-testid="checkout-fullname"
+                placeholder="Nome Completo"
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label>Seu Email</Form.Label>
+              <Form.Control
+                type="string"
+                data-testid="checkout-email"
+                placeholder="Seu Email"
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label>Seu CPF</Form.Label>
+              <Form.Control
+                type="string"
+                data-testid="checkout-cpf"
+                placeholder="Seu CPF"
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label>Seu Numero de telefone</Form.Label>
+              <Form.Control
+                type="string"
+                data-testid="checkout-phone"
+                placeholder="Seu Numero de telefone"
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label>Seu CEP</Form.Label>
+              <Form.Control
+                type="string"
+                data-testid="checkout-cep"
+                placeholder="Seu CEP"
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Label>Seu Email</Form.Label>
+              <Form.Control
+                type="string"
+                data-testid="checkout-address"
+                placeholder="Seu Endereço"
+              />
+            </Form.Group>
+          </Form>
+        </div>
+      </>
     );
   }
 }
