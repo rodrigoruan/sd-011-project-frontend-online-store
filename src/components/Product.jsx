@@ -5,9 +5,11 @@ import handleCart from '../services/localStorage';
 
 export default class Product extends Component {
   addQuantity(product) {
+    const { callback } = this.props;
     const quantityProduct = { quantity: 1 };
     const obj = Object.assign(quantityProduct, product);
     handleCart(obj);
+    callback();
   }
 
   render() {
@@ -49,4 +51,5 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
   }).isRequired,
+  callback: PropTypes.func.isRequired,
 };

@@ -14,16 +14,19 @@ class Home extends Component {
       searchResult: [],
       voidSearch: false,
       category: '',
+      cart: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.queryResult = this.queryResult.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
+    this.getLocalStorage = this.getLocalStorage.bind(this);
   }
 
   componentDidMount() {
     api.getCategories().then((result) => this.setState({
       categories: result,
     }));
+    this.getLocalStorage();
   }
 
   handleChange({ target }) {
@@ -39,6 +42,17 @@ class Home extends Component {
       [name]: value,
     }, () => {
       this.queryResult();
+    });
+  }
+
+  getLocalStorage() {
+    let cartItems = JSON.parse(localStorage.getItem('cart'));
+    if (cartItems === null) {
+      cartItems = [];
+    }
+    const result = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    this.setState({
+      cart: result,
     });
   }
 
@@ -59,7 +73,7 @@ class Home extends Component {
   }
 
   render() {
-    const { categories, search, searchResult, voidSearch } = this.state;
+    const { categories, search, searchResult, voidSearch, cart } = this.state;
     console.log(voidSearch);
     return (
       <div className="home-page">
@@ -93,7 +107,10 @@ class Home extends Component {
             Pesquisar
           </button>
           <div>
-            <Link to="/ShoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
+            <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+              Carrinho
+              <span data-testid="shopping-cart-size">{ cart }</span>
+            </Link>
           </div>
           <div>
             {
@@ -103,6 +120,7 @@ class Home extends Component {
                   <Product
                     key={ product.id }
                     product={ product }
+                    callback={ this.getLocalStorage }
                   />
                 ))
             }
