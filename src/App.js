@@ -4,7 +4,7 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-import { getCart } from './services/storage';
+import { getCart, setCart } from './services/storage';
 import { About, NotFound, ShoppingCart, Home, Checkout, ProductDetails } from './pages/zPageMenu';
 import { Header } from './components/zComponentsMenu';
 
@@ -15,6 +15,7 @@ export default class App extends Component {
     this.state = {
       shoppingCart: [],
     };
+    this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
   componentDidMount() {
@@ -22,6 +23,45 @@ export default class App extends Component {
     api.getProductsFromCategoryAndQuery();
     getCart();
   }
+
+  handleAddToCart(item) {
+    const oldItems = [...getCart()];
+    const itemExists = oldItems.find((el) => el.id === item.id);
+    if (itemExists) {
+      const updatedItem = { ...item, quantity: itemExists.quantity + 1 };
+      const updatedShoppingCart = oldItems.map((el) => (el.id === item.id ? updatedItem : el));
+      setCart([...updatedShoppingCart]);
+      return this.forceUpdate();
+    }
+    setCart([...oldItems, { ...item, quantity: 1 }]);
+    return this.forceUpdate();
+  }
+
+  handleDecreaseQuantity = (item) => {
+    const oldItems = [...getCart()];
+    const itemExists = oldItems.find((el) => el.id === item.id);
+    if (itemExists && itemExists.quantity > 1) {
+      const updatedItem = { ...item, quantity: itemExists.quantity - 1 };
+      const updatedShoppingCart = oldItems.map((el) => (el.id === item.id ? updatedItem : el));
+      setCart([...updatedShoppingCart]);
+      return this.forceUpdate();
+    }
+    if (itemExists && itemExists.quantity === 1) {
+      const updatedShoppingCart = oldItems.filter((el) => el.id !== item.id);
+      setCart([...updatedShoppingCart]);
+      return this.forceUpdate();
+    }
+  };
+
+  handleRemoveFromCart = (item) => {
+    const oldItems = [...getCart()];
+    const itemExists = oldItems.find((el) => el.id === item.id);
+    if (itemExists) {
+      const updatedShoppingCart = oldItems.filter((el) => el.id !== item.id);
+      setCart([...updatedShoppingCart]);
+      return this.forceUpdate();
+    }
+  };
 
   render() {
     const { shoppingCart } = this.state;

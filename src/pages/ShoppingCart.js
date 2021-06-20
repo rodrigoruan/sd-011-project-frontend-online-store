@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { CartProduct } from '../components/zComponentsMenu';
 import { getCart, saveStorage } from '../services/storage';
-import {
-  handleAddToCart,
-  handleDecreaseQuantity,
-  handleRemoveFromCart,
-} from '../components/HandleButtons';
+
 export default class ShoppingCart extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +35,7 @@ export default class ShoppingCart extends Component {
   };
 
   render() {
+    const { handleAddToCart, handleDecreaseQuantity, handleRemoveFromCart } = this.props;
     const { shouldRedirect } = this.state;
     const emptyCartMessage = (
       <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
@@ -55,20 +52,11 @@ export default class ShoppingCart extends Component {
       <div>
         {cartItems.map((item) => (
           <CartProduct
-            productData={item}
+            cartItem={item}
             key={item.id}
-            handleAddToCart={(el) => {
-              handleAddToCart(el);
-              this.forceUpdate();
-            }}
-            handleDecreaseQuantity={(el) => {
-              handleDecreaseQuantity(el);
-              this.forceUpdate();
-            }}
-            handleRemoveFromCart={(el) => {
-              handleRemoveFromCart(el);
-              this.forceUpdate();
-            }}
+            handleAddToCart={handleAddToCart}
+            handleDecreaseQuantity={handleDecreaseQuantity}
+            handleRemoveFromCart={handleRemoveFromCart}
           />
         ))}
         <h5>Valor total:{this.sumProducts()}</h5>

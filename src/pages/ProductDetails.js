@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { ProductReviewForm } from '../components/zComponentsMenu';
 import * as storage from '../services/storage';
-import { handleAddToCart } from '../components/HandleButtons';
+import Cart from '../components/Cart';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -40,6 +40,7 @@ export default class ProductDetails extends Component {
   };
 
   render() {
+    const { handleAddToCart } = this.props;
     const getReviews = storage.readReviews('reviews');
     const { product } = this.state;
     if (!product) {
@@ -65,6 +66,7 @@ export default class ProductDetails extends Component {
         >
           Add to Cart!
         </button>
+        <Cart data-testid="shopping-cart-size" />
         <hr />
         <ProductReviewForm handleFormSubmit={this.handleFormSubmit} />
         <div>

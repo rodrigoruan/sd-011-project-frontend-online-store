@@ -17,11 +17,13 @@ export const handleDecreaseQuantity = (item) => {
   if (itemExists && itemExists.quantity > 1) {
     const updatedItem = { ...item, quantity: itemExists.quantity - 1 };
     const updatedShoppingCart = oldItems.map((el) => (el.id === item.id ? updatedItem : el));
-    return setCart([...updatedShoppingCart]);
+    setCart([...updatedShoppingCart]);
+    return this.forceUpdate();
   }
   if (itemExists && itemExists.quantity === 1) {
     const updatedShoppingCart = oldItems.filter((el) => el.id !== item.id);
-    return setCart([...updatedShoppingCart]);
+    setCart([...updatedShoppingCart]);
+    return this.forceUpdate();
   }
 };
 
@@ -31,6 +33,7 @@ export const handleRemoveFromCart = (item) => {
   const itemExists = oldItems.find((el) => el.id === item.id);
   if (itemExists) {
     const updatedShoppingCart = oldItems.filter((el) => el.id !== item.id);
-    return setCart([...updatedShoppingCart]);
+    setCart([...updatedShoppingCart]);
+    return this.forceUpdate();
   }
 };

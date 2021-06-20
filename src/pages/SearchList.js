@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ProductCard } from '../components/zComponentsMenu';
-import {
-  handleAddToCart,
-  handleDecreaseQuantity,
-  handleRemoveFromCart,
-} from '../components/HandleButtons';
+import { getCart } from '../services/storage';
+import Cart from '../components/Cart';
 
 export default class SearchList extends Component {
   constructor(props) {
@@ -17,8 +14,6 @@ export default class SearchList extends Component {
     this.showList = this.showList.bind(this);
   }
 
-  componentDidMount() {}
-
   componentDidUpdate(prevProps) {
     const { products } = this.props;
     if (prevProps.products !== products) {
@@ -26,26 +21,21 @@ export default class SearchList extends Component {
     }
   }
 
+  componentDidMount() {}
+
   setFalse = () => {
     this.setState({ empty: false });
   };
 
   showList = () => {
-    const { products } = this.props;
+    const { products, handleAddToCart } = this.props;
     const { empty } = this.state;
     if (!empty && products.length > 1) {
       return products.map((el, index) => (
-        <ProductCard
-          item={el}
-          key={index}
-          handleAddToCart={(el) => {
-            handleAddToCart(el);
-            return this.forceUpdate();
-          }}
-        />
+        <ProductCard item={el} key={index} handleAddToCart={handleAddToCart} />
       ));
     }
-    if (products.length < 1) {
+    if (!empty && products.length < 1) {
       return <>Nenhum produto foi encontrado</>;
     }
   };
@@ -56,7 +46,12 @@ export default class SearchList extends Component {
       return <>Loading</>;
     }
     if (products) {
-      return <div className="search-list">{this.showList()}</div>;
+      return (
+        <div className="search-list">
+          <Cart />
+          {this.showList()}
+        </div>
+      );
     }
   }
 }

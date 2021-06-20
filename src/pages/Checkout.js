@@ -12,12 +12,9 @@ export default class FinishScreen extends Component {
   }
 
   getCartProducts = () => {
-    const products = storage.readStorage('cartStorage');
-    if (products) {
-      return products.map((el, index) => (<CartProduct
-        productData={ el }
-        key={ index }
-      />));
+    const cartItem = storage.readStorage('cartStorage');
+    if (cartItem) {
+      return cartItem.map((el, index) => <CartProduct cartItem={el} key={index} />);
     }
   };
 
