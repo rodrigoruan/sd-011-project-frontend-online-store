@@ -19,9 +19,7 @@ class ShoppingCart extends React.Component {
 
   handleDelete(product) {
     const { filteredCart } = this.state;
-    const newList = filteredCart.filter((item) => {
-      return item.id !== product.id;
-    });
+    const newList = filteredCart.filter((item) => item.id !== product.id);
     this.setState({
       filteredCart: newList,
     });
@@ -38,7 +36,7 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { cart, increaseQuantity, decreaseQuantity } = this.props;
-    const { filteredCart, count, products } = this.state;
+    const { filteredCart /* , count, products */ } = this.state;
 
     const emptyCart = (
       <h3 data-testid="shopping-cart-empty-message">
@@ -64,6 +62,8 @@ ShoppingCart.propTypes = {
     length: PropTypes.arrayOf().isRequired,
     reduce: PropTypes.func.isRequired,
   }).isRequired,
+  increaseQuantity: PropTypes.func.isRequired,
+  decreaseQuantity: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;
