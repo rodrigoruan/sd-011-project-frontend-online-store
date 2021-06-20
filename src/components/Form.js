@@ -5,7 +5,8 @@ export default class Forms extends Component {
   render() {
     return (
       <div>
-        <form controlId="formBasicEmail">
+        <form controlId="formBasicEmail" className="forms">
+          <h1>Avalie este produto!</h1>
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>Seu Nome</Form.Label>
             <Form.Control type="text" placeholder="Digite Seu Nome!" />

@@ -61,6 +61,12 @@
 }
 
 .imgr {
-  max-width: 350px;
   height: auto;
+  max-width: 350px;
+}
+
+.forms {
+  margin: 0 auto;
+  padding: 5px;
+  width: 90%;
 }
