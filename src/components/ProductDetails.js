@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Form from './Form';
+import NavHome from './NavHome';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -54,6 +55,7 @@ export default class ProductDetails extends Component {
 
     return (
       <div>
+        <NavHome filterProducts={ this.filterProducts } />
         <Link
           data-testid="shopping-cart-button"
           to={ {

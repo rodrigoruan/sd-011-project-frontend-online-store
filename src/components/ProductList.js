@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
@@ -32,41 +32,61 @@ export default class ProductList extends Component {
     const { free_shipping: freeShipping } = shipping;
 
     return (
-      <div data-testid="product">
-        <p>{ title }</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>
-          R$
-          {price}
-        </p>
-        <div>
-          Frete:
-          { freeShipping
-            ? <p data-testid="free-shipping">Frete Gratis</p>
-            : <p>A combinar com o vendedor</p> }
-        </div>
-        <Button
-          variant="outline-success"
-          data-testid="product-add-to-cart"
-          value={ id }
-          onClick={ () => {
-            this.handlerLocalStore(products);
-            foundQuantityItemsCart();
-          } }
-          type="button"
-        >
-          Adicionar ao Carrinho
-        </Button>
-        <Link
-          to={ {
-            pathname: `/details/${id}`,
-            state: { detail: products },
-          } }
-          data-testid="product-detail-link"
-        >
-          <Button variant="info">Detalhes</Button>
-        </Link>
-      </div>
+      <>
+        <Card style={ { width: '18rem' } } data-testid="product">
+          <Card.Img variant="top" src={ thumbnail } alt={ title } />
+          <Card.Body>
+            <Card.Title>{ title }</Card.Title>
+            <Card.Text>
+              R$:
+              {price}
+            </Card.Text>
+            <Card.Text>
+              {' '}
+              Frete:
+              { freeShipping
+                ? <p data-testid="free-shipping">Frete Gratis</p>
+                : <p>A combinar com o vendedor</p> }
+            </Card.Text>
+            <Button
+              variant="outline-success"
+              data-testid="product-add-to-cart"
+              value={ id }
+              onClick={ () => {
+                this.handlerLocalStore(products);
+                foundQuantityItemsCart();
+              } }
+              type="button"
+            >
+              Adicionar ao Carrinho
+            </Button>
+            <Link
+              to={ {
+                pathname: `/details/${id}`,
+                state: { detail: products },
+              } }
+              data-testid="product-detail-link"
+            >
+              <Button variant="info">Detalhes</Button>
+            </Link>
+          </Card.Body>
+        </Card>
+
+        {/* <div data-testid="product">
+          <p>{ title }</p>
+          <img />
+          <p>
+            R$
+            {price}
+          </p>
+          <div>
+            Frete:
+            { freeShipping
+              ? <p data-testid="free-shipping">Frete Gratis</p>
+              : <p>A combinar com o vendedor</p> }
+          </div>
+        </div> */}
+      </>
     );
   }
 }

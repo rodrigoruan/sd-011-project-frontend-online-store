@@ -4,12 +4,22 @@
 }
 
 .navHome {
+  align-items: center;
   background-color: black;
   color: white;
+  display: flex;
+  justify-content: space-around;
   padding: 25px;
 }
 
 .category {
   display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.product {
+  display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }

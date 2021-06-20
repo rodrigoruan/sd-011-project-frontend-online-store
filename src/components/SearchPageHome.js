@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Nav, Form, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Categories from './Categories';
 import * as api from '../services/api';
 import ProductList from './ProductList';
-import NavHome from './NavHome';
 
 export default class SearchPageHome extends Component {
   constructor() {
@@ -74,16 +73,29 @@ export default class SearchPageHome extends Component {
     const { categoriesData, product, loading, itemsCart } = this.state;
     return (
       <div>
-        <NavHome />
-        <label htmlFor="initialMessage">
-          <input
-            data-testid="query-input"
-            type="text"
-            id="initialMessage"
-            onChange={ this.filterProducts }
-            name="query"
-          />
-        </label>
+        <div className="navHome">
+          <h1> Trybe Oline Store </h1>
+          <Nav className="mr-auto">
+            <Nav.Link><Link to="/"> Home </Link></Nav.Link>
+          </Nav>
+          <Form inline>
+            <FormControl
+              type="text"
+              placeholder="Search"
+              className="mr-sm-2"
+              id="initialMessage"
+              onChange={ this.filterProducts }
+            />
+            <Button
+              variant="outline-info"
+              data-testid="query-button"
+              type="button"
+              onClick={ this.getProducts }
+            >
+              Pesquisar
+            </Button>
+          </Form>
+        </div>
         <div className="category">
           { categoriesData.map((item) => (<Categories
             listCategories={ item }
@@ -116,15 +128,17 @@ export default class SearchPageHome extends Component {
             )
           </Button>
         </Link>
-        {loading ? (
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        ) : (product.map((item) => (<ProductList
-          products={ item }
-          key={ item.id }
-          foundQuantityItemsCart={ this.foundQuantityItemsCart }
-        />)))}
+        <div className="product">
+          {loading ? (
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          ) : (product.map((item) => (<ProductList
+            products={ item }
+            key={ item.id }
+            foundQuantityItemsCart={ this.foundQuantityItemsCart }
+          />)))}
+        </div>
       </div>
     );
   }
