@@ -100,9 +100,8 @@
 }
 
 .btCartItem {
+  align-items: center;
   display: flex;
   margin: 5px;
-  align-items: center;
   justify-content: space-around;
 }
- 
