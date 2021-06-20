@@ -6,6 +6,29 @@ import Avaliations from './Avaliations';
 import handleCart from '../services/localStorage';
 
 export default class Details extends Component {
+  constructor() {
+    super();
+    this.state = {
+      cart: 0,
+    };
+    this.getLocalStorage = this.getLocalStorage.bind(this);
+  }
+
+  componentDidMount() {
+    this.getLocalStorage();
+  }
+
+  getLocalStorage() {
+    let cartItems = JSON.parse(localStorage.getItem('cart'));
+    if (cartItems === null) {
+      cartItems = [];
+    }
+    const result = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    this.setState({
+      cart: result,
+    });
+  }
+
   addQuantity(product) {
     const quantityProduct = { quantity: 1 };
     const obj = Object.assign(quantityProduct, product);
@@ -18,10 +41,14 @@ export default class Details extends Component {
       location: { state: { element } },
     } = this.props;
     const { title, price, thumbnail, attributes } = element;
+    const { cart } = this.state;
     return (
       <div>
         <div>
-          <Link to="/ShoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
+          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+            Carrinho
+            <span data-testid="shopping-cart-size">{ cart }</span>
+          </Link>
         </div>
         <div>
           <div>
