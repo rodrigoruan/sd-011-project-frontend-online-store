@@ -33,31 +33,30 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
+    const getCart = JSON.parse(localStorage.getItem('cart'));
     return (
       <>
-        { (JSON.parse(localStorage.cart).length === 0)
-          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-          : JSON.parse(localStorage.cart).map(({ id, title, qtd }) => (
-            <div key={ id }>
-              <p data-testid="shopping-cart-product-name">{ title }</p>
-              <button
-                type="button"
-                data-testid="product-increase-quantity"
-                onClick={ () => this.addQtdprd(id) }
-              >
-                +
-              </button>
-              <span data-testid="shopping-cart-product-quantity">{ qtd }</span>
-              <button
-                type="button"
-                data-testid="product-decrease-quantity"
-                onClick={ () => this.rmQtd(id) }
-              >
-                -
-              </button>
-              <button type="button" onClick={ () => this.removeBtn(id) }>X</button>
-            </div>
-          )) }
+        { localStorage.cart ? getCart.map(({ id, title, qtd }) => (
+          <div key={ id }>
+            <p data-testid="shopping-cart-product-name">{ title }</p>
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ () => this.addQtdprd(id) }
+            >
+              +
+            </button>
+            <span data-testid="shopping-cart-product-quantity">{ qtd }</span>
+            <button
+              type="button"
+              data-testid="product-decrease-quantity"
+              onClick={ () => this.rmQtd(id) }
+            >
+              -
+            </button>
+            <button type="button" onClick={ () => this.removeBtn(id) }>X</button>
+          </div>
+        )) : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p> }
         <button type="button" data-testid="shopping-cart-button">Comprar</button>
       </>
     );
@@ -66,7 +65,10 @@ class ShoppingCart extends React.Component {
 
 ShoppingCart.propTypes = {
   arrayCartItens: PropTypes.arrayOf(PropTypes.object).isRequired,
-  updateArray: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;
+
+ShoppingCart.propTypes = {
+  updateArray: PropTypes.func.isRequired,
+};
