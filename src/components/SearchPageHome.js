@@ -97,6 +97,7 @@ export default class SearchPageHome extends Component {
             </Button>
           </Form>
           <Link
+            className="bt"
             data-testid="shopping-cart-button"
             to={ {
               pathname: '/shoppingCart',

@@ -13,14 +13,15 @@
 }
 
 .category {
-  border: solid 2px black;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 300px;
+  margin-right: 1050px;
   padding: 10px;
   position: absolute;
-  width: 300px;
-  min-width: 300px;
+  width: 20%;
 }
 
 .category input {
@@ -32,8 +33,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
-  padding: 50px;
-  max-width: 100px;
+  width: 70%;
 }
 
 .productItem {
@@ -41,11 +41,21 @@
   flex-flow: column nowrap;
   height: fit-content;
   justify-content: space-evenly;
-  margin: 10px;
-  width: 350px;
+  margin: 5px;
+  width: 300px;
 }
 
 
 .containerHome {
   display: flex;
+  justify-content: space-around;
+}
+
+.containerHome .product {
+  justify-content: right;
+  margin-left: 280px;
+}
+
+.bt {
+  margin-left: 15px;
 }
