@@ -59,3 +59,8 @@
 .bt {
   margin-left: 15px;
 }
+
+.imgr {
+  max-width: 350px;
+  height: auto;
+}

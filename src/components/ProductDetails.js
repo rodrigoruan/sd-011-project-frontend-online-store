@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Form from './Form';
 import NavHome from './NavHome';
@@ -60,35 +61,36 @@ export default class ProductDetails extends Component {
           itemsCart={ itemsCart }
           quantityItems={ quantityItems }
         />
-        <div>
-          <h1 data-testid="product-detail-name">{title}</h1>
-          <img src={ thumbnail } alt={ title } />
-          <h2>{`R$ ${price}`}</h2>
-        </div>
-
-        {
-          installments ? (
-            <div>
-              <h5>{`${detail.sold_quantity} unidades vendidas.`}</h5>
-              <p>
-                {`Estoque: ${installments.quantity}`}
-              </p>
-            </div>
-          ) : <p>Unidade única</p>
-        }
-
-        <div>
-          <h3>Especificações Técnicas:</h3>
+        <Card.Img variant="top" className="imgr" src={ thumbnail } alt={ title } />
+        <Card.Body>
+          <Card.Title data-testid="product-detail-name">{title}</Card.Title>
+          <Card.Text>
+            {`R$ ${price}`}
+          </Card.Text>
+          {
+            installments ? (
+              <div>
+                <h5>{`${detail.sold_quantity} unidades vendidas.`}</h5>
+                <p>
+                  {`Estoque: ${installments.quantity}`}
+                </p>
+              </div>
+            ) : <p>Unidade única</p>
+          }
           <div>
-            {attributes.map((attribute, index) => (
-              <p key={ index }>
-                {attribute.name}
-                :
-                {attribute.value_name}
-              </p>
-            ))}
+            <h3>Especificações Técnicas:</h3>
+            <div>
+              {attributes.map((attribute, index) => (
+                <p key={ index }>
+                  {attribute.name}
+                  :
+                  {attribute.value_name}
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
+        </Card.Body>
+        <Card.Footer />
         <Link to="/">
           <Button
             variant="primary"
