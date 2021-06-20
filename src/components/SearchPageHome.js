@@ -78,6 +78,9 @@ export default class SearchPageHome extends Component {
           <Nav className="mr-auto">
             <Nav.Link><Link to="/"> Home </Link></Nav.Link>
           </Nav>
+          <Nav className="mr-auto">
+            <Nav.Link><Link to="/about"> About </Link></Nav.Link>
+          </Nav>
           <Form inline>
             <FormControl
               type="text"
