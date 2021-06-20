@@ -11,7 +11,7 @@ class Home extends Component {
     this.state = {
       search: '',
       categoryId: '',
-      prodList: [],
+      searchInfo: [],
     };
     this.inputListner = this.inputListner.bind(this);
     this.requestProducts = this.requestProducts.bind(this);
@@ -34,16 +34,16 @@ class Home extends Component {
   requestProducts() {
     const { categoryId, search } = this.state;
     api.getProductsFromCategoryAndQuery(categoryId, search)
-      .then(({ results }) => (
+      .then((results) => (
         this.setState({
-          prodList: results,
+          searchInfo: results,
           wasSearched: true,
         })
       ));
   }
 
   render() {
-    const { prodList, wasSearched } = this.state;
+    const { searchInfo, wasSearched } = this.state;
 
     return (
       <div>
@@ -86,7 +86,7 @@ class Home extends Component {
             </Link>
           </div>
         </header>
-        {(!wasSearched) ? null : <Products prodList={ prodList } />}
+        {(!wasSearched) ? null : <Products searchInfo={ searchInfo } />}
       </div>
     );
   }

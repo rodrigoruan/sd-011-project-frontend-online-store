@@ -96,7 +96,7 @@ class ProductDetail extends Component {
               </h1>
             </div>
             <div className="product-details">
-              <img className="product-img" src={ info.thumbnail } alt={ info.title } />
+              <img className="product-img" src={ info.pictures[0].url } alt={ info.title } />
               <div className="product-description">
                 <h1>
                   Descrição do Produto:

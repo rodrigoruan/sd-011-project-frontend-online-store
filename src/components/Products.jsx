@@ -53,15 +53,16 @@ class Products extends Component {
   }
 
   render() {
-    const { prodList } = this.props;
-    if (prodList.length === 0) {
+    const { searchInfo } = this.props;
+    if (searchInfo.searchProdList.length === 0) {
       return <NotFound />;
     }
     return (
       <main>
-        { prodList.map((item) => (
+        { searchInfo.searchProdList.map((item) => (
           // Como enviar um objeto pelo Link -> https://reactrouter.com/web/api/Link
           <div className="product-card" data-testid="product" key={ item.id }>
+            { console.log(item) }
             <Link
               data-testid="product-detail-link"
               className="product-card-link"
@@ -72,7 +73,7 @@ class Products extends Component {
               } }
             >
               <div className="product-img">
-                <img src={ item.thumbnail } alt={ item.title } />
+                <img src={ item.pictures[0].url } alt={ item.title } />
               </div>
               <div className="product-info">
                 <p>{`R$: ${item.price}`}</p>
