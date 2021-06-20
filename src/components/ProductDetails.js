@@ -20,6 +20,7 @@ class ProductDetails extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.loadCartList = this.loadCartList.bind(this);
     this.setRating = this.setRating.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -54,6 +55,20 @@ class ProductDetails extends React.Component {
   setRating(event) {
     this.setState({
       rating: event,
+    });
+  }
+
+  decreaseQuantity() {
+    const { product: { id } } = this.state;
+    const previousList = this.loadCartList();
+    if (previousList[id] && previousList[id].quantity > 1) {
+      previousList[id].quantity -= 1;
+    }
+    localStorage.setItem('cartList', JSON.stringify(previousList));
+    const details = this.loadCartList();
+    const productArray = Object.values(details);
+    this.setState({
+      quantity: productArray.length,
     });
   }
 
@@ -107,6 +122,7 @@ class ProductDetails extends React.Component {
         <button
           className="decrease-btn"
           type="button"
+          onClick={ this.decreaseQuantity }
         >
           -
         </button>
@@ -118,12 +134,13 @@ class ProductDetails extends React.Component {
         <button
           className="increase-btn"
           type="button"
+          onClick={ this.handleClick }
         >
           +
         </button>
         <button
-          type="button"
           className="add-to-cart-btn-details"
+          type="button"
           data-testid="product-detail-add-to-cart"
           onClick={ this.handleClick }
         >
