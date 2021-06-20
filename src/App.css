@@ -19,7 +19,9 @@
 }
 
 .product {
+  align-items: stretch;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row warp;
+  justify-content: center;
+  padding: 5px;
 }
