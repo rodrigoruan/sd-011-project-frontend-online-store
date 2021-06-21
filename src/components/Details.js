@@ -5,8 +5,7 @@ import Button from './Button';
 
 export default class Details extends Component {
   constructor() {
-    super()
-
+    super();
     this.state = {
       email: '',
       message: '',
@@ -18,6 +17,15 @@ export default class Details extends Component {
     this.setState({
       [name]: value,
     });
+  }
+
+  addAvaliationLocalStorage = () => {
+    const { location } = this.props;
+    const { state } = location;
+    const { product } = state;
+    const { title } = product;
+    const { email, message } = this.state;
+    localStorage.setItem(`Avaliation ${title}`, JSON.stringify({ email, message }));
   }
 
   render() {
@@ -68,7 +76,12 @@ export default class Details extends Component {
             onChange={ this.handleChange }
           />
           <br />
-          <button type="button">Avaliar</button>
+          <button
+            onClick={ this.addAvaliationLocalStorage }
+            type="button"
+          >
+            Avaliar
+          </button>
         </form>
       </div>
     );
