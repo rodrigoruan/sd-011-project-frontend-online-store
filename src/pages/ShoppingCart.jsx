@@ -32,12 +32,18 @@ export default class ShoppingCart extends Component {
   }
 
   deletProduct(id) {
-    const { shoppingCart } = this.state;
-    const actualArrayProducts = shoppingCart;
-    const newArrayProducts = actualArrayProducts.filter((product) => product.id !== id);
+    const cartItems = JSON.parse(localStorage.getItem('cart'));
+    const removedItemCart = cartItems.filter((item) => item.id !== id);
+    localStorage.setItem('cart', JSON.stringify([...removedItemCart]));
     this.setState({
-      shoppingCart: [...newArrayProducts],
-    });
+      shoppingCart:[...removedItemCart],
+    }, () => this.totalShoppingCart());
+    // const { shoppingCart } = this.state;
+    // const actualArrayProducts = shoppingCart;
+    // const newArrayProducts = actualArrayProducts.filter((product) => product.id !== id);
+    // this.setState({
+    //   shoppingCart: [...newArrayProducts],
+    // });
   }
 
   updatedProduct({ ...productUpdated }) {
@@ -51,6 +57,7 @@ export default class ShoppingCart extends Component {
     this.setState({
       shoppingCart: [...newShoppincart],
     });
+    localStorage.setItem('cart', JSON.stringify([...newShoppincart]));
     this.totalShoppingCart();
   }
 
