@@ -67,23 +67,37 @@ export default class ShoppingCart extends Component {
         {
           JSON.parse(localStorage.ShoppingCart).map((product, index) => (
             <div className="cart-item" key={ index }>
-              <div className="cart-item-info">
+              <div className="cart-item-div">
                 <button
+                  className="btn-items"
                   type="button"
                   onClick={ () => this.removeItem(product.id) }
                 >
                   X
                 </button>
-                <p data-testid="shopping-cart-product-name">{ product.title }</p>
+                <div className="cart-item-info">
+                  <img
+                    className="cart-item-img"
+                    alt={ product.title }
+                    src={ product.thumbnail }
+                  />
+                  <div className="cart-item-text">
+                    <p dataestid="shopping-cart-product-name">{ product.title }</p>
+                  </div>
+                </div>
                 <button
+                  className="btn-items"
                   type="button"
                   data-testid="product-decrease-quantity"
                   onClick={ () => this.lessItem(product.id) }
                 >
                   -
                 </button>
-                <p data-testid="shopping-cart-product-quantity">{product.counter}</p>
+                <div className="cart-item-counter">
+                  <p data-testid="shopping-cart-product-quantity">{product.counter}</p>
+                </div>
                 <button
+                  className="btn-items"
                   type="button"
                   data-testid="product-increase-quantity"
                   onClick={ () => this.plusItem(product.id, product.availableQuantity) }
@@ -94,8 +108,23 @@ export default class ShoppingCart extends Component {
             </div>
           ))
         }
+        <h2 className="cart-item cart-total">
+          Total da compra: R$
+          {
+            JSON.parse(localStorage.ShoppingCart).reduce((acc, cur) => {
+              acc += cur.price * cur.counter;
+              return acc;
+            }, 0).toFixed(2).replace('.', ',')
+          }
+        </h2>
         <Link to="/CheckoutPage">
-          <button type="button" data-testid="checkout-products">Finalizar compra</button>
+          <button
+            className="btn-items btn-checkout"
+            type="button"
+            data-testid="checkout-products"
+          >
+            Finalizar compra
+          </button>
         </Link>
       </div>
     );
