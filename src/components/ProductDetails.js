@@ -67,12 +67,25 @@ class ProductDetails extends React.Component {
 
   render() {
     const { productObject, comments } = this.state;
+    if (productObject === null) {
+      return <p>Loading...</p>;
+    }
     return (
-      <div data-testid="product-detail-name">
-        {(productObject === null)
-          ? <p>Loading...</p>
-          : <p>{ productObject.title }</p>}
+      <div className="div-product-details">
+        <h1 data-testid="product-detail-name">{ productObject.title }</h1>
+        <div>
+          <img
+            className="detail-img"
+            src={ productObject.thumbnail }
+            alt={ productObject.title }
+          />
+        </div>
+        <h2>
+          RS
+          {productObject.price.toFixed(2).replace('.', ',')}
+        </h2>
         <button
+          className="btn-items btn-checkout"
           data-testid="product-detail-add-to-cart"
           type="button"
           onClick={ this.setItem }

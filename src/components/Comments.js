@@ -81,7 +81,11 @@ export default class Comments extends Component {
               onChange={ this.onChange }
             />
           </div>
-          <button type="button" onClick={ () => addComment(this.state) }>
+          <button
+            className="btn-items btn-checkout"
+            type="button"
+            onClick={ () => addComment(this.state) }
+          >
             Avaliar
           </button>
         </form>
