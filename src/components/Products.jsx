@@ -31,6 +31,7 @@ class Products extends Component {
 
   addProductToCart(item) {
     const { shoppingCart } = this.state;
+    const { sumShoppingCartItens } = this.props;
 
     if (shoppingCart.some((productItem) => productItem.productId === item.id)) {
       shoppingCart.find((productItem) => productItem.productId === item.id).quantity += 1;
@@ -50,10 +51,13 @@ class Products extends Component {
       }),
       async () => this.setShoppingCartToLocalStorage());
     }
+
+    sumShoppingCartItens();
   }
 
   render() {
     const { prodList } = this.props;
+
     if (prodList.length === 0) {
       return <NotFound />;
     }
@@ -100,6 +104,7 @@ Products.propTypes = {
     PropTypes.array,
     PropTypes.object,
   ]).isRequired,
+  sumShoppingCartItens: PropTypes.func.isRequired,
 };
 
 export default Products;
