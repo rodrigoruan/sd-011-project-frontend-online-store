@@ -36,6 +36,17 @@ export default class Details extends Component {
           price={ product.price }
           dataTestid="product-detail-add-to-cart"
         />
+        <form>
+          <input type="text" placeholder="Email" />
+          <br />
+          <textarea
+            data-testid="product-detail-evaluation"
+            type="text"
+            placeholder="Mensagem(opcional)"
+          />
+          <br />
+          <button type="button">Avaliar</button>
+        </form>
       </div>
     );
   }
