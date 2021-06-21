@@ -35,7 +35,11 @@ class ProductDetailCard extends Component {
 
   render() {
     const { title, imgPath, price, id } = this.props;
-    const { quantityTotalInitial, quantityTotal } = this.state;
+    const {
+      quantityTotalInitial,
+      quantityTotal,
+      available_quantity: availableQuantity,
+    } = this.state;
 
     return (
       <div>
@@ -65,6 +69,7 @@ class ProductDetailCard extends Component {
           price={ price }
           id={ id }
           manipulateState={ this.manipulateState }
+          availableQuantity={ availableQuantity }
         />
       </div>
     );

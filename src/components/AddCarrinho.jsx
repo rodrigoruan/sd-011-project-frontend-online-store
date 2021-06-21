@@ -16,7 +16,8 @@ class AddCarrinho extends Component {
     const { manipulateState } = this.props;
     let arrProducts = [];
     const storageData = JSON.parse(localStorage.getItem('products'));
-    const { title, price, id, imgPath } = this.props;
+    const { title, price, id, imgPath, availableQuantity } = this.props;
+
     const { quantity } = this.state;
     const product = {
       title,
@@ -24,6 +25,7 @@ class AddCarrinho extends Component {
       price,
       quantity,
       imgPath,
+      availableQuantity,
     };
 
     this.setState((oldState) => ({
@@ -78,4 +80,5 @@ AddCarrinho.propTypes = {
   id: PropTypes.string.isRequired,
   testId: PropTypes.string.isRequired,
   manipulateState: PropTypes.func.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
 };
