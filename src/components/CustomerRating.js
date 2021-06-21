@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class CustomerRating extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
-      rating: '',
+      rating: 0,
       comment: '',
     };
     this.handleChange = this.handleChange.bind(this);

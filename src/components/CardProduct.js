@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 
 class CardProduct extends Component {
   render() {
-    const { product } = this.props;
-    const { product: { title, thumbnail, price, id } } = this.props;
+    const { product, addToCartFunction } = this.props;
+    const { title, thumbnail, price, id } = product;
     return (
       <div data-testid="product">
         <Link
@@ -19,6 +19,13 @@ class CardProduct extends Component {
           <img src={ thumbnail } alt={ title } />
           <p>{ price }</p>
         </Link>
+        <button
+          data-testid="product-add-to-cart"
+          onClick={ () => addToCartFunction(product) }
+          type="button"
+        >
+          Adiiconar ao carrinho
+        </button>
       </div>
     );
   }
