@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import '../css/Cart.css';
 
 export default class Cart extends Component {
   constructor() {
     super();
-    this.state = {
-      products: [],
-      count: 0,
-    };
+    this.state = { products: [], count: 0 };
   }
 
   componentDidMount() {
@@ -18,10 +16,7 @@ export default class Cart extends Component {
     const getProducts = { ...localStorage };
     const arrayOfproducts = Object.values(getProducts).map((e) => JSON.parse(e));
 
-    this.setState({
-      products: arrayOfproducts,
-      count: arrayOfproducts,
-    });
+    this.setState({ products: arrayOfproducts, count: arrayOfproducts });
   };
 
   handleClick = ({ target: { id, name } }) => {
@@ -29,7 +24,6 @@ export default class Cart extends Component {
 
     if (name === 'add' && product.counter < product.availableQuantity) {
       product.counter += 1;
-      console.log(product.counter);
     }
     if (name === 'sub' && product.counter > 1) {
       product.counter -= 1;
@@ -47,25 +41,43 @@ export default class Cart extends Component {
   render() {
     const { count } = this.state;
     const { products } = this.state;
+
     if (!products.length) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
       );
     }
+
     return (
       <div>
+        <div className="header-cart">
+          <h1 className="cart-title">Carrinho</h1>
+          <Link to={ { pathname: '/checkout' } }>
+            <button className="buy-button" data-testid="checkout-products" type="button">
+              Finalizar compra
+            </button>
+          </Link>
+        </div>
         {products.map(({ title, price, thumbnail, id, availableQuantity }) => (
-          <div key={ id }>
-            <p data-testid="shopping-cart-product-name">{title}</p>
+          <div className="cart-product-container" key={ id }>
+            <p
+              className="product-name"
+              data-testid="shopping-cart-product-name"
+            >
+              {title}
+            </p>
             <img src={ thumbnail } alt={ title } />
-            <p>
+            <p className="price-cart">
               R$
               {price}
             </p>
             <p data-testid="shopping-cart-product-quantity">
+              Quantidade:
+              {' '}
               {count.find((item) => item.title === title).counter}
             </p>
             <button
+              className="add-button all-button"
               disabled={
                 availableQuantity
                 === count.find((item) => item.title === title).counter
@@ -79,6 +91,7 @@ export default class Cart extends Component {
               (+)
             </button>
             <button
+              className="sub-button all-button"
               data-testid="product-decrease-quantity"
               type="button"
               name="sub"
@@ -88,6 +101,7 @@ export default class Cart extends Component {
               (-)
             </button>
             <button
+              className="remove-button all-button"
               type="button"
               name="delete"
               id={ title }
@@ -97,11 +111,6 @@ export default class Cart extends Component {
             </button>
           </div>
         ))}
-        <Link to={ { pathname: '/checkout' } }>
-          <button data-testid="checkout-products" type="button">
-            Comprar
-          </button>
-        </Link>
       </div>
     );
   }
