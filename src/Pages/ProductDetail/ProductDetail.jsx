@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Rating from '../Rating';
 import './productDetail.css';
+import ShoppingCartBtn from '../../components/ShoppingCartBtn';
 
 // import * as api from '../../services/api';
 
@@ -10,13 +10,16 @@ class ProductDetail extends Component {
   constructor(props) {
     super(props);
     const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
-    if (!shoppingCart) {
+
+    if (shoppingCart) {
       this.state = {
-        shoppingCart: [],
+        shoppingCart,
+        shoppingCartItens: shoppingCart.reduce(((acc, curr) => acc + curr.quantity), 0),
       };
     } else {
       this.state = {
-        shoppingCart,
+        shoppingCart: [],
+        shoppingCartItens: 0,
       };
     }
 
@@ -35,9 +38,10 @@ class ProductDetail extends Component {
     if (shoppingCart.some((productItem) => productItem.productId === item.id)) {
       shoppingCart.find((productItem) => productItem.productId === item.id).quantity += 1;
 
-      this.setState({
+      this.setState((prevState) => ({
         shoppingCart,
-      },
+        shoppingCartItens: prevState.shoppingCartItens + 1,
+      }),
       async () => this.setShoppingCartToLocalStorage());
     } else {
       const productInfo = {
@@ -47,25 +51,27 @@ class ProductDetail extends Component {
       };
       this.setState((prevState) => ({
         shoppingCart: [...prevState.shoppingCart, productInfo],
+        shoppingCartItens: prevState.shoppingCartItens + 1,
       }),
       async () => this.setShoppingCartToLocalStorage());
     }
   }
 
   render() {
-    const { shoppingCarts } = this.state;
-    console.log(shoppingCarts);
+    const { shoppingCartItens } = this.state;
+
     const {
       location:
       { state:
         { item },
       },
     } = this.props;
+
     return (
       <>
         {item.map((info) => (
           <div key={ info.id }>
-            <Link data-testid="shopping-cart-button" to="/shoppingcart">Botão</Link>
+            <ShoppingCartBtn shoppingCartItens={ shoppingCartItens } />
             <div className="main-product-info">
               <h1 data-testid="product-detail-name">{info.title}</h1>
               <h1>{ `R$: ${info.price}` }</h1>

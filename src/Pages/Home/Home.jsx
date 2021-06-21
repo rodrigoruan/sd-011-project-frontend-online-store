@@ -1,21 +1,36 @@
 import React, { Component } from 'react';
 import './home.css';
-import { Link } from 'react-router-dom';
 import CategoryList from '../../components/CategoryList';
 import * as api from '../../services/api';
 import Products from '../../components/Products';
+import ShoppingCartBtn from '../../components/ShoppingCartBtn';
 
 class Home extends Component {
   constructor() {
     super();
-    this.state = {
-      search: '',
-      categoryId: '',
-      prodList: [],
-    };
+
+    const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+
+    if (shoppingCart) {
+      this.state = {
+        search: '',
+        categoryId: '',
+        prodList: [],
+        shoppingCartItens: shoppingCart.reduce(((acc, curr) => acc + curr.quantity), 0),
+      };
+    } else {
+      this.state = {
+        search: '',
+        categoryId: '',
+        prodList: [],
+        shoppingCartItens: 0,
+      };
+    }
+
     this.inputListner = this.inputListner.bind(this);
     this.requestProducts = this.requestProducts.bind(this);
     this.selectListner = this.selectListner.bind(this);
+    this.sumShoppingCartItens = this.sumShoppingCartItens.bind(this);
   }
 
   inputListner({ target }) {
@@ -42,8 +57,14 @@ class Home extends Component {
       ));
   }
 
+  sumShoppingCartItens() {
+    this.setState((prevState) => ({
+      shoppingCartItens: prevState.shoppingCartItens + 1,
+    }));
+  }
+
   render() {
-    const { prodList, wasSearched } = this.state;
+    const { prodList, wasSearched, shoppingCartItens } = this.state;
 
     return (
       <div>
@@ -74,19 +95,16 @@ class Home extends Component {
             </div>
           </div>
           <div className="header-shopping-cart-button">
-            <Link
-              data-testid="shopping-cart-button"
-              to="/shoppingcart"
-            >
-              <img
-                src="/imgs/shopping-cart.png"
-                alt="Shopping-cart-button"
-                width="25px"
-              />
-            </Link>
+            <ShoppingCartBtn shoppingCartItens={ shoppingCartItens } />
           </div>
         </header>
-        {(!wasSearched) ? null : <Products prodList={ prodList } />}
+        {(!wasSearched)
+          ? null
+          : (
+            <Products
+              prodList={ prodList }
+              sumShoppingCartItens={ this.sumShoppingCartItens }
+            />)}
       </div>
     );
   }
