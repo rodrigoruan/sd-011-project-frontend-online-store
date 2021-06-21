@@ -46,22 +46,12 @@ export default class CartItems extends Component {
             <br />
             <br />
             <div>
-              <Link to="/cartitems">
-                <AddAndRemoveCartItem
-                  title={ title }
-                  price={ price }
-                  thumbnail={ thumbnail }
-                  operator="-"
-                />
-              </Link>
-              <Link to="/cartitems">
-                <AddAndRemoveCartItem
-                  title={ title }
-                  price={ price }
-                  thumbnail={ thumbnail }
-                  operator="+"
-                />
-              </Link>
+              <AddAndRemoveCartItem
+                title={ title }
+                price={ price }
+                thumbnail={ thumbnail }
+                onClick={ this.getLocalStorage }
+              />
             </div>
             <h5>{ `Valor do(s) produto(s): R$${count * price}` }</h5>
             <br />
