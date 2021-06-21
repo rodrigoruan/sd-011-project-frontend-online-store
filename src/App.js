@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import NavBar from './components/NavBar';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import ProductPage from './pages/ProductPage';
@@ -13,6 +14,7 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <NavBar />
         <Switch>
           <Route exact path="/" render={ () => <Home { ...api } /> } />
           <Route path="/cart" render={ (props) => <Cart { ...props } /> } />

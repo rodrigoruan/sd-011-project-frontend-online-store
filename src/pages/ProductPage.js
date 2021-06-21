@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
 import ProductEvaluation from '../components/ProductEvaluation';
@@ -85,12 +84,6 @@ export default class ProductPage extends Component {
       const { title, thumbnail, price } = product;
       return (
         <div data-testid="movie-details">
-          <Link
-            to="/Cart"
-            data-testid="shopping-cart-button"
-          >
-            CART
-          </Link>
           <h3>
             <span data-testid="product-detail-name">
               { title }

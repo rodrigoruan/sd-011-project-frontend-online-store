@@ -11,6 +11,12 @@ export default function Cart() {
   useEffect(() => {
     setLocalItems(getLocalStorage());
   }, []);
+
+  if (!localItems) {
+    return (
+      <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>
+    );
+  }
   return (
     <div>
       <div className="cart-container">

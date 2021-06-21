@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../services/api';
 import PropTypes from 'prop-types';
 import CategoriesBar from '../components/CategoriesBar';
@@ -71,12 +70,6 @@ class Home extends React.Component {
     const { getCategories } = this.props;
     return (
       <div>
-        <Link
-          to="/Cart"
-          data-testid="shopping-cart-button"
-        >
-          CART
-        </Link>
         <form>
           <input
             type="text"
