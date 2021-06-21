@@ -18,10 +18,10 @@ class RatingEvaluation extends Component {
                 type="radio"
                 value={ starRating }
               />
-              <FaStar
+            { <FaStar
                 size={ 20 }
                 color={ starRating <= rating ? '#ffc107' : '#b1b8cf' }
-              />
+              /> }
             </label>
           );
         })}
