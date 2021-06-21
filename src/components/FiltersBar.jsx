@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './filter-bar.css';
+// import './filter-bar.css';
 
 export default class FiltersBar extends Component {
   render() {
+    // Funções: setCategory
+    // Objetos: categories
     const { categories, setCategory } = this.props;
     return (
       <div className="filter-container">
