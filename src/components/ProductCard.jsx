@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 
 export default class ProductCard extends Component {
   render() {
-    const { product: { title, price, thumbnail, id }, addCart } = this.props;
+    const { product: { title, price, thumbnail, id, available_quantity },
+      addCart } = this.props;
+
     return (
       <div className="product-card" data-testid="product">
         <p data-testid="product-detail-name">{title}</p>
         <img src={ thumbnail } alt={ title } style={ { width: '150px' } } />
         <p>{`R$ ${price}`}</p>
+        <p>{`Quantidade disponível: ${available_quantity}`}</p>
         <button
           data-testid="product-add-to-cart"
           type="button"
@@ -38,6 +41,7 @@ ProductCard.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
+    available_quantity: PropTypes.number,
     thumbnail: PropTypes.string,
   }).isRequired,
 };
