@@ -80,6 +80,9 @@ class ProductDetail extends Component {
                 ))}
               </div>
             </div>
+            { (info.shipping.free_shipping)
+              ? <p data-testid="free-shipping">Frete Grátis</p>
+              : null }
             <button
               type="button"
               data-testid="product-detail-add-to-cart"

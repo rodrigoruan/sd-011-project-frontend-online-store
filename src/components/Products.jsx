@@ -77,6 +77,9 @@ class Products extends Component {
               <div className="product-info">
                 <p>{`R$: ${item.price}`}</p>
                 <h1>{item.title}</h1>
+                { (item.shipping.free_shipping)
+                  ? <p data-testid="free-shipping">Frete Grátis</p>
+                  : null }
               </div>
             </Link>
             <button
