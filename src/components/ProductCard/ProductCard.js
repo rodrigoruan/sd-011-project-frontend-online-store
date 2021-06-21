@@ -19,7 +19,13 @@ export default class ProductCard extends Component {
     } = this.props;
     return (
       <div className="product-card" data-testid="product">
-        <Link
+        <div class="ui card">
+          <div class="image">
+            <img src={ thumbnail }/>
+          </div>
+          <div class="content">
+            <div class="header">
+            <Link
           data-testid="product-detail-link"
           to={ {
             pathname: `/details/${id}`,
@@ -35,33 +41,6 @@ export default class ProductCard extends Component {
         >
           {title}
         </Link>
-        <img src={ thumbnail } alt={ title } />
-        {price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-        <p>
-          { shipping ? <img
-            data-testid="free-shipping"
-            className="free-shipping"
-            src={ Ship }
-            alt="Frete Grátis!!!"
-          /> : '' }
-        </p>
-        { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
-        <button
-          type="button"
-          id={ title }
-          className={ thumbnail }
-          name={ price }
-          onClick={ () => handleAddToShopCart(this.props) }
-          data-testid="product-add-to-cart"
-        >
-          Comprar
-        </button>
-        <div class="ui card">
-          <div class="image">
-            <img src={ thumbnail }/>
-          </div>
-          <div class="content">
-            <div class="header">{ title }
           </div>
           <div class="meta">
             Friend
