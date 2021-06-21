@@ -2,26 +2,43 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ProductDetail from './Pages/ProductDetail';
+import ShoppingCart from './Pages/ShoppingCart';
 import Main from './Pages/Main';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    const getCart = JSON.parse(localStorage.getItem('cart'));
     this.state = {
-      itensAdded: [],
+      mastercartItens: getCart,
     };
-    this.addItems = this.addItems.bind(this);
+    this.addItens = this.addItens.bind(this);
+    this.newArray = this.newArray.bind(this);
   }
 
-  addItems(obj) {
-    const { itensAdded } = this.state;
-    this.setState({
-      itensAdded: [...itensAdded, obj],
-    });
+  newArray(array) {
+    localStorage.setItem('cart', JSON.stringify(array));
+    this.setState({ mastercartItens: array });
+  }
+
+  addItens(obj) {
+    if (!localStorage.cart) {
+      localStorage.setItem('cart', JSON.stringify([obj]));
+    } else {
+      const getCart = JSON.parse(localStorage.getItem('cart'));
+      const idArrayItens = getCart.some(({ id }) => id === obj.id);
+      const addqtd = getCart.map((objID) => objID.id);
+      if (!idArrayItens) {
+        localStorage.setItem('cart', JSON.stringify([...getCart, obj]));
+      } else {
+        addqtd.qtd += 1;
+        localStorage.setItem('cart', JSON.stringify([...getCart]));
+      }
+    }
   }
 
   render() {
-    const { itensAdded } = this.state;
+    const { mastercartItens } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
@@ -29,26 +46,32 @@ export default class App extends Component {
             <Route
               exact
               path="/"
-              render={
-                (props) => (
-                  <Main
-                    { ...props }
-                    itensAdded={ itensAdded }
-                    addItens={ this.addItems }
-                  />)
-              }
+              render={ (props) => (<Main
+                { ...props }
+                arrayCartItens={ mastercartItens }
+                addItens={ this.addItens }
+                updateArray={ this.newArray }
+              />) }
             />
             <Route
               exact
               path="/product/:id"
-              render={
-                (props) => (
-                  <ProductDetail
-                    { ...props }
-                    itensAdded={ itensAdded }
-                    addItens={ this.addItems }
-                  />)
-              }
+              render={ (props) => (<ProductDetail
+                { ...props }
+                arrayCartItens={ mastercartItens }
+                addItens={ this.addItens }
+                updateArray={ this.newArray }
+              />) }
+            />
+            <Route
+              exact
+              path="/cart"
+              render={ (props) => (<ShoppingCart
+                { ...props }
+                arrayCartItens={ mastercartItens }
+                addItens={ this.addItens }
+                updateArray={ this.newArray }
+              />) }
             />
           </Switch>
         </BrowserRouter>
