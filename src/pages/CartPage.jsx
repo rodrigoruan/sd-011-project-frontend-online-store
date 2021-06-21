@@ -24,6 +24,12 @@ export default class CartPage extends Component {
     return (
       <div className="cartpage-container">
         <Link to="/">Voltar</Link>
+        <Link
+          to="/checkout"
+          data-testid="checkout-products"
+        >
+          Finalizar Compra
+        </Link>
         <div className="cart-list">
           {
             cart.map((product, index) => {
