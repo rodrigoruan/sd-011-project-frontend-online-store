@@ -9,7 +9,12 @@ export default class Details extends Component {
     this.state = {
       email: '',
       message: '',
+      allAvaliations: [],
     };
+  }
+
+  componentDidMount() {
+    this.getLocalStorage();
   }
 
   handleChange = ({ target }) => {
@@ -28,12 +33,25 @@ export default class Details extends Component {
     localStorage.setItem(`Avaliation ${title}`, JSON.stringify({ email, message }));
   }
 
+  getLocalStorage = () => {
+    const { location } = this.props;
+    const { state } = location;
+    const { product } = state;
+    const { title } = product;
+    const avaliations = { ...localStorage };
+    const value = Object.keys(avaliations).filter((avaliation) => avaliation === `Avaliation ${title}`);
+    const arrayAvaliations = Object.values(value).map((avaliation) => JSON.parse(avaliation));
+    this.setState({
+      allAvaliations: arrayAvaliations,
+    });
+  }
+
   render() {
     const { location } = this.props;
     const { state } = location;
     const { product } = state;
     const { title, price, thumbnail, attributes } = product;
-
+    const { allAvaliations } = this.state;
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cartitems">
@@ -83,6 +101,14 @@ export default class Details extends Component {
             Avaliar
           </button>
         </form>
+        <div>
+          { allAvaliations.map((avaliation, index) => (
+            <div key={ index }>
+              <h3>{ avaliation.email }</h3>
+              <span>{ avaliation.message }</span>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
