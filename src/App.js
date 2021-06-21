@@ -4,6 +4,8 @@ import * as api from './services/api';
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
+import CheckoutPage from './pages/CheckoutPage';
+
 import './App.css';
 
 class App extends Component {
@@ -120,6 +122,12 @@ class App extends Component {
               render={ () => (<ProductDetailsPage
                 addToCart={ this.addToCart }
                 selectedProduct={ selectedProduct }
+              />) }
+            />
+            <Route
+              path="/checkout"
+              render={ () => (<CheckoutPage
+                cart={ cart }
               />) }
             />
           </Switch>
