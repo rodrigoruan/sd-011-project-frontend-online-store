@@ -67,7 +67,7 @@ class Cart extends React.Component {
         { this.renderLocalStorageItems() }
         <p>
           Soma Total: R$
-          { totalPrice }
+          { totalPrice.toFixed(2) }
         </p>
         <Link to="/" className="cart-render-link">Voltar Para Pagina Inicial</Link>
         <Link

@@ -69,3 +69,8 @@
 .checkout-product-title:hover {
   color: red;
 }
+
+.checkout-product-quantity {
+  display: flex;
+  flex-grow: 1;
+}
