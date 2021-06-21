@@ -4,21 +4,15 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  font-family: Arial;
-  justify-content: space-between;
-  margin: 10px 10px 0px 10px;
-  width: 350px;
   height: 420px;
+  justify-content: space-between;
+  margin: 10px 10px 0;
+  width: 350px;
 }
 
 .CardContainer:hover {
-  /* cursor: pointer; */
   transform: scale(1.1);
-  transition: .5s;
-}
-
-.CardContainer:hover .titleContainer {
-  font-weight: 600;
+  transition: 0.5s;
 }
 
 .titleContainer {
@@ -28,41 +22,42 @@
   display: flex;
   font-size: 17px;
   font-weight: 400;
-
   height: 80px;
   justify-content: center;
   width: 100%;
 }
 
+.CardContainer:hover .titleContainer {
+  font-weight: 600;
+}
+
 .thumbContainer {
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 200px;
   justify-content: center;
   overflow: hidden;
   width: 100%;
-  height: 200px;
 }
 
 .Thumbnail {
   width: 150px;
-  /* height: 70%; */
 }
 
 .priceContainer {
+  font-size: 22px;
   height: 30px;
   width: 100%;
-  font-size: 22px;
 }
 
 .ratingContainer {
-  width: 100%;
   font-size: 15px;
+  width: 100%;
 }
 
 .addToCartAndDetailsContainer {
-  width: 100%;
   height: 67px;
-  /* background-color: rgb(19, 25, 32); */
+  width: 100%;
 }
 
 .moreDetails {
@@ -79,19 +74,18 @@
 }
 
 .addToCartAndDetailsContainer button {
-  color: #f08804;
-  font-weight: 400;
-  font-size: 20px;
-  height: 45px;
-  width: 100%;
   background-color: rgb(19, 25, 32);
   border: none;
+  color: #f08804;
+  font-size: 20px;
+  font-weight: 400;
+  height: 45px;
+  width: 100%;
 }
 
 .addToCartAndDetailsContainer button:hover {
-  cursor: pointer;
-  /* background-color: rgb(19, 25, 32, 0.1); */
   background-color: white;
+  cursor: pointer;
 }
 
 .CardContainer:hover button {
