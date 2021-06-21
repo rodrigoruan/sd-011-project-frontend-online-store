@@ -94,3 +94,4 @@ ProductDetail.propTypes = {
 };
 
 export default ProductDetail;
+
