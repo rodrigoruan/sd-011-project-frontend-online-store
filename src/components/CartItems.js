@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import AddAndRemoveCartItem from './AddAndRemoveCartItem';
 
 export default class CartItems extends Component {
@@ -45,20 +46,22 @@ export default class CartItems extends Component {
             <br />
             <br />
             <div>
-              <AddAndRemoveCartItem
-                title={ title }
-                price={ price }
-                thumbnail={ thumbnail }
-                dataTestId="product-decrease-quantity"
-                operator="-"
-              />
-              <AddAndRemoveCartItem
-                title={ title }
-                price={ price }
-                thumbnail={ thumbnail }
-                dataTestId="product-increase-quantity"
-                operator="+"
-              />
+              <Link to="/cartitems">
+                <AddAndRemoveCartItem
+                  title={ title }
+                  price={ price }
+                  thumbnail={ thumbnail }
+                  operator="-"
+                />
+              </Link>
+              <Link to="/cartitems">
+                <AddAndRemoveCartItem
+                  title={ title }
+                  price={ price }
+                  thumbnail={ thumbnail }
+                  operator="+"
+                />
+              </Link>
             </div>
             <h5>{ `Valor do(s) produto(s): R$${count * price}` }</h5>
             <br />

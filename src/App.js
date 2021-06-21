@@ -11,7 +11,7 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <Route exact path="/" component={ Home } />
-        <Route exact path="/cartItems" component={ CartItems } />
+        <Route exact path="/cartitems" component={ CartItems } />
         <Route path="/details/:id" render={ (props) => <Details { ...props } /> } />
       </BrowserRouter>
     );
