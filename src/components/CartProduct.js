@@ -14,7 +14,7 @@ export default class CartProduct extends Component {
   }
 
   setItemObj = () => {
-    const { cartItem, handleAddToCart, handleDecreaseQuantity, handleRemoveFromCart } = this.props;
+    const { cartItem } = this.props;
     this.setState(cartItem);
   };
 

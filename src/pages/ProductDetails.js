@@ -66,7 +66,7 @@ export default class ProductDetails extends Component {
         >
           Add to Cart!
         </button>
-        <Cart data-testid="shopping-cart-size" />
+        <Cart />
         <hr />
         <ProductReviewForm handleFormSubmit={this.handleFormSubmit} />
         <div>
