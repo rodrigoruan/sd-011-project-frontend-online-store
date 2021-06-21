@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class AddToCart extends React.Component {
   constructor(props) {
     super(props);
-
     this.addItem = this.addItem.bind(this);
   }
 
@@ -18,25 +17,26 @@ class AddToCart extends React.Component {
     const existingItem = existingCart.find(
       (currItem, index) => {
         position = index;
-        return currItem.product.id === item.product.id;
+        return currItem.id === item.id;
       },
     );
     if (existingItem === undefined) {
       existingCart.push(item);
-      existingQuantity.push({ [item.product.id]: 1 });
+      existingQuantity.push({ [item.id]: 1 });
     } else {
-      existingQuantity[position][item.product.id] += 1;
+      existingQuantity[position][item.id] += 1;
     }
     localStorage.setItem('items', JSON.stringify(existingCart));
     localStorage.setItem('quantity', JSON.stringify(existingQuantity));
   }
 
   render() {
+    const { test } = this.props;
     return (
       <div>
         <button
           type="button"
-          data-testid="product-add-to-cart"
+          data-testid={ test }
           onClick={ () => this.addItem() }
         >
           Adicionar ao Carrinho
@@ -50,4 +50,5 @@ export default AddToCart;
 
 AddToCart.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
+  test: PropTypes.string.isRequired,
 };

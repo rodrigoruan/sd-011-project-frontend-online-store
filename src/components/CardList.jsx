@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CardCreator from './cardCreator';
+import CardCreator from './CardCreator';
 
 export default class CardList extends React.Component {
   render() {

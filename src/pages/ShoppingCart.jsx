@@ -66,7 +66,7 @@ export default class ShoppingCart extends Component {
           </p>
         )
           : items.map(
-            ({ product: { title, thumbnail, price, id } }, index) => {
+            ({ title, thumbnail, price, id }, index) => {
               totalPrice += price * quantity[index][id];
               return (
                 <div key={ index } data-testid="shopping-cart-product-name">

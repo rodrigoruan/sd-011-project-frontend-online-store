@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import CardList from './cardList';
+import CardList from '../components/CardList';
 import * as fetchApi from '../services/api';
-import Categories from './Categories';
-import carrinho from '../carrinho.png';
+import Categories from '../components/Categories';
+import carrinho from '../images/carrinho.png';
 
 class LandingPage extends React.Component {
   constructor() {
