@@ -8,18 +8,25 @@ class TopBar extends React.Component {
   render() {
     const { handleOnChange, totalCounter } = this.props;
     return (
-      <div>
-        <h2 data-testid="home-initial-message">
+      <div className="div-searchbar">
+        <div className="btns-div-search">
+          <Link to="/">
+            <button type="button" className="btn-cart">
+              <img alt="home" src="https://img.icons8.com/small/39/ffffff/home-page.png" />
+            </button>
+          </Link>
+          <Link to="/ShoppingCart">
+            <button data-testid="shopping-cart-button" type="button" className="btn-cart">
+              <img alt="cart" src="https://img.icons8.com/small/32/ffffff/shopping-cart-loaded.png" />
+              <p data-testid="shopping-cart-size" className="noDecor">{ totalCounter }</p>
+            </button>
+          </Link>
+        </div>
+        <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
-        </h2>
+        </p>
         <Input onClick={ handleOnChange } />
         <Filtros onClick={ handleOnChange } />
-        <Link to="/ShoppingCart">
-          <button data-testid="shopping-cart-button" type="button">
-            Carrinho de Compras
-          </button>
-          <p data-testid="shopping-cart-size">{ totalCounter }</p>
-        </Link>
       </div>
     );
   }

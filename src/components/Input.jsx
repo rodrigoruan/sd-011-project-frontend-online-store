@@ -20,9 +20,11 @@ class Input extends React.Component {
     const { query } = this.state;
     const { onClick } = this.props;
     return (
-      <div>
+      <div className="input-search">
         <input
+          className="h18"
           type="text"
+          placeholder="Digite um termo"
           name="query"
           id="inpQuery"
           value={ query }
@@ -31,6 +33,7 @@ class Input extends React.Component {
         />
         <Link to="/">
           <button
+            className="btn-search"
             type="button"
             name="query"
             id="butQuery"
@@ -38,7 +41,7 @@ class Input extends React.Component {
             onClick={ onClick }
             data-testid="query-button"
           >
-            Pesquisar
+            .
           </button>
         </Link>
       </div>

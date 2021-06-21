@@ -46,14 +46,34 @@ export default class ShoppingCart extends Component {
     someCounter();
   }
 
+  removeItem = (id) => {
+    const { someCounter } = this.props;
+    const cart = JSON.parse(localStorage.ShoppingCart);
+    const objJSON = cart.filter((element) => element.id !== id);
+    localStorage.ShoppingCart = JSON.stringify(objJSON);
+    someCounter();
+  }
+
   render() {
+    if (JSON.parse(localStorage.ShoppingCart).length === 0) {
+      return (
+        <div className="div-all-cart-items">
+          <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio...</h2>
+        </div>
+      );
+    }
     return (
-      <div>
+      <div className="div-all-cart-items">
         {
-          (JSON.parse(localStorage.ShoppingCart).length === 0)
-            ? <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
-            : JSON.parse(localStorage.ShoppingCart).map((product, index) => (
-              <div key={ index }>
+          JSON.parse(localStorage.ShoppingCart).map((product, index) => (
+            <div className="cart-item" key={ index }>
+              <div className="cart-item-info">
+                <button
+                  type="button"
+                  onClick={ () => this.removeItem(product.id) }
+                >
+                  X
+                </button>
                 <p data-testid="shopping-cart-product-name">{ product.title }</p>
                 <button
                   type="button"
@@ -71,9 +91,9 @@ export default class ShoppingCart extends Component {
                   +
                 </button>
               </div>
-            ))
+            </div>
+          ))
         }
-        <Link to="/">Voltar</Link>
         <Link to="/CheckoutPage">
           <button type="button" data-testid="checkout-products">Finalizar compra</button>
         </Link>

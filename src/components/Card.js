@@ -37,27 +37,38 @@ class Card extends Component {
   render() {
     const { title, thumbnail, price, id, shipping, availableQuantity } = this.props;
     return (
-      <div data-testid="product">
+      <div data-testid="product" className="div-card">
         <Link
+          className="link-card noDecor"
           data-testid="product-detail-link"
           to={ {
             pathname: `/product/${id}`,
             state: { title, thumbnail, price, id, availableQuantity },
           } }
         >
-          <h2>{title}</h2>
-          <img src={ thumbnail } alt={ title } />
-          { this.renderShipping(shipping) }
-          <p>{price}</p>
-          Mais informações
+          <div className="title-div-card">
+            <p>{title}</p>
+          </div>
+          <img className="card-img" src={ thumbnail } alt={ title } />
+          <div className="h18">
+            { this.renderShipping(shipping) }
+          </div>
+          <p className="card-price">
+            R$
+            { price.toFixed(2).replace('.', ',') }
+          </p>
         </Link>
-        <button
-          data-testid="product-add-to-cart"
-          type="button"
-          onClick={ this.setItem }
-        >
-          Adicionar ao carrinho
-        </button>
+        <div>
+          <button
+            className="btn-add-cart"
+            data-testid="product-add-to-cart"
+            type="button"
+            onClick={ this.setItem }
+          >
+            Adicionar ao carrinho
+            <img alt="buy" src="https://img.icons8.com/small/16/ffffff/buy.png" />
+          </button>
+        </div>
       </div>
     );
   }

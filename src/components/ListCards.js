@@ -6,17 +6,17 @@ export default class ListCards extends Component {
   render() {
     const { products, query, category, someCounter } = this.props;
     return (
-      <div>
+      <div className="div-all-cards">
         {(products === undefined) ? <p>Loading...</p>
           : products.map((product, index) => (
-            <div key={ index }>
-              <Card
-                { ...product }
-                query={ query }
-                category={ category }
-                someCounter={ someCounter }
-              />
-            </div>))}
+            <Card
+              key={ index }
+              { ...product }
+              query={ query }
+              category={ category }
+              someCounter={ someCounter }
+            />
+          ))}
       </div>
     );
   }

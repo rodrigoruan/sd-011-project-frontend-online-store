@@ -29,7 +29,7 @@ class Filtros extends Component {
       return <div>Loading...</div>;
     }
     return (
-      <div>
+      <div className="div-categories">
         {categories.map((category) => (
           <label key={ category.name } htmlFor={ category.id } data-testid="category">
             <input

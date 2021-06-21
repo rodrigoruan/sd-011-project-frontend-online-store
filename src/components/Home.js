@@ -78,47 +78,47 @@ export default class Home extends Component {
     const { products, query, category, totalCounter } = this.state;
     return (
       <div>
-        <TopBar handleOnChange={ this.handleOnChange } totalCounter={ totalCounter } />
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={ () => (
-              <ListCards
-                products={ products }
-                category={ category }
-                query={ query }
-                someCounter={ this.someCounter }
-              />
-            ) }
-          />
-          <Route
-            path="/ShoppingCart"
-            render={ () => (
-              <ShoppingCart someCounter={ this.someCounter } />) }
-          />
-          <Route
-            path="/ShoppingCart"
-            render={ (props) => (
-              <ShoppingCart
-                { ...props }
-                someCounter={ this.someCounter }
-              />
-            ) }
-          />
-          <Route
-            path="/product/:ProductId"
-            render={ (props) => (
-              <ProductDetails
-                { ...props }
-                query={ query }
-                category={ category }
-                someCounter={ this.someCounter }
-              />
-            ) }
-          />
-          <Route to="/CheckoutPage" component={ CheckoutPage } />
-        </Switch>
+        <header className="header">
+          <h1> MERCADO TRYBE</h1>
+        </header>
+        <div className="div-home">
+          <TopBar handleOnChange={ this.handleOnChange } totalCounter={ totalCounter } />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={ () => (
+                <ListCards
+                  products={ products }
+                  category={ category }
+                  query={ query }
+                  someCounter={ this.someCounter }
+                />
+              ) }
+            />
+            <Route
+              path="/ShoppingCart"
+              render={ (props) => (
+                <ShoppingCart
+                  { ...props }
+                  someCounter={ this.someCounter }
+                />
+              ) }
+            />
+            <Route
+              path="/product/:ProductId"
+              render={ (props) => (
+                <ProductDetails
+                  { ...props }
+                  query={ query }
+                  category={ category }
+                  someCounter={ this.someCounter }
+                />
+              ) }
+            />
+            <Route to="/CheckoutPage" component={ CheckoutPage } />
+          </Switch>
+        </div>
       </div>
     );
   }
