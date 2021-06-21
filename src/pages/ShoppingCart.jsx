@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import closeButton from '../images/close-button.png';
 
 export default class ShoppingCart extends Component {
@@ -106,6 +107,11 @@ export default class ShoppingCart extends Component {
             },
           )}
         <p>{`Valor total: R$${totalPrice.toFixed(2)}`}</p>
+        <Link to="/checkout" data-testid="checkout-products">
+          <button type="button">
+            Finalizar compra
+          </button>
+        </Link>
       </div>
     );
   }

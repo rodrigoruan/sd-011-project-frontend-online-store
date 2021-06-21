@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import carrinho from '../images/carrinho.png';
-import Form from '../components/Form';
+import RatingForm from '../components/RatingForm';
 import AddToCart from '../components/AddToCart';
 
 class ProductDetails extends React.Component {
@@ -44,7 +44,7 @@ class ProductDetails extends React.Component {
           <img src={ carrinho } alt="carrinho" />
         </Link>
         <div>
-          <Form />
+          <RatingForm />
         </div>
       </div>
     );

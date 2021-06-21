@@ -13,7 +13,7 @@ class cardCreator extends React.Component {
     return (
       <div>
         <Link
-          to={ `/productDetails/${id}` }
+          to={ `/product-details/${id}` }
           data-testid="product-detail-link"
           className="productDetails"
           onClick={ () => {
