@@ -4,6 +4,22 @@ import { Link } from 'react-router-dom';
 import Button from './Button';
 
 export default class Details extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      email: '',
+      message: '',
+    };
+  }
+
+  handleChange = ({ target }) => {
+    const { name, value } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   render() {
     const { location } = this.props;
     const { state } = location;
@@ -37,12 +53,19 @@ export default class Details extends Component {
           dataTestid="product-detail-add-to-cart"
         />
         <form>
-          <input type="text" placeholder="Email" />
+          <input
+            name="email"
+            type="text"
+            placeholder="Email"
+            onChange={ this.handleChange }
+          />
           <br />
           <textarea
+            name="message"
             data-testid="product-detail-evaluation"
             type="text"
             placeholder="Mensagem(opcional)"
+            onChange={ this.handleChange }
           />
           <br />
           <button type="button">Avaliar</button>
