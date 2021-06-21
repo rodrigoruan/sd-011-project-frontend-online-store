@@ -4,15 +4,17 @@ import PropTypes from 'prop-types';
 
 export default class ProductCard extends Component {
   render() {
-    const { product: { title, price, thumbnail, id, available_quantity },
+    const { product: { title, price, thumbnail, id },
       addCart } = this.props;
+
+    const { product: { available_quantity: quantity } } = this.props; // https://eslint.org/docs/rules/camelcase
 
     return (
       <div className="product-card" data-testid="product">
         <p data-testid="product-detail-name">{title}</p>
         <img src={ thumbnail } alt={ title } style={ { width: '150px' } } />
         <p>{`R$ ${price}`}</p>
-        <p>{`Quantidade disponível: ${available_quantity}`}</p>
+        <p>{`Quantidade disponível: ${quantity}`}</p>
         <button
           data-testid="product-add-to-cart"
           type="button"
