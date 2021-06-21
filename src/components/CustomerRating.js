@@ -6,7 +6,7 @@ class CustomerRating extends Component {
     super();
     this.state = {
       email: '',
-      rating: '',
+      rating: 0,
       comment: '',
     };
     this.handleChange = this.handleChange.bind(this);
