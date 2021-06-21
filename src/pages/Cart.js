@@ -1,27 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-export default class Cart extends React.Component {
-  // constructor() {
-  //   super();
-  // }
+const getLocalStorage = () => {
+  const item = localStorage.getItem('cart-products');
+  return item ? JSON.parse(item) : [];
+};
 
-  render() {
-    const items = { ...localStorage };
-    const text = 'shopping-cart-empty-message';
-    const renderCart1 = Object.values(items).map((e) => (
-      <div key={ JSON.parse(e).id }>
-        <p data-testid="shopping-cart-product-name">{ JSON.parse(e).title }</p>
-        <img src={ JSON.parse(e).thumbnail } alt={ e } />
-        <p data-testid="shopping-cart-product-quantity">
-          { JSON.parse(e).quantity }
-        </p>
+export default function Cart() {
+  const [localItems, setLocalItems] = useState([]);
+
+  useEffect(() => {
+    setLocalItems(getLocalStorage());
+  }, []);
+  return (
+    <div>
+      <div className="cart-container">
+        <div className="item">
+          {localItems.map((item) => (
+            <article key={ item.id }>
+              <h3 data-testid="shopping-cart-product-name">{ item.title }</h3>
+              <img src={ item.thumbnail } alt={ item.title } />
+              <p
+                data-testid="shopping-cart-product-quantity"
+              >
+                {`Quantidade: ${localItems.length}`}
+              </p>
+            </article>
+          ))}
+        </div>
       </div>
-    ));
-    return (
-      <div>
-        { window.localStorage
-          .length > 0 ? renderCart1 : <p data-testid={ text }>Seu carrinho está vazio</p>}
-      </div>
-    );
-  }
+    </div>
+  );
 }

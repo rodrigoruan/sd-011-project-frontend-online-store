@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
 import ProductEvaluation from '../components/ProductEvaluation';
@@ -15,6 +16,7 @@ export default class ProductPage extends Component {
     this.onMount = this.onMount.bind(this);
     this.renderProductPage = this.renderProductPage.bind(this);
     this.verifyByTerms = this.verifyByTerms.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   async componentDidMount() {
@@ -24,6 +26,14 @@ export default class ProductPage extends Component {
 
   componentWillUnmount() {
     this.mounted = false;
+  }
+
+  handleClick = () => {
+    const { product } = this.state;
+    const { price, title, thumbnail, id } = product;
+
+    const LocalProduct = [{ price, title, thumbnail, id }];
+    localStorage.setItem('cart-products', JSON.stringify(LocalProduct));
   }
 
   onMount(props) {
@@ -75,6 +85,12 @@ export default class ProductPage extends Component {
       const { title, thumbnail, price } = product;
       return (
         <div data-testid="movie-details">
+          <Link
+            to="/Cart"
+            data-testid="shopping-cart-button"
+          >
+            CART
+          </Link>
           <h3>
             <span data-testid="product-detail-name">
               { title }
@@ -84,6 +100,12 @@ export default class ProductPage extends Component {
           </h3>
           <img alt={ title } src={ thumbnail } />
           <ProductEvaluation />
+          <input
+            type="button"
+            value="Adicionar ao carrinho"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => this.handleClick() }
+          />
         </div>
       );
     }
