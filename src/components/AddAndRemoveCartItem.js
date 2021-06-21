@@ -21,6 +21,12 @@ export default class AddAndRemoveCartItem extends Component {
     onClick();
   };
 
+  removeCartItem = () => {
+    const { title, onClick } = this.props;
+    localStorage.removeItem(title);
+    onClick();
+  }
+
   render() {
     return (
       <>
@@ -37,6 +43,9 @@ export default class AddAndRemoveCartItem extends Component {
           onClick={ this.increment }
         >
           +
+        </button>
+        <button onClick={ this.removeCartItem } type="button">
+          X
         </button>
       </>
     );

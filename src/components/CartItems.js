@@ -52,9 +52,6 @@ export default class CartItems extends Component {
                 thumbnail={ thumbnail }
                 onClick={ this.getLocalStorage }
               />
-              <button type="button">
-                X
-              </button>
             </div>
             <h5>{ `Valor do(s) produto(s): R$${count * price}` }</h5>
             <br />
