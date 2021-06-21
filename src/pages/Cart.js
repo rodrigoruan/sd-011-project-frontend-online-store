@@ -69,8 +69,14 @@ class Cart extends React.Component {
           Soma Total: R$
           { totalPrice }
         </p>
-        {/* button para finalizar a compra, enviar ao localStorage o valor total */}
-        <Link to="/">Voltar Para Pagina Inicial</Link>
+        <Link to="/" className="cart-render-link">Voltar Para Pagina Inicial</Link>
+        <Link
+          to="/Checkout"
+          data-testid="checkout-products"
+          className="cart-render-link"
+        >
+          Finalizar compra
+        </Link>
       </div>
     );
   }
