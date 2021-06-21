@@ -44,8 +44,8 @@ export default class Checkout extends Component {
 
   total() {
     const { cartProducts } = this.state;
-    const price = cartProducts.map((product) => product.price);
-    return price.reduce((init, current) => init + current, 0);
+    const price = cartProducts.map((product) => product.price * product.quantity);
+    return price.reduce((init, current) => init + current, 0).toFixed(2);
   }
 
   renderNameInput() {

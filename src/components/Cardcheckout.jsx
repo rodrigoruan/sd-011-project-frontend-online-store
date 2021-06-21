@@ -25,7 +25,12 @@ export default class Cardcheckout extends Component {
         <Link to="/Cart" className="checkout-product-card-link">
           <p className="checkout-product-title">{product.title}</p>
         </Link>
-        <p className="checkout-product-price">{`R$ ${product.price}` }</p>
+        <p className="checkout-product-quantity">{`[Itens: ${product.quantity}]`}</p>
+        <p
+          className="checkout-product-price"
+        >
+          {`R$ ${product.price * product.quantity}` }
+        </p>
       </div>
     ));
   }
