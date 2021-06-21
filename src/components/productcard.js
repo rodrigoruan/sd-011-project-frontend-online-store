@@ -14,12 +14,14 @@ export default class ProductCard extends Component {
   handleAddCart() {
     const { quantity } = this.state;
     const { id, title, thumbnail, price } = this.props;
+    const totalValues = price;
     const obj = {
       id,
       title,
       price,
       thumbnail,
       quantity,
+      totalValues,
     };
     window.localStorage
       .setItem(id, JSON.stringify(obj));
