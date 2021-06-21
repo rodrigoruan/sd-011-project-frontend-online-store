@@ -35,7 +35,7 @@ export default class CartCard extends Component {
         .setItem(id, JSON.stringify(obj));
       realQuantity = productquantities;
       this.setState({ realQuantity: realQuantity + 1 });
-      window.location.reload();
+  //    window.location.reload();
     }
   }
 
@@ -68,7 +68,7 @@ export default class CartCard extends Component {
   removeItem() {
     const { id } = this.props;
     localStorage.removeItem(id);
-    window.location.reload();
+   // window.location.reload();
   }
 
   render() {
