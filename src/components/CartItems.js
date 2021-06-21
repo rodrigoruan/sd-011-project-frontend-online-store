@@ -21,14 +21,6 @@ export default class CartItems extends Component {
     });
   }
 
-  increaseItem = () => {
-    console.log('increase');
-  }
-
-  decreaseItem = () => {
-    console.log('decrease');
-  }
-
   render() {
     const { allProducts } = this.state;
 
@@ -46,22 +38,32 @@ export default class CartItems extends Component {
               {`${title} - R$${price}`}
             </h3>
             <img src={ thumbnail } alt={ title } />
+            <br />
             <span data-testid="shopping-cart-product-quantity">
               { count }
             </span>
+            <br />
+            <br />
             <div>
               <AddAndRemoveCartItem
+                title={ title }
+                price={ price }
+                thumbnail={ thumbnail }
                 dataTestId="product-decrease-quantity"
                 operator="-"
-                decrease={ this.decreaseItem }
               />
               <AddAndRemoveCartItem
+                title={ title }
+                price={ price }
+                thumbnail={ thumbnail }
                 dataTestId="product-increase-quantity"
                 operator="+"
-                increase={ this.increaseItem }
               />
             </div>
-            <h2>{ `Valor do(s) produto(s): R$${count * price}` }</h2>
+            <h5>{ `Valor do(s) produto(s): R$${count * price}` }</h5>
+            <br />
+            <br />
+            <br />
           </div>
         ))}
         <span>
