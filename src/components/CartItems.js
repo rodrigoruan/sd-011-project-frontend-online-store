@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import AddAndRemoveCartItem from './AddAndRemoveCartItem';
 
 export default class CartItems extends Component {
   constructor() {
@@ -18,7 +20,6 @@ export default class CartItems extends Component {
     this.setState({
       allProducts: itemProduct,
     });
-    console.log(itemProduct);
   }
 
   render() {
@@ -38,11 +39,35 @@ export default class CartItems extends Component {
               {`${title} - R$${price}`}
             </h3>
             <img src={ thumbnail } alt={ title } />
+            <br />
             <span data-testid="shopping-cart-product-quantity">
               { count }
             </span>
+            <br />
+            <br />
+            <div>
+              <AddAndRemoveCartItem
+                title={ title }
+                price={ price }
+                thumbnail={ thumbnail }
+                onClick={ this.getLocalStorage }
+              />
+            </div>
+            <h5>{ `Valor do(s) produto(s): R$${count * price}` }</h5>
+            <br />
           </div>
         ))}
+        <span>
+          O valor total é: R$
+          {allProducts.reduce((acc, { price, count }) => acc + price * count, 0)}
+        </span>
+        <br />
+        <button type="button">
+          Finalizar compra
+        </button>
+        <Link to="/">
+          Voltar
+        </Link>
       </div>
     );
   }

@@ -18,17 +18,11 @@ export default class SearchBar extends Component {
     this.getCategory = this.getCategory.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.getValuTextInput = this.getValuTextInput.bind(this);
-    // this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
     this.getCategory();
-    // this.getProducts();
   }
-
-  // componentDidUpdate() {
-  //   this.getLocalStorage();
-  // }
 
   getValuTextInput({ target }) {
     const { name, value } = target;
@@ -54,9 +48,6 @@ export default class SearchBar extends Component {
     });
   }
 
-  // updateCartItem() {
-  //   this.setState((oldValue) => ({ cart: oldValue.cart + 1 }));
-  // }
   render() {
     const { categories, products, textSearch } = this.state;
 
@@ -76,9 +67,6 @@ export default class SearchBar extends Component {
           <div>
             <Link data-testid="shopping-cart-button" to="/cartitems">
               Carrinho de compras
-              {/* <span data-testeid="shopping-cart-product-quantity">
-                { cart }
-              </span> */}
             </Link>
           </div>
           <button
@@ -123,8 +111,6 @@ export default class SearchBar extends Component {
                   thumbnail={ product.thumbnail }
                   price={ product.price }
                   dataTestid="product-add-to-cart"
-                  // updateCartItem={ this.updateCartItem }
-                  // id={ product.id }
                 />
               </div>
             ))}

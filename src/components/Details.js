@@ -36,12 +36,6 @@ export default class Details extends Component {
           price={ product.price }
           dataTestid="product-detail-add-to-cart"
         />
-        {/* <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-        >
-          Adicionar ao carrinho
-        </button> */}
       </div>
     );
   }
