@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class CheckoutPage extends Component {
   render() {
@@ -20,22 +21,53 @@ export default class CheckoutPage extends Component {
                     R$
                     { price }
                   </span>
-                  <span data-testid="shopping-cart-product-quantity"></span>
+                  <span data-testid="shopping-cart-product-quantity" />
                 </div>
-              )
+              );
             })
           }
-          <span>Total: R$ { total }</span>
+          <span>
+            Total: R$
+            { total }
+          </span>
         </div>
         <form action="">
-          <input placeholder="Nome Completo" data-testid="checkout-fullname" type="text" />
-          <input placeholder="Email" data-testid="checkout-email" type="text" />
-          <input placeholder="CPF" data-testid="checkout-cpf" type="text" />
-          <input placeholder="Telefone" data-testid="checkout-phone" type="text" />
-          <input placeholder="CEP" data-testid="checkout-cep" type="text" />
-          <input placeholder="Endereço" data-testid="checkout-address" type="text" />
+          <input
+            placeholder="Nome Completo"
+            data-testid="checkout-fullname"
+            type="text"
+          />
+          <input
+            placeholder="Email"
+            data-testid="checkout-email"
+            type="text"
+          />
+          <input
+            placeholder="CPF"
+            data-testid="checkout-cpf"
+            type="text"
+          />
+          <input
+            placeholder="Telefone"
+            data-testid="checkout-phone"
+            type="text"
+          />
+          <input
+            placeholder="CEP"
+            data-testid="checkout-cep"
+            type="text"
+          />
+          <input
+            placeholder="Endereço"
+            data-testid="checkout-address"
+            type="text"
+          />
         </form>
       </div>
-    )
+    );
   }
 }
+
+CheckoutPage.propTypes = {
+  cart: PropTypes.instanceOf(PropTypes.object).isRequired,
+};

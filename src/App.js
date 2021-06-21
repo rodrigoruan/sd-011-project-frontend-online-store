@@ -125,7 +125,10 @@ class App extends Component {
               />) }
             />
             <Route
-              path="/checkout" render={ () => <CheckoutPage cart={ cart } /> }
+              path="/checkout"
+              render={ () => (<CheckoutPage
+                cart={ cart }
+              />) }
             />
           </Switch>
         </Router>
