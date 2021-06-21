@@ -51,7 +51,14 @@ class ConteudoCarrinho extends Component {
     productsSelected = productsSelected.reverse();
 
     if (productsSelected.length !== 0) {
-      return productsSelected.map(({ title, price, quantity, id, imgPath }, index) => (
+      return productsSelected.map(({
+        title,
+        price,
+        quantity,
+        id,
+        imgPath,
+        availableQuantity,
+      }, index) => (
         <ProductCartCard
           key={ id }
           title={ title }
@@ -60,6 +67,7 @@ class ConteudoCarrinho extends Component {
           imgPath={ imgPath }
           index={ index }
           removeProduct={ this.removeProduct }
+          availableQuantity={ availableQuantity }
         />
       ));
     }

@@ -6,18 +6,25 @@ class ProductCartCard extends Component {
     super(props);
 
     const { quantity } = this.props;
-
+    console.log(this.props);
     this.state = {
       quantity,
+      disabled: false,
     };
 
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.removeProductFunction = this.removeProductFunction.bind(this);
+    this.handleQuant = this.handleQuant.bind(this);
+  }
+
+  handleQuant() {
+    this.setState({ disabled: true });
   }
 
   increaseQuantity() {
     const { quantity } = this.state;
+    const { availableQuantity } = this.props;
     const incrementQuantity = quantity + 1;
     const storageData = JSON.parse(localStorage.getItem('products'));
     const quantityTotal = parseInt(localStorage.getItem('quantidade'), 10);
@@ -27,6 +34,10 @@ class ProductCartCard extends Component {
     storageData[index].quantity = incrementQuantity;
     localStorage.setItem('products', JSON.stringify(storageData));
     localStorage.setItem('quantidade', quantityTotal + 1);
+
+    if (quantity >= availableQuantity - 1) {
+      this.handleQuant();
+    }
   }
 
   decreaseQuantity() {
@@ -51,7 +62,7 @@ class ProductCartCard extends Component {
 
   render() {
     const { title, price, id, imgPath } = this.props;
-    const { quantity } = this.state;
+    const { quantity, disabled } = this.state;
     return (
       <div key={ id }>
         <h3 data-testid="shopping-cart-product-name">{ title }</h3>
@@ -69,6 +80,7 @@ class ProductCartCard extends Component {
               data-testid="product-increase-quantity"
               type="button"
               onClick={ this.increaseQuantity }
+              disabled={ disabled }
             >
               +
             </button>
@@ -103,4 +115,5 @@ ProductCartCard.propTypes = {
   index: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,
   removeProduct: PropTypes.func.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
 };

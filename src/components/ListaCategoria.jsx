@@ -52,10 +52,12 @@ class ListaCategoria extends Component {
           thumbnail,
           price,
           category_id: catId,
+          available_quantity: availableQuantity,
           shipping: { free_shipping: freeShipping },
         }) => (
           <ProductCard
             freeShipping={ freeShipping }
+            availableQuantity={ availableQuantity }
             id={ id }
             key={ id }
             title={ title }

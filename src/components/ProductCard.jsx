@@ -9,7 +9,7 @@ class ProductCard extends Component {
       manipulateState, freeShipping } = this.props;
     const shippingStatus = freeShipping
       ? <p data-testid="free-shipping">Frete Gratis</p> : <p>Frete Pago</p>;
-
+    const { availableQuantity } = this.props;
     return (
       <div>
         <Link
@@ -30,6 +30,7 @@ class ProductCard extends Component {
           id={ id }
           manipulateState={ manipulateState }
           imgPath={ imgPath }
+          availableQuantity={ availableQuantity }
         />
       </div>
     );
@@ -46,4 +47,5 @@ ProductCard.propTypes = {
   category_id: PropTypes.string.isRequired,
   manipulateState: PropTypes.func.isRequired,
   freeShipping: PropTypes.bool.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
 };
