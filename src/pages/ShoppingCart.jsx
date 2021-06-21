@@ -19,8 +19,8 @@ class ShoppingCart extends React.Component {
   }
 
   handleIncrease({ currentTarget }) {
-    const { cart } = this.state;
     const { name } = currentTarget;
+    const { cart } = this.state;
     cart.forEach((item) => {
       if (item.id === name) {
         this.setState({ cart: [...cart, item] });
@@ -33,17 +33,29 @@ class ShoppingCart extends React.Component {
     const { name } = currentTarget;
     const removed = cart.find((item) => item.id === name);
     const index = cart.indexOf(removed);
-    cart.splice(index, 1);
+    cart.pop(index);
     this.setState({ cart: [...cart] });
+  }
+
+  removeDuplicates(data) {
+    const uniqueElements = [];
+    data.forEach((element) => {
+      if (!uniqueElements.includes(element)) {
+        uniqueElements.push(element);
+      }
+    });
+    return uniqueElements;
   }
 
   render() {
     const { cart } = this.state;
+    const cartWhithoutDuplicates = this.removeDuplicates(cart);
+
     return (
       <div className="cart-products-container">
         {cart.length < 1
           ? <h4 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h4>
-          : cart.map((product, index) => (
+          : cartWhithoutDuplicates.map((product, index) => (
             <div key={ index }>
               <ProductCard
                 className="cart-product-card"
