@@ -24,13 +24,17 @@ class ShoppingCart extends Component {
 
   handleClickIncrease(item) {
     const { shoppingCartItens } = this.state;
+    const { quantity } = item;
+    const availableQuantity = item.productInfo[0].available_quantity;
 
-    shoppingCartItens
-      .find((productItem) => productItem.productId === item.productId).quantity += 1;
+    if (availableQuantity > quantity) {
+      shoppingCartItens
+        .find((productItem) => productItem.productId === item.productId).quantity += 1;
 
-    this.setState({
-      shoppingCartItens,
-    });
+      this.setState({
+        shoppingCartItens,
+      });
+    }
   }
 
   handleClickDecrease(item) {
