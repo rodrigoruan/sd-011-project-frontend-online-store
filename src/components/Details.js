@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import DetailsAddToCartButton from './DetailsAddToCartButton';
-// import * as api from '../services/api';
 import EvaluationForm from './EvaluationForm';
 import Reviews from './Reviews';
 
