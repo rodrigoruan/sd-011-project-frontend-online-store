@@ -8,6 +8,7 @@ export default class ProductEvaluation extends Component {
   render() {
     const { name } = this.props;
     const evaluations = JSON.parse(localStorage.getItem(name));
+    console.log(evaluations);
 
     return (
       <div>
