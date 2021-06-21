@@ -103,8 +103,13 @@ export default class Product extends Component {
         <div>
           <ul>
             {attributes && attributes
-              .map(({ name }, index) => (
-                <li className="product-spec" key={ index }>{name}</li>
+              .map((item, index) => (
+                <li className="product-spec" key={ index }>
+                  {item.name}
+                  :
+                  {' '}
+                  {item.value_name}
+                </li>
               ))}
           </ul>
         </div>

@@ -1,12 +1,12 @@
 .avaliation-container {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
 }
 
 .avaliations {
-  font-size: 25px;
   color: #333;
+  font-size: 25px;
   text-align: center;
 }
 
@@ -20,8 +20,8 @@
 }
 
 .avaliation-input {
-  padding: 2px 15px;
   color: #333;
+  padding: 2px 15px;
   text-align: center;
 }
 
@@ -58,8 +58,8 @@
 }
 
 .product-container {
-  max-width: 960px;
   margin: 0 auto;
+  max-width: 960px;
 }
 
 .product-name {
@@ -69,8 +69,8 @@
 
 .product-price {
   color: #39b54a;
-  text-align: center;
   font-size: 20px;
+  text-align: center;
 }
 
 .product-spec {
@@ -79,7 +79,7 @@
 
 .img-container {
   background-color: white;
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%) , 0 6px 20px 0 rgb(0 0 0 / 19%);
   padding: 25px 0;
 }
 
@@ -94,13 +94,13 @@
 }
 
 .to-cart-link {
-  display: block;
-  text-align: center;
-  padding-bottom: 20px;
   color: #333;
-  width: 120px;
+  display: block;
   margin: 0 auto;
+  padding-bottom: 20px;
+  text-align: center;
   transition: 0.5s;
+  width: 120px;
 }
 
 .to-cart-link:hover {
