@@ -7,9 +7,7 @@ import backImage from '../images/back.png';
 
 export default class ShopCart extends Component {
   render() {
-    const { product: { title, price, thumbnail, id }, addCart } = this.props;
-    const { product } = this.props;
-    cconst {
+    const {
       cartItems,
       removeCartItem,
       increaseItemQuantity,
@@ -28,9 +26,6 @@ export default class ShopCart extends Component {
             <img src={ backImage } alt="Cart" style={ { width: '50px' } } />
           </Link>
         </nav>
-        <p data-testid="shopping-cart-product-quantity">
-          {`Quantidade: ${cartItems.length}`}
-        </p>
         { cartItems.map((item) => (
           <div className="cart-product-container" key={ item.id }>
             <button
@@ -47,26 +42,24 @@ export default class ShopCart extends Component {
             >
               { item.title }
             </p>
-            <p>{`R$ ${item.price}`}</p>
             <button
-              data-testid="product-increase-quantity"
+              onClick={ decreaseItemQuantity }
               type="button"
-              // onClick={ () => console.log('ok') }
-            >
-              +
-            </button>
-
-            <span>
-              `Quantidade:`
-            </span>
-
-            <button
+              value={ item.id }
               data-testid="product-decrease-quantity"
-              type="button"
-              // onClick={ () => console.log('ok') }
             >
               -
             </button>
+            <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
+            <button
+              onClick={ increaseItemQuantity }
+              type="button"
+              value={ item.id }
+              data-testid="product-increase-quantity"
+            >
+              +
+            </button>
+            <p>{`R$ ${item.price}`}</p>
           </div>))}
       </div>
     );
@@ -74,12 +67,14 @@ export default class ShopCart extends Component {
 }
 
 ShopCart.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      length: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      map: PropTypes.func,
-    }),
+  cartItems: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string,
+    length: PropTypes.number,
+    map: PropTypes.func,
+    quantity: PropTypes.number,
   }).isRequired,
   removeCartItem: PropTypes.func.isRequired,
+  increaseItemQuantity: PropTypes.func.isRequired,
+  decreaseItemQuantity: PropTypes.func.isRequired,
 };
