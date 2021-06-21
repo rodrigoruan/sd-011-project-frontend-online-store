@@ -51,7 +51,7 @@ export default class App extends Component {
   }
 
   setStorage() {
-    const { cartItems, productCards } = this.state;
+    const { cartItems } = this.state;
     localStorage.setItem('localCart', JSON.stringify(cartItems));
   }
 
@@ -89,21 +89,21 @@ export default class App extends Component {
     localStorage.setItem('localCards', JSON.stringify(fetchedProductsFromCategories.results));
   }
 
-  addCart({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    const isInCart = cartItems.some((item) => item.id === value);
+  addCart(product) {
+    const { cartItems } = this.state;
+    // const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === product.id);
     if (!isInCart) {
-      itemToCart.quantity = 1;
+      product.quantity = 1;
       this.setState({
-        cartItems: [...cartItems, itemToCart],
+        cartItems: [...cartItems, product],
       });
       // this.setStorage();
     } else {
       this.setState({
         cartItems: [...cartItems],
       });
-      itemToCart.quantity += 1;
+      product.quantity += 1;
       // this.setStorage();
     }
     this.setStorage();
@@ -118,28 +118,28 @@ export default class App extends Component {
     // this.setStorage();
   }
 
-  increaseItemQuantity({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    const isInCart = cartItems.some((item) => item.id === value);
+  increaseItemQuantity(product) {
+    const { cartItems } = this.state;
+    // const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === product.id);
     if (isInCart) {
       this.setState({
         cartItems: [...cartItems],
       });
-      itemToCart.quantity += 1;
+      product.quantity += 1;
       this.setStorage();
     }
   }
 
-  decreaseItemQuantity({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    const isInCart = cartItems.some((item) => item.id === value);
-    if (isInCart && itemToCart.quantity > 1) {
+  decreaseItemQuantity(product) {
+    const { cartItems } = this.state;
+    // const itemToCart = productCards.find((item) => item.id === value);
+    const isInCart = cartItems.some((item) => item.id === product.id);
+    if (isInCart && product.quantity > 1) {
       this.setState({
         cartItems: [...cartItems],
       });
-      itemToCart.quantity -= 1;
+      product.quantity -= 1;
       this.setStorage();
     }
   }

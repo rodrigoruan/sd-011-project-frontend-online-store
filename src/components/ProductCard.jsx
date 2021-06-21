@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export default class ProductCard extends Component {
   render() {
     const { product: { title, price, thumbnail, id }, addCart } = this.props;
+    const { product } = this.props;
     return (
       <div className="product-card" data-testid="product">
         <p data-testid="product-detail-name">{title}</p>
@@ -13,7 +14,7 @@ export default class ProductCard extends Component {
         <button
           data-testid="product-add-to-cart"
           type="button"
-          onClick={ addCart }
+          onClick={ () => addCart(product) }
           value={ id }
         >
           Adicionar ao Carrinho
