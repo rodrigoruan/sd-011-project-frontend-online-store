@@ -52,10 +52,11 @@ export default class CartItems extends Component {
                 thumbnail={ thumbnail }
                 onClick={ this.getLocalStorage }
               />
+              <button type="button">
+                X
+              </button>
             </div>
             <h5>{ `Valor do(s) produto(s): R$${count * price}` }</h5>
-            <br />
-            <br />
             <br />
           </div>
         ))}
@@ -64,6 +65,9 @@ export default class CartItems extends Component {
           {allProducts.reduce((acc, { price, count }) => acc + price * count, 0)}
         </span>
         <br />
+        <button type="button">
+          Finalizar compra
+        </button>
         <Link to="/">
           Voltar
         </Link>
