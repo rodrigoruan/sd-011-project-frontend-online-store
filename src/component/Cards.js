@@ -19,7 +19,7 @@ export default class Cards extends Component {
     return (
       <div className="list-cards">
         { resultSearch.map(
-          ({ id, title, shipping, price, maxQtd = available_quantity }) => (
+          ({ id, title, shipping, price, available_quantity: maxQtd }) => (
             <div className="cards" data-testid="product" key={ id }>
               <p>{ title }</p>
               { shipping.free_shipping
