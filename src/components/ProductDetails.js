@@ -17,7 +17,6 @@ class ProductDetails extends React.Component {
     this.getProduct = this.getProduct.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.loadCartList = this.loadCartList.bind(this);
-    this.cartItensStorage = this.cartItensStorage.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
@@ -27,10 +26,14 @@ class ProductDetails extends React.Component {
   }
 
   handleClick() {
-    const { product: { title, thumbnail, price }, quantity } = this.state;
+    const { product: { id, title, thumbnail, price }, quantity } = this.state;
     const previousList = this.loadCartList();
-    for (let i = 0; i < quantity; i += 1) {
-      previousList.push({ title, thumbnail, price });
+    if (previousList[id]) {
+      for (let i = 0; i < quantity; i += 1) {
+        previousList[id].quantity += 1;
+      }
+    } else {
+      previousList[id] = { title, thumbnail, price, quantity };
     }
     localStorage.setItem('cartList', JSON.stringify(previousList));
     this.setState({
@@ -44,15 +47,6 @@ class ProductDetails extends React.Component {
     const product = productObj.results
       .find((prod) => prod.id === id);
     this.setState({ product });
-  }
-
-  cartItensStorage() {
-    let previousList = localStorage.getItem('cartList');
-    if (previousList === null) {
-      previousList = {};
-      return previousList;
-    }
-    return JSON.parse(previousList);
   }
 
   increaseQuantity() {
@@ -79,7 +73,7 @@ class ProductDetails extends React.Component {
   loadCartList() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
-      previousList = [];
+      previousList = {};
       return previousList;
     }
     return JSON.parse(previousList);
@@ -148,7 +142,6 @@ class ProductDetails extends React.Component {
         <button
           type="button"
           className="add-to-cart-btn-details"
-          data-testid="product-detail-add-to-cart"
           onClick={ this.handleClick }
         >
           Adicionar ao carrinho

@@ -7,10 +7,10 @@ class ShoppingCart extends Component {
   constructor(props) {
     super(props);
 
-    this.cartItensStorage = this.cartItensStorage.bind(this);
+    this.loadCartList = this.loadCartList.bind(this);
   }
 
-  cartItensStorage() {
+  loadCartList() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
       previousList = {};
@@ -20,7 +20,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const details = this.cartItensStorage();
+    const details = this.loadCartList();
     const productArray = Object.values(details);
 
     return (
@@ -33,7 +33,7 @@ class ShoppingCart extends Component {
           : productArray
             .map((product, index) => <Cart key={ index } product={ product } />) }
 
-        <h4>
+        <h4 data-testid="shopping-cart-product-quantity">
           Você possui
           { ` ${productArray.length} ` }
           itens no carrinho

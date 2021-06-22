@@ -68,7 +68,6 @@ class FormsAvaliation extends Component {
 
   render() {
     const avaliations = this.getComments();
-    // const { avaliations } = this.state;
     return (
       <div>
         <h2>Avaliações</h2>

@@ -46,13 +46,12 @@ class Cart extends Component {
   decreaseQuantity() {
     const { product: { id } } = this.props;
     const previousList = this.loadCartList();
-    if (previousList[id].quantity > 1) {
+
+    if (previousList[id]) {
       previousList[id].quantity -= 1;
       this.setState({
         quantity: previousList[id].quantity,
       });
-    } else {
-      console.log('deletar o item e atualizar o carrinho');
     }
 
     localStorage.setItem('cartList', JSON.stringify(previousList));
