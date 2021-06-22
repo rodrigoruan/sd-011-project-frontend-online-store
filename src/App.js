@@ -91,8 +91,8 @@ export default class App extends Component {
 
   addCart(product) {
     const { cartItems } = this.state;
-    // const itemToCart = productCards.find((item) => item.id === value);
     const isInCart = cartItems.some((item) => item.id === product.id);
+    const itemIsInCart = cartItems.find((item) => item.id === product.id);
     if (!isInCart) {
       product.quantity = 1;
       this.setState({
@@ -101,7 +101,7 @@ export default class App extends Component {
       // this.setStorage();
       // Não estamos conseguindo alterar as quantidades dos items já adicionados, após renderização do carrinho
     } else {
-      product.quantity += 1;
+      itemIsInCart.quantity += 1;
       this.setState({
         cartItems: [...cartItems],
       });
