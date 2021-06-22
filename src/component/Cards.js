@@ -18,18 +18,18 @@ export default class Cards extends Component {
     const { resultSearch } = this.props;
     return (
       <div className="list-cards">
-        { resultSearch.map(({ id, title, shipping, price }) => (
+        { resultSearch.map(({ id, title, shipping, price, available_quantity }) => (
           <div className="cards" data-testid="product" key={ id }>
             <p>{ title }</p>
             { shipping.free_shipping
-              ? <spam data-testid="free-shipping">Frete Grátis</spam> : '' }
+              ? <span data-testid="free-shipping">Frete Grátis</span> : '' }
             <Link to={ `/product/${id}` } data-testid="product-detail-link">
               Ver detalhes
             </Link>
             <button
               type="button"
               data-testid="product-add-to-cart"
-              onClick={ () => this.handleAdd(id, title, 0, price) }
+              onClick={ () => this.handleAdd(id, title, available_quantity, price) }
             >
               Adicionar
             </button>
