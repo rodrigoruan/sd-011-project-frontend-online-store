@@ -31,10 +31,16 @@ class ShoppingCart extends React.Component {
   handleDecrease({ currentTarget }) {
     const { cart } = this.state;
     const { name } = currentTarget;
-    const removed = cart.find((item) => item.id === name);
-    const index = cart.indexOf(removed);
-    cart.splice(index, 1);
-    this.setState({ cart: [...cart] });
+    let lastIndex = 0;
+    for (let index = 0; index < cart.length; index += 1) {
+      if (cart[index].id === name) {
+        lastIndex = index;
+      }
+    }
+    const filteredCart = cart.reduce((acc, item, position) => (position === lastIndex
+      ? acc
+      : acc.concat(item)), []);
+    this.setState({ cart: filteredCart });
   }
 
   render() {
