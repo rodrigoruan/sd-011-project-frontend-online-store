@@ -106,7 +106,7 @@ class Cart extends Component {
         >
           +
         </button>
-        <p data-testid="shopping-cart-product-quantity">
+        <p>
           { quantity }
         </p>
         <button
