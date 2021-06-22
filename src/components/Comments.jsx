@@ -21,9 +21,8 @@ export default class Comments extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props
+    const { id } = this.props;
     this.handleComments(id);
-    /* this.saveComments(); */
     //  this.saveComments2();
   }
 
@@ -49,8 +48,6 @@ export default class Comments extends Component {
     }
     this.setState({ comments: localStorage.getItem(id) }); // atualiza o estado com os comentários salvos no localStorage
   } */
-
-
 
   handleComments(id) {
     if (localStorage[id]) {

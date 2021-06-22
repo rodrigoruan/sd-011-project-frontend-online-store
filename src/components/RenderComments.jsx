@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class RenderComments extends Component {
   render() {
@@ -12,3 +13,11 @@ export default class RenderComments extends Component {
     );
   }
 }
+
+RenderComments.propTypes = {
+  comentario: PropTypes.shape({
+    rate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    email: PropTypes.string,
+    comment: PropTypes.string,
+  }).isRequired,
+};
