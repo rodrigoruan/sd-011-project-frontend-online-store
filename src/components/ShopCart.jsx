@@ -52,7 +52,7 @@ export default class ShopCart extends Component {
             </button>
             <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
             <button
-              onClick={ increaseItemQuantity }
+              onClick={ item.quantity < item.available_quantity && increaseItemQuantity }
               type="button"
               value={ item.id }
               data-testid="product-increase-quantity"
@@ -60,6 +60,7 @@ export default class ShopCart extends Component {
               +
             </button>
             <p>{`R$ ${item.price}`}</p>
+            <p>{`Quantidade ${item.available_quantity}`}</p>
           </div>))}
       </div>
     );
