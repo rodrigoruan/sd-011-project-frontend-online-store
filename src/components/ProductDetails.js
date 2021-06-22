@@ -15,6 +15,7 @@ class ProductDetails extends React.Component {
     };
 
     this.getProduct = this.getProduct.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.loadCartList = this.loadCartList.bind(this);
     this.cartItensStorage = this.cartItensStorage.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
@@ -23,32 +24,17 @@ class ProductDetails extends React.Component {
 
   componentDidMount() {
     this.getProduct();
-    this.getSetState();
   }
 
   handleClick() {
-    const { product: { title, thumbnail, price, id } } = this.state;
+    const { product: { title, thumbnail, price } } = this.state;
     const previousList = this.loadCartList();
-    if (previousList[id]) {
-      previousList[id].quantity += 1;
-    } else {
-      previousList[id] = { title, thumbnail, price, quantity: 1 };
-    }
-    // previousList.push({ title, thumbnail, price });
-    // const productArray = Object.values(details);
-    const quantityItem = previousList[id].quantity;
-    this.setState({
-      quantity: quantityItem,
-    });
+    previousList.push({ title, thumbnail, price });
     localStorage.setItem('cartList', JSON.stringify(previousList));
-    // const details = this.loadCartList();
-  }
-
-  getSetState() {
-    const { quantity } = this.state;
-    console.log(`qtd do getSetState ${quantity}`);
+    const details = this.cartItensStorage();
+    const productArray = Object.values(details);
     this.setState({
-      quantity,
+      quantity: productArray.length,
     });
   }
 
@@ -58,8 +44,6 @@ class ProductDetails extends React.Component {
     const product = productObj.results
       .find((prod) => prod.id === id);
     this.setState({ product });
-    // daria para fazer um if para verificar se o ID ja existe no localStorage
-    // se ja existir pegar as info caso contrario pegar da variavel acima que pega da API
   }
 
   cartItensStorage() {
@@ -68,16 +52,7 @@ class ProductDetails extends React.Component {
       previousList = {};
       return previousList;
     }
-    // const details = this.loadCartList();
-    // const productArray = Object.values(details);
-    // this.setState({
-    //   quantity: productArray.length,
-    // });
-    const quantityItem = previousList[id].quantity;
-    this.setState({
-      quantity: quantityItem,
-    });
-    localStorage.setItem('cartList', JSON.stringify(previousList));
+    return JSON.parse(previousList);
   }
 
   increaseQuantity() {
@@ -101,7 +76,7 @@ class ProductDetails extends React.Component {
   loadCartList() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
-      previousList = {};
+      previousList = [];
       return previousList;
     }
     return JSON.parse(previousList);
@@ -125,7 +100,7 @@ class ProductDetails extends React.Component {
         </header>
         <h3 data-testid="product-detail-name">
           { title }
-          { ' - R$ ' }
+          {' - R$ '}
           { price === undefined ? price : parseFloat(price).toFixed(2).replace('.', ',') }
         </h3>
         <div className="container-image-and-product-details">
@@ -167,8 +142,8 @@ class ProductDetails extends React.Component {
           +
         </button>
         <button
-          className="add-to-cart-btn-details"
           type="button"
+          className="add-to-cart-btn-details"
           data-testid="product-detail-add-to-cart"
           onClick={ this.handleClick }
         >
