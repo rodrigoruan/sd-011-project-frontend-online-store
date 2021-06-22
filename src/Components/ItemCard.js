@@ -4,25 +4,36 @@ import PropTypes from 'prop-types';
 
 class ItemCard extends Component {
   render() {
+    const { product, addCartItem } = this.props;
     const { price, title, id, thumbnail } = this.props;
-    const product = { price, title, id, thumbnail };
+    const products = { price, title, id, thumbnail };
     return (
-      <Link
-        data-testid="product-detail-link"
-        to={ {
-          pathname: `/product/${id}`,
-          state: { product },
-        } }
-      >
-        <li data-testid="product" className="product-card">
-          <h4 className="product-card-title">{title}</h4>
-          <img className="product-image" alt="imagem do produto" src={ thumbnail } />
-          <p className="product-card-price">{ `R$ ${price}` }</p>
-          <p className="product-link-details">
-            Ver Detalhes
-          </p>
-        </li>
-      </Link>
+      <div>
+        <Link
+          data-testid="product-detail-link"
+          to={ {
+            pathname: `/products/${id}`,
+            state: { products },
+          } }
+        >
+          <li data-testid="product" className="product-card">
+            <h4 className="product-card-title">{title}</h4>
+            <img className="product-image" alt="imagem do produto" src={ thumbnail } />
+            <p className="product-card-price">{`R$ ${price}`}</p>
+            <p className="product-link-details">
+              Ver Detalhes
+            </p>
+          </li>
+        </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ addCartItem }
+          value={ JSON.stringify(product) }
+        >
+          Adicionar
+        </button>
+      </div>
     );
   }
 }

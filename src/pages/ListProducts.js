@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Button from '../Components/ButtonShopCart';
 import CategoryList from '../Components/CategoryList';
 import ProductList from '../Components/ProductList';
@@ -58,12 +58,17 @@ class ListProducts extends Component {
 
   render() {
     const { data } = this.state;
+    const { addCartItem, getCart } = this.props;
+
     return (
       <div className="flex-dashboard">
         <CategoryList
           handleUserInput={ this.handlerChangeState }
           getProductsFromCategory={ this.getProductsByCategory }
         />
+        <div>
+          {`${getCart().length} itens no carrinho`}
+        </div>
         <div className="main-content">
           <div className="row">
             <label htmlFor="search">
@@ -86,11 +91,16 @@ class ListProducts extends Component {
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h2>
-          <ProductList productsList={ data } />
+          <ProductList productsList={ data } addCartItem={ addCartItem } />
         </div>
       </div>
     );
   }
 }
+
+ListProducts.propTypes = {
+  addCartItem: PropTypes.func,
+  getCart: PropTypes.func,
+}.isRequired;
 
 export default ListProducts;
