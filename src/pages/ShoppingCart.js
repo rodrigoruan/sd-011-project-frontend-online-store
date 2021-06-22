@@ -9,7 +9,7 @@ export default class ShoppingCart extends Component {
     super(props);
     this.state = {
       shouldRedirect: false,
-      totalPrice: 5,
+
     };
   }
 
@@ -26,9 +26,7 @@ export default class ShoppingCart extends Component {
   sumProducts = () => {
     const cartItems = getCart();
     if (cartItems.length > 0) {
-      const reducer = (a, b) => {
-        return a + b.price * b.quantity;
-      };
+      const reducer = (a, b) => a + b.price * b.quantity;
       return cartItems.reduce(reducer, 0).toFixed(2);
     }
     return '';
@@ -52,16 +50,23 @@ export default class ShoppingCart extends Component {
       <div>
         {cartItems.map((item) => (
           <CartProduct
-            cartItem={item}
-            key={item.id}
-            handleAddToCart={handleAddToCart}
-            handleDecreaseQuantity={handleDecreaseQuantity}
-            handleRemoveFromCart={handleRemoveFromCart}
+            cartItem={ item }
+            key={ item.id }
+            handleAddToCart={ handleAddToCart }
+            handleDecreaseQuantity={ handleDecreaseQuantity }
+            handleRemoveFromCart={ handleRemoveFromCart }
           />
         ))}
-        <h5>Valor total:{this.sumProducts()}</h5>
+        <h5>
+          Valor total:
+          {this.sumProducts()}
+        </h5>
 
-        <button type="button" data-testid="checkout-products" onClick={this.handleBuyAction}>
+        <button
+          type="button"
+          data-testid="checkout-products"
+          onClick={ this.handleBuyAction }
+        >
           Finalizar compra
         </button>
       </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ProductCard } from '../components/zComponentsMenu';
-import { getCart } from '../services/storage';
 import Cart from '../components/Cart';
 
 export default class SearchList extends Component {
@@ -21,8 +20,6 @@ export default class SearchList extends Component {
     }
   }
 
-  componentDidMount() {}
-
   setFalse = () => {
     this.setState({ empty: false });
   };
@@ -32,7 +29,7 @@ export default class SearchList extends Component {
     const { empty } = this.state;
     if (!empty && products.length > 1) {
       return products.map((el, index) => (
-        <ProductCard item={el} key={index} handleAddToCart={handleAddToCart} />
+        <ProductCard item={ el } key={ index } handleAddToCart={ handleAddToCart } />
       ));
     }
     if (!empty && products.length < 1) {
@@ -64,6 +61,6 @@ SearchList.propTypes = {
       thumbnail: PropTypes.string,
       title: PropTypes.string,
       price: PropTypes.number,
-    })
+    }),
   ).isRequired,
 };

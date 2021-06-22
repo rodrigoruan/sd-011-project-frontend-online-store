@@ -64,14 +64,20 @@ export default class Home extends Component {
 
     return (
       <div className="home-div">
-        <SearchInput handleSubmit={this.handleSubmit} handleInput={this.handleInput} />
+        <SearchInput
+          handleSubmit={ this.handleSubmit }
+          handleInput={ this.handleInput }
+        />
         <div className="search-results">
-          <Categories handleRadioClick={this.handleRadioClick} categories={categories} />
+          <Categories
+            handleRadioClick={ this.handleRadioClick }
+            categories={ categories }
+          />
           <SearchList
-            products={products}
-            handleAddToCart={(el) => {
+            products={ products }
+            handleAddToCart={ (el) => {
               handleAddToCart(el);
-            }}
+            } }
           />
         </div>
       </div>
@@ -87,6 +93,6 @@ Home.propTypes = {
       price: PropTypes.number,
       thumbnail: PropTypes.string,
       title: PropTypes.string,
-    })
+    }),
   ),
 }.isRequired;

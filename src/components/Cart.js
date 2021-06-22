@@ -12,6 +12,6 @@ export default class Cart extends Component {
       return 0;
     };
     // prettier-ignore
-    return (<div data-testid="shopping-cart-size">{getCartQuantity()}</div>)
+    return (<div data-testid="shopping-cart-size">{getCartQuantity()}</div>);
   }
 }

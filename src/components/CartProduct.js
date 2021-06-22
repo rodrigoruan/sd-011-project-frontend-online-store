@@ -20,16 +20,19 @@ export default class CartProduct extends Component {
 
   CheckAvailability = () => {
     const { cartItem } = this.props;
+    const availableQuantity = cartItem.available_quantity;
     const alreadyInTheCart = getCart().find((el) => el.id === cartItem.id);
-    const { available_quantity, quantity } = cartItem;
-    if (alreadyInTheCart.quantity >= available_quantity) {
+    if (alreadyInTheCart.quantity >= availableQuantity) {
       return true;
     }
     return false;
   };
 
   render() {
-    const { cartItem, handleAddToCart, handleDecreaseQuantity, handleRemoveFromCart } = this.props;
+    const { cartItem,
+      handleAddToCart,
+      handleDecreaseQuantity,
+      handleRemoveFromCart } = this.props;
     // prettier-ignore
 
     const showButtons = () => {
@@ -40,15 +43,15 @@ export default class CartProduct extends Component {
             <button
               data-testid="product-decrease-quantity"
               type="button"
-              onClick={() => handleDecreaseQuantity(cartItem)}
+              onClick={ () => handleDecreaseQuantity(cartItem) }
             >
               -
             </button>
             <button
-            disabled={this.CheckAvailability()}
+              disabled={ this.CheckAvailability() }
               data-testid="product-increase-quantity"
               type="button"
-              onClick={() => handleAddToCart(cartItem)}
+              onClick={ () => handleAddToCart(cartItem) }
             >
               +
             </button>
@@ -60,7 +63,7 @@ export default class CartProduct extends Component {
     const showRemoveButton = () => {
       if (handleRemoveFromCart) {
         return (
-          <button type="button" onClick={() => handleRemoveFromCart(cartItem)}>
+          <button type="button" onClick={ () => handleRemoveFromCart(cartItem) }>
             X
           </button>
         );
@@ -71,7 +74,7 @@ export default class CartProduct extends Component {
       <div>
         {showRemoveButton()}
         <p data-testid="shopping-cart-product-name">{cartItem.title}</p>
-        <img height="150px" src={cartItem.thumbnail} alt="thumbnail" />
+        <img height="150px" src={ cartItem.thumbnail } alt="thumbnail" />
         <span>{cartItem.price}</span>
         <div data-testid="shopping-cart-product-quantity">{cartItem.quantity}</div>
         {showButtons()}
@@ -86,6 +89,6 @@ CartProduct.propTypes = {
       price: PropTypes.number,
       thumbnail: PropTypes.string,
       title: PropTypes.string,
-    })
+    }),
   ),
 }.isRequired;

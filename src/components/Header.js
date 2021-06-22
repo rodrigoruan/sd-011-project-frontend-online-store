@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-max-depth */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Cart from '../components/Cart';
 
 export default class Header extends Component {
   render() {
@@ -21,7 +20,7 @@ export default class Header extends Component {
               className="nav-link"
             >
               Carrinho
-              {/* <Cart /> */}
+
             </Link>
           </li>
           <li>

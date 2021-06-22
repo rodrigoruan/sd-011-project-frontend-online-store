@@ -49,31 +49,33 @@ export default class ProductDetails extends Component {
 
     return (
       <div>
-        <img src={product.thumbnail} alt="product" />
+        <img src={ product.thumbnail } alt="product" />
         <p data-testid="product-detail-name">{product.title}</p>
         <p>{product.price}</p>
-        {product.attributes &&
-          product.attributes.map((att, index) => (
-            <p key={index}>
-              {att.name}-{att.value_name}
+        {product.attributes
+          && product.attributes.map((att, index) => (
+            <p key={ index }>
+              {att.name}
+              -
+              {att.value_name}
             </p>
           ))}
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
           className="btn btn-success"
-          onClick={() => handleAddToCart(product)}
+          onClick={ () => handleAddToCart(product) }
         >
           Add to Cart!
         </button>
         <Cart />
         <hr />
-        <ProductReviewForm handleFormSubmit={this.handleFormSubmit} />
+        <ProductReviewForm handleFormSubmit={ this.handleFormSubmit } />
         <div>
           <h4>Avaliações já feitas:</h4>
-          {getReviews &&
-            getReviews.map((el, index) => (
-              <div key={index}>
+          {getReviews
+            && getReviews.map((el, index) => (
+              <div key={ index }>
                 <hr />
                 <h5>
                   E-mail:

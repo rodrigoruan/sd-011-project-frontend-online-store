@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export default class ItemProduct extends Component {
   constructor(props) {
@@ -25,10 +25,10 @@ export default class ItemProduct extends Component {
     if (shouldRedirect) {
       return (
         <Redirect
-          to={{
+          to={ {
             pathname: `/details/${id}`,
             state: { id, categoryId, title, thumbnail, price },
-          }}
+          } }
         />
       );
     }
@@ -39,9 +39,9 @@ export default class ItemProduct extends Component {
       }
     };
     return (
-      <div data-testid="product" className="content" key={id}>
+      <div data-testid="product" className="content" key={ id }>
         {freeShiping()}
-        <img src={thumbnail} alt="product thumbnail" />
+        <img src={ thumbnail } alt="product thumbnail" />
         <h3>{title}</h3>
         <h6>
           R$
@@ -50,12 +50,12 @@ export default class ItemProduct extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={() => handleAddToCart(item)}
+          onClick={ () => handleAddToCart(item) }
           className="btn btn-success"
         >
           Add to Cart!
         </button>
-        <button data-testid="product-detail-link" type="button" onClick={this.SeeMore}>
+        <button data-testid="product-detail-link" type="button" onClick={ this.SeeMore }>
           Ver Detalhes
         </button>
         {/* <Link
@@ -80,5 +80,8 @@ ItemProduct.propTypes = {
     price: PropTypes.number,
     id: PropTypes.string,
     category_id: PropTypes.string,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }),
   }).isRequired,
 };

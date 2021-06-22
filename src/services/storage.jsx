@@ -15,10 +15,11 @@ export const createReview = (noteData) => {
 };
 
 export const readStorage = (item) => JSON.parse(localStorage.getItem(item));
-export const saveStorage = (products) =>
-  localStorage.setItem('cartStorage', JSON.stringify(products));
+export const saveStorage = (products) => localStorage.setItem('cartStorage',
+  JSON.stringify(products));
 
-export const setCart = (item) => localStorage.setItem('shoppingCart', JSON.stringify(item));
+export const setCart = (item) => localStorage.setItem('shoppingCart',
+  JSON.stringify(item));
 export const getCart = () => {
   if (localStorage.getItem('shoppingCart') !== null) {
     const getData = JSON.parse(localStorage.getItem('shoppingCart'));

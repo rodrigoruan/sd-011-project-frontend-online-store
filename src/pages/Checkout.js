@@ -14,7 +14,7 @@ export default class FinishScreen extends Component {
   getCartProducts = () => {
     const cartItem = storage.readStorage('cartStorage');
     if (cartItem) {
-      return cartItem.map((el, index) => <CartProduct cartItem={el} key={index} />);
+      return cartItem.map((el, index) => <CartProduct cartItem={ el } key={ index } />);
     }
   };
 
