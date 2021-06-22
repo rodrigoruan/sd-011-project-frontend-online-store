@@ -32,7 +32,7 @@ class LandingPage extends React.Component {
 
   render() {
     const { cardList } = this.state;
-    const { getProductDetails } = this.props;
+    const { getProductDetails, quantityIcon, updateQuantityIcon } = this.props;
     return (
       <div data-testid="home-initial-message">
         <span>Digite algum termo de pesquisa ou escolha uma categoria.</span>
@@ -50,10 +50,12 @@ class LandingPage extends React.Component {
         </button>
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ carrinho } alt="carrinho" />
+          <span data-testid="shopping-cart-size">{ quantityIcon }</span>
         </Link>
         <CardList
           list={ cardList.results }
           getProductDetails={ getProductDetails }
+          updateQuantityIcon={ updateQuantityIcon }
         />
         <Categories onClick={ this.onClick } />
       </div>
@@ -63,6 +65,8 @@ class LandingPage extends React.Component {
 
 LandingPage.propTypes = {
   getProductDetails: PropTypes.func.isRequired,
+  quantityIcon: PropTypes.number.isRequired,
+  updateQuantityIcon: PropTypes.func.isRequired,
 };
 
 export default LandingPage;

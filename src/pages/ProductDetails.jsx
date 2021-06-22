@@ -26,7 +26,7 @@ class ProductDetails extends React.Component {
 
   render() {
     const { title, thumbnail, price, attributes } = this.state;
-    const { productDetails } = this.props;
+    const { productDetails, quantityIcon, updateQuantityIcon } = this.props;
     return (
       <div>
         <p className="productDetailsName" data-testid="product-detail-name">{title}</p>
@@ -39,9 +39,14 @@ class ProductDetails extends React.Component {
             )) : <p>Loading...</p>
           }
         </ul>
-        <AddToCart item={ productDetails } test="product-detail-add-to-cart" />
+        <AddToCart
+          item={ productDetails }
+          test="product-detail-add-to-cart"
+          updateQuantityIcon={ updateQuantityIcon }
+        />
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ carrinho } alt="carrinho" />
+          <span data-testid="shopping-cart-size">{ quantityIcon }</span>
         </Link>
         <div>
           <RatingForm />
@@ -58,6 +63,8 @@ ProductDetails.propTypes = {
     price: PropTypes.number.isRequired,
     attributes: PropTypes.arrayOf(PropTypes.any).isRequired,
   }).isRequired,
+  quantityIcon: PropTypes.number.isRequired,
+  updateQuantityIcon: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;
