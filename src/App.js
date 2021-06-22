@@ -45,10 +45,39 @@ class App extends Component {
   }
 
   addToCart = (product) => {
-    this.setState((prevState) => ({
-      cart: [...prevState.cart, product],
-    }));
-  };
+    const { cart } = this.state;
+    let newCart = [...cart];
+    if (cart.find((item) => item.id === product.id)) {
+      const productIndex = newCart.findIndex((item) => item.id === product.id);
+      newCart[productIndex].amount += 1;
+      console.log(newCart[productIndex].amount);
+    } else {
+      newCart = [...cart, {...product, amount: 1}]; 
+    }
+    this.setState({
+      cart: newCart,
+    });
+  }
+
+  decreaseFromCart = (product) => {
+    
+    const { cart } = this.state;
+    let newCart = [...cart];
+    if (cart.find((item) => item.id === product.id)) {
+      const productIndex = newCart.findIndex((item) => item.id === product.id);
+      if (newCart[productIndex].amount > 0) {
+        newCart[productIndex].amount -= 1;
+      }
+      if (newCart[productIndex].amount === 0) {
+        newCart = newCart.filter((item) => item.id !== newCart[productIndex].id);
+      }
+    } else {
+      newCart = [...cart, {...product, amount: 1}]; 
+    }
+    this.setState({
+      cart: newCart,
+    });
+  }
 
   removeFromCart = (product) => {
     const { cart } = this.state;
@@ -115,6 +144,8 @@ class App extends Component {
               render={ () => (<CartPage
                 cart={ cart }
                 removeFromCart={ this.removeFromCart }
+                addToCart={ this.addToCart }
+                decreaseFromCart={ this.decreaseFromCart}
               />) }
             />
             <Route
