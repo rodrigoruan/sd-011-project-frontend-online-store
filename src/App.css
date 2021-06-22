@@ -86,8 +86,13 @@ body {
   align-items: center;
   border: 1px solid #f9cf00;
   display: flex;
+  justify-content: space-around;
   margin: 25px 0;
   padding: 25px;
+}
+
+.rowCart img {
+  width: 100px;
 }
 
 .buttonTransparent {

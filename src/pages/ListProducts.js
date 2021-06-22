@@ -26,7 +26,6 @@ class ListProducts extends Component {
 
   async getProductsByCategory(categoryId) {
     /**/
-    console.log(categoryId);
     const { search } = this.state;
     const result = await api.getProductsFromCategoryAndQuery(categoryId, search);
     this.setState({
@@ -40,7 +39,6 @@ class ListProducts extends Component {
       api.getProductsFromCategoryAndQuery(category, search)
         .then(({ results }) => {
           this.setState({ data: results });
-          console.log(results);
         });
     });
   }

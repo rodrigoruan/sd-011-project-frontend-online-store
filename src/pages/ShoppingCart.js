@@ -12,39 +12,66 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { getCart, removeCartItem } = this.props;
+    const { getCart,
+      removeCartItem,
+      increaseQuantityItem,
+      decreaseQuantityItem,
+    } = this.props;
     const items = getCart();
 
     if (items.length === 0) {
       return this.renderEmptycart();
     }
-    return (
-      <div>
-        <h2>Carrinho de Compras</h2>
-        {items.map(({ id, title, price, thumbnail }) => (
-          <div className="rowCart" key={ title }>
-            <button
-              className="buttonTransparent"
-              type="button"
-              onClick={ () => removeCartItem(id) }
-            >
-              X
-            </button>
-            <h3 data-testid="shopping-cart-product-name">{ title }</h3>
-            <img src={ thumbnail } alt="" />
-            <p>{ price }</p>
-            <p data-testid="shopping-cart-product-quantity">
-              Quantidade:
-              { getCart().length }
-            </p>
-          </div>
-        ))}
-      </div>
-    );
+    if (items.length > 0) {
+      return (
+        <div>
+          <h2>Carrinho de Compras</h2>
+          {items.map(({ id, title, price, thumbnail, qtde }) => (
+            <div className="rowCart" key={ id }>
+              <button
+                className="buttonTransparent"
+                type="button"
+                onClick={ () => removeCartItem(id) }
+              >
+                X
+              </button>
+              <img src={ thumbnail } alt={ title } />
+              <h3 data-testid="shopping-cart-product-name">{ title }</h3>
+              <button
+                data-testid="product-decrease-quantity"
+                className="buttonTransparent"
+                type="button"
+                onClick={ () => decreaseQuantityItem(id) }
+              >
+                -
+              </button>
+              <h3 data-testid="shopping-cart-product-quantity">
+                Quantidade:
+                { qtde }
+              </h3>
+              <button
+                data-testid="product-increase-quantity"
+                className="buttonTransparent"
+                type="button"
+                onClick={ () => increaseQuantityItem(id) }
+              >
+                +
+              </button>
+              <h3>
+                <span>R$</span>
+                { price }
+              </h3>
+            </div>
+          ))}
+        </div>
+      );
+    }
   }
 }
 
 ShoppingCart.propTypes = {
   getCart: PropTypes.func,
   removeCartItem: PropTypes.func,
+  increaseQuantityItem: PropTypes.func,
+  decreaseQuantityItem: PropTypes.func,
 }.isRequired;

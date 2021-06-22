@@ -16,6 +16,8 @@ class App extends Component {
     this.getCartItems = this.getCartItems.bind(this);
     this.addCartItem = this.addCartItem.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);
+    this.increaseQuantityItem = this.increaseQuantityItem.bind(this);
+    this.decreaseQuantityItem = this.decreaseQuantityItem.bind(this);
   }
 
   getCartItems() {
@@ -26,7 +28,6 @@ class App extends Component {
   addCartItem({ target: { value } }) {
     const obj = JSON.parse(value);
     obj.qtde = 1;
-    console.log(obj.qtde);
     this.setState((previousState) => ({
       cart: [...previousState.cart, obj],
     }));
@@ -34,9 +35,30 @@ class App extends Component {
 
   removeCartItem(id) {
     const { cart } = this.state;
-    const updatedCart = cart.map((item) => item.id !== id);
+    const updatedCart = cart.filter((item) => item.id !== id);
+    if (updatedCart.length === 0) {
+      this.setState({
+        cart: [],
+      });
+    }
     this.setState({
       cart: updatedCart,
+    });
+  }
+
+  increaseQuantityItem(id) {
+    const { cart } = this.state;
+    cart.find((item) => item.id === id).qtde += 1;
+    this.setState({
+      cart: [...cart],
+    });
+  }
+
+  decreaseQuantityItem(id) {
+    const { cart } = this.state;
+    cart.find((item) => item.id === id).qtde -= 1;
+    this.setState({
+      cart: [...cart],
     });
   }
 
@@ -54,6 +76,8 @@ class App extends Component {
             <ShoppingCart
               getCart={ this.getCartItems }
               removeCartItem={ this.removeCartItem }
+              increaseQuantityItem={ this.increaseQuantityItem }
+              decreaseQuantityItem={ this.decreaseQuantityItem }
             />
           </Route>
           <Route
