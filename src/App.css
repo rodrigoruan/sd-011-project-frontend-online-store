@@ -8,6 +8,7 @@
 }
 
 body {
+  background-color: #94618e;
   font-size: 12px;
 }
 
@@ -81,7 +82,30 @@ body {
   padding: 25px 0;
 }
 
+.rowCart {
+  align-items: center;
+  border: 1px solid #f9cf00;
+  display: flex;
+  margin: 25px 0;
+  padding: 25px;
+}
+
+.buttonTransparent {
+  background-color: transparent;
+  border: 1px solid #f9cf00;
+  color: #f4decb;
+  font-size: 1.5rem;
+  margin: 20px;
+  padding: 0 15px;
+  text-decoration: none;
+}
+
+.buttonTransparent:hover {
+  background-color: #49274a;
+}
+
 .buttonCart {
+  background-color: transparent;
   border: 1px solid #f9cf00;
   color: #f4decb;
   font-size: 1.5rem;
@@ -148,4 +172,9 @@ body {
   font-size: 1.6rem;
   padding: 5px;
   text-decoration: none;
+}
+
+.padding-x {
+  margin-left: 15px;
+  margin-right: 15px;
 }

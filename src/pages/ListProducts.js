@@ -21,24 +21,13 @@ class ListProducts extends Component {
 
   handlerChangeState(event) {
     const { target: { name, value } } = event;
-    if (name === 'category') {
-      this.setState({ [name]: value }, () => this.getProductsByCategory());
-    } else {
-      this.setState({ [name]: value });
-    }
+    this.setState({ [name]: value });
   }
 
   async getProductsByCategory(categoryId) {
     /**/
     console.log(categoryId);
     const { search } = this.state;
-    // this.setState({ data: [] }, () => {
-    //   api.getProductsFromCategoryAndQuery(categoryId, search)
-    //     .then(({ results }) => {
-    //       this.setState({ data: results });
-    //       console.log(results);
-    //     });
-    // });
     const result = await api.getProductsFromCategoryAndQuery(categoryId, search);
     this.setState({
       data: result.results,
@@ -66,13 +55,12 @@ class ListProducts extends Component {
           handleUserInput={ this.handlerChangeState }
           getProductsFromCategory={ this.getProductsByCategory }
         />
-        <div>
-          {`${getCart().length} itens no carrinho`}
-        </div>
+        <div />
         <div className="main-content">
           <div className="row">
             <label htmlFor="search">
               <input
+                className="inputShoppingCart"
                 data-testid="query-input"
                 type="text"
                 name="search"
@@ -80,6 +68,7 @@ class ListProducts extends Component {
               />
             </label>
             <button
+              className="searchButton"
               data-testid="query-button"
               type="submit"
               onClick={ this.getProductsByQuery }
@@ -90,6 +79,9 @@ class ListProducts extends Component {
           </div>
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
+          </h2>
+          <h2>
+            {`${getCart().length} itens no carrinho`}
           </h2>
           <ProductList productsList={ data } addCartItem={ addCartItem } />
         </div>

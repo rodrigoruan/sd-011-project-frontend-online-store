@@ -16,11 +16,10 @@ export default class CategoryList extends Component {
   }
 
   async getList() {
-    const listCategories = await api.getCategories()
-      .then((category) => this.setState({
-        categories: category,
-      }));
-    return listCategories;
+    const result = await api.getCategories();
+    this.setState({
+      categories: result,
+    });
   }
 
   render() {
@@ -28,7 +27,6 @@ export default class CategoryList extends Component {
     const { getProductsFromCategory } = this.props;
     return (
       <div className="sidebar-catories">
-        {console.log(categories)}
         <ul>
           {categories.map((category) => (
             <li

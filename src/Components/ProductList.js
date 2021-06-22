@@ -9,7 +9,7 @@ class ProductList extends Component {
       <ul className="listProducts">
         {productsList.map((product) => (
           <ItemCard
-            key={ product.title }
+            key={ product.id }
             title={ product.title }
             thumbnail={ product.thumbnail }
             price={ product.price }

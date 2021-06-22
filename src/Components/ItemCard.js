@@ -6,14 +6,13 @@ class ItemCard extends Component {
   render() {
     const { product, addCartItem } = this.props;
     const { price, title, id, thumbnail } = this.props;
-    const products = { price, title, id, thumbnail };
     return (
       <div>
         <Link
           data-testid="product-detail-link"
           to={ {
             pathname: `/products/${id}`,
-            state: { products },
+            state: { product },
           } }
         >
           <li data-testid="product" className="product-card">
