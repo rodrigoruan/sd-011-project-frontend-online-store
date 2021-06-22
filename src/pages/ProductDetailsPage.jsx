@@ -8,7 +8,8 @@ export default class ProductDetailsPage extends Component {
     // Funções: addToCart
     // Objetos: selectedProduct, title, thumbnail, price, id
     const { addToCart, selectedProduct } = this.props;
-    const { title, thumbnail, price, id } = selectedProduct;
+    const { title, thumbnail, price, id,
+      shipping: { free_shipping: freeShipping } } = selectedProduct;
     return (
       <div>
         <Link to="/" className="home-button">Voltar</Link>
@@ -24,6 +25,8 @@ export default class ProductDetailsPage extends Component {
           R$
           { price }
         </span>
+        { freeShipping === true
+          ? <span data-testid="free-shipping">Frete grátis</span> : '' }
         <p>
           id:
           { id }
@@ -48,5 +51,8 @@ ProductDetailsPage.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool,
+    }),
   }).isRequired,
 };
