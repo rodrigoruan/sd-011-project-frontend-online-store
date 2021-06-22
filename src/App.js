@@ -43,6 +43,7 @@ class App extends React.Component {
     }));
   }
 
+  /** Função responsável por incrementar a quantidade de itens ao carrinho. */
   increaseQuantity(product) {
     const { cart } = this.state;
     const newArr = cart.map((item) => {
@@ -57,6 +58,7 @@ class App extends React.Component {
     });
   }
 
+  /** Função responsável por decrementar a quantidade de itens ao carrinho. */
   decreaseQuantity(product) {
     const { cart } = this.state;
     const newArr = cart.map((item) => {

@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 
 /** Este componente é responsável por exibir um novo item
  * no carrinho de comprar. Ele é renderizado de forma dinâmica
- * no componente ShoppingCart.jsx, onde algumas propa são
+ * no componente ShoppingCart.jsx, onde algumas props são
  * passadas, incluindo funções e um produto em específico. */
 class NewItem extends Component {
   render() {
+    /** Props vindo de App.js */
     const { product, handleDelete, increaseQuantity, decreaseQuantity } = this.props;
 
     // const quantity = cart.filter((item) => item === product);
 
     return (
-      /** O componente abaixo recebe gera um card de um produto adicionado ao carrinho.
+      /** Abaixo é gerado um card de um produto adicionado ao carrinho.
        * Recebe funções de incremento e decremento, para aumentar e diminuir a quantida-
        * de de itens em um carrinho. */
       <div>

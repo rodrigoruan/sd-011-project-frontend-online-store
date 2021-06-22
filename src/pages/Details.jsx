@@ -36,13 +36,9 @@ class Details extends React.Component {
   */
   render() {
     const { addState } = this.props;
-    const {
-      location: {
-        state: {
-          product,
-        },
-      },
-    } = this.props;
+    /** Desestruturação abaixo: vindo do componente Link
+     * em cardItem.jsx */
+    const { location: { state: { product } } } = this.props;
 
     return (
       <div
