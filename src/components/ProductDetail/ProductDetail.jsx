@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import CartButton from '../CartButton/index';
 import './ProductDetail.css';
 import AddToCartBttn from '../ShoppingCart/AddToCartBttn';
+import RateComment from '../RateComment/RateComment';
 
 export default class ProductDetail extends Component {
   render() {
@@ -42,6 +43,7 @@ export default class ProductDetail extends Component {
             dataTest="product-detail-add-to-cart"
           />
         </div>
+        <RateComment product={ id } />
       </div>
     );
   }
