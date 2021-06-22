@@ -1,26 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaStar } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import '../App.css';
+import FormsAvaliation from './FormsAvaliation';
 
 class ProductDetails extends React.Component {
   constructor() {
     super();
-    const details = this.cartItensStorage();
-    const productArray = Object.values(details);
     this.state = {
       product: [],
-      rating: null,
-      quantity: productArray.length,
+      quantity: 1,
     };
 
     this.getProduct = this.getProduct.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.loadCartList = this.loadCartList.bind(this);
-    this.setRating = this.setRating.bind(this);
     this.cartItensStorage = this.cartItensStorage.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -47,12 +46,6 @@ class ProductDetails extends React.Component {
     this.setState({ product });
   }
 
-  setRating(event) {
-    this.setState({
-      rating: event,
-    });
-  }
-
   cartItensStorage() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
@@ -60,6 +53,24 @@ class ProductDetails extends React.Component {
       return previousList;
     }
     return JSON.parse(previousList);
+  }
+
+  increaseQuantity() {
+    const { quantity } = this.state;
+    const prevState = quantity;
+    this.setState({
+      quantity: prevState + 1,
+    });
+  }
+
+  decreaseQuantity() {
+    const { quantity } = this.state;
+    const prevState = quantity;
+    if (quantity > 1) {
+      this.setState({
+        quantity: prevState - 1,
+      });
+    }
   }
 
   loadCartList() {
@@ -72,9 +83,11 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { product: { title, thumbnail, price }, quantity } = this.state;
-    const { rating } = this.state;
-    const numberOfStars = 5;
+    const { product:
+      { title, thumbnail, price },
+    quantity,
+    } = this.state;
+
     return (
       <div>
         <header className="header-details-product">
@@ -112,6 +125,7 @@ class ProductDetails extends React.Component {
         <button
           className="decrease-btn"
           type="button"
+          onClick={ this.decreaseQuantity }
         >
           -
         </button>
@@ -123,6 +137,7 @@ class ProductDetails extends React.Component {
         <button
           className="increase-btn"
           type="button"
+          onClick={ () => this.increaseQuantity() }
         >
           +
         </button>
@@ -134,54 +149,7 @@ class ProductDetails extends React.Component {
         >
           Adicionar ao carrinho
         </button>
-        <h3>Avaliações</h3>
-        <form>
-          <div className="container-forms">
-            <input
-              type="email"
-              placeholder="Email"
-              size="30"
-              className="input-email-forms"
-              onChange={ this.getEmailAndMessage }
-            />
-            <div className="container-stars">
-              {[...Array(numberOfStars)].map((star, index) => {
-                const ratingValue = index + 1;
-                return (
-                  <label htmlFor={ index } key={ index }>
-                    <input
-                      id={ index }
-                      className="radio-star"
-                      type="radio"
-                      name="rating"
-                      value={ ratingValue }
-                      required
-                      onClick={ () => this.setRating(ratingValue) }
-                    />
-                    <FaStar
-                      rating={ rating }
-                      color={ ratingValue <= rating ? '#ffc107' : '#e4e5e9' }
-                      className="star-rating"
-                      size={ 30 }
-                    />
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-          <textarea
-            data-testid="product-detail-evaluation"
-            placeholder="Mensagem(opcional)"
-            rows="6"
-            cols="60"
-          />
-          <button
-            type="button"
-            className="btn-submit-avaliation"
-          >
-            Avaliar
-          </button>
-        </form>
+        <FormsAvaliation />
       </div>
     );
   }
