@@ -71,7 +71,7 @@ export default class App extends Component {
       this.setState({
         cartItems: [...cartItems, itemToCart],
       });
-    } else {
+    } else if (itemToCart.quantity < itemToCart.available_quantity) {
       this.setState({
         cartItems: [...cartItems],
       });

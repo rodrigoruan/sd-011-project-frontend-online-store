@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Comments from './Comments';
 
 export default class ProductDetails extends Component {
   render() {
@@ -39,6 +40,7 @@ export default class ProductDetails extends Component {
         >
           Adicionar ao carrinho
         </button>
+        <Comments id={ id } />
       </>
     );
   }
@@ -54,8 +56,10 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addCart: PropTypes.func.isRequired,
+  /* comments: PropTypes.string.isRequired, */
   cartItems: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
+    reduce: PropTypes.func,
   }).isRequired,
 };
