@@ -27,14 +27,14 @@ class ProductDetails extends React.Component {
   }
 
   handleClick() {
-    const { product: { title, thumbnail, price } } = this.state;
+    const { product: { title, thumbnail, price }, quantity } = this.state;
     const previousList = this.loadCartList();
-    previousList.push({ title, thumbnail, price });
+    for (let i = 0; i < quantity; i += 1) {
+      previousList.push({ title, thumbnail, price });
+    }
     localStorage.setItem('cartList', JSON.stringify(previousList));
-    const details = this.cartItensStorage();
-    const productArray = Object.values(details);
     this.setState({
-      quantity: productArray.length,
+      quantity: 1,
     });
   }
 
@@ -56,11 +56,14 @@ class ProductDetails extends React.Component {
   }
 
   increaseQuantity() {
-    const { quantity } = this.state;
+    const { quantity, product } = this.state;
+    const quantityAvailable = product.available_quantity;
     const prevState = quantity;
-    this.setState({
-      quantity: prevState + 1,
-    });
+    if (prevState < quantityAvailable) {
+      this.setState({
+        quantity: prevState + 1,
+      });
+    }
   }
 
   decreaseQuantity() {
@@ -135,6 +138,7 @@ class ProductDetails extends React.Component {
           { quantity }
         </span>
         <button
+          data-testid="product-detail-add-to-cart"
           className="increase-btn"
           type="button"
           onClick={ () => this.increaseQuantity() }
