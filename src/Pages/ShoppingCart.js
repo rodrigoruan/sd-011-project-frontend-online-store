@@ -22,8 +22,10 @@ class ShoppingCart extends React.Component {
     const { updateArray } = this.props;
     const getCart = JSON.parse(localStorage.getItem('cart'));
     const addqtd = getCart.find((idObj) => idObj.id === id);
-    addqtd.qtd += 1;
-    updateArray(getCart);
+    if (addqtd.qtd < addqtd.maxQtd) {
+      addqtd.qtd += 1;
+      updateArray(getCart);
+    }
   }
 
   removeBtn(idRm) {

@@ -23,11 +23,11 @@ export default class ProductDetail extends Component {
   }
 
   handleAdd(product) {
-    const { id, title, price } = product;
+    const { id, title, price, available_quantity: maxQtd } = product;
     const obj = {
       id,
       title,
-      maxQtd: 0,
+      maxQtd,
       qtd: 1,
       value: price,
     };
