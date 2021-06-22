@@ -49,17 +49,13 @@ class App extends Component {
   increaseQuantityItem(id) {
     const { cart } = this.state;
     cart.find((item) => item.id === id).qtde += 1;
-    this.setState({
-      cart: [...cart],
-    });
+    this.setState({ cart });
   }
 
   decreaseQuantityItem(id) {
     const { cart } = this.state;
     cart.find((item) => item.id === id).qtde -= 1;
-    this.setState({
-      cart: [...cart],
-    });
+    this.setState({ cart });
   }
 
   render() {
