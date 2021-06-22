@@ -33,7 +33,7 @@ class Cart extends Component {
     if (previousList[id]) {
       previousList[id].quantity += 1;
     } else {
-      previousList[id] = { title, thumbnail, price, quantity: 1 };
+      previousList[id] = { id, title, thumbnail, price, quantity: 1 };
     }
     const quantityItem = previousList[id].quantity;
     this.setState({
@@ -47,7 +47,7 @@ class Cart extends Component {
     const { product: { id } } = this.props;
     const previousList = this.loadCartList();
 
-    if (previousList[id]) {
+    if (previousList[id].quantity > 1) {
       previousList[id].quantity -= 1;
       this.setState({
         quantity: previousList[id].quantity,

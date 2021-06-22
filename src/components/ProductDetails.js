@@ -33,7 +33,7 @@ class ProductDetails extends React.Component {
         previousList[id].quantity += 1;
       }
     } else {
-      previousList[id] = { title, thumbnail, price, quantity };
+      previousList[id] = { id, title, thumbnail, price, quantity };
     }
     localStorage.setItem('cartList', JSON.stringify(previousList));
     this.setState({
@@ -132,7 +132,6 @@ class ProductDetails extends React.Component {
           { quantity }
         </span>
         <button
-          data-testid="product-detail-add-to-cart"
           className="increase-btn"
           type="button"
           onClick={ () => this.increaseQuantity() }
@@ -141,6 +140,7 @@ class ProductDetails extends React.Component {
         </button>
         <button
           type="button"
+          data-testid="product-detail-add-to-cart"
           className="add-to-cart-btn-details"
           onClick={ this.handleClick }
         >
