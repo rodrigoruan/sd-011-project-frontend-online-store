@@ -54,7 +54,6 @@ export default class ShopCart extends Component {
             </button>
             <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
             <button
-
               className="shop-cart-buttons"
               onClick={ item.quantity < item.available_quantity && increaseItemQuantity }
               type="button"
