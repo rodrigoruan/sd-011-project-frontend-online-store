@@ -23,7 +23,6 @@ export default class Comments extends Component {
   componentDidMount() {
     const { id } = this.props;
     this.handleComments(id);
-    /* this.saveComments(); */
     //  this.saveComments2();
   }
 
