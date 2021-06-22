@@ -67,6 +67,10 @@ class Home extends React.Component {
     this.getItemsFromCategoryAndQuery(category, inputQuery);
   }
 
+  /** Esta função clearState é chamada quando uma nova requisição
+   * é feita. Isso deve acontecer para que não tenhamos conflitos
+   * em novas requisições, quando novos itens se misturtam com os
+   * antigos */
   clearState() {
     this.setState({
       response: [],
