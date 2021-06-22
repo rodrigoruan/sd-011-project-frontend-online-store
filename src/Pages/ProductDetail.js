@@ -23,12 +23,11 @@ export default class ProductDetail extends Component {
   }
 
   handleAdd(product) {
-    // eslint-disable-next-line camelcase
-    const { id, title, price, available_quantity } = product;
+    const { id, title, price, maxQtd = available_quantity } = product;
     const obj = {
       id,
       title,
-      maxQtd: available_quantity,
+      maxQtd,
       qtd: 1,
       value: price,
     };
