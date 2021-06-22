@@ -1,13 +1,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class ItemProduct extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      shouldRedirect: false,
+    };
+    this.SeeMore = this.SeeMore.bind(this);
+  }
+
+  SeeMore = () => {
+    this.setState({ shouldRedirect: true });
+  };
+
   render() {
     const num = 10;
     const { item, handleAddToCart } = this.props;
-    const { thumbnail, title, price, id, shipping, available_quantity } = item;
+    const { thumbnail, title, price, id, shipping } = item;
     const categoryId = item.category_id;
+    const { shouldRedirect } = this.state;
+    if (shouldRedirect) {
+      return (
+        <Redirect
+          to={{
+            pathname: `/details/${id}`,
+            state: { id, categoryId, title, thumbnail, price },
+          }}
+        />
+      );
+    }
 
     const freeShiping = () => {
       if (shipping.free_shipping) {
@@ -31,7 +55,10 @@ export default class ItemProduct extends Component {
         >
           Add to Cart!
         </button>
-        <Link
+        <button data-testid="product-detail-link" type="button" onClick={this.SeeMore}>
+          Ver Detalhes
+        </button>
+        {/* <Link
           to={{
             pathname: `/details/${id}`,
             state: { id, categoryId, title, thumbnail, price },
@@ -39,7 +66,7 @@ export default class ItemProduct extends Component {
           data-testid="product-detail-link"
         >
           Ver Detalhes
-        </Link>
+        </Link> */}
       </div>
     );
   }
