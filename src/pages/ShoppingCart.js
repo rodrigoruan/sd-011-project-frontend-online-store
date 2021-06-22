@@ -12,7 +12,7 @@ export default class ShoppingCart extends Component {
   }
 
   render() {
-    const { getCart } = this.props;
+    const { getCart, removeCartItem } = this.props;
     const items = getCart();
 
     if (items.length === 0) {
@@ -21,9 +21,16 @@ export default class ShoppingCart extends Component {
     return (
       <div>
         <h2>Carrinho de Compras</h2>
-        {items.map(({ title, price, thumbnail }) => (
-          <div key={ title }>
-            <p data-testid="shopping-cart-product-name">{ title }</p>
+        {items.map(({ id, title, price, thumbnail }) => (
+          <div className="rowCart" key={ title }>
+            <button
+              className="buttonTransparent"
+              type="button"
+              onClick={ () => removeCartItem(id) }
+            >
+              X
+            </button>
+            <h3 data-testid="shopping-cart-product-name">{ title }</h3>
             <img src={ thumbnail } alt="" />
             <p>{ price }</p>
             <p data-testid="shopping-cart-product-quantity">
@@ -39,4 +46,5 @@ export default class ShoppingCart extends Component {
 
 ShoppingCart.propTypes = {
   getCart: PropTypes.func,
+  removeCartItem: PropTypes.func,
 }.isRequired;

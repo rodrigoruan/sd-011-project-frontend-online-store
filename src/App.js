@@ -4,24 +4,6 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import ListProducts from './pages/ListProducts';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetail from './pages/ProductDetail';
-// import * as api from './services/api';
-
-// function App() {
-//   return (
-
-//     <BrowserRouter>
-//       <Switch>
-//         <Route exact path="/" render={ () => <ListProducts /> } />
-//         <Route exact path="/shoppingCart" render={ () => <ShopingCart /> } />
-//         <Route
-//           path="/product/:id"
-//           render={ (props) => <ProductDetail { ...props } /> }
-//         />
-//       </Switch>
-//     </BrowserRouter>
-
-//   );
-// }
 
 class App extends Component {
   constructor() {
@@ -33,6 +15,7 @@ class App extends Component {
 
     this.getCartItems = this.getCartItems.bind(this);
     this.addCartItem = this.addCartItem.bind(this);
+    this.removeCartItem = this.removeCartItem.bind(this);
   }
 
   getCartItems() {
@@ -42,9 +25,19 @@ class App extends Component {
 
   addCartItem({ target: { value } }) {
     const obj = JSON.parse(value);
+    obj.qtde = 1;
+    console.log(obj.qtde);
     this.setState((previousState) => ({
       cart: [...previousState.cart, obj],
     }));
+  }
+
+  removeCartItem(id) {
+    const { cart } = this.state;
+    const updatedCart = cart.map((item) => item.id !== id);
+    this.setState({
+      cart: updatedCart,
+    });
   }
 
   render() {
@@ -58,7 +51,10 @@ class App extends Component {
             />
           </Route>
           <Route path="/shoppingCart">
-            <ShoppingCart getCart={ this.getCartItems } />
+            <ShoppingCart
+              getCart={ this.getCartItems }
+              removeCartItem={ this.removeCartItem }
+            />
           </Route>
           <Route
             path="/products/:id"
