@@ -53,10 +53,10 @@ export default class ProductDetail extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { title, email, textArea, rating } = this.state;
-    const data = JSON.parse(localStorage.getItem(title)) || [];
+    const { email, textArea, rating, id } = this.state;
+    const data = JSON.parse(localStorage.getItem(id)) || [];
     const evaluations = JSON.stringify([...data, { email, textArea, rating }]);
-    localStorage.setItem(title, evaluations);
+    localStorage.setItem(id, evaluations);
     this.setState({
       email: '',
       textArea: '',
@@ -103,7 +103,8 @@ export default class ProductDetail extends Component {
     } = this.state;
     let freeShipping = null;
     if (hasFreeShipping) freeShipping = 'Frete Grátis';
-    const showEvaluations = localStorage.getItem(id) || false;
+    const showEvaluations = localStorage.getItem(id);
+    console.log(showEvaluations);
     return (
       <div>
         <Link to="/">Voltar</Link>
