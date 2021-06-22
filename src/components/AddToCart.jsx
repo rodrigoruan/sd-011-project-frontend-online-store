@@ -31,13 +31,16 @@ class AddToCart extends React.Component {
   }
 
   render() {
-    const { test } = this.props;
+    const { test, updateQuantityIcon } = this.props;
     return (
       <div>
         <button
           type="button"
           data-testid={ test }
-          onClick={ () => this.addItem() }
+          onClick={ () => {
+            this.addItem();
+            updateQuantityIcon();
+          } }
         >
           Adicionar ao Carrinho
         </button>
@@ -51,4 +54,5 @@ export default AddToCart;
 AddToCart.propTypes = {
   item: PropTypes.objectOf(PropTypes.any).isRequired,
   test: PropTypes.string.isRequired,
+  updateQuantityIcon: PropTypes.func.isRequired,
 };

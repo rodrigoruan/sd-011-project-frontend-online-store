@@ -4,7 +4,7 @@ import CardCreator from './CardCreator';
 
 export default class CardList extends React.Component {
   render() {
-    const { list, getProductDetails } = this.props;
+    const { list, getProductDetails, updateQuantityIcon } = this.props;
     return (
       <div>
         {
@@ -15,6 +15,7 @@ export default class CardList extends React.Component {
                 key={ index }
                 product={ produto }
                 getProductDetails={ getProductDetails }
+                updateQuantityIcon={ updateQuantityIcon }
               />))
         }
       </div>
@@ -25,6 +26,7 @@ export default class CardList extends React.Component {
 CardList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.any),
   getProductDetails: PropTypes.func.isRequired,
+  updateQuantityIcon: PropTypes.func.isRequired,
 };
 
 CardList.defaultProps = {

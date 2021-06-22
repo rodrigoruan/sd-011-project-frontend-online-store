@@ -6,10 +6,11 @@ import AddToCart from './AddToCart';
 class cardCreator extends React.Component {
   render() {
     const {
+      product,
       product: { title, thumbnail, price, id },
       getProductDetails,
+      updateQuantityIcon,
     } = this.props;
-    const { product } = this.props;
     return (
       <div>
         <Link
@@ -26,7 +27,11 @@ class cardCreator extends React.Component {
             <p className="productPrice">{price}</p>
           </div>
         </Link>
-        <AddToCart item={ product } test="product-add-to-cart" />
+        <AddToCart
+          item={ product }
+          test="product-add-to-cart"
+          updateQuantityIcon={ updateQuantityIcon }
+        />
       </div>
     );
   }
@@ -41,6 +46,7 @@ cardCreator.propTypes = {
     id: PropTypes.string.isRequired,
   }).isRequired,
   getProductDetails: PropTypes.func.isRequired,
+  updateQuantityIcon: PropTypes.func.isRequired,
 };
 
 export default cardCreator;

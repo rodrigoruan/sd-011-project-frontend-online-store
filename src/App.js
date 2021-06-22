@@ -9,18 +9,38 @@ import Checkout from './pages/Checkout';
 class App extends React.Component {
   constructor() {
     super();
+    const quantity = JSON.parse(localStorage.getItem('quantity'));
+    let quantityIcon = 0;
+    if (quantity !== null) {
+      quantity.forEach((item) => {
+        quantityIcon += Object.values(item)[0];
+      });
+    }
     this.state = {
       productDetails: {},
+      quantityIcon,
     };
     this.onClick = this.onClick.bind(this);
+    this.updateQuantityIcon = this.updateQuantityIcon.bind(this);
   }
 
   onClick(value) {
     this.setState({ productDetails: value });
   }
 
+  updateQuantityIcon() {
+    const quantity = JSON.parse(localStorage.getItem('quantity'));
+    let quantityIcon = 0;
+    if (quantity !== null) {
+      quantity.forEach((item) => {
+        quantityIcon += Object.values(item)[0];
+      });
+    }
+    this.setState({ quantityIcon });
+  }
+
   render() {
-    const { productDetails } = this.state;
+    const { productDetails, quantityIcon } = this.state;
     return (
       <Router>
         <Switch>
@@ -31,6 +51,8 @@ class App extends React.Component {
               <LandingPage
                 { ...props }
                 getProductDetails={ this.onClick }
+                quantityIcon={ quantityIcon }
+                updateQuantityIcon={ this.updateQuantityIcon }
               />) }
           />
           <Route exact path="/shopping-cart" component={ ShoppingCart } />
@@ -40,6 +62,8 @@ class App extends React.Component {
               <ProductDetails
                 { ...props }
                 productDetails={ productDetails }
+                quantityIcon={ quantityIcon }
+                updateQuantityIcon={ this.updateQuantityIcon }
               />) }
           />
           <Route path="/checkout" component={ Checkout } />
