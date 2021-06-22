@@ -38,7 +38,6 @@ class Cardproduct extends Component {
       >
         <p>{ title }</p>
         <img src={ thumbnail } width="100px" alt="produto" />
-
         <p>1</p>
         <button
           type="button"

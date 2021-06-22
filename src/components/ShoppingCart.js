@@ -33,9 +33,9 @@ class ShoppingCart extends Component {
           : productArray
             .map((product, index) => <Cart key={ index } product={ product } />) }
 
-        <h4 data-testid="shopping-cart-product-quantity">
+        <h4>
           Você possui
-          { ` ${productArray.length} ` }
+          {productArray.length}
           itens no carrinho
         </h4>
       </div>
