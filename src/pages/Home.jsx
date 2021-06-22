@@ -60,7 +60,9 @@ class Home extends React.Component {
    * o botão de pesquisar é acionado. Assim, a função getItemsFromCategoryAndQuery
    * é chamada, fazendo a devida requisição.
    * A função getItemsFromCategoryAndQuery também é chamada quando
-   * há click em alguma categoria. Isso serve para que tenhamos retorno */
+   * há click em alguma categoria, quando é feita uma vefificação
+   * na função acima chamada getTextAndCategory.
+   * */
   async requestButton() {
     this.clearState();
     const { inputQuery, category } = this.state;
