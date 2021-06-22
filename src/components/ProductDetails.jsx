@@ -57,5 +57,6 @@ ProductDetails.propTypes = {
   cartItems: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
+    reduce: PropTypes.func,
   }).isRequired,
 };
