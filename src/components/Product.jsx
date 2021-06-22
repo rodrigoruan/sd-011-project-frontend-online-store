@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import handleCart from '../services/localStorage';
+import '../styles/Product.css';
 
 export default class Product extends Component {
   addQuantity(product) {
@@ -18,34 +19,49 @@ export default class Product extends Component {
     const { free_shipping: freeShipping } = shipping;
 
     return (
-      <div data-testid="product">
-        <span>{ id }</span>
-        <h3>{ title }</h3>
-        <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
-        <Link
-          data-testid="product-detail-link"
-          to={ {
-            pathname: `/Details/${id}`,
-            state: {
-              element: product },
-          } }
-        >
-          Detalhes
-        </Link>
-        <button
-          id={ id }
-          type="button"
-          onClick={ () => this.addQuantity(product) }
-          data-testid="product-add-to-cart"
-        >
-          Adicionar ao Carrinho
-        </button>
-        {
-          freeShipping
-            ? <span data-testid="free-shipping">Frete Grátis</span>
-            : null
-        }
+      <div className="product" data-testid="product">
+        <div className="product-title">
+          <h5>{ title }</h5>
+        </div>
+        <div className="product-image">
+          <img
+            src={ thumbnail }
+            alt={ title }
+          />
+        </div>
+        <div className="product-price-shipping">
+          <span>
+            R$
+            { price }
+          </span>
+          {
+            freeShipping
+              ? <span data-testid="free-shipping">Frete Grátis</span>
+              : null
+          }
+        </div>
+        <div className="product-buttons">
+          <Link
+            data-testid="product-detail-link"
+            className="btn btn-primary"
+            to={ {
+              pathname: `/Details/${id}`,
+              state: {
+                element: product },
+            } }
+          >
+            Detalhes
+          </Link>
+          <button
+            id={ id }
+            type="button"
+            onClick={ () => this.addQuantity(product) }
+            data-testid="product-add-to-cart"
+            className="btn btn-success"
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
       </div>
     );
   }

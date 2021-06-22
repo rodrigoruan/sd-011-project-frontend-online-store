@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import BuyerInfo from './BuyerInfo';
+import BuyerInfo from '../components/BuyerInfo';
 
 export default class Checkout extends Component {
   constructor(props) {
