@@ -32,7 +32,7 @@ class Cardproduct extends Component {
   render() {
     const { title, thumbnail, price, id, categoryId } = this.props;
     return (
-      <div data-testid="product">
+      <div data-testid="product" className="product-card">
         <p data-testid="shopping-cart-product-name">{ title }</p>
         <img src={ thumbnail } width="100px" alt="produto" />
 

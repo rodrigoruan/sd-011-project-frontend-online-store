@@ -9,32 +9,62 @@ import FormsAvaliation from './FormsAvaliation';
 class ProductDetails extends React.Component {
   constructor() {
     super();
+<<<<<<< HEAD
     this.state = {
       product: [],
       quantity: 1,
+=======
+    // const details = this.loadCartList();
+    // const productArray = Object.values(details);
+    this.state = {
+      product: [],
+      rating: null,
+      quantity: 1,
+      // quantity: productArray.length,
+>>>>>>> 79ec0761b1dda8e46a91647ffbc5aa2b745da6d9
     };
 
     this.getProduct = this.getProduct.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.loadCartList = this.loadCartList.bind(this);
+<<<<<<< HEAD
     this.cartItensStorage = this.cartItensStorage.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
+=======
+    this.setRating = this.setRating.bind(this);
+    this.getSetState = this.getSetState.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+>>>>>>> 79ec0761b1dda8e46a91647ffbc5aa2b745da6d9
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
   componentDidMount() {
     this.getProduct();
+    this.getSetState();
   }
 
   handleClick() {
-    const { product: { title, thumbnail, price } } = this.state;
+    const { product: { title, thumbnail, price, id } } = this.state;
     const previousList = this.loadCartList();
-    previousList.push({ title, thumbnail, price });
-    localStorage.setItem('cartList', JSON.stringify(previousList));
-    const details = this.cartItensStorage();
-    const productArray = Object.values(details);
+    if (previousList[id]) {
+      previousList[id].quantity += 1;
+    } else {
+      previousList[id] = { title, thumbnail, price, quantity: 1 };
+    }
+    // previousList.push({ title, thumbnail, price });
+    // const productArray = Object.values(details);
+    const quantityItem = previousList[id].quantity;
     this.setState({
-      quantity: productArray.length,
+      quantity: quantityItem,
+    });
+    localStorage.setItem('cartList', JSON.stringify(previousList));
+    // const details = this.loadCartList();
+  }
+
+  getSetState() {
+    const { quantity } = this.state;
+    console.log(`qtd do getSetState ${quantity}`);
+    this.setState({
+      quantity,
     });
   }
 
@@ -44,15 +74,40 @@ class ProductDetails extends React.Component {
     const product = productObj.results
       .find((prod) => prod.id === id);
     this.setState({ product });
+    // daria para fazer um if para verificar se o ID ja existe no localStorage
+    // se ja existir pegar as info caso contrario pegar da variavel acima que pega da API
   }
 
+<<<<<<< HEAD
   cartItensStorage() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
       previousList = {};
       return previousList;
+=======
+  setRating(event) {
+    this.setState({
+      rating: event,
+    });
+  }
+
+  decreaseQuantity() {
+    const { product: { id } } = this.state;
+    const previousList = this.loadCartList();
+    if (previousList[id] && previousList[id].quantity > 1) {
+      previousList[id].quantity -= 1;
+>>>>>>> 79ec0761b1dda8e46a91647ffbc5aa2b745da6d9
     }
-    return JSON.parse(previousList);
+    // const details = this.loadCartList();
+    // const productArray = Object.values(details);
+    // this.setState({
+    //   quantity: productArray.length,
+    // });
+    const quantityItem = previousList[id].quantity;
+    this.setState({
+      quantity: quantityItem,
+    });
+    localStorage.setItem('cartList', JSON.stringify(previousList));
   }
 
   increaseQuantity() {
@@ -76,18 +131,25 @@ class ProductDetails extends React.Component {
   loadCartList() {
     let previousList = localStorage.getItem('cartList');
     if (previousList === null) {
-      previousList = [];
+      previousList = {};
       return previousList;
     }
     return JSON.parse(previousList);
   }
 
   render() {
+<<<<<<< HEAD
     const { product:
       { title, thumbnail, price },
     quantity,
     } = this.state;
 
+=======
+    const { product: { title, thumbnail, price }, quantity } = this.state;
+    console.log(`qtd do getSetState ${quantity}`);
+    const { rating } = this.state;
+    const numberOfStars = 5;
+>>>>>>> 79ec0761b1dda8e46a91647ffbc5aa2b745da6d9
     return (
       <div>
         <header className="header-details-product">
@@ -100,7 +162,7 @@ class ProductDetails extends React.Component {
         </header>
         <h3 data-testid="product-detail-name">
           { title }
-          {' - R$ '}
+          { ' - R$ ' }
           { price === undefined ? price : parseFloat(price).toFixed(2).replace('.', ',') }
         </h3>
         <div className="container-image-and-product-details">
@@ -137,19 +199,74 @@ class ProductDetails extends React.Component {
         <button
           className="increase-btn"
           type="button"
+<<<<<<< HEAD
           onClick={ () => this.increaseQuantity() }
+=======
+          onClick={ this.handleClick }
+>>>>>>> 79ec0761b1dda8e46a91647ffbc5aa2b745da6d9
         >
           +
         </button>
         <button
-          type="button"
           className="add-to-cart-btn-details"
+          type="button"
           data-testid="product-detail-add-to-cart"
           onClick={ this.handleClick }
         >
           Adicionar ao carrinho
         </button>
+<<<<<<< HEAD
         <FormsAvaliation />
+=======
+        <h3>Avaliações</h3>
+        <form>
+          <div className="container-forms">
+            <input
+              type="email"
+              placeholder="Email"
+              size="30"
+              className="input-email-forms"
+              onChange={ this.getEmailAndMessage }
+            />
+            <div className="container-stars">
+              { [...Array(numberOfStars)].map((star, index) => {
+                const ratingValue = index + 1;
+                return (
+                  <label htmlFor={ index } key={ index }>
+                    <input
+                      id={ index }
+                      className="radio-star"
+                      type="radio"
+                      name="rating"
+                      value={ ratingValue }
+                      required
+                      onClick={ () => this.setRating(ratingValue) }
+                    />
+                    <FaStar
+                      rating={ rating }
+                      color={ ratingValue <= rating ? '#ffc107' : '#e4e5e9' }
+                      className="star-rating"
+                      size={ 30 }
+                    />
+                  </label>
+                );
+              }) }
+            </div>
+          </div>
+          <textarea
+            data-testid="product-detail-evaluation"
+            placeholder="Mensagem(opcional)"
+            rows="6"
+            cols="60"
+          />
+          <button
+            type="button"
+            className="btn-submit-avaliation"
+          >
+            Avaliar
+          </button>
+        </form>
+>>>>>>> 79ec0761b1dda8e46a91647ffbc5aa2b745da6d9
       </div>
     );
   }

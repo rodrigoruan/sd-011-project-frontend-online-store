@@ -28,8 +28,8 @@ class ShoppingCart extends Component {
         <Link to="/">
           Página Inicial
         </Link>
-        { (!productArray)
-          ? <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
+        { (productArray.length === 0)
+          ? <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>
           : productArray
             .map((product, index) => <Cart key={ index } product={ product } />) }
 

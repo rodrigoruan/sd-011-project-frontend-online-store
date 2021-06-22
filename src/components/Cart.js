@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import '../App.css';
+
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -19,8 +21,7 @@ class Cart extends Component {
   }
 
   getSetState() {
-    const { product } = this.props;
-    const { quantity } = product;
+    const { product: { quantity } } = this.props;
     this.setState({
       quantity,
     });
@@ -50,7 +51,10 @@ class Cart extends Component {
       this.setState({
         quantity: previousList[id].quantity,
       });
+    } else {
+      console.log('deletar o item e atualizar o carrinho');
     }
+
     localStorage.setItem('cartList', JSON.stringify(previousList));
     this.totalValue();
   }
@@ -90,7 +94,11 @@ class Cart extends Component {
     return (
       <div>
         <button type="button">X</button>
-        <img alt={ `${product.title}` } src={ product.thumbnail } />
+        <img
+          className="image-details"
+          alt={ `${product.title}` }
+          src={ product.thumbnail }
+        />
         <h4 data-testid="shopping-cart-product-name">{ product.title }</h4>
         <button
           type="button"
