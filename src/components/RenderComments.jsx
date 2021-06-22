@@ -12,3 +12,11 @@ export default class RenderComments extends Component {
     );
   }
 }
+
+RenderComments.propTypes = {
+  comentario: PropTypes.shape({
+    rate: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    email: PropTypes.string,
+    comment: PropTypes.string,
+  }).isRequired,
+};
