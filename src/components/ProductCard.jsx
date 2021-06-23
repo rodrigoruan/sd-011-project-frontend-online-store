@@ -22,7 +22,7 @@ export default class ProductCard extends Component {
         <Link
           to={ {
             pathname: `/details/${id}`,
-            state: { title, price, thumbnail, id },
+            state: { product },
           } }
           data-testid="product-detail-link"
         >
