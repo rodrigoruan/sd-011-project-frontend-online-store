@@ -31,7 +31,7 @@ export default class ProductDetailsPage extends Component {
           <span
             data-testid="shopping-cart-size"
           >
-            { shoppingCartSize }
+            { 2 * shoppingCartSize }
           </span>
         </div>
 
