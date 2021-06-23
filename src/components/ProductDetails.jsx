@@ -7,10 +7,7 @@ export default class ProductDetails extends Component {
   render() {
     const { location:
       { state:
-        { title,
-          price,
-          thumbnail,
-          id,
+        { product,
         },
       }, addCart, cartItems } = this.props;
 
@@ -25,22 +22,25 @@ export default class ProductDetails extends Component {
         >
           Voltar ao carrinho
         </Link>
+        <p data-testid="shopping-cart-size">
+          { cartItems.reduce((acc, curr) => (acc + curr.quantity), 0)}
+        </p>
         <div data-testid="product">
-          <h4 data-testid="product-detail-name">{title}</h4>
-          <p>{`R$ ${price}`}</p>
-          <img src={ thumbnail } alt={ title } />
+          <h4 data-testid="product-detail-name">{product.title}</h4>
+          <p>{`R$ ${product.price}`}</p>
+          <img src={ product.thumbnail } alt={ product.title } />
           <p>Detalhes Técnicos</p>
 
         </div>
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ addCart }
-          value={ id }
+          onClick={ () => addCart(product) }
+          value={ product.id }
         >
           Adicionar ao carrinho
         </button>
-        <Comments id={ id } />
+        <Comments id={ product.id } />
       </>
     );
   }
@@ -49,10 +49,12 @@ export default class ProductDetails extends Component {
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      title: PropTypes.string,
-      price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      thumbnail: PropTypes.string,
-      id: PropTypes.string,
+      product: PropTypes.shape({
+        title: PropTypes.string,
+        price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        thumbnail: PropTypes.string,
+        id: PropTypes.string,
+      }),
     }),
   }).isRequired,
   addCart: PropTypes.func.isRequired,
