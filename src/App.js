@@ -79,6 +79,14 @@ class App extends Component {
     });
   }
 
+  getCartSize = () => {
+    const { cart } = this.state;
+    return cart.reduce((acc, product) => {
+      acc += product.amount;
+      return acc;
+    }, 0);
+  }
+
   removeFromCart = (product) => {
     const { cart } = this.state;
     const filteredOutProduct = cart.filter((item) => item.id !== product.id);
@@ -133,6 +141,7 @@ class App extends Component {
                 products={ products }
                 categories={ categories }
                 addToCart={ this.addToCart }
+                getCartSize={ this.getCartSize }
                 setCategory={ this.setCategory }
                 selectedProduct={ this.selectedProduct }
                 handleInputChange={ this.handleInputChange }
@@ -152,6 +161,7 @@ class App extends Component {
               path="/product-details/:id"
               render={ () => (<ProductDetailsPage
                 addToCart={ this.addToCart }
+                getCartSize={ this.getCartSize }
                 selectedProduct={ selectedProduct }
               />) }
             />

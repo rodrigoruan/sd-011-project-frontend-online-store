@@ -5,40 +5,66 @@ import EvaluationForm from '../components/EvaluationForm';
 
 export default class ProductDetailsPage extends Component {
   render() {
-    // Funções: addToCart
+    // Funções: addToCart, getCartSize
     // Objetos: selectedProduct, title, thumbnail, price, id
-    const { addToCart, selectedProduct } = this.props;
-    const { title, thumbnail, price, id,
-      shipping: { free_shipping: freeShipping } } = selectedProduct;
+    const { addToCart, selectedProduct, getCartSize } = this.props;
+    const {
+      title,
+      thumbnail,
+      price,
+      id,
+      shipping: { free_shipping: freeShipping },
+    } = selectedProduct;
+    const shoppingCartSize = getCartSize();
+
     return (
       <div>
         <Link to="/" className="home-button">Voltar</Link>
-        <Link
-          data-testid="shopping-cart-button"
-          to="/cart"
-        >
-          Carrinho de Compras
-        </Link>
-        <h3 data-testid="product-detail-name">{ title }</h3>
-        <img src={ thumbnail } alt="Product Thumbnail" />
+
+        <div className="cart-wrapper">
+          <Link
+            data-testid="shopping-cart-button"
+            to="/cart"
+          >
+            Carrinho de Compras
+          </Link>
+          <span
+            data-testid="shopping-cart-size"
+          >
+            { shoppingCartSize }
+          </span>
+        </div>
+
+        <h3 data-testid="product-detail-name">{title}</h3>
+
+        <img src={thumbnail} alt="Product Thumbnail" />
+
         <span>
           R$
-          { price }
+          {price}
         </span>
-        { freeShipping === true
-          ? <span data-testid="free-shipping">Frete grátis</span> : '' }
+
+        {freeShipping === true ? (
+          <span data-testid="free-shipping">Frete grátis</span>
+        ) : (
+          ""
+        )}
+
         <p>
           id:
-          { id }
+          {id}
         </p>
+
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => addToCart(selectedProduct) }
+          onClick={() => addToCart(selectedProduct)}
         >
           Adicionar ao Carrinho
         </button>
+
         <EvaluationForm />
+
       </div>
     );
   }
