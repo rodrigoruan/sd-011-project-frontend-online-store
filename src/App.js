@@ -26,10 +26,22 @@ export default class App extends Component {
     this.removeCartItem = this.removeCartItem.bind(this);
     this.increaseItemQuantity = this.increaseItemQuantity.bind(this);
     this.decreaseItemQuantity = this.decreaseItemQuantity.bind(this);
+    this.setStorage = this.setStorage.bind(this);
+    this.getStorage = this.getStorage.bind(this);
   }
 
   componentDidMount() {
     this.fetchProductCategory();
+    if (localStorage.getItem('localCart')) {
+      this.getStorage();
+    }
+    // if (localStorage.getItem('localCards')) {
+    //   this.getStorage();
+    // }
+  }
+
+  componentDidUpdate() {
+    this.setStorage();
   }
 
   handleChange({ target }) {
@@ -39,11 +51,26 @@ export default class App extends Component {
     });
   }
 
+  setStorage() {
+    const { cartItems } = this.state;
+    localStorage.setItem('localCart', JSON.stringify(cartItems));
+  }
+
+  getStorage() {
+    const cartItemsStorage = JSON.parse(localStorage.getItem('localCart'));
+    // const cardsItemsStorage = JSON.parse(localStorage.getItem('localCards'));
+    this.setState({
+      cartItems: cartItemsStorage,
+      // productCards: cardsItemsStorage,
+    });
+  }
+
   async fetchProducts() {
     const { categoryId, search } = this.state;
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
     this.setState({ productCards: fetchedProducts.results });
+    // localStorage.setItem('localCards', JSON.stringify(fetchedProducts.results));
   }
 
   async fetchProductCategory() {
@@ -60,23 +87,29 @@ export default class App extends Component {
       productCards: fetchedProductsFromCategories.results,
       categoryId: id,
     });
+    // localStorage.setItem('localCards', JSON.stringify(fetchedProductsFromCategories.results));
   }
 
-  addCart({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    const isInCart = cartItems.some((item) => item.id === value);
+  addCart(product) {
+    const { cartItems } = this.state;
+    const isInCart = cartItems.some((item) => item.id === product.id);
+    const itemIsInCart = cartItems.find((item) => item.id === product.id);
     if (!isInCart) {
-      itemToCart.quantity = 1;
+      product.quantity = 1;
       this.setState({
-        cartItems: [...cartItems, itemToCart],
+        cartItems: [...cartItems, product],
       });
-    } else if (itemToCart.quantity < itemToCart.available_quantity) {
+
+      // this.setStorage();
+      // Não estamos conseguindo alterar as quantidades dos items já adicionados, após renderização do carrinho
+    } else {
+      itemIsInCart.quantity += 1;
       this.setState({
         cartItems: [...cartItems],
       });
-      itemToCart.quantity += 1;
+      // this.setStorage();
     }
+    this.setStorage();
   }
 
   removeCartItem({ target: { value } }) {
@@ -85,13 +118,14 @@ export default class App extends Component {
     this.setState({
       cartItems: updateCart,
     });
+    // this.setStorage();
   }
 
   increaseItemQuantity({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    const isInCart = cartItems.some((item) => item.id === value);
-    if (isInCart) {
+    const { cartItems } = this.state;
+    const itemToCart = cartItems.find((item) => item.id === value);
+    // const isInCart = cartItems.some((item) => item.id === product.id);
+    if (itemToCart) {
       this.setState({
         cartItems: [...cartItems],
       });
@@ -100,10 +134,10 @@ export default class App extends Component {
   }
 
   decreaseItemQuantity({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    const isInCart = cartItems.some((item) => item.id === value);
-    if (isInCart && itemToCart.quantity > 1) {
+    const { cartItems } = this.state;
+    const itemToCart = cartItems.find((item) => item.id === value);
+    // const isInCart = cartItems.some((item) => item.id === product.id);
+    if (itemToCart.quantity > 1) {
       this.setState({
         cartItems: [...cartItems],
       });

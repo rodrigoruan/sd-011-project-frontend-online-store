@@ -14,6 +14,7 @@ export default class ProductCard extends Component {
     addCart } = this.props;
 
     const { product: { available_quantity: quantity } } = this.props; // https://eslint.org/docs/rules/camelcase
+    const { product } = this.props;
 
     return (
       <div className="product-card" data-testid="product">
@@ -27,7 +28,7 @@ export default class ProductCard extends Component {
         <button
           data-testid="product-add-to-cart"
           type="button"
-          onClick={ addCart }
+          onClick={ () => addCart(product) }
           value={ id }
         >
           Adicionar ao Carrinho
@@ -35,7 +36,7 @@ export default class ProductCard extends Component {
         <Link
           to={ {
             pathname: `/details/${id}`,
-            state: { title, price, thumbnail, id },
+            state: { product },
           } }
           data-testid="product-detail-link"
         >
