@@ -8,7 +8,7 @@ export default class CartPage extends Component {
   }
 
   render() {
-    // Funções: removeFromCart
+    // Funções: removeFromCart, addToCart, decreaseFromCart
     // Objetos: cart
     const { cart, removeFromCart, addToCart, decreaseFromCart } = this.props;
 
