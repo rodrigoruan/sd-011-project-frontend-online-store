@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default class ProductCard extends Component {
   render() {
-    //  const { product } = this.props;
+    const { product } = this.props;
     const { product:
       { title,
         price,
