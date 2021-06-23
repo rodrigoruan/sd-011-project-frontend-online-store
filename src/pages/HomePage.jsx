@@ -7,10 +7,10 @@ import FiltersBar from '../components/FiltersBar';
 export default class HomePage extends Component {
   render() {
     // Funções: addToCart, setCategory, selectedProduct,
-    //          handleInputChange, handleSearchClick
+    //          handleInputChange, handleSearchClick, getCartSize
     // Objetos: products, categories
     const {
-      addToCart, products, categories,
+      addToCart, getCartSize, products, categories,
       handleInputChange, handleSearchClick,
       setCategory, selectedProduct, loading,
     } = this.props;
@@ -27,6 +27,8 @@ export default class HomePage extends Component {
       />);
     }
 
+    const shoppingCartSize = getCartSize();
+
     return (
       <div>
         <form action="" className="form-search">
@@ -39,6 +41,7 @@ export default class HomePage extends Component {
               data-testid="query-input"
               onChange={ (e) => handleInputChange(e) }
             />
+
             <button
               type="button"
               name="button"
@@ -47,12 +50,28 @@ export default class HomePage extends Component {
             >
               Pesquisar
             </button>
-            <Link data-testid="shopping-cart-button" to="/cart">Carrinho de Compras</Link>
+
+            <div className="cart-wrapper">
+              <Link
+                data-testid="shopping-cart-button"
+                to="/cart"
+              >
+                Carrinho de Compras
+              </Link>
+
+              <span
+                data-testid="shopping-cart-size"
+              >
+                { shoppingCartSize }
+              </span>
+            </div>
           </label>
+          
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h2>
         </form>
+
         {
           toRender
         }
@@ -64,6 +83,7 @@ export default class HomePage extends Component {
 HomePage.propTypes = {
   loading: PropTypes.bool.isRequired,
   addToCart: PropTypes.func.isRequired,
+  getCartSize: PropTypes.func.isRequired,
   setCategory: PropTypes.func.isRequired,
   selectedProduct: PropTypes.func.isRequired,
   handleInputChange: PropTypes.func.isRequired,
