@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Comments from './Comments';
 
 export default class ProductDetails extends Component {
   render() {
@@ -21,12 +22,6 @@ export default class ProductDetails extends Component {
         >
           Voltar ao carrinho
         </Link>
-        <p
-          data-testid="shopping-cart-size"
-        >
-          {cartItems.reduce((acc, curr) => (
-            (acc + (curr.quantity))), 0)}
-        </p>
         <div data-testid="product">
           <h4 data-testid="product-detail-name">{product.title}</h4>
           <p>{`R$ ${product.price}`}</p>
@@ -42,6 +37,7 @@ export default class ProductDetails extends Component {
         >
           Adicionar ao carrinho
         </button>
+        <Comments id={ id } />
       </>
     );
   }
@@ -59,6 +55,7 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addCart: PropTypes.func.isRequired,
+  /* comments: PropTypes.string.isRequired, */
   cartItems: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,
