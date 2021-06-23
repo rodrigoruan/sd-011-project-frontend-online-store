@@ -62,21 +62,25 @@ export default class App extends Component {
     });
   }
 
-  addCart({ target: { value } }) {
-    const { productCards, cartItems } = this.state;
-    const itemToCart = productCards.find((item) => item.id === value);
-    const isInCart = cartItems.some((item) => item.id === value);
+  addCart(product) {
+    const { cartItems } = this.state;
+    const isInCart = cartItems.some((item) => item.id === product.id);
+    const itemIsInCart = cartItems.find((item) => item.id === product.id);
     if (!isInCart) {
-      itemToCart.quantity = 1;
+      product.quantity = 1;
       this.setState({
-        cartItems: [...cartItems, itemToCart],
+        cartItems: [...cartItems, product],
       });
-    } else if (itemToCart.quantity < itemToCart.available_quantity) {
+      // this.setStorage();
+      // Não estamos conseguindo alterar as quantidades dos items já adicionados, após renderização do carrinho
+    } else {
+      itemIsInCart.quantity += 1;
       this.setState({
         cartItems: [...cartItems],
       });
-      itemToCart.quantity += 1;
+      // this.setStorage();
     }
+    this.setStorage();
   }
 
   removeCartItem({ target: { value } }) {
