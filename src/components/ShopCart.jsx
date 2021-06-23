@@ -29,6 +29,7 @@ export default class ShopCart extends Component {
         { cartItems.map((item) => (
           <div className="cart-product-container" key={ item.id }>
             <button
+              className="shop-cart-buttons"
               onClick={ removeCartItem }
               type="button"
               value={ item.id }
@@ -43,6 +44,7 @@ export default class ShopCart extends Component {
               { item.title }
             </p>
             <button
+              className="shop-cart-buttons"
               onClick={ decreaseItemQuantity }
               type="button"
               value={ item.id }
@@ -52,7 +54,8 @@ export default class ShopCart extends Component {
             </button>
             <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
             <button
-              onClick={ increaseItemQuantity }
+              className="shop-cart-buttons"
+              onClick={ item.quantity < item.available_quantity && increaseItemQuantity }
               type="button"
               value={ item.id }
               data-testid="product-increase-quantity"
@@ -60,7 +63,24 @@ export default class ShopCart extends Component {
               +
             </button>
             <p>{`R$ ${item.price}`}</p>
+            <p>{`Quantidade ${item.available_quantity}`}</p>
           </div>))}
+        <div className="total-price">
+          {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
+            acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
+        </div>
+        <Link
+          to="/checkout"
+        >
+          <button
+            className="go-to-checkout-button"
+            type="button"
+            data-testid="checkout-products"
+            value={ cartItems }
+          >
+            Finalizar Compra
+          </button>
+        </Link>
       </div>
     );
   }
@@ -73,6 +93,7 @@ ShopCart.propTypes = {
     length: PropTypes.number,
     map: PropTypes.func,
     quantity: PropTypes.number,
+    reduce: PropTypes.func,
   }).isRequired,
   removeCartItem: PropTypes.func.isRequired,
   increaseItemQuantity: PropTypes.func.isRequired,

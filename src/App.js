@@ -4,6 +4,7 @@ import Home from './components/Home';
 import ShopCart from './components/ShopCart';
 /* import ProductCard from './components/ProductCard'; */
 import ProductDetails from './components/ProductDetails';
+import Checkout from './components/Checkout';
 import * as fetchAPI from './services/api';
 import './App.css';
 
@@ -98,6 +99,7 @@ export default class App extends Component {
       this.setState({
         cartItems: [...cartItems, product],
       });
+
       // this.setStorage();
       // Não estamos conseguindo alterar as quantidades dos items já adicionados, após renderização do carrinho
     } else {
@@ -179,6 +181,12 @@ export default class App extends Component {
                 cartItems={ cartItems }
                 addCart={ this.addCart }
                 { ...props }
+              />) }
+            />
+            <Route
+              path="/checkout"
+              render={ () => (<Checkout
+                cartItems={ cartItems }
               />) }
             />
           </Switch>
