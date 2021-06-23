@@ -49,8 +49,12 @@ class App extends Component {
     let newCart = [...cart];
     if (cart.find((item) => item.id === product.id)) {
       const productIndex = newCart.findIndex((item) => item.id === product.id);
-      newCart[productIndex].amount += 1;
-      console.log(newCart[productIndex].amount);
+      if (newCart[productIndex].amount === newCart[productIndex].available_quantity) {
+        console.log('Número máximo');
+      } else {
+        newCart[productIndex].amount += 1;
+        console.log(newCart[productIndex].amount);
+      }
     } else {
       newCart = [...cart, { ...product, amount: 1 }];
     }
