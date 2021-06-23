@@ -16,6 +16,8 @@ export default class Home extends Component {
       cartItems,
     } = this.props;
 
+    // backup
+
     if (categories === []) return <div>Loading...</div>;
     return (
       <div>
