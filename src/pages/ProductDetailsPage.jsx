@@ -37,7 +37,7 @@ export default class ProductDetailsPage extends Component {
 
         <h3 data-testid="product-detail-name">{title}</h3>
 
-        <img src={thumbnail} alt="Product Thumbnail" />
+        <img src={ thumbnail } alt="Product Thumbnail" />
 
         <span>
           R$
@@ -47,7 +47,7 @@ export default class ProductDetailsPage extends Component {
         {freeShipping === true ? (
           <span data-testid="free-shipping">Frete grátis</span>
         ) : (
-          ""
+          ''
         )}
 
         <p>
@@ -58,7 +58,7 @@ export default class ProductDetailsPage extends Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={() => addToCart(selectedProduct)}
+          onClick={ () => addToCart(selectedProduct) }
         >
           Adicionar ao Carrinho
         </button>
@@ -72,6 +72,7 @@ export default class ProductDetailsPage extends Component {
 
 ProductDetailsPage.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  getCartSize: PropTypes.func.isRequired,
   selectedProduct: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
