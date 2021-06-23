@@ -14,8 +14,7 @@ export default class ProductCard extends Component {
     addCart } = this.props;
 
     const { product: { available_quantity: quantity } } = this.props; // https://eslint.org/docs/rules/camelcase
-    const { product } = this.props; 
-
+    const { product } = this.props;
 
     return (
       <div className="product-card" data-testid="product">
