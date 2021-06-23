@@ -12,6 +12,7 @@ export default class ProductDetails extends Component {
           id,
         },
       }, addCart, cartItems } = this.props;
+    const { product } = this.props;
 
     return (
       <>
@@ -40,7 +41,7 @@ export default class ProductDetails extends Component {
         <button
           data-testid="product-detail-add-to-cart"
           type="button"
-          onClick={ () => addCart() }
+          onClick={ () => addCart(product) }
           value={ id }
         >
           Adicionar ao carrinho
