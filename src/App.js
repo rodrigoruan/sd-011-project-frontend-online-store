@@ -110,7 +110,7 @@ export default class App extends Component {
     }
     this.setStorage();
   }
- 
+  
   removeCartItem({ target: { value } }) {
     const { cartItems } = this.state;
     const updateCart = cartItems.filter(({ id }) => id !== value);
