@@ -49,10 +49,14 @@ class App extends Component {
     let newCart = [...cart];
     if (cart.find((item) => item.id === product.id)) {
       const productIndex = newCart.findIndex((item) => item.id === product.id);
-      newCart[productIndex].amount += 1;
-      console.log(newCart[productIndex].amount);
+      if (newCart[productIndex].amount === newCart[productIndex].available_quantity) {
+        console.log('Número máximo');
+      } else {
+        newCart[productIndex].amount += 1;
+        console.log(newCart[productIndex].amount);
+      }
     } else {
-      newCart = [...cart, {...product, amount: 1}]; 
+      newCart = [...cart, { ...product, amount: 1 }];
     }
     this.setState({
       cart: newCart,
@@ -60,7 +64,6 @@ class App extends Component {
   }
 
   decreaseFromCart = (product) => {
-    
     const { cart } = this.state;
     let newCart = [...cart];
     if (cart.find((item) => item.id === product.id)) {
@@ -72,7 +75,7 @@ class App extends Component {
         newCart = newCart.filter((item) => item.id !== newCart[productIndex].id);
       }
     } else {
-      newCart = [...cart, {...product, amount: 1}]; 
+      newCart = [...cart, { ...product, amount: 1 }];
     }
     this.setState({
       cart: newCart,
@@ -154,7 +157,7 @@ class App extends Component {
                 cart={ cart }
                 removeFromCart={ this.removeFromCart }
                 addToCart={ this.addToCart }
-                decreaseFromCart={ this.decreaseFromCart}
+                decreaseFromCart={ this.decreaseFromCart }
               />) }
             />
             <Route

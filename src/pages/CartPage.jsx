@@ -5,11 +5,10 @@ import ItemsCart from '../components/ItemsCart';
 
 export default class CartPage extends Component {
   componentDidMount() {
-    const { cart } = this.props;
   }
 
   render() {
-    // Funções: removeFromCart
+    // Funções: removeFromCart, addToCart, decreaseFromCart
     // Objetos: cart
     const { cart, removeFromCart, addToCart, decreaseFromCart } = this.props;
 
@@ -42,10 +41,9 @@ export default class CartPage extends Component {
                 addToCart={ addToCart }
                 decreaseFromCart={ decreaseFromCart }
               />
-            ))  
-          }    
-              
-              
+            ))
+          }
+
         </div>
       </div>
     );
@@ -55,4 +53,6 @@ export default class CartPage extends Component {
 CartPage.propTypes = {
   cart: PropTypes.instanceOf(PropTypes.object).isRequired,
   removeFromCart: PropTypes.func.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  decreaseFromCart: PropTypes.func.isRequired,
 };
