@@ -32,7 +32,7 @@ class ProductDetails extends React.Component {
     const { product: { id, title, thumbnail, price }, quantity } = this.state;
     const previousList = this.loadCartList();
     if (previousList[id]) {
-      for (let i = 0;i < quantity;i += 1) {
+      for (let i = 0; i < quantity; i += 1) {
         previousList[id].quantity += 1;
       }
     } else {
@@ -104,7 +104,7 @@ class ProductDetails extends React.Component {
   render() {
     const { product:
       { title, thumbnail, price },
-      quantity, cartQuantity } = this.state;
+    quantity, cartQuantity } = this.state;
 
     return (
       <div>
