@@ -7,7 +7,6 @@ export default class AvaliationForm extends Component {
     super();
 
     this.state = {
-      allAvaliations: [],
       email: '',
       message: '',
       stars: 0,
@@ -21,24 +20,35 @@ export default class AvaliationForm extends Component {
     });
   }
 
-  // getLocalStorage = () => {
-
-  //   }
-
   alterStateStar = (newRating) => {
     this.setState({
       stars: newRating,
     });
   }
 
-  // setLocalStorage = () => {
-  // }
+  setLocalStorage = () => {
+    const { email, message, stars } = this.state;
+    const { title } = this.props;
+    const avaliation = { email, message, stars };
+    const storage = JSON.parse(localStorage.getItem(`Avaliation ${title}`));
+    if (storage) {
+      localStorage.setItem(`Avaliation ${title}`, JSON.stringify([...storage, avaliation]));
+    } else {
+      localStorage.setItem(`Avaliation ${title}`, JSON.stringify([avaliation]));
+    }
+    this.setState({
+      email: '',
+      message: '',
+      stars: 0,
+    });
+  }
 
   render() {
+    const { email, message, stars } = this.state;
     return (
       <form>
         <ReactStars
-          // value={ 4 }
+          value={ stars }
           // edit={ false }
           count={ 5 }
           onChange={ this.alterStateStar }
@@ -47,6 +57,7 @@ export default class AvaliationForm extends Component {
           activeColor="#ffd700"
         />
         <input
+          value={ email }
           name="email"
           onChange={ this.handleChange }
           placeholder="Email"
@@ -54,18 +65,19 @@ export default class AvaliationForm extends Component {
         />
         <br />
         <textarea
+          value={ message }
           name="message"
           onChange={ this.handleChange }
           type="text"
           placeholder="Mensagem(opcional)"
         />
         <br />
-        <button type="button">Avaliar</button>
+        <button onClick={ this.setLocalStorage } type="button">Avaliar</button>
       </form>
     );
   }
 }
 
 AvaliationForm.propTypes = {
-
-}
+  title: PropTypes.string.isRequired,
+};

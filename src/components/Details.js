@@ -38,7 +38,7 @@ export default class Details extends Component {
           dataTestid="product-detail-add-to-cart"
         />
         <div>
-          <AvaliationForm price={ price } title={ title } thumbnail={ thumbnail } />
+          <AvaliationForm title={ title } />
         </div>
       </div>
     );
