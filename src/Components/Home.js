@@ -48,6 +48,7 @@ class Home extends React.Component {
       price: object.price,
       id: object.id,
       quantity: 1,
+      availableQuantity: object.available_quantity,
     };
     let initial = false;
     if (!localStorage.cart || localStorage.length === 0) {
