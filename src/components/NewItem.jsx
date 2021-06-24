@@ -35,9 +35,15 @@ class NewItem extends Component {
             - MENOS
           </button>
           <img src={ product.thumbnail } alt={ product.title } />
-          <p>{product.price}</p>
-          <span data-testid="shopping-cart-product-quantity">{product.quantity}</span>
-          {/* <span>{product.quantity * product.price}</span> */}
+          <p>
+            Valor deste produto: R$
+            {product.price}
+          </p>
+          <span
+            data-testid="shopping-cart-product-quantity"
+          >
+            {`Quandidade selecionada: ${product.quantity}` }
+          </span>
         </div>
       </div>
     );

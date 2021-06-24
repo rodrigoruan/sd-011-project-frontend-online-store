@@ -36,7 +36,7 @@ class CardItem extends React.Component {
             data-testid="product-add-to-cart"
             onClick={ () => addState(product) }
           >
-            add
+            Adicionar ao carrinho
           </button>
         </>
       ))
