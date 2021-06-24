@@ -88,6 +88,7 @@ export default class AvaliationForm extends Component {
           />
           <br />
           <textarea
+            data-testid="product-detail-evaluation"
             value={ message }
             name="message"
             onChange={ this.handleChange }
@@ -95,7 +96,12 @@ export default class AvaliationForm extends Component {
             placeholder="Mensagem(opcional)"
           />
           <br />
-          <button onClick={ this.setLocalStorage } type="button">Avaliar</button>
+          <button
+            onClick={ this.setLocalStorage }
+            type="button"
+          >
+            Avaliar
+          </button>
         </form>
         <div>
           {allAvaliations && allAvaliations.map((avaliation, index) => (
