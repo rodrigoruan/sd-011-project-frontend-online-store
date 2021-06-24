@@ -12,7 +12,6 @@ export default class AddAndRemoveCartItem extends Component {
 
   increment = () => {
     const { title, price, thumbnail, onClick, quantity } = this.props;
-    console.log(quantity);
     let count = JSON.parse(localStorage.getItem(title)).count + 1;
     if (count < quantity) {
       this.setState({
@@ -34,7 +33,6 @@ export default class AddAndRemoveCartItem extends Component {
 
   decrement = () => {
     const { title, price, thumbnail, onClick, quantity } = this.props;
-    console.log(quantity);
     let count = JSON.parse(localStorage.getItem(title)).count - 1;
     if (count < 2) {
       count = 1;
