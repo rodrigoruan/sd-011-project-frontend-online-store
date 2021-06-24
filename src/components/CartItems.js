@@ -16,7 +16,9 @@ export default class CartItems extends Component {
 
   getLocalStorage = () => {
     const getStorage = { ...localStorage }; // O spread operator, espalha, distribui todo o objeto, na variavel;
-    const itemProduct = Object.values(getStorage).map((item) => JSON.parse(item));
+    const itemProduct = Object.values(getStorage)
+      .map((item) => JSON.parse(item))
+      .filter((product) => product.count);
     this.setState({
       allProducts: itemProduct,
     });
@@ -62,9 +64,11 @@ export default class CartItems extends Component {
           {allProducts.reduce((acc, { price, count }) => acc + price * count, 0)}
         </span>
         <br />
-        <button type="button">
-          Finalizar compra
-        </button>
+        <Link to={ { pathname: '/checkout', state: { allProducts } } }>
+          <button data-testid="checkout-products" type="button">
+            Finalizar compra
+          </button>
+        </Link>
         <Link to="/">
           Voltar
         </Link>

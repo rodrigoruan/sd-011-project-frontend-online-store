@@ -5,6 +5,7 @@ import './App.css';
 import CartItems from './components/CartItems';
 import Details from './components/Details';
 import Home from './components/Home';
+import Checkout from './components/Checkout';
 
 export default class App extends Component {
   render() {
@@ -12,6 +13,7 @@ export default class App extends Component {
       <BrowserRouter>
         <Route exact path="/" component={ Home } />
         <Route exact path="/cartitems" component={ CartItems } />
+        <Route path="/checkout" render={ (props) => <Checkout { ...props } /> } />
         <Route path="/details/:id" render={ (props) => <Details { ...props } /> } />
       </BrowserRouter>
     );
