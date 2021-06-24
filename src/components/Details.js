@@ -30,7 +30,7 @@ export default class Details extends Component {
     const { location } = this.props;
     const { state } = location;
     const { product } = state;
-    const { title, price, thumbnail, attributes, available_quantity } = product;
+    const { title, price, thumbnail, attributes } = product;
     const { allCartItens } = this.state;
 
     return (
@@ -44,7 +44,6 @@ export default class Details extends Component {
         <div>
           <h2 data-testid="product-detail-name">{`${title} - R$${price}`}</h2>
           <img src={ thumbnail } alt={ title } />
-          <span>{ `Produtos em estoque: ${available_quantity} unidades` }</span>
         </div>
         <div>
           <h3>Especificações Técnicas</h3>
