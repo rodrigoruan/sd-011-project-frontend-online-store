@@ -28,17 +28,29 @@ class Cart extends Component {
   }
 
   increaseQuantity() {
-    const { product: { id, title, thumbnail, price } } = this.props;
+    const { product: { id, title, thumbnail, price, availableQuantity } } = this.props;
+    const { quantity } = this.state;
     const previousList = this.loadCartList();
-    if (previousList[id]) {
-      previousList[id].quantity += 1;
-    } else {
-      previousList[id] = { id, title, thumbnail, price, quantity: 1 };
+
+    const prevState = quantity;
+    if (prevState < availableQuantity) {
+      if (previousList[id]) {
+        previousList[id].quantity += 1;
+      } else {
+        previousList[id] = {
+          id, title, thumbnail, price, quantity: 1, availableQuantity,
+        };
+      }
+      const quantityItem = previousList[id].quantity;
+      this.setState({
+        quantity: quantityItem,
+      });
     }
-    const quantityItem = previousList[id].quantity;
+
     this.setState({
-      quantity: quantityItem,
+      quantity: prevState + 1,
     });
+
     localStorage.setItem('cartList', JSON.stringify(previousList));
     this.totalValue();
   }
@@ -139,6 +151,7 @@ Cart.propTypes = {
     price: PropTypes.number,
     id: PropTypes.string,
     quantity: PropTypes.number,
+    availableQuantity: PropTypes.string,
   }).isRequired,
 };
 

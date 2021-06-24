@@ -5,6 +5,7 @@ import Cardproduct from './Cardproduct';
 class Searchfield extends Component {
   render() {
     const { products, cartQuantity } = this.props;
+
     return (
       <div className="container-products">
         { products.map((product) => (
@@ -16,6 +17,7 @@ class Searchfield extends Component {
             id={ product.id }
             categoryId={ product.category_id }
             cartQuantity={ cartQuantity }
+            availableQuantity={ product.available_quantity }
           />
         )) }
       </div>

@@ -10,12 +10,12 @@ class Cardproduct extends Component {
   }
 
   handleClick() {
-    const { id, title, thumbnail, price, cartQuantity } = this.props;
+    const { id, title, thumbnail, price, cartQuantity, availableQuantity } = this.props;
     const previousList = this.loadCartList();
     if (previousList[id]) {
       previousList[id].quantity += 1;
     } else {
-      previousList[id] = { id, title, thumbnail, price, quantity: 1 };
+      previousList[id] = { id, title, thumbnail, price, quantity: 1, availableQuantity };
     }
     localStorage.setItem('cartList', JSON.stringify(previousList));
     cartQuantity();
@@ -31,7 +31,7 @@ class Cardproduct extends Component {
   }
 
   render() {
-    const { title, thumbnail, price, id, categoryId } = this.props;
+    const { title, thumbnail, price, id, categoryId, availableQuantity } = this.props;
     return (
       <div
         data-testid="product"
@@ -39,7 +39,7 @@ class Cardproduct extends Component {
       >
         <p>{ title }</p>
         <img src={ thumbnail } width="100px" alt="produto" />
-        <p>1</p>
+        <p>{ availableQuantity }</p>
         <button
           type="button"
           data-testid="product-add-to-cart"
@@ -66,6 +66,7 @@ Cardproduct.propTypes = {
   id: PropTypes.string.isRequired,
   categoryId: PropTypes.string.isRequired,
   cartQuantity: PropTypes.func.isRequired,
+  availableQuantity: PropTypes.string.isRequired,
 };
 
 export default Cardproduct;

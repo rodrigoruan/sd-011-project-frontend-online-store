@@ -56,6 +56,7 @@ class ProductDetails extends React.Component {
   increaseQuantity() {
     const { quantity, product } = this.state;
     const quantityAvailable = product.available_quantity;
+    console.log(quantityAvailable);
     const prevState = quantity;
     if (prevState < quantityAvailable) {
       this.setState({
