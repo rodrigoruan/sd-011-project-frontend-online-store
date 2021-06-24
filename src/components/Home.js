@@ -10,6 +10,7 @@ export default class SearchBar extends Component {
     super(props);
 
     this.state = {
+      allCartItens: [],
       categories: [],
       textSearch: '',
       products: [],
@@ -22,6 +23,17 @@ export default class SearchBar extends Component {
 
   componentDidMount() {
     this.getCategory();
+    this.getLocalStorage();
+  }
+
+  getLocalStorage = () => {
+    const getStorage = { ...localStorage }; // O spread operator, espalha, distribui todo o objeto, na variavel;
+    const itemProduct = Object.values(getStorage)
+      .map((item) => JSON.parse(item))
+      .filter((product) => product.count);
+    this.setState({
+      allCartItens: itemProduct,
+    });
   }
 
   getValuTextInput({ target }) {
@@ -49,7 +61,7 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    const { categories, products, textSearch } = this.state;
+    const { categories, products, textSearch, allCartItens } = this.state;
 
     return (
       <div className="main-container">
@@ -67,6 +79,9 @@ export default class SearchBar extends Component {
           <div>
             <Link data-testid="shopping-cart-button" to="/cartitems">
               Carrinho de compras
+              <span data-testid="shopping-cart-size">
+                {allCartItens.reduce((acc, cur) => acc + cur.count, 0)}
+              </span>
             </Link>
           </div>
           <button
@@ -103,7 +118,6 @@ export default class SearchBar extends Component {
                     title={ product.title }
                     thumbnail={ product.thumbnail }
                     price={ product.price }
-
                   />
                 </Link>
                 <Button
@@ -111,6 +125,7 @@ export default class SearchBar extends Component {
                   thumbnail={ product.thumbnail }
                   price={ product.price }
                   dataTestid="product-add-to-cart"
+                  funcGetLocalStorage={ this.getLocalStorage }
                 />
               </div>
             ))}

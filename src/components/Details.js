@@ -5,16 +5,41 @@ import Button from './Button';
 import AvaliationForm from './AvaliationForm';
 
 export default class Details extends Component {
+  constructor() {
+    super();
+    this.state = {
+      allCartItens: [],
+    };
+  }
+
+  componentDidMount() {
+    this.getLocalStorage();
+  }
+
+  getLocalStorage = () => {
+    const getStorage = { ...localStorage }; // O spread operator, espalha, distribui todo o objeto, na variavel;
+    const itemProduct = Object.values(getStorage)
+      .map((item) => JSON.parse(item))
+      .filter((product) => product.count);
+    this.setState({
+      allCartItens: itemProduct,
+    });
+  }
+
   render() {
     const { location } = this.props;
     const { state } = location;
     const { product } = state;
     const { title, price, thumbnail, attributes } = product;
+    const { allCartItens } = this.state;
 
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cartitems">
-          Carrinho de compras
+          Carrinho de comprasㅤ
+          <span data-testid="shopping-cart-size">
+            {allCartItens.reduce((acc, cur) => acc + cur.count, 0)}
+          </span>
         </Link>
         <div>
           <h2 data-testid="product-detail-name">{`${title} - R$${price}`}</h2>
@@ -36,6 +61,7 @@ export default class Details extends Component {
           thumbnail={ product.thumbnail }
           price={ product.price }
           dataTestid="product-detail-add-to-cart"
+          funcGetLocalStorage={ this.getLocalStorage }
         />
         <div>
           <AvaliationForm title={ title } />
