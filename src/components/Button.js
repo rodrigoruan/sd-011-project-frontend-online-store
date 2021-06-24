@@ -25,10 +25,10 @@ export default class Button extends Component {
   }
 
   addToCart() {
-    const { title, price, thumbnail, funcGetLocalStorage } = this.props;
+    const { title, price, thumbnail, funcGetLocalStorage, quantity } = this.props;
     this.setState((oldValue) => ({ count: oldValue.count + 1 }));
     const { count } = this.state;
-    const objeto = { count, title, price, thumbnail };
+    const objeto = { count, title, price, thumbnail, quantity };
     localStorage.setItem(title, JSON.stringify(objeto));
     funcGetLocalStorage();
   }
@@ -49,6 +49,7 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
+  quantity: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

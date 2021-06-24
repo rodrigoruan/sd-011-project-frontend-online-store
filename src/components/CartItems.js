@@ -35,7 +35,7 @@ export default class CartItems extends Component {
 
     return (
       <div>
-        {allProducts.map(({ title, thumbnail, price, count }, index) => (
+        {allProducts.map(({ title, thumbnail, price, count, quantity }, index) => (
           <div key={ index }>
             <h3 data-testid="shopping-cart-product-name">
               {`${title} - R$${price}`}
@@ -52,6 +52,7 @@ export default class CartItems extends Component {
                 title={ title }
                 price={ price }
                 thumbnail={ thumbnail }
+                quantity={ quantity }
                 onClick={ this.getLocalStorage }
               />
             </div>
