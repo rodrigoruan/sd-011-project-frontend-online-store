@@ -8,19 +8,21 @@ import Details from './pages/Details';
 class App extends React.Component {
   constructor() {
     super();
-    this.addState = this.addState.bind(this);
-
     this.state = {
       cart: [],
       quantity: 0,
     };
+
+    this.addState = this.addState.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
   }
 
+  /** Esta função "addState" é responsável por adicionar um item ao carrinho.
+   * Basicamente, ele recebe por parâmetro um produto específico. Esse parâmetro
+   * é um item que apareceu na home, assim que uma requisição é feita. */
   addState(product) {
     let newCart = [];
-    // const counter = 1;
     const { cart } = this.state;
     const anyProduct = cart.find((item) => item.id === product.id);
 
@@ -33,13 +35,20 @@ class App extends React.Component {
         return item;
       });
     } else {
+      /** Caso o produto ainda não exista no carrinho, será adicionado
+       *  uma chave chamada "quantity" e o valor dela será 1, significando
+       * que é o primeiro produto daquele tipo no carrinho */
       product.quantity = 1;
+      /** Aqui abaixo é feita a junção do carrinho com o produto, utilizando
+       * spread. O .push() não deve ser utilizado devido a problemas relacionados
+       * ao React, onde ele em vez dele unificar o array, ele faz algo do tipo:
+       * [Array anterior, [novo array]] */
       newCart = [...cart, product];
     }
 
+    /** Após o ocorrido, o newCart é adicicionado ao cart */
     this.setState(() => ({
       cart: newCart,
-      // quantity: previouState.quantity + counter,
     }));
   }
 
@@ -84,7 +93,6 @@ class App extends React.Component {
               exact
               path="/carrinho"
               render={ () => (<ShoppingCart
-                addState={ this.addState }
                 cart={ cart }
                 quantity={ quantity }
                 decreaseQuantity={ this.decreaseQuantity }
@@ -94,11 +102,7 @@ class App extends React.Component {
             <Route
               exact
               path="/details/:id"
-              render={ (props) => (
-                <Details
-                  { ...props }
-                  addState={ this.addState }
-                />) }
+              render={ (props) => (<Details { ...props } addState={ this.addState } />) }
             />
           </Switch>
         </BrowserRouter>
