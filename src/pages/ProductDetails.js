@@ -43,9 +43,9 @@ export default class ProductDetails extends Component {
     const { handleAddToCart } = this.props;
     const getReviews = storage.readReviews('reviews');
     const { product } = this.state;
-    if (!product) {
-      return 'Loading...';
-    }
+    // if (!product) {
+    //   return 'Loading...';
+    // }
 
     return (
       <div>
