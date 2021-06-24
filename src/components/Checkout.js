@@ -8,13 +8,48 @@ export default class Checkout extends Component {
     const { allProducts } = state;
     return (
       <div>
-        <h3>Revise seus Produtos</h3>
-        {allProducts.map(({ thumbnail, title, price, count }, index) => (
-          <div key={ index }>
-            <img src={ thumbnail } alt={ title } />
-            <span>{ `${title} - ${count} - R$${count * price}`}</span>
-          </div>
-        ))}
+        <div>
+          <h3>Revise seus Produtos</h3>
+          {allProducts.map(({ thumbnail, title, price, count }, index) => (
+            <div key={ index }>
+              <img src={ thumbnail } alt={ title } />
+              <span>{ `${title} - ${count} - R$${count * price}`}</span>
+            </div>
+          ))}
+        </div>
+        <form>
+          <input
+            data-testid="checkout-fullname"
+            type="text"
+            placeholder="Nome completo"
+          />
+          <input
+            data-testid="checkout-email"
+            type="text"
+            placeholder="Email"
+          />
+          <input
+            data-testid="checkout-cpf"
+            type="text"
+            placeholder="Cpf"
+          />
+          <input
+            data-testid="checkout-phone"
+            type="text"
+            placeholder="Telefone"
+          />
+          <input
+            data-testid="checkout-cep"
+            type="text"
+            placeholder="CEP"
+          />
+          <input
+            data-testid="checkout-address"
+            type="text"
+            placeholder="Endereço"
+          />
+        </form>
+        <button type="button">Comprar</button>
       </div>
     );
   }
