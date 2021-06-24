@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ProductCard } from '../components/zComponentsMenu';
+import Cart from '../components/Cart';
 
 export default class SearchList extends Component {
   constructor(props) {
@@ -11,8 +12,6 @@ export default class SearchList extends Component {
     };
     this.showList = this.showList.bind(this);
   }
-
-  componentDidMount() {}
 
   componentDidUpdate(prevProps) {
     const { products } = this.props;
@@ -33,7 +32,7 @@ export default class SearchList extends Component {
         <ProductCard item={ el } key={ index } handleAddToCart={ handleAddToCart } />
       ));
     }
-    if (products.length < 1) {
+    if (!empty && products.length < 1) {
       return <>Nenhum produto foi encontrado</>;
     }
   };
@@ -44,16 +43,24 @@ export default class SearchList extends Component {
       return <>Loading</>;
     }
     if (products) {
-      return <div className="search-list">{this.showList()}</div>;
+      return (
+        <div className="search-list">
+          <Cart />
+          {this.showList()}
+        </div>
+      );
     }
   }
 }
 
 SearchList.propTypes = {
   handleAddToCart: PropTypes.func.isRequired,
-  products: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string,
-    thumbnail: PropTypes.string,
-    title: PropTypes.string,
-    price: PropTypes.number,
-  })).isRequired };
+  products: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      thumbnail: PropTypes.string,
+      title: PropTypes.string,
+      price: PropTypes.number,
+    }),
+  ).isRequired,
+};

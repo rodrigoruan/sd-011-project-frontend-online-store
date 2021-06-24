@@ -61,8 +61,8 @@ export default class Home extends Component {
   render() {
     const { handleAddToCart } = this.props;
     const { categories, products } = this.state;
+
     return (
-      // prettier-ignore
       <div className="home-div">
         <SearchInput
           handleSubmit={ this.handleSubmit }
@@ -73,7 +73,12 @@ export default class Home extends Component {
             handleRadioClick={ this.handleRadioClick }
             categories={ categories }
           />
-          <SearchList products={ products } handleAddToCart={ handleAddToCart } />
+          <SearchList
+            products={ products }
+            handleAddToCart={ (el) => {
+              handleAddToCart(el);
+            } }
+          />
         </div>
       </div>
     );

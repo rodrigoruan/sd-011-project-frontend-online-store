@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import { ProductReviewForm } from '../components/zComponentsMenu';
 import * as storage from '../services/storage';
+import Cart from '../components/Cart';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -39,12 +40,12 @@ export default class ProductDetails extends Component {
   };
 
   render() {
+    const { handleAddToCart } = this.props;
     const getReviews = storage.readReviews('reviews');
     const { product } = this.state;
-    const { handleAddToCart } = this.props;
-    if (!product) {
-      return 'Loading...';
-    }
+    // if (!product) {
+    //   return 'Loading...';
+    // }
 
     return (
       <div>
@@ -67,6 +68,7 @@ export default class ProductDetails extends Component {
         >
           Add to Cart!
         </button>
+        <Cart />
         <hr />
         <ProductReviewForm handleFormSubmit={ this.handleFormSubmit } />
         <div>

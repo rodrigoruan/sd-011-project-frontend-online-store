@@ -4,13 +4,9 @@ import './App.css';
 import './css/searchlist.css';
 import './css/home.css';
 import * as api from './services/api';
-// import * as storage from './services/storage';
-
-import { About,
-  NotFound, ShoppingCart,
-  Home,
-  Checkout,
-  ProductDetails } from './pages/zPageMenu';
+import { getCart, setCart } from './services/storage';
+import { About, NotFound,
+  ShoppingCart, Home, Checkout, ProductDetails } from './pages/zPageMenu';
 import { Header } from './components/zComponentsMenu';
 
 export default class App extends Component {
@@ -26,55 +22,45 @@ export default class App extends Component {
   componentDidMount() {
     api.getCategories();
     api.getProductsFromCategoryAndQuery();
+    getCart();
   }
 
-  // handleAddToCart(id, thumbnail, title, price, quantity) {
   handleAddToCart(item) {
-    const quantity = 1;
-    const { id, title, thumbnail, price } = item;
-    const { shoppingCart } = this.state;
-    const oldItems = [...shoppingCart];
-    const newItem = { id, title, thumbnail, price, quantity };
-    const itemExists = oldItems.find((el) => el.id === id);
+    const oldItems = [...getCart()];
+    const itemExists = oldItems.find((el) => el.id === item.id);
     if (itemExists) {
-      const updatedItem = { id,
-        title,
-        thumbnail,
-        price,
-        quantity: itemExists.quantity + 1 };
-      const updatedShoppingCart = oldItems.map((el) => (el.id === id ? updatedItem : el));
-      return this.setState({ shoppingCart: [...updatedShoppingCart] });
+      const updatedItem = { ...item, quantity: itemExists.quantity + 1 };
+      const updatedCart = oldItems.map((el) => (el.id === item.id ? updatedItem : el));
+      setCart([...updatedCart]);
+      return this.forceUpdate();
     }
-    this.setState({ shoppingCart: [...oldItems, newItem] });
+    setCart([...oldItems, { ...item, quantity: 1 }]);
+    return this.forceUpdate();
   }
 
   handleDecreaseQuantity = (item) => {
-    const { id, title, thumbnail, price } = item;
-    const { shoppingCart } = this.state;
-    const oldItems = [...shoppingCart];
-    const itemExists = oldItems.find((el) => el.id === id);
+    const oldItems = [...getCart()];
+    const itemExists = oldItems.find((el) => el.id === item.id);
     if (itemExists && itemExists.quantity > 1) {
-      const updatedItem = { id,
-        title,
-        thumbnail,
-        price,
-        quantity: itemExists.quantity - 1 };
-      const updatedShoppingCart = oldItems.map((el) => (el.id === id ? updatedItem : el));
-      return this.setState({ shoppingCart: [...updatedShoppingCart] });
+      const updatedItem = { ...item, quantity: itemExists.quantity - 1 };
+      const updatedCart = oldItems.map((el) => (el.id === item.id ? updatedItem : el));
+      setCart([...updatedCart]);
+      return this.forceUpdate();
     }
     if (itemExists && itemExists.quantity === 1) {
-      const updatedShoppingCart = oldItems.filter((el) => el.id !== id);
-      return this.setState({ shoppingCart: [...updatedShoppingCart] });
+      const updatedCart = oldItems.filter((el) => el.id !== item.id);
+      setCart([...updatedCart]);
+      return this.forceUpdate();
     }
   };
 
-  handleRemoveFromCart = (id) => {
-    const { shoppingCart } = this.state;
-    const oldItems = [...shoppingCart];
-    const itemExists = oldItems.find((el) => el.id === id);
+  handleRemoveFromCart = (item) => {
+    const oldItems = [...getCart()];
+    const itemExists = oldItems.find((el) => el.id === item.id);
     if (itemExists) {
-      const updatedShoppingCart = oldItems.filter((el) => el.id !== id);
-      return this.setState({ shoppingCart: [...updatedShoppingCart] });
+      const updatedCart = oldItems.filter((el) => el.id !== item.id);
+      setCart([...updatedCart]);
+      return this.forceUpdate();
     }
   };
 

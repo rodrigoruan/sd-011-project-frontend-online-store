@@ -5,10 +5,7 @@ import { Link } from 'react-router-dom';
 export default class Header extends Component {
   render() {
     return (
-
-      <nav
-        className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg"
-      >
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top expand-lg">
         <section className="navbar-nav" id="navbarNav">
           <li className="nav-item active">
             <Link className="nav-link" to="/">
@@ -23,6 +20,7 @@ export default class Header extends Component {
               className="nav-link"
             >
               Carrinho
+
             </Link>
           </li>
           <li>
@@ -30,16 +28,13 @@ export default class Header extends Component {
               About
             </Link>
           </li>
-          {' '}
           <li>
             <Link className="nav-item" to="/checkout">
               Checkout
             </Link>
           </li>
-
         </section>
       </nav>
-
     );
   }
 }
