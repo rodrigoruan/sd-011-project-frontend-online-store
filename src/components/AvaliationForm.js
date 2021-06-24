@@ -72,7 +72,6 @@ export default class AvaliationForm extends Component {
         <form>
           <ReactStars
             value={ stars }
-            // edit={ false }
             count={ 5 }
             onChange={ this.alterStateStar }
             size={ 25 }
@@ -110,7 +109,12 @@ export default class AvaliationForm extends Component {
               <span>{ avaliation.message }</span>
               <br />
               <span>Avaliação: </span>
-              <ReactStars value={ avaliation.stars } isHalf="true" edit={ false } />
+              <ReactStars
+                size={ 20 }
+                value={ avaliation.stars }
+                isHalf="true"
+                edit={ false }
+              />
             </div>
           ))}
         </div>
