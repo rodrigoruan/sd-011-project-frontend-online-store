@@ -38,6 +38,9 @@ class ShoppingCart extends Component {
           {productArray.length}
           itens no carrinho
         </h4>
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">Checkout</button>
+        </Link>
       </div>
     );
   }

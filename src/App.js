@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import ShoppingCart from './components/ShoppingCart';
 import ProductDetails from './components/ProductDetails';
+import Checkout from './components/Checkout';
 
 import './App.css';
 
@@ -23,6 +24,7 @@ class App extends React.Component {
               path="/product-detail/:categoryId/:id"
               render={ (props) => <ProductDetails { ...props } /> }
             />
+            <Route exact path="/checkout" component={ Checkout } />
           </Switch>
         </BrowserRouter>
       </div>
