@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Checkout extends Component {
   render() {
     const { location } = this.props;
     const { state } = location;
     const { allProducts } = state;
-    return(
+    return (
       <div>
         <h3>Revise seus Produtos</h3>
         {allProducts.map(({ thumbnail, title, price, count }, index) => (
@@ -18,3 +19,16 @@ export default class Checkout extends Component {
     );
   }
 }
+
+Checkout.propTypes = {
+  location: PropTypes.objectOf({
+    state: PropTypes.objectOf({
+      allProducts: PropTypes.objectOf({
+        title: PropTypes.string,
+        price: PropTypes.string,
+        thumbnail: PropTypes.string,
+        count: PropTypes.number,
+      }),
+    }),
+  }).isRequired,
+};

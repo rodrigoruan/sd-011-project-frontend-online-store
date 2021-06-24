@@ -16,7 +16,9 @@ export default class CartItems extends Component {
 
   getLocalStorage = () => {
     const getStorage = { ...localStorage }; // O spread operator, espalha, distribui todo o objeto, na variavel;
-    const itemProduct = Object.values(getStorage).map((item) => JSON.parse(item)).filter((product) => product.count);
+    const itemProduct = Object.values(getStorage)
+      .map((item) => JSON.parse(item))
+      .filter((product) => product.count);
     this.setState({
       allProducts: itemProduct,
     });
