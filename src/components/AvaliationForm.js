@@ -7,10 +7,15 @@ export default class AvaliationForm extends Component {
     super();
 
     this.state = {
+      allAvaliations: [],
       email: '',
       message: '',
       stars: 0,
     };
+  }
+
+  componentDidMount() {
+    this.getLocalStorage();
   }
 
   handleChange = ({ target }) => {
@@ -26,15 +31,32 @@ export default class AvaliationForm extends Component {
     });
   }
 
+  getLocalStorage = () => {
+    const { title } = this.props;
+    const storage = JSON.parse(localStorage.getItem(`Avaliation ${title}`));
+    if (storage) {
+      this.setState({
+        allAvaliations: storage,
+      });
+    }
+  }
+
   setLocalStorage = () => {
     const { email, message, stars } = this.state;
     const { title } = this.props;
     const avaliation = { email, message, stars };
     const storage = JSON.parse(localStorage.getItem(`Avaliation ${title}`));
     if (storage) {
-      localStorage.setItem(`Avaliation ${title}`, JSON.stringify([...storage, avaliation]));
+      localStorage.setItem(`Avaliation ${title}`,
+        JSON.stringify([...storage, avaliation]));
+      this.setState({
+        allAvaliations: [...storage, avaliation],
+      });
     } else {
       localStorage.setItem(`Avaliation ${title}`, JSON.stringify([avaliation]));
+      this.setState({
+        allAvaliations: [avaliation],
+      });
     }
     this.setState({
       email: '',
@@ -44,36 +66,49 @@ export default class AvaliationForm extends Component {
   }
 
   render() {
-    const { email, message, stars } = this.state;
+    const { email, message, stars, allAvaliations } = this.state;
     return (
-      <form>
-        <ReactStars
-          value={ stars }
-          // edit={ false }
-          count={ 5 }
-          onChange={ this.alterStateStar }
-          size={ 25 }
-          isHalf="true"
-          activeColor="#ffd700"
-        />
-        <input
-          value={ email }
-          name="email"
-          onChange={ this.handleChange }
-          placeholder="Email"
-          type="text"
-        />
-        <br />
-        <textarea
-          value={ message }
-          name="message"
-          onChange={ this.handleChange }
-          type="text"
-          placeholder="Mensagem(opcional)"
-        />
-        <br />
-        <button onClick={ this.setLocalStorage } type="button">Avaliar</button>
-      </form>
+      <div>
+        <form>
+          <ReactStars
+            value={ stars }
+            // edit={ false }
+            count={ 5 }
+            onChange={ this.alterStateStar }
+            size={ 25 }
+            isHalf="true"
+            activeColor="#ffd700"
+          />
+          <input
+            value={ email }
+            name="email"
+            onChange={ this.handleChange }
+            placeholder="Email"
+            type="text"
+          />
+          <br />
+          <textarea
+            value={ message }
+            name="message"
+            onChange={ this.handleChange }
+            type="text"
+            placeholder="Mensagem(opcional)"
+          />
+          <br />
+          <button onClick={ this.setLocalStorage } type="button">Avaliar</button>
+        </form>
+        <div>
+          {allAvaliations && allAvaliations.map((avaliation, index) => (
+            <div key={ index }>
+              <h3>{ avaliation.email }</h3>
+              <span>{ avaliation.message }</span>
+              <br />
+              <span>Avaliação: </span>
+              <ReactStars value={ avaliation.stars } isHalf="true" edit={ false } />
+            </div>
+          ))}
+        </div>
+      </div>
     );
   }
 }
