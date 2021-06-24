@@ -27,7 +27,7 @@ class Category extends Component {
     const { categories } = this.state;
     const { byCategory } = this.props;
     return (
-      <div>
+      <div className="categories-container">
         <h4>
           Categorias:
         </h4>
@@ -35,6 +35,7 @@ class Category extends Component {
           .map((category) => (
             <button
               type="button"
+              className="category-button"
               key={ category.id }
               data-testid="category"
               onClick={ () => byCategory(category.id) }

@@ -72,8 +72,10 @@ class Home extends Component {
             <FaShoppingCart size={ 30 } />
           </Link>
         </div>
-        <Category byCategory={ this.getProductsByCategory } />
-        <Searchfield products={ products } />
+        <div className="container-home">
+          <Category byCategory={ this.getProductsByCategory } />
+          <Searchfield products={ products } />
+        </div>
       </div>
     );
   }

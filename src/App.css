@@ -1,3 +1,122 @@
 .App {
   text-align: center;
 }
+
+.input-email-forms {
+  padding: 0.4rem;
+}
+
+.radio-star {
+  display: none;
+}
+
+.star-rating {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+textarea {
+  display: block;
+  margin-top: 1rem;
+}
+
+.btn-submit-avaliation {
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 8rem;
+}
+
+.header-details-product {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.2rem;
+}
+
+.container-image-especification {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-image-and-product-details {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20px;
+  width: 50%;
+}
+
+.container-image-details {
+  float: left;
+  height: auto;
+  width: 50%;
+}
+
+.container-description-details {
+  float: left;
+  height: auto;
+  margin-left: 2rem;
+  width: 100%;
+}
+
+.image-details {
+  height: auto;
+  width: 100px;
+}
+
+
+.decrease-btn {
+  margin: 10px;
+  padding: 10px;
+}
+
+.increase-btn {
+  margin: 10px;
+  padding: 10px;
+}
+
+.quantity-product-details {
+  border: 1px solid black;
+  border-radius: 100%;
+  padding: 0.6rem;
+}
+
+.add-to-cart-btn-details {
+  margin: 10px;
+  padding: 10px;
+}
+
+.container-forms {
+  display: flex;
+}
+
+.container-stars {
+  margin-left: 30px;
+}
+
+.container-home {
+  display: flex;
+  flex-direction: row;
+}
+
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+  width: 20%;
+}
+
+.category-button {
+  margin: 2px;
+}
+
+.container-products {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
+.product-card {
+  padding: 10px;
+  width: 200px;
+}

@@ -32,11 +32,13 @@ class Cardproduct extends Component {
   render() {
     const { title, thumbnail, price, id, categoryId } = this.props;
     return (
-      <div data-testid="product">
-        <p data-testid="shopping-cart-product-name">{ title }</p>
+      <div
+        data-testid="product"
+        className="product-card"
+      >
+        <p>{ title }</p>
         <img src={ thumbnail } width="100px" alt="produto" />
-
-        <p data-testid="shopping-cart-product-quantity">1</p>
+        <p>1</p>
         <button
           type="button"
           data-testid="product-add-to-cart"

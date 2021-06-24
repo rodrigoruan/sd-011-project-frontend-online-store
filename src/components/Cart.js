@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import '../App.css';
+
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -19,8 +21,7 @@ class Cart extends Component {
   }
 
   getSetState() {
-    const { product } = this.props;
-    const { quantity } = product;
+    const { product: { quantity } } = this.props;
     this.setState({
       quantity,
     });
@@ -32,7 +33,7 @@ class Cart extends Component {
     if (previousList[id]) {
       previousList[id].quantity += 1;
     } else {
-      previousList[id] = { title, thumbnail, price, quantity: 1 };
+      previousList[id] = { id, title, thumbnail, price, quantity: 1 };
     }
     const quantityItem = previousList[id].quantity;
     this.setState({
@@ -45,12 +46,14 @@ class Cart extends Component {
   decreaseQuantity() {
     const { product: { id } } = this.props;
     const previousList = this.loadCartList();
+
     if (previousList[id].quantity > 1) {
       previousList[id].quantity -= 1;
       this.setState({
         quantity: previousList[id].quantity,
       });
     }
+
     localStorage.setItem('cartList', JSON.stringify(previousList));
     this.totalValue();
   }
@@ -90,7 +93,11 @@ class Cart extends Component {
     return (
       <div>
         <button type="button">X</button>
-        <img alt={ `${product.title}` } src={ product.thumbnail } />
+        <img
+          className="image-details"
+          alt={ `${product.title}` }
+          src={ product.thumbnail }
+        />
         <h4 data-testid="shopping-cart-product-name">{ product.title }</h4>
         <button
           type="button"
