@@ -106,6 +106,7 @@ class Cart extends Component {
                 data-testid="product-increase-quantity"
                 onClick={ (event) => this.handleClickAdd(item, index, event) }
                 // id={ `btn ${index}` }
+                disabled={ item.quantity === item.availableQuantity }
               >
                 +
               </button>

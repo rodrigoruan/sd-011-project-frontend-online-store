@@ -15,6 +15,7 @@ export class Product extends Component {
       mensage: '',
       rating: '',
       id: '',
+      availableQuantity: undefined,
     };
     this.submitButton = this.submitButton.bind(this);
     this.sendProductDetails = this.sendProductDetails.bind(this);
@@ -35,6 +36,7 @@ export class Product extends Component {
       imagePath: details.thumbnail,
       attributes: [],
       id: details.id,
+      availableQuantity: details.available_quantity,
     });
   }
 
@@ -56,6 +58,7 @@ export class Product extends Component {
       price: object.price,
       id: object.id,
       quantity: 1,
+      availableQuantity: object.availableQuantity,
     };
     let initial = false;
     if (!localStorage.cart) {
@@ -68,7 +71,9 @@ export class Product extends Component {
       let equal = false;
       for (let index = 0; index < cart.length; index += 1) {
         if (cart[index].id === response.id) {
-          cart[index].quantity += 1;
+          if (cart[index].quantity > cart[index].availableQuantity) {
+            cart[index].quantity += 1;
+          }
           equal = true;
           return (cart, equal);
         }
@@ -83,7 +88,14 @@ export class Product extends Component {
 
   render() {
     const { title,
-      price, imagePath, attributes, eMail, mensage, rating, id } = this.state;
+      price,
+      imagePath,
+      attributes,
+      eMail,
+      mensage,
+      rating,
+      id,
+      availableQuantity } = this.state;
     const product = this.state;
     return (
       <>
@@ -96,6 +108,12 @@ export class Product extends Component {
             Preço:
             {' '}
             { price }
+          </span>
+          <br />
+          <span>
+            Quantidade disponível:
+            {' '}
+            { availableQuantity }
           </span>
           <br />
           <button
