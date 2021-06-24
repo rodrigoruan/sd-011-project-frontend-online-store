@@ -124,6 +124,7 @@ export default class SearchBar extends Component {
                   title={ product.title }
                   thumbnail={ product.thumbnail }
                   price={ product.price }
+                  quantity={ product.available_quantity }
                   dataTestid="product-add-to-cart"
                   funcGetLocalStorage={ this.getLocalStorage }
                 />
