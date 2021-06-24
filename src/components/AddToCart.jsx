@@ -8,7 +8,11 @@ class AddToCart extends React.Component {
   }
 
   addItem() {
-    const { item } = this.props;
+    const {
+      item,
+      item: { available_quantity: availableQuantity },
+      updateQuantityIcon,
+    } = this.props;
     let existingCart = JSON.parse(localStorage.getItem('items'));
     if (existingCart == null) existingCart = [];
     let existingQuantity = JSON.parse(localStorage.getItem('quantity'));
@@ -20,27 +24,29 @@ class AddToCart extends React.Component {
         return currItem.id === item.id;
       },
     );
-    if (existingItem === undefined) {
+    if (existingItem === undefined && availableQuantity > 0) {
       existingCart.push(item);
       existingQuantity.push({ [item.id]: 1 });
-    } else {
+      localStorage.setItem('quantity', JSON.stringify(existingQuantity));
+      updateQuantityIcon();
+    }
+    if (existingItem !== undefined
+      && availableQuantity > existingQuantity[position][item.id]) {
       existingQuantity[position][item.id] += 1;
+      localStorage.setItem('quantity', JSON.stringify(existingQuantity));
+      updateQuantityIcon();
     }
     localStorage.setItem('items', JSON.stringify(existingCart));
-    localStorage.setItem('quantity', JSON.stringify(existingQuantity));
   }
 
   render() {
-    const { test, updateQuantityIcon } = this.props;
+    const { test } = this.props;
     return (
       <div>
         <button
           type="button"
           data-testid={ test }
-          onClick={ () => {
-            this.addItem();
-            updateQuantityIcon();
-          } }
+          onClick={ () => this.addItem() }
         >
           Adicionar ao Carrinho
         </button>
@@ -52,7 +58,10 @@ class AddToCart extends React.Component {
 export default AddToCart;
 
 AddToCart.propTypes = {
-  item: PropTypes.objectOf(PropTypes.any).isRequired,
+  item: PropTypes.shape({
+    available_quantity: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+  }).isRequired,
   test: PropTypes.string.isRequired,
   updateQuantityIcon: PropTypes.func.isRequired,
 };
