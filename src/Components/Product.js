@@ -71,7 +71,7 @@ export class Product extends Component {
       let equal = false;
       for (let index = 0; index < cart.length; index += 1) {
         if (cart[index].id === response.id) {
-          if (cart[index].quantity > cart[index].availableQuantity) {
+          if (cart[index].quantity < cart[index].availableQuantity) {
             cart[index].quantity += 1;
           }
           equal = true;
