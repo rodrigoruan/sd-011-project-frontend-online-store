@@ -3,20 +3,26 @@ import PropTypes from 'prop-types';
 
 export default class AddAndRemoveCartItem extends Component {
   increment = () => {
-    const { title, price, thumbnail, onClick } = this.props;
-    const count = JSON.parse(localStorage.getItem(title)).count + 1;
-    const objeto = { count, title, price, thumbnail };
-    localStorage.setItem(title, JSON.stringify(objeto));
+    const { title, price, thumbnail, onClick, quantity } = this.props;
+    let count = JSON.parse(localStorage.getItem(title)).count + 1;
+    if (count < quantity) {
+      const objeto = { count, title, price, thumbnail, quantity };
+      localStorage.setItem(title, JSON.stringify(objeto));
+    } else {
+      count = quantity;
+      const objeto = { count, title, price, thumbnail, quantity };
+      localStorage.setItem(title, JSON.stringify(objeto));
+    }
     onClick();
   };
 
   decrement = () => {
-    const { title, price, thumbnail, onClick } = this.props;
+    const { title, price, thumbnail, onClick, quantity } = this.props;
     let count = JSON.parse(localStorage.getItem(title)).count - 1;
     if (count < 2) {
       count = 1;
     }
-    const objeto = { count, title, price, thumbnail };
+    const objeto = { count, title, price, thumbnail, quantity };
     localStorage.setItem(title, JSON.stringify(objeto));
     onClick();
   };
@@ -53,6 +59,7 @@ export default class AddAndRemoveCartItem extends Component {
 }
 
 AddAndRemoveCartItem.propTypes = {
+  quantity: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
