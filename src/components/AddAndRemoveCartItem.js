@@ -15,7 +15,6 @@ export default class AddAndRemoveCartItem extends Component {
     let count = JSON.parse(localStorage.getItem(title)).count + 1;
     if (count < quantity) {
       this.setState({
-        dccButton: true,
         addButton: false,
       });
       const objeto = { count, title, price, thumbnail, quantity };
