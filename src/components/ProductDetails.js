@@ -12,6 +12,7 @@ class ProductDetails extends React.Component {
     this.state = {
       product: [],
       quantity: 1,
+      cartQuantity: 0,
     };
 
     this.getProduct = this.getProduct.bind(this);
@@ -19,10 +20,12 @@ class ProductDetails extends React.Component {
     this.loadCartList = this.loadCartList.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.cartQuantity = this.cartQuantity.bind(this);
   }
 
   componentDidMount() {
     this.getProduct();
+    this.cartQuantity();
   }
 
   handleClick() {
@@ -39,6 +42,7 @@ class ProductDetails extends React.Component {
     this.setState({
       quantity: 1,
     });
+    this.cartQuantity();
   }
 
   async getProduct() {
@@ -79,11 +83,27 @@ class ProductDetails extends React.Component {
     return JSON.parse(previousList);
   }
 
+  cartQuantity() {
+    const localValues = JSON.parse(localStorage.getItem('cartList'));
+
+    if (!localValues) {
+      const quantity = 0;
+      return quantity;
+    }
+    const quantity = Object.values(localValues);
+    const result = quantity
+      .reduce(((acc, cur) => ({
+        cartQuantity: acc.quantity + cur.quantity,
+      })));
+    this.setState({
+      cartQuantity: result.cartQuantity,
+    });
+  }
+
   render() {
     const { product:
       { title, thumbnail, price },
-    quantity,
-    } = this.state;
+    quantity, cartQuantity } = this.state;
 
     return (
       <div>
@@ -93,6 +113,7 @@ class ProductDetails extends React.Component {
           </Link>
           <Link to="/ShoppingCart" data-testid="shopping-cart-button">
             <FaShoppingCart size={ 30 } />
+            <p data-testid="shopping-cart-size">{ cartQuantity }</p>
           </Link>
         </header>
         <h3 data-testid="product-detail-name">

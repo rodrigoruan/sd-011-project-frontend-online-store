@@ -13,11 +13,17 @@ class Home extends Component {
       search: '',
       products: [],
       categoryId: '',
+      quantity: 0,
     };
 
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.getProductsByCategory = this.getProductsByCategory.bind(this);
+    this.cartQuantity = this.cartQuantity.bind(this);
+  }
+
+  componentDidMount() {
+    this.cartQuantity();
   }
 
   onChange({ target: { value } }) {
@@ -41,8 +47,27 @@ class Home extends Component {
     this.setState({ products: data.results, categoryId });
   }
 
+  cartQuantity() {
+    const localValues = JSON.parse(localStorage.getItem('cartList'));
+
+    if (!localValues) {
+      const quantity = 0;
+      return quantity;
+    }
+    const quantity = Object.values(localValues);
+    const result = quantity
+      .reduce(((acc, cur) => ({
+        quantity: acc.quantity + cur.quantity,
+      })));
+
+    this.setState({
+      quantity: result.quantity,
+    });
+  }
+
   render() {
-    const { products, search } = this.state;
+    const { products, search, quantity } = this.state;
+
     return (
       <div>
         <form>
@@ -70,11 +95,12 @@ class Home extends Component {
         <div>
           <Link to="/ShoppingCart" data-testid="shopping-cart-button">
             <FaShoppingCart size={ 30 } />
+            <p data-testid="shopping-cart-size">{ quantity }</p>
           </Link>
         </div>
         <div className="container-home">
           <Category byCategory={ this.getProductsByCategory } />
-          <Searchfield products={ products } />
+          <Searchfield cartQuantity={ this.cartQuantity } products={ products } />
         </div>
       </div>
     );
