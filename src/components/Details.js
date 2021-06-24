@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Button from './Button';
+import AvaliationForm from './AvaliationForm';
 
 export default class Details extends Component {
   render() {
@@ -36,6 +37,9 @@ export default class Details extends Component {
           price={ product.price }
           dataTestid="product-detail-add-to-cart"
         />
+        <div>
+          <AvaliationForm price={ price } title={ title } thumbnail={ thumbnail } />
+        </div>
       </div>
     );
   }

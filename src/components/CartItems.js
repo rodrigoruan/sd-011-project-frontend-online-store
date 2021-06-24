@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import ReactStars from 'react-rating-stars-component';
 import AddAndRemoveCartItem from './AddAndRemoveCartItem';
 
 export default class CartItems extends Component {
@@ -59,12 +58,6 @@ export default class CartItems extends Component {
           </div>
         ))}
         <span>
-          {/* <ReactStars
-            count={ 5 }
-            // onChange={ratingChanged}
-            size={ 24 }
-            activeColor="#ffd700"
-          /> */}
           O valor total é: R$
           {allProducts.reduce((acc, { price, count }) => acc + price * count, 0)}
         </span>
