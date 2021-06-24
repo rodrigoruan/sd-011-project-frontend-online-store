@@ -62,7 +62,7 @@ export default class CartItems extends Component {
           {allProducts.reduce((acc, { price, count }) => acc + price * count, 0)}
         </span>
         <br />
-        <Link to="/checkout">
+        <Link to={ { pathname: '/checkout', state: { allProducts } } }>
           <button data-testid="checkout-products" type="button">
             Finalizar compra
           </button>
