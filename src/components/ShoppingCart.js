@@ -19,6 +19,21 @@ class ShoppingCart extends Component {
     return JSON.parse(previousList);
   }
 
+  itemsOnCart() {
+    const details = this.loadCartList();
+    const productArray = Object.values(details);
+    const oneToNine = 10;
+
+    if (productArray.length === 1) {
+      return 'Você possui 01 item no carrinho';
+    }
+    if (productArray.length < oneToNine) {
+      return `Você possui 0${productArray.length} items no carrinho`;
+    }
+
+    return `Você possui ${productArray.length} items no carrinho`;
+  }
+
   render() {
     const details = this.loadCartList();
     const productArray = Object.values(details);
@@ -34,9 +49,7 @@ class ShoppingCart extends Component {
             .map((product, index) => <Cart key={ index } product={ product } />) }
 
         <h4>
-          Você possui
-          {productArray.length}
-          itens no carrinho
+          {this.itemsOnCart()}
         </h4>
         <Link to="/checkout">
           <button type="button" data-testid="checkout-products">Checkout</button>

@@ -14,7 +14,7 @@ class Cardproduct extends Component {
       id, title, thumbnail, price, cartQuantity, availableQuantity, freeShipping,
     } = this.props;
     const previousList = this.loadCartList();
-    if (previousList[id]) {
+    if (previousList[id] && previousList[id].quantity < availableQuantity) {
       previousList[id].quantity += 1;
     } else {
       previousList[id] = {
@@ -43,11 +43,11 @@ class Cardproduct extends Component {
         data-testid="product"
         className="product-card"
       >
-        <p>{ title }</p>
+        <p>{title}</p>
         <img src={ thumbnail } width="100px" alt="produto" />
-        <p>{ availableQuantity }</p>
+        <p>{availableQuantity}</p>
 
-        { freeShipping && <p data-testid="free-shipping">Frete grátis</p> }
+        {freeShipping && <p data-testid="free-shipping">Frete grátis</p>}
 
         <button
           type="button"
@@ -56,7 +56,7 @@ class Cardproduct extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <p>{ `R$ ${parseFloat(price).toFixed(2).replace('.', ',')}` }</p>
+        <p>{`R$ ${parseFloat(price).toFixed(2).replace('.', ',')}`}</p>
         <Link
           to={ `/product-detail/${categoryId}/${id}` }
           data-testid="product-detail-link"

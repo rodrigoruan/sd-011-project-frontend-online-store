@@ -29,14 +29,22 @@ class ProductDetails extends React.Component {
   }
 
   handleClick() {
-    const { product: { id, title, thumbnail, price }, quantity } = this.state;
+    const { product:
+      { id, title, thumbnail, price }, quantity } = this.state;
     const previousList = this.loadCartList();
-    if (previousList[id]) {
+    const availableQuantity = this.productQuantityAvailable();
+
+    if (previousList[id] && previousList[id].quantity < availableQuantity) {
       for (let i = 0; i < quantity; i += 1) {
         previousList[id].quantity += 1;
       }
     } else {
-      previousList[id] = { id, title, thumbnail, price, quantity };
+      previousList[id] = { id,
+        title,
+        thumbnail,
+        price,
+        quantity,
+        availableQuantity };
     }
     localStorage.setItem('cartList', JSON.stringify(previousList));
     this.setState({
@@ -53,10 +61,15 @@ class ProductDetails extends React.Component {
     this.setState({ product });
   }
 
+  productQuantityAvailable() {
+    const { product } = this.state;
+    const quantityAvailable = product.available_quantity;
+    return quantityAvailable;
+  }
+
   increaseQuantity() {
     const { quantity, product } = this.state;
     const quantityAvailable = product.available_quantity;
-    console.log(quantityAvailable);
     const prevState = quantity;
     if (prevState < quantityAvailable) {
       this.setState({
