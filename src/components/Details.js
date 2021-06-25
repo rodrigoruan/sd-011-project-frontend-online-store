@@ -30,9 +30,8 @@ export default class Details extends Component {
     const { location } = this.props;
     const { state } = location;
     const { product } = state;
-    const { title, price, thumbnail, attributes } = product;
+    const { title, price, thumbnail, attributes, shipping } = product;
     const { allCartItens } = this.state;
-
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cartitems">
@@ -44,6 +43,10 @@ export default class Details extends Component {
         <div>
           <h2 data-testid="product-detail-name">{`${title} - R$${price}`}</h2>
           <img src={ thumbnail } alt={ title } />
+          <br />
+          {shipping.free_shipping ? (
+            <span data-testid="free-shipping">Frete Grátis</span>
+          ) : null }
         </div>
         <div>
           <h3>Especificações Técnicas</h3>

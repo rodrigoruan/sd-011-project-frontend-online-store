@@ -119,6 +119,11 @@ export default class SearchBar extends Component {
                     thumbnail={ product.thumbnail }
                     price={ product.price }
                   />
+                  {product.shipping.free_shipping ? (
+                    <span data-testid="free-shipping">Frete Grátis</span>
+                  ) : null }
+                  <br />
+                  <br />
                 </Link>
                 <Button
                   title={ product.title }
