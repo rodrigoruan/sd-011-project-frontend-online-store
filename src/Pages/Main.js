@@ -29,13 +29,14 @@ export default class Main extends Component {
 
   render() {
     const { arraySearch, ctgId } = this.state;
-    const { addItens } = this.props;
+    const { addItens, showQtd, actualQtd } = this.props;
 
     return (
       <>
+        <span data-testid="shopping-cart-size">{ actualQtd }</span>
         <Search evSrch={ this.eventSearch } ctgId={ ctgId } />
         <Categorys evCtg={ this.eventCtg } evSrch={ this.eventSearch } />
-        <Cards resultSearch={ arraySearch } addItems={ addItens } />
+        <Cards resultSearch={ arraySearch } addItems={ addItens } showQtd={ showQtd } />
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
       </>
     );
@@ -44,4 +45,6 @@ export default class Main extends Component {
 
 Main.propTypes = {
   addItens: PropTypes.func.isRequired,
+  showQtd: PropTypes.func.isRequired,
+  actualQtd: PropTypes.number.isRequired,
 };

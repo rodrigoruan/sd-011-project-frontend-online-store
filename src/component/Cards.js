@@ -10,8 +10,9 @@ export default class Cards extends Component {
 
   handleAdd(id, title, maxQtd, value) {
     const obj = { id, title, maxQtd, qtd: 1, value };
-    const { addItems } = this.props;
+    const { addItems, showQtd } = this.props;
     addItems(obj);
+    showQtd();
   }
 
   render() {
@@ -45,4 +46,5 @@ export default class Cards extends Component {
 Cards.propTypes = {
   resultSearch: PropTypes.arrayOf(PropTypes.object).isRequired,
   addItems: PropTypes.func.isRequired,
+  showQtd: PropTypes.func.isRequired,
 };

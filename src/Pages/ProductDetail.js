@@ -23,16 +23,9 @@ export default class ProductDetail extends Component {
   }
 
   handleAdd(product) {
-    const { id, title, price, available_quantity: maxQtd } = product;
-    const obj = {
-      id,
-      title,
-      maxQtd,
-      qtd: 1,
-      value: price,
-    };
-    const { addItens } = this.props;
-    addItens(obj);
+    const { id } = product;
+    const { addQtdprd } = this.props;
+    addQtdprd(id, product);
   }
 
   async getProduct() {
@@ -55,6 +48,7 @@ export default class ProductDetail extends Component {
 
   render() {
     const { product, shipping, comments } = this.state;
+    const { actualQtd } = this.props;
     return (
       <div>
         <p data-testid="product-detail-name">{ product.title }</p>
@@ -70,6 +64,7 @@ export default class ProductDetail extends Component {
         <FormComment idPrd={ product.id } evBtn={ this.setCommentarray } />
         <Comments idPrd={ product.id } arrayComment={ comments } />
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <span data-testid="shopping-cart-size">{ actualQtd }</span>
       </div>
     );
   }
@@ -81,5 +76,8 @@ ProductDetail.propTypes = {
       id: PropTypes.string,
     }),
   }).isRequired,
-  addItens: PropTypes.func.isRequired,
+  // addItens: PropTypes.func.isRequired,
+  actualQtd: PropTypes.number.isRequired,
+  // showQtd: PropTypes.func.isRequired,
+  addQtdprd: PropTypes.func.isRequired,
 };

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 class ShoppingCart extends React.Component {
   constructor() {
     super();
+
     this.addQtdprd = this.addQtdprd.bind(this);
     this.rmQtd = this.rmQtd.bind(this);
     this.removeBtn = this.removeBtn.bind(this);
@@ -19,13 +20,8 @@ class ShoppingCart extends React.Component {
   }
 
   addQtdprd(id) {
-    const { updateArray } = this.props;
-    const getCart = JSON.parse(localStorage.getItem('cart'));
-    const addqtd = getCart.find((idObj) => idObj.id === id);
-    if (addqtd.qtd < addqtd.maxQtd) {
-      addqtd.qtd += 1;
-      updateArray(getCart);
-    }
+    const { addQtdprd } = this.props;
+    addQtdprd(id);
   }
 
   removeBtn(idRm) {
@@ -36,6 +32,8 @@ class ShoppingCart extends React.Component {
 
   render() {
     const getCart = JSON.parse(localStorage.getItem('cart'));
+    const { actualQtd } = this.props;
+
     return (
       <>
         { localStorage.cart ? getCart.map(({ id, title, qtd }) => (
@@ -59,6 +57,7 @@ class ShoppingCart extends React.Component {
             <button type="button" onClick={ () => this.removeBtn(id) }>X</button>
           </div>
         )) : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p> }
+        <span data-testid="shopping-cart-size">{ actualQtd }</span>
         <button type="button" data-testid="shopping-cart-button">Comprar</button>
       </>
     );
@@ -73,4 +72,6 @@ export default ShoppingCart;
 
 ShoppingCart.propTypes = {
   updateArray: PropTypes.func.isRequired,
+  actualQtd: PropTypes.number.isRequired,
+  addQtdprd: PropTypes.func.isRequired,
 };
