@@ -49,6 +49,7 @@ class ProductList extends React.Component {
             <ProductCard
               produto={ product }
               key={ product.id }
+              addProduct={ this.addProductToCart }
             />))}
         </div>
         <h4

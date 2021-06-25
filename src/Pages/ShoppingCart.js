@@ -5,7 +5,7 @@ import CartList from '../CartList';
 class ShoppingCart extends React.Component {
   render() {
     const productFromDetails = JSON.parse(localStorage.getItem('productList'));
-    if (productFromDetails.length === 0) {
+    if (productFromDetails === null || productFromDetails.length === 0) {
       return (
         <div>
           <h3 data-testid="shopping-cart-empty-message">

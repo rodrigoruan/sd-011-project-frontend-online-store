@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  // Switch,
 } from 'react-router-dom';
 import './App.css';
 import Home from './Pages/Home';
@@ -14,19 +13,18 @@ class App extends React.Component {
     return (
       <div>
         <Router>
-          {/* <Switch> */}
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={ Home } />
+
           <Route
             path="/cart"
             render={ (props) => <ShoppingCart { ...props } /> }
           />
+
           <Route
             path="/details/:id"
             render={ (props) => <ProductDetails { ...props } /> }
           />
-          {/* </Switch> */}
+
         </Router>
       </div>);
   }
