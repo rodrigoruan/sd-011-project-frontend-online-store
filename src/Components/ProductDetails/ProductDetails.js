@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from './Home.module.css';
-import ShoppingCart from './ShoppingCart';
+import style from './ProductDetails.module.css';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
-export class Product extends Component {
+export class ProductDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,7 +66,6 @@ export class Product extends Component {
       initial = true;
     }
     const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(cart);
     if (cart.length > 0 && initial === false) {
       let equal = false;
       for (let index = 0; index < cart.length; index += 1) {
@@ -80,7 +79,6 @@ export class Product extends Component {
       }
       if (equal === false) {
         cart.push(response);
-        console.log(cart);
       }
     }
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -189,7 +187,7 @@ export class Product extends Component {
   }
 }
 
-Product.propTypes = {
+ProductDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,
@@ -197,4 +195,4 @@ Product.propTypes = {
   }).isRequired,
 };
 
-export default Product;
+export default ProductDetails;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import style from './Checkout.module.css';
-import ShoppingCart from './ShoppingCart';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
 
 export class Checkout extends Component {
   render() {
