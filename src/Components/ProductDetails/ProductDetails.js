@@ -16,14 +16,71 @@ export class ProductDetails extends Component {
       rating: '',
       id: '',
       availableQuantity: undefined,
+      shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
     this.submitButton = this.submitButton.bind(this);
-    this.sendProductDetails = this.sendProductDetails.bind(this);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.addFirstItemToCart = this.addFirstItemToCart.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.addNewItemToCart = this.addNewItemToCart.bind(this);
   }
 
   componentDidMount() {
     const { match: { params: { id } } } = this.props;
     this.fetchProductDetails(id);
+  }
+
+  handleAddToCart({ thumbnail,
+    title,
+    price,
+    id,
+    available_quantity: availableQuantity,
+  }) {
+    const product = {
+      thumbnail,
+      title,
+      price,
+      id,
+      quantity: 1,
+      availableQuantity,
+    };
+    const cartDoesNotExists = !localStorage.cart || localStorage.length === 0;
+    if (cartDoesNotExists) {
+      return this.addFirstItemToCart(product);
+    }
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const itemExist = cart.findIndex((cartItem) => cartItem.id === product.id) >= 0;
+    if (itemExist) {
+      return this.increaseQuantity(product);
+    }
+    return this.addNewItemToCart(product);
+  }
+
+  addFirstItemToCart(product) {
+    localStorage.setItem('cart', JSON.stringify([product]));
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    this.setState({ shoppingCart: cart });
+  }
+
+  increaseQuantity(product) {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const newCart = cart.map((item) => {
+      if (item.id === product.id) {
+        const { quantity } = item;
+        const newQuantity = quantity + 1;
+        return { ...item, quantity: newQuantity };
+      }
+      return item;
+    });
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    this.setState({ shoppingCart: newCart });
+  }
+
+  addNewItemToCart(product) {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const newCart = [...cart, product];
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    this.setState({ shoppingCart: newCart });
   }
 
   async fetchProductDetails(id) {
@@ -51,39 +108,6 @@ export class ProductDetails extends Component {
     });
   }
 
-  async sendProductDetails(object) {
-    const response = {
-      thumbnail: object.thumbnail,
-      title: object.title,
-      price: object.price,
-      id: object.id,
-      quantity: 1,
-      availableQuantity: object.availableQuantity,
-    };
-    let initial = false;
-    if (!localStorage.cart) {
-      localStorage.setItem('cart', JSON.stringify([response]));
-      initial = true;
-    }
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart.length > 0 && initial === false) {
-      let equal = false;
-      for (let index = 0; index < cart.length; index += 1) {
-        if (cart[index].id === response.id) {
-          if (cart[index].quantity < cart[index].availableQuantity) {
-            cart[index].quantity += 1;
-          }
-          equal = true;
-          return (cart, equal);
-        }
-      }
-      if (equal === false) {
-        cart.push(response);
-      }
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }
-
   render() {
     const { title,
       price,
@@ -93,11 +117,12 @@ export class ProductDetails extends Component {
       mensage,
       rating,
       id,
-      availableQuantity } = this.state;
+      availableQuantity,
+      shoppingCart } = this.state;
     const product = this.state;
     return (
       <>
-        <ShoppingCart />
+        <ShoppingCart cart={ shoppingCart } />
         <div className={ style.product }>
           <h3 data-testid="product-detail-name">{ title }</h3>
           <img src={ imagePath } alt="" />
@@ -118,7 +143,7 @@ export class ProductDetails extends Component {
             type="button"
             data-testid="product-detail-add-to-cart"
             id={ id }
-            onClick={ () => this.sendProductDetails(product) }
+            onClick={ () => this.handleAddToCart(product) }
           >
             Add to Cart
           </button>

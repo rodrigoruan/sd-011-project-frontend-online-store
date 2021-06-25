@@ -20,6 +20,7 @@ class Home extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.addFirstItemToCart = this.addFirstItemToCart.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.addNewItemToCart = this.addNewItemToCart.bind(this);
   }
 
   componentDidMount() {
