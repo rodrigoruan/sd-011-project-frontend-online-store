@@ -19,10 +19,15 @@ class Home extends React.Component {
     this.clearState = this.clearState.bind(this);
   }
 
+  /** A função getCategories é chamada no componentDidMount para
+   * que tenhamos a lista de categorias armazenada, para renderi-
+   * zação posterior. */
   componentDidMount() {
     this.getCategories();
   }
 
+  /** Função responsável por fazer requisições à API do Mercado
+   * Livre, de acordo com o que for passado por parâmetro. */
   async getItemsFromCategoryAndQuery(category, inputQuery) {
     const request = await api.getProductsFromCategoryAndQuery(category, inputQuery);
     this.setState({
@@ -30,7 +35,7 @@ class Home extends React.Component {
     });
   }
 
-  // Joga a lista de categorias para o state "allCategories"
+  /** Joga a lista de categorias para o state "allCategories" */
   async getCategories() {
     const response = await api.getCategories();
     this.setState({
@@ -38,8 +43,8 @@ class Home extends React.Component {
     });
   }
 
-  // Função responsável por pegar dados do input e catagory e
-  // jogar para o state
+  /** Função responsável por pegar dados do input e catagory e
+   * jogar para o state */
   getTextAndCategory({ target }) {
     const { value, name } = target;
     this.setState({
@@ -51,12 +56,23 @@ class Home extends React.Component {
     });
   }
 
+  /** A função assíncrona requestButton é usada toda vez que
+   * o botão de pesquisar é acionado. Assim, a função getItemsFromCategoryAndQuery
+   * é chamada, fazendo a devida requisição.
+   * A função getItemsFromCategoryAndQuery também é chamada quando
+   * há click em alguma categoria, quando é feita uma vefificação
+   * na função acima chamada getTextAndCategory.
+   * */
   async requestButton() {
     this.clearState();
     const { inputQuery, category } = this.state;
     this.getItemsFromCategoryAndQuery(category, inputQuery);
   }
 
+  /** Esta função clearState é chamada quando uma nova requisição
+   * é feita. Isso deve acontecer para que não tenhamos conflitos
+   * em novas requisições, quando novos itens se misturtam com os
+   * antigos */
   clearState() {
     this.setState({
       response: [],
