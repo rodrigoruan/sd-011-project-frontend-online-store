@@ -15,8 +15,8 @@ class Home extends React.Component {
       search: false,
       shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClickLi = this.handleClickLi.bind(this);
+    this.searchByTerm = this.searchByTerm.bind(this);
+    this.listCategoryItens = this.listCategoryItens.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.addFirstItemToCart = this.addFirstItemToCart.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
@@ -26,23 +26,6 @@ class Home extends React.Component {
   componentDidMount() {
     getCategories()
       .then((json) => this.setState({ categories: json }));
-  }
-
-  handleClick() {
-    const { value } = document.querySelector('input');
-    const id = getCategories()
-      .then((json) => json.id);
-    getProductsFromCategoryAndQuery(id, value)
-      .then((json) => this.setState({
-        products: json.results,
-        search: true,
-      }));
-  }
-
-  async handleClickLi({ target: { id } }) {
-    const { value } = document.querySelector('input');
-    const query = await getProductsFromCategoryAndQuery(id, value);
-    this.setState({ products: query.results });
   }
 
   handleAddToCart({ thumbnail,
@@ -69,6 +52,23 @@ class Home extends React.Component {
       return this.increaseQuantity(product);
     }
     return this.addNewItemToCart(product);
+  }
+
+  searchByTerm() {
+    const { value } = document.querySelector('input');
+    const id = getCategories()
+      .then((json) => json.id);
+    getProductsFromCategoryAndQuery(id, value)
+      .then((json) => this.setState({
+        products: json.results,
+        search: true,
+      }));
+  }
+
+  async listCategoryItens({ target: { id } }) {
+    const { value } = document.querySelector('input');
+    const query = await getProductsFromCategoryAndQuery(id, value);
+    this.setState({ products: query.results });
   }
 
   addFirstItemToCart(product) {
@@ -128,7 +128,7 @@ class Home extends React.Component {
             id="search-button"
             type="button"
             data-testid="query-button"
-            onClick={ this.handleClick }
+            onClick={ this.searchByTerm }
           >
             Busca
           </button>
@@ -156,7 +156,7 @@ class Home extends React.Component {
                 to="/"
                 key={ category.id }
                 className={ style.link }
-                onClick={ this.handleClickLi }
+                onClick={ this.listCategoryItens }
               >
                 <li
                   data-testid="category"

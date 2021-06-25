@@ -15,7 +15,7 @@ export class Checkout extends Component {
     const shoppingCart = JSON.parse(localStorage.getItem('cart'));
     return (
       <>
-        <ShoppingCart />
+        <ShoppingCart cart={ shoppingCart } />
         <section className={ `${style.container} animeLeft` }>
           <div className={ style.products }>
             {shoppingCart && shoppingCart.map((item, index) => (
@@ -97,4 +97,5 @@ export class Checkout extends Component {
     );
   }
 }
+
 export default Checkout;

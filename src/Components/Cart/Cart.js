@@ -14,9 +14,15 @@ class Cart extends Component {
 
   handleClickAdd(_item, index) {
     const cart = JSON.parse(localStorage.getItem('cart'));
-    cart[index].quantity += 1;
-    // const productCurrentQuantity = cart[index].quantity;
-    localStorage.setItem('cart', JSON.stringify(cart));
+    const newCart = cart.map((product, _cartIndex, cartArray) => {
+      if (cartArray.indexOf(product) === index) {
+        const { quantity } = product;
+        const newQuantity = quantity + 1;
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
+    });
+    localStorage.setItem('cart', JSON.stringify(newCart));
     this.setState({
       shoppingCart: JSON.parse(localStorage.getItem('cart')),
     });
@@ -24,9 +30,15 @@ class Cart extends Component {
 
   handleClickSub(_item, index) {
     const cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart[index].quantity > 1) cart[index].quantity -= 1;
-    // if (cart[index].quantity > 1)
-    localStorage.setItem('cart', JSON.stringify(cart));
+    const newCart = cart.map((product, _cartIndex, cartArray) => {
+      if (cartArray.indexOf(product) === index) {
+        const { quantity } = product;
+        const newQuantity = quantity - 1;
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
+    });
+    localStorage.setItem('cart', JSON.stringify(newCart));
     this.setState({
       shoppingCart: JSON.parse(localStorage.getItem('cart')),
     });
@@ -70,7 +82,8 @@ class Cart extends Component {
               <button
                 type="button"
                 data-testid="product-decrease-quantity"
-                onClick={ (event) => this.handleClickSub(item, index, event) }
+                onClick={ () => this.handleClickSub(item, index) }
+                disabled={ item.quantity === 1 }
               >
                 -
               </button>
@@ -78,8 +91,7 @@ class Cart extends Component {
               <button
                 type="button"
                 data-testid="product-increase-quantity"
-                onClick={ (event) => this.handleClickAdd(item, index, event) }
-                // id={ `btn ${index}` }
+                onClick={ () => this.handleClickAdd(item, index) }
                 disabled={ item.quantity === item.availableQuantity }
               >
                 +
