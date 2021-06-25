@@ -10,12 +10,16 @@ class Cardproduct extends Component {
   }
 
   handleClick() {
-    const { id, title, thumbnail, price, cartQuantity, availableQuantity } = this.props;
+    const {
+      id, title, thumbnail, price, cartQuantity, availableQuantity, freeShipping,
+    } = this.props;
     const previousList = this.loadCartList();
     if (previousList[id]) {
       previousList[id].quantity += 1;
     } else {
-      previousList[id] = { id, title, thumbnail, price, quantity: 1, availableQuantity };
+      previousList[id] = {
+        id, title, thumbnail, price, quantity: 1, availableQuantity, freeShipping,
+      };
     }
     localStorage.setItem('cartList', JSON.stringify(previousList));
     cartQuantity();
@@ -31,7 +35,9 @@ class Cardproduct extends Component {
   }
 
   render() {
-    const { title, thumbnail, price, id, categoryId, availableQuantity } = this.props;
+    const {
+      title, thumbnail, price, id, categoryId, availableQuantity, freeShipping,
+    } = this.props;
     return (
       <div
         data-testid="product"
@@ -40,6 +46,9 @@ class Cardproduct extends Component {
         <p>{ title }</p>
         <img src={ thumbnail } width="100px" alt="produto" />
         <p>{ availableQuantity }</p>
+
+        { freeShipping && <p data-testid="free-shipping">Frete grátis</p> }
+
         <button
           type="button"
           data-testid="product-add-to-cart"
@@ -66,7 +75,8 @@ Cardproduct.propTypes = {
   id: PropTypes.string.isRequired,
   categoryId: PropTypes.string.isRequired,
   cartQuantity: PropTypes.func.isRequired,
-  availableQuantity: PropTypes.string.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
+  freeShipping: PropTypes.bool.isRequired,
 };
 
 export default Cardproduct;

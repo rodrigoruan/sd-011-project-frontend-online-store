@@ -119,7 +119,7 @@ class ProductDetails extends React.Component {
         </header>
         <h3 data-testid="product-detail-name">
           { title }
-          {' - R$ '}
+          { ' - R$ ' }
           { price === undefined ? price : parseFloat(price).toFixed(2).replace('.', ',') }
         </h3>
         <div className="container-image-and-product-details">
