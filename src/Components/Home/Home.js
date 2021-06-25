@@ -114,7 +114,6 @@ class Home extends React.Component {
               ? shoppingCart.reduce((acc, cv) => acc + cv.quantity, 0) : 0}
           </span>
         </section>
-        {/* Renderiza o card de produtos após clicar no botão */}
         <section className={ style.inputContent }>
           <label htmlFor="site-search">
             <input
@@ -123,7 +122,6 @@ class Home extends React.Component {
               id="site-search"
             />
           </label>
-
           <button
             id="search-button"
             type="button"
@@ -143,12 +141,8 @@ class Home extends React.Component {
               key={ product.id }
             />
           ))}
-
           {search && products.length === 0 && <p>Nenhum produto encontrado</p>}
         </section>
-
-        {/* Renderiza o card de produtos após clicar na categoria */}
-
         <section>
           <ul className={ style.list }>
             {categories && categories.map((category) => (
