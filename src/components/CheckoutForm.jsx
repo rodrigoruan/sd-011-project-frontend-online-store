@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './Checkout.css'
 
 export default class CheckoutForm extends Component {
   render() {

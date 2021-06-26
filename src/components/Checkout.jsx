@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
-import backImage from '../images/back.png';
+import back from '../images/arrow_back.svg';
+import './ShopCart.css'
+import './Checkout.css'
 
 const initialFormState = {
   fullname: '',
@@ -72,9 +74,14 @@ export default class Checkout extends Component {
     if (formIsValid) return <Redirect to="/" />;
     return (
       <div className="checkout-container">
-        <Link exact to="/cart">
-          <img src={ backImage } alt="Cart" style={ { width: '50px' } } />
-        </Link>
+        <header className="checkout-header">
+          <Link exact to="/cart">
+            <img src={ back } alt="Cart" className="back" />
+          </Link>
+          <h1> Checkout </h1>
+          < div style={ { width: '50px' } }></div>
+        </header>
+        <div className="body-checkout">
         <div className="checkout-products-review">
           <h2>Revise seus Produtos</h2>
           { cartItems.map((item) => (
@@ -95,15 +102,18 @@ export default class Checkout extends Component {
                 {`Valor total: R$ ${(item.price * item.quantity).toFixed(2)}`}
               </p>
             </div>))}
-          <div className="total-price">
+          <div className="price-total">
+            <h2>
             {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
               acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
+            </h2>
           </div>
         </div>
         <CheckoutForm
           handleChange={ this.handleChange }
           handleSubmit={ this.handleSubmit }
         />
+        </div>
       </div>
     );
   }

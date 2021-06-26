@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
-import cartImage from '../images/cart.svg';
+import logo from '../images/logo_frontend_store.svg';
+import './Home.css';
 
 export default class Home extends Component {
   render() {
@@ -18,43 +19,43 @@ export default class Home extends Component {
 
     if (categories === []) return <div>Loading...</div>;
     return (
-      <div>
+      <div className="home">
         <header className="home-header">
-          <h1>Front-End Online Store</h1>
-        </header>
-        <nav className="nav-home">
+          <div className="logo-header">
+            <img src={ logo } alt="Front-End Online Store" className="logo" />
+          </div>
+          <div className="form-home">
+            <form className="search-bar-home form-search">
+              <input
+                type="search"
+                data-testid="query-input"
+                name="search"
+                onChange={ handleChange }
+                placeholder="Faça sua pesquisa"
+              />
+              <i
+                className="fa fa-search"
+                // type="button"
+                // aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
+                data-testid="query-button"
+                onClick={ fetchProducts }
+              />
+            </form>
+          </div>
           <Link
             data-testid="shopping-cart-button"
             to="/cart"
           >
-            <img src={ cartImage } alt="Cart" style={ { width: '80px' } } />
+            <div className="cart-home">
+              <div className="cart-items">
+                <p data-testid="shopping-cart-size">
+                  { cartItems.reduce((acc, curr) => (acc + curr.quantity), 0)}
+                </p>
+              </div>
+            </div>
           </Link>
-          <p data-testid="shopping-cart-size">
-            { cartItems.reduce((acc, curr) => (acc + curr.quantity), 0)}
-          </p>
-        </nav>
 
-        <div className="search-bar-home">
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-          <label htmlFor="search">
-            <input
-              type="text"
-              data-testid="query-input"
-              name="search"
-              onChange={ handleChange }
-            />
-          </label>
-          <button
-            type="button"
-            aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
-            data-testid="query-button"
-            onClick={ fetchProducts }
-          >
-            Enviar
-          </button>
-        </div>
+        </header>
         <div className="main-container-home">
           <div className="category-buttons-container">
             <h2>Categorias</h2>
