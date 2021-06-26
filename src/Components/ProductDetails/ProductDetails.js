@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './ProductDetails.module.css';
-import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import { ShoppingCart, AvaliationForm } from '..';
 
 export class ProductDetails extends Component {
   constructor(props) {
@@ -11,14 +11,10 @@ export class ProductDetails extends Component {
       price: 0,
       imagePath: '',
       attributes: [],
-      eMail: '',
-      mensage: '',
-      rating: '',
       id: '',
       availableQuantity: undefined,
       shoppingCart: localStorage.cart ? JSON.parse(localStorage.getItem('cart')) : [],
     };
-    this.submitButton = this.submitButton.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
     this.addFirstItemToCart = this.addFirstItemToCart.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
@@ -97,25 +93,11 @@ export class ProductDetails extends Component {
     });
   }
 
-  submitButton() {
-    const eMail = document.getElementById('email-id').value;
-    const mensage = document.getElementById('mensage-id').value;
-    const rating = document.getElementById('rating-id').value;
-    this.setState({
-      eMail,
-      mensage,
-      rating,
-    });
-  }
-
   render() {
     const { title,
       price,
       imagePath,
       attributes,
-      eMail,
-      mensage,
-      rating,
       id,
       availableQuantity,
       shoppingCart } = this.state;
@@ -153,58 +135,7 @@ export class ProductDetails extends Component {
               {/* {attributes.map((atribute) => <li key="">{attributes}</li>)} */}
             </ul>
           </div>
-          <form>
-            <h3>Avaliações</h3>
-            <label htmlFor="email-id">
-              <p>Email:</p>
-              <input
-                id="email-id"
-                type="e-mail"
-                placeholder="Digite seu e-mail"
-                required
-              />
-            </label>
-            <label htmlFor="rating-id">
-              <p>Estrelas:</p>
-              <input
-                id="rating-id"
-                type="number"
-                step={ 0.1 }
-                min={ 0 }
-                max={ 5 }
-                placeholder="0 a 5"
-                required
-              />
-            </label>
-            <label htmlFor="mensage-id">
-              <p>Mensagem:</p>
-              <textarea
-                type="text"
-                data-testid="product-detail-evaluation"
-                id="mensage-id"
-              />
-            </label>
-            <br />
-            <button
-              onClick={ this.submitButton }
-              id="avaiation-button"
-              type="button"
-            >
-              Avaliar
-            </button>
-          </form>
-          <section>
-            <h4>Avaliações recentes</h4>
-            <h4>
-              { eMail }
-            </h4>
-            <h3>
-              { mensage }
-            </h3>
-            <h3>
-              { rating }
-            </h3>
-          </section>
+          <AvaliationForm />
         </div>
         <span>Direitos reservados.</span>
       </>

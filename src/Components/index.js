@@ -5,3 +5,4 @@ export { default as Home } from './Home/Home';
 export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as ProductDetails } from './ProductDetails/ProductDetails';
 export { default as ShoppingCart } from './ShoppingCart/ShoppingCart';
+export { default as AvaliationForm } from './AvaliationForm/AvaliationForm';
