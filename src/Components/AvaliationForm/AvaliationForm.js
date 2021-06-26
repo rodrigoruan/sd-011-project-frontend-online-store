@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Avaliations from '../Avaliations/Avaliations';
 
 class AvaliationForm extends Component {
   constructor() {
@@ -45,6 +46,10 @@ class AvaliationForm extends Component {
 
   render() {
     const { email, rating, message } = this.state;
+    let avaliations = [];
+    if (localStorage.avaliations) {
+      avaliations = JSON.parse(localStorage.getItem('avaliations'));
+    }
     return (
       <>
         <form>
@@ -98,15 +103,13 @@ class AvaliationForm extends Component {
         </form>
         <section>
           <h4>Avaliações recentes</h4>
-          <h4>
-            {/* { email } */}
-          </h4>
-          <h3>
-            {/* { mensage } */}
-          </h3>
-          <h3>
-            {/* { rating } */}
-          </h3>
+          {(avaliations.length > 0)
+            ? avaliations.map((avaliation, index) => {
+              index += 1;
+              index -= 1;
+              return (<Avaliations avaliation={ avaliation } key={ index } />);
+            })
+            : <p>Produto ainda sem avaliações</p>}
         </section>
       </>
     );

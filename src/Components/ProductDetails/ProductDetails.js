@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './ProductDetails.module.css';
-import { ShoppingCart, AvaliationForm } from '..';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import AvaliationForm from '../AvaliationForm/AvaliationForm';
 
 export class ProductDetails extends Component {
   constructor(props) {
