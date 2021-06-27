@@ -22,15 +22,17 @@ export default class ShoppingCart extends Component {
     localStorage.setItem('quantity', JSON.stringify(quantity));
   }
 
-  increaseQuantity(event) {
+  increaseQuantity(event, availableQuantity) {
     const { quantity } = this.state;
     const {
       target: { name, id },
     } = event;
-    quantity[name][id] += 1;
-    this.setState({
-      quantity,
-    });
+    if (availableQuantity > quantity[name][id]) {
+      quantity[name][id] += 1;
+      this.setState({
+        quantity,
+      });
+    }
   }
 
   decreaseQuantity(event) {
@@ -67,7 +69,11 @@ export default class ShoppingCart extends Component {
           </p>
         )
           : items.map(
-            ({ title, thumbnail, price, id }, index) => {
+            ({ title,
+              thumbnail,
+              price,
+              id,
+              available_quantity: availableQuantity }, index) => {
               totalPrice += price * quantity[index][id];
               return (
                 <div key={ index } data-testid="shopping-cart-product-name">
@@ -97,7 +103,9 @@ export default class ShoppingCart extends Component {
                     id={ id }
                     type="button"
                     data-testid="product-increase-quantity"
-                    onClick={ this.increaseQuantity }
+                    onClick={
+                      (event) => this.increaseQuantity(event, availableQuantity)
+                    }
                   >
                     +
                   </button>
