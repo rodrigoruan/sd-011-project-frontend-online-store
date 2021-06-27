@@ -102,71 +102,73 @@ export default class Comments extends Component {
     const { comments } = this.state;
     return (
       <div>
-        <h3>Escrever Avaliações</h3>
-        <fieldset>
-          <div>
-            <label htmlFor="email">
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
+        <div className="form-avaliation">
+          <h3>Escrever Avaliações</h3>
+          <form className="form-comments">
+            <div className="form-email">
+              <label htmlFor="email">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  onChange={ this.handleChange }
+                />
+              </label>
+            </div>
+            <div>
+              <textarea
+                type="text"
                 onChange={ this.handleChange }
+                placeholder="Mensagem(Opcional)"
+                data-testid="product-detail-evaluation"
+                name="comment"
               />
-            </label>
-          </div>
-          <div>
-            <textarea
-              type="text"
-              onChange={ this.handleChange }
-              placeholder="Mensagem(Opcional)"
-              data-testid="product-detail-evaluation"
-              name="comment"
-            />
-          </div>
-          <div role="radiogroup">
-            <span>
-              <input
-                value="1"
-                name="rate"
-                type="radio"
-                onChange={ this.handleChange }
-              />
-              <input
-                value="2"
-                name="rate"
-                type="radio"
-                onChange={ this.handleChange }
-              />
-              <input
-                value="3"
-                name="rate"
-                type="radio"
-                onChange={ this.handleChange }
-              />
-              <input
-                value="4"
-                name="rate"
-                type="radio"
-                onChange={ this.handleChange }
-              />
-              <input
-                value="5"
-                name="rate"
-                type="radio"
-                onChange={ this.handleChange }
-              />
-            </span>
-          </div>
-          <div>
-            <button
-              type="button"
-              aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
-              data-testid="query-button"
-              onClick={ this.saveNew }
-            >
-              Avaliar
-            </button>
-          </div>
+            </div>
+            <div role="radiogroup">
+              <span>
+                <input
+                  value="1"
+                  name="rate"
+                  type="radio"
+                  onChange={ this.handleChange }
+                />
+                <input
+                  value="2"
+                  name="rate"
+                  type="radio"
+                  onChange={ this.handleChange }
+                />
+                <input
+                  value="3"
+                  name="rate"
+                  type="radio"
+                  onChange={ this.handleChange }
+                />
+                <input
+                  value="4"
+                  name="rate"
+                  type="radio"
+                  onChange={ this.handleChange }
+                />
+                <input
+                  value="5"
+                  name="rate"
+                  type="radio"
+                  onChange={ this.handleChange }
+                />
+              </span>
+            </div>
+            <div>
+              <button
+                type="button"
+                aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
+                data-testid="query-button"
+                onClick={ this.saveNew }
+              >
+                Avaliar
+              </button>
+            </div>
+          </form>
           <div>
             <h4>Avaliações</h4>
             {comments.map((value, index) => (
@@ -176,7 +178,7 @@ export default class Comments extends Component {
               />))}
           </div>
 
-        </fieldset>
+        </div>
       </div>
     );
   }
