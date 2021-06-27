@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RenderComments from './RenderComments';
+import './ProductDetails.css';
 
 export default class Comments extends Component {
   constructor() {

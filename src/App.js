@@ -5,7 +5,7 @@ import ShopCart from './components/ShopCart';
 /* import ProductCard from './components/ProductCard'; */
 import ProductDetails from './components/ProductDetails';
 import Checkout from './components/Checkout';
-import Footer from './components/Footer'
+import Footer from './components/Footer';
 import * as fetchAPI from './services/api';
 import './App.css';
 
