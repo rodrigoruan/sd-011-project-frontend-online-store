@@ -14,6 +14,7 @@ class ProductDetails extends React.Component {
         thumbnail,
         price,
         attributes,
+        shipping: { free_shipping: freeShipping },
       },
     } = this.props;
     this.state = {
@@ -21,11 +22,12 @@ class ProductDetails extends React.Component {
       thumbnail,
       price,
       attributes,
+      freeShipping,
     };
   }
 
   render() {
-    const { title, thumbnail, price, attributes } = this.state;
+    const { title, thumbnail, price, attributes, freeShipping } = this.state;
     const { productDetails, quantityIcon, updateQuantityIcon } = this.props;
     return (
       <div>
@@ -39,6 +41,12 @@ class ProductDetails extends React.Component {
             )) : <p>Loading...</p>
           }
         </ul>
+        <p>
+          Frete Grátis:
+          { freeShipping
+            ? <span data-testid="free-shipping">Sim</span>
+            : <span>Não</span> }
+        </p>
         <AddToCart
           item={ productDetails }
           test="product-detail-add-to-cart"
@@ -62,6 +70,9 @@ ProductDetails.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     attributes: PropTypes.arrayOf(PropTypes.any).isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
   quantityIcon: PropTypes.number.isRequired,
   updateQuantityIcon: PropTypes.func.isRequired,

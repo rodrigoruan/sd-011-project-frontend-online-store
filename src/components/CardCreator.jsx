@@ -7,7 +7,13 @@ class cardCreator extends React.Component {
   render() {
     const {
       product,
-      product: { title, thumbnail, price, id },
+      product: {
+        title,
+        thumbnail,
+        price,
+        id,
+        shipping: { free_shipping: freeShipping },
+      },
       getProductDetails,
       updateQuantityIcon,
     } = this.props;
@@ -25,6 +31,12 @@ class cardCreator extends React.Component {
             <p className="productName">{title}</p>
             <img src={ thumbnail } alt="Foto do Produto" className="productPicture" />
             <p className="productPrice">{price}</p>
+            <p>
+              Frete Grátis:
+              { freeShipping
+                ? <span data-testid="free-shipping">Sim</span>
+                : <span>Não</span> }
+            </p>
           </div>
         </Link>
         <AddToCart
@@ -44,6 +56,9 @@ cardCreator.propTypes = {
     price: PropTypes.number.isRequired,
     category_id: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
   getProductDetails: PropTypes.func.isRequired,
   updateQuantityIcon: PropTypes.func.isRequired,
