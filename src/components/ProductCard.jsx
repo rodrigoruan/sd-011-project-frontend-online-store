@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './ProductCard.css'
+import './ProductCard.css';
 import freeship from '../images/freeship.svg';
 
 export default class ProductCard extends Component {
@@ -22,8 +22,8 @@ export default class ProductCard extends Component {
       <div className="product-card" data-testid="product">
         <img src={ thumbnail } alt={ title } style={ { width: '150px' } } className="product-img" />
         <div className="price-ship">
-        <p className="price">{`R$ ${price}`}</p>
-        { freeShipping ? <img src= { freeship } data-testid="free-shipping" className="ship" alt="Frete Grátis" /> : undefined}
+          <p className="price">{`R$ ${price}`}</p>
+          { freeShipping ? <img src={ freeship } data-testid="free-shipping" className="ship" alt="Frete Grátis" /> : undefined}
         </div>
         <h4 data-testid="product-detail-name" className>{title}</h4>
 
@@ -34,8 +34,8 @@ export default class ProductCard extends Component {
           } }
           data-testid="product-detail-link"
           className="viewdetails"
-          >
-          <p >Ver Detalhes</p>
+        >
+          <p>Ver Detalhes</p>
         </Link>
         <button
           data-testid="product-add-to-cart"
@@ -43,7 +43,7 @@ export default class ProductCard extends Component {
           onClick={ () => addCart(product) }
           value={ id }
           className="addcart"
-          >
+        >
           <p className="add">Adicionar ao Carrinho</p>
           <p className="quantity">{`Quantidade disponível: ${quantity}`}</p>
         </button>

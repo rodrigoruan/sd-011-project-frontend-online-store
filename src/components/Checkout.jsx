@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import CheckoutForm from './CheckoutForm';
 import back from '../images/arrow_back.svg';
-import './ShopCart.css'
-import './Checkout.css'
+import './ShopCart.css';
+import './Checkout.css';
 
 const initialFormState = {
   fullname: '',
@@ -79,40 +79,40 @@ export default class Checkout extends Component {
             <img src={ back } alt="Cart" className="back" />
           </Link>
           <h1> Checkout </h1>
-          < div style={ { width: '50px' } }></div>
+          <div style={ { width: '50px' } } />
         </header>
         <div className="body-checkout">
-        <div className="checkout-products-review">
-          <h2>Revise seus Produtos</h2>
-          { cartItems.map((item) => (
-            <div className="checkout-product" key={ item.id }>
-              <img
-                className="image-product-cart"
-                src={ item.thumbnail }
-                alt={ item.id }
-              />
-              <p className="cart-product-title">
-                { item.title }
-              </p>
-              <p className="price-params">{`Quantidade: ${item.quantity}`}</p>
-              <p className="price-params">{`Valor unitário: R$ ${item.price}`}</p>
-              <p
-                className="price-params"
-              >
-                {`Valor total: R$ ${(item.price * item.quantity).toFixed(2)}`}
-              </p>
-            </div>))}
-          <div className="price-total">
-            <h2>
-            {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
-              acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
-            </h2>
+          <div className="checkout-products-review">
+            <h2>Revise seus Produtos</h2>
+            { cartItems.map((item) => (
+              <div className="checkout-product" key={ item.id }>
+                <img
+                  className="image-product-cart"
+                  src={ item.thumbnail }
+                  alt={ item.id }
+                />
+                <p className="cart-product-title">
+                  { item.title }
+                </p>
+                <p className="price-params">{`Quantidade: ${item.quantity}`}</p>
+                <p className="price-params">{`Valor unitário: R$ ${item.price}`}</p>
+                <p
+                  className="price-params"
+                >
+                  {`Valor total: R$ ${(item.price * item.quantity).toFixed(2)}`}
+                </p>
+              </div>))}
+            <div className="price-total">
+              <h2>
+                {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
+                  acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
+              </h2>
+            </div>
           </div>
-        </div>
-        <CheckoutForm
-          handleChange={ this.handleChange }
-          handleSubmit={ this.handleSubmit }
-        />
+          <CheckoutForm
+            handleChange={ this.handleChange }
+            handleSubmit={ this.handleSubmit }
+          />
         </div>
       </div>
     );

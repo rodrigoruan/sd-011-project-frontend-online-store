@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import cartImage from '../images/cart.svg';
 import back from '../images/arrow_back.svg';
-import cartempty from '../images/cart_empty.svg'
-import './ShopCart.css'
+import cartempty from '../images/cart_empty.svg';
+import './ShopCart.css';
 
 export default class EmptyShopCart extends Component {
   render() {
