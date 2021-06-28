@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class CustomerRating extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       email: '',
-      rating: 0,
+      rating: '',
       comment: '',
     };
     this.handleChange = this.handleChange.bind(this);
@@ -26,7 +26,7 @@ class CustomerRating extends Component {
       <div>
         <h1>Avaliações</h1>
         <form>
-          <p>Itens com * são obrigatórios</p>
+          <p>Intens com * são obrigatórios</p>
           <input
             placeholder="Digite seu email*"
             name="email"

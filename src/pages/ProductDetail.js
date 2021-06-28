@@ -2,11 +2,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shoppingCartImage from '../images/shoppingCart.jpg';
+import CustomerRating from '../components/CustomerRating';
+import Rating from '../components/Rating';
 
 class ProductDetail extends Component {
   constructor() {
     super();
     this.addToCart = this.addToCart.bind(this);
+    this.addRating = this.addRating.bind(this);
+  }
+
+  getRatings(id) {
+    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+    let productRatings;
+    if (ratings.length > 0) {
+      productRatings = ratings.filter((rating) => rating.id === id);
+      console.log(productRatings);
+    }
+    return productRatings;
+  }
+
+  addRating(rating) {
+    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+    ratings.push(rating);
+    localStorage.setItem('ratings', JSON.stringify(ratings));
+    this.forceUpdate();
   }
 
   addToCart(product) {
@@ -29,8 +49,10 @@ class ProductDetail extends Component {
       price,
       attributes,
       installments,
+      id,
       sold_quantity: soldQuantity,
     } = detail;
+    const productRatings = this.getRatings(id);
 
     return (
       <div>
@@ -63,6 +85,13 @@ class ProductDetail extends Component {
             ))}
           </ul>
         </div>
+        <CustomerRating addRatingFunction={ this.addRating } productId={ id } />
+        {
+          productRatings
+            ? productRatings
+              .map((rating, index) => <Rating key={ index } rating={ rating } />)
+            : null
+        }
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
@@ -85,6 +114,7 @@ ProductDetail.propTypes = {
         title: PropTypes.string,
         thumbnail: PropTypes.string,
         price: PropTypes.number,
+        id: PropTypes.string,
         attributes: PropTypes.arrayOf(PropTypes.object),
         installments: PropTypes.shape({
           quantity: PropTypes.number,
