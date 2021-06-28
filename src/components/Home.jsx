@@ -73,7 +73,6 @@ export default class Home extends Component {
               </button>
             ))}
           </div>
-
           <div className="cards-container">
             {!productCards
               ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar

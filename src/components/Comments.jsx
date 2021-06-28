@@ -128,14 +128,15 @@ export default class Comments extends Component {
               <h4 className="product-class">Classifique o produto</h4>
               <span className="star-cb-group">
                 <input type="radio" id="rating-5" name="rate" value="5" onChange={ this.handleChange } />
+                {/* <input type="radio" id="rating-5" name="rate" value="5" checked="checked" onChange={ this.handleChange } /> */}
                 <label htmlFor="rating-5">5</label>
-                <input type="radio" id="rating-4" name="rate" value="4" checked="checked" onChange={ this.handleChange } />
+                <input type="radio" id="rating-4" name="rate" value="4" onChange={ this.handleChange } />
                 <label htmlFor="rating-4">4</label>
                 <input type="radio" id="rating-3" name="rate" value="3" onChange={ this.handleChange } />
                 <label htmlFor="rating-3">3</label>
                 <input type="radio" id="rating-2" name="rate" value="2" onChange={ this.handleChange } />
                 <label htmlFor="rating-2">2</label>
-                <input type="radio" id="rating-1" name="rate" value="1" onChange={ this.handleChange } />
+                <input type="radio" id="rating-1" name="rate" value="1"  onChange={ this.handleChange } />
                 <label htmlFor="rating-1">1</label>
                 <input type="radio" id="rating-0" name="rate" value="0" className="star-cb-clear" onChange={ this.handleChange } />
                 <label htmlFor="rating-0">0</label>
@@ -155,7 +156,7 @@ export default class Comments extends Component {
           </div>
         </form>
         <div className="avaliations">
-          <h3>Avaliações</h3>
+          <h3>Avaliações do Produto</h3>
           {comments.map((value, index) => (
             <RenderComments
               key={ index }
