@@ -9,9 +9,9 @@ export default class RenderComments extends Component {
       <div className="user-comment">
         <img src={ userimg } alt="User profile" className="user-img" />
         <div className="comment-info">
-        <h4 className="comment-email">{ email }</h4>
-        <h5 className="comment-rate">{`Classificação: ${ rate }`}</h5>
-        <p className="comment-text">{ comment }</p>
+          <h4 className="comment-email">{ email }</h4>
+          <h5 className="comment-rate">{`Classificação: ${rate}`}</h5>
+          <p className="comment-text">{ comment }</p>
         </div>
       </div>
     );

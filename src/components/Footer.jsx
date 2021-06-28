@@ -62,7 +62,7 @@ export default class Footer extends Component {
               <a href="https://github.com/Sicarruda">
                 <img src={ git } alt="GitHub Link" className="git-image" />
               </a>
-              <a>
+              <a href="https://www.linkedin.com/in/jessica-arruda-62040a72/">
                 <img src={ linkedin } alt="Linkedin Link" className="linkedin-image" />
               </a>
               <span>
