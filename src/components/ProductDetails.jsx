@@ -59,7 +59,7 @@ export default class ProductDetails extends Component {
             </button>
           </div>
         </div>
-        <div className="comments">
+        <div>
           <Comments id={ product.id } />
         </div>
       </>

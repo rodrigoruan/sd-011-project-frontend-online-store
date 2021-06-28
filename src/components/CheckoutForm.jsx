@@ -7,84 +7,90 @@ export default class CheckoutForm extends Component {
     const { handleChange, handleSubmit } = this.props;
 
     return (
-      <form>
+      <form className="checkout-form">
         <fieldset className="client-info">
           <h2>Informações do Comprador</h2>
-          <label htmlFor="checkout-fullname">
-            <input
-              type="text"
-              data-testid="checkout-fullname"
-              placeholder="Nome Completo"
-              name="fullname"
-              onChange={ handleChange }
-              required
-            />
-          </label>
-          <label htmlFor="checkout-email">
-            <input
-              type="text"
-              data-testid="checkout-email"
-              placeholder="Email"
-              name="email"
-              onChange={ handleChange }
-              required
-            />
-          </label>
-          <label htmlFor="checkout-cpf">
-            <input
-              type="text"
-              maxLength="11"
-              data-testid="checkout-cpf"
-              placeholder="CPF"
-              name="cpf"
-              onChange={ handleChange }
-              required
-            />
-          </label>
-          <label htmlFor="checkout-phone">
-            <input
-              type="text"
-              data-testid="checkout-phone"
-              placeholder="Telefone"
-              name="phone"
-              onChange={ handleChange }
-              required
-            />
-          </label>
-          <label htmlFor="checkout-cep">
-            <input
-              type="text"
-              data-testid="checkout-cep"
-              placeholder="CEP"
-              name="cep"
-              maxLength="8"
-              onChange={ handleChange }
-              required
-            />
-          </label>
-          <label htmlFor="checkout-address">
-            <input
-              type="text"
-              data-testid="checkout-address"
-              placeholder="Endreço"
-              name="address"
-              onChange={ handleChange }
-              required
-            />
-          </label>
+          <div className="name-cpf">
+            <label htmlFor="checkout-fullname">
+              <input
+                type="text"
+                data-testid="checkout-fullname"
+                placeholder="Nome Completo"
+                name="fullname"
+                onChange={ handleChange }
+                required
+              />
+            </label>
+            <label htmlFor="checkout-cpf">
+              <input
+                type="text"
+                maxLength="11"
+                data-testid="checkout-cpf"
+                placeholder="CPF"
+                name="cpf"
+                onChange={ handleChange }
+                required
+              />
+            </label>
+          </div>
+          <div className="email-phone">
+            <label htmlFor="checkout-email">
+              <input
+                type="text"
+                data-testid="checkout-email"
+                placeholder="Email"
+                name="email"
+                onChange={ handleChange }
+                required
+              />
+            </label>
+            <label htmlFor="checkout-phone">
+              <input
+                type="text"
+                data-testid="checkout-phone"
+                placeholder="Telefone"
+                name="phone"
+                onChange={ handleChange }
+                required
+              />
+            </label>
+          </div>
+          <div className="adress">
+            <label htmlFor="checkout-cep">
+              <input
+                type="text"
+                data-testid="checkout-cep"
+                placeholder="CEP"
+                name="cep"
+                maxLength="8"
+                onChange={ handleChange }
+                required
+              />
+            </label>
+            <label htmlFor="checkout-address">
+              <input
+                type="text"
+                data-testid="checkout-address"
+                placeholder="Endereço"
+                name="address"
+                onChange={ handleChange }
+                required
+              />
+            </label>
+          </div>
         </fieldset>
         <fieldset className="payment-method">
           <h2>Método de Pagamento</h2>
           <label htmlFor="boleto">
-            Boleto
             <input
               type="radio"
               name="paymentMethod"
               onChange={ handleChange }
             />
+            Boleto
           </label>
           <label htmlFor="card">
-            Cartão de Crédito
+            <h4>Cartão de Crédito</h4>
             <input
               type="radio"
               value="visa"
@@ -113,7 +119,7 @@ export default class CheckoutForm extends Component {
           type="submit"
           onClick={ handleSubmit }
         >
-          Comprar
+          Finalizar Compra
         </button>
       </form>
     );

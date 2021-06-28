@@ -25,11 +25,9 @@
 }
 
 .body-checkout {
-  padding: 0 10%;
-}
-
-.total-price {
-
+  padding: 0  10% 10% 10%;
+  display:flex ;
+  flex-direction: column;
 }
 
 .cart-product-title {
@@ -61,20 +59,96 @@
   margin: 50px 20px;
 }
 
-
 .client-info {
-  border: black 1px solid;
-  margin: 15px 0;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-radius: 15px;
+  height: fit-content;
+  text-align: center;
+  width: 100%;
 }
 
 .payment-method {
-  border: black 1px solid;
-  margin: 15px 0;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-radius: 15px;
+  height: fit-content;
+  /* margin: 20px 10%;
+  padding: 5% 20px; */
+  text-align: center;
+  width: 100%; 
 }
 
 .finish-checkout-button {
-  margin: 15px 0;
-  padding: 10px;
+  background: rgb(88,131,255);
+  background: linear-gradient(90deg, rgba(1,245,189,1) 0%, rgba(88,131,255,1) 100%);
+	border-radius: 15px;
+	border:none;
+	display:flex;
+  justify-content: center;
+	cursor:pointer;
+	color:#ffffff;
+	padding:5px;
+  margin: 20px;
+  width: 220px;
+	text-decoration:none;
+  font-size: large;
+  font-weight:bold;
 }
+
+.checkout-form{
+  display:flex ;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 100px;
+  margin: 0 10%;
+  padding: 0 20px;
+}
+
+.client-info {
+  padding: 5% 20px;
+}
+
+.payment-method {
+  margin: 20px 10%;
+  padding: 5% 20px;
+}
+
+.client-info input {
+  padding: 7px;
+  font-size: 14px;
+  border-width: 0px;
+  border-color: #CCCCCC;
+  background-color: #FFFFFF;
+  color: #000000;
+  border-style: hidden;
+  border-radius: 50px;
+  box-shadow: 0px 0px 5px rgba(66,66,66,.30);
+  margin: 10px;
+  width: 300px;
+}
+
+.client-info h2 {
+  margin: 20px;
+}
+
+.payment-method h2 {
+  margin: 20px;
+}
+
+.payment-method h4 {
+  margin: 10px 0 0 0;
+}
+
+.payment-method input {
+  padding: 7px;
+  margin: 10px;
+}
+

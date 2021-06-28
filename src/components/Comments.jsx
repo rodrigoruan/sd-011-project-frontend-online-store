@@ -101,61 +101,44 @@ export default class Comments extends Component {
   render() {
     const { comments } = this.state;
     return (
-      <div>
-        <div className="form-avaliation">
-          <h3>Escrever Avaliações</h3>
-          <form className="form-comments">
-            <div className="form-email">
-              <label htmlFor="email">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  onChange={ this.handleChange }
-                />
-              </label>
-            </div>
-            <div>
-              <textarea
-                type="text"
+      <div className="form-avaliation">
+        <h3>Escrever Avaliações</h3>
+        <form className="form-comments">
+          <div className="form-email">
+            <label htmlFor="email">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
                 onChange={ this.handleChange }
-                placeholder="Mensagem(Opcional)"
-                data-testid="product-detail-evaluation"
-                name="comment"
               />
-            </div>
-            <div role="radiogroup">
-              <span>
-                <input
-                  value="1"
-                  name="rate"
-                  type="radio"
-                  onChange={ this.handleChange }
-                />
-                <input
-                  value="2"
-                  name="rate"
-                  type="radio"
-                  onChange={ this.handleChange }
-                />
-                <input
-                  value="3"
-                  name="rate"
-                  type="radio"
-                  onChange={ this.handleChange }
-                />
-                <input
-                  value="4"
-                  name="rate"
-                  type="radio"
-                  onChange={ this.handleChange }
-                />
-                <input
-                  value="5"
-                  name="rate"
-                  type="radio"
-                  onChange={ this.handleChange }
-                />
+            </label>
+          </div>
+          <div className="text-area">
+            <textarea
+              type="text"
+              onChange={ this.handleChange }
+              placeholder="Mensagem(Opcional)"
+              data-testid="product-detail-evaluation"
+              name="comment"
+            />
+          </div>
+          <div className="rating-submit">
+            <div role="radiogroup" className="radio-group">
+              <h4 className="product-class">Classifique o produto</h4>
+              <span className="star-cb-group">
+                <input type="radio" id="rating-5" name="rate" value="5" onChange={ this.handleChange } />
+                <label htmlFor="rating-5">5</label>
+                <input type="radio" id="rating-4" name="rate" value="4" checked="checked" onChange={ this.handleChange } />
+                <label htmlFor="rating-4">4</label>
+                <input type="radio" id="rating-3" name="rate" value="3" onChange={ this.handleChange } />
+                <label htmlFor="rating-3">3</label>
+                <input type="radio" id="rating-2" name="rate" value="2" onChange={ this.handleChange } />
+                <label htmlFor="rating-2">2</label>
+                <input type="radio" id="rating-1" name="rate" value="1" onChange={ this.handleChange } />
+                <label htmlFor="rating-1">1</label>
+                <input type="radio" id="rating-0" name="rate" value="0" className="star-cb-clear" onChange={ this.handleChange } />
+                <label htmlFor="rating-0">0</label>
               </span>
             </div>
             <div>
@@ -164,22 +147,24 @@ export default class Comments extends Component {
                 aria-label="Save" // https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/master/docs/rules/control-has-associated-label.md
                 data-testid="query-button"
                 onClick={ this.saveNew }
+                className="avaliate"
               >
                 Avaliar
               </button>
             </div>
-          </form>
-          <div>
-            <h4>Avaliações</h4>
-            {comments.map((value, index) => (
-              <RenderComments
-                key={ index }
-                comentario={ value }
-              />))}
           </div>
-
+        </form>
+        <div className="avaliations">
+          <h3>Avaliações</h3>
+          {comments.map((value, index) => (
+            <RenderComments
+              key={ index }
+              comentario={ value }
+            />))}
         </div>
+
       </div>
+
     );
   }
 }
