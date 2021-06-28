@@ -192,7 +192,7 @@ export default class App extends Component {
             />
           </Switch>
         </Router>
-        < Footer />
+        <Footer />
       </div>
     );
   }
