@@ -26,7 +26,9 @@ class CustomerRating extends Component {
       <div>
         <h1>Avaliações</h1>
         <form>
-          <p>Itens com * são obrigatórios</p>
+          <p>
+            Itens com * são obrigatórios
+          </p>
           <input
             placeholder="Digite seu email*"
             name="email"
