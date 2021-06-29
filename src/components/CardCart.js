@@ -6,10 +6,10 @@ class CardCart extends Component {
   render() {
     const { products } = this.props;
     return (
-      <ul data-testid="shopping-cart-product-name">
+      <ul>
         {products.map((cartProduct) => (
           <li key={ cartProduct.id }>
-            <p>{ cartProduct.title }</p>
+            <p data-testid="shopping-cart-product-name">{ cartProduct.title }</p>
             <p>{ cartProduct.price }</p>
             <img src={ cartProduct.thumbnail } alt={ cartProduct.title } />
             <div>
