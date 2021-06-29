@@ -101,7 +101,6 @@ export default class Product extends Component {
           />
           <ShoppingCartButton />
         </section>
-
         <section>
           <h1>Avaliações</h1>
 

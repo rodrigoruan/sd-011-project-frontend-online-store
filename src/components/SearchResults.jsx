@@ -30,12 +30,12 @@ export default class SearchResults extends React.Component {
           </form>
         </header>
         <ol className="search-section__results">
-          {searchResults.results.map(((product) => (<ProductCard
+          { searchResults.results.map(((product) => (<ProductCard
             key={ product.id }
             product={ product }
             addItemToCart={ addItemToCart }
           />)
-          ))}
+          )) }
         </ol>
       </section>
     );
