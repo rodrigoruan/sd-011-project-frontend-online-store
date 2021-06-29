@@ -17,7 +17,6 @@ class ProductDetail extends Component {
     let productRatings;
     if (ratings.length > 0) {
       productRatings = ratings.filter((rating) => rating.id === id);
-      console.log(productRatings);
     }
     return productRatings;
   }
