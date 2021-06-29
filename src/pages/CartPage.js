@@ -10,11 +10,12 @@ class cartPage extends Component {
       <div data-testid="shopping-cart-empty-message">
         {
           products.length > 0
-            ?
+            ? (
               <div>
-                 <Link to="/checkout" data-testid="checkout-products">Checkout</Link>
-                 <CardCart products={ products } />
+                <Link to="/checkout" data-testid="checkout-products">Checkout</Link>
+                <CardCart products={ products } />
               </div>
+            )
             : <EmptyCart />
         }
       </div>
