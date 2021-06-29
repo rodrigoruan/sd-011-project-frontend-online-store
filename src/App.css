@@ -54,10 +54,10 @@ main {
 footer {
   align-items: center;
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  padding: 40px;
   gap: 14px;
+  justify-content: center;
+  padding: 40px;
 }
 
 .categories-container {
