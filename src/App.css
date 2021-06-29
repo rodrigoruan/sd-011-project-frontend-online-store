@@ -55,8 +55,8 @@ footer {
   align-items: center;
   display: flex;
   justify-content: center;
-  padding: 40px;
   flex-direction: column;
+  padding: 40px;
   gap: 14px;
 }
 
