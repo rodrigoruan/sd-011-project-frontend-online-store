@@ -15,14 +15,10 @@ export default class Checkout extends React.Component {
               <p>{ title }</p>
               <img src={ thumbnail } alt={ title } />
               <p>
-                R$
-                {' '}
-                { price }
+                {`R$ ${price}`}
               </p>
               <p>
-                Quantidade:
-                {' '}
-                {quantity}
+                {`Quantidade: ${quantity}`}
               </p>
             </div>
           ))
