@@ -67,7 +67,7 @@ class Cart extends Component {
           {shoppingCart && shoppingCart.map((item, index) => (
             <div key={ index }>
               <h2 data-testid="shopping-cart-product-name">{ item.title }</h2>
-              <img src={ item.thumbnail } alt="foto do produto no carro" />
+              <img src={ item.thumbnail } alt="imagem do produto" />
               <p>
                 R$
                 { item.price }
