@@ -51,12 +51,21 @@ class QuantityButton extends Component {
     const { quantity } = this.state;
     return (
       <div data-testid="shopping-cart-product-quantity">
-        <button type="button" onClick={ this.addQuantity }>+</button>
-        <p>{quantity}</p>
+        <button
+          type="button"
+          onClick={ this.addQuantity }
+          data-testid="product-increase-quantity"
+        >
+          +
+        </button>
+        <p>
+          {quantity}
+        </p>
         <button
           type="button"
           onClick={ this.subtractQuantity }
           disabled={ quantity < 2 }
+          data-testid="product-decrease-quantity"
         >
           -
         </button>
