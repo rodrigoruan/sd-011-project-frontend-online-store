@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import ShopCart from './components/ShopCart';
-/* import ProductCard from './components/ProductCard'; */
 import ProductDetails from './components/ProductDetails';
 import Checkout from './components/Checkout';
 import Footer from './components/Footer';
@@ -14,7 +13,7 @@ export default class App extends Component {
     super();
     this.state = {
       categories: [],
-      productCards: [],
+      productCards: undefined,
       categoryId: '',
       search: '',
       cartItems: [],
@@ -36,9 +35,6 @@ export default class App extends Component {
     if (localStorage.getItem('localCart')) {
       this.getStorage();
     }
-    // if (localStorage.getItem('localCards')) {
-    //   this.getStorage();
-    // }
   }
 
   componentDidUpdate() {
@@ -59,10 +55,8 @@ export default class App extends Component {
 
   getStorage() {
     const cartItemsStorage = JSON.parse(localStorage.getItem('localCart'));
-    // const cardsItemsStorage = JSON.parse(localStorage.getItem('localCards'));
     this.setState({
       cartItems: cartItemsStorage,
-      // productCards: cardsItemsStorage,
     });
   }
 
@@ -71,7 +65,6 @@ export default class App extends Component {
     const fetchedProducts = await
     fetchAPI.getProductsFromCategoryAndQuery(categoryId, search);
     this.setState({ productCards: fetchedProducts.results });
-    // localStorage.setItem('localCards', JSON.stringify(fetchedProducts.results));
   }
 
   async fetchProductCategory() {
@@ -88,7 +81,6 @@ export default class App extends Component {
       productCards: fetchedProductsFromCategories.results,
       categoryId: id,
     });
-    // localStorage.setItem('localCards', JSON.stringify(fetchedProductsFromCategories.results));
   }
 
   addCart(product) {
@@ -101,14 +93,11 @@ export default class App extends Component {
         cartItems: [...cartItems, product],
       });
 
-      // this.setStorage();
-      // Não estamos conseguindo alterar as quantidades dos items já adicionados, após renderização do carrinho
     } else {
       itemIsInCart.quantity += 1;
       this.setState({
         cartItems: [...cartItems],
       });
-      // this.setStorage();
     }
     this.setStorage();
   }
@@ -119,13 +108,11 @@ export default class App extends Component {
     this.setState({
       cartItems: updateCart,
     });
-    // this.setStorage();
   }
 
   increaseItemQuantity({ target: { value } }) {
     const { cartItems } = this.state;
     const itemToCart = cartItems.find((item) => item.id === value);
-    // const isInCart = cartItems.some((item) => item.id === product.id);
     if (itemToCart) {
       this.setState({
         cartItems: [...cartItems],
@@ -137,7 +124,6 @@ export default class App extends Component {
   decreaseItemQuantity({ target: { value } }) {
     const { cartItems } = this.state;
     const itemToCart = cartItems.find((item) => item.id === value);
-    // const isInCart = cartItems.some((item) => item.id === product.id);
     if (itemToCart.quantity > 1) {
       this.setState({
         cartItems: [...cartItems],

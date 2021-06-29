@@ -34,22 +34,6 @@ export default class Comments extends Component {
     });
   }
 
-  /*   saveComments() {
-    const { comment, rate } = this.state;
-    const object = { comment, rate }; // cria o objeto que será guardado no localStorage
-    const { id } = this.props;
-    if (rate) { // identifica que há avaliação
-      const getItem = localStorage.getItem(id); // busca o item id
-      if (getItem) { // se há o id no localStorage
-        localStorage.setItem(id, `${getItem}+${JSON.stringify(object)}`); // set a chave id com o valor buscado (getItem), acrescentando o objeto em formato de string, pois o localStorage só aceita texto
-      }
-      if (!getItem && rate !== 0) { // se o localStorage estiver vazio e o rate foi diferente de 0, set o objeto
-        localStorage.setItem(id, JSON.stringify(object));
-      }
-    }
-    this.setState({ comments: localStorage.getItem(id) }); // atualiza o estado com os comentários salvos no localStorage
-  } */
-
   handleComments(id) {
     if (localStorage[id]) {
       this.setState({
@@ -126,6 +110,7 @@ export default class Comments extends Component {
           <div className="rating-submit">
             <div role="radiogroup" className="radio-group">
               <h4 className="product-class">Classifique o produto</h4>
+              {/* Modelo de radio buttons retirado de https://codeconvey.com/css-star-rating-radio-buttons/ */}
               <span className="star-cb-group">
                 <input type="radio" id="rating-5" name="rate" value="5" onChange={ this.handleChange } />
                 {/* <input type="radio" id="rating-5" name="rate" value="5" checked="checked" onChange={ this.handleChange } /> */}
@@ -136,7 +121,7 @@ export default class Comments extends Component {
                 <label htmlFor="rating-3">3</label>
                 <input type="radio" id="rating-2" name="rate" value="2" onChange={ this.handleChange } />
                 <label htmlFor="rating-2">2</label>
-                <input type="radio" id="rating-1" name="rate" value="1"  onChange={ this.handleChange } />
+                <input type="radio" id="rating-1" name="rate" value="1" onChange={ this.handleChange } />
                 <label htmlFor="rating-1">1</label>
                 <input type="radio" id="rating-0" name="rate" value="0" className="star-cb-clear" onChange={ this.handleChange } />
                 <label htmlFor="rating-0">0</label>
@@ -173,5 +158,3 @@ export default class Comments extends Component {
 Comments.propTypes = {
   id: PropTypes.string.isRequired,
 };
-
-// comments && comments.split('+').map((item, index) -> esse formato permite a renderização correta com a funsção saveComments

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import EmptyShopCart from './EmptyShopCart';
 import cartImage from '../images/cart.svg';
 import back from '../images/arrow_back.svg';
-import './ShopCart.css'
+import './ShopCart.css';
 
 export default class ShopCart extends Component {
   render() {
@@ -38,56 +38,56 @@ export default class ShopCart extends Component {
                 X
               </button>
               <div className="img-title">
-              <img className="image-product-cart" src={ item.thumbnail } alt={ item.id } />
-              <p
-                className="cart-product-title"
-                data-testid="shopping-cart-product-name"
-              >
-                { item.title }
-              </p>
+                <img className="image-product-cart" src={ item.thumbnail } alt={ item.id } />
+                <p
+                  className="cart-product-title"
+                  data-testid="shopping-cart-product-name"
+                >
+                  { item.title }
+                </p>
               </div>
-              <div className='quantity-item'>
-              <button
-                className="button-decrease"
-                onClick={ decreaseItemQuantity }
-                type="button"
-                value={ item.id }
-                data-testid="product-decrease-quantity"
-              >
-                -
-              </button>
-              <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
-              <button
-                className="button-increase"
-                onClick={ item.quantity < item.available_quantity && increaseItemQuantity }
-                type="button"
-                value={ item.id }
-                data-testid="product-increase-quantity"
-              >
-                +
-              </button>
-              <p className="avaliable-quantity">{`Disponível: ${item.available_quantity}`}</p>
+              <div className="quantity-item">
+                <button
+                  className="button-decrease"
+                  onClick={ decreaseItemQuantity }
+                  type="button"
+                  value={ item.id }
+                  data-testid="product-decrease-quantity"
+                >
+                  -
+                </button>
+                <p data-testid="shopping-cart-product-quantity">{ item.quantity }</p>
+                <button
+                  className="button-increase"
+                  onClick={ item.quantity < item.available_quantity && increaseItemQuantity }
+                  type="button"
+                  value={ item.id }
+                  data-testid="product-increase-quantity"
+                >
+                  +
+                </button>
+                <p className="avaliable-quantity">{`Disponível: ${item.available_quantity}`}</p>
               </div>
               <p className="item-price">{`R$ ${item.price} un.`}</p>
             </div>))}
         </div>
         <div className="gocheckout">
-        <div className="total-price">
-          {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
-            acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
-        </div>
-        <Link
-          to="/checkout"
-        >
-          <button
-            className="go-to-checkout-button"
-            type="button"
-            data-testid="checkout-products"
-            value={ cartItems }
+          <div className="total-price">
+            {`Valor Total da Compra: R$${cartItems.reduce((acc, curr) => (
+              acc + (curr.quantity * curr.price)), 0).toFixed(2)}`}
+          </div>
+          <Link
+            to="/checkout"
           >
-            Finalizar Compra
-          </button>
-        </Link>
+            <button
+              className="go-to-checkout-button"
+              type="button"
+              data-testid="checkout-products"
+              value={ cartItems }
+            >
+              Finalizar Compra
+            </button>
+          </Link>
         </div>
       </div>
     );

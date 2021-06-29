@@ -73,12 +73,6 @@
   margin-bottom: 100px;
 }
 
-/* .form-comments {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-} */
-
 .form-email input {
   padding: 7px;
   font-size: 14px;
@@ -222,6 +216,6 @@
 .comment-rate {
   color: rgba(255,68,64,1);
   text-shadow: 0 0 1px #333;
-  font-size: 0.8em;
-  margin-top: 0.3em;
+  font-size: 1em;
+  letter-spacing: -0.1em;
 }

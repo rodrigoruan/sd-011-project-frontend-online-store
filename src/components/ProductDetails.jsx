@@ -79,7 +79,6 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   addCart: PropTypes.func.isRequired,
-  /* comments: PropTypes.string.isRequired, */
   cartItems: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     name: PropTypes.string,

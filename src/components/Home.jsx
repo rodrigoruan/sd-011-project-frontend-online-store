@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
 import logo from '../images/logo_frontend_store.svg';
+import banner from '../images/banner.png';
 import './Home.css';
 
 export default class Home extends Component {
@@ -26,6 +27,7 @@ export default class Home extends Component {
           </div>
           <div className="form-home">
             <form className="search-bar-home form-search">
+              {/* Modelo retirado de https://freefrontend.com/css-search-boxes */}
               <input
                 type="search"
                 data-testid="query-input"
@@ -75,7 +77,9 @@ export default class Home extends Component {
           </div>
           <div className="cards-container">
             {!productCards
-              ? <p>Nenhum produto foi encontrado</p> // Tentar retornar apenas após não encontrar
+              ? <div className="div-banner">
+                <img src={ banner } alt="" className="banner" />
+              </div> // Tentar retornar apenas após não encontrar
               : productCards.map((product) => (
                 <ProductCard
                   key={ product.id }
