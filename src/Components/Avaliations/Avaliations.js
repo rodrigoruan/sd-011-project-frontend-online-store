@@ -1,20 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import style from './Avaliations.module.css';
 
 class Avaliations extends React.Component {
   render() {
     const { avaliation: { email, message, rating } } = this.props;
     return (
-      <div>
-        <h4>
+      <div className={ style.avaliation }>
+        <span>
+          Email:
+          {' '}
           { email }
-        </h4>
-        <h3>
+          {' '}
+        </span>
+        <span>
+          Avaliação:
+          {' '}
           { message }
-        </h3>
-        <h3>
+          {' '}
+        </span>
+        <span>
+          Nota:
+          {' '}
           { rating }
-        </h3>
+          {' '}
+        </span>
       </div>
     );
   }
@@ -24,7 +34,7 @@ Avaliations.propTypes = {
   avaliation: PropTypes.shape({
     email: PropTypes.string,
     message: PropTypes.string,
-    rating: PropTypes.number,
+    rating: PropTypes.string,
   }).isRequired,
 };
 

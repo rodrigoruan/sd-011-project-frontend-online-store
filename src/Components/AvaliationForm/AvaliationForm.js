@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Avaliations from '../Avaliations/Avaliations';
 
 class AvaliationForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const { id } = props;
 
     this.state = {
       email: '',
       rating: '',
       message: '',
+      id,
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.submitButton = this.submitButton.bind(this);
+    this.handleAvaliation = this.handleAvaliation.bind(this);
   }
 
   handleChange({ target }) {
@@ -20,13 +23,60 @@ class AvaliationForm extends Component {
     this.setState({ [name]: value });
   }
 
+  handleAvaliation() {
+    const { email, rating, message, id } = this.state;
+    const avaliation = {
+      email,
+      rating,
+      message,
+      id,
+    };
+    return this.addAvaliation(avaliation);
+  }
+
+  getProductAvaliations(id) {
+    const avaliations = JSON.parse(localStorage.getItem('avaliations'));
+    return avaliations.filter((aval) => aval[0] === id);
+  }
+
   addAvaliation(avaliation) {
+    const { email, rating, message, id } = avaliation;
     if (!localStorage.avaliations) {
-      localStorage.setItem('avaliations', JSON.stringify([avaliation]));
-    } else {
-      const avaliations = JSON.parse(localStorage.getItem('avaliations'));
-      localStorage.setItem('avaliations', JSON.stringify([...avaliations, avaliation]));
+      return this.createAndAddAvaliationOnLocalStorage(avaliation);
     }
+    const avaliations = JSON.parse(localStorage.getItem('avaliations'));
+    const productAvaliations = avaliations.filter((aval) => aval[0] === id);
+    if (productAvaliations.length === 0) {
+      return this.addFirstAvaliationOnNewProduct(avaliations, avaliation);
+    }
+    const newProductAvaliations = [...productAvaliations[0], { email, rating, message }];
+    return this.addNewAvaliationToProduct(avaliations, newProductAvaliations, id);
+  }
+
+  createAndAddAvaliationOnLocalStorage({ email, rating, message, id }) {
+    const productAvaliation = [id, { email, rating, message }];
+    localStorage.setItem('avaliations', JSON.stringify([productAvaliation]));
+    this.resetState();
+  }
+
+  addFirstAvaliationOnNewProduct(avaliations, { email, rating, message, id }) {
+    const newAvaliations = [...avaliations, [id, { email, rating, message }]];
+    localStorage.setItem('avaliations', JSON.stringify(newAvaliations));
+    this.resetState();
+  }
+
+  addNewAvaliationToProduct(avaliations, newProductAvaliations, id) {
+    const newAvaliations = avaliations.map((aval) => {
+      if (aval[0] === id) {
+        return newProductAvaliations;
+      }
+      return aval;
+    });
+    localStorage.setItem('avaliations', JSON.stringify(newAvaliations));
+    this.resetState();
+  }
+
+  resetState() {
     this.setState({
       email: '',
       rating: '',
@@ -34,22 +84,10 @@ class AvaliationForm extends Component {
     });
   }
 
-  submitButton() {
-    const { email, rating, message } = this.state;
-    const avaliation = {
-      email,
-      rating,
-      message,
-    };
-    return this.addAvaliation(avaliation);
-  }
-
   render() {
-    const { email, rating, message } = this.state;
-    let avaliations = [];
-    if (localStorage.avaliations) {
-      avaliations = JSON.parse(localStorage.getItem('avaliations'));
-    }
+    const { email, rating, message, id } = this.state;
+    const productAvaliations = localStorage.avaliations
+      ? this.getProductAvaliations(id) : [];
     return (
       <>
         <form>
@@ -94,7 +132,7 @@ class AvaliationForm extends Component {
           </label>
           <br />
           <button
-            onClick={ this.submitButton }
+            onClick={ this.handleAvaliation }
             id="avaiation-button"
             type="button"
           >
@@ -103,11 +141,12 @@ class AvaliationForm extends Component {
         </form>
         <section>
           <h4>Avaliações recentes</h4>
-          {(avaliations.length > 0)
-            ? avaliations.map((avaliation, index) => {
-              index += 1;
-              index -= 1;
-              return (<Avaliations avaliation={ avaliation } key={ index } />);
+          {(productAvaliations.length > 0)
+            ? productAvaliations[0].map((avaliation, index) => {
+              if (index !== 0) {
+                return (<Avaliations avaliation={ avaliation } key={ index } />);
+              }
+              return (<span key={ index } />);
             })
             : <p>Produto ainda sem avaliações</p>}
         </section>
@@ -115,5 +154,9 @@ class AvaliationForm extends Component {
     );
   }
 }
+
+AvaliationForm.propTypes = {
+  id: PropTypes.string.isRequired,
+};
 
 export default AvaliationForm;

@@ -136,7 +136,7 @@ export class ProductDetails extends Component {
               {/* {attributes.map((atribute) => <li key="">{attributes}</li>)} */}
             </ul>
           </div>
-          <AvaliationForm />
+          {id !== '' ? <AvaliationForm id={ id } /> : <span />}
         </div>
         <span>Direitos reservados.</span>
       </>
