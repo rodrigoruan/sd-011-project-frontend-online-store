@@ -17,7 +17,7 @@ class Products extends Component {
   addToCart() {
     const { quantity } = this.state;
     const count = quantity + 1;
-    this.setState({ quantity: count }, () => { saveStorage(this.state); });
+    this.setState({ quantity: count }, () => { saveStorage(this.state); }); // pulo do gato
   }
 
   render() {
