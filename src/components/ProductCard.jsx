@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import '../styles/ProductCard.css';
+import 'bulma/css/bulma.min.css';
 
 class ProductCard extends Component {
   constructor(props) {
@@ -59,6 +59,7 @@ class ProductCard extends Component {
     return (
       <li className="product-card" data-testid="product">
         <Link
+          className="Link"
           data-testid="product-detail-link"
           to={ {
             pathname: '/productdetail',
@@ -74,11 +75,12 @@ class ProductCard extends Component {
         >
           { console.log(inStorage) }
           <h4>{title}</h4>
-          <img alt="foto do produto" src={ thumbnail } />
-          <p>{ `R$ ${price}` }</p>
-          { this.renderSpan(hasFreeShipping)}
+          <img className="center" alt="foto do produto" src={ thumbnail } />
+          <p className="center">{ `R$ ${price}` }</p>
+          <p className="center">{ this.renderSpan(hasFreeShipping)}</p>
         </Link>
         <button
+          className="button is-primary"
           type="button"
           data-testid="product-add-to-cart"
           onClick={ this.handleButton }

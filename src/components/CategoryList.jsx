@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
+import 'bulma/css/bulma.min.css';
 
 class CategoryList extends Component {
   constructor() {

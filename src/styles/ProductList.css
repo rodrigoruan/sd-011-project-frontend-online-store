@@ -1,8 +1,12 @@
 .productList {
-  border: 1px solid black;
+  align-items: stretch;
+  align-content: space-between;
+  align-self: auto;
+  background-color: grey;
+  border: 1px;
   display: flex;
   flex-flow: row wrap;
-  margin: 0;
-  padding: 5px;
-  width: 75%;
+  margin: 1px;
+  padding: 20px;
+  width: 75% ;
 }

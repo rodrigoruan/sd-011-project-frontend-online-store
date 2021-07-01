@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
-
 import '../styles/ProductList.css';
+import 'bulma/css/bulma.min.css';
 
 class ProductList extends Component {
   render() {

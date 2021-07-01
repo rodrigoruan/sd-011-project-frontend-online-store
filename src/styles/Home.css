@@ -1,8 +1,14 @@
+  body {
+  align-items: center;
+  align-content: space-around;
+  align-self: top;
+}
 .searchSection {
   align-items: center;
+  align-content: space-between;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content:space-between;
   margin: 1em auto 2em;
   width: 90%;
 }
@@ -48,5 +54,6 @@
 
 .categories {
   border: 1px solid black;
-  width: 20%;
+  margin: 0 auto;
+  width: 25%;
 }

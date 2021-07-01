@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ProductEvaluation from '../components/ProductEvaluation';
 import 'react-rater/lib/react-rater.css';
+import 'bulma/css/bulma.min.css';
 
 export default class ProductDetail extends Component {
   constructor({ location }) {

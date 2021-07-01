@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as Api from '../services/api';
-
 import ProductList from '../components/ProductList';
 import CategoryList from '../components/CategoryList';
-
 import '../styles/Home.css';
+import 'bulma/css/bulma.min.css';
 
 class Home extends Component {
   constructor() {
@@ -72,6 +71,8 @@ class Home extends Component {
         <div className="searchSection">
           <label htmlFor="search">
             <input
+              class="input is-primary" 
+              placeholder="Digite Aqui o Termo para pesquisa"
               data-testid="query-input"
               type="text"
               name="search"
@@ -79,15 +80,15 @@ class Home extends Component {
             />
           </label>
           <button
-            className="btn"
+            className="button is-primary"
             data-testid="query-button"
             type="submit"
             onClick={ this.RequestApi }
           >
-            Pesquisar
-          </button>
+          Pesquisar
+            </button>
           <Link
-            className="btn cart-btn"
+            className="button is-link"
             to="/cart"
             data-testid="shopping-cart-button"
           >

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 // All credits of Rater to https://reactjsexample.com/a-star-rater-in-react-js/
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
+import 'bulma/css/bulma.min.css';
 
 export default class ProductEvaluation extends Component {
   render() {
