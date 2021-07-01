@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ShoppingCartItem from '../components/ShoppingCartItem';
+import '../styles/ShoppingCart.css';
 
 export default class ShoppingCart extends Component {
   constructor(props) {
@@ -64,7 +65,7 @@ export default class ShoppingCart extends Component {
         (acc, total) => acc + (total.quantity * total.price), 0,
       );
       this.setState({
-        totalShoppingCart: totalSumPrices,
+        totalShoppingCart: Math.round(totalSumPrices * 100) / 100,
       });
     });
   }
@@ -74,7 +75,11 @@ export default class ShoppingCart extends Component {
     return (
       <div className="shopping-cart-page">
         <div className="button-back">
-          <Link to="/">Voltar</Link>
+          <Link to="/">
+            <div className="icons">
+              <i className="fas fa-arrow-left">Voltar</i>
+            </div>
+          </Link>
         </div>
         <div className="page-title">
           <h2>Carrinho de Compras</h2>
@@ -92,20 +97,24 @@ export default class ShoppingCart extends Component {
         </div>
         <div className="total-shopping-cart-section">
           <p className="total-shopping-cart">
-            R$
-            { totalShoppingCart }
+            <b>
+              Total:
+              R$
+              { totalShoppingCart }
+            </b>
           </p>
+          <Link
+            className="btn btn-success"
+            data-testid="checkout-products"
+            to={ {
+              pathname: '/Checkout',
+              state: {
+                cart: shoppingCart },
+            } }
+          >
+            Ir para Checkout
+          </Link>
         </div>
-        <Link
-          data-testid="checkout-products"
-          to={ {
-            pathname: '/Checkout',
-            state: {
-              cart: shoppingCart },
-          } }
-        >
-          Ir para Checkout
-        </Link>
       </div>
     );
   }

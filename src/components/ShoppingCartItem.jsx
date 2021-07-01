@@ -79,47 +79,52 @@ export default class ShoppingCartItem extends Component {
     const { deletProduct } = this.props;
     return (
       <div className="shopping-cart-item-section">
-        <button
-          type="button"
-          onClick={ () => deletProduct(id) }
-          className="delet-product"
-        >
-          X
-        </button>
-        <img className="image-product" src={ thumbnail } alt={ title } />
-        <span
-          className="title-product"
-          data-testid="shopping-cart-product-name"
-        >
-          { title }
-        </span>
-        <button
-          className="button-quantity"
-          type="button"
-          onClick={ this.handleDecrease }
-          data-testid="product-decrease-quantity"
-        >
-          -
-        </button>
-        <p
-          className="quantity-producty"
-          data-testid="shopping-cart-product-quantity"
-        >
-          { quantity }
-        </p>
-        <button
-          className="button-quantity"
-          type="button"
-          onClick={ this.handleIncrease }
-          data-testid="product-increase-quantity"
-          disabled={ buttonIncrease }
-        >
-          +
-        </button>
-        <p className="price-product">
-          R$
-          { totalPrice }
-        </p>
+        <div className="cart-description">
+          <button
+            type="button"
+            onClick={ () => deletProduct(id) }
+            className="delet-product"
+          >
+            <i className="fas fa-times-circle fa-lg" />
+          </button>
+          <img className="image-product" src={ thumbnail } alt={ title } />
+          <span
+            className="title-product"
+            data-testid="shopping-cart-product-name"
+          >
+            { title }
+          </span>
+        </div>
+        <div className="cart-buttons">
+          <button
+            className="button-quantity"
+            type="button"
+            onClick={ this.handleDecrease }
+            data-testid="product-decrease-quantity"
+          >
+            <i className="fas fa-minus-circle fa-lg" />
+          </button>
+          <span
+            className="quantity-producty"
+            data-testid="shopping-cart-product-quantity"
+          >
+            { quantity }
+          </span>
+          <button
+            className="button-quantity"
+            type="button"
+            onClick={ this.handleIncrease }
+            data-testid="product-increase-quantity"
+            disabled={ buttonIncrease }
+          >
+            <i className="fas fa-plus-circle fa-lg" />
+          </button>
+          <span className="price-product">
+            R$
+            { Math.round(totalPrice * 100) / 100 }
+          </span>
+
+        </div>
       </div>
     );
   }

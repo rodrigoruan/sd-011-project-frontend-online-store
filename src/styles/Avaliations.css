@@ -1,0 +1,24 @@
+.avaliation-wrapper {
+  margin-top: 40px;
+}
+
+.avaliation {
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  max-width: 750px;
+  padding: 15px;
+}
+
+.avaliation-email-rating {
+  display: flex;
+  margin-left: 20px;
+}
+
+.avaliation-rating {
+  margin-left: 10px;
+}
+
+.avaliation-message {
+  margin-left: 20px;
+}

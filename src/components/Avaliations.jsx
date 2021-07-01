@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Avaliations.css';
 
 export default class Avaliations extends Component {
   constructor() {
@@ -33,21 +34,21 @@ export default class Avaliations extends Component {
   render() {
     const { avaliations } = this.state;
     return (
-      <div>
+      <div className="avaliation-wrapper">
         <h2>Pessoas que avaliaram</h2>
         { avaliations.map(({ formStars, email, message }, index) => (
-          <div key={ index }>
-            <div>
+          <div className="avaliation form-check" key={ index }>
+            <div className="avaliation-email-rating">
               <p>
                 Email:
                 { email }
               </p>
-              <p>
+              <p className="avaliation-rating">
                 Nota:
                 { formStars }
               </p>
             </div>
-            <div>
+            <div className="avaliation-message">
               <p>
                 Mensagem:
                 { message }

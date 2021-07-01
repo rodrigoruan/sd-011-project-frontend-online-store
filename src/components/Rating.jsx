@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Rating extends Component {
   render() {
@@ -71,6 +72,10 @@ export default class Rating extends Component {
           </label>
         </div>
       </div>
-    )
+    );
   }
 }
+
+Rating.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+};
