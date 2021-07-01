@@ -169,7 +169,7 @@ export default class Cart extends Component {
     if (pay) {
       return (
         <div className="cart-page">
-          <Link to="/">Voltar</Link>
+          <Link className="button is-link" to="/">Voltar</Link>
           <div className="title-price-wrapper">
             <h1 className="is-size-3 cart-title">{cartTitle}</h1>
             <p className="total-price">
@@ -187,7 +187,7 @@ export default class Cart extends Component {
     }
 
     return (
-      <div className="cart-page">
+      <div className="cart-page box">
         <Link className="button is-link" to="/">Voltar</Link>
         <div className="title-price-wrapper">
           <h1 className="is-size-3 cart-title">{cartTitle}</h1>

@@ -1,0 +1,11 @@
+.form {
+  width: 60%;
+  margin: 50px auto 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form fieldset {
+  width: 100%;
+  margin: 20px auto 30px;
+}
