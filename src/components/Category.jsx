@@ -7,7 +7,7 @@ export default class Category extends Component {
     const { id, name, handleChange } = this.props;
     return (
       <div className="categories form-check">
-        <label htmlFor={ name } className="form-check-label">
+        <label htmlFor={ name } className="category-label form-check-label">
           <input
             type="radio"
             id={ name }

@@ -13,11 +13,18 @@ export default class Product extends Component {
     callback();
   }
 
+  freeShipping() {
+    return (
+      <span className="free-shipping btn-success" data-testid="free-shipping">
+        Frete Grátis
+      </span>
+    );
+  }
+
   render() {
     const { product } = this.props;
     const { id, title, price, thumbnail, shipping } = product;
     const { free_shipping: freeShipping } = shipping;
-
     return (
       <div className="product" data-testid="product">
         <div className="product-title">
@@ -35,9 +42,7 @@ export default class Product extends Component {
             { price }
           </span>
           {
-            freeShipping
-              ? <span data-testid="free-shipping">Frete Grátis</span>
-              : null
+            freeShipping && this.freeShipping()
           }
         </div>
         <div className="product-buttons">
@@ -47,7 +52,8 @@ export default class Product extends Component {
             to={ {
               pathname: `/Details/${id}`,
               state: {
-                element: product },
+                element: product,
+              },
             } }
           >
             Detalhes

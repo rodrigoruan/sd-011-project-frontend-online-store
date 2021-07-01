@@ -34,6 +34,15 @@ export default class Details extends Component {
     const quantityProduct = { quantity: 1 };
     const obj = Object.assign(quantityProduct, product);
     handleCart(obj);
+    this.getLocalStorage();
+  }
+
+  freeShipping() {
+    return (
+      <span className="free-shipping btn-success" data-testid="free-shipping">
+        Frete Grátis
+      </span>
+    );
   }
 
   render() {
@@ -67,9 +76,7 @@ export default class Details extends Component {
           <div>
             <h3 data-testid="product-detail-name">{`${title}`}</h3>
             {
-              freeShipping
-                ? <span data-testid="free-shipping">Frete Grátis</span>
-                : null
+              freeShipping && this.freeShipping()
             }
           </div>
           <div className="detail-image-info">

@@ -22,6 +22,7 @@
 
 .image-product {
   margin: 0 5px;
+  max-width: 90px;
 }
 
 .title-product {
