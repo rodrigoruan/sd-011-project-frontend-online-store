@@ -1,0 +1,10 @@
+.email-rating {
+  display: flex;
+  justify-content: flex-start;
+  width: 50%;
+  margin-bottom: 20px;
+}
+
+#form-email {
+  margin-right: 50px;
+}
