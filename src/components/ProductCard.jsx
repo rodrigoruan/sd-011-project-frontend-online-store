@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import '../styles/ProductCard.css';
 import 'bulma/css/bulma.min.css';
+import '../styles/ProductCard.css';
 
 class ProductCard extends Component {
   constructor(props) {
@@ -40,7 +40,7 @@ class ProductCard extends Component {
   renderSpan(hasFreeShipping) {
     if (hasFreeShipping) {
       return (
-        <span data-testid="free-shipping">Frete Grátis</span>
+        <span className="frete" data-testid="free-shipping">Frete Grátis</span>
       );
     }
     return (null);
@@ -57,7 +57,7 @@ class ProductCard extends Component {
     } = this.props;
     const { disabled } = this.state;
     return (
-      <li className="product-card" data-testid="product">
+      <li className="product-card box center" data-testid="product">
         <Link
           className="Link"
           data-testid="product-detail-link"
@@ -74,10 +74,12 @@ class ProductCard extends Component {
           } }
         >
           { console.log(inStorage) }
-          <h4>{title}</h4>
-          <img className="center" alt="foto do produto" src={ thumbnail } />
-          <p className="center">{ `R$ ${price}` }</p>
-          <p className="center">{ this.renderSpan(hasFreeShipping)}</p>
+          <img className="center img" alt="foto do produto" src={ thumbnail } />
+          <div>
+          <h4 className="text">{title}</h4>
+          <p><b>{ `R$ ${price}  ` } </b>
+            { this.renderSpan(hasFreeShipping)}</p>
+          </div>
         </Link>
         <button
           className="button is-primary"
@@ -93,9 +95,9 @@ class ProductCard extends Component {
             quantity: 1,
             inStorage,
           }) }
-        >
+          >
           Adicionar
-        </button>
+          </button>
       </li>
     );
   }

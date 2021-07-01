@@ -2,7 +2,7 @@
   align-items: stretch;
   align-content: space-between;
   align-self: auto;
-  background-color: grey;
+  background-color: rgb(202, 202, 202);
   border: 1px;
   display: flex;
   flex-flow: row wrap;

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import ProductEvaluation from '../components/ProductEvaluation';
 import 'react-rater/lib/react-rater.css';
 import 'bulma/css/bulma.min.css';
+import '../styles/ProductDetail.css';
+
 
 export default class ProductDetail extends Component {
   constructor({ location }) {
@@ -106,18 +108,23 @@ export default class ProductDetail extends Component {
     if (hasFreeShipping) freeShipping = 'Frete Grátis';
     const showEvaluations = localStorage.getItem(id) || false;
     return (
-      <div>
-        <Link to="/">Voltar</Link>
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
-        <p data-testid="shopping-cart-size">
-          {cartSize}
-        </p>
+      <div >
+        <div className="level columns is-mobile is-multiline is-centered is-gapless box is-vcentered">
+          <Link to="/" className="level-item has-text-centered button is-danger is-light column box is-vcentered" >Voltar</Link>
+          <p className="level-item has-text-centered column box is-vcentered"data-testid="shopping-cart-size"> Produtos no Carrinho:  
+            {cartSize}
+          </p>
+          <Link to="/cart" className="level-item has-text-centered button is-primary is-light column box is-vcentered"   data-testid="shopping-cart-button">Carrinho</Link>
+        </div>
+        <div className="center box">
         <h3 data-testid="product-detail-name">{ title }</h3>
-        <h3>{price}</h3>
-        <img src={ thumbnail } alt={ title } />
+        <h3>R${price.toFixed(2)}</h3>
+        <img src={ thumbnail } alt={ title } width="250px" height="250px"/>
         <h4 data-testid="free-shipping">{ freeShipping }</h4>
         <button
           type="button"
+          className="button is-primary"
+          data-testid="query-button"
           data-testid="product-detail-add-to-cart"
           disabled={ disabled }
           onClick={ this.addToCart }
@@ -132,10 +139,12 @@ export default class ProductDetail extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <form>
+        </div>
+        <form className="box field" >
           <label htmlFor="email">
-            Email:
+            Email: 
             <input
+              className="input is-danger"
               type="text"
               name="email"
               value={ email }
@@ -152,19 +161,21 @@ export default class ProductDetail extends Component {
             } }
           />
           <label htmlFor="commentary">
+            <br/>
             Comentários:
             <textarea
+              className="textarea is-primary"
               name="commentary"
               id=""
-              cols="30"
-              rows="10"
+              cols="10"
+              rows="5"
               value={ textArea }
               onChange={ this.handleChange }
               data-testid="product-detail-evaluation"
               placeholder="Opcional"
             />
           </label>
-          <input
+          <input className="center button is-danger"
             type="submit"
             value="Avaliar"
             onClick={ this.handleSubmit }
