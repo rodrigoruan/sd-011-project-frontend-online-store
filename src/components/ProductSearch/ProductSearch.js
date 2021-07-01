@@ -9,7 +9,7 @@ export default class ProductSearch extends Component {
 
     return (
       <div>
-        <div className="ui icon input">
+        <div className="ui icon input search-bar">
           <input
             data-testid="query-input"
             className="query-input ui icon input"
@@ -17,6 +17,7 @@ export default class ProductSearch extends Component {
             type="text"
             value={ value }
             onChange={ onChange }
+            placeholder="Pesquisar produto ou categoria..."
           />
           <i aria-hidden="true" class="search icon"></i>
         </div>

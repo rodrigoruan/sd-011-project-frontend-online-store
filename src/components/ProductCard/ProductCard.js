@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './ProductCard.css';
-import Ship from '../../imgs/frete.jpg';
 
 export default class ProductCard extends Component {
   render() {
@@ -19,12 +18,12 @@ export default class ProductCard extends Component {
     } = this.props;
     return (
       <div className="product-card" data-testid="product">
-        <div class="ui card">
-          <div class="image">
-            <img src={ thumbnail }/>
+        <div className="ui card card-size">
+          <div>
+            <img className="image-thumb" src={ thumbnail }/>
           </div>
-          <div class="content">
-            <div class="header">
+          <div className="content">
+            <div className="header">
             <Link
           data-testid="product-detail-link"
           to={ {
@@ -42,30 +41,27 @@ export default class ProductCard extends Component {
           {title}
         </Link>
           </div>
-          <div class="meta">
-            Friend
+          <div className="meta">
+            Categoria
           </div>
-          <div class="description">
-          <p>
-          { shipping ? <img
-            data-testid="free-shipping"
-            className="free-shipping"
-            src={ Ship }
-            alt="Frete Grátis!!!"
-          /> : '' }
-        </p>
+          <div className="description">
+          { shipping ?
+          <div className="free-ship">
+          <i className="truck icon" data-testid="free-shipping" /> 
+          <p>Frete grátis</p>
+          </div>: '' }
         { price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
           </div>
           </div>
-          <div class="extra content">
+          <div className="extra-content">
             <a>
-              <i aria-hidden="true" class="user icon" />
+              <i aria-hidden="true" class="shopping cart icon" />
               {availableQuantity}
             </a>
           <button
           type="button"
           id={ title }
-          className={ thumbnail }
+          className="ui primary button mini ui button"
           name={ price }
           onClick={ () => handleAddToShopCart(this.props) }
           data-testid="product-add-to-cart"

@@ -8,3 +8,23 @@
 .free-shipping {
   width: 80px;
 }
+
+.extra-content {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid rgba(34,36,38,.1);
+  padding: 5px;
+  align-items: center;
+}
+
+.free-ship {
+  margin-bottom: 2px;
+  font-weight: bolder;
+  color: rgb(27, 44, 122);
+}
+
+.image-thumb {
+  height: 200px;
+  width: 100%;
+  padding: 2px;
+}
