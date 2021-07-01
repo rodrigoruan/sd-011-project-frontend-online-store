@@ -1,0 +1,31 @@
+body {
+  margin: 10px;
+  padding: 10px auto;
+}
+p , h3, h4{
+  text-align:center;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  text-align: center;
+  width: 50%;
+}
+
+.columns {
+  background-color: cadetblue;  
+}
+
+.field {
+  text-align: center;
+  max-width: 30%;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+Link {
+ justify-content: center;
+}

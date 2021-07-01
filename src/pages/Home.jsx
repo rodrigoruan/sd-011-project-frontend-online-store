@@ -71,7 +71,7 @@ class Home extends Component {
         <div className="searchSection">
           <label htmlFor="search">
             <input
-              class="input is-primary" 
+              className="input is-primary"
               placeholder="Digite Aqui o Termo para pesquisa"
               data-testid="query-input"
               type="text"
@@ -85,18 +85,17 @@ class Home extends Component {
             type="submit"
             onClick={ this.RequestApi }
           >
-          Pesquisar
-            </button>
-          <Link
-            className="button is-link"
-            to="/cart"
-            data-testid="shopping-cart-button"
-          >
-            Carrinho
-          </Link>
-          <p data-testid="shopping-cart-size">
-            {cartSize}
-          </p>
+            Pesquisar
+          </button>
+          <div>
+            <Link
+              className="button is-link"
+              to="/cart"
+              data-testid="shopping-cart-button"
+            >
+              {`Carrinho ${cartSize}`}
+            </Link>
+          </div>
         </div>
         <h2 className="home-message" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
@@ -107,7 +106,6 @@ class Home extends Component {
           />
           <ProductList addToCart={ this.addToCart } productsList={ data } />
         </div>
-
       </div>
     );
   }

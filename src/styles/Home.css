@@ -8,7 +8,7 @@ body {
   align-content: space-between;
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-around;
   margin: 1em auto 2em;
   width: 90%;
 }
@@ -50,10 +50,4 @@ body {
   justify-content: space-between;
   margin: 0 auto;
   width: 90%;
-}
-
-.categories {
-  border: 1px solid black;
-  margin: 0 auto;
-  width: 25%;
 }
