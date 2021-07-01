@@ -6,19 +6,19 @@ export default class Cart extends Component {
   constructor() {
     super();
     const cartList = {};
-    Object.values(sessionStorage).forEach((value) => {
-      if (!value.includes('rendererID')) {
-        const item = JSON.parse(value);
-        cartList[item.id] = item;
-      }
-    });
     const disabled = {};
     Object.values(sessionStorage).forEach((value) => {
       if (!value.includes('rendererID')) {
         const item = JSON.parse(value);
+        cartList[item.id] = item;
         disabled[item.id] = (item.quantity + 1) >= item.inStorage;
       }
     });
+    // Object.values(sessionStorage).forEach((value) => {
+    //   if (!value.includes('rendererID')) {
+    //     const item = JSON.parse(value);
+    //   }
+    // });
 
     this.state = {
       cartList,

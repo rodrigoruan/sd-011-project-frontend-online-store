@@ -72,7 +72,6 @@ class ProductCard extends Component {
             }),
           } }
         >
-          { console.log(inStorage) }
           <h4>{title}</h4>
           <img alt="foto do produto" src={ thumbnail } />
           <p>{ `R$ ${price}` }</p>
