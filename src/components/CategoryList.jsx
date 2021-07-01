@@ -24,22 +24,25 @@ class CategoryList extends Component {
     const { categories } = this.state;
     const { handleUserInput } = this.props;
     return (
-      <div className="categories">
-        {categories.map((category) => (
-          <div key={ category.id }>
-            <label htmlFor={ category.name }>
-              <input
-                type="radio"
-                name="category"
-                id={ category.name }
-                value={ category.id }
-                data-testid="category"
-                onChange={ handleUserInput }
-              />
+      <div className="select is-info">
+        <select name="category" onChange={ handleUserInput }>
+          <option
+            name=""
+            value=""
+          >
+            Selecione uma categoria
+          </option>
+          {categories.map((category) => (
+            <option
+              key={ category.id }
+              data-testid="category"
+              name="category"
+              value={ category.id }
+            >
               {category.name}
-            </label>
-          </div>
-        ))}
+            </option>
+          ))}
+        </select>
       </div>
     );
   }
