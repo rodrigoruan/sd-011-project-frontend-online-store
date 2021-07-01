@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { addToCart } from '../actions';
 
 import '../styles/ProductCard.css';
 
@@ -19,23 +21,24 @@ class ProductCard extends Component {
     this.state = {
       disabled,
     };
-    this.handleButton = this.handleButton.bind(this);
+    // this.handleButton = this.handleButton.bind(this);
     this.renderSpan = this.renderSpan.bind(this);
   }
 
-  handleButton(event) {
-    const { target: { value } } = event;
-    const { addToCart } = this.props;
-    let data = JSON.parse(value);
-    if (sessionStorage[data.id]) {
-      data = JSON.parse(sessionStorage[data.id]);
-    }
-    if ((data.quantity + 1) >= data.inStorage) {
-      this.setState({ disabled: true }, addToCart(event));
-    } else {
-      addToCart(event);
-    }
-  }
+  // handleButton(event) {
+  //   // const { target: { value } } = event;
+  //   // this.mapDispatchToProps(value);
+  //   // const { addToCart } = this.props;
+  //   // let data = JSON.parse(value);
+  //   // if (sessionStorage[data.id]) {
+  //   //   data = JSON.parse(sessionStorage[data.id]);
+  //   // }
+  //   // if ((data.quantity + 1) >= data.inStorage) {
+  //   //   this.setState({ disabled: true }, addToCart(event));
+  //   // } else {
+  //   //   addToCart(event);
+  //   // }
+  // }
 
   renderSpan(hasFreeShipping) {
     if (hasFreeShipping) {
@@ -54,8 +57,10 @@ class ProductCard extends Component {
       thumbnail,
       inStorage,
       hasFreeShipping,
+      add,
     } = this.props;
     const { disabled } = this.state;
+    const value = { id, title, price, thumbnail, inStorage };
     return (
       <li className="product-card" data-testid="product">
         <Link
@@ -80,16 +85,16 @@ class ProductCard extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ this.handleButton }
+          onClick={ () => add(value) }
           disabled={ disabled }
-          value={ JSON.stringify({
-            id,
-            title,
-            price,
-            thumbnail,
-            quantity: 1,
-            inStorage,
-          }) }
+          // value={ JSON.stringify({
+          //   id,
+          //   title,
+          //   price,
+          //   thumbnail,
+          //   quantity: 1,
+          //   inStorage,
+          // }) }
         >
           Adicionar
         </button>
@@ -98,10 +103,14 @@ class ProductCard extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  add: (value) => dispatch(addToCart(value)),
+});
+
 ProductCard.propTypes = {
   title: PropTypes.string,
   price: PropTypes.number,
   thumbnail: PropTypes.string,
 }.isRequired;
 
-export default ProductCard;
+export default connect(null, mapDispatchToProps)(ProductCard);

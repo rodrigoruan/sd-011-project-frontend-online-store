@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  state: null,
+  cartList: [],
 };
 
 function cartReducer(state = INITIAL_STATE, action) {
