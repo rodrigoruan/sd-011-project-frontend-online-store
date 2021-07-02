@@ -5,6 +5,35 @@ const INITIAL_STATE = {
 function cartReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'ADD_TO_CART':
+    if (state.cartList.length === 0) {
+      return {
+        ...state,
+        cartList: [
+          ...state.cartList,
+          {
+            id: action.payload.id,
+            title: action.payload.title,
+            thumbnail: action.payload.thumbnail,
+            price: action.payload.price,
+            inStorage: action.payload.inStorage,
+            quantity: 1,
+          },
+        ],
+      };
+    }
+    if (state.cartList.find((item) => item.id === action.payload.id)) {
+      const updatedCartList = state.cartList.map((cartItem) => {
+        if (cartItem.id === action.payload.id) {
+          cartItem.quantity += 1;
+          return cartItem;
+        }
+        return cartItem;
+      });
+      return {
+        ...state,
+        cartList: updatedCartList,
+      };
+    }
     return {
       ...state,
       cartList: [
@@ -15,13 +44,10 @@ function cartReducer(state = INITIAL_STATE, action) {
           thumbnail: action.payload.thumbnail,
           price: action.payload.price,
           inStorage: action.payload.inStorage,
+          quantity: 1,
         },
       ],
     };
-  // case 'REMOVE_FROM_CART':
-  //   return { state: action.payload };
-  // case 'CLEAR_CART':
-  //   return { state: action.payload };
   default:
     return state;
   }

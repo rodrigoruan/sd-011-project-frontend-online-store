@@ -1,29 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PaymentForm from '../components/PaymentForm';
 
-export default class Cart extends Component {
-  constructor() {
-    super();
-    const cartList = {};
-    const disabled = {};
-    Object.values(sessionStorage).forEach((value) => {
-      if (!value.includes('rendererID')) {
-        const item = JSON.parse(value);
-        cartList[item.id] = item;
-        disabled[item.id] = (item.quantity + 1) >= item.inStorage;
-      }
-    });
-    // Object.values(sessionStorage).forEach((value) => {
-    //   if (!value.includes('rendererID')) {
-    //     const item = JSON.parse(value);
-    //   }
-    // });
-
+class Cart extends Component {
+  constructor(props) {
+    super(props);
+    const { cartList } = this.props;
+    // const disabled = {};
     this.state = {
       cartList,
       pay: false,
-      disabled,
+      // disabled,
     };
 
     this.addItem = this.addItem.bind(this);
@@ -44,15 +33,15 @@ export default class Cart extends Component {
     const { cartList } = this.state;
     const cart = { ...cartList };
     const item = { ...cart[name] };
-    const disabled = (item.quantity + 1) >= item.inStorage;
+    // const disabled = (item.quantity + 1) >= item.inStorage;
     item.quantity += 1;
     cart[name] = item;
-    this.setState((prevState) => ({
+    this.setState(() => ({
       cartList: cart,
-      disabled: {
-        ...prevState.disabled,
-        [name]: disabled,
-      },
+      // disabled: {
+      //   ...prevState.disabled,
+      //   [name]: disabled,
+      // },
     }));
   }
 
@@ -69,12 +58,12 @@ export default class Cart extends Component {
     } else {
       item.quantity -= 1;
       cart[name] = item;
-      this.setState((prevState) => ({
+      this.setState(() => ({
         cartList: cart,
-        disabled: {
-          ...prevState.disabled,
-          [name]: false,
-        },
+        // disabled: {
+        //   ...prevState.disabled,
+        //   [name]: false,
+        // },
       }));
     }
   }
@@ -83,7 +72,7 @@ export default class Cart extends Component {
     const { cartList } = this.state;
     const cart = { ...cartList };
     delete cart[name];
-    sessionStorage.removeItem(name);
+    // sessionStorage.removeItem(name);
     this.setState(() => ({
       cartList: cart,
     }));
@@ -98,7 +87,7 @@ export default class Cart extends Component {
     return totalPrice;
   }
 
-  elementList([id, { title, price, thumbnail, quantity }], disabled) {
+  elementList({ id, title, price, thumbnail, quantity }) {
     return (
       <li key={ id }>
         <button
@@ -124,7 +113,7 @@ export default class Cart extends Component {
           data-testid="product-increase-quantity"
           type="button"
           name={ id }
-          disabled={ disabled[id] }
+          // disabled={ disabled[id] }
           onClick={ this.addItem }
         >
           Incrementar
@@ -135,8 +124,9 @@ export default class Cart extends Component {
   }
 
   render() {
-    const { cartList, disabled, pay } = this.state;
-    if (Object.entries(cartList).length === 0) {
+    const { pay } = this.state;
+    const { cartList } = this.props;
+    if (cartList.length === 0) {
       return (
         <div>
           <Link to="/">Voltar</Link>
@@ -151,9 +141,9 @@ export default class Cart extends Component {
       return (
         <div>
           <Link to="/">Voltar</Link>
-          {Object.entries(cartList).map(
+          {cartList.map(
             (cartItem) => (
-              this.elementList(cartItem, disabled)
+              this.elementList(cartItem)
             ),
           )}
           {`Valor total da compra: R$${this.totalPrice()}`}
@@ -165,9 +155,9 @@ export default class Cart extends Component {
     return (
       <div>
         <Link to="/">Voltar</Link>
-        {Object.entries(cartList).map(
+        {cartList.map(
           (cartItem) => (
-            this.elementList(cartItem, disabled)
+            this.elementList(cartItem)
           ),
         )}
         {`Valor total da compra: R$${this.totalPrice()}`}
@@ -183,3 +173,13 @@ export default class Cart extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  cartList: state.cartReducer.cartList,
+});
+
+Cart.propTypes = {
+  cartList: PropTypes.shape.isRequired,
+};
+
+export default connect(mapStateToProps, null)(Cart);
