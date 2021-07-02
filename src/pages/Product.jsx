@@ -87,7 +87,9 @@ export default class Product extends Component {
 
           <section>
             <h1>Formas de pagamento</h1>
-            { shipping.free_shipping ? <p>Free Shipping</p> : '' }
+            { shipping.free_shipping
+              ? <p data-testid="free-shipping">FRETE GRATIS</p>
+              : ''}
             <p>{ `R$${price}` }</p>
             { this.getInstallmentsElement(product) }
           </section>
