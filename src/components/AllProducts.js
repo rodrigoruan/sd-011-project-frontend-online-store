@@ -9,6 +9,8 @@ class AllProducts extends Component {
   }
 
   addToCart(product) {
+    const { updateCartQuantity } = this.props;
+
     const products = JSON.parse(localStorage.getItem('products')) || [];
     product.quantity = 1;
     if (!products.some((value) => value.id === product.id)) {
@@ -18,6 +20,8 @@ class AllProducts extends Component {
       products[currentIndex].quantity += 1;
     }
     localStorage.setItem('products', JSON.stringify(products));
+
+    updateCartQuantity();
   }
 
   render() {
@@ -40,6 +44,7 @@ class AllProducts extends Component {
 
 AllProducts.propTypes = {
   productsList: PropTypes.arrayOf(PropTypes.object),
+  updateCartQuantity: PropTypes.func,
 }.isRequired;
 
 export default AllProducts;

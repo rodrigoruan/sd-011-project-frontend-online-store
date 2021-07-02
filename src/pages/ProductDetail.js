@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import shoppingCartImage from '../images/shoppingCart.jpg';
 import CustomerRating from '../components/CustomerRating';
 import Rating from '../components/Rating';
+import ShoppingCartLink from '../components/ShoppingCartLink';
 
 class ProductDetail extends Component {
   constructor() {
@@ -21,11 +20,10 @@ class ProductDetail extends Component {
     return productRatings;
   }
 
-  addRating(rating) {
-    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
-    ratings.push(rating);
-    localStorage.setItem('ratings', JSON.stringify(ratings));
-    this.forceUpdate();
+  getQuantity() {
+    const cartProducts = JSON.parse(localStorage.getItem('products')) || [];
+
+    return cartProducts.reduce((acc, { quantity }) => acc + quantity, 0);
   }
 
   addToCart(product) {
@@ -38,6 +36,13 @@ class ProductDetail extends Component {
       products[currentIndex].quantity += 1;
     }
     localStorage.setItem('products', JSON.stringify(products));
+  }
+
+  addRating(rating) {
+    const ratings = JSON.parse(localStorage.getItem('ratings')) || [];
+    ratings.push(rating);
+    localStorage.setItem('ratings', JSON.stringify(ratings));
+    this.forceUpdate();
   }
 
   render() {
@@ -98,9 +103,7 @@ class ProductDetail extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ shoppingCartImage } alt="Cart" />
-        </Link>
+        <ShoppingCartLink quantity={ this.getQuantity() } />
       </div>
     );
   }
