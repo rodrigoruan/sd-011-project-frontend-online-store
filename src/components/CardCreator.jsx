@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AddToCart from './AddToCart';
+import './CardCreator.css';
 
 class cardCreator extends React.Component {
   render() {
@@ -18,21 +19,20 @@ class cardCreator extends React.Component {
       updateQuantityIcon,
     } = this.props;
     return (
-      <div>
+      <div className="product">
         <Link
           to={ `/product-details/${id}` }
           data-testid="product-detail-link"
-          className="productDetails"
           onClick={ () => {
             getProductDetails(product);
           } }
         >
-          <div data-testid="product">
-            <p className="productName">{title}</p>
-            <img src={ thumbnail } alt="Foto do Produto" className="productPicture" />
-            <p className="productPrice">{price}</p>
+          <div data-testid="product" className="product-details">
+            <p className="product-name">{title}</p>
+            <img src={ thumbnail } alt="Foto do Produto" className="product-picture" />
+            <p className="productPrice">{`R$ ${price}` }</p>
             <p>
-              Frete Grátis:
+              { 'Frete Grátis: ' }
               { freeShipping
                 ? <span data-testid="free-shipping">Sim</span>
                 : <span>Não</span> }

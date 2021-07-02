@@ -1,0 +1,29 @@
+.product {
+  border: solid rgba(0, 0, 0, 0.24) 1px;
+  height: 300px;
+  margin: 5px;
+  width: 23%;
+}
+
+.product > a {
+  color: black;
+  text-decoration: none;
+}
+
+.product-details {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+  justify-content: center;
+  text-align: center;
+}
+
+.product-details > * {
+  padding: 5px;
+}
+
+.product-picture {
+  max-width: 50%;
+  min-height: 150px;
+}
