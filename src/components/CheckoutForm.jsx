@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './CheckoutForm.css';
 
 class CheckoutForm extends Component {
   render() {
     return (
-      <div>
+      <div className="checkout-form-container">
         <p>Preencha os dados para finalizar a compra:</p>
-        <form>
+        <form className="checkout-form">
           <label htmlFor="checkout-fullname">
             Nome Completo
             <input data-testid="checkout-fullname" type="text" id="checkout-fullname" />

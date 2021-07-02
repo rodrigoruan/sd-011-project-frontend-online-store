@@ -1,0 +1,23 @@
+.checkout-form-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.checkout-form-container > * {
+  margin: 10px;
+}
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-form > * {
+  margin: 10px;
+}
+
+.checkout-form > label {
+  display: flex;
+  flex-direction: column;
+}
