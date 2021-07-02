@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PaymentForm from '../components/PaymentForm';
+import { addToCart } from '../actions';
 
 class Cart extends Component {
   constructor(props) {
@@ -87,7 +88,9 @@ class Cart extends Component {
     return totalPrice;
   }
 
-  elementList({ id, title, price, thumbnail, quantity }) {
+  elementList(value) {
+    const { id, title, price, thumbnail, quantity } = value;
+    const { add } = this.props;
     return (
       <li key={ id }>
         <button
@@ -114,7 +117,7 @@ class Cart extends Component {
           type="button"
           name={ id }
           // disabled={ disabled[id] }
-          onClick={ this.addItem }
+          onClick={ () => add(value) }
         >
           Incrementar
         </button>
@@ -174,12 +177,16 @@ class Cart extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  cartList: state.cartReducer.cartList,
-});
-
 Cart.propTypes = {
   cartList: PropTypes.shape.isRequired,
 };
 
-export default connect(mapStateToProps, null)(Cart);
+const mapStateToProps = (state) => ({
+  cartList: state.cartReducer.cartList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  add: (value) => dispatch(addToCart(value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
