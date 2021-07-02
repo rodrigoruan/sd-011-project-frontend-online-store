@@ -1,0 +1,25 @@
+.checkout-page {
+  background-color: rgba(209, 187, 187, 0.24);
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.main {
+  width: 70%;
+}
+
+.last-step {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  width: 30%;
+}
+
+.last-step > p {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 50px;
+}
