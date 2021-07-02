@@ -5,6 +5,7 @@ import CardList from '../components/CardList';
 import * as fetchApi from '../services/api';
 import Categories from '../components/Categories';
 import carrinho from '../images/carrinho.png';
+import './LandingPage.css';
 
 class LandingPage extends React.Component {
   constructor() {
@@ -34,30 +35,40 @@ class LandingPage extends React.Component {
     const { cardList } = this.state;
     const { getProductDetails, quantityIcon, updateQuantityIcon } = this.props;
     return (
-      <div data-testid="home-initial-message">
-        <span>Digite algum termo de pesquisa ou escolha uma categoria.</span>
-        <input
-          onChange={ this.onChange }
-          type="text"
-          data-testid="query-input"
-        />
-        <button
-          type="submit"
-          data-testid="query-button"
-          onClick={ this.onClick }
-        >
-          Pesquisar
-        </button>
-        <Link data-testid="shopping-cart-button" to="/shopping-cart">
-          <img src={ carrinho } alt="carrinho" />
-          <span data-testid="shopping-cart-size">{ quantityIcon }</span>
-        </Link>
+      <div data-testid="home-initial-message" className="landing-page">
+        <div className="header">
+          <span>Digite algum termo de pesquisa ou escolha uma categoria.</span>
+          <div className="query-area">
+            <div>
+              <input
+                onChange={ this.onChange }
+                type="text"
+                data-testid="query-input"
+                className="search-bar"
+              />
+              <button
+                type="submit"
+                data-testid="query-button"
+                onClick={ this.onClick }
+                className="search-button"
+              >
+                Pesquisar
+              </button>
+            </div>
+            <Link data-testid="shopping-cart-button" to="/shopping-cart">
+              <img src={ carrinho } alt="carrinho" className="cart-image" />
+              <span data-testid="shopping-cart-size" className="cart-number">
+                { quantityIcon }
+              </span>
+            </Link>
+          </div>
+        </div>
+        <Categories onClick={ this.onClick } />
         <CardList
           list={ cardList.results }
           getProductDetails={ getProductDetails }
           updateQuantityIcon={ updateQuantityIcon }
         />
-        <Categories onClick={ this.onClick } />
       </div>
     );
   }

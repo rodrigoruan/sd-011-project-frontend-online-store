@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.landing-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: rgba(119, 151, 2, 0.493);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.query-area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.query-area > div {
+  align-items: center;
+  display: flex;
+  margin: 20px 0;
+  width: 80%;
+}
+
+.search-bar {
+  border-radius: 10px;
+  padding: 5px 0;
+  width: 70%;
+}
+
+.search-button {
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 5px 0;
+  width: 15%;
+}
+
+.query-area > a {
+  align-items: flex-start;
+  color: black;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  text-decoration: dashed;
+}
+
+.cart-image {
+  width: 60px;
+}
+
+.cart-number {
+  background-color: rgb(6, 176, 255);
+  border-radius: 100%;
+  font-weight: 700;
+  height: 20px;
+  width: 20px;
+}
