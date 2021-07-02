@@ -29,6 +29,7 @@ class Categories extends React.Component {
             <input
               type="radio"
               data-testid="category"
+              name="category"
               onClick={ onClick }
               id={ id }
             />

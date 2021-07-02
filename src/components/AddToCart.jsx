@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './AddToCart.css';
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class AddToCart extends React.Component {
   render() {
     const { test } = this.props;
     return (
-      <div>
+      <div className="add-to-cart">
         <button
           type="button"
           data-testid={ test }
