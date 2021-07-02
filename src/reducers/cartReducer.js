@@ -1,7 +1,14 @@
 const INITIAL_STATE = {
   cartList: [],
 };
-
+const newItem = (action) => ({
+  id: action.payload.id,
+  title: action.payload.title,
+  thumbnail: action.payload.thumbnail,
+  price: action.payload.price,
+  inStorage: action.payload.inStorage,
+  quantity: 1,
+});
 function cartReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case 'ADD_TO_CART':
@@ -10,14 +17,7 @@ function cartReducer(state = INITIAL_STATE, action) {
         ...state,
         cartList: [
           ...state.cartList,
-          {
-            id: action.payload.id,
-            title: action.payload.title,
-            thumbnail: action.payload.thumbnail,
-            price: action.payload.price,
-            inStorage: action.payload.inStorage,
-            quantity: 1,
-          },
+          newItem(action),
         ],
       };
     }
@@ -38,14 +38,7 @@ function cartReducer(state = INITIAL_STATE, action) {
       ...state,
       cartList: [
         ...state.cartList,
-        {
-          id: action.payload.id,
-          title: action.payload.title,
-          thumbnail: action.payload.thumbnail,
-          price: action.payload.price,
-          inStorage: action.payload.inStorage,
-          quantity: 1,
-        },
+        newItem(action),
       ],
     };
   default:
