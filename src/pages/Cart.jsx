@@ -28,7 +28,7 @@ class Cart extends React.Component {
     return (
       <main>
         <h1>Carrinho de Compras</h1>
-        {!itemList.length
+        {itemList.length
           ? (
             <ul>
               {itemList.map(((product) => (<CartItem

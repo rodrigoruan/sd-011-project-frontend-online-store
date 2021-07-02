@@ -53,17 +53,8 @@ class App extends Component {
       const parsedState = JSON.parse(retrievedState);
       return parsedState;
     } catch (err) {
-      console.log('to no error');
       throw new Error(err);
     }
-  }
-
-  saveStorage() {
-    if (!Storage || !localStorage) return;
-
-    const jsonState = JSON.stringify(this.state);
-
-    localStorage.setItem('frontend-store', jsonState);
   }
 
   getTotalPrice() {
@@ -75,6 +66,14 @@ class App extends Component {
       }, 0).toFixed(2);
     }
     return 0;
+  }
+
+  saveStorage() {
+    if (!Storage || !localStorage) return;
+
+    const jsonState = JSON.stringify(this.state);
+
+    localStorage.setItem('frontend-store', jsonState);
   }
 
   addItemToCart(product) {
@@ -201,7 +200,7 @@ class App extends Component {
               path="/checkout"
               render={ () => (<Checkout
                 getTotalPrice={ this.getTotalPrice }
-                productList={ shoppingCart }
+                shoppingCart={ shoppingCart }
               />) }
             />
           </Switch>
