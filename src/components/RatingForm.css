@@ -1,0 +1,35 @@
+.rating-form-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 30%;
+}
+
+.rating-form-container > * {
+  margin: 10px;
+}
+
+.rating-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.rating-form > * {
+  margin: 5px;
+  padding: 5px;
+}
+
+.email {
+  width: 100%;
+}
+
+.rating {
+  width: 20%;
+}
+
+.rating-form > textarea {
+  height: 100px;
+  width: 100%;
+}
