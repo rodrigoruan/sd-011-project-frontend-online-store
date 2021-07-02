@@ -6,90 +6,26 @@ import PaymentForm from '../components/PaymentForm';
 import { addToCart, decreaseOfCart, resetCart } from '../actions';
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
-    const { cartList } = this.props;
-    // const disabled = {};
+  constructor() {
+    super();
+
     this.state = {
-      cartList,
       pay: false,
-      // disabled,
     };
 
-    this.addItem = this.addItem.bind(this);
-    this.decreasesItem = this.decreasesItem.bind(this);
-    this.removeItem = this.removeItem.bind(this);
     this.totalPrice = this.totalPrice.bind(this);
   }
 
-  componentDidUpdate() {
-    const { cartList } = this.state;
-    Object.values(cartList).forEach((listItem) => {
-      const value = JSON.stringify(listItem);
-      sessionStorage.setItem(listItem.id, value);
-    });
-  }
-
-  addItem({ target: { name } }) {
-    const { cartList } = this.state;
-    const cart = { ...cartList };
-    const item = { ...cart[name] };
-    // const disabled = (item.quantity + 1) >= item.inStorage;
-    item.quantity += 1;
-    cart[name] = item;
-    this.setState(() => ({
-      cartList: cart,
-      // disabled: {
-      //   ...prevState.disabled,
-      //   [name]: disabled,
-      // },
-    }));
-  }
-
-  decreasesItem(event) {
-    const {
-      target: { name },
-    } = event;
-    const { cartList } = this.state;
-    const cart = { ...cartList };
-    const item = { ...cart[name] };
-
-    if (item.quantity === 1) {
-      this.removeItem(event);
-    } else {
-      item.quantity -= 1;
-      cart[name] = item;
-      this.setState(() => ({
-        cartList: cart,
-        // disabled: {
-        //   ...prevState.disabled,
-        //   [name]: false,
-        // },
-      }));
-    }
-  }
-
-  removeItem({ target: { name } }) {
-    const { cartList } = this.state;
-    const cart = { ...cartList };
-    delete cart[name];
-    // sessionStorage.removeItem(name);
-    this.setState(() => ({
-      cartList: cart,
-    }));
-  }
-
   totalPrice() {
-    const { cartList } = this.state;
-    let totalPrice = 0;
-    Object.values(cartList).forEach(({ price, quantity }) => {
-      totalPrice += price * quantity;
-    });
-    return totalPrice;
+    const { cartList } = this.props;
+
+    return cartList.reduce((total, { price, quantity }) => (
+      total + (price * quantity)
+    ), 0).toFixed(2);
   }
 
   elementList(value) {
-    const { id, title, price, thumbnail, quantity } = value;
+    const { id, title, price, thumbnail, inStorage, quantity } = value;
     const { add, decrease } = this.props;
     return (
       <li key={ id }>
@@ -107,7 +43,11 @@ class Cart extends Component {
           data-testid="product-decrease-quantity"
           type="button"
           name={ id }
-          onClick={ () => decrease(value) }
+          onClick={
+            quantity === 1
+              ? (event) => this.removeItem(event) // funciona porem precisa da função com redux para funcionar ;P
+              : () => decrease(value)
+          }
         >
           decrementar
         </button>
@@ -116,19 +56,19 @@ class Cart extends Component {
           data-testid="product-increase-quantity"
           type="button"
           name={ id }
-          // disabled={ disabled[id] }
+          disabled={ inStorage <= quantity }
           onClick={ () => add(value) }
         >
           Incrementar
         </button>
-        <p>{price * quantity}</p>
+        <p>{price.toFixed(2)}</p>
       </li>
     );
   }
 
   render() {
     const { pay } = this.state;
-    const { cartList } = this.props;
+    const { cartList, reset } = this.props;
     if (cartList.length === 0) {
       return (
         <div>
@@ -154,8 +94,6 @@ class Cart extends Component {
         </div>
       );
     }
-
-    const { reset } = this.props;
 
     return (
       <div>

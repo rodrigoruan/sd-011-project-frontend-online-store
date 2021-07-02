@@ -13,13 +13,6 @@ class ProductDetail extends Component {
   constructor({ location }) {
     super({ location });
 
-    let disabled = false;
-    const item = sessionStorage[location.state.id];
-    if (item) {
-      const itemObject = JSON.parse(item);
-      disabled = itemObject.quantity >= itemObject.inStorage;
-    }
-
     this.state = {
       id: location.state.id,
       price: location.state.price,
@@ -30,7 +23,6 @@ class ProductDetail extends Component {
       email: '',
       textArea: '',
       rating: 1,
-      disabled,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -72,19 +64,22 @@ class ProductDetail extends Component {
       textArea,
       rating,
       inStorage,
-      disabled,
       hasFreeShipping,
     } = this.state;
-    const value = { id, title, thumbnail, price, inStorage };
+
     const { cartList, add } = this.props;
-    const cartSize = cartList.filter((item) => item.id === id);
-    const showEvaluations = localStorage.getItem(id);
+
+    const value = { id, title, thumbnail, price, inStorage };
+
+    const item = cartList.find((cartItem) => cartItem.id === id);
+    const itemQuantity = item ? item.quantity : 0;
+
     return (
       <div>
         <Link to="/">Voltar</Link>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         <p data-testid="shopping-cart-size">
-          {cartSize ? cartSize[0].quantity : 0}
+          {itemQuantity}
         </p>
         <h3 data-testid="product-detail-name">{ title }</h3>
         <h3>{price}</h3>
@@ -93,7 +88,7 @@ class ProductDetail extends Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          disabled={ disabled }
+          disabled={ inStorage <= itemQuantity }
           onClick={ () => add(value) }
         >
           Adicionar ao carrinho
@@ -137,7 +132,7 @@ class ProductDetail extends Component {
           />
         </form>
         {
-          showEvaluations
+          localStorage.getItem(id)
             ? (
               <ProductEvaluation
                 name={ id }
