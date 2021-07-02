@@ -23,10 +23,9 @@ class ProductDetails extends Component {
     const { match, location } = this.props;
     const { id } = match.params;
     const { productId } = location.state;
-    console.log(productId)
     const request = await getProductsFromCategoryAndQuery('$CATEGORY_ID', `${id}`);
     const product = await request.results.filter((result) => (
-      result.id === productId 
+      result.id === productId
     ));
     console.log(product);
     await this.setState({

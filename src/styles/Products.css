@@ -1,6 +1,6 @@
 .product {
-  width: 200px;
   height: 300px;
+  width: 200px;
 }
 
 .detailsLink {
@@ -12,39 +12,38 @@
 }
 
 .product img {
-  width: 200px;
-  height: 250px;
   border-radius: 10px;
   display: none;
+  height: 250px;
+  width: 200px;
 }
 
 .img {
-  width: 200px;
-  height: 250px;
-  background-position: center;
-  background-size: 200px 250px;
-  background-repeat: no-repeat;
   background-clip: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 200px 250px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.205);
+  height: 250px;
+  width: 200px;
 }
 
 .imgFront {
-  width: 200px;
-  height: 250px;
-  position: absolute;
   border-radius: 10px;
+  height: 250px;
   margin-top: -250px;
-  /* background-color: rgba(137, 43, 226, 0.219); */
+  position: absolute;
+  width: 200px;
 }
 
 .productArea {
-  width: 200px;
-  height: 360px;
-  margin: 10px 20px;
   display: flex;
   flex-direction: column;
+  height: 360px;
   justify-content: space-between;
+  margin: 10px 20px;
+  width: 200px;
 }
 
 button {

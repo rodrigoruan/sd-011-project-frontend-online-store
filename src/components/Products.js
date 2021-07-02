@@ -24,15 +24,15 @@ class Products extends Component {
           className="detailsLink"
           to={ {
             pathname: `/product-details/${title}`,
-            state: { 
-              productToAdd: product, 
-              productId: id 
+            state: {
+              productToAdd: product,
+              productId: id,
             },
           } }
           data-testid="product-detail-link"
         >
           <div className="product" data-testid="product" aria-hidden="true">
-            <div className="img" style={{ backgroundImage: `url(${img})` }} />
+            <div className="img" style={ { backgroundImage: `url(${img})` } } />
             <div className="imgFront" />
             <img src={ img } alt="produto" />
             <p>
@@ -58,7 +58,7 @@ Products.propTypes = {
   product: PropTypes.objectOf(String).isRequired,
   title: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
-  price: PropTypes.number,
+  price: PropTypes.number.isRequired,
   func: PropTypes.func.isRequired,
 };
 
