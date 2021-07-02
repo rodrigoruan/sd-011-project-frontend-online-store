@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CustomerRating from '../components/CustomerRating';
 import Rating from '../components/Rating';
 import ShoppingCartLink from '../components/ShoppingCartLink';
+import FreeShipping from '../components/FreeShipping';
 
 class ProductDetail extends Component {
   constructor() {
@@ -55,6 +56,7 @@ class ProductDetail extends Component {
       installments,
       id,
       sold_quantity: soldQuantity,
+      shipping: { free_shipping: freeShipping },
     } = detail;
     const productRatings = this.getRatings(id);
 
@@ -89,6 +91,7 @@ class ProductDetail extends Component {
             ))}
           </ul>
         </div>
+        { freeShipping ? <FreeShipping /> : null }
         <CustomerRating addRatingFunction={ this.addRating } productId={ id } />
         {
           productRatings
@@ -122,6 +125,9 @@ ProductDetail.propTypes = {
           quantity: PropTypes.number,
         }),
         sold_quantity: PropTypes.number,
+        shipping: PropTypes.shape({
+          free_shipping: PropTypes.bool,
+        }),
       }),
     }),
   }).isRequired,

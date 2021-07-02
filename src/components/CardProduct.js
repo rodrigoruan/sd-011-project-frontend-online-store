@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import FreeShipping from './FreeShipping';
 
 class CardProduct extends Component {
   render() {
     const { product, addToCartFunction } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const {
+      title,
+      thumbnail,
+      price,
+      id,
+      shipping: { free_shipping: freeShipping },
+    } = product;
+
     return (
       <div data-testid="product">
         <Link
@@ -19,12 +27,13 @@ class CardProduct extends Component {
           <img src={ thumbnail } alt={ title } />
           <p>{ price }</p>
         </Link>
+        { freeShipping ? <FreeShipping /> : null }
         <button
           data-testid="product-add-to-cart"
           onClick={ () => addToCartFunction(product) }
           type="button"
         >
-          Adiiconar ao carrinho
+          Adicionar ao carrinho
         </button>
       </div>
     );
