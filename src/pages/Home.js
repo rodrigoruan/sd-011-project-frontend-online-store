@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import shoppingCartImage from '../images/shoppingCart.jpg';
 import * as Api from '../services/api';
 import CategoryList from '../components/categoryList';
 import SearchBarProducts from '../components/SearchBarProducts';
 import AllProducts from '../components/AllProducts';
 import Button from '../components/Button';
+import ShoppingCartLink from '../components/ShoppingCartLink';
 
 class Home extends Component {
   constructor() {
@@ -17,9 +16,11 @@ class Home extends Component {
       products: [],
       searchValue: '',
       category: '',
+      cartQuantity: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.updateCartQuantity = this.updateCartQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -56,8 +57,18 @@ class Home extends Component {
     });
   }
 
+  updateCartQuantity() {
+    const cartProducts = JSON.parse(localStorage.getItem('products')) || [];
+
+    const cartQuantity = cartProducts.reduce((acc, { quantity }) => acc + quantity, 0);
+
+    this.setState({
+      cartQuantity,
+    });
+  }
+
   render() {
-    const { searchValue, products, categories, loading } = this.state;
+    const { searchValue, products, categories, loading, cartQuantity } = this.state;
     return (
       <div>
         <SearchBarProducts value={ searchValue } onChange={ this.handleChange } />
@@ -72,10 +83,11 @@ class Home extends Component {
         <span data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>
-        <Link to="/cart" data-testid="shopping-cart-button">
-          <img src={ shoppingCartImage } alt="Cart" />
-        </Link>
-        <AllProducts productsList={ products } />
+        <ShoppingCartLink quantity={ cartQuantity } />
+        <AllProducts
+          productsList={ products }
+          updateCartQuantity={ this.updateCartQuantity }
+        />
       </div>
     );
   }
