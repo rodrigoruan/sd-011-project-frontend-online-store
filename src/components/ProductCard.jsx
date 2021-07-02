@@ -7,7 +7,13 @@ import AddToCartButton from './AddToCartButton';
 export default class ProductCard extends React.Component {
   render() {
     const { addItemToCart, product } = this.props;
-    const { thumbnail, title, price, id } = product;
+    const {
+      thumbnail,
+      title,
+      price,
+      id,
+      shipping,
+    } = product;
 
     return (
       <li data-testid="product" className="product-card">
@@ -19,6 +25,9 @@ export default class ProductCard extends React.Component {
           data-testid="product-detail-link"
         >
           <h1>{title}</h1>
+          {shipping.free_shipping
+            ? <p data-testid="free-shipping">FRETE GRATIS</p>
+            : ''}
           <picture>
             <img src={ thumbnail } alt={ title } />
           </picture>

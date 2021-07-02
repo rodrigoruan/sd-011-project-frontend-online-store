@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Home, Cart, Product } from './pages';
+import { Home, Cart, Product, Checkout } from './pages';
 import * as api from './services/api';
 import './App.css';
 
@@ -10,6 +10,7 @@ class App extends Component {
 
     this.updateSearchResults = this.updateSearchResults.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.getTotalPrice = this.getTotalPrice.bind(this);
     this.removeItemFromCart = this.removeItemFromCart.bind(this);
     this.updateQuantity = this.updateQuantity.bind(this);
 
@@ -63,6 +64,17 @@ class App extends Component {
     const jsonState = JSON.stringify(this.state);
 
     localStorage.setItem('frontend-store', jsonState);
+  }
+
+  getTotalPrice() {
+    const { shoppingCart } = this.state;
+    if (shoppingCart.length) {
+      return shoppingCart.reduce((acc, current) => {
+        acc += (current.price * current.quantity);
+        return acc;
+      }, 0).toFixed(2);
+    }
+    return 0;
   }
 
   addItemToCart(product) {
@@ -173,6 +185,7 @@ class App extends Component {
                 updateQuantity={ this.updateQuantity }
                 removeItemFromCart={ this.removeItemFromCart }
                 shoppingCart={ shoppingCart }
+                getTotalPrice={ this.getTotalPrice }
               />) }
             />
 
@@ -182,6 +195,13 @@ class App extends Component {
                 addItemToCart={ this.addItemToCart }
                 totalItemCount={ totalItemCount }
                 { ...props }
+              />) }
+            />
+            <Route
+              path="/checkout"
+              render={ () => (<Checkout
+                getTotalPrice={ this.getTotalPrice }
+                productList={ shoppingCart }
               />) }
             />
           </Switch>

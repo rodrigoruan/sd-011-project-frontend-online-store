@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CartItem } from '../components';
+import { Link } from 'react-router-dom';
+import { CartItem, EmptyCart } from '../components';
 
 class Cart extends React.Component {
   getTotalPrice() {
@@ -15,19 +16,20 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { shoppingCart, removeItemFromCart, updateQuantity } = this.props;
+    const {
+      shoppingCart,
+      removeItemFromCart,
+      updateQuantity,
+      getTotalPrice } = this.props;
+
     const { itemList } = shoppingCart;
+    const totalPrice = getTotalPrice();
 
     return (
       <main>
         <h1>Carrinho de Compras</h1>
         {!itemList.length
           ? (
-            <div data-testid="shopping-cart-empty-message">
-              <p>Seu carrinho está vazio</p>
-            </div>
-          )
-          : (
             <ul>
               {itemList.map(((product) => (<CartItem
                 updateQuantity={ updateQuantity }
@@ -37,11 +39,17 @@ class Cart extends React.Component {
               />)
               ))}
             </ul>
-          )}
+          )
+          : (
+            <EmptyCart />
+          ) }
         <h2>
           VALOR TOTAL : R$
-          { this.getTotalPrice() }
+          { totalPrice }
         </h2>
+        <Link to="/checkout" data-testid="checkout-products">
+          Comprar agora
+        </Link>
       </main>
     );
   }
