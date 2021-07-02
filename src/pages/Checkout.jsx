@@ -4,16 +4,17 @@ import { EmptyCart, BuyerInfo } from '../components';
 
 export default class Checkout extends Component {
   render() {
-    const { productList, getTotalPrice } = this.props;
+    const { shoppingCart, getTotalPrice } = this.props;
+    const { itemList } = shoppingCart;
     const totalPrice = getTotalPrice();
     return (
       <main>
-        { productList.length
+        { itemList.length
           ? (
             <section>
               <section>
                 <h1>Revise seus Produtos</h1>
-                { productList.map((item) => (
+                { itemList.map((item) => (
                   <section key={ item.id }>
                     <p>{ item.title }</p>
                     <picture>
@@ -48,6 +49,6 @@ export default class Checkout extends Component {
 }
 
 Checkout.propTypes = {
-  productList: PropTypes.object,
+  shoppingCart: PropTypes.object,
   getTotalPrice: PropTypes.func,
 }.isRequired;
