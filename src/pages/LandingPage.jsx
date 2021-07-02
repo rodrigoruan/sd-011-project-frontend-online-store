@@ -63,12 +63,14 @@ class LandingPage extends React.Component {
             </Link>
           </div>
         </div>
-        <Categories onClick={ this.onClick } />
-        <CardList
-          list={ cardList.results }
-          getProductDetails={ getProductDetails }
-          updateQuantityIcon={ updateQuantityIcon }
-        />
+        <div className="body">
+          <Categories onClick={ this.onClick } />
+          <CardList
+            list={ cardList.results }
+            getProductDetails={ getProductDetails }
+            updateQuantityIcon={ updateQuantityIcon }
+          />
+        </div>
       </div>
     );
   }

@@ -1,0 +1,15 @@
+.categories {
+  background-color: rgba(141, 141, 141, 0.219);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 20%;
+}
+
+.categorie {
+  padding: 5px;
+}
+
+.categorie > input {
+  margin-right: 10px;
+}

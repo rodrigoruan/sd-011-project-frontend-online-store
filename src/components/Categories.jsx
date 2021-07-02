@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getCategories } from '../services/api';
+import './Categories.css';
 
 class Categories extends React.Component {
   constructor() {
@@ -22,9 +23,9 @@ class Categories extends React.Component {
     const { categories } = this.state;
     const { onClick } = this.props;
     return (
-      <div>
+      <div className="categories">
         { categories.map(({ id, name }) => (
-          <label htmlFor={ id } key={ id }>
+          <label htmlFor={ id } key={ id } className="categorie">
             <input
               type="radio"
               data-testid="category"
