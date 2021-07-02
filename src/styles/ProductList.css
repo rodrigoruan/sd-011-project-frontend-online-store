@@ -1,12 +1,11 @@
 .productList {
   align-items: stretch;
   align-content: space-between;
-  align-self: auto;
   background-color: rgb(202, 202, 202);
   border: 1px;
   display: flex;
   flex-flow: row wrap;
-  margin: 1px;
+  margin: 10px auto;
   padding: 20px;
-  width: 80%;
+  width: 95%;
 }

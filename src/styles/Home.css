@@ -3,26 +3,35 @@ body {
   align-content: space-around;
   align-self: top;
 }
+
 .searchSection {
   align-items: center;
   align-content: space-between;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 1em auto 2em;
   width: 90%;
 }
 
-.searchSection label {
-  width: 50%;
+.searchSection .searchBar label {
+  width: 80%;
 }
 
-.searchSection input {
-  border: 1px solid #272727;
+.searchSection .searchBar input {
   border-radius: 5px;
   font-size: 1.2rem;
   padding: 2px 5px;
   width: 100%;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+}
+
+.search-button {
+  margin-left: 10px;
 }
 
 .btn {
@@ -43,11 +52,10 @@ body {
   text-align: center;
 }
 
-.category-products-wrapper {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 auto;
-  width: 90%;
+.search-size-1 {
+  width: 15%;
+}
+
+.search-size-2 {
+  width: 65%;
 }

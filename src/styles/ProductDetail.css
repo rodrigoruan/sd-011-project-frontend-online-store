@@ -2,21 +2,36 @@ body {
   margin: 10px;
   padding: 10px auto;
 }
-p , h3, h4{
-  text-align:center;
+
+p,
+h3,
+h4 {
+  text-align: center;
+}
+
+.navbar-product-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.navbar-product-details-btn {
+  padding: 15px 30px;
+  margin: 5px 20px;
 }
 
 .center {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto;
   padding: 10px;
   text-align: center;
   width: 50%;
 }
 
 .columns {
-  background-color: cadetblue;  
+  background-color: cadetblue;
 }
 
 .field {
@@ -27,5 +42,5 @@ p , h3, h4{
 }
 
 Link {
- justify-content: center;
+  justify-content: center;
 }

@@ -69,25 +69,30 @@ class Home extends Component {
     return (
       <div>
         <div className="searchSection">
-          <label htmlFor="search">
-            <input
-              className="input is-primary"
-              placeholder="Digite Aqui o Termo para pesquisa"
-              data-testid="query-input"
-              type="text"
-              name="search"
-              onChange={ this.HandlerState }
-            />
-          </label>
-          <button
-            className="button is-primary"
-            data-testid="query-button"
-            type="submit"
-            onClick={ this.RequestApi }
-          >
-            Pesquisar
-          </button>
-          <div>
+          <CategoryList
+            handleUserInput={ this.HandlerState }
+          />
+          <div className="searchBar search-size-2">
+            <label htmlFor="search">
+              <input
+                className="input is-primary"
+                placeholder="Digite Aqui o Termo para pesquisa"
+                data-testid="query-input"
+                type="text"
+                name="search"
+                onChange={ this.HandlerState }
+              />
+            </label>
+            <button
+              className="button is-primary search-button"
+              data-testid="query-button"
+              type="submit"
+              onClick={ this.RequestApi }
+            >
+              Pesquisar
+            </button>
+          </div>
+          <div className="search-size-1">
             <Link
               className="button is-link"
               to="/cart"
@@ -100,12 +105,7 @@ class Home extends Component {
         <h2 className="home-message" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        <div className="category-products-wrapper">
-          <CategoryList
-            handleUserInput={ this.HandlerState }
-          />
-          <ProductList addToCart={ this.addToCart } productsList={ data } />
-        </div>
+        <ProductList addToCart={ this.addToCart } productsList={ data } />
       </div>
     );
   }

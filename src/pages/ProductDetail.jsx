@@ -8,7 +8,6 @@ import 'react-rater/lib/react-rater.css';
 import 'bulma/css/bulma.min.css';
 import '../styles/ProductDetail.css';
 
-
 export default class ProductDetail extends Component {
   constructor({ location }) {
     super({ location });
@@ -108,74 +107,97 @@ export default class ProductDetail extends Component {
     if (hasFreeShipping) freeShipping = 'Frete Grátis';
     const showEvaluations = localStorage.getItem(id) || false;
     return (
-      <div >
-        <div className="level columns is-mobile is-multiline is-centered is-gapless box is-vcentered">
-          <Link to="/" className="level-item has-text-centered button is-danger is-light column box is-vcentered" >Voltar</Link>
-          <p className="level-item has-text-centered column box is-vcentered"data-testid="shopping-cart-size"> Produtos no Carrinho:  
-            {cartSize}
+      <div>
+        <div
+          className="navbar-product-details"
+        >
+          <Link
+            to="/"
+            className="button is-danger navbar-product-details-btn"
+          >
+            Voltar
+          </Link>
+          <p
+            className="is-warning navbar-product-details-btn"
+            data-testid="shopping-cart-size"
+          >
+            {`Produtos no Carrinho:${cartSize}`}
           </p>
-          <Link to="/cart" className="level-item has-text-centered button is-primary is-light column box is-vcentered"   data-testid="shopping-cart-button">Carrinho</Link>
+          <Link
+            to="/cart"
+            className="button is-info navbar-product-details-btn"
+            data-testid="shopping-cart-button"
+          >
+            Carrinho
+          </Link>
         </div>
         <div className="center box">
-        <h3 data-testid="product-detail-name">{ title }</h3>
-        <h3>R${price.toFixed(2)}</h3>
-        <img src={ thumbnail } alt={ title } width="250px" height="250px"/>
-        <h4 data-testid="free-shipping">{ freeShipping }</h4>
-        <button
-          type="button"
-          className="button is-primary"
-          data-testid="query-button"
-          data-testid="product-detail-add-to-cart"
-          disabled={ disabled }
-          onClick={ this.addToCart }
-          value={ JSON.stringify({
-            id,
-            title,
-            price,
-            thumbnail,
-            quantity: 1,
-            inStorage,
-          }) }
-        >
-          Adicionar ao carrinho
-        </button>
+          <h3 data-testid="product-detail-name">{ title }</h3>
+          <h3>{`R$${price.toFixed(2)}`}</h3>
+          <img src={ thumbnail } alt={ title } width="250px" height="250px" />
+          <h4 data-testid="free-shipping">{ freeShipping }</h4>
+          <button
+            type="button"
+            className="button is-primary"
+            data-testid="query-button"
+            disabled={ disabled }
+            onClick={ this.addToCart }
+            value={ JSON.stringify({
+              id,
+              title,
+              price,
+              thumbnail,
+              quantity: 1,
+              inStorage,
+            }) }
+          >
+            Adicionar ao carrinho
+          </button>
         </div>
-        <form className="box field" >
-          <label htmlFor="email">
-            Email: 
-            <input
-              className="input is-danger"
-              type="text"
-              name="email"
-              value={ email }
-              onChange={ this.handleChange }
-              required
-              placeholder="Obrigatório"
+        <form className="box field">
+          <div>
+            <label htmlFor="email">
+              <p className="pb-2">Email:</p>
+              <input
+                className="input is-danger"
+                type="text"
+                name="email"
+                value={ email }
+                onChange={ this.handleChange }
+                required
+                placeholder="Obrigatório"
+              />
+            </label>
+          </div>
+          <div>
+            <p className="pt-4">Avaliação:</p>
+            <Rater
+              total={ 5 }
+              rating={ rating }
+              onRate={ (event) => {
+                this.retrieveRating(event);
+              } }
             />
-          </label>
-          <Rater
-            total={ 5 }
-            rating={ rating }
-            onRate={ (event) => {
-              this.retrieveRating(event);
-            } }
-          />
-          <label htmlFor="commentary">
-            <br/>
-            Comentários:
-            <textarea
-              className="textarea is-primary"
-              name="commentary"
-              id=""
-              cols="10"
-              rows="5"
-              value={ textArea }
-              onChange={ this.handleChange }
-              data-testid="product-detail-evaluation"
-              placeholder="Opcional"
-            />
-          </label>
-          <input className="center button is-danger"
+          </div>
+          <div>
+            <label htmlFor="commentary">
+              <br />
+              <p className="pb-2">Comentários:</p>
+              <textarea
+                className="textarea is-primary"
+                name="commentary"
+                id=""
+                cols="10"
+                rows="5"
+                value={ textArea }
+                onChange={ this.handleChange }
+                data-testid="product-detail-evaluation"
+                placeholder="Opcional"
+              />
+            </label>
+          </div>
+          <input
+            className="center button is-danger"
             type="submit"
             value="Avaliar"
             onClick={ this.handleSubmit }

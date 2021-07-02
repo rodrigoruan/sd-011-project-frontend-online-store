@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'bulma/css/bulma.min.css';
-import '../styles/Form.css';
 
 class PaymentForm extends Component {
   constructor(props) {
@@ -31,9 +30,9 @@ class PaymentForm extends Component {
       <form className="form">
         <h3 className="is-size-4 has-text-centered">Informações do comprador</h3>
         <fieldset>
-          <div className="field is-expanded">
+          <div className="my-field is-expanded">
             <p className="label">Nome</p>
-            <div name className="control">
+            <div className="control">
               <input
                 className="input"
                 name="nome"
@@ -46,10 +45,10 @@ class PaymentForm extends Component {
             </div>
           </div>
 
-          <div className="field is-horizontal">
+          <div className="my-field is-horizontal">
             <div className="field-body">
-              <div className="field">
-                <div name className="control is-expanded">
+              <div className="my-field">
+                <div className="control is-expanded">
                   <input
                     className="input"
                     name="cpf"
@@ -60,8 +59,8 @@ class PaymentForm extends Component {
                   />
                 </div>
               </div>
-              <div className="field">
-                <div name className="control is-expanded">
+              <div className="my-field">
+                <div className="control is-expanded">
                   <input
                     className="input"
                     name="Email"
@@ -72,8 +71,8 @@ class PaymentForm extends Component {
                   />
                 </div>
               </div>
-              <div className="field">
-                <div name className="control is-expanded">
+              <div className="my-field">
+                <div className="control is-expanded">
                   <input
                     className="input"
                     name="Telefone"
@@ -87,9 +86,9 @@ class PaymentForm extends Component {
             </div>
           </div>
 
-          <div className="field">
+          <div className="my-field">
             <p className="label">Endereço</p>
-            <div name className="control">
+            <div className="control">
               <input
                 className="input"
                 name="Endereço"
@@ -101,10 +100,10 @@ class PaymentForm extends Component {
             </div>
           </div>
 
-          <div className="field is-horizontal">
+          <div className="my-field is-horizontal">
             <div className="field-body">
-              <div className="field">
-                <div name className="control is-expanded">
+              <div className="my-field">
+                <div className="control is-expanded">
                   <input
                     className="input"
                     name="Complemento"
@@ -113,8 +112,8 @@ class PaymentForm extends Component {
                   />
                 </div>
               </div>
-              <div className="field">
-                <div name className="control is-expanded">
+              <div className="my-field">
+                <div className="control is-expanded">
                   <input
                     className="input"
                     name="Numero"
@@ -124,8 +123,8 @@ class PaymentForm extends Component {
                   />
                 </div>
               </div>
-              <div className="field">
-                <div name className="control is-expanded">
+              <div className="my-field">
+                <div className="control is-expanded">
                   <input
                     className="input"
                     name="CEP"
@@ -136,8 +135,8 @@ class PaymentForm extends Component {
                   />
                 </div>
               </div>
-              <div className="field">
-                <div name className="control is-expanded">
+              <div className="my-field">
+                <div className="control is-expanded">
                   <input
                     className="input"
                     name="Cidade"
@@ -150,7 +149,7 @@ class PaymentForm extends Component {
             </div>
           </div>
 
-          <div className="field">
+          <div className="my-field">
             <label className="label">Estado</label>
             <div className="control">
               <div className="select">
@@ -179,29 +178,14 @@ class PaymentForm extends Component {
             </div>
           </div>
         </fieldset>
-
-        <h3>Forma de pagamento</h3>
-        <fieldset>
-          <label htmlFor="boleto">
-            <input type="radio" id="boleto" name="payment-form" value="boleto" />
-            Boleto
-          </label>
-
-          <label htmlFor="visa">
-            <input type="radio" id="visa" name="payment-form" value="visa" />
-            Visa
-          </label>
-
-          <label htmlFor="master">
-            <input type="radio" id="master" name="payment-form" value="master" />
-            Master
-          </label>
-
-          <label htmlFor="elo">
-            <input type="radio" id="elo" name="payment-form" value="elo" />
-            Elo
-          </label>
-        </fieldset>
+        <div>
+          <button
+            className="button is-danger is-large center"
+            type="button"
+          >
+            Seguir para a forma de pagamento
+          </button>
+        </div>
       </form>
     );
   }

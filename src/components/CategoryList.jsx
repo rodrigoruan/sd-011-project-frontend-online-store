@@ -24,7 +24,7 @@ class CategoryList extends Component {
     const { categories } = this.state;
     const { handleUserInput } = this.props;
     return (
-      <div className="select is-info">
+      <div className="select is-info search-size-1">
         <select name="category" onChange={ handleUserInput }>
           <option
             name=""
