@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardCreator from './CardCreator';
+import './CardList.css';
 
 export default class CardList extends React.Component {
   render() {
     const { list, getProductDetails, updateQuantityIcon } = this.props;
     return (
-      <div>
+      <div className="card-list">
         {
           list === undefined
             ? <span>Nenhum produto foi encontrado</span>
