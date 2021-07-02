@@ -25,8 +25,8 @@ class CarrinhoCompras extends Component {
       <div>
         { cartItems.length === 0 ? emptyCart : cartItems.map((item, index) => (
           <div className="cartProduct" key={ index }>
-            <button onClick={() => this.addItem(item) }>+</button>
-            <button onClick={() => this.removeItem(item) }>-</button>
+            <button onClick={() => this.addItem(item) } data-testid="product-increase-quantity">+</button>
+            <button onClick={() => this.removeItem(item) } data-testid="product-decrease-quantity">-</button>
             <p data-testid="shopping-cart-product-name">{ item.title }</p>
             <img src={ item.thumbnail } alt="produto" />
             <p>
