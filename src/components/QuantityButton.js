@@ -48,12 +48,15 @@ class QuantityButton extends Component {
   }
 
   render() {
+    const { product: { available_quantity: stock } } = this.props;
     const { quantity } = this.state;
+
     return (
       <div data-testid="shopping-cart-product-quantity">
         <button
           type="button"
           onClick={ this.addQuantity }
+          disabled={ stock === quantity }
           data-testid="product-increase-quantity"
         >
           +
