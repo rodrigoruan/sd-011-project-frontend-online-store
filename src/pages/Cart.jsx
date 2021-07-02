@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PaymentForm from '../components/PaymentForm';
-import { addToCart } from '../actions';
+import { addToCart, decreaseOfCart, resetCart } from '../actions';
 
 class Cart extends Component {
   constructor(props) {
@@ -90,7 +90,7 @@ class Cart extends Component {
 
   elementList(value) {
     const { id, title, price, thumbnail, quantity } = value;
-    const { add } = this.props;
+    const { add, decrease } = this.props;
     return (
       <li key={ id }>
         <button
@@ -107,7 +107,7 @@ class Cart extends Component {
           data-testid="product-decrease-quantity"
           type="button"
           name={ id }
-          onClick={ this.decreasesItem }
+          onClick={ () => decrease(value) }
         >
           decrementar
         </button>
@@ -155,9 +155,12 @@ class Cart extends Component {
       );
     }
 
+    const { reset } = this.props;
+
     return (
       <div>
         <Link to="/">Voltar</Link>
+        <button type="button" onClick={ () => reset() }>Limpar carrinho</button>
         {cartList.map(
           (cartItem) => (
             this.elementList(cartItem)
@@ -179,6 +182,9 @@ class Cart extends Component {
 
 Cart.propTypes = {
   cartList: PropTypes.shape.isRequired,
+  add: PropTypes.func.isRequired,
+  decrease: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -187,6 +193,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   add: (value) => dispatch(addToCart(value)),
+  decrease: (value) => dispatch(decreaseOfCart(value)),
+  reset: (value) => dispatch(resetCart(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

@@ -6,7 +6,7 @@ import '../styles/ProductList.css';
 
 class ProductList extends Component {
   render() {
-    const { productsList, addToCart } = this.props;
+    const { productsList } = this.props;
     return (
       <ul className="productList">
         {productsList.map(
@@ -18,7 +18,6 @@ class ProductList extends Component {
               price={ price }
               id={ id }
               inStorage={ inStorage }
-              addToCart={ addToCart }
               hasFreeShipping={ shipping.free_shipping }
             />
           ),
@@ -28,8 +27,8 @@ class ProductList extends Component {
   }
 }
 
+export default ProductList;
+
 ProductList.propTypes = {
   productsList: PropTypes.arrayOf(PropTypes.object),
 }.isRequired;
-
-export default ProductList;

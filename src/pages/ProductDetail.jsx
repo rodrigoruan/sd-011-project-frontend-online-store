@@ -2,20 +2,16 @@ import React, { Component } from 'react';
 import Rater from 'react-rater';
 // All credits of Rater to https://reactjsexample.com/a-star-rater-in-react-js/
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductEvaluation from '../components/ProductEvaluation';
 import 'react-rater/lib/react-rater.css';
 
-export default class ProductDetail extends Component {
+import { addToCart } from '../actions';
+
+class ProductDetail extends Component {
   constructor({ location }) {
     super({ location });
-    let cartSize = 0;
-    Object.values(sessionStorage).forEach((value) => {
-      if (!value.includes('rendererID')) {
-        const data = JSON.parse(value);
-        cartSize += data.quantity;
-      }
-    });
 
     let disabled = false;
     const item = sessionStorage[location.state.id];
@@ -35,11 +31,9 @@ export default class ProductDetail extends Component {
       textArea: '',
       rating: 1,
       disabled,
-      cartSize,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.addToCart = this.addToCart.bind(this);
   }
 
   handleChange(event) {
@@ -68,25 +62,6 @@ export default class ProductDetail extends Component {
     this.setState({ rating: event.rating });
   }
 
-  addToCart({ target: { value } }) {
-    const data = JSON.parse(value);
-    const key = data.id;
-    if (sessionStorage[key]) {
-      const recoveredObject = JSON.parse(sessionStorage[key]);
-      const copy = { ...recoveredObject };
-      if (copy.quantity < copy.inStorage) {
-        copy.quantity += 1;
-        sessionStorage[key] = JSON.stringify(copy);
-        this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
-      } else {
-        this.setState({ disabled: true });
-      }
-    } else {
-      sessionStorage.setItem(key, value);
-      this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
-    }
-  }
-
   render() {
     const {
       id,
@@ -98,37 +73,28 @@ export default class ProductDetail extends Component {
       rating,
       inStorage,
       disabled,
-      cartSize,
       hasFreeShipping,
     } = this.state;
-    let freeShipping = null;
-    if (hasFreeShipping) freeShipping = 'Frete Grátis';
+    const value = { id, title, thumbnail, price, inStorage };
+    const { cartList, add } = this.props;
+    const cartSize = cartList.filter((item) => item.id === id);
     const showEvaluations = localStorage.getItem(id);
-    console.log(showEvaluations);
     return (
       <div>
         <Link to="/">Voltar</Link>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         <p data-testid="shopping-cart-size">
-          {cartSize}
+          {cartSize ? cartSize[0].quantity : 0}
         </p>
         <h3 data-testid="product-detail-name">{ title }</h3>
         <h3>{price}</h3>
         <img src={ thumbnail } alt={ title } />
-        <h4 data-testid="free-shipping">{ freeShipping }</h4>
+        {hasFreeShipping ? <h4 data-testid="free-shipping">Frete Grátis</h4> : null}
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
           disabled={ disabled }
-          onClick={ this.addToCart }
-          value={ JSON.stringify({
-            id,
-            title,
-            price,
-            thumbnail,
-            quantity: 1,
-            inStorage,
-          }) }
+          onClick={ () => add(value) }
         >
           Adicionar ao carrinho
         </button>
@@ -184,6 +150,18 @@ export default class ProductDetail extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  cartList: state.cartReducer.cartList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  add: (value) => dispatch(addToCart(value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
+
 ProductDetail.propTypes = {
   location: PropTypes.object,
+  cartList: PropTypes.shape,
+  add: PropTypes.func,
 }.isRequired;

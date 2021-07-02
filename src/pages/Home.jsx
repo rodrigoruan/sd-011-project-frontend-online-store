@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import * as Api from '../services/api';
 
 import ProductList from '../components/ProductList';
@@ -8,42 +10,17 @@ import CategoryList from '../components/CategoryList';
 import '../styles/Home.css';
 
 class Home extends Component {
-  constructor() {
-    super();
-    let cartSize = 0;
-    Object.values(sessionStorage).forEach((value) => {
-      if (!value.includes('rendererID')) {
-        const data = JSON.parse(value);
-        cartSize += data.quantity;
-      }
-    });
+  constructor(props) {
+    super(props);
+
     this.state = {
       data: [],
       search: '',
       category: '',
-      cartSize,
     };
 
     this.HandlerState = this.HandlerState.bind(this);
     this.RequestApi = this.RequestApi.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-  }
-
-  addToCart({ target: { value } }) {
-    const data = JSON.parse(value);
-    const key = data.id;
-    if (sessionStorage[key]) {
-      const recoveredObject = JSON.parse(sessionStorage[key]);
-      const copy = { ...recoveredObject };
-      if (copy.quantity < copy.inStorage) {
-        copy.quantity += 1;
-        sessionStorage[key] = JSON.stringify(copy);
-        this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
-      }
-    } else {
-      sessionStorage.setItem(key, value);
-      this.setState((prevState) => ({ cartSize: prevState.cartSize + 1 }));
-    }
   }
 
   HandlerState(event) {
@@ -66,7 +43,9 @@ class Home extends Component {
   }
 
   render() {
-    const { data, cartSize } = this.state;
+    const { data } = this.state;
+    const { cartList } = this.props;
+    const cartSize = cartList.reduce((acc, { quantity }) => acc + quantity, 0);
     return (
       <div>
         <div className="searchSection">
@@ -104,7 +83,7 @@ class Home extends Component {
           <CategoryList
             handleUserInput={ this.HandlerState }
           />
-          <ProductList addToCart={ this.addToCart } productsList={ data } />
+          <ProductList productsList={ data } />
         </div>
 
       </div>
@@ -112,4 +91,12 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  cartList: state.cartReducer.cartList,
+});
+
+export default connect(mapStateToProps, null)(Home);
+
+Home.propTypes = {
+  cartList: PropTypes.shape,
+}.isRequired;
