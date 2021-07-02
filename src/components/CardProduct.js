@@ -33,7 +33,7 @@ class CardProduct extends Component {
           onClick={ () => addToCartFunction(product) }
           type="button"
         >
-          Adiconar ao carrinho
+          Adicionar ao carrinho
         </button>
       </div>
     );
