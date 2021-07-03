@@ -1,52 +1,80 @@
-.product {
+.productArea {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.062) 0 0 5px;
+  box-sizing: border-box;
+  color: var(--primary-color);
   height: 300px;
+  margin-bottom: 40px;
+  margin-left: 100px;
+  padding: 10px;
+  transition: 0.2s ease;
   width: 200px;
+}
+
+.productArea:hover {
+  box-shadow: rgba(0, 0, 0, 0.151) 0 5px 15px;
+  transition: 0.2s ease;
 }
 
 .detailsLink {
+  color: var(--text-color);
   text-decoration: none;
 }
 
+.img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 150px;
+  width: 100%;
+}
+
+img {
+  display: none;
+}
+
 .title {
+  color: var(--text-color);
   font-size: 12px;
 }
 
-.product img {
-  border-radius: 10px;
-  display: none;
-  height: 250px;
-  width: 200px;
-}
-
-.img {
-  background-clip: border-box;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 200px 250px;
-  border-radius: 10px;
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.205);
-  height: 250px;
-  width: 200px;
-}
-
-.imgFront {
-  border-radius: 10px;
-  height: 250px;
-  margin-top: -250px;
-  position: absolute;
-  width: 200px;
-}
-
-.productArea {
+.button {
+  align-items: center;
+  background-color: var(--third-color);
+  border: none;
+  border-radius: 0 20px 20px 0;
+  color: var(--secondary-color);
+  cursor: pointer;
   display: flex;
-  flex-direction: column;
-  height: 360px;
-  justify-content: space-between;
-  margin: 10px 20px;
-  width: 200px;
+  height: 35px;
+  justify-content: flex-start;
+  margin-left: -10px;
+  padding-left: 10px;
+  transition: 0.2s ease;
+  width: 40px;
 }
 
-button {
-  margin-top: 10px;
+.button:hover {
+  transition: 0.2s ease;
+  width: 120px;
 }
 
+.button:hover p {
+  font-weight: 700;
+  margin-left: 15px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  visibility: visible;
+}
+
+.p {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  visibility: hidden;
+}
+
+/* .cartAdd {
+  background-color: red;
+  position: absolute;
+} */

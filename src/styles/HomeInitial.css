@@ -1,38 +1,48 @@
 .header {
-  display: flex;
-  justify-content: space-evenly;
   align-items: center;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.089);
+  background-color: var(--primary-color);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.048);
+  color: var(--secondary-color);
+  display: flex;
   height: 80px;
-  color: #13579b;
+  justify-content: space-evenly;
 }
 
 .form {
+
   /* background-color: brown; */
-  height: 65px;
+  height: 40px;
+}
+
+.iconDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+}
+
+.darkDiv {
+  cursor: pointer;
 }
 
 .search {
-  width: 1000px;
+  background-color: #eee;
+  border: solid #aaa 1px;
+  border-radius: 3px 0 0 3px;
+  border-right: none;
   height: 38px;
   outline: none;
-  border: none;
-  border-radius: 3px 0 0 3px;
   padding-left: 10px;
-  background-color: #EEE;
-  border: solid #AAA 1px;
-  border-right: none;
+  width: 1000px;
 }
 
 .searchBtn {
-  border: solid #AAA 1px;
+  background-color: #eee;
+  border: solid #aaa 1px;
   border-left: none;
-  background-color: #EEE;
-  width: 40px;
-  height: 42px;
   border-radius: 0 3px 3px 0;
   cursor: text;
+  height: 42px;
+  width: 40px;
 }
 
 .searchIcon {
@@ -41,14 +51,14 @@
 
 .contentArea {
   display: flex;
-  margin: 0 auto;
-  width: 90%;
   height: 90vh;
+  margin: 0 auto;
   margin-top: 40px;
+  width: 90%;
 }
 
 .cartIcon {
-  color: #13579b;
+  color: var(--secondary-color);
   font-size: 25px;
 }
 
@@ -58,6 +68,7 @@
 
 .searchArea {
   width: 78%;
+
   /* background-color: aquamarine; */
 }
 

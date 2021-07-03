@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faAdjust, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchArea from './SearchArea';
@@ -37,7 +37,8 @@ class HomeInitial extends Component {
   }
 
   async filterProductsByCategory({ target }) {
-    if (target.className === 'Category') {
+    const { className } = target;
+    if (className === 'Category') {
       const { id } = target;
       const { search } = this.state;
       if (search !== '') {
@@ -52,6 +53,11 @@ class HomeInitial extends Component {
         });
       }
     }
+  }
+
+  darkMode() {
+    const root = document.querySelector('html');
+    root.classList.toggle('dark-mode');
   }
 
   render() {
@@ -86,6 +92,9 @@ class HomeInitial extends Component {
             <Link to="/carrinho-compras">
               <FontAwesomeIcon icon={ faShoppingCart } className="cartIcon" />
             </Link>
+            <div className="darkDiv" aria-hidden="true" onClick={ this.darkMode }>
+              <FontAwesomeIcon icon={ faAdjust } className="cartIcon" />
+            </div>
           </div>
         </header>
         <div className="contentArea">

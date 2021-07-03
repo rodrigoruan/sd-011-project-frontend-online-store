@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../styles/Products.css';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 class Products extends Component {
   constructor(props) {
@@ -33,7 +35,6 @@ class Products extends Component {
         >
           <div className="product" data-testid="product" aria-hidden="true">
             <div className="img" style={ { backgroundImage: `url(${img})` } } />
-            <div className="imgFront" />
             <img src={ img } alt="produto" />
             <p>
               {'R$'}
@@ -46,8 +47,14 @@ class Products extends Component {
           type="button"
           data-testid="product-add-to-cart"
           onClick={ this.addItemCart }
+          className="button"
         >
-          Adicionar ao carrinho
+          <div className="cartAdd">
+            <FontAwesomeIcon icon={ faCartPlus } />
+          </div>
+          <p className="p">
+            Adicionar
+          </p>
         </button>
       </div>
     );

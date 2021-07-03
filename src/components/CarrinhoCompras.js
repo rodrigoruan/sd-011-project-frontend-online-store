@@ -13,7 +13,9 @@ class CarrinhoCompras extends Component {
   }
 
   removeItem(product) {
-    product.cartCount -= 1;
+    if (product.cartCount > 0) {
+      product.cartCount -= 1;
+    }
     this.forceUpdate();
   }
 

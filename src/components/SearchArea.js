@@ -7,7 +7,7 @@ class SearchArea extends Component {
   render() {
     const { products, createCart } = this.props;
     const preText = (
-      <h1 data-testid="home-initial-message">
+      <h1 className="searchTitle" data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </h1>
     );
