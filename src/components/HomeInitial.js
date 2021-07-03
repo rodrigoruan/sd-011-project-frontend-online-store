@@ -5,7 +5,6 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import cart from '../Images/cart.png';
 import SearchArea from './SearchArea';
 import Filter from './Filter';
-import '../styles/HomeInitial.css'
 
 class HomeInitial extends Component {
   constructor(props) {
@@ -91,7 +90,11 @@ class HomeInitial extends Component {
         </header>
         <div className="contentArea">
           <Filter className="filter" onClick={ this.filterProductsByCategory } />
-          <SearchArea className="search" products={ products } createCart={ createCart } />
+          <SearchArea
+            className="search"
+            products={ products }
+            createCart={ createCart }
+          />
         </div>
       </div>
     );

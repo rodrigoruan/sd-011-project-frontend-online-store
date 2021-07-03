@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Products from './Products';
-import '../styles/SearchArea.css'
+import '../styles/SearchArea.css';
 
 class SearchArea extends Component {
   render() {
