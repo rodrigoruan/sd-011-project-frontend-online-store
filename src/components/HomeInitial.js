@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import cart from '../Images/cart.png';
 import SearchArea from './SearchArea';
 import Filter from './Filter';
 import '../styles/HomeInitial.css';
@@ -58,8 +59,9 @@ class HomeInitial extends Component {
     const { createCart } = this.props;
     return (
       <div>
-        <header>
-          <form>
+        <header className="header">
+          <h1>GRUPO-24</h1>
+          <form className="form">
             <label htmlFor="search-bar">
               <input
                 type="text"
@@ -68,24 +70,21 @@ class HomeInitial extends Component {
                 id="search-bar"
                 value={ search }
                 onChange={ this.onChange }
+                className="search"
               />
             </label>
             <button
               data-testid="query-button"
               onClick={ this.filterProductsBySearch }
               type="button"
+              className="searchBtn"
             >
-              Buscar
+              <FontAwesomeIcon icon={ faSearch } className="searchIcon" />
             </button>
           </form>
-          <div>
+          <div className="iconDiv">
             <Link to="/carrinho-compras">
-              <img
-                src={ cart }
-                alt="carrinho-compras"
-                data-testid="shopping-cart-button"
-                height="200px"
-              />
+              <FontAwesomeIcon icon={ faShoppingCart } className="cartIcon" />
             </Link>
           </div>
         </header>

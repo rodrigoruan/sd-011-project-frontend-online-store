@@ -1,7 +1,7 @@
 .filterArea {
 	border-radius: 10px;
 	margin-left: 0;
-	box-shadow: rgba(0, 0, 0, 0.199) 5px 5px 20px;
+	box-shadow: rgba(0, 0, 0, 0.199) 10px 10px 20px;
 	overflow: auto;
 }
 
@@ -37,8 +37,14 @@
 	transition: ease 0.2s;
 }
 
+.selected {
+	color: white;
+	background-color: #13579b;
+}
+
 .icon {
 	margin-right: 10px;
+	color: #13579b;
 }
 
 /* width */
