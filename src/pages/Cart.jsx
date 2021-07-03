@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PaymentForm from '../components/PaymentForm';
-import { addToCart, decreaseOfCart, resetCart } from '../actions';
+import { addToCart, decreaseOfCart, resetCart, removeItem } from '../actions';
 
 class Cart extends Component {
   constructor() {
@@ -26,7 +26,7 @@ class Cart extends Component {
 
   elementList(value) {
     const { id, title, price, thumbnail, inStorage, quantity } = value;
-    const { add, decrease } = this.props;
+    const { add, decrease, remove } = this.props;
     return (
       <li key={ id }>
         <button
@@ -45,7 +45,7 @@ class Cart extends Component {
           name={ id }
           onClick={
             quantity === 1
-              ? (event) => this.removeItem(event) // funciona porem precisa da função com redux para funcionar ;P
+              ? () => remove(value)
               : () => decrease(value)
           }
         >
@@ -123,6 +123,7 @@ Cart.propTypes = {
   add: PropTypes.func.isRequired,
   decrease: PropTypes.func.isRequired,
   reset: PropTypes.func.isRequired,
+  remove: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -133,6 +134,7 @@ const mapDispatchToProps = (dispatch) => ({
   add: (value) => dispatch(addToCart(value)),
   decrease: (value) => dispatch(decreaseOfCart(value)),
   reset: (value) => dispatch(resetCart(value)),
+  remove: (value) => dispatch(removeItem(value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

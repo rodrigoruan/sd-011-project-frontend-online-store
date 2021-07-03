@@ -1,4 +1,4 @@
-import { ADD_TO_CART, DECRESE_OF_CART, RESET_CART } from '../actions';
+import { ADD_TO_CART, DECRESE_OF_CART, RESET_CART, REMOVE_OF_CART } from '../actions';
 
 const INITIAL_STATE = {
   cartList: [],
@@ -12,6 +12,11 @@ const newItem = (action) => ({
   inStorage: action.payload.inStorage,
   quantity: 1,
 });
+
+const filterArray = (state, action) => {
+  const newState = state.cartList.filter((item) => item.id !== action.payload.id);
+  return newState;
+};
 
 function cartReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -31,6 +36,7 @@ function cartReducer(state = INITIAL_STATE, action) {
       ...state,
       cartList: [...state.cartList, newItem(action)],
     };
+
   case DECRESE_OF_CART:
     return {
       ...state,
@@ -41,8 +47,16 @@ function cartReducer(state = INITIAL_STATE, action) {
         return cartItem;
       }),
     };
+
   case RESET_CART:
     return INITIAL_STATE;
+
+  case REMOVE_OF_CART:
+    return {
+      ...state,
+      cartList: [...filterArray(state, action)],
+    };
+
   default:
     return state;
   }
