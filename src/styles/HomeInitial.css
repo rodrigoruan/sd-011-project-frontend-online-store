@@ -1,7 +1,9 @@
 .contentArea {
   display: flex;
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
+  height: 90vh;
+  /* background-color: aquamarine; */
 }
 
 .filterArea {
@@ -9,7 +11,7 @@
 }
 
 .searchArea {
-  width: 82%;
+  width: 78%;
 }
 
 header {

@@ -1,0 +1,64 @@
+.filterArea {
+	border-radius: 10px;
+	margin-left: 0;
+	box-shadow: rgba(0, 0, 0, 0.199) 5px 5px 20px;
+	overflow: auto;
+}
+
+.categories {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	height: 200%;
+	margin-top: 12px;
+	justify-content: space-around;
+	align-items: center;	
+}
+
+.Category {
+	cursor: pointer;
+	font-size: 20px;
+	height: 52px;
+	/* border: black solid 1px; */
+	margin-left: -40px;
+	display: flex;
+	align-items: center;
+	width: 105%;
+	padding-left: 10px;
+	display: flex;
+	justify-content: flex-start;
+	transition: ease 0.2s;
+}
+
+.Category:hover {
+	background-color: #FFF;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.26);
+	border-radius: 10px;
+	transition: ease 0.2s;
+}
+
+.icon {
+	margin-right: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #CCC;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #BBB;
+	border-radius: 10px;
+}
