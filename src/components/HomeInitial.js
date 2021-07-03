@@ -6,6 +6,7 @@ import cart from '../Images/cart.png';
 import SearchArea from './SearchArea';
 import Filter from './Filter';
 import '../styles/HomeInitial.css';
+
 class HomeInitial extends Component {
   constructor(props) {
     super(props);
