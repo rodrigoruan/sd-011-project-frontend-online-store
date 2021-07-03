@@ -89,7 +89,7 @@ class HomeInitial extends Component {
             </button>
           </form>
           <div className="iconDiv">
-            <Link to="/carrinho-compras">
+            <Link data-testid="shopping-cart-button" to="/carrinho-compras">
               <FontAwesomeIcon icon={ faShoppingCart } className="cartIcon" />
             </Link>
             <div className="darkDiv" aria-hidden="true" onClick={ this.darkMode }>
