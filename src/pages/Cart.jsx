@@ -33,7 +33,7 @@ class Cart extends Component {
           data-testid=""
           type="button"
           name={ title }
-          onClick={ this.removeItem }
+          onClick={ () => remove(value) }
         >
           Remover
         </button>
