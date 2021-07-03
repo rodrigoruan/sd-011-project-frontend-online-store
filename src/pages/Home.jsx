@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as Api from '../services/api';
-
 import ProductList from '../components/ProductList';
 import CategoryList from '../components/CategoryList';
-
 import '../styles/Home.css';
+import 'bulma/css/bulma.min.css';
 
 class Home extends Component {
   constructor(props) {
@@ -58,44 +57,44 @@ class Home extends Component {
     return (
       <div>
         <div className="searchSection">
-          <label htmlFor="search">
-            <input
-              data-testid="query-input"
-              type="text"
-              name="search"
-              onKeyUp={ this.handleInput }
-              onChange={ this.HandlerState }
-            />
-          </label>
-          <button
-            className="btn"
-            data-testid="query-button"
-            type="submit"
-            onClick={ this.RequestApi }
-          >
-            Pesquisar
-          </button>
-          <Link
-            className="btn cart-btn"
-            to="/cart"
-            data-testid="shopping-cart-button"
-          >
-            Carrinho
-          </Link>
-          <p data-testid="shopping-cart-size">
-            {cartSize}
-          </p>
+          <CategoryList
+            handleUserInput={ this.HandlerState }
+          />
+          <div className="searchBar search-size-2">
+            <label htmlFor="search">
+              <input
+                className="input is-primary"
+                placeholder="Digite Aqui o Termo para pesquisa"
+                data-testid="query-input"
+                type="text"
+                name="search"
+                onKeyUp={ this.handleInput }
+                onChange={ this.HandlerState }
+              />
+            </label>
+            <button
+              className="button is-primary search-button"
+              data-testid="query-button"
+              type="submit"
+              onClick={ this.RequestApi }
+            >
+              Pesquisar
+            </button>
+          </div>
+          <div className="search-size-1">
+            <Link
+              className="button is-link"
+              to="/cart"
+              data-testid="shopping-cart-button"
+            >
+              {`Carrinho ${cartSize}`}
+            </Link>
+          </div>
         </div>
         <h2 className="home-message" data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
-        <div className="category-products-wrapper">
-          <CategoryList
-            handleUserInput={ this.HandlerState }
-          />
-          <ProductList productsList={ data } />
-        </div>
-
+        <ProductList addToCart={ this.addToCart } productsList={ data } />
       </div>
     );
   }

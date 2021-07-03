@@ -1,18 +1,50 @@
+.Link {
+  color: black;
+  text-decoration: none;
+  box-shadow: 1px, 1px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 50%;
+}
+
 .product-card {
   align-items: center;
-  border: 1px solid magenta;
+  align-content: space-between;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 5px;
   max-width: 200px;
+  height: 100%;
   padding: 0 7px;
+  color: black;
 }
 
 .product-card h4 {
   text-align: center;
 }
 
-img {
-  width: 100px;
+.frete {
+  font-size: 10px;
+  padding: 1px auto;
+  margin: 1px auto;
+  box-shadow: 2px 2px yellow;
+}
+.text {
+  width: 180px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.img {
+  width: 224px;
+  height: 224px;
+  object-fit: scale-down;
 }

@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addToCart } from '../actions';
 
+import 'bulma/css/bulma.min.css';
 import '../styles/ProductCard.css';
 
 class ProductCard extends Component {
   renderSpan(hasFreeShipping) {
     if (hasFreeShipping) {
       return (
-        <span data-testid="free-shipping">Frete Grátis</span>
+        <span className="frete" data-testid="free-shipping">Frete Grátis</span>
       );
     }
     return (null);
@@ -34,8 +35,9 @@ class ProductCard extends Component {
     const itemQuantity = item ? item.quantity : 0;
 
     return (
-      <li className="product-card" data-testid="product">
+      <li className="product-card box center" data-testid="product">
         <Link
+          className="Link"
           data-testid="product-detail-link"
           to={ {
             pathname: '/productdetail',
@@ -49,12 +51,19 @@ class ProductCard extends Component {
             }),
           } }
         >
-          <h4>{title}</h4>
-          <img alt="foto do produto" src={ thumbnail } />
-          <p>{ `R$ ${price}` }</p>
-          { this.renderSpan(hasFreeShipping)}
+          <img className="center img" alt="foto do produto" src={ thumbnail } />
+          <div>
+            <h4 className="text">{title}</h4>
+            <p>
+              <b>
+                { `R$ ${price}  ` }
+              </b>
+              {this.renderSpan(hasFreeShipping)}
+            </p>
+          </div>
         </Link>
         <button
+          className="button is-primary"
           type="button"
           data-testid="product-add-to-cart"
           onClick={ () => add(value) }

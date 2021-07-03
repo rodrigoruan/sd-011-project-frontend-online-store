@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ProductEvaluation from '../components/ProductEvaluation';
 import 'react-rater/lib/react-rater.css';
+import 'bulma/css/bulma.min.css';
+import '../styles/ProductDetail.css';
 
 import { addToCart } from '../actions';
 
@@ -74,65 +76,100 @@ class ProductDetail extends Component {
     const item = cartList.find((cartItem) => cartItem.id === id);
     const itemQuantity = item ? item.quantity : 0;
 
+    const showEvaluations = localStorage.getItem(id);
+
     return (
       <div>
-        <Link to="/">Voltar</Link>
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
-        <p data-testid="shopping-cart-size">
-          {itemQuantity}
-        </p>
-        <h3 data-testid="product-detail-name">{ title }</h3>
-        <h3>{price}</h3>
-        <img src={ thumbnail } alt={ title } />
-        {hasFreeShipping ? <h4 data-testid="free-shipping">Frete Grátis</h4> : null}
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          disabled={ inStorage <= itemQuantity }
-          onClick={ () => add(value) }
+        <div
+          className="navbar-product-details"
         >
-          Adicionar ao carrinho
-        </button>
-        <form>
-          <label htmlFor="email">
-            Email:
-            <input
-              type="text"
-              name="email"
-              value={ email }
-              onChange={ this.handleChange }
-              required
-              placeholder="Obrigatório"
+          <Link
+            to="/"
+            className="button is-danger navbar-product-details-btn"
+          >
+            Voltar
+          </Link>
+          <p
+            className="is-warning navbar-product-details-btn"
+            data-testid="shopping-cart-size"
+          >
+            {`Produtos no Carrinho:${itemQuantity}`}
+          </p>
+          <Link
+            to="/cart"
+            className="button is-info navbar-product-details-btn"
+            data-testid="shopping-cart-button"
+          >
+            Carrinho
+          </Link>
+        </div>
+        <div className="center box">
+          <h3 data-testid="product-detail-name">{ title }</h3>
+          <h3>{`R$${price.toFixed(2)}`}</h3>
+          <img src={ thumbnail } alt={ title } width="250px" height="250px" />
+          {hasFreeShipping ? <h4 data-testid="free-shipping">Frete Grátis</h4> : null}
+          <br />
+          <button
+            type="button"
+            className="button is-success"
+            data-testid="product-detail-add-to-cart"
+            disabled={ inStorage <= itemQuantity }
+            onClick={ () => add(value) }
+          >
+            Adicionar ao carrinho
+          </button>
+        </div>
+        <form className="box field">
+          <div>
+            <label htmlFor="email">
+              <p className="pb-2">Email:</p>
+              <input
+                className="input is-info"
+                type="text"
+                name="email"
+                value={ email }
+                onChange={ this.handleChange }
+                required
+                placeholder="Obrigatório"
+              />
+            </label>
+          </div>
+          <div>
+            <p className="pt-4">Avaliação:</p>
+            <Rater
+              total={ 5 }
+              rating={ rating }
+              onRate={ (event) => {
+                this.retrieveRating(event);
+              } }
             />
-          </label>
-          <Rater
-            total={ 5 }
-            rating={ rating }
-            onRate={ (event) => {
-              this.retrieveRating(event);
-            } }
-          />
-          <label htmlFor="commentary">
-            Comentários:
-            <textarea
-              name="commentary"
-              id=""
-              cols="30"
-              rows="10"
-              value={ textArea }
-              onChange={ this.handleChange }
-              data-testid="product-detail-evaluation"
-              placeholder="Opcional"
-            />
-          </label>
+          </div>
+          <div>
+            <label htmlFor="commentary">
+              <br />
+              <p className="pb-2">Comentários:</p>
+              <textarea
+                className="textarea is-info"
+                name="commentary"
+                id=""
+                cols="10"
+                rows="5"
+                value={ textArea }
+                onChange={ this.handleChange }
+                data-testid="product-detail-evaluation"
+                placeholder="Opcional"
+              />
+            </label>
+          </div>
           <input
+            className="center button is-info is-outlined"
             type="submit"
             value="Avaliar"
             onClick={ this.handleSubmit }
           />
         </form>
         {
-          localStorage.getItem(id)
+          showEvaluations
             ? (
               <ProductEvaluation
                 name={ id }
