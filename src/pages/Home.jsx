@@ -19,8 +19,17 @@ class Home extends Component {
       category: '',
     };
 
+    this.handleInput = this.handleInput.bind(this);
     this.HandlerState = this.HandlerState.bind(this);
     this.RequestApi = this.RequestApi.bind(this);
+  }
+
+  handleInput({ keyCode }) {
+    const enterKeyCode = 13;
+
+    if (keyCode === enterKeyCode) {
+      this.RequestApi();
+    }
   }
 
   HandlerState(event) {
@@ -54,6 +63,7 @@ class Home extends Component {
               data-testid="query-input"
               type="text"
               name="search"
+              onKeyUp={ this.handleInput }
               onChange={ this.HandlerState }
             />
           </label>
