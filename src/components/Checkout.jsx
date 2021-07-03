@@ -36,7 +36,8 @@ export default class Checkout extends Component {
   clearStorage(event) {
     event.preventDefault();
     localStorage.removeItem('cart');
-    alert('Compra concluída com sucesso! Volte sempre!');
+    localStorage.removeItem('totalPrice');
+    alert('Parabéns, seu cartão foi clonado!');
     this.setState({
       redirect: true,
     });
