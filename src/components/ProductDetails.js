@@ -55,7 +55,7 @@ class ProductDetails extends Component {
     return (
       <div className="productPage">
         <div className="prdHeader">
-          <Link to="/carrinho-compras">
+          <Link data-testid="shopping-cart-button" to="/carrinho-compras">
             <FontAwesomeIcon icon={ faShoppingCart } />
           </Link>
           <Link to="/">
