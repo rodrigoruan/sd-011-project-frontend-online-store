@@ -8,16 +8,25 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const createCart = (product) => {
-    const add = cartItems.some((item) => {
-      if (item.id === product.id) {
-        item.cartCount += 1;
-        return true;
-      }
-      return false;
-    });
-    if (add === false) {
+    // console.table(product);
+    // console.table(cartItems[0]);
+    console.log(cartItems.includes(product));
+    if (cartItems.includes(product)) {
+      setCartItems([...cartItems]);
+    } else {
       setCartItems([...cartItems, product]);
     }
+  };
+
+  const [quant, setQuant] = useState(0);
+
+  const cartQuant = () => {
+    const quantArr = cartItems.map((item) => (
+      item.cartCount
+    ));
+    // console.log(quantArr);
+    const quantity = quantArr.reduce((acc, curr) => (acc + curr), 0);
+    setQuant(quantity);
   };
 
   return (
@@ -34,6 +43,7 @@ function App() {
           render={ (props) => (<CarrinhoCompras
             { ...props }
             cartItems={ cartItems }
+            createCart={ createCart }
           />) }
         />
         <Route
@@ -41,6 +51,8 @@ function App() {
           render={ (props) => (<HomeInitial
             { ...props }
             createCart={ createCart }
+            cartQuant={ cartQuant }
+            quant={ quant }
           />) }
         />
       </Switch>

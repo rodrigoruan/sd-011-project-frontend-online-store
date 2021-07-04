@@ -62,7 +62,7 @@ class HomeInitial extends Component {
 
   render() {
     const { products, search } = this.state;
-    const { createCart } = this.props;
+    const { createCart, cartQuant, quant } = this.props;
     return (
       <div>
         <header className="header">
@@ -91,6 +91,7 @@ class HomeInitial extends Component {
           <div className="iconDiv">
             <Link data-testid="shopping-cart-button" to="/carrinho-compras">
               <FontAwesomeIcon icon={ faShoppingCart } className="cartIcon" />
+              { quant }
             </Link>
             <div className="darkDiv" aria-hidden="true" onClick={ this.darkMode }>
               <FontAwesomeIcon icon={ faAdjust } className="cartIcon" />
@@ -103,6 +104,7 @@ class HomeInitial extends Component {
             className="search"
             products={ products }
             createCart={ createCart }
+            cartQuant={ cartQuant }
           />
         </div>
       </div>
@@ -112,6 +114,8 @@ class HomeInitial extends Component {
 
 HomeInitial.propTypes = {
   createCart: PropTypes.func.isRequired,
+  cartQuant: PropTypes.number.isRequired,
+  quant: PropTypes.func.isRequired,
 };
 
 export default HomeInitial;

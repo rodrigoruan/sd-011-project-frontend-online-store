@@ -5,7 +5,7 @@ import '../styles/SearchArea.css';
 
 class SearchArea extends Component {
   render() {
-    const { products, createCart } = this.props;
+    const { products, createCart, cartQuant } = this.props;
     const preText = (
       <h1 className="searchTitle" data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
@@ -13,19 +13,17 @@ class SearchArea extends Component {
     );
     return (
       <div className="searchArea">
-        { products.length === 0 ? preText : products.map((product, index) => {
-          product.cartCount = 1;
-          return (<Products
-            key={ index }
-            title={ product.title }
-            price={ product.price }
-            img={ product.thumbnail }
-            product={ product }
-            func={ createCart }
-            products={ products }
-          />
-          );
-        })}
+        { products.length === 0 ? preText : products.map((product, index) => (<Products
+          key={ index }
+          title={ product.title }
+          price={ product.price }
+          img={ product.thumbnail }
+          product={ product }
+          func={ createCart }
+          products={ products }
+          cartQuant={ cartQuant }
+        />
+        ))}
       </div>
     );
   }
@@ -34,6 +32,7 @@ class SearchArea extends Component {
 SearchArea.propTypes = {
   products: PropTypes.arrayOf(Object).isRequired,
   createCart: PropTypes.func.isRequired,
+  cartQuant: PropTypes.number.isRequired,
 };
 
 export default SearchArea;

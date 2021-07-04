@@ -11,15 +11,22 @@ class Products extends Component {
     this.addItemCart = this.addItemCart.bind(this);
   }
 
-  addItemCart() {
-    const { product, func } = this.props;
-    product.cartItem = true;
+  async addItemCart() {
+    const { product, func, cartQuant } = this.props;
+    if (product.cartCount && product.available_quantity > product.cartCount) {
+      product.cartCount += 1;
+    } else {
+      product.cartCount = 1;
+    }
     func(product);
+    cartQuant();
+    this.forceUpdate();
   }
 
   render() {
     const { title, img, price, product } = this.props;
     const { id } = product;
+    const FIFTY = 50;
     return (
       <div className="productArea">
         <Link
@@ -35,12 +42,14 @@ class Products extends Component {
         >
           <div className="product" data-testid="product" aria-hidden="true">
             <div className="img" style={ { backgroundImage: `url(${img})` } } />
-            <img src={ img } alt="produto" />
+            <img className="noneImg" src={ img } alt="produto" />
             <p>
               {'R$'}
               { price ? price.toFixed(2) : '00' }
             </p>
-            <p className="title">{ title }</p>
+            <p className="title">
+              { title.length > FIFTY ? `${title.substr(0, FIFTY)}...` : `${title}` }
+            </p>
           </div>
         </Link>
         <button
@@ -67,6 +76,7 @@ Products.propTypes = {
   img: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   func: PropTypes.func.isRequired,
+  cartQuant: PropTypes.number.isRequired,
 };
 
 export default Products;

@@ -8,14 +8,20 @@ class CarrinhoCompras extends Component {
   }
 
   addItem(product) {
-    product.cartCount += 1;
+    const { createCart } = this.props;
+    if (product.cartCount < product.available_quantity) {
+      product.cartCount += 1;
+    }
+    createCart(product);
     this.forceUpdate();
   }
 
   removeItem(product) {
-    if (product.cartCount > 0) {
+    const { createCart } = this.props;
+    if (product.cartCount > 1) {
       product.cartCount -= 1;
     }
+    createCart(product);
     this.forceUpdate();
   }
 
@@ -60,6 +66,8 @@ class CarrinhoCompras extends Component {
 
 CarrinhoCompras.propTypes = {
   cartItems: PropTypes.arrayOf(Object).isRequired,
+  createCart: PropTypes.func.isRequired,
+
 };
 
 export default CarrinhoCompras;
