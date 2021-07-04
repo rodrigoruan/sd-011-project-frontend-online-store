@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import cart from '../Images/cart.png';
+import '../styles/ProductDetails.css';
 import Rating from './Rating';
 
 class ProductDetails extends Component {
@@ -51,39 +53,47 @@ class ProductDetails extends Component {
     const { id } = match.params;
     const { product } = this.state;
     return (
-      <div>
-        <img src={ product.thumbnail } alt="product" />
-        <p data-testid="product-detail-name">{product.title}</p>
-        <p>
-          {'R$ '}
-          { product.price }
-        </p>
-        { product.attributes && product.attributes.map((att, index) => (
-          <p key={ index }>
-            { att.name }
-            -
-            { att.value_name }
-          </p>
-        ))}
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.addItemCart }
-        >
-          Adicionar ao carrinho
-        </button>
-        <Rating id={ id } />
-        <Link to="/carrinho-compras">
-          <img
-            src={ cart }
-            alt="carrinho-compras"
-            data-testid="shopping-cart-button"
-            height="200px"
-          />
-        </Link>
-        <Link to="/">
-          HOME
-        </Link>
+      <div className="productPage">
+        <div className="prdHeader">
+          <Link to="/carrinho-compras">
+            <FontAwesomeIcon icon={ faShoppingCart } />
+          </Link>
+          <Link to="/">
+            HOME
+          </Link>
+        </div>
+        <div className="prdTop">
+          <div className="prdInfos">
+            <p data-testid="product-detail-name" className="prdTitle">{product.title}</p>
+            <img src={ product.thumbnail } alt="product" />
+            <p className="prdPrice">
+              {'R$ '}
+              { product.price }
+            </p>
+            <button
+              type="button"
+              data-testid="product-detail-add-to-cart"
+              onClick={ this.addItemCart }
+              className="prdAdd"
+            >
+              Adicionar ao carrinho
+            </button>
+            <div className="prdSpecs">
+              { product.attributes && product.attributes.map((att, index) => (
+                <div className="table" key={ index }>
+                  <p className="firstP">
+                    { att.name }
+                    :
+                  </p>
+                  <p>
+                    { att.value_name }
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Rating id={ id } />
+        </div>
       </div>
     );
   }

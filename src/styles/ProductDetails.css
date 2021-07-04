@@ -1,0 +1,45 @@
+.productPage {
+  background-color: var(--fourth-color);
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  margin: 40px auto;
+  padding: 40px;
+  width: 90vw;
+}
+
+.prdTop {
+  display: flex;
+  justify-content: space-around;
+}
+
+.prdTitle {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.prdPrice {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.prdSpecs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+}
+
+.table {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+}
+
+.firstP {
+  color: var(--second-text-color);
+  font-weight: 300;
+}

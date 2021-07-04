@@ -19,6 +19,7 @@ code {
   --third-color: #90c7ff;
   --fourth-color: white;
   --text-color: black;
+  --second-text-color: #aaa
 }
 
 .dark-mode:root {
