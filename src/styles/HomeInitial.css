@@ -14,9 +14,30 @@
   height: 40px;
 }
 
+.cont {
+  align-items: center;
+  background-color: var(--primary-color);
+  border: solid 2px var(--secondary-color);
+  border-radius: 50px;
+  color: var(--text-color);
+  display: flex;
+  font-size: 12px;
+  font-style: none;
+  font-weight: 700;
+  height: 15px;
+  justify-content: center;
+  position: absolute;
+  right: 180px;
+  text-decoration: none;
+  top: 35px;
+  vertical-align: middle;
+  width: 15px;
+}
+
 .iconDiv {
   display: flex;
   justify-content: space-between;
+  text-decoration: none;
   width: 70px;
 }
 

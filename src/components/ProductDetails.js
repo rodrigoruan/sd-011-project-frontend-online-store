@@ -37,7 +37,12 @@ class ProductDetails extends Component {
   addItemCart() {
     const { createCart, location } = this.props;
     const { productToAdd } = location.state;
-    productToAdd.cartItem = true;
+    const condition = (productToAdd.available_quantity > productToAdd.cartCount);
+    if (productToAdd.cartCount && condition) {
+      productToAdd.cartCount += 1;
+    } else {
+      productToAdd.cartCount = 1;
+    }
     createCart(productToAdd);
   }
 

@@ -91,7 +91,7 @@ class HomeInitial extends Component {
           <div className="iconDiv">
             <Link data-testid="shopping-cart-button" to="/carrinho-compras">
               <FontAwesomeIcon icon={ faShoppingCart } className="cartIcon" />
-              { quant }
+              <div className="cont">{ quant > 1 ? quant - 1 : quant }</div>
             </Link>
             <div className="darkDiv" aria-hidden="true" onClick={ this.darkMode }>
               <FontAwesomeIcon icon={ faAdjust } className="cartIcon" />
@@ -114,8 +114,8 @@ class HomeInitial extends Component {
 
 HomeInitial.propTypes = {
   createCart: PropTypes.func.isRequired,
-  cartQuant: PropTypes.number.isRequired,
-  quant: PropTypes.func.isRequired,
+  cartQuant: PropTypes.func.isRequired,
+  quant: PropTypes.number.isRequired,
 };
 
 export default HomeInitial;

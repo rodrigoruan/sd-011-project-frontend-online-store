@@ -25,7 +25,7 @@ function App() {
       item.cartCount
     ));
     // console.log(quantArr);
-    const quantity = quantArr.reduce((acc, curr) => (acc + curr), 0);
+    const quantity = quantArr.reduce((acc, curr) => (acc + curr), 1);
     setQuant(quantity);
   };
 
