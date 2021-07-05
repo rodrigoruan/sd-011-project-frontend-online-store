@@ -16,34 +16,53 @@ export default class ProductDetail extends Component {
           <Link to="/" className="LinkBack"> Voltar </Link>
           <CartButton />
         </header>
-        <div>
-          <h1 data-testid="product-detail-name">{name}</h1>
-          <img src={ image } alt="Product Thumbnail" />
-          <p className="priceP">
-            {price.total }
-            <span>
-              &nbsp;
-              { price.currency }
-            </span>
-          </p>
-          {spec.map((atributo) => (
-            <div key={ atributo.id }>
-              <p className="atributoP"><b>{atributo.name}</b></p>
-              <span>{atributo.value_name}</span>
+        <div className="page-container">
+          <div className="image-container">
+            <img className="product-image" src={ image } alt="Product Thumbnail" />
+          </div>
+          <div className="info-container">
+            <div className="title-container">
+              <h1
+                className="title-product-details"
+                data-testid="product-detail-name"
+              >
+                {name}
+              </h1>
             </div>
-          ))}
-          <AddToCartBttn
-            product={ {
-              id,
-              title: name,
-              price: price.total,
-              thumbnail: image,
-              currency_id: price.currency,
-            } }
-            dataTest="product-detail-add-to-cart"
-          />
+            <p className="priceP">
+              R$&nbsp;
+              {price.total }
+              <span>
+                &nbsp;
+                { price.currency }
+              </span>
+            </p>
+            {spec.map((atributo) => (
+              <div key={ atributo.id }>
+                <p className="atributoP">
+                  <b>
+                    {atributo.name}
+                    :
+                  </b>
+                </p>
+                <span>{atributo.value_name}</span>
+              </div>
+            ))}
+            <AddToCartBttn
+              product={ {
+                id,
+                title: name,
+                price: price.total,
+                thumbnail: image,
+                currency_id: price.currency,
+              } }
+              dataTest="product-detail-add-to-cart"
+            />
+          </div>
         </div>
-        <RateComment product={ id } />
+        <div className="rate-container">
+          <RateComment product={ id } />
+        </div>
       </div>
     );
   }

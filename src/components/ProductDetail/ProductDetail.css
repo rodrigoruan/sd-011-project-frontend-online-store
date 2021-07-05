@@ -1,3 +1,32 @@
+.page-container {
+  height: 80vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.page-container .image-container{
+  width: 50%;
+  text-align: center;
+}
+
+.page-container .image-container img {
+  width: 50%;
+}
+
+.page-container .info-container {
+  width: 50%;
+  height: 800px;
+}
+
+.page-container .info-container p {
+  font-size: 22px;
+}
+
+.page-container .info-container span {
+  font-size: 22px;
+}
+
 .priceP {
   color: black;
 }
@@ -23,4 +52,70 @@
 
 .LinkBack:hover {
   color: #f08804;
+}
+
+.page-container .info-container button {
+  background-color: #131920;
+  border: none;
+  border-radius: 10px;
+  color: #f08804;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 600;
+  height: 50px;
+  margin-top: 30px;
+  margin-left: 30%;
+  width: 300px;
+  transform: scale(1);
+  transition: .5s;
+}
+
+.page-container .info-container button:hover {
+  background-color: #f08804;
+  color: #131920;
+  transform: scale(1.3);
+  transition: .5s;
+}
+
+div .rate-container {
+  margin-top: -90px;
+  align-items: center;
+  display: flex;
+  height: 19.2vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+div .rate-container main form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div .rate-container main form label{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div .rate-container main form textarea{
+resize: none;
+}
+
+div .rate-container button {
+  background-color: #131920;
+  color: #f08804;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 440px;
+  height: 50px;
+  cursor: pointer;
+}
+
+div .rate-container button:hover {
+  transition: .6s;
+  background-color: #f08804;
+  color: #131920;
 }

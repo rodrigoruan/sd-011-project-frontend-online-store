@@ -55,7 +55,7 @@ class RateComment extends React.Component {
       <main>
         <form>
           <label htmlFor="rate">
-            Pontuação:
+            Avalie:
             <input
               name="rate"
               type="number"
@@ -73,10 +73,11 @@ class RateComment extends React.Component {
               name="commentary"
               value={ commentary }
               onChange={ this.switchScore }
+              cols="60"
             />
           </label>
           <button className="cartIcon" type="button" onClick={ this.updateComment }>
-            Submit
+            Enviar
           </button>
         </form>
         { score.map((callback, index) => (
