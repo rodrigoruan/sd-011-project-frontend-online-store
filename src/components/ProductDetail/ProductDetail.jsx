@@ -60,9 +60,9 @@ export default class ProductDetail extends Component {
             />
           </div>
         </div>
-          <div className="rate-container">
-            <RateComment product={ id } />
-          </div>
+        <div className="rate-container">
+          <RateComment product={ id } />
+        </div>
       </div>
     );
   }
