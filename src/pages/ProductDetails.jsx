@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import ReactStars from 'react-rating-stars-component';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import '../styles/productDetails.css';
 
 export default class ProductDetails extends Component {
   constructor() {
@@ -23,6 +25,10 @@ export default class ProductDetails extends Component {
     addToCart(product);
   }
 
+  ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+
   async searchProducts() {
     const { match: { params } } = this.props;
     const { category, id, query } = params;
@@ -38,32 +44,42 @@ export default class ProductDetails extends Component {
     const { loading, product } = this.state;
     const { cart } = this.props;
     const { thumbnail, price, title, attributes } = product;
-    const numbersOfStars = 5;
-    const stars = Array(numbersOfStars).fill(0);
     return loading ? (
       <div>
         <h3>loading...</h3>
         <h4 data-testid="shopping-cart-size">{cart.length}</h4>
       </div>
     ) : (
-      <div>
+      <main>
+        <Link data-testid="shopping-cart-button" to="/shoppingcart">
+          <span className="shopping-cart-button">
+            {' '}
+            { /* */ }
+            <Link data-testid="shopping-cart-button" to="/shoppingcart">
+              <button
+                className="material-icons white-bg"
+                type="button"
+              >
+                shopping_cart
+              </button>
+            </Link>
+            <span data-testid="shopping-cart-size">{cart.length}</span>
+          </span>
+        </Link>
         <h1 data-testid="product-detail-name">{ `${title} - R$ ${price}` }</h1>
-        <img src={ thumbnail } alt="product" />
-        <label htmlFor="details">
-          O que você precisa saber sobre este produto
+        <img src={ thumbnail } alt="product" className="img-product-details" />
+        <div className="features">
+          <h3>Características</h3>
           <ul>
             {attributes.filter(({ name, value_name: value }) => name.toUpperCase()
               !== 'UNDEFINED' && value.toUpperCase() !== 'UNDEFINED')
               .map(({ name, value_name: value }, i) => (
                 <li key={ i }>{ `${name} : ${value}`}</li>))}
+            { product.shipping.free_shipping
+              ? <li data-testid="free-shipping">Frete grátis</li>
+              : null }
           </ul>
-        </label>
-        <textarea data-testid="product-detail-evaluation" />
-        <button type="button">Submit</button>
-        {stars.map((_value, index) => (<span key={ index }>{index + 1}</span>))}
-        { product.shipping.free_shipping
-          ? <p data-testid="free-shipping">Frete grátis</p>
-          : null }
+        </div>
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
@@ -71,12 +87,21 @@ export default class ProductDetails extends Component {
         >
           Adicionar ao carrinho
         </button>
-        <Link data-testid="shopping-cart-button" to="/shoppingcart">
-          <button type="button">
-            Carrinho
-          </button>
-        </Link>
-      </div>
+
+        <div className="avaliation-container">
+          <textarea
+            data-testid="product-detail-evaluation"
+            placeholder="Digite sua avaliação"
+          />
+          <ReactStars
+            count={ 5 }
+            onChange={ this.ratingChanged }
+            size={ 24 }
+            activeColor="#ffd700"
+          />
+          <button type="button" className="btn submit">Avaliar</button>
+        </div>
+      </main>
     );
   }
 }

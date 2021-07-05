@@ -7,30 +7,31 @@ export default class CardProduct extends Component {
     const { product, query, addToCart } = this.props;
     const { title, price, thumbnail, category_id: categoryId, id } = product;
     return (
-      <div>
+      <div className="card-product">
         <Link
           data-testid="product-detail-link"
           to={ `/product/${query}/${categoryId}/${id}` }
         >
-          <div data-testid="product">
-            <img src={ thumbnail } alt={ title } />
-            <p>{ title }</p>
+          <div data-testid="product" className="top-card">
+            <img src={ thumbnail } alt={ title } className="img-product" />
+            <p className="title-product">{ title }</p>
             <p>
               R$
               { price }
             </p>
           </div>
         </Link>
-        { product.shipping.free_shipping
-          ? <p data-testid="free-shipping">Frete grátis</p>
-          : null }
         <button
           data-testid="product-add-to-cart"
           onClick={ () => addToCart(product) }
           type="button"
+          className="add-to-cart"
         >
           Adicionar ao Carrinho
         </button>
+        { product.shipping.free_shipping
+          ? <p data-testid="free-shipping" className="free-shipping">Frete grátis</p>
+          : null }
       </div>
     );
   }

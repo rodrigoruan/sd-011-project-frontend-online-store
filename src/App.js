@@ -15,6 +15,7 @@ class App extends React.Component {
     this.addToCart = this.addToCart.bind(this);
     this.subQuantity = this.subQuantity.bind(this);
     this.addQuantity = this.addQuantity.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
   }
 
   componentDidMount() {
@@ -72,6 +73,16 @@ class App extends React.Component {
     });
   }
 
+  deleteProduct(product) {
+    const { cart } = this.state;
+    const newCart = cart.filter((element) => element !== product);
+    this.setState({
+      cart: newCart,
+    }, () => {
+      this.setStorage();
+    });
+  }
+
   render() {
     const { cart } = this.state;
     return (
@@ -94,6 +105,7 @@ class App extends React.Component {
                 cart={ cart }
                 addQuantity={ this.addQuantity }
                 subQuantity={ this.subQuantity }
+                deleteProduct={ this.deleteProduct }
               />) }
           />
           <Route

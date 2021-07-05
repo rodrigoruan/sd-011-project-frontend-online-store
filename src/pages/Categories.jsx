@@ -52,20 +52,20 @@ export default class Categories extends Component {
         {
           showMenu ? (
             <div className="menu">
-              <div>
+              <div className="menu">
                 {categoriesList.map((category) => (
-                  <label htmlFor={ category.id } key={ category.id }>
-                    <input
-                      type="radio"
-                      name="category"
-                      id={ category.id }
-                      data-testid="category"
-                      value={ category.id }
-                      onClick={ handleChange }
-                    />
+                  <button
+                    key={ category.id }
+                    name="category"
+                    id={ category.id }
+                    data-testid="category"
+                    value={ category.id }
+                    onClick={ handleChange }
+                    type="button"
+                    className="btn-categories"
+                  >
                     {category.name}
-                    <br />
-                  </label>
+                  </button>
                 ))}
               </div>
             </div>

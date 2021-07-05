@@ -1,5 +1,10 @@
+body {
+  background: #fefefe;
+}
+
 .App {
   text-align: center;
+  /* background: #fefefe; */
 }
 
 .App-logo {
@@ -16,14 +21,33 @@
 }
 
 * {
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
   margin: 0;
   padding: 0;
 }
 
 .main-container {
+  background: #fefefe;
   display: flex;
   flex-direction: column;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btn-categories {
+  font-size: 14px;
+  border:rgba(0, 0, 0, 0.06);
+  padding: 3px;
+  width: 150px;
+  margin-right: 20px  ;
+}
+
+.search-input {
+  height: 25px;
 }
 
 .paths {
@@ -31,7 +55,13 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 4px;
+  margin: 10px;
+  height: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.white-bg {
+  background: #fefefe;
 }
 
 button {
@@ -46,6 +76,7 @@ button:hover {
   font-size: small;
   padding: 0 10px;
   text-align: center;
+  background: #fefefe;
 }
 
 .product-item div {
@@ -72,6 +103,7 @@ button:hover {
   align-items: flex-start;
   display: flex;
   flex-wrap: wrap;
+  gap: 12px;
 }
 
 .App-header {
@@ -98,4 +130,58 @@ button:hover {
   to {
     transform: rotate(360deg);
   }
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.card-product {
+  width: 100px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-direction: column;
+  height: 250px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-product:hover {
+  box-shadow: 0 10px 12px rgba(0, 0, 0, 0.06);
+}
+
+.img-product {
+  height: 100px;
+}
+
+.top-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title-product {
+  margin-top: 10px;
+  height: 20px;
+}
+
+.add-to-cart {
+  background: #343a46;
+  border-radius: 4px;
+  justify-self: flex-end;
+  align-self: flex-end;
+  width: 100%;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fefefe;
+}
+
+.free-shipping {
+  background: #8ddcf1;
+  padding: 5px;
+  border-radius: 5px;
 }

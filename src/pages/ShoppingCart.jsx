@@ -25,16 +25,31 @@ export default class ShoppingCart extends Component {
 
   render() {
     const { filteredCart } = this.state;
-    const { cart, addQuantity, subQuantity } = this.props;
+    const { cart, addQuantity, subQuantity, deleteProduct } = this.props;
     return filteredCart.length > 0 ? (
-      <div>
-        <h4 data-testid="shopping-cart-size">{cart.length}</h4>
+      <main>
+        <Link data-testid="shopping-cart-button" to="/shoppingcart">
+          <span className="shopping-cart-button">
+            {' '}
+            { /* */ }
+            <Link data-testid="shopping-cart-button" to="/shoppingcart">
+              <button
+                className="material-icons white-bg"
+                type="button"
+              >
+                shopping_cart
+              </button>
+            </Link>
+            <span data-testid="shopping-cart-size">{cart.length}</span>
+          </span>
+        </Link>
         {filteredCart.map((item) => (
           <ItemShopCart
             item={ item }
             cart={ cart }
             addQuantity={ addQuantity }
             subQuantity={ subQuantity }
+            deleteProduct={ deleteProduct }
             key={ item.id }
           />
         ))}
@@ -44,7 +59,7 @@ export default class ShoppingCart extends Component {
         >
           <button type="button">Finalizar Compra</button>
         </Link>
-      </div>
+      </main>
     ) : (
       <h2 data-testid="shopping-cart-empty-message">
         Seu carrinho está vazio
@@ -57,4 +72,5 @@ ShoppingCart.propTypes = {
   cart: PropTypes.arrayOf(PropTypes.object).isRequired,
   addQuantity: PropTypes.func.isRequired,
   subQuantity: PropTypes.func.isRequired,
+  deleteProduct: PropTypes.func.isRequired,
 };

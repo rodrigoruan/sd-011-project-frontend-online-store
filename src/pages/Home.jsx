@@ -45,7 +45,7 @@ export default class Home extends Component {
             { /* */ }
             <Link data-testid="shopping-cart-button" to="/shoppingcart">
               <button
-                className="material-icons"
+                className="material-icons white-bg"
                 type="button"
               >
                 shopping_cart
@@ -59,11 +59,12 @@ export default class Home extends Component {
             <label htmlFor="searchInput">
               <input
                 type="text"
-                placeholder="Digite seu produto"
+                placeholder="Digite sua busca"
                 id="searchInput"
                 name="query"
                 onChange={ this.handleChange }
                 data-testid="query-input"
+                className="search-input"
               />
             </label>
           </div>
@@ -74,15 +75,17 @@ export default class Home extends Component {
               type="button"
               data-testid="query-button"
               onClick={ this.searchProducts }
-              className="material-icons"
+              className="material-icons white-bg"
             >
               search
             </button>
           </div>
         </div>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
+        {!products && (
+          <p data-testid="home-initial-message" className="inicial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria para buscar produtos.
+          </p>
+        )}
         <div className="main">
           <Categories handleChange={ this.handleChange } />
           <div className="product-item">
