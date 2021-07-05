@@ -37,38 +37,45 @@ export default class EachItem extends Component {
     const { total, price } = this.state;
     return (
       <div className="productCartContainer" key={ item.id }>
-        <img src={ item.thumbnail } alt="Product Thumbnail" />
-        <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
-        <div>
-          <button
-            type="button"
-            value={ item.id }
-            name="decrease"
-            onClick={ this.changeQuantity }
-            data-testid="product-decrease-quantity"
-            disabled={ total <= 1 }
-          >
-            -
-          </button>
-          <h5 data-testid="shopping-cart-product-quantity">{total}</h5>
-          <button
-            type="button"
-            value={ item.id }
-            name="increase"
-            onClick={ this.changeQuantity }
-            data-testid="product-increase-quantity"
-          >
-            +
-          </button>
-          <h5>{price * total}</h5>
-          <span>{ item.currencyId }</span>
+        <div className="image-container">
+          <img src={ item.thumbnail } alt="Product Thumbnail" />
         </div>
-        <button
-          type="button"
-          onClick={ () => removeItem(item.id) }
-        >
-          X
-        </button>
+        <div className="item-container">
+          <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
+          <div className="item-quantity-manipulator">
+            <button
+              className="removeQtdButton"
+              type="button"
+              value={ item.id }
+              name="decrease"
+              onClick={ this.changeQuantity }
+              data-testid="product-decrease-quantity"
+              disabled={ total <= 1 }
+            >
+              -
+            </button>
+            <h5 data-testid="shopping-cart-product-quantity">{total}</h5>
+            <button
+              className="addQtdButton"
+              type="button"
+              value={ item.id }
+              name="increase"
+              onClick={ this.changeQuantity }
+              data-testid="product-increase-quantity"
+            >
+              +
+            </button>
+            <h5>{parseFloat(price * total).toFixed(2)}</h5>
+            <span>{ item.currencyId }</span>
+          </div>
+          <button
+            className="remove-item-cart"
+            type="button"
+            onClick={ () => removeItem(item.id) }
+          >
+            Remover Item
+          </button>
+        </div>
       </div>
     );
   }

@@ -4,16 +4,92 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  height: 420px;
   justify-content: space-between;
-  margin: 10px;
-  padding: 10px;
-  width: 20%;
+  margin: 10px 10px 0;
+  width: 350px;
+}
+
+.CardContainer:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+.titleContainer {
+  align-items: center;
+  background-color: rgb(19, 25, 32);
+  color: white;
+  display: flex;
+  font-size: 17px;
+  font-weight: 400;
+  height: 80px;
+  justify-content: center;
+  width: 100%;
+}
+
+.CardContainer:hover .titleContainer {
+  font-weight: 600;
+}
+
+.thumbContainer {
+  align-items: center;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  overflow: hidden;
+  width: 100%;
 }
 
 .Thumbnail {
   width: 150px;
 }
 
-.pPrice {
-  color: black;
+.priceContainer {
+  font-size: 22px;
+  height: 30px;
+  width: 100%;
+}
+
+.ratingContainer {
+  font-size: 15px;
+  width: 100%;
+}
+
+.addToCartAndDetailsContainer {
+  height: 67px;
+  width: 100%;
+}
+
+.moreDetails {
+  color: orange;
+  font-size: 20px;
+  height: 30;
+  text-decoration: none;
+  width: 300px;
+}
+
+.CardContainer:hover .moreDetails div {
+  background-color: rgb(19, 25, 32);
+  width: 100%;
+}
+
+.addToCartAndDetailsContainer button {
+  background-color: rgb(19, 25, 32);
+  border: none;
+  color: #f08804;
+  font-size: 20px;
+  font-weight: 400;
+  height: 45px;
+  width: 100%;
+}
+
+.addToCartAndDetailsContainer button:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+.CardContainer:hover button {
+  background-color: #f08804;
+  color: rgb(19, 25, 32);
+  font-weight: 700;
 }

@@ -4,12 +4,100 @@
 }
 
 .productCartContainer {
-  background-color: rgb(233, 232, 232);
   border: 1px solid black;
   border-radius: 4px;
   display: flex;
-  justify-content: space-between;
   margin: 10px auto;
-  padding: 20px;
-  width: 50vw;
+  width: 99vw;
+}
+
+.productCartContainer .image-container {
+  align-items: center;
+  display: flex;
+  height: 150px;
+  justify-content: center;
+  text-align: center;
+  width: 15vw;
+}
+
+.productCartContainer .image-container img {
+  width: 130px;
+}
+
+.productCartContainer .item-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 84vw;
+}
+
+.productCartContainer .item-container h3 {
+  width: 80%;
+}
+
+.productCartContainer .item-container .item-quantity-manipulator {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  width: 300px;
+}
+
+.productCartContainer .item-container .item-quantity-manipulator h5 {
+  font-size: 18px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.productCartContainer .item-container .item-quantity-manipulator button {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+  height: 40px;
+  padding-bottom: 10px;
+  width: 40px;
+}
+
+.productCartContainer .item-container .item-quantity-manipulator .addQtdButton {
+  background-color: green;
+  cursor: pointer;
+}
+
+.productCartContainer .item-container .item-quantity-manipulator .removeQtdButton {
+  background-color: red;
+  cursor: pointer;
+}
+
+.productCartContainer .item-container .item-quantity-manipulator .removeQtdButton:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.productCartContainer .item-container .item-quantity-manipulator .addQtdButton:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.item-container .remove-item-cart {
+  background-color: red;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 800;
+  height: 40px;
+  margin-right: 20px;
+  width: 200px;
+}
+
+.item-container .remove-item-cart:hover {
+  background-color: white;
+  border: 2px solid red;
+  color: red;
+  transform: scale(1.2);
+  transition: 0.7s;
 }

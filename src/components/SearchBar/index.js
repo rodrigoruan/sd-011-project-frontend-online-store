@@ -69,7 +69,7 @@ export default class SearchBar extends React.Component {
         <div className="headerContainer">
           <p>
             Trybe
-            <span className="yellowSpan">Store</span>
+            <span className="yellowSpan">Store.</span>
           </p>
           <label htmlFor="search-input" className="headerLabel">
             <input
@@ -81,13 +81,12 @@ export default class SearchBar extends React.Component {
               onChange={ this.handleInputChange }
             />
             <button
+              className="searchButton"
               type="button"
               onClick={ this.fetchProductsByTerm }
               data-testid="query-button"
             >
-              {/* <i className="fa fa-search lupaIcon">
-              </i> */}
-              Buscar
+              <i className="fa fa-search lupaIcon" />
             </button>
           </label>
           <CartButton />
