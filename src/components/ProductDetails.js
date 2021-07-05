@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faBox, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -55,6 +55,12 @@ class ProductDetails extends Component {
     const loading = (<p>Erro, tente novamente mais tarde</p>);
     const condition = (product === undefined);
     const secondCondition = (product !== undefined && product.attributes !== undefined);
+    const frShp = (
+      <div data-testid="free-shipping">
+        Frete Grátis
+        <FontAwesomeIcon icon={ faBox } />
+      </div>
+    );
     const page = (
       <div className="productPage">
         <div className="prdHeader">
@@ -64,6 +70,7 @@ class ProductDetails extends Component {
           <Link to="/">
             HOME
           </Link>
+          { (!condition && product.shipping && product.shipping.free_shipping) && frShp }
         </div>
         <div className="prdTop">
           <div className="prdInfos">

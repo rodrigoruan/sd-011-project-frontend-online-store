@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../styles/Products.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
+import { faBox, faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 class Products extends Component {
   constructor(props) {
@@ -25,8 +25,17 @@ class Products extends Component {
 
   render() {
     const { title, img, price, product } = this.props;
-    const { id } = product;
+    const { id, shipping } = product;
     const FIFTY = 50;
+    const freeShip = (
+      <div data-testid="free-shipping" className="free">
+        <p className="p">
+          Frete Grátis
+        </p>
+        <FontAwesomeIcon icon={ faBox } />
+      </div>
+    );
+    console.log(product);
     return (
       <div className="productArea">
         <Link
@@ -52,19 +61,22 @@ class Products extends Component {
             </p>
           </div>
         </Link>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ this.addItemCart }
-          className="button"
-        >
-          <div className="cartAdd">
-            <FontAwesomeIcon icon={ faCartPlus } />
-          </div>
-          <p className="p">
-            Adicionar
-          </p>
-        </button>
+        <div className="bottom">
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ this.addItemCart }
+            className="button"
+          >
+            <div className="cartAdd">
+              <FontAwesomeIcon icon={ faCartPlus } />
+            </div>
+            <p className="p">
+              Adicionar
+            </p>
+          </button>
+          { shipping.free_shipping && freeShip}
+        </div>
       </div>
     );
   }

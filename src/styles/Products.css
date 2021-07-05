@@ -77,6 +77,41 @@
   visibility: hidden;
 }
 
+.free {
+  align-items: center;
+  background-color: rgb(125, 245, 125);
+  border-radius: 20px 0 0 20px;
+  box-sizing: border-box;
+  color: green;
+  display: flex;
+  height: 35px;
+  justify-content: flex-end;
+  margin-right: -10px;
+  padding-right: 10px;
+  transition: 0.2s ease;
+  width: 40px;
+}
+
+.free:hover {
+  transition: 0.2s ease;
+  width: 120px;
+}
+
+.free:hover p {
+  cursor: default;
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 10px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  visibility: visible;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* .cartAdd {
   background-color: red;
   position: absolute;

@@ -19,6 +19,7 @@
   background-color: var(--primary-color);
   border: solid 2px var(--secondary-color);
   border-radius: 50px;
+  bottom: 15px;
   color: var(--text-color);
   display: flex;
   font-size: 12px;
@@ -26,10 +27,8 @@
   font-weight: 700;
   height: 15px;
   justify-content: center;
-  position: absolute;
-  right: 180px;
-  text-decoration: none;
-  top: 35px;
+  position: relative;
+  right: -15px;
   vertical-align: middle;
   width: 15px;
 }
