@@ -78,6 +78,7 @@ export default class Home extends Component {
           <div className="cards-container">
             {!productCards
               ? <div className="div-banner">
+                <p data-testid="home-initial-message" className="home-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>
                 <img src={ banner } alt="" className="banner" />
               </div> // Tentar retornar apenas após não encontrar
               : productCards.map((product) => (

@@ -202,3 +202,13 @@ padding: 10px 0px;
 .banner {
   width: 100%;
 }
+
+.home-message {
+  text-align: center;
+  color: #606060;
+  font-weight: bold;
+  margin-bottom: 22px;
+  font-size:1.5vw;
+  width: 100%;
+  
+}

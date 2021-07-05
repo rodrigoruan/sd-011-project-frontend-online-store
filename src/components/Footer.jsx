@@ -38,7 +38,7 @@ export default class Footer extends Component {
               <a href="https://github.com/Halysson2">
                 <img src={ git } alt="GitHub Link" className="git-image" />
               </a>
-              <a>
+              <a href="https://www.linkedin.com/mwlite/in/halysson-sena-0087b9212">
                 <img src={ linkedin } alt="Linkedin Link" className="linkedin-image" />
               </a>
               <span>
