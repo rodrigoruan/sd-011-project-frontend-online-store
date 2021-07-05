@@ -52,7 +52,10 @@ class ProductDetails extends Component {
     const { match } = this.props;
     const { id } = match.params;
     const { product } = this.state;
-    return (
+    const loading = (<p>Erro, tente novamente mais tarde</p>);
+    const condition = (product === undefined);
+    const secondCondition = (product !== undefined && product.attributes !== undefined);
+    const page = (
       <div className="productPage">
         <div className="prdHeader">
           <Link data-testid="shopping-cart-button" to="/carrinho-compras">
@@ -64,11 +67,16 @@ class ProductDetails extends Component {
         </div>
         <div className="prdTop">
           <div className="prdInfos">
-            <p data-testid="product-detail-name" className="prdTitle">{product.title}</p>
-            <img src={ product.thumbnail } alt="product" />
+            <p
+              data-testid="product-detail-name"
+              className="prdTitle"
+            >
+              { condition ? loading : product.title}
+            </p>
+            <img src={ condition ? loading : product.thumbnail } alt="product" />
             <p className="prdPrice">
               {'R$ '}
-              { product.price }
+              { condition ? loading : product.price }
             </p>
             <button
               type="button"
@@ -79,7 +87,7 @@ class ProductDetails extends Component {
               Adicionar ao carrinho
             </button>
             <div className="prdSpecs">
-              { product.attributes && product.attributes.map((att, index) => (
+              { secondCondition ? product.attributes.map((att, index) => (
                 <div className="table" key={ index }>
                   <p className="firstP">
                     { att.name }
@@ -89,11 +97,15 @@ class ProductDetails extends Component {
                     { att.value_name }
                   </p>
                 </div>
-              ))}
+              )) : loading}
             </div>
           </div>
           <Rating id={ id } />
         </div>
+      </div>);
+    return (
+      <div className="page">
+        {(product === undefined ? loading : page)}
       </div>
     );
   }

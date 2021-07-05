@@ -8,8 +8,6 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const createCart = (product) => {
-    // console.table(product);
-    // console.table(cartItems[0]);
     console.log(cartItems.includes(product));
     if (cartItems.includes(product)) {
       setCartItems([...cartItems]);

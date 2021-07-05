@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import { faStar } from '@fortawesome/free-regular-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import StarRating from 'react-star-ratings';
 import Comment from './Comment';
 
 class Rating extends Component {
@@ -27,9 +30,17 @@ class Rating extends Component {
     this.setState({ [name]: value });
   }
 
-  rate({ target }) {
-    const { id } = target;
-    this.setState({ rate: id });
+  // rate({ target }) {
+  //   const { id } = target;
+  //   if (id) {
+  //     this.setState({ rate: id });
+  //   }
+  // }
+
+  rate(newRating) {
+    this.setState({
+      rate: newRating,
+    });
   }
 
   saveComments() {
@@ -78,11 +89,15 @@ class Rating extends Component {
             onChange={ this.onChange }
             value={ email }
           />
-          <button type="button" id="1" onClick={ this.rate }>O</button>
-          <button type="button" id="2" onClick={ this.rate }>O</button>
-          <button type="button" id="3" onClick={ this.rate }>O</button>
-          <button type="button" id="4" onClick={ this.rate }>O</button>
-          <button type="button" id="5" onClick={ this.rate }>O</button>
+          <StarRating
+            rating={ rate }
+            starRatedColor="var(--secondary-color)"
+            starHoverColor="var(--secondary-color)"
+            starDimension="20px"
+            changeRating={ this.rate }
+            numberOfStars={ 5 }
+            name="rating"
+          />
           <p id="rating">{ rate }</p>
           <textarea
             maxLength="200"
