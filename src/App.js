@@ -98,7 +98,7 @@ class App extends React.Component {
   render() {
     const { cart } = this.state;
     return (
-      <div>
+      <div className="style-page">
         <BrowserRouter>
           <Switch>
             <Route exact path="/" render={ () => <Home addState={ this.addState } /> } />

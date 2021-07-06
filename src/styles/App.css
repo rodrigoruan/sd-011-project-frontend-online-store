@@ -48,3 +48,8 @@
 .categories {
   height: 100%;
 }
+
+.style-page {
+  display: flex;
+  justify-content: center;
+}
