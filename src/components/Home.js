@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ProductLibrary from './ProductLibrary';
 import * as api from '../services/api';
 import CategoryBar from './CategoryBar';
+import '../CSS/Home.css';
 
 class Home extends Component {
   constructor() {
@@ -65,24 +66,30 @@ class Home extends Component {
   render() {
     const { searchText } = this.state;
     return (
-      <div>
-        <input
-          type="text"
-          value={ searchText }
-          name="searchText"
-          onChange={ this.handleSearchText }
-          data-testid="query-input"
-        />
-        <button
-          type="button"
-          onClick={ this.handleSearchProduct }
-          data-testid="query-button"
-        >
-          buscar
-        </button>
-        {this.renderProductLibrary()}
-        <CategoryBar onClickCategory={ this.handleSearchFromCategoryList } />
-        <Link to="/Cart" data-testid="shopping-cart-button">Carrinho!</Link>
+      <div className="home-container">
+        <div className="search-input">
+          <input
+            type="text"
+            value={ searchText }
+            name="searchText"
+            onChange={ this.handleSearchText }
+            data-testid="query-input"
+          />
+          <button
+            type="button"
+            onClick={ this.handleSearchProduct }
+            data-testid="query-button"
+          >
+            buscar
+          </button>
+        </div>
+        <div className="main-container">
+          <div className="side-bar-container">
+            <CategoryBar onClickCategory={ this.handleSearchFromCategoryList } />
+            <Link to="/Cart" data-testid="shopping-cart-button">Carrinho!</Link>
+          </div>
+          {this.renderProductLibrary()}
+        </div>
       </div>
     );
   }
