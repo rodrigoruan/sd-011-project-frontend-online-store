@@ -45,17 +45,6 @@
   display: flex;
 }
 
-.main-page .search-bar {
-  align-items: baseline;
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-}
-
-.categories .category-form {
-  border: #282c34 2px solid;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  width: 200px;
+.categories {
+  height: 100%;
 }

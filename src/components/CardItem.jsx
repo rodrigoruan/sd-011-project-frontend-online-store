@@ -1,19 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../styles/CardItem.css';
 
 class CardItem extends React.Component {
   render() {
     const { products, addState } = this.props;
-    const notFound = 'Nenhum produto foi encontrado';
+    const notFound = (<p className="notFound">Nenhum produto foi encontrado</p>);
+    // const firstMsg = (<p className="firstMsg">Pesquise por categoria ou texto</p>);
 
     return products.length === 0 ? notFound : (
       products.map((product) => (
-        <>
+        <div key={ product.name } className="cardProduct">
+          <img src={ product.thumbnail } alt={ product.title } className="productImage" />
           {/* Para fazer a utilização de props em componentes <Link>
           foi consultado um artigo em ui.dev
           Source: https://ui.dev/react-router-v5-pass-props-to-link/ */}
           <Link
+            className="linkDetails"
             to={ {
               pathname: `/details/${product.id}`,
               state: {
@@ -27,8 +31,7 @@ class CardItem extends React.Component {
               key={ product.title }
             >
               <p>{product.title}</p>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <p>{product.price}</p>
+              <p>{`R$ ${product.price}`}</p>
             </div>
           </Link>
           <button
@@ -38,7 +41,7 @@ class CardItem extends React.Component {
           >
             Adicionar ao carrinho
           </button>
-        </>
+        </div>
       ))
     );
   }

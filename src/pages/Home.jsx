@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import CardItem from '../components/CardItem';
 import * as api from '../services/api';
+import '../styles/Home.css';
 
 class Home extends React.Component {
   constructor() {
@@ -96,36 +97,48 @@ class Home extends React.Component {
                   value={ anyCategory.id }
                   onClick={ this.getTextAndCategory }
                 >
-                  { anyCategory.name }
+                  {anyCategory.name}
                 </button>
               ))}
             </div>
           </aside>
         </div>
         <div>
-          <form className="search-bar">
-            <label htmlFor="queryInput" data-testid="home-initial-message">
-              Digite algum termo de pesquisa ou escolha uma categoria.
-              <input
-                type="text"
-                name="inputQuery"
-                data-testid="query-input"
-                id="queryInput"
-                onChange={ this.getTextAndCategory }
-              />
-            </label>
-          </form>
-          <button
-            type="button"
-            onClick={ this.requestButton }
-            data-testid="query-button"
-          >
-            Pesquisa
-          </button>
-          <Link to="/carrinho" data-testid="shopping-cart-button">
-            Carrinho de compras 🛒
-          </Link>
-          <CardItem products={ response } addState={ addState } />
+          <div className="topTools">
+            <div className="search-bar">
+              <form>
+                <label
+                  htmlFor="queryInput"
+                  data-testid="home-initial-message"
+                  className="input"
+                >
+                  {/* eslint-disable-next-line react/jsx-max-depth */}
+                  <input
+                    placeholder="🔎 Digite o termo de pesquisa ou escolha uma categoria."
+                    type="text"
+                    name="inputQuery"
+                    data-testid="query-input"
+                    id="queryInput"
+                    onChange={ this.getTextAndCategory }
+                  />
+                </label>
+              </form>
+              <button
+                className="queryButton"
+                type="button"
+                onClick={ this.requestButton }
+                data-testid="query-button"
+              >
+                Pesquisa
+              </button>
+            </div>
+            <Link to="/carrinho" data-testid="shopping-cart-button">
+              Carrinho de compras 🛒
+            </Link>
+          </div>
+          <div className="boardItems">
+            <CardItem products={ response } addState={ addState } />
+          </div>
         </div>
       </div>
     );

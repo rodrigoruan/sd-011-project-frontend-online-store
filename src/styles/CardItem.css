@@ -1,0 +1,42 @@
+.boardItems {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+  margin-left: 200px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.cardProduct {
+  display: flex;
+  width: 150px;
+  height: 150px;
+  padding: 50px 30px 50px 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: cornflowerblue;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin: 10px 10px;
+  box-shadow: inset 0 0 1em rgba(0, 0, 0, 0.418), 0 0 1em rgba(0, 0, 0, 0.466);
+}
+
+.notFound {
+  display: flex;
+  background-color: red;
+  font-size: 50px;
+  margin-left: 50px;
+}
+
+.linkDetails {
+  color: black;
+  text-decoration: none;
+}
+
+.productImage {
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+  border: 5px solid rgba(0, 0, 0, 0.178);
+}
