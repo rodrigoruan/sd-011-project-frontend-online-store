@@ -68,6 +68,8 @@ export default class Product extends Component {
       price,
     } = product;
 
+    console.log(product);
+
     return (
       <main>
         <article>
