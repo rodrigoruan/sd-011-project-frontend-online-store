@@ -65,7 +65,7 @@ class App extends React.Component {
     this.setState(() => ({ cart: newCart }));
   }
 
-  /** Função responsável por incrementar a quantidade de itens ao carrinho. */
+  /** Função responsável por incrementar a quantidade de itens ao carrinho . */
   increaseQuantity(product) {
     const { cart } = this.state;
     const newArr = cart.map((item) => {
