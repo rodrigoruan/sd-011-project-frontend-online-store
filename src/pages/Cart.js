@@ -1,5 +1,6 @@
 import React from 'react';
 import CartCard from '../components/CartCard';
+import './Cart.css';
 
 export default class Cart extends React.Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class Cart extends React.Component {
     const items = { ...localStorage };
     const text = 'shopping-cart-empty-message';
     const renderCart1 = Object.values(items).map((e) => (
-      <div key={ JSON.parse(e).id }>
+      <div className="cart-card" key={ JSON.parse(e).id }>
         <CartCard { ...JSON.parse(e) } />
         <div />
       </div>
@@ -35,7 +36,11 @@ export default class Cart extends React.Component {
     return (
       <div>
         { window.localStorage
-          .length > 0 ? renderCart1 : <p data-testid={ text }>Seu carrinho está vazio</p>}
+          .length > 0 ? (
+            <div className="cart-cont">
+              {renderCart1}
+            </div>)
+          : <p data-testid={ text }>Seu carrinho está vazio</p>}
         <div>
           <br />
           {this.getAllValues()}
