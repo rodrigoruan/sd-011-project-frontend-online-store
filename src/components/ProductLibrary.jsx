@@ -6,7 +6,7 @@ class ProductLibrary extends Component {
   render() {
     const { productsList } = this.props;
     return (
-      <div>
+      <div className="product-list-container">
         {productsList.map((product) => (<ProductCard
           key={ product.id }
           product={ product }

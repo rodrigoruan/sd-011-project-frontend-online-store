@@ -1,0 +1,15 @@
+.search-input {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.main-container {
+  display: flex;
+}
+
+.side-bar-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(64, 220, 248, 0.6);
+}
