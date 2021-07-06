@@ -1,0 +1,120 @@
+body {
+  background-color: gainsboro;
+}
+
+.header {
+  align-items: center;
+  background-color: #1f3a93;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  padding: 25px;
+}
+
+.header form {
+  display: flex;
+  flex-grow: 2;
+  flex-shrink: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cart-link {
+  color: white;
+  font-weight: 500;
+  padding: 0 5% 0 20%;
+}
+
+.search-inp {
+  border: none;
+  border-radius: 10px 0 0 10px;
+  flex-grow: 6;
+  flex-shrink: 1;
+  padding: 7px 10px;
+}
+
+.search-inp:focus {
+  outline: none;
+}
+
+.search-btn {
+  border: none;
+  border-radius: 0 10px 10px 0;
+  flex-grow: 1;
+  flex-shrink: 1;
+  padding: 7px 10px;
+  transition: 0.5s;
+}
+
+.search-btn:hover {
+  filter: brightness(90%);
+}
+
+.cards-cont {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 5px 7%;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 1% 5%;
+  padding: 2% 0;
+  transition: 0.75s;
+  width: 23%;
+}
+
+.card:hover {
+  box-shadow: 0 5px 5px #888;
+}
+
+.card img {
+  height: 55%;
+  margin: 0 2.5%;
+  object-fit: cover;
+  width: 95%;
+}
+
+.card-info {
+  border-top: rgb(238, 238, 238) solid 1px;
+  height: 35%;
+  padding: 1% 2.5% 0;
+}
+
+.card-info h3, .card-info p {
+  margin: 0;
+}
+
+.card-info h3 {
+  color: #1f3a93;
+  filter: brightness(90%);
+  font-weight: 500;
+}
+
+.card-ui {
+  align-items: center;
+  display: flex;
+  height: 10%;
+  justify-content: space-around;
+  padding: 0 2.5%;
+}
+
+.card-ui button {
+  background-color: #1f3a93;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  padding: 5% 2.5%;
+  transition: 0.5s;
+}
+
+.card-ui button:hover {
+  filter: brightness(125%);
+}
+
+.card-ui a {
+  color: #1f3a93;
+}

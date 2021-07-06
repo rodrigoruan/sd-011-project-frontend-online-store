@@ -110,7 +110,7 @@ export default class CartCard extends Component {
           R$
           {money}
         </span>
-        <button type="button" onClick={ this.removeItem }>X</button>
+        <button className="rmv-btn" type="button" onClick={ this.removeItem }>X</button>
         <button type="button">Finalizar compra</button>
       </div>
     );

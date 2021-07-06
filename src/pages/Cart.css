@@ -1,0 +1,28 @@
+.cart-cont {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  margin: 5px 7%;
+}
+
+.cart-card {
+  border-bottom: 1px solid rgb(238, 238, 238);
+  margin: 0 2.5% 0.5%;
+  padding: 0.5% 0;
+  width: 95%;
+}
+
+.cart-card img {
+  height: 10%;
+  margin: 0 2.5%;
+  object-fit: cover;
+  width: 10%;
+}
+
+.rmv-btn {
+  background-color: #e7433d;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+}
