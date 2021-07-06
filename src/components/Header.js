@@ -10,7 +10,12 @@ class Header extends Component {
     super();
     this.state = {
       toggle: false,
+      sum: 0,
     };
+  }
+
+  componentDidMount() {
+    this.sumCartItems();
   }
 
   menuToggle = () => {
@@ -18,10 +23,17 @@ class Header extends Component {
     this.setState({ toggle: !toggle });
   }
 
+  sumCartItems = () => {
+    const storage = { ...localStorage };
+    const response = Object.values(storage).map((e) => JSON.parse(e));
+    const total = response.reduce((acc, curr) => acc + curr.counter, 0);
+    this.setState({ sum: total });
+  }
+
   render() {
     // Aria-hidden:
     // https://developers.google.com/web/fundamentals/accessibility/semantics-aria/hiding-and-updating-content?hl=pt-br
-    const { toggle } = this.state;
+    const { toggle, sum } = this.state;
     return (
       <header>
         <div className="menu" onClick={ this.menuToggle } aria-hidden="true">
@@ -41,8 +53,8 @@ class Header extends Component {
               <img src={ Close } alt="" width="20" />
             </li>
           </ul>
-          <div className="nav-cart">
-            <span>0</span>
+          <div data-testid="shopping-cart-size" className="nav-cart">
+            <span data-testid="shopping-cart-size">{ sum }</span>
             <Link to="/cart">
               <img src={ CartIcon } alt="" width="20" />
             </Link>

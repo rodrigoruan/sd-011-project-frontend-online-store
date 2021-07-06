@@ -15,10 +15,15 @@ export default class Home extends Component {
       categoryId: '',
       dataApi: [],
       request: false,
+      sum: 0,
     };
 
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+  }
+
+  componentDidMount() {
+    this.sumCartItems();
   }
 
   onSearchTextChange(event) {
@@ -41,13 +46,19 @@ export default class Home extends Component {
       });
   }
 
-  render() {
-    const { dataApi, request, query } = this.state;
+  sumCartItems = () => {
+    const storage = { ...localStorage };
+    const response = Object.values(storage).map((e) => JSON.parse(e));
+    const total = response.reduce((acc, curr) => acc + curr.counter, 0);
+    this.setState({ sum: total });
+  }
 
+  render() {
+    const { dataApi, request, query, sum } = this.state;
     return (
       <>
         <div className="cart-screen">
-          <span>0</span>
+          <span data-testid="shopping-cart-size">{ sum }</span>
           <Link to="/cart">
             <button
               type="button"

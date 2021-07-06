@@ -15,7 +15,6 @@ export default class CartItem extends Component {
         <div>
           <button type="button">+</button>
           <button type="button">-</button>
-          <button type="button">Remover</button>
         </div>
       </li>
     );

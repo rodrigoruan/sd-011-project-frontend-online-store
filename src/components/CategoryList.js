@@ -35,18 +35,18 @@ export default class CategoryList extends Component {
       <section className="category-section">
         <h1>Categorias:</h1>
         { categories.map((category) => (
-          <label htmlFor={ category.id } key={ category.id } className="label-radio">
-            <input
-              data-testid="category"
-              type="radio"
-              id={ category.id }
-              name="category"
-              value={ category.id }
-              onClick={ ({ target: { value } }) => fetchProducts(value) }
-            />
+          <option
+            key={ category.id }
+            className="label-radio"
+            data-testid="category"
+            id={ category.id }
+            name="category"
+            value={ category.id }
+            onClick={ ({ target: { value } }) => fetchProducts(value) }
+          >
             { category.name }
-          </label>
 
+          </option>
         ))}
       </section>
     );

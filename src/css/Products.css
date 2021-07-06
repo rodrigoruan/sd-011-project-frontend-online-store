@@ -37,7 +37,7 @@ a:link {
   box-shadow: none;
 }
 
-.card img {
+.card img, .img-details {
   display: block;
   height: 100%;
   max-height: 300px;
@@ -46,12 +46,37 @@ a:link {
   width: 100%;
 }
 
-.card h3 {
-  color: black;
-  margin: 10px 0;
+.product-detail {
+  align-items: center;
+  border: 1px solid #eee;
+  box-shadow: 2px 8px 20px #ddd;
+  height: 400px;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 0 150px;
+  width: 80%;
 }
 
-.card h3:hover {
+.product-detail li {
+  list-style: none;
+}
+
+.product-detail img {
+  height: 200px;
+  width: 200px;
+}
+
+.name-item-detais {
+  justify-content: space-evenly;
+}
+
+h3 {
+  color: black;
+  margin: 10px 0;
+  text-align: center;
+}
+
+h3:hover {
   color: crimson;
 }
 
@@ -72,6 +97,47 @@ p {
   outline: none;
   text-transform: uppercase;
   width: 100%;
+}
+
+.buttons-cart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-sub-sum {
+  background: rgb(7, 165, 2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: large;
+  height: 40px;
+  letter-spacing: 2px;
+  margin: 15px 0;
+  outline: none;
+  text-transform: uppercase;
+  width: 70px;
+}
+
+.div-cart {
+  align-items: center;
+  justify-content: space-around;
+}
+
+.div-cart button:hover {
+  background-color: red;
+}
+
+.button-delete {
+  border: none;
+  color: rgb(223, 19, 80);
+  cursor: pointer;
+  height: 20px;
+  width: 100%;
+}
+
+.quantity {
+  align-self: center;
 }
 
 @media ( max-width : 650px ) {

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Rating from './Rating';
+import '../css/Products.css';
+import CartIcon from '../img/shopping-cart-solid.svg';
 
 export default class ProductDetails extends Component {
   constructor(props) {
@@ -11,30 +13,53 @@ export default class ProductDetails extends Component {
       message: '',
       rating: 0,
       showForm: false,
+      counter: 1,
+      sum: 0,
     };
 
-    this.setItemStorage = this.setItemStorage.bind(this);
     this.inputHandler = this.inputHandler.bind(this);
     this.renderRating = this.renderRating.bind(this);
   }
 
   componentDidMount() {
-    const productInfo = JSON.parse(localStorage.getItem('productInfos'));
-    if (!productInfo) {
-      localStorage.setItem('productInfos', JSON.stringify([]));
-    }
+    this.sumCartItems();
+    this.changeState();
   }
 
-  setItemStorage() {
-    const productInfo = JSON.parse(localStorage.getItem('productInfos'));
-    const { location: { state: { id, title, thumbnail, price } } } = this.props;
-    productInfo.push({
-      id,
-      title,
-      thumbnail,
-      price,
-    });
-    localStorage.setItem('productInfos', JSON.stringify(productInfo));
+  changeState = () => {
+    const { location: { state } } = this.props;
+    const { title } = state;
+
+    const local = JSON.parse(localStorage.getItem(title));
+    if (local) {
+      this.setState({ counter: local.counter + 1 });
+    }
+  };
+
+  handleClick = () => {
+    const { location: { state } } = this.props;
+    const { location: { state: { title } } } = this.props;
+    const { counter } = this.state;
+    const local = JSON.parse(localStorage.getItem(title));
+
+    this.setState((previous) => ({ counter: previous.counter + 1 }));
+
+    if (local) {
+      local.counter = counter;
+      localStorage.setItem(title, JSON.stringify(local));
+    } else {
+      const object = { ...state, counter };
+      localStorage.setItem(title, JSON.stringify(object));
+    }
+
+    this.sumCartItems();
+  };
+
+  sumCartItems = () => {
+    const storage = { ...localStorage };
+    const response = Object.values(storage).map((e) => JSON.parse(e));
+    const total = response.reduce((acc, curr) => acc + curr.counter, 0);
+    this.setState({ sum: total });
   }
 
   inputHandler({ target: { name, value } }) {
@@ -50,27 +75,51 @@ export default class ProductDetails extends Component {
   }
 
   render() {
-    const { location: { state: { title, thumbnail, price } } } = this.props;
-    const { email, message, rating, showForm } = this.state;
+    const { location: { state: { title, thumbnail, price, attributes } } } = this.props;
+    const { email, message, rating, showForm, sum } = this.state;
     return (
       <>
-        <Link to="/cart">
-          <button type="button" data-testid="shopping-cart-button">Carrinho</button>
-        </Link>
-        <h4 data-testid="product-detail-name">{title}</h4>
-        <img src={ thumbnail } alt={ title } />
-        <span>
-          R$
-          { price }
-        </span>
+        <div className="cart-screen">
+          <span data-testid="shopping-cart-size">{ sum }</span>
+          <Link
+            data-testid="shopping-cart-button"
+            to="/cart"
+          >
+            <button
+              type="button"
+              className="cart-scree"
+            >
+              <img src={ CartIcon } alt="" width="20" />
+            </button>
+          </Link>
+        </div>
+        <div className="name-item-detais">
+          <h3 data-testid="product-detail-name">{title}</h3>
+          <p>{ `R$ ${price.toLocaleString('pt-BR')}` }</p>
+        </div>
+        <div className="product-detail">
+          <img src={ thumbnail } alt={ title } className="img-details" />
+          <ul>
+            {attributes && attributes
+              .map((item, index) => (
+                <li key={ index }>
+                  {item.name}
+                  :
+                  {' '}
+                  {item.value_name}
+                </li>
+              ))}
+          </ul>
+        </div>
         <button
           type="button"
+          className="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ this.setItemStorage }
+          onClick={ this.handleClick }
         >
           Adicionar ao carrinho
         </button>
-        <form>
+        <form className="form">
           <input
             name="email"
             required
