@@ -6,11 +6,17 @@ export default class CartItem extends Component {
     const { productInfo } = this.props;
     const { title, thumbnail, price } = productInfo;
     return (
-      <div>
+      <li>
         <h5 data-testid="shopping-cart-product-name">{ title }</h5>
-        <img src={ thumbnail } alt={ title } />
-        <span>{ price }</span>
-      </div>
+        <div>
+          <img src={ thumbnail } alt={ title } />
+          <span>{ `R$ ${price.toFixed(2)}` }</span>
+        </div>
+        <div>
+          <button type="button">+</button>
+          <button type="button">-</button>
+        </div>
+      </li>
     );
   }
 }

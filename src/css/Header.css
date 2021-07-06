@@ -1,9 +1,11 @@
 header {
   align-items: center;
+  box-shadow: 0 0 5px #ccc;
   display: flex;
   justify-content: space-around;
   min-height: 70px;
   overflow: hidden;
+  padding: 15px 10px;
 }
 
 nav ul li a {
@@ -14,7 +16,7 @@ nav ul li a {
 }
 
 header .logo a {
-  color: darkblue;
+  color: black;
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -66,7 +68,7 @@ header .menu, header .close {
     left: 0;
     opacity: 0.97;
     position: fixed;
-    top: 100%;
+    top: -100%;
     transition: 0.5s linear;
     width: 100%;
     z-index: 99;
@@ -81,4 +83,9 @@ header .menu, header .close {
     right: 20px;
     top: 10px;
   }
+
+  header ul.toggle {
+    top: 0;
+  }
+
 }

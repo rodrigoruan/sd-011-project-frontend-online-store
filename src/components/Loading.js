@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './css/Section.css';
+import '../css/Section.css';
 
 class Loading extends Component {
   render() {

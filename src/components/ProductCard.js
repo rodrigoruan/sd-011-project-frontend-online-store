@@ -1,80 +1,78 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './css/Products.css';
+import '../css/Products.css';
 
-class ProductCard extends Component {
-  constructor(props) {
-    super(props);
-
-    this.setItemStorage = this.setItemStorage.bind(this);
+export default class ProductCard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      counter: 1,
+    };
   }
 
-  componentDidMount() {
-    const productInfo = JSON.parse(localStorage.getItem('productInfos'));
-    if (!productInfo) {
-      localStorage.setItem('productInfos', JSON.stringify([]));
-    }
-  }
-
-  setItemStorage() {
-    const productInfo = JSON.parse(localStorage.getItem('productInfos'));
+  handleClick = () => {
+    this.setState((previous) => ({
+      counter: previous.counter + 1,
+    }));
+    const { counter } = this.state;
     const { products } = this.props;
-    const { id, title, thumbnail, price } = products;
-    productInfo.push({
-      id,
-      title,
-      thumbnail,
-      price,
-    });
-    console.log(productInfo);
-    localStorage.setItem('productInfos', JSON.stringify(productInfo));
+    const { title, price, thumbnail, id, attributes } = products;
+    const object = { counter, price, thumbnail, id, attributes, title };
+    const json = JSON.stringify(object);
+    localStorage.setItem(title, json);
   }
 
   render() {
+    const { props, state } = this;
+    const { counter } = state;
     const { products } = this.props;
-    const { id, title, thumbnail, price } = products;
+    const { title, price, thumbnail, id, attributes, shipping } = products;
+    const availableQuantity = props.available_quantity;
 
     return (
-      <div className="card">
+      <li className="card">
         <Link
-          to={ { pathname: `/product/${id}`, state: products } }
           data-testid="product-detail-link"
+          to={ {
+            pathname: `/product/${id}`,
+            state: { title,
+              price,
+              thumbnail,
+              id,
+              attributes,
+              shipping,
+              availableQuantity,
+            },
+          } }
         >
           <div data-testid="product" className="product">
             <img src={ thumbnail } alt={ `Foto do produto ${title}` } />
             <h3>{ title }</h3>
-            <p>{ `${price} R$` }</p>
+            {shipping.free_shipping ? (
+              <p className="shipping" data-testid="free-shipping">Frete Grátis!</p>
+            ) : null}
+            <p>{ `R$ ${price.toLocaleString('pt-BR')}` }</p>
           </div>
         </Link>
         <button
+          disabled={ counter > availableQuantity }
           className="button"
-          type="button"
           data-testid="product-add-to-cart"
-          onClick={ this.setItemStorage }
+          onClick={ this.handleClick }
+          type="button"
         >
-          Adicionar ao carrinho
+          Adicionar ao Carrinho
         </button>
-      </div>
+      </li>
     );
   }
 }
 
 ProductCard.propTypes = {
-  products: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    thumbnail: PropTypes.string,
-    price: PropTypes.number,
-  }),
-};
-
-ProductCard.defaultProps = {
-  products: PropTypes.shape({
-    title: '',
-    thumbnail: '',
-    price: 0,
-  }),
-};
-
-export default ProductCard;
+  title: PropTypes.string,
+  price: PropTypes.number,
+  thumbnail: PropTypes.string,
+  id: PropTypes.string,
+  free_shipping: PropTypes.bool,
+}.isRequired;
