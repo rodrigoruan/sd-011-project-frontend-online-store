@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import CategoriesBar from '../components/CategoriesBar';
 import ProductCard from '../components/productcard';
 import Loading from '../components/Loading';
+import './Home.css';
 
 class Home extends React.Component {
   constructor(props) {
@@ -71,26 +72,31 @@ class Home extends React.Component {
     const { getCategories } = this.props;
     return (
       <div>
-        <Link
-          to="/Cart"
-          data-testid="shopping-cart-button"
-        >
-          CART
-        </Link>
-        <form>
-          <input
-            type="text"
-            data-testid="query-input"
-            value={ value }
-            onChange={ this.handleChange }
-          />
-          <input
-            type="submit"
-            data-testid="query-button"
-            value="Enviar"
-            onClick={ this.handleSubmit }
-          />
-        </form>
+        <header className="header">
+          <Link
+            className="cart-link"
+            to="/Cart"
+            data-testid="shopping-cart-button"
+          >
+            CART
+          </Link>
+          <form>
+            <input
+              className="search-inp"
+              type="text"
+              data-testid="query-input"
+              value={ value }
+              onChange={ this.handleChange }
+            />
+            <input
+              className="search-btn"
+              type="submit"
+              data-testid="query-button"
+              value="Enviar"
+              onClick={ this.handleSubmit }
+            />
+          </form>
+        </header>
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
@@ -98,7 +104,7 @@ class Home extends React.Component {
           functionHome={ getCategories }
           filterCategory={ this.handleButton }
         />
-        <div>
+        <div className="cards-cont">
           {searched ? this.renderCards() : <span>Nada foi pesquisado.</span>}
         </div>
       </div>
