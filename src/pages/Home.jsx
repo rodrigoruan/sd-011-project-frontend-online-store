@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Categories, SearchResults, ShoppingCartButton } from '../components';
+import { Categories, SearchResults, Header } from '../components';
 import * as api from '../services/api';
 
 class Home extends React.Component {
@@ -50,10 +50,7 @@ class Home extends React.Component {
     const { currentCategoryFilter, searchTerm } = this.state;
     return (
       <>
-        <header className="p-10 flex justify-between">
-          <h1>Fortim (14 em engrish)</h1>
-          <ShoppingCartButton totalItemCount={ totalItemCount } />
-        </header>
+        <Header showCartButton totalItemCount={ totalItemCount } />
         <main className="home-container">
           <Categories
             handleSearch={ this.handleSearch }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { AddToCartButton, ShoppingCartButton } from '../components';
+import { AddToCartButton, RatingForm, Header } from '../components';
 
 export default class Product extends Component {
   constructor(props) {
@@ -71,122 +71,68 @@ export default class Product extends Component {
     console.log(product);
 
     return (
-      <main>
-        <article>
-          <h1>Especificações do produto</h1>
+      <>
+        <Header showCartButton totalItemCount={ totalItemCount } />
+        <main>
+          <article>
+            <h1>Especificações do produto</h1>
+
+            <section>
+              <h1 data-testid="product-detail-name">{ title }</h1>
+              <img src={ thumbnail } alt={ title } />
+            </section>
+
+            <section>
+              <h1>Disponibilidade</h1>
+              { availableQuantity ? (
+                <p>{ `Produtos Disponíveis: ${availableQuantity}` }</p>
+              )
+                : '' }
+              { soldQuantity ? <p>{ `Produtos Vendidos: ${soldQuantity}` }</p> : '' }
+            </section>
+
+            <section>
+              <h1>Formas de pagamento</h1>
+              { shipping.free_shipping
+                ? <p data-testid="free-shipping">FRETE GRATIS</p>
+                : ''}
+              <p>{ `R$${price}` }</p>
+              { this.getInstallmentsElement(product) }
+            </section>
+          </article>
 
           <section>
-            <h1 data-testid="product-detail-name">{ title }</h1>
-            <img src={ thumbnail } alt={ title } />
-          </section>
-
-          <section>
-            <h1>Disponibilidade</h1>
-            { availableQuantity ? (
-              <p>{ `Produtos Disponíveis: ${availableQuantity}` }</p>
-            )
-              : '' }
-            { soldQuantity ? <p>{ `Produtos Vendidos: ${soldQuantity}` }</p> : '' }
-          </section>
-
-          <section>
-            <h1>Formas de pagamento</h1>
-            { shipping.free_shipping
-              ? <p data-testid="free-shipping">FRETE GRATIS</p>
-              : ''}
-            <p>{ `R$${price}` }</p>
-            { this.getInstallmentsElement(product) }
-          </section>
-        </article>
-
-        <section>
-          <AddToCartButton
-            product={ product }
-            addItemToCart={ addItemToCart }
-            testid="product-detail-add-to-cart"
-          />
-          <ShoppingCartButton totalItemCount={ totalItemCount } />
-        </section>
-        <section>
-          <h1>Avaliações</h1>
-
-          <form onSubmit={ this.handleSubmitRating }>
-            <input
-              type="email"
-              value={ evaluationForm.email }
-              placeholder="Email"
-              onChange={ this.handleFormChange }
-              name="email"
-              required
+            <AddToCartButton
+              product={ product }
+              addItemToCart={ addItemToCart }
+              testid="product-detail-add-to-cart"
             />
-            <fieldset>
-              <input
-                type="radio"
-                name="rating"
-                value="1"
-                onChange={ this.handleFormChange }
-                checked={ evaluationForm.rating === '1' }
-                required
-              />
-              <input
-                type="radio"
-                name="rating"
-                value="2"
-                onChange={ this.handleFormChange }
-                checked={ evaluationForm.rating === '2' }
-                required
-              />
-              <input
-                type="radio"
-                name="rating"
-                value="3"
-                onChange={ this.handleFormChange }
-                checked={ evaluationForm.rating === '3' }
-                required
-              />
-              <input
-                type="radio"
-                name="rating"
-                value="4"
-                onChange={ this.handleFormChange }
-                checked={ evaluationForm.rating === '4' }
-                required
-              />
-              <input
-                type="radio"
-                name="rating"
-                value="5"
-                onChange={ this.handleFormChange }
-                checked={ evaluationForm.rating === '5' }
-                required
-              />
-            </fieldset>
-            <textarea
-              type="email"
-              value={ evaluationForm.message }
-              placeholder="Mensagem (opcional)"
-              onChange={ this.handleFormChange }
-              name="message"
-              data-testid="product-detail-evaluation"
-            />
-            <button type="submit">Avaliar</button>
-          </form>
+          </section>
+          <section>
+            <h1>Avaliações</h1>
 
-          <ul>
-            { evaluations.map(({ id, email, message, rating }) => (
-              <li key={ id }>
-                <section>
-                  <p>{ email }</p>
-                  { message ? <p>{ message }</p> : null }
-                </section>
-                <section>
-                  { rating }
-                </section>
-              </li>
-            )) }
-          </ul>
-        </section>
-      </main>
+            <RatingForm
+              handleSubmitRating={ this.handleSubmitRating }
+              handleFormChange={ this.handleFormChange }
+              evaluationForm={ evaluationForm }
+            />
+
+            <ul>
+              { evaluations.map(({ id, email, message, rating }) => (
+                <li key={ id }>
+                  <section>
+                    <p>{ email }</p>
+                    { message ? <p>{ message }</p> : null }
+                  </section>
+                  <section>
+                    { rating }
+                  </section>
+                </li>
+              )) }
+            </ul>
+          </section>
+        </main>
+      </>
     );
   }
 }
