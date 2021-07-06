@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NewItem from '../components/NewItem';
+import '../styles/Cart.css';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -59,8 +60,11 @@ class ShoppingCart extends React.Component {
     const { shoppingCart } = this.state;
 
     const emptyCart = (
-      <h3 data-testid="shopping-cart-empty-message">
-        Seu carrinho está vazio
+      <h3
+        data-testid="shopping-cart-empty-message"
+        className="shopping-cart-empty-message"
+      >
+        Seu carrinho está vazio 💸
       </h3>);
 
     /** Esta condicional abaixo verifica se o carrinho está vazio.

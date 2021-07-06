@@ -132,7 +132,11 @@ class Home extends React.Component {
                 Pesquisa
               </button>
             </div>
-            <Link to="/carrinho" data-testid="shopping-cart-button">
+            <Link
+              to="/carrinho"
+              data-testid="shopping-cart-button"
+              className="cart-button"
+            >
               Carrinho de compras 🛒
             </Link>
           </div>

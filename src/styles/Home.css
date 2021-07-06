@@ -34,3 +34,16 @@
   height: 100%;
   margin: 10px 10px
 }
+
+.cart-button {
+  display: flex;
+  align-items: center;
+  margin-top: 7px;
+  padding: 0 8px;
+  margin-left: 10px;
+  text-decoration: none;
+  color: aliceblue;
+  
+  border-radius: 10px;
+  background-color: rgb(0, 0, 0);
+}
