@@ -9,13 +9,18 @@ class ProductDetail extends React.Component {
     const { state } = location;
     const { product } = state;
     return (
-      <div>
-        <div
-          data-testid="product-detail-name"
-        >
-          {product.title}
+      <div className="card-flex">
+        <img src={ product.thumbnail } alt="" />
+        <div className="details-card-product">
+          <div
+            data-testid="product-detail-name"
+          >
+            {product.title}
+          </div>
+          <p>{`R$ ${product.price}`}</p>
         </div>
         <button
+          className="searchButton"
           type="button"
           data-testid="product-detail-add-to-cart"
           onClick={ addCartItem }
@@ -36,6 +41,8 @@ ProductDetail.propTypes = {
     state: PropTypes.shape({
       product: PropTypes.shape({
         title: PropTypes.string.isRequired,
+        thumbnail: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
       }).isRequired,
     }).isRequired,
   }).isRequired,

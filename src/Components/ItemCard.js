@@ -7,7 +7,7 @@ class ItemCard extends Component {
     const { product, addCartItem } = this.props;
     const { price, title, id, thumbnail } = this.props;
     return (
-      <div>
+      <div className="item-card">
         <Link
           data-testid="product-detail-link"
           to={ {
@@ -25,6 +25,7 @@ class ItemCard extends Component {
           </li>
         </Link>
         <button
+          className="searchButton"
           type="button"
           data-testid="product-add-to-cart"
           onClick={ addCartItem }
