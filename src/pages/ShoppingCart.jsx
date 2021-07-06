@@ -57,7 +57,10 @@ export default class ShoppingCart extends Component {
           data-testid="checkout-products"
           to="/checkout"
         >
-          <button type="button">Finalizar Compra</button>
+          <div>
+            <button type="button" className="btn-item-cart">Finalizar Compra</button>
+            {` R$ ${cart.reduce((acc, { price }) => acc + price, 0)}`}
+          </div>
         </Link>
       </main>
     ) : (

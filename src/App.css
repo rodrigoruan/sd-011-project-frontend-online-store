@@ -51,8 +51,8 @@ body {
 }
 
 .paths {
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: center;
   margin: 10px;

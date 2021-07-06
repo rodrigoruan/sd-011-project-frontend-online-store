@@ -1,0 +1,29 @@
+.item-shop-cart {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 2rem;
+}
+
+.btn-stretch {
+  align-self: stretch;
+}
+
+.item-shop-cart-details {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.quantity {
+  display: flex;
+  gap: 2rem;
+}
+
+.btn-item-cart {
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
