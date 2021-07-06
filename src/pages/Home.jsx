@@ -49,24 +49,29 @@ class Home extends React.Component {
       totalItemCount } = this.props;
     const { currentCategoryFilter, searchTerm } = this.state;
     return (
-      <main className="home-container">
-        <Categories
-          handleSearch={ this.handleSearch }
-          filterCategory={ this.filterCategory }
-          categories={ categories }
-          currentCategoryFilter={ currentCategoryFilter }
-        />
-        <SearchResults
-          searchTerm={ searchTerm }
-          handleSearch={ this.handleSearch }
-          handleChangeField={ this.handleChangeField }
-          searchResults={ searchResults }
-          updateSearchResults={ updateSearchResults }
-          currentCategoryFilter={ currentCategoryFilter }
-          addItemToCart={ addItemToCart }
-        />
-        <ShoppingCartButton totalItemCount={ totalItemCount } />
-      </main>
+      <>
+        <header className="p-10 flex justify-between">
+          <h1>Fortim (14 em engrish)</h1>
+          <ShoppingCartButton totalItemCount={ totalItemCount } />
+        </header>
+        <main className="home-container">
+          <Categories
+            handleSearch={ this.handleSearch }
+            filterCategory={ this.filterCategory }
+            categories={ categories }
+            currentCategoryFilter={ currentCategoryFilter }
+          />
+          <SearchResults
+            searchTerm={ searchTerm }
+            handleSearch={ this.handleSearch }
+            handleChangeField={ this.handleChangeField }
+            searchResults={ searchResults }
+            updateSearchResults={ updateSearchResults }
+            currentCategoryFilter={ currentCategoryFilter }
+            addItemToCart={ addItemToCart }
+          />
+        </main>
+      </>
     );
   }
 }

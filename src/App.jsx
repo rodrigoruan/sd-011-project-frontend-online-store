@@ -164,7 +164,6 @@ class App extends Component {
 
     return (
       <>
-        <header>Frontend Online Store</header>
         <BrowserRouter>
           <Switch>
             <Route
