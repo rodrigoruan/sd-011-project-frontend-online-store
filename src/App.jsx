@@ -59,8 +59,9 @@ class App extends Component {
 
   getTotalPrice() {
     const { shoppingCart } = this.state;
-    if (shoppingCart.length) {
-      return shoppingCart.reduce((acc, current) => {
+    const { itemList } = shoppingCart;
+    if (itemList.length) {
+      return itemList.reduce((acc, current) => {
         acc += (current.price * current.quantity);
         return acc;
       }, 0).toFixed(2);
