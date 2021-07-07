@@ -6,10 +6,11 @@
   display: flex;
   font-weight: 600;
   padding: 0.5em;
-  position: absolute;
+  position: fixed;
   right: 1em;
   text-decoration: none;
   top: 1em;
+  z-index: 999;
 }
 
 .container svg {

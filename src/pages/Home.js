@@ -6,6 +6,7 @@ import AllProducts from '../components/AllProducts';
 import Button from '../components/Button';
 import ShoppingCartLink from '../components/ShoppingCartLink';
 import style from './Home.module.css';
+import LogoImg from '../images/ESTales-logo.png';
 
 class Home extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.fetchCategories();
+    this.updateCartQuantity();
   }
 
   handleChange({ target }) {
@@ -72,6 +74,7 @@ class Home extends Component {
     const { searchValue, products, categories, loading, cartQuantity } = this.state;
     return (
       <div className={ style.container }>
+        <img src={ LogoImg } alt="logo" />
         <header className={ style.header }>
           <span data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -84,21 +87,27 @@ class Home extends Component {
               classes={ style.btn }
             />
           </div>
-          <div className={ style.categories }>
-            { !loading && categories
-              .map((category, index) => (
-                <CategoryList
-                  key={ index }
-                  category={ category }
-                  changeFunction={ this.handleChange }
-                />))}
-          </div>
         </header>
+        <aside className={ style.aside }>
+          <div className={ style.categories }>
+            {
+              !loading && categories
+                .map((category, index) => (
+                  <CategoryList
+                    key={ index }
+                    category={ category }
+                    changeFunction={ this.handleChange }
+                  />))
+            }
+          </div>
+        </aside>
+        <main className={ style.main }>
+          <AllProducts
+            productsList={ products }
+            updateCartQuantity={ this.updateCartQuantity }
+          />
+        </main>
         <ShoppingCartLink quantity={ cartQuantity } />
-        <AllProducts
-          productsList={ products }
-          updateCartQuantity={ this.updateCartQuantity }
-        />
       </div>
     );
   }

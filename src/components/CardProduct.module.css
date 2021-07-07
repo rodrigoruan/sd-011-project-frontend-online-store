@@ -8,7 +8,25 @@
   padding: 1em;
   padding-bottom: 2.5em;
   position: relative;
+  transform: scale(1);
+  transition: transform 0.5s;
   width: 20%;
+}
+
+.container:hover {
+  transform: scale(1.25) translateY(2.5em);
+  transition: transform 0.5s;
+  z-index: 5;
+}
+
+.container img {
+  max-height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.container:hover img {
+  height: 100%;
 }
 
 .container a > * {
@@ -35,11 +53,6 @@
 
 .container a > p:last-of-type:before {
   content: 'R$ ';
-}
-
-.container img {
-  height: 300px;
-  width: 300px;
 }
 
 .btn {
