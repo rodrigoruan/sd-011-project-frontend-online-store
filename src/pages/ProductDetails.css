@@ -1,0 +1,35 @@
+.product-details-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.product-details-header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.product-details-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-details-main .img-container {
+  flex-shrink: 0;
+  width: 200px;
+  margin-right: 60px;
+}
+
+.product-details-main img {
+  width: 100%;
+}
+
+.product-details-main .price {
+  font-size: 2em;
+  margin-bottom: 20px;
+}

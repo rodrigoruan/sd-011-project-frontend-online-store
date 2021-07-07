@@ -1,0 +1,19 @@
+.rating-container {
+  margin: 80px auto;
+}
+
+.rating-container form {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+.rating-container form input,
+.rating-container form textarea {
+  border: 1px solid #cdcdcd;
+  border-radius: 2px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  margin-left: 1px;
+  margin-right: 4px;
+}
