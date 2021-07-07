@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCard';
 
+import searchSvg from '../searchSvg';
+
 export default class SearchResults extends React.Component {
   render() {
     const { searchResults,
@@ -11,25 +13,36 @@ export default class SearchResults extends React.Component {
       addItemToCart } = this.props;
 
     return (
-      <section id="home-search" className="home-two-fourths search-section">
-        <header className="search-section__header">
-          <form onSubmit={ handleSearch }>
-            <input
-              type="text"
-              value={ searchTerm }
-              onChange={ handleChangeField }
-              data-testid="query-input"
-            />
-            <p
-              className="home-initial-message"
-              data-testid="home-initial-message"
+      <section id="home-search" className="col-span-3">
+        <header className="mb-12">
+          <p
+            className="home-initial-message mb-2 ml-3"
+            data-testid="home-initial-message"
+          >
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+          <form onSubmit={ handleSearch } className="flex">
+            <div className="searchForm">
+              <input
+                type="text"
+                value={ searchTerm }
+                onChange={ handleChangeField }
+                data-testid="query-input"
+                className="w-full bg-transparent"
+              />
+              { searchSvg }
+            </div>
+
+            <button
+              type="submit"
+              data-testid="query-button"
+              className="w-32 bg-gray-500 rounded-lg ml-4 hover:bg-gray-400 transition"
             >
-              Digite algum termo de pesquisa ou escolha uma categoria.
-            </p>
-            <button type="submit" data-testid="query-button">Pesquisar</button>
+              Pesquisar
+            </button>
           </form>
         </header>
-        <ol className="search-section__results">
+        <ol className="flex flex-wrap gap-y-12 justify-between">
           { searchResults.results.map(((product) => (<ProductCard
             key={ product.id }
             product={ product }

@@ -51,7 +51,7 @@ class Home extends React.Component {
     return (
       <>
         <Header showCartButton totalItemCount={ totalItemCount } />
-        <main className="home-container">
+        <main className="grid grid-cols-4 p-12">
           <Categories
             handleSearch={ this.handleSearch }
             filterCategory={ this.filterCategory }

@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 
 export default class AddToCartButton extends Component {
   render() {
-    const { addItemToCart, product, testid } = this.props;
+    const { addItemToCart, product, testid, callToAction, size } = this.props;
 
     return (
       <button
         type="button"
         data-testid={ testid }
         onClick={ () => addItemToCart(product) }
+        className={ `addToCart ${size === 'small' ? 'addToCartSm' : 'addToCartLg'}` }
       >
-        Adicionar ao carrinho
+        { callToAction }
       </button>
     );
   }
@@ -34,4 +35,6 @@ AddToCartButton.propTypes = {
   }),
   addItemToCart: PropTypes.func,
   testid: PropTypes.string,
+  callToAction: PropTypes.string,
+  size: PropTypes.oneOf(['small', 'large']),
 }.isRequired;

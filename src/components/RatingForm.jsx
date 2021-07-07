@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import StarRating from './StarRating';
+
 export class RatingForm extends Component {
   render() {
     const { handleSubmitRating, handleFormChange, evaluationForm } = this.props;
@@ -15,48 +17,10 @@ export class RatingForm extends Component {
           name="email"
           required
         />
-        <fieldset>
-          <input
-            type="radio"
-            name="rating"
-            value="1"
-            onChange={ handleFormChange }
-            checked={ evaluationForm.rating === '1' }
-            required
-          />
-          <input
-            type="radio"
-            name="rating"
-            value="2"
-            onChange={ handleFormChange }
-            checked={ evaluationForm.rating === '2' }
-            required
-          />
-          <input
-            type="radio"
-            name="rating"
-            value="3"
-            onChange={ handleFormChange }
-            checked={ evaluationForm.rating === '3' }
-            required
-          />
-          <input
-            type="radio"
-            name="rating"
-            value="4"
-            onChange={ handleFormChange }
-            checked={ evaluationForm.rating === '4' }
-            required
-          />
-          <input
-            type="radio"
-            name="rating"
-            value="5"
-            onChange={ handleFormChange }
-            checked={ evaluationForm.rating === '5' }
-            required
-          />
-        </fieldset>
+        <StarRating
+          handleFormChange={ handleFormChange }
+          rating={ evaluationForm.rating }
+        />
         <textarea
           type="email"
           value={ evaluationForm.message }

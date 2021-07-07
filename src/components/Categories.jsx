@@ -5,14 +5,14 @@ export default class Categories extends Component {
   render() {
     const { categories, filterCategory, currentCategoryFilter } = this.props;
     return (
-      <section className="categories-container home-one-fourth">
-        <p>Categorias:</p>
+      <section className="col-span-1 pr-6">
+        <h1 className="text-xl mb-4">Filtrar por categoria</h1>
         <ul className="categories-list">
           { categories.map(({ name, id }) => {
             const isSelected = (id === currentCategoryFilter);
             return (
               <li
-                className={ `category${isSelected ? ' category--selected' : ''}` }
+                className={ `categoryItem ${isSelected ? ' categorySelected' : ''}` }
                 key={ id }
               >
                 <button
@@ -20,6 +20,7 @@ export default class Categories extends Component {
                   type="button"
                   data-id={ id }
                   onClick={ filterCategory }
+                  className="w-full text-left"
                 >
                   { name }
                 </button>
