@@ -59,38 +59,43 @@ class ShoppingCart extends React.Component {
     const cartWhithoutDuplicates = this.removeDuplicates(cart);
 
     return (
-      <div className="cart-products-container">
-        {cart.length < 1
-          ? <h4 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h4>
-          : cartWhithoutDuplicates.map((product, index) => (
-            <div key={ index }>
-              <ProductCard
-                className="cart-product-card"
-                item={ product }
-                addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
-              />
-              <button
-                name={ product.id }
-                onClick={ this.handleDecrease }
-                type="button"
-                data-testid="product-decrease-quantity"
-              >
-                <AiFillMinusCircle />
-              </button>
-              <span data-testid="shopping-cart-product-quantity">
-                {cart.filter((item) => item === product).length}
-              </span>
-              <button
-                name={ product.id }
-                onClick={ this.handleIncrease }
-                type="button"
-                data-testid="product-increase-quantity"
-              >
-                <IoMdAddCircle />
-              </button>
-              <button type="button">X</button>
-            </div>))}
-      </div>
+      <section className="cart-section">
+        <h3 className="carrinho">
+          Seu carrinho
+        </h3>
+        <div className="cart-products-container">
+          {cart.length < 1
+            ? <h4 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h4>
+            : cartWhithoutDuplicates.map((product, index) => (
+              <div key={ index }>
+                <ProductCard
+                  className="cart-product-card"
+                  item={ product }
+                  addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
+                />
+                <button
+                  name={ product.id }
+                  onClick={ this.handleDecrease }
+                  type="button"
+                  data-testid="product-decrease-quantity"
+                >
+                  <AiFillMinusCircle />
+                </button>
+                <span data-testid="shopping-cart-product-quantity">
+                  {cart.filter((item) => item === product).length}
+                </span>
+                <button
+                  name={ product.id }
+                  onClick={ this.handleIncrease }
+                  type="button"
+                  data-testid="product-increase-quantity"
+                >
+                  <IoMdAddCircle />
+                </button>
+                <button type="button">X</button>
+              </div>))}
+        </div>
+      </section>
     );
   }
 }
