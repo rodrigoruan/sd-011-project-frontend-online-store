@@ -53,6 +53,7 @@ class Home extends React.Component {
     const { categories } = this.state;
     return categories.map((category) => (
       <button
+        className="category-li"
         name={ category.id }
         type="button"
         key={ category.id }
@@ -75,36 +76,44 @@ class Home extends React.Component {
     const { products, shoppingCart } = this.state;
     return (
       <main>
-        <SearchBar onInputChangeProps={ this.onInputChange } />
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.handleSearchs }
-        >
-          PESQUISAR
-        </button>
+        <div className="input-div">
+          <SearchBar onInputChangeProps={ this.onInputChange } />
+          <button
+            className="search-btn"
+            type="button"
+            data-testid="query-button"
+            onClick={ this.handleSearchs }
+          >
+            PESQUISAR
+          </button>
+        </div>
         <section className="products-column">
-          <ul className="list-categories">
-            {this.listCategories()}
-          </ul>
           <Link
+            className="seeCart-btn"
             data-testid="shopping-cart-button"
             to={ {
               pathname: '/shopping-cart',
               state: { shoppingCart },
             } }
           >
-            <MdShoppingCart />
+           <MdShoppingCart size={ 30 } />
+           Carrinho 
           </Link>
-          {products.length > 0
-            ? products.map((item) => (
-              <ProductCard
-                key={ item.id }
-                item={ item }
-                addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
-              />
-            ))
-            : <p>Nenhum produto encontrado</p> }
+          <ul className="list-categories">
+            {this.listCategories()}
+          </ul>
+          <div className="products-list">
+            {products.length > 0
+              ? products.map((item) => (
+                <ProductCard
+                  className="product-info"
+                  key={ item.id }
+                  item={ item }
+                  addProductToShoppingCartStateProps={ this.addProductToShoppingCartState }
+                />
+              ))
+              : <p>Nenhum produto encontrado</p> }
+          </div>
         </section>
       </main>
     );

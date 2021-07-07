@@ -7,8 +7,14 @@ class SearchBar extends React.Component {
 
     return (
       <header className="header">
+        <h4
+          data-testid="home-initial-message"
+        >
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h4>
         <label htmlFor="home-input">
           <input
+            className="input-product"
             type="text"
             id="home-input"
             data-testid="query-input"
@@ -16,11 +22,6 @@ class SearchBar extends React.Component {
             onChange={ onInputChangeProps }
           />
         </label>
-        <h4
-          data-testid="home-initial-message"
-        >
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h4>
       </header>
     );
   }
