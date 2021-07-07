@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import style from './CustomerRating.module.css';
 
 class CustomerRating extends Component {
   constructor() {
@@ -23,12 +24,12 @@ class CustomerRating extends Component {
     const { addRatingFunction, productId } = this.props;
     const { email, rating, comment } = this.state;
     return (
-      <div>
+      <div className={ style.container }>
         <h1>Avaliações</h1>
-        <form>
+        <form className={ style.form }>
           <p>Itens com * são obrigatórios</p>
           <input
-            placeholder="Digite seu email*"
+            placeholder="Email*"
             name="email"
             type="text"
             value={ email }
@@ -36,7 +37,7 @@ class CustomerRating extends Component {
             required
           />
           <input
-            placeholder="nota?*"
+            placeholder="Nota*"
             name="rating"
             type="number"
             value={ rating }
@@ -48,7 +49,7 @@ class CustomerRating extends Component {
           />
           <textarea
             data-testid="product-detail-evaluation"
-            placeholder="Mensagem (opicional)"
+            placeholder="Comentário"
             name="comment"
             type="text"
             value={ comment }

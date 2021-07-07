@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import FreeShipping from './FreeShipping';
+import style from './CardProduct.module.css';
 
 class CardProduct extends Component {
   render() {
@@ -15,7 +16,7 @@ class CardProduct extends Component {
     } = product;
 
     return (
-      <div data-testid="product">
+      <div className={ style.container } data-testid="product">
         <Link
           to={ {
             pathname: `/details/${id}`,
@@ -29,6 +30,7 @@ class CardProduct extends Component {
         </Link>
         { freeShipping ? <FreeShipping /> : null }
         <button
+          className={ style.btn }
           data-testid="product-add-to-cart"
           onClick={ () => addToCartFunction(product) }
           type="button"

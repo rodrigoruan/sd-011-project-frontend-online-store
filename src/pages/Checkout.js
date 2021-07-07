@@ -1,5 +1,6 @@
 import React from 'react';
 import CheckoutForm from '../components/CheckoutForm';
+import style from './Checkout.module.css';
 
 export default class Checkout extends React.Component {
   getProducts() {
@@ -8,11 +9,11 @@ export default class Checkout extends React.Component {
 
   render() {
     return (
-      <section>
+      <section className={ style.container }>
         {
           this.getProducts().map(({ id, title, thumbnail, price, quantity }) => (
-            <div key={ id }>
-              <p>{ title }</p>
+            <div className={ style.product } key={ id }>
+              <h1>{ title }</h1>
               <img src={ thumbnail } alt={ title } />
               <p>
                 {`R$ ${price}`}

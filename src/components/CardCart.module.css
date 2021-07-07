@@ -1,0 +1,33 @@
+.productsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em;
+}
+
+.productsList li {
+  align-items: center;
+  background-color: var(--secondary-background-color);
+  border-radius: 0.25em;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 1em;
+}
+
+.productsList li h1 {
+  font-size: 1em;
+  margin-bottom: 1em;
+}
+
+.productsList li img {
+  height: 250px;
+  width: 250px;
+}
+
+.productsList li > p {
+  margin: 1em 0;
+}
+
+.productsList li > p:before {
+  content: 'R$ ';
+}

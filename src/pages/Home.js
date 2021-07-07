@@ -5,6 +5,7 @@ import SearchBarProducts from '../components/SearchBarProducts';
 import AllProducts from '../components/AllProducts';
 import Button from '../components/Button';
 import ShoppingCartLink from '../components/ShoppingCartLink';
+import style from './Home.module.css';
 
 class Home extends Component {
   constructor() {
@@ -70,19 +71,29 @@ class Home extends Component {
   render() {
     const { searchValue, products, categories, loading, cartQuantity } = this.state;
     return (
-      <div>
-        <SearchBarProducts value={ searchValue } onChange={ this.handleChange } />
-        <Button onClick={ this.fetchProducts } innerText="Buscar" />
-        { !loading && categories
-          .map((category, index) => (
-            <CategoryList
-              key={ index }
-              category={ category }
-              changeFunction={ this.handleChange }
-            />))}
-        <span data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </span>
+      <div className={ style.container }>
+        <header className={ style.header }>
+          <span data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </span>
+          <div>
+            <SearchBarProducts value={ searchValue } onChange={ this.handleChange } />
+            <Button
+              onClick={ this.fetchProducts }
+              innerText="Buscar"
+              classes={ style.btn }
+            />
+          </div>
+          <div className={ style.categories }>
+            { !loading && categories
+              .map((category, index) => (
+                <CategoryList
+                  key={ index }
+                  category={ category }
+                  changeFunction={ this.handleChange }
+                />))}
+          </div>
+        </header>
         <ShoppingCartLink quantity={ cartQuantity } />
         <AllProducts
           productsList={ products }

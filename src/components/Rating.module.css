@@ -1,0 +1,29 @@
+.container {
+  align-items: center;
+  background-color: var(--primary-background-color);
+  border-radius: 0.25em;
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
+  padding: 1em;
+  width: 100%;
+}
+
+.container > * + * {
+  padding: 0.25em 0;
+}
+
+.container h1 {
+  font-size: 1em;
+}
+
+.container p {
+  text-align: center;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.container p + p {
+  border-top: 1px solid var(--primary-color);
+  opacity: 0.5;
+}

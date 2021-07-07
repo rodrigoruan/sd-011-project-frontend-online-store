@@ -1,0 +1,31 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 2em;
+}
+
+.product {
+  align-items: center;
+  background-color: var(--secondary-background-color);
+  border-radius: 0.25em;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  width: 400px;
+}
+
+.product h1 {
+  font-size: 1em;
+}
+
+.product img {
+  height: 250px;
+  margin: 1em 0;
+  width: 250px;
+}
+
+.product p + p {
+  margin-top: 0.5em;
+}

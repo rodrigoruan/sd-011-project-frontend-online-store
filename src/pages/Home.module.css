@@ -1,0 +1,49 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  align-items: center;
+  background-color: var(--tertiary-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 1em;
+  padding: 0.5em 0;
+  width: 100%;
+}
+
+.btn {
+  background-color: var(--quaternary-color);
+  border: none;
+  border-radius: 0.25em;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 0.5em;
+  padding: 0.5em;
+}
+
+.btn:hover {
+  background-color: var(--primary-color);
+  box-shadow: 0 0 0 0.25em var(--quaternary-color);
+  color: var(--quaternary-color);
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  justify-content: center;
+  padding: 0 1em;
+}
+
+.categories > * {
+  padding: 0 0.25em;
+}
+
+[ type = 'radio' ] {
+  margin-right: 0.25em;
+}

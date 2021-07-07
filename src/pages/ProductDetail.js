@@ -4,6 +4,7 @@ import CustomerRating from '../components/CustomerRating';
 import Rating from '../components/Rating';
 import ShoppingCartLink from '../components/ShoppingCartLink';
 import FreeShipping from '../components/FreeShipping';
+import style from './ProductDetail.module.css';
 
 class ProductDetail extends Component {
   constructor() {
@@ -61,53 +62,57 @@ class ProductDetail extends Component {
     const productRatings = this.getRatings(id);
 
     return (
-      <div>
-        <div>
-          <p data-testid="product-detail-name">{title}</p>
-          <img src={ thumbnail } alt={ title } />
-          <p>{`R$ ${price}`}</p>
-        </div>
+      <section className={ style.container }>
+        <div className={ style.card }>
+          <div className={ style.cardHeader }>
+            <p data-testid="product-detail-name">{title}</p>
+            <img src={ thumbnail } alt={ title } />
+            <p>{`R$ ${price}`}</p>
+          </div>
 
-        {
-          installments ? (
+          <div className={ style.cardBody }>
+            {
+              installments ? (
+                <ul>
+                  <li>{`${soldQuantity} unidades vendidas.`}</li>
+                  <li>{`Estoque: ${installments.quantity}`}</li>
+                </ul>
+              ) : <p>Unidade única</p>
+            }
+            <p>
+              Especificações:
+            </p>
             <ul>
-              <li>{`${soldQuantity} unidades vendidas.`}</li>
-              <li>{`Estoque: ${installments.quantity}`}</li>
+              {attributes.map((attribute, index) => (
+                <li key={ index }>
+                  { `${attribute.name}: ${attribute.value_name}` }
+                </li>
+              ))}
             </ul>
-          ) : <p>Unidade única</p>
-        }
+            { freeShipping ? <FreeShipping /> : null }
+          </div>
 
-        <div>
-          <p>
-            Especificações:
-          </p>
-          <ul>
-            {attributes.map((attribute, index) => (
-              <li key={ index }>
-                {attribute.name}
-                :
-                {attribute.value_name}
-              </li>
-            ))}
-          </ul>
+          <div className={ style.cardFooter }>
+            <CustomerRating addRatingFunction={ this.addRating } productId={ id } />
+            {
+              productRatings
+                ? productRatings
+                  .map((rating, index) => <Rating key={ index } rating={ rating } />)
+                : null
+            }
+          </div>
+
+          <button
+            className={ style.addBtn }
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => this.addToCart(detail) }
+          >
+            Adicionar ao carrinho
+          </button>
         </div>
-        { freeShipping ? <FreeShipping /> : null }
-        <CustomerRating addRatingFunction={ this.addRating } productId={ id } />
-        {
-          productRatings
-            ? productRatings
-              .map((rating, index) => <Rating key={ index } rating={ rating } />)
-            : null
-        }
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => this.addToCart(detail) }
-        >
-          Adicionar ao carrinho
-        </button>
         <ShoppingCartLink quantity={ this.getQuantity() } />
-      </div>
+      </section>
     );
   }
 }

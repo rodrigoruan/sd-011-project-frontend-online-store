@@ -1,0 +1,27 @@
+.container {
+  align-items: center;
+  background-color: var(--quaternary-color);
+  border-radius: 0.25em;
+  color: var(--primary-color);
+  display: flex;
+  font-weight: 600;
+  padding: 0.5em;
+  position: absolute;
+  right: 1em;
+  text-decoration: none;
+  top: 1em;
+}
+
+.container svg {
+  color: var(--primary-color);
+  margin-right: 0.25em;
+}
+
+.container:hover {
+  box-shadow: 0 0 0 0.25em var(--quaternary-color);
+}
+
+.container:hover, .container:hover svg {
+  background-color: var(--primary-color);
+  color: var(--quaternary-color);
+}

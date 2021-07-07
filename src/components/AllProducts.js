@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CardProduct from './CardProduct';
+import style from './AllProducts.module.css';
 
 class AllProducts extends Component {
   constructor() {
@@ -27,10 +28,14 @@ class AllProducts extends Component {
   render() {
     const { productsList } = this.props;
     if (!productsList[0]) {
-      return <span>Nenhum produto foi encontrado</span>;
+      return (
+        <span className={ style.empty }>
+          Nenhum produto foi encontrado
+        </span>
+      );
     }
     return (
-      <div>
+      <div className={ style.productsList }>
         {productsList.map((product) => (
           <CardProduct
             addToCartFunction={ this.addToCart }

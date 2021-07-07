@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import style from './QuantityButton.module.css';
 
 class QuantityButton extends Component {
   constructor() {
@@ -52,18 +53,7 @@ class QuantityButton extends Component {
     const { quantity } = this.state;
 
     return (
-      <div data-testid="shopping-cart-product-quantity">
-        <button
-          type="button"
-          onClick={ this.addQuantity }
-          disabled={ stock === quantity }
-          data-testid="product-increase-quantity"
-        >
-          +
-        </button>
-        <p>
-          {quantity}
-        </p>
+      <div className={ style.container } data-testid="shopping-cart-product-quantity">
         <button
           type="button"
           onClick={ this.subtractQuantity }
@@ -71,6 +61,17 @@ class QuantityButton extends Component {
           data-testid="product-decrease-quantity"
         >
           -
+        </button>
+        <p>
+          {quantity}
+        </p>
+        <button
+          type="button"
+          onClick={ this.addQuantity }
+          disabled={ stock === quantity }
+          data-testid="product-increase-quantity"
+        >
+          +
         </button>
       </div>
     );

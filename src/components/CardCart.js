@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QuantityButton from './QuantityButton';
+import style from './CardCart.module.css';
 
 class CardCart extends Component {
   render() {
     const { products } = this.props;
     return (
-      <ul>
+      <ul className={ style.productsList }>
         {products.map((cartProduct) => (
           <li key={ cartProduct.id }>
-            <p data-testid="shopping-cart-product-name">{ cartProduct.title }</p>
-            <p>{ cartProduct.price }</p>
+            <h1 data-testid="shopping-cart-product-name">{ cartProduct.title }</h1>
             <img src={ cartProduct.thumbnail } alt={ cartProduct.title } />
-            <div>
-              <QuantityButton product={ cartProduct } />
-            </div>
+            <p>{ cartProduct.price }</p>
+            <QuantityButton product={ cartProduct } />
           </li>
         ))}
       </ul>

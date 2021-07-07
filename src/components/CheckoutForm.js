@@ -1,4 +1,5 @@
 import React from 'react';
+import style from './CheckoutForm.module.css';
 
 export default class CheckoutForm extends React.Component {
   constructor() {
@@ -35,7 +36,7 @@ export default class CheckoutForm extends React.Component {
     } = this.state;
 
     return (
-      <form>
+      <form className={ style.form }>
         <label htmlFor="checkout-fullname">
           <input
             data-testid="checkout-fullname"

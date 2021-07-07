@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import style from './Rating.module.css';
 
 class Rating extends Component {
   render() {
     const { rating } = this.props;
     return (
-      <div>
-        <p>{ rating.email }</p>
+      <div className={ style.container }>
+        <h1>{ rating.email }</h1>
         <p>{ rating.rating }</p>
         <p>{ rating.comment}</p>
       </div>
