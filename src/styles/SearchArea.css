@@ -1,0 +1,14 @@
+.searchArea {
+  background-color: var(--fourth-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  /* background-color: red; */
+}
+
+.searchTitle {
+  color: var(--text-color);
+  margin-left: auto;
+  margin-right: auto;
+}

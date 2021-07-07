@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { faBox, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import cart from '../Images/cart.png';
+import '../styles/ProductDetails.css';
 import Rating from './Rating';
 
 class ProductDetails extends Component {
@@ -20,12 +22,14 @@ class ProductDetails extends Component {
   }
 
   async getProduct() {
-    const { match } = this.props;
+    const { match, location } = this.props;
     const { id } = match.params;
+    const { productId } = location.state;
     const request = await getProductsFromCategoryAndQuery('$CATEGORY_ID', `${id}`);
     const product = await request.results.filter((result) => (
-      result.title === id
+      result.id === productId
     ));
+    console.log(product);
     await this.setState({
       product: product[0],
     });
@@ -35,7 +39,12 @@ class ProductDetails extends Component {
   addItemCart() {
     const { createCart, location } = this.props;
     const { productToAdd } = location.state;
-    productToAdd.cartItem = true;
+    const condition = (productToAdd.available_quantity > productToAdd.cartCount);
+    if (productToAdd.cartCount && condition) {
+      productToAdd.cartCount += 1;
+    } else {
+      productToAdd.cartCount = 1;
+    }
     createCart(productToAdd);
   }
 
@@ -43,40 +52,67 @@ class ProductDetails extends Component {
     const { match } = this.props;
     const { id } = match.params;
     const { product } = this.state;
+    const loading = (<p>Erro, tente novamente mais tarde</p>);
+    const condition = (product === undefined);
+    const secondCondition = (product !== undefined && product.attributes !== undefined);
+    const frShp = (
+      <div data-testid="free-shipping">
+        Frete Grátis
+        <FontAwesomeIcon icon={ faBox } />
+      </div>
+    );
+    const page = (
+      <div className="productPage">
+        <div className="prdHeader">
+          <Link data-testid="shopping-cart-button" to="/carrinho-compras">
+            <FontAwesomeIcon icon={ faShoppingCart } />
+          </Link>
+          <Link to="/">
+            HOME
+          </Link>
+          { (!condition && product.shipping && product.shipping.free_shipping) && frShp }
+        </div>
+        <div className="prdTop">
+          <div className="prdInfos">
+            <p
+              data-testid="product-detail-name"
+              className="prdTitle"
+            >
+              { condition ? loading : product.title}
+            </p>
+            <img src={ condition ? loading : product.thumbnail } alt="product" />
+            <p className="prdPrice">
+              {'R$ '}
+              { condition ? loading : product.price }
+            </p>
+            <button
+              type="button"
+              data-testid="product-detail-add-to-cart"
+              onClick={ this.addItemCart }
+              className="prdAdd"
+            >
+              Adicionar ao carrinho
+            </button>
+            <div className="prdSpecs">
+              { secondCondition ? product.attributes.map((att, index) => (
+                <div className="table" key={ index }>
+                  <p className="firstP">
+                    { att.name }
+                    :
+                  </p>
+                  <p>
+                    { att.value_name }
+                  </p>
+                </div>
+              )) : loading}
+            </div>
+          </div>
+          <Rating id={ id } />
+        </div>
+      </div>);
     return (
-      <div>
-        <img src={ product.thumbnail } alt="product" />
-        <p data-testid="product-detail-name">{product.title}</p>
-        <p>
-          {'R$ '}
-          { product.price }
-        </p>
-        { product.attributes && product.attributes.map((att, index) => (
-          <p key={ index }>
-            { att.name }
-            -
-            { att.value_name }
-          </p>
-        ))}
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.addItemCart }
-        >
-          Adicionar ao carrinho
-        </button>
-        <Rating id={ id } />
-        <Link to="/carrinho-compras">
-          <img
-            src={ cart }
-            alt="carrinho-compras"
-            data-testid="shopping-cart-button"
-            height="200px"
-          />
-        </Link>
-        <Link to="/">
-          HOME
-        </Link>
+      <div className="page">
+        {(product === undefined ? loading : page)}
       </div>
     );
   }

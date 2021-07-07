@@ -1,0 +1,80 @@
+.productPage {
+  background-color: var(--fourth-color);
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.075) 0 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  margin: 40px auto;
+  padding: 40px;
+  width: 90vw;
+}
+
+.prdTop {
+  display: flex;
+  justify-content: space-around;
+}
+
+.prdTitle {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.prdPrice {
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.prdSpecs {
+  background-color: rgb(236, 236, 236);
+  box-shadow: rgba(0, 0, 0, 0.116) 1px 1px 10px;
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.prdInfos {
+
+  /* background-color: aquamarine; */
+  display: flex;
+  flex-direction: column;
+  height: 750px;
+}
+
+.prdInfos img {
+  margin: 0 auto;
+  width: 200px;
+}
+
+.prdInfos button {
+  margin-bottom: 40px;
+}
+
+.table {
+  align-items: center;
+  background-color: rgb(247, 247, 247);
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+}
+
+.firstP {
+  color: var(--second-text-color);
+  font-weight: 300;
+}
+
+.starBtn {
+  background-color: transparent;
+  border: none;
+  color: yellow;
+  height: 30px;
+  width: 30px;
+}
+
+.star {
+  cursor: pointer;
+  font-size: 20px;
+}

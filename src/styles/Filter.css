@@ -1,0 +1,73 @@
+.filterArea {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.199) 9px 9px 20px;
+  height: 780px;
+  margin-left: 0;
+  overflow: auto;
+}
+
+.categories {
+  align-items: center;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  height: 200%;
+  justify-content: space-around;
+  list-style: none;
+  margin-top: 12px;
+}
+
+.Category {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  height: 52px;
+  justify-content: flex-start;
+
+  /* border: black solid 1px; */
+  margin-left: -40px;
+  padding-left: 10px;
+  transition: ease 0.2s;
+  width: 105%;
+}
+
+.Category:hover {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.26);
+  transition: ease 0.2s;
+}
+
+.selected {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.icon {
+  color: var(--secondary-color);
+  margin-right: 10px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
+  border-radius: 10px;
+}

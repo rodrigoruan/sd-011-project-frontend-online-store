@@ -1,0 +1,104 @@
+.header {
+  align-items: center;
+  background-color: var(--primary-color);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.048);
+  color: var(--secondary-color);
+  display: flex;
+  height: 80px;
+  justify-content: space-evenly;
+}
+
+.form {
+
+  /* background-color: brown; */
+  height: 40px;
+}
+
+.cont {
+  align-items: center;
+  background-color: var(--primary-color);
+  border: solid 2px var(--secondary-color);
+  border-radius: 50px;
+  bottom: 15px;
+  color: var(--text-color);
+  display: flex;
+  font-size: 12px;
+  font-style: none;
+  font-weight: 700;
+  height: 15px;
+  justify-content: center;
+  position: relative;
+  right: -15px;
+  vertical-align: middle;
+  width: 15px;
+}
+
+.iconDiv {
+  display: flex;
+  justify-content: space-between;
+  text-decoration: none;
+  width: 70px;
+}
+
+.darkDiv {
+  cursor: pointer;
+}
+
+.search {
+  background-color: #eee;
+  border: solid #aaa 1px;
+  border-radius: 3px 0 0 3px;
+  border-right: none;
+  height: 38px;
+  outline: none;
+  padding-left: 10px;
+  width: 1000px;
+}
+
+.searchBtn {
+  background-color: #eee;
+  border: solid #aaa 1px;
+  border-left: none;
+  border-radius: 0 3px 3px 0;
+  cursor: text;
+  height: 42px;
+  width: 40px;
+}
+
+.searchIcon {
+  cursor: pointer;
+}
+
+.contentArea {
+  display: flex;
+  height: 90vh;
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 90%;
+}
+
+.cartIcon {
+  color: var(--secondary-color);
+  font-size: 25px;
+}
+
+.filterArea {
+  width: 18%;
+}
+
+.searchArea {
+  width: 78%;
+
+  /* background-color: aquamarine; */
+}
+
+header {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+header img {
+  height: 40px;
+  width: 40px;
+}
