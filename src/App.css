@@ -1,42 +1,123 @@
+  
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.input-email-forms {
+  padding: 0.4rem;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-
+.radio-star {
+  display: none;
 }
 
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
+.star-rating {
+  cursor: pointer;
+  transition: color 200ms;
+}
+
+textarea {
+  display: block;
+  margin-top: 1rem;
+}
+
+.btn-submit-avaliation {
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 8rem;
+}
+
+.header-details-product {
+  display: flex;
+  justify-content: space-between;
+  margin: 1.2rem;
+}
+
+.container-image-especification {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-image-and-product-details {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 20px;
+  width: 50%;
+}
+
+.container-image-details {
+  float: left;
+  height: auto;
+  width: 50%;
+}
+
+.container-description-details {
+  float: left;
+  height: auto;
+  margin-left: 2rem;
+  width: 100%;
+}
+
+.image-details {
+  height: auto;
+  width: 100px;
+}
+
+
+.decrease-btn {
+  margin: 10px;
+  padding: 10px;
+}
+
+.increase-btn {
+  margin: 10px;
+  padding: 10px;
+}
+
+.quantity-product-details {
+  border: 1px solid black;
+  border-radius: 100%;
+  padding: 0.6rem;
+}
+
+.add-to-cart-btn-details {
+  margin: 10px;
+  padding: 10px;
+}
+
+.container-forms {
+  display: flex;
+}
+
+.container-stars {
+  margin-left: 30px;
+}
+
+.container-home {
+  display: flex;
+  flex-direction: row;
+}
+
+.categories-container {
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
+  margin: 0 20px;
+  width: 20%;
 }
 
-.App-link {
-  color: #61dafb;
+.category-button {
+  margin: 2px;
 }
 
-@keyframes App-logo-spin {
+.container-products {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.product-card {
+  padding: 10px;
+  width: 200px;
 }
