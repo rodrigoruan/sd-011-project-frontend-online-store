@@ -1,0 +1,76 @@
+.buy-button {
+  background: #eee;
+  border: 0;
+  border-radius: 5px;
+  color: #333;
+  cursor: pointer;
+  display: block;
+  margin: 6px auto 0;
+  margin-left: 60px;
+  padding: 5px 25px;
+  transition: 0.5s;
+}
+
+.buy-button:hover {
+  background-color: #252525;
+  color: #eee;
+  transition: 0.5s;
+}
+
+.cart-product-container {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%) , 0 6px 20px 0 rgb(0 0 0 / 19%);
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.cart-title {
+  color: #eee;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 17px;
+}
+
+.price-cart {
+  color: #39b54a;
+}
+
+.all-button {
+  background-color: #eee;
+  border: none;
+  border-radius: 4px;
+  color: #333;
+  cursor: pointer;
+  margin: 0 10px;
+  padding: 4px 25px;
+  transition: 0.5s;
+}
+
+.all-button:hover {
+  background-color: #333;
+  transition: 0.5s;
+}
+
+.add-button {
+  color: #00a650;
+}
+
+.sub-button {
+  color: #2968c8;
+}
+
+.remove-button {
+  color: #ff605a;
+}
+
+.header-cart {
+  align-items: center;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+}

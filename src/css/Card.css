@@ -1,0 +1,57 @@
+.container-card {
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  max-width: 100%;
+  text-align: center;
+  transition: 1s;
+  width: 250px;
+}
+
+.container-card:hover {
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%) , 0 6px 20px 0 rgb(0 0 0 / 19%);
+  transition: 1s;
+}
+
+img {
+  height: auto;
+  max-height: 95px;
+  max-width: 230px;
+  width: 100px;
+}
+
+.shipping {
+  color: #3483fa;
+}
+
+.add-cart-button {
+  background-color: #eee;
+  border: 1px solid #252525;
+  border-radius: 2px;
+  color: #333;
+  cursor: pointer;
+  margin-bottom: 15px;
+  padding: 4px;
+  transition: 1s;
+}
+
+.add-cart-button:hover {
+  background-color: #333;
+  color: #eee;
+  transition: 1s;
+}
+
+.price {
+  color: #00a650;
+}
+
+.link-card {
+  text-decoration: none;
+}
+
+.title {
+  color: #333;
+  height: 50px;
+}

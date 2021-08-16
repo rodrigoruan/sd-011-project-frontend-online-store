@@ -1,0 +1,98 @@
+.container {
+  align-items: center;
+  background-color: #252525;
+  display: flex;
+  justify-content: space-around;
+  max-width: 100%;
+  padding: 15px 0;
+}
+
+.initial-message {
+  color: #333;
+  font-size: 20px;
+  text-align: center;
+}
+
+.container input {
+  border: none;
+  font-size: 17px;
+  padding: 6px;
+}
+
+.cart {
+  background-color: #252525;
+  border-radius: 5px;
+  color: #eee;
+  display: block;
+  font-size: 17px;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: 1s;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.select {
+  background-color: #eee;
+  border: none;
+  border-radius: 1px;
+  color: #333;
+  font-size: 17px;
+  padding: 6px;
+}
+
+.input-text {
+  background-color: #eee;
+  border: 0.5px solid #252525;
+  border-radius: 2px;
+  color: #333;
+  font-size: 17px;
+  padding: 6px;
+}
+
+.search-bar {
+  background-color: #252525;
+}
+
+.button {
+  background: none;
+  border: 2px solid #252525;
+  border-radius: 5px;
+  color: #eee;
+  cursor: pointer;
+  font-size: 17px;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: 1s;
+}
+
+.button:hover {
+  background-color: #eee;
+  color: #252525;
+  transition: 1s;
+}
+
+.cart:hover {
+  background-color: #eee;
+  border-radius: 5px;
+  color: #252525;
+  transition: 1s;
+}
+
+@media ( max-width : 730px ) {
+
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-input {
+    margin-left: 105px;
+  }
+}
